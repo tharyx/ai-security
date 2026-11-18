@@ -15,6 +15,16 @@
     "09-enterprise-architecture",
     "10-capstone-project"
   ],
-  "file_count": 344,
-  "note": "Generated listing. Review official standards, cloud docs and regulations for current versions."
+  "file_count": 502,
+  "note": "Generated listing. Review official standards, cloud docs and regulations for current versions.",
+  "frameworks": [
+    "OWASP LLM Top 10 2026",
+    "OWASP Agentic Top 10 2026",
+    "OWASP MCP Top 10 (beta)",
+    "NIST AI RMF",
+    "ISO/IEC 42001",
+    "EU AI Act (Omnibus 2026)",
+    "India DPDP Rules 2025",
+    "CERT-In AI Security Auditing Guidelines"
+  ]
 }

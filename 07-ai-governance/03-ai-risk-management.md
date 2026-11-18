@@ -7,7 +7,8 @@
 |---|---|
 | **Prerequisites** | [Lesson 01](01-ai-inventory-and-system-register.md) (tiers), [Lesson 02](02-roles-policies-and-operating-model.md) (who may accept risk); threat modeling from [Module 01](../01-ai-security-fundamentals/) |
 | **Lab** | [`lab/risk_register.py`](lab/risk_register.py), fixtures `risks_*.csv` (based on [`00-program/templates/risk-register.csv`](../00-program/templates/risk-register.csv)) |
-| **Maps to** | NIST AI RMF (all four functions) and NIST AI 600-1 · ISO/IEC 23894:2023 · ISO/IEC 42001 clause 6.1 and 8.2–8.4 · EU AI Act Art 9 (risk management for high-risk systems) · OWASP LLM Top 10 2025 and MITRE ATLAS as threat sources |
+| **Maps to** | NIST AI RMF (all four functions) and NIST AI 600-1 · ISO/IEC 23894:2023 · ISO/IEC 42001 clause 6.1 and 8.2–8.4 · EU AI Act Art 9 (risk management for high-risk systems) · CERT-In AI Security Auditing Guidelines section 5 (risk tiering) · threat sources: OWASP Top 10 for LLM Applications **2026** (renumbered from the 2025 edition; for example Excessive Agency is now LLM03, was LLM06:2025), OWASP Top 10 for Agentic Applications (ASI01–ASI10), OWASP MCP Top 10, MITRE ATLAS |
+| **Policy** | [AI Risk Management Policy](policies/02-ai-risk-management-policy.md), [AI Third-Party Risk Assessment](policies/05-ai-third-party-risk-assessment.md) |
 
 ---
 
@@ -40,7 +41,7 @@ Risk management is how an organization decides **which AI risks to reduce, which
 ### 2.2 The risk workflow
 
 1. **Context:** purpose, users, affected people, operating environment (from the system card).
-2. **Identify:** harms, security threats, privacy risks, misuse and failure modes. Use catalogs: OWASP LLM Top 10, MITRE ATLAS, NIST AI 600-1 risks, your own incidents.
+2. **Identify:** harms, security threats, privacy risks, misuse and failure modes. Use catalogs: OWASP Top 10 for LLM Applications 2026, OWASP Top 10 for Agentic Applications (ASI01–ASI10) for agents, OWASP MCP Top 10 for MCP servers and clients, MITRE ATLAS, NIST AI 600-1 risks, OWASP GenAI data-security risks (DSGAI01–21), your own incidents.
 3. **Analyze:** likelihood, impact, exposure, how easily you'd detect it, and whether the harm can be reversed.
 4. **Evaluate:** compare with risk appetite and legal requirements.
 5. **Treat:** avoid, mitigate, transfer, or accept with accountable approval.
@@ -64,7 +65,38 @@ The **NIST AI Risk Management Framework 1.0** (NIST AI 100-1, January 2023) is v
 
 NIST also describes **characteristics of trustworthy AI**: valid and reliable; safe; secure and resilient; accountable and transparent; explainable and interpretable; privacy-enhanced; and fair with harmful bias managed. A useful habit: for each system, ask which of these could fail and how you would notice.
 
-The companion **AI RMF Playbook** (on the NIST AI Resource Center) gives suggested actions for each subcategory.
+The companion **AI RMF Playbook** (on the NIST AI Resource Center) gives suggested actions for each subcategory. NIST has announced a revision of AI RMF 1.0; the four functions are expected to stay the core, but check the current version.
+
+#### The Playbook in practice: key actions per function (our summary)
+
+The Playbook is long (about 70 subcategories, each with suggested actions, transparency questions and references). These are the actions a security architect uses most, in our own words:
+
+| Subcategory | What it asks for | What you actually do | Evidence in this repo |
+|---|---|---|---|
+| GOVERN 1.1 | Legal and regulatory requirements understood and documented | Applicability matrix per system | Module 08 Lesson 01 engine |
+| GOVERN 1.4 | Risk process set by transparent policies | Written risk policy with numbered, checkable rules | [Risk Management Policy](policies/02-ai-risk-management-policy.md) |
+| GOVERN 1.5 | Ongoing monitoring and periodic review planned, with roles | Review intervals by tier; overdue finding | GOV-06 |
+| GOVERN 1.6 | AI system inventory | Register as code | Lesson 01 |
+| GOVERN 1.7 | Safe decommissioning | Retirement checklist; disable keys and endpoints | Lesson 06, APR-12 |
+| GOVERN 2.1 / 2.3 | Roles clear; executives own AI risk decisions | RACI; board accepts critical risk | Lesson 02, RISK-04 |
+| GOVERN 3.2 | Roles for human-AI configuration and oversight | Oversight levels per system | GOV-03 |
+| GOVERN 4.3 | Practices for testing, incident identification and information sharing | Red-team in CI; incident triage; near-miss log | Lesson 06 |
+| GOVERN 5.1 | Feedback from people outside the team | Appeal and complaint routes feed the risk register | CTL-APPEAL |
+| GOVERN 6.1 / 6.2 | Third-party policies; contingency for high-risk third-party failures | Vendor tiers, questionnaire, exit plan | [Third-Party Risk Assessment](policies/05-ai-third-party-risk-assessment.md) |
+| MAP 1.1 | Intended purpose, context and laws documented | Intended-use statement; system card | GOV-02 |
+| MAP 1.5 | Risk tolerance documented | Appetite (residual ≤ 9 in the lab) | `APPETITE` |
+| MAP 2.2 | Knowledge limits and human use of output documented | Model card limitations | Lesson 05, DOC-06 |
+| MAP 3.5 | Human oversight processes defined | Approve-each / human-decides by tier | GOV-03 |
+| MAP 4.1 | Legal and technology risks of components, incl. third-party data and software | AI BOM; datasheets; licence check | DS-03 |
+| MAP 5.1 | Likelihood and magnitude of impacts estimated, using past incidents | 5×5 scoring with incident databases as input | `risk_register.py` |
+| MEASURE 1.1 | Metrics chosen for the most significant risks first; unmeasured risks documented | Eval plan per tier | APR-03 |
+| MEASURE 2.7 | Security and resilience evaluated | Prompt-injection and leakage regression suites | Modules 02–06 tests |
+| MEASURE 2.8 / 2.9 | Transparency, accountability, explanation examined | Decision notices; model cards | Lesson 05 |
+| MEASURE 3.1 | Emergent and unanticipated risks tracked in deployment | Monitoring, drift alerts, incident trends | Lesson 06 |
+| MANAGE 1.3 | Responses to high-priority risks planned (mitigate, transfer, avoid, accept) | Treatment plans with owners and dates | RISK-03 |
+| MANAGE 2.3 / 2.4 | Respond to unknown risks; supersede, disengage or deactivate systems | Kill switch; rollback to approved hash | AIR-03, `can_deploy` |
+| MANAGE 3.1 | Third-party risks monitored | Annual vendor reassessment; change notices | MA-05 |
+| MANAGE 4.1 / 4.3 | Post-deployment monitoring plan; incidents communicated, including to affected people | Monitoring plan; incident policy; reporting clocks | Module 08 Lesson 04 |
 
 ### 2.4 NIST AI 600-1: the Generative AI Profile
 
@@ -232,11 +264,11 @@ Read `test_high_risk_system_without_a_risk_entry_is_blocked`: a high-tier system
 
 ### Step 5: Build your own risk register (the week-30 deliverable)
 
-Copy `fixtures/risks_governed.csv` to your journal folder. Write **at least 15 risks** for your capstone system across security, privacy, safety, reliability, misuse and third-party dependency. Use NIST AI 600-1's 12 risks and the OWASP LLM Top 10 as prompts. Score them with `risk_register.py`. For every risk above appetite, write a treatment with an owner and a due date.
+Copy `fixtures/risks_governed.csv` to your journal folder. Write **at least 15 risks** for your capstone system across security, privacy, safety, reliability, misuse and third-party dependency. Use NIST AI 600-1's 12 risks, the OWASP Top 10 for LLM Applications 2026 and, for agents and MCP, the OWASP Agentic (ASI) and MCP Top 10 lists as prompts. Put the catalog IDs in a column. Score them with `risk_register.py`. For every risk above appetite, write a treatment with an owner and a due date.
 
 ### Step 6: Assess a vendor
 
-Pick one model provider you use or plan to use. Fill the table in section 2.8 from its public documentation (trust center, terms, data processing addendum). Mark each answer "documented", "contractual" or "unknown". Unknowns become questions for procurement and a risk entry (value chain).
+Pick one model provider you use or plan to use. Fill the 14-question questionnaire in the [AI Third-Party Risk Assessment](policies/05-ai-third-party-risk-assessment.md) (Appendix A; the table in section 2.8 is the short version) from its public documentation (trust center, terms, data processing addendum). Mark each answer "documented", "contractual" or "unknown". Unknowns become questions for procurement and a risk entry (value chain).
 
 ### Step 7: Break it yourself (predict, then run)
 
@@ -358,6 +390,16 @@ OWASP and ATLAS are threat catalogs: lists of what can go wrong and how attacker
 "Every AI system starts with some danger built in. Our controls reduce it, but only the ones that are actually built and tested. Residual risk is what's left after that. Today the biggest leftover risk is X; it is above what we agreed to tolerate, the fix is due on this date, and until then we either accept it with your sign-off or we limit the feature."
 </details>
 
+<details><summary><b>Q15. Pick three NIST AI RMF Playbook subcategories you would implement first, and how.</b></summary>
+
+GOVERN 1.6 (inventory: the register as code, discovery of shadow AI), MAP 1.1 (intended use and context: required fields in the system card), and MEASURE 2.7 (security and resilience evaluated: prompt-injection and leakage regression suites in CI). Together they tell you what exists, what it is for, and whether it resists attack, which every later decision depends on.
+</details>
+
+<details><summary><b>Q16. How would you use the CERT-In eight-factor tiering next to your own risk register?</b></summary>
+
+As a second, external view of inherent risk per system: score F1–F8 (1–4) before credit for controls, compute the composite and tier, and compare with your own tier. If they differ, the higher one decides audit depth. The risk register then holds the specific risks and treatments. Module 08 Lesson 06 has the lab.
+</details>
+
 ---
 
 ## 8. Checklist (definition of done)
@@ -376,7 +418,10 @@ OWASP and ATLAS are threat catalogs: lists of what can go wrong and how attacker
 - NIST AI Resource Center (Playbook, crosswalks): https://airc.nist.gov/
 - ISO/IEC 23894:2023, *AI — Guidance on risk management*: https://www.iso.org/standard/77304.html
 - ISO 31000, *Risk management — Guidelines*: https://www.iso.org/iso-31000-risk-management.html
-- OWASP Top 10 for LLM Applications 2025: https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (released August 2026; the 2025 edition is the previous numbering): https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications (ASI01–ASI10, December 2025): https://genai.owasp.org/
+- OWASP MCP Top 10 (beta): https://owasp.org/www-project-mcp-top-10/
+- NIST AI RMF Playbook: https://airc.nist.gov/
 - MITRE ATLAS: https://atlas.mitre.org/
 - Regulation (EU) 2024/1689 (EU AI Act), Art 9: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
 - Repo template: [`00-program/templates/risk-register.csv`](../00-program/templates/risk-register.csv)

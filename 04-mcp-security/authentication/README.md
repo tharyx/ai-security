@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [MCP servers](../mcp-server/) (roles and transports); HTTP basics (headers, status codes 401/403) |
 | **Lab** | [`lab/`](lab/): stdlib HMAC "JWT-like" tokens, runs offline, no identity provider needed |
-| **Maps to** | OWASP LLM06:2025 Excessive Agency · LLM02:2025 Sensitive Information Disclosure · OWASP Agentic AI Threats T3 (Privilege Compromise), T9 (Identity Spoofing) · OWASP API Security Top 10 2023: API1 (BOLA), API2 (Broken Authentication) · CIS Controls v8: 5 (Account Management), 6 (Access Control Management) |
+| **Maps to** | **OWASP MCP Top 10 (2025, beta):** MCP07 Insufficient Authentication & Authorization, MCP01 Token Mismanagement & Secret Exposure, MCP02 Privilege Escalation via Scope Creep · **OWASP LLM Top 10 2026:** LLM03 Excessive Agency [2025: LLM06] · LLM02 Sensitive Information Disclosure [2025: LLM02] · **OWASP Agentic Top 10 2026:** ASI03 Identity & Privilege Abuse · OWASP API Security Top 10 2023: API1 (BOLA), API2 (Broken Authentication) · CIS Controls v8: 5 (Account Management), 6 (Access Control Management) |
 
 ---
 
@@ -108,6 +108,18 @@ MCP adds its own variant, described in the spec's security best practices: an **
 - **Ask for the minimum.** When a tool needs more, return `403` with `WWW-Authenticate: Bearer error="insufficient_scope", scope="tickets:write"` so the client can ask the user for more (step-up), instead of requesting everything at login.
 - **Short-lived access tokens** (minutes). OAuth 2.1 expects refresh tokens for public clients to be sender-constrained or **rotated** on every use.
 - **Sender-constrained tokens** (DPoP, RFC 9449, or mutual TLS) make a stolen token useless without the client's private key. Consider them for high-risk servers.
+
+### 2.8 Token theft, consent and secret lifetime (MCP01, MCP02)
+
+Bearer tokens work for **whoever holds them**. Interviewers for identity roles like to test whether you understand what that means in practice (the *IAM & Zero Trust interview scenarios* workbook in your library has several such cases). Three patterns matter for MCP:
+
+| Pattern | What happens | Why password resets don't help | Controls |
+|---|---|---|---|
+| **Token theft** | Malware or a leaked log hands over a refresh token; the attacker mints new access tokens from another network | No interactive login happens, so MFA never runs | Short access-token lifetimes; refresh-token rotation with reuse detection; sender-constrained tokens (DPoP, RFC 9449, or mTLS) so a copied token fails without the client's key; detect refreshes from a different device or client |
+| **Consent phishing** | A user approves a malicious (or over-reaching) MCP client that asks for broad, offline access. No password is stolen | The **grant is the credential**; it survives resets | Allow user consent only for low-risk scopes; admin consent workflow for the rest; alert on new offline-access grants; revoke grants *and* refresh tokens during response |
+| **Static secrets that never die** | A server's API key sits in a config file or vault for years, readable by a whole team | Rotation never happens; one leak opens many systems | Per-server vault paths; dynamic secrets with short leases; workload identity (cloud roles, federation) instead of stored keys; the launch-environment and redaction controls in [secure-operations](../secure-operations/) |
+
+**Scope creep through consent.** If a client can ask for any scope and users click "Allow", permissions only ever grow. Keep the approved scope list per client or server, and treat a request for new scopes as a change that needs review (MCP02). The [secure-operations](../secure-operations/) lab blocks such an update with a `scope_creep` event.
 
 ---
 
@@ -332,12 +344,27 @@ URLs are stored in browser history, proxy logs, server access logs and `Referer`
 The host passes credentials through the environment, so: use a fine-grained token limited to the needed repositories and permissions; keep it in the OS keychain or a secret manager, not in a plain-text config file checked into git; give the server process only the variables it needs; rotate it; and prefer short-lived tokens issued per session (e.g., via a GitHub App) over long-lived personal tokens.
 </details>
 
-<details><summary><b>Q13. Explain to an executive why "the AI assistant uses an admin key" is a problem.</b></summary>
+<details><summary><b>Q13. A refresh token for an MCP client was stolen from a laptop. The user's password and MFA were never touched. How do you detect it, and what makes a stolen token useless?</b></summary>
+
+Detect: the identity provider shows refresh events (not interactive logins) from a different device ID, client fingerprint or network than the session that issued the token; the MCP server sees calls from unusual IPs with that token's `jti`. Contain: revoke the refresh token family and active sessions, isolate the laptop, and treat every other token or cookie on it as stolen. Prevent: short access-token lifetimes, refresh-token rotation (reuse of an old one revokes the family), and sender-constrained tokens (DPoP or mTLS) so the token is useless without the private key that stays on the device.
+</details>
+
+<details><summary><b>Q14. Users granted a new "AI productivity" MCP client broad read access to mail and files. Nothing was hacked. Why is this an identity incident?</b></summary>
+
+Because the OAuth grant itself is the attacker's credential. A delegated grant with offline access gives a refresh token that keeps working after password resets and new MFA prompts. Response: list every user who consented and the scopes granted, revoke the grants and refresh tokens, block the client ID, and use API logs (not mail-gateway logs) to see what data was read. Prevention: allow user consent only for low-risk scopes from verified publishers, require admin approval for the rest, and alert on new high-risk grants.
+</details>
+
+<details><summary><b>Q15. "We moved all MCP secrets into a vault, so we are done." What do you answer?</b></summary>
+
+A vault fixes where secrets live, not how long they live or how much one reader can unlock. Check the vault policies (per server and environment, not per team), audit and alert on unusual reads, move to dynamic credentials with short leases where the platform supports it, and use workload identity so many secrets do not need to exist at all. Also check the other leak paths: launch environments, config files, logs and the model's context.
+</details>
+
+<details><summary><b>Q16. Explain to an executive why "the AI assistant uses an admin key" is a problem.</b></summary>
 
 "If the assistant uses one master key, then anyone who can talk to the assistant effectively has the master key. Our normal rules about who may see what stop working, because every request looks like it comes from an administrator. We want the assistant to carry each person's own badge, so the systems we already trust keep enforcing the rules."
 </details>
 
-<details><summary><b>Q14. What changes between the 2025-03-26 and 2025-06-18 MCP authorization rules, in short?</b></summary>
+<details><summary><b>Q17. What changes between the 2025-03-26 and 2025-06-18 MCP authorization rules, in short?</b></summary>
 
 2025-03-26 introduced OAuth 2.1-based authorization for HTTP transports. 2025-06-18 clarified the roles: the MCP server is an OAuth resource server, it must publish protected resource metadata (RFC 9728) so clients can discover the authorization server, clients must use resource indicators (RFC 8707) to bind tokens to the server, and token passthrough is explicitly forbidden. Later revisions may change details again, so in a real project I would read the current version before designing.
 </details>
@@ -350,6 +377,7 @@ The host passes credentials through the environment, so: use a fine-grained toke
 - [ ] `python -m pytest 04-mcp-security/authentication` passes.
 - [ ] I did the five "break it yourself" steps and recorded predictions and results.
 - [ ] I can explain token passthrough and the confused deputy with the lab's examples.
+- [ ] I can answer Q13–Q15 (token theft, consent phishing, "the vault is enough") out loud in two minutes each.
 - [ ] Week 14 journal: my design for an authenticated MCP service: token claims, scopes per tool, downstream credential model, and what I log.
 
 ## 9. References
@@ -369,3 +397,6 @@ The host passes credentials through the environment, so: use a fine-grained toke
 - CVE-2025-6514 (mcp-remote): https://nvd.nist.gov/vuln/detail/CVE-2025-6514
 - Norm Hardy, *The Confused Deputy* (1988): https://dl.acm.org/doi/10.1145/54289.871709
 - OWASP API Security Top 10 2023: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- OWASP MCP Top 10 (2025, beta; MCP01, MCP02, MCP07): https://owasp.org/www-project-mcp-top-10/
+- OWASP Top 10 for Agentic Applications 2026 (ASI03 Identity & Privilege Abuse): https://genai.owasp.org/
+- OAuth 2.0 Security Best Current Practice, RFC 9700: https://www.rfc-editor.org/rfc/rfc9700

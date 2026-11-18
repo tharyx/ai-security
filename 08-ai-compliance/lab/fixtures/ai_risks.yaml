@@ -1,0 +1,83 @@
+# ACME's top AI risks, linked to the control set in controls.yaml. Synthetic data for the lab.
+# OWASP IDs use the 2026 LLM Top 10 numbering; ASI = OWASP Top 10 for Agentic Applications;
+# MCP = OWASP MCP Top 10 (beta). An empty control list is a design gap, on purpose.
+- id: AR-01
+  system: AI-001
+  risk: Indirect prompt injection makes the email agent send customer data to an outsider
+  rating: High
+  owasp_llm_2026: [LLM01, LLM02]
+  owasp_agentic: [ASI01, ASI02]
+  owasp_mcp: []
+  controls: [CTL-EVAL, CTL-ACCESS, CTL-LOG]
+- id: AR-02
+  system: AI-001
+  risk: Agent tool runs with more permission than the user who asked
+  rating: High
+  owasp_llm_2026: [LLM03]
+  owasp_agentic: [ASI03]
+  owasp_mcp: [MCP02, MCP07]
+  controls: [CTL-ACCESS, CTL-HO]
+- id: AR-03
+  system: AI-002
+  risk: Biased CV summaries steer recruiters against some groups
+  rating: Critical
+  owasp_llm_2026: [LLM07]
+  owasp_agentic: []
+  owasp_mcp: []
+  controls: [CTL-HO, CTL-EVAL, CTL-DOC]
+- id: AR-04
+  system: AI-002
+  risk: Applicant personal data stays in indexes, caches and logs after an erasure request
+  rating: High
+  owasp_llm_2026: [LLM02, LLM09]
+  owasp_agentic: []
+  owasp_mcp: []
+  controls: [CTL-PRIV, CTL-LOG]
+- id: AR-05
+  system: AI-003
+  risk: Vendor changes or retrains the model without notice; source code kept by the vendor
+  rating: Medium
+  owasp_llm_2026: [LLM04]
+  owasp_agentic: [ASI04]
+  owasp_mcp: []
+  controls: [CTL-VEND, CTL-INV]
+- id: AR-06
+  system: AI-004
+  risk: Poisoned or unapproved MCP server tool description redirects the ops agent
+  rating: High
+  owasp_llm_2026: [LLM05]
+  owasp_agentic: [ASI04, ASI06]
+  owasp_mcp: [MCP03, MCP09]
+  controls: [CTL-VEND, CTL-EVAL, CTL-INV]
+- id: AR-07
+  system: AI-001
+  risk: AI incident detected late; CERT-In 6-hour and GDPR 72-hour clocks missed
+  rating: High
+  owasp_llm_2026: []
+  owasp_agentic: [ASI08]
+  owasp_mcp: [MCP08]
+  controls: [CTL-IR, CTL-LOG]
+- id: AR-08
+  system: AI-002
+  risk: Explanation and human-review route missing for rejected applicants
+  rating: High
+  owasp_llm_2026: [LLM07]
+  owasp_agentic: [ASI09]
+  owasp_mcp: []
+  controls: [CTL-DOC, CTL-HO]
+- id: AR-09
+  system: AI-001
+  risk: System prompt and tool schemas leak and help attackers plan an attack
+  rating: Medium
+  owasp_llm_2026: [LLM08]
+  owasp_agentic: []
+  owasp_mcp: [MCP10]
+  controls: [CTL-EVAL, CTL-ACM]
+- id: AR-10
+  system: AI-002
+  risk: Fairness drifts after deployment and nobody measures it
+  rating: High
+  owasp_llm_2026: [LLM07]
+  owasp_agentic: []
+  owasp_mcp: []
+  controls: []

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Secure AI gateway: the request pipeline, model routing and safe failover</title>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrRed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="760" fill="#ffffff"/>
+  <text x="600" y="40" text-anchor="middle" font-size="28" font-weight="bold" fill="#0f172a">Secure AI gateway: one front door for every model call</text>
+  <text x="600" y="68" text-anchor="middle" font-size="16" fill="#475569">Each numbered step is a policy enforcement point. Steps 1-5 and 7-11 are hard (code); step 6 is soft (a classifier).</text>
+
+  <!-- callers -->
+  <text x="145" y="118" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Callers</text>
+  <rect x="40" y="135" width="210" height="64" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="145" y="162" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Users</text>
+  <text x="145" y="182" text-anchor="middle" font-size="12" fill="#475569">SSO + MFA token (OIDC)</text>
+  <rect x="40" y="225" width="210" height="64" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="145" y="252" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Apps and workloads</text>
+  <text x="145" y="272" text-anchor="middle" font-size="12" fill="#475569">workload identity, no API keys</text>
+  <rect x="40" y="315" width="210" height="64" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="145" y="342" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Agents</text>
+  <text x="145" y="362" text-anchor="middle" font-size="12" fill="#475569">own ID + delegated user</text>
+  <text x="145" y="410" text-anchor="middle" font-size="12" fill="#475569">All untrusted until step 1</text>
+  <line x1="252" y1="257" x2="326" y2="138" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- gateway frame -->
+  <rect x="300" y="92" width="520" height="476" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="560" y="112" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">AI gateway (runs with its own workload identity)</text>
+
+  <g font-size="14" fill="#0f172a">
+    <rect x="330" y="120" width="460" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="345" y="143">1  Authenticate: signature, expiry, audience, delegation</text>
+    <rect x="330" y="164" width="460" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="345" y="187">2  Strict request schema and size limit (tenant from token)</text>
+    <rect x="330" y="208" width="460" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="345" y="231">3  Rate limit per caller (user, app or agent)</text>
+    <rect x="330" y="252" width="460" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="345" y="275">4  Token and cost budget per tenant</text>
+    <rect x="330" y="296" width="460" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="345" y="319">5  Input DLP: block secrets, mask personal data</text>
+    <rect x="330" y="340" width="460" height="36" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="345" y="363">6  Guardrail hook (soft): fail closed for confidential</text>
+    <rect x="330" y="384" width="460" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="345" y="407">7  Route only to models approved for the data class</text>
+    <rect x="330" y="428" width="460" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="345" y="451">8  Response cache keyed by tenant (and user)</text>
+    <rect x="330" y="472" width="460" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="345" y="495">9  Call model; fail over only to approved models</text>
+    <rect x="330" y="516" width="460" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="345" y="539">10 Output DLP: redact secrets and personal data</text>
+  </g>
+  <line x1="300" y1="534" x2="256" y2="534" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="145" y="530" text-anchor="middle" font-size="13" fill="#475569">answer (redacted)</text>
+  <text x="145" y="548" text-anchor="middle" font-size="13" fill="#475569">+ correlation ID</text>
+
+  <!-- models -->
+  <text x="1020" y="118" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Model endpoints (private)</text>
+  <rect x="880" y="140" width="280" height="62" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1020" y="166" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">corp-llm-private</text>
+  <text x="1020" y="186" text-anchor="middle" font-size="12" fill="#475569">approved up to confidential (primary)</text>
+  <rect x="880" y="222" width="280" height="62" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1020" y="248" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">corp-llm-backup</text>
+  <text x="1020" y="268" text-anchor="middle" font-size="12" fill="#475569">approved up to confidential (failover)</text>
+  <rect x="880" y="304" width="280" height="62" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1020" y="330" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">vendor-llm-standard</text>
+  <text x="1020" y="350" text-anchor="middle" font-size="12" fill="#475569">approved up to internal only</text>
+  <rect x="880" y="400" width="280" height="62" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="1020" y="426" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">free-public-llm</text>
+  <text x="1020" y="446" text-anchor="middle" font-size="12" fill="#475569">not approved: never routed, never a fallback</text>
+
+  <line x1="790" y1="485" x2="878" y2="175" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="790" y1="488" x2="878" y2="256" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="790" y1="491" x2="878" y2="338" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="790" y1="496" x2="878" y2="440" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrRed)"/>
+  <text x="835" y="482" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">blocked</text>
+
+  <!-- audit -->
+  <rect x="330" y="600" width="460" height="54" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="560" y="623" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">11  Audit log for every step</text>
+  <text x="560" y="642" text-anchor="middle" font-size="12" fill="#475569">redacted, token fingerprint only (never the token), model, tokens, cost, decision</text>
+  <line x1="560" y1="568" x2="560" y2="598" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="880" y="600" width="280" height="54" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1020" y="623" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">SIEM and cost dashboards</text>
+  <text x="1020" y="642" text-anchor="middle" font-size="12" fill="#475569">detections, budget alerts, kill switch</text>
+  <line x1="790" y1="627" x2="878" y2="627" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- legend -->
+  <rect x="40" y="690" width="22" height="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="70" y="703" font-size="13" fill="#0f172a">hard control</text>
+  <rect x="180" y="690" width="22" height="16" fill="#fffbeb" stroke="#d97706" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="210" y="703" font-size="13" fill="#0f172a">soft control</text>
+  <rect x="320" y="690" width="22" height="16" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="350" y="703" font-size="13" fill="#0f172a">untrusted</text>
+  <rect x="450" y="690" width="22" height="16" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="480" y="703" font-size="13" fill="#0f172a">model</text>
+  <rect x="560" y="690" width="22" height="16" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="590" y="703" font-size="13" fill="#0f172a">data store</text>
+  <text x="40" y="738" font-size="13" fill="#475569">Lab: 09-enterprise-architecture/lab/gateway/  (SecureGateway flags switch off one step at a time)</text>
+</svg>

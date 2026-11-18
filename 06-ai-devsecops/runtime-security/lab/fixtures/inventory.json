@@ -1,0 +1,29 @@
+{
+  "_comment": "Lab inventory: what each AI service runs, built from its SBOM and AI-BOM. All names are fictional.",
+  "assets": [
+    {
+      "id": "support-chat-api",
+      "owner": "team-support",
+      "internet_facing": true,
+      "has_tools": true,
+      "data_class": "confidential",
+      "components": {"fastserve": "1.4.2", "support-llm": "3.0.0", "prompt:support-system": "7", "tokenizer-lib": "0.9.1"}
+    },
+    {
+      "id": "research-sandbox",
+      "owner": "team-research",
+      "internet_facing": false,
+      "has_tools": false,
+      "data_class": "public",
+      "components": {"fastserve": "1.3.0", "big-llm": "2026.6"}
+    },
+    {
+      "id": "hr-rag-bot",
+      "owner": "team-hr-it",
+      "internet_facing": false,
+      "has_tools": false,
+      "data_class": "restricted",
+      "components": {"fastserve": "1.5.0", "vectorstore-lite": "2.1.0"}
+    }
+  ]
+}

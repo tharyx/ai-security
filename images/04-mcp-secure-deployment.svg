@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Secure MCP deployment: local and remote servers</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="760" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Secure MCP deployment: two locks for every risk</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Code checks in the gateway and servers, plus runtime limits that still hold when the code has a bug.</text>
+
+  <!-- Developer laptop -->
+  <rect x="40" y="110" width="370" height="430" rx="16" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="225" y="140" text-anchor="middle" font-size="17" font-weight="700" fill="#334155">Developer laptop</text>
+  <rect x="65" y="160" width="320" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="225" y="190" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">AI host (IDE agent)</text>
+  <text x="225" y="212" text-anchor="middle" font-size="12" fill="#92400e">servers only from the registry</text>
+  <rect x="65" y="255" width="320" height="140" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="225" y="282" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">stdio server in a sandbox</text>
+  <text x="85" y="307" font-size="13" fill="#166534">- minimal env: PATH, LANG + its own secret</text>
+  <text x="85" y="329" font-size="13" fill="#166534">- mounts only the project folder</text>
+  <text x="85" y="351" font-size="13" fill="#166534">- no ~/.ssh, ~/.aws, browser profile</text>
+  <text x="85" y="373" font-size="13" fill="#166534">- pinned package version + digest</text>
+  <rect x="65" y="415" width="320" height="105" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="225" y="442" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Local HTTP server (if needed)</text>
+  <text x="85" y="467" font-size="13" fill="#166534">- bind 127.0.0.1, never 0.0.0.0</text>
+  <text x="85" y="489" font-size="13" fill="#166534">- check Host and Origin headers</text>
+  <text x="85" y="511" font-size="13" fill="#166534">- per-launch token</text>
+  <path d="M225 230 L225 251" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- Hostile web page -->
+  <rect x="40" y="590" width="370" height="80" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="225" y="622" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Web page on evil.example</text>
+  <text x="225" y="645" text-anchor="middle" font-size="12" fill="#991b1b">DNS rebinding / drive-by POST to localhost</text>
+  <path d="M225 588 L225 526" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#r)"/>
+  <text x="240" y="562" font-size="13" font-weight="700" fill="#dc2626">blocked: Host / Origin / token</text>
+
+  <!-- Gateway -->
+  <rect x="455" y="160" width="270" height="270" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="590" y="190" text-anchor="middle" font-size="17" font-weight="700" fill="#166534">MCP gateway</text>
+  <text x="475" y="220" font-size="13" fill="#166534">- OAuth resource server (aud, exp)</text>
+  <text x="475" y="244" font-size="13" fill="#166534">- registry, digests, scope baseline</text>
+  <text x="475" y="268" font-size="13" fill="#166534">- per-agent tool allowlist</text>
+  <text x="475" y="292" font-size="13" fill="#166534">- taint + human approval</text>
+  <text x="475" y="316" font-size="13" fill="#166534">- token exchange, no passthrough</text>
+  <text x="475" y="340" font-size="13" fill="#166534">- per-session context, args only</text>
+  <text x="475" y="364" font-size="13" fill="#166534">- redaction + audit events</text>
+  <text x="475" y="388" font-size="13" fill="#166534">- kill switch per server</text>
+  <path d="M385 195 L451 230" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="455" y="150" font-size="12" fill="#475569">from hosts: HTTPS + audience-bound token</text>
+
+  <!-- SIEM -->
+  <rect x="455" y="470" width="270" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="590" y="502" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">SIEM</text>
+  <text x="590" y="525" text-anchor="middle" font-size="12" fill="#475569">hash-chained audit trail + detections</text>
+  <path d="M590 430 L590 466" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- Server runtime -->
+  <rect x="770" y="110" width="390" height="320" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="10 6"/>
+  <text x="965" y="140" text-anchor="middle" font-size="17" font-weight="700" fill="#166534">Container / microVM for the server</text>
+  <rect x="795" y="160" width="340" height="62" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="965" y="188" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">acme-tickets MCP server</text>
+  <text x="965" y="209" text-anchor="middle" font-size="12" fill="#92400e">third-party code: untrusted until reviewed</text>
+  <text x="795" y="250" font-size="13" fill="#166534">- image pinned by digest (@sha256:...)</text>
+  <text x="795" y="274" font-size="13" fill="#166534">- non-root user, read-only root file system</text>
+  <text x="795" y="298" font-size="13" fill="#166534">- not privileged, no host network</text>
+  <text x="795" y="322" font-size="13" fill="#166534">- no docker.sock, no home-folder mounts</text>
+  <text x="795" y="346" font-size="13" fill="#166534">- CPU and memory limits</text>
+  <text x="795" y="370" font-size="13" fill="#166534">- secrets as vault references, not values</text>
+  <text x="795" y="394" font-size="13" fill="#166534">- listens only for the gateway</text>
+  <path d="M725 260 L766 260" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- Vault and egress -->
+  <rect x="770" y="470" width="180" height="80" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="860" y="502" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Vault</text>
+  <text x="860" y="525" text-anchor="middle" font-size="12" fill="#166534">per-server, short-lived</text>
+  <rect x="980" y="470" width="180" height="80" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1070" y="502" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Egress proxy</text>
+  <text x="1070" y="525" text-anchor="middle" font-size="12" fill="#166534">allowlist of hosts</text>
+  <path d="M860 432 L860 466" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M1070 432 L1070 466" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- Destinations -->
+  <rect x="770" y="610" width="180" height="70" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="860" y="640" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">tickets-api</text>
+  <text x="860" y="660" text-anchor="middle" font-size="12" fill="#475569">allowed destination</text>
+  <rect x="980" y="610" width="180" height="70" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1070" y="640" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">169.254.169.254</text>
+  <text x="1070" y="660" text-anchor="middle" font-size="12" fill="#991b1b">cloud metadata, internal ranges</text>
+  <path d="M1040 552 L890 606" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M1070 552 L1070 606" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#r)"/>
+  <text x="1085" y="585" font-size="13" font-weight="700" fill="#dc2626">blocked</text>
+
+  <text x="40" y="720" font-size="13" fill="#475569">The lab's check_deployment() finds the runtime gaps (13 rules); SecureOpsGateway shows the gateway controls. Green = hard control, red = attacker, amber = semi-trusted.</text>
+</svg>

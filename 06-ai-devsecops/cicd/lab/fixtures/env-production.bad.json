@@ -1,0 +1,9 @@
+{
+  "_comment": "A production environment that exists in name only.",
+  "name": "production",
+  "protection_rules": [],
+  "deployment_branch_policy": null,
+  "can_admins_bypass": true,
+  "secrets": ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"],
+  "reviewer_members": []
+}

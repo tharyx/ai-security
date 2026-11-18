@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Prompt injection](../prompt-injection/) (week 5); Python basics |
 | **Lab** | [`lab/`](lab/): runs offline, no API key needed, no real harmful content |
-| **Maps to** | OWASP LLM01:2025 Prompt Injection (jailbreaking is listed there as a form of injection) · MITRE ATLAS AML.T0054 (LLM Jailbreak) · NIST AI 600-1 (GAI risks: dangerous content, information integrity) |
+| **Maps to** | OWASP LLM01:2026 Prompt Injection (same ID in 2025, where jailbreaking is described as a form of injection) · OWASP AI Testing Guide AITG-APP-01, AITG-APP-12 (Toxic Output) · MITRE ATLAS AML.T0054 (LLM Jailbreak) · NIST AI 600-1 (GAI risks: dangerous content, information integrity) |
 
 ---
 
@@ -38,7 +38,7 @@ They share tricks, so people mix them up. The difference is the **target**:
 - A **jailbreak** attacks the *model's safety training* (or the operator's content policy). The usual attacker is the user. The goal is content the model should refuse.
 - **Prompt injection** attacks the *application's trust boundary*. The attacker can be a third party hiding text in a document. The goal is data theft or unauthorized actions.
 
-OWASP's 2025 list puts both under LLM01, and treats jailbreaking as a form of prompt injection. In practice they also **chain**: an indirect injection can carry a jailbreak, and a jailbroken model is easier to steer into leaking data.
+OWASP puts both under LLM01 (the 2025 text treats jailbreaking as a form of prompt injection, and the ID is unchanged in 2026; verify the current wording). In practice they also **chain**: an indirect injection can carry a jailbreak, and a jailbroken model is easier to steer into leaking data.
 
 ### 2.2 Why safety training fails: the root cause
 
@@ -287,7 +287,7 @@ A story-writing app moderates each message. Abusers learn to build long role-pla
 
 <details><summary><b>Q1. What is the difference between a jailbreak and prompt injection?</b></summary>
 
-A jailbreak targets the **model's safety training** or the operator's content policy, to get output the model should refuse. The usual attacker is the user. Prompt injection targets the **application's trust boundary**: untrusted text changes what the app does, often to leak data or call tools, and the attacker can be a third party. They share techniques, and OWASP 2025 lists jailbreaking under LLM01 as a form of prompt injection. Impact differs: jailbreaks mostly hurt brand, safety and compliance; injections mostly hurt data and integrity.
+A jailbreak targets the **model's safety training** or the operator's content policy, to get output the model should refuse. The usual attacker is the user. Prompt injection targets the **application's trust boundary**: untrusted text changes what the app does, often to leak data or call tools, and the attacker can be a third party. They share techniques, and OWASP lists jailbreaking under LLM01 (2025 and 2026) as a form of prompt injection. Impact differs: jailbreaks mostly hurt brand, safety and compliance; injections mostly hurt data and integrity.
 </details>
 
 <details><summary><b>Q2. Why does safety training fail against jailbreaks?</b></summary>
@@ -382,7 +382,7 @@ Many jailbreaks are probabilistic: best-of-N sends hundreds of variants and keep
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025 (LLM01 Prompt Injection, including jailbreaking): https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (LLM01 Prompt Injection; jailbreaking described as a form of injection in the 2025 text): https://genai.owasp.org/llm-top-10/
 - MITRE ATLAS, AML.T0054 LLM Jailbreak: https://atlas.mitre.org/
 - Wei, Haghtalab, Steinhardt, *Jailbroken: How Does LLM Safety Training Fail?* (2023): https://arxiv.org/abs/2307.02483
 - Zou et al., *Universal and Transferable Adversarial Attacks on Aligned Language Models* (GCG, 2023): https://arxiv.org/abs/2307.15043

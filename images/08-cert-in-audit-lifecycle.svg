@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>CERT-In AI Security Auditing Guidelines: eight-factor risk tiering decides audit depth, then a six-phase audit produces findings, corrective action plans and follow-up</title>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">CERT-In AI security audit: tier first, then audit</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Simplified from the CERT-In AI Security Auditing Guidelines v1.0 (Nov 2026). Read the official text for details.</text>
+
+  <!-- tiering -->
+  <rect x="40" y="100" width="340" height="250" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="60" y="130" font-size="17" font-weight="700" fill="#1e3a8a">1. Score 8 risk factors (1-4)</text>
+  <g font-size="13" fill="#0f172a">
+    <text x="60" y="156">F1 impact     F2 autonomy</text>
+    <text x="60" y="178">F3 data         F4 scale and exposure</text>
+    <text x="60" y="200">F5 reversibility   F6 sector criticality</text>
+    <text x="60" y="222">F7 adversarial exposure</text>
+    <text x="60" y="244">F8 complexity and auditability</text>
+  </g>
+  <text x="60" y="276" font-size="13" fill="#1e3a8a">Score before credit for controls.</text>
+  <text x="60" y="296" font-size="13" fill="#1e3a8a">Missing evidence never means "low".</text>
+  <text x="60" y="316" font-size="13" fill="#1e3a8a">Escalation triggers: autonomy, privileged</text>
+  <text x="60" y="336" font-size="13" fill="#1e3a8a">access, cannot be safely stopped...</text>
+
+  <path d="M 380 225 L 420 225" stroke="#334155" stroke-width="3"/>
+  <path d="M 420 225 L 410 218 L 410 232 Z" fill="#334155"/>
+
+  <rect x="430" y="100" width="330" height="250" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="450" y="130" font-size="17" font-weight="700" fill="#0f172a">2. Composite 8-32 -&gt; tier</text>
+  <g font-size="13">
+    <rect x="450" y="146" width="290" height="38" rx="6" fill="#f0fdf4" stroke="#16a34a"/>
+    <text x="462" y="170" fill="#166534">8-12 Tier 1 Low: self-assessment</text>
+    <rect x="450" y="190" width="290" height="38" rx="6" fill="#fffbeb" stroke="#d97706"/>
+    <text x="462" y="214" fill="#92400e">13-19 Tier 2 Moderate: internal audit</text>
+    <rect x="450" y="234" width="290" height="38" rx="6" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="462" y="258" fill="#991b1b">20-26 Tier 3 High: independent audit</text>
+    <rect x="450" y="278" width="290" height="38" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+    <text x="462" y="302" fill="#991b1b">27-32 Tier 4 Critical: + continuous</text>
+  </g>
+  <text x="450" y="338" font-size="12" fill="#475569">Auditor and owner disagree? The higher tier applies.</text>
+
+  <path d="M 760 225 L 800 225" stroke="#334155" stroke-width="3"/>
+  <path d="M 800 225 L 790 218 L 790 232 Z" fill="#334155"/>
+
+  <rect x="810" y="100" width="350" height="250" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="830" y="130" font-size="17" font-weight="700" fill="#166534">3. Domains in scope</text>
+  <g font-size="13" fill="#0f172a">
+    <text x="830" y="156">8.1 governance    8.2 data and privacy</text>
+    <text x="830" y="178">8.3 model risk    8.4 bias and fairness</text>
+    <text x="830" y="200">8.5 explainability  8.6 security, incidents</text>
+    <text x="830" y="222">8.7 monitoring, drift  8.8 human oversight</text>
+    <text x="830" y="244">8.9 third-party and supply chain</text>
+  </g>
+  <text x="830" y="276" font-size="13" fill="#166534">Tier 1: 8.1 and 8.6 at minimum.</text>
+  <text x="830" y="296" font-size="13" fill="#166534">Tier 2-4: all nine, plus GenAI, RAG,</text>
+  <text x="830" y="316" font-size="13" fill="#166534">agentic and multimodal requirements</text>
+  <text x="830" y="336" font-size="13" fill="#166534">where they apply.</text>
+
+  <!-- six phases -->
+  <text x="40" y="392" font-size="17" font-weight="700" fill="#0f172a">4. Six audit phases</text>
+  <g font-size="13" text-anchor="middle">
+    <rect x="40" y="406" width="176" height="64" rx="10" fill="#f8fafc" stroke="#64748b"/>
+    <text x="128" y="432" font-weight="700" fill="#0f172a">1 Initiation</text>
+    <text x="128" y="452" fill="#475569">mandate, independence</text>
+    <rect x="228" y="406" width="176" height="64" rx="10" fill="#f8fafc" stroke="#64748b"/>
+    <text x="316" y="432" font-weight="700" fill="#0f172a">2 Risk and scoping</text>
+    <text x="316" y="452" fill="#475569">inventory, tier check</text>
+    <rect x="416" y="406" width="176" height="64" rx="10" fill="#f8fafc" stroke="#64748b"/>
+    <text x="504" y="432" font-weight="700" fill="#0f172a">3 Planning</text>
+    <text x="504" y="452" fill="#475569">tests, evidence list</text>
+    <rect x="604" y="406" width="176" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="692" y="432" font-weight="700" fill="#166534">4 Fieldwork</text>
+    <text x="692" y="452" fill="#166534">design + operating tests</text>
+    <rect x="792" y="406" width="176" height="64" rx="10" fill="#f8fafc" stroke="#64748b"/>
+    <text x="880" y="432" font-weight="700" fill="#0f172a">5 Findings</text>
+    <text x="880" y="452" fill="#475569">condition, criteria, cause</text>
+    <rect x="980" y="406" width="180" height="64" rx="10" fill="#f8fafc" stroke="#64748b"/>
+    <text x="1070" y="432" font-weight="700" fill="#0f172a">6 Report, follow-up</text>
+    <text x="1070" y="452" fill="#475569">opinion, CAPs, re-audit</text>
+  </g>
+
+  <rect x="40" y="494" width="560" height="122" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="60" y="522" font-size="15" font-weight="700" fill="#92400e">Evidence the auditor accepts</text>
+  <text x="60" y="546" font-size="13" fill="#0f172a">Documents (policies, model cards, datasheets, impact assessments),</text>
+  <text x="60" y="566" font-size="13" fill="#0f172a">observation (demos, walkthroughs), analysis (test results, bias and</text>
+  <text x="60" y="586" font-size="13" fill="#0f172a">drift metrics, VAPT), interviews (only with corroboration).</text>
+  <text x="60" y="606" font-size="13" fill="#92400e">No access to a vendor model is not proof of conformity.</text>
+
+  <rect x="620" y="494" width="540" height="122" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="640" y="522" font-size="15" font-weight="700" fill="#991b1b">Finding severity drives the clock</text>
+  <text x="640" y="546" font-size="13" fill="#0f172a">Critical / High: escalate now, contain, expedited plan.</text>
+  <text x="640" y="566" font-size="13" fill="#0f172a">Moderate: plan in 30 business days, fix in 60 days.</text>
+  <text x="640" y="586" font-size="13" fill="#0f172a">Low: within 3 months. Owner = a named person.</text>
+  <text x="640" y="606" font-size="13" fill="#991b1b">"Unsatisfactory" or 2+ Critical: re-audit within 3 months.</text>
+</svg>

@@ -121,7 +121,29 @@ def test_annex_i_product_obligations_apply_later():
     c = act.classify(case("hr-document-router", annex_iii_area="none", art6_3_exception="none",
                           annex_i_safety_component=True))
     assert c.primary == "high_risk"
-    assert next(o for o in c.obligations if o.ref == "Art 9").applies_from == date(2027, 8, 2)
+    assert next(o for o in c.obligations if o.ref == "Art 9").applies_from == date(2028, 8, 2)
+
+
+def test_omnibus_moved_annex_iii_high_risk_dates_but_not_transparency():
+    # Digital Omnibus, Reg. (EU) 2026/1744: stand-alone high-risk from 2 Dec 2027 (was 2 Aug 2026).
+    deployer = act.classify(CASES["cv-screening-deployer"])
+    assert next(o for o in deployer.obligations if o.ref == "Art 26(2)").applies_from == date(2027, 12, 2)
+    chatbot = act.classify(CASES["support-chatbot"])
+    assert next(o for o in chatbot.obligations if o.ref == "Art 50(1)").applies_from == date(2026, 8, 2)
+    assert any("grace period" in q for q in chatbot.open_questions)
+
+
+def test_on_todays_date_transparency_applies_but_high_risk_duties_do_not_yet():
+    today = date(2026, 11, 18)
+    now, later = act.obligations_in_force(act.classify(CASES["support-chatbot"]), today)
+    assert {o.ref for o in now} >= {"Art 50(1)", "Art 50(2)"} and later == []
+    now, later = act.obligations_in_force(act.classify(CASES["cv-screening-deployer"]), today)
+    assert [o.ref for o in now] == ["Art 4"] and all(o.applies_from == date(2027, 12, 2) for o in later)
+
+
+def test_gpai_dates_unchanged_by_omnibus():
+    c = act.classify(CASES["frontier-model"])
+    assert {o.applies_from for o in c.obligations if o.ref != "Art 4"} == {date(2025, 8, 2)}
 
 
 def test_no_eu_link_is_out_of_scope_but_says_why():

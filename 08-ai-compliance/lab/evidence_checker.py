@@ -36,7 +36,7 @@ from pathlib import Path
 import yaml
 
 AUTOMATED_COLLECTORS = {"pipeline", "scheduler", "cloud-config-export"}
-FRAMEWORKS = ["eu_ai_act", "iso_42001", "nist_ai_rmf", "soc2", "iso_27001"]
+FRAMEWORKS = ["eu_ai_act", "iso_42001", "nist_ai_rmf", "soc2", "iso_27001", "cert_in_ai"]
 
 
 def normalized_digest(data: bytes) -> str:

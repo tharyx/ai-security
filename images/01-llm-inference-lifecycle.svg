@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The LLM inference lifecycle, step by step</title>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">The LLM inference lifecycle, step by step</text>
+  <text x="40" y="80" font-size="16" fill="#475569">One request from the user to the answer. Red: what can go wrong at the step. Green: the control that belongs there.</text>
+  <rect x="40" y="120" width="250" height="110" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="54" y="144" font-size="15" font-weight="700" fill="#92400e">1. AI gateway</text>
+  <text x="54" y="164" font-size="12" fill="#92400e">authN, quotas, size limits</text>
+  <text x="54" y="181" font-size="12" fill="#991b1b">risk: abuse, denial of wallet</text>
+  <text x="54" y="198" font-size="12" fill="#166534">control: SSO, rate limit, caps</text>
+  <rect x="330" y="120" width="250" height="110" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="344" y="144" font-size="15" font-weight="700" fill="#92400e">2. Prompt assembly</text>
+  <text x="344" y="164" font-size="12" fill="#92400e">chat template joins roles</text>
+  <text x="344" y="181" font-size="12" fill="#991b1b">risk: injection, hidden context</text>
+  <text x="344" y="198" font-size="12" fill="#166534">control: escape role tokens</text>
+  <rect x="620" y="120" width="250" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="634" y="144" font-size="15" font-weight="700" fill="#1e3a8a">3. Tokenize</text>
+  <text x="634" y="164" font-size="12" fill="#1e3a8a">text to token IDs, count</text>
+  <text x="634" y="181" font-size="12" fill="#991b1b">risk: filter bypass by encoding</text>
+  <text x="634" y="198" font-size="12" fill="#166534">control: normalize, then filter</text>
+  <rect x="910" y="120" width="250" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="924" y="144" font-size="15" font-weight="700" fill="#1e3a8a">4. Prefill</text>
+  <text x="924" y="164" font-size="12" fill="#1e3a8a">whole prompt in one pass</text>
+  <text x="924" y="181" font-size="12" fill="#991b1b">risk: shared prompt/KV cache</text>
+  <text x="924" y="198" font-size="12" fill="#166534">control: cache per tenant</text>
+  <rect x="910" y="320" width="250" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="924" y="344" font-size="15" font-weight="700" fill="#1e3a8a">5. Decode loop</text>
+  <text x="924" y="364" font-size="12" fill="#1e3a8a">one new token per step</text>
+  <text x="924" y="381" font-size="12" fill="#991b1b">risk: runaway output, loops</text>
+  <text x="924" y="398" font-size="12" fill="#166534">control: max tokens, step limits</text>
+  <rect x="620" y="320" width="250" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="634" y="344" font-size="15" font-weight="700" fill="#1e3a8a">6. Sampling</text>
+  <text x="634" y="364" font-size="12" fill="#1e3a8a">temperature, top-k, top-p</text>
+  <text x="634" y="381" font-size="12" fill="#991b1b">risk: rare unsafe output</text>
+  <text x="634" y="398" font-size="12" fill="#166534">control: test rates, not one run</text>
+  <rect x="330" y="320" width="250" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="344" y="344" font-size="15" font-weight="700" fill="#1e3a8a">7. Detokenize + stream</text>
+  <text x="344" y="364" font-size="12" fill="#1e3a8a">tokens back to text, streamed</text>
+  <text x="344" y="381" font-size="12" fill="#991b1b">risk: leak before a filter runs</text>
+  <text x="344" y="398" font-size="12" fill="#166534">control: buffer or filter stream</text>
+  <rect x="40" y="320" width="250" height="110" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="54" y="344" font-size="15" font-weight="700" fill="#92400e">8. Post-process + log</text>
+  <text x="54" y="364" font-size="12" fill="#92400e">parse tool calls, render</text>
+  <text x="54" y="381" font-size="12" fill="#991b1b">risk: XSS, SSRF, PII in logs</text>
+  <text x="54" y="398" font-size="12" fill="#166534">control: validate at sink, redact</text>
+  <line x1="290" y1="175" x2="328" y2="175" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="580" y1="175" x2="618" y2="175" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="870" y1="175" x2="908" y2="175" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="1035" y1="230" x2="1035" y2="318" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="910" y1="375" x2="872" y2="375" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="620" y1="375" x2="582" y2="375" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="330" y1="375" x2="292" y2="375" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="1045" y="270" font-size="12" font-weight="400" fill="#475569" text-anchor="start">KV cache</text>
+  <text x="1045" y="286" font-size="12" font-weight="400" fill="#475569" text-anchor="start">reused</text>
+  <line x1="165" y1="430" x2="165" y2="468" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="180" y="460" font-size="13" font-weight="400" fill="#0f172a" text-anchor="start">answer to the user, or a tool call that the app (not the model) decides to run</text>
+  <rect x="40" y="490" width="1120" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="54" y="514" font-size="15" font-weight="700" fill="#334155">Serving engine underneath (for example vLLM, TGI, a cloud model API)</text>
+  <text x="54" y="534" font-size="13" fill="#334155">Many users' requests share one GPU: continuous batching, a paged KV cache, prompt caching, quantized weights.</text>
+  <text x="54" y="551" font-size="13" fill="#334155">So isolation matters inside the serving layer too: per-tenant caches, no prompts in shared debug logs, GPU memory hygiene.</text>
+</svg>

@@ -1,4 +1,4 @@
-"""Controls for OWASP LLM10 Unbounded Consumption: size limits, rate limits, budgets, loop guards.
+"""Controls for OWASP LLM06:2026 Unbounded Consumption (LLM10 in 2025): size limits, rate limits, budgets, loop guards.
 
 Every model call costs money and capacity. Without limits, one user (or one bug) can:
 * send a giant prompt (cost and latency for everyone),

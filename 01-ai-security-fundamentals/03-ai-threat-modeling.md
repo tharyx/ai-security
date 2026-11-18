@@ -1,14 +1,14 @@
 # Lesson 03: Threat Modeling AI Systems
 
 > **Module:** 01 · AI Security Fundamentals · **Week:** 4 · **Time:** ~10 hours
-> **You will:** threat-model an AI system with STRIDE, MITRE ATLAS and the OWASP LLM Top 10, write abuse cases, score risk, spot the lethal trifecta, and run a threat model as code that fails the build when the design is unsafe.
+> **You will:** threat-model an AI system with STRIDE, MITRE ATLAS and the OWASP Top 10 lists (LLM 2026, Agentic, MCP), choose between methods (STRIDE, PASTA, LINDDUN, DREAD, attack trees, MAESTRO), write abuse cases, score risk, spot the lethal trifecta, and run a threat model and an attack tree as code.
 
 | | |
 |---|---|
 | **Prerequisites** | [Lesson 02](02-ai-system-architecture-and-trust-boundaries.md) (DFDs, trust zones, taint) |
-| **Lab** | [`lab/threat_model.py`](lab/threat_model.py): part 2, "find and score the threats" |
+| **Lab** | [`lab/threat_model.py`](lab/threat_model.py): part 2, "find and score the threats" · [`lab/attack_tree.py`](lab/attack_tree.py): attack trees as code |
 | **Templates** | [`threat-model-template.md`](../00-program/templates/threat-model-template.md) · [`risk-register.csv`](../00-program/templates/risk-register.csv) |
-| **Maps to** | OWASP LLM Top 10 2025 (all ten) · MITRE ATLAS · NIST AI RMF: MAP and MEASURE functions · Microsoft STRIDE |
+| **Maps to** | OWASP Top 10 for LLM Applications 2026 (all ten; 2025 numbers in brackets) · OWASP Top 10 for Agentic Applications (ASI01–ASI10) · OWASP MCP Top 10 (beta) · MITRE ATLAS · NIST AI RMF: MAP and MEASURE · Microsoft STRIDE · CSA MAESTRO · ISC2 AI Security objective 6.1 |
 
 ---
 
@@ -93,22 +93,56 @@ Some commonly used techniques (IDs and names change as ATLAS evolves, so check t
 | AML.T0043 | Craft Adversarial Data | Evasion of a malware or fraud classifier |
 | AML.T0029 | Denial of ML Service | Flooding an inference endpoint |
 
-### 2.5 OWASP Top 10 for LLM Applications (2025)
+**ATLAS in 2026 (verify at the source).** The ISC2 AI Security study guide (validated November 2026) describes the current ATLAS matrix as **16 tactics**: 14 reused from ATT&CK (including Lateral Movement) plus two specific to AI, **AI Model Access** (reaching the model through an API, a product or the artifact) and **AI Attack Staging** (preparing the attack, for example building a proxy model or crafting adversarial data). Older material calls them "ML Model Access" and "ML Attack Staging"; they are the same tactics. Technique IDs keep changing, so always copy them from the live matrix.
 
-The OWASP list is a **risk checklist**, not a threat model. Use it to make sure you did not miss a category.
+### 2.5 OWASP Top 10 for LLM Applications (2026)
 
-| ID | Risk | One-line example | Primary hard control | Lab rule |
+The OWASP list is a **risk checklist**, not a threat model. Use it to make sure you did not miss a category. The 2026 edition (released August 2026) renumbered several items; the 2025 id is in brackets because most courses and tools still use it. The lab analyzer reports 2026 ids and contains the full mapping (`OWASP_2025_TO_2026` in [`threat_model.py`](lab/threat_model.py)).
+
+| ID 2026 (2025) | Risk | One-line example | Primary hard control | Lab rule |
 |---|---|---|---|---|
-| LLM01 | Prompt Injection | Email text makes the agent send data out | Tool policy outside the model; break the trifecta | `TB-001`, `TRI-001` |
-| LLM02 | Sensitive Information Disclosure | Assistant reveals another tenant's records | ACL-filtered retrieval; redaction; no secrets in context | `RAG-001`, `DATA-001` |
-| LLM03 | Supply Chain | Backdoored model or poisoned package | Provenance, signing, scanning, pinned versions | (module 06) |
-| LLM04 | Data and Model Poisoning | Fine-tuning set seeded with a trigger | Data provenance, review, anomaly checks | `TB-001` on `F06` |
-| LLM05 | Improper Output Handling | Model output rendered as HTML or run as SQL | Encode / validate at the sink | `OUT-001` |
-| LLM06 | Excessive Agency | Summarizer with an email-sending tool | Least-privilege tools; user identity; approval | `TB-001`, `ID-001` |
-| LLM07 | System Prompt Leakage | Prompt reveals an API key | No secrets in prompts | `SEC-001` |
-| LLM08 | Vector and Embedding Weaknesses | Shared index without tenant filter | Pre-filter by tenant and ACL | `RAG-001` |
-| LLM09 | Misinformation | Bot invents a refund policy | Grounding with citations; human review for high-stakes use | (process) |
-| LLM10 | Unbounded Consumption | Scripted max-length prompts | Token budgets, quotas, rate limits | `DOS-001` |
+| LLM01:2026 (LLM01:2025) | Prompt Injection, now also cross-modal (image, audio) | Email text makes the agent send data out | Tool policy outside the model; break the trifecta | `TB-001`, `TRI-001` |
+| LLM02:2026 (LLM02:2025) | Sensitive Information Disclosure, now also reasoning traces, logs, embeddings, side channels | Assistant reveals another tenant's records | ACL-filtered retrieval; redaction; no secrets in context | `RAG-001`, `DATA-001` |
+| LLM03:2026 (LLM06:2025) | Excessive Agency (moved up from #6) | Summarizer with an email-sending tool | Least-privilege tools; user identity; approval | `TB-001`, `ID-001` |
+| LLM04:2026 (LLM03:2025) | Supply Chain | Backdoored model or poisoned package | Provenance, signing, scanning, pinned versions | (module 06) |
+| LLM05:2026 (LLM04:2025) | Data and Model Poisoning | Fine-tuning set seeded with a trigger | Data provenance, review, anomaly checks | `TB-001` on `F06` |
+| LLM06:2026 (LLM10:2025) | Unbounded Consumption | Scripted max-length prompts | Token budgets, quotas, rate limits | `DOS-001` |
+| LLM07:2026 (LLM09:2025) | Misinformation | Bot invents a refund policy | Grounding with citations; human review for high-stakes use | (process) |
+| LLM08:2026 (LLM07:2025) | Hidden Context Exposure (was System Prompt Leakage; now also tool schemas, policy logic, workflow rules) | Prompt reveals an API key or the refund-approval rules | No secrets or access logic in any hidden context | `SEC-001` |
+| LLM09:2026 (LLM08:2025) | Vector and Embedding Weaknesses | Shared index without tenant filter | Pre-filter by tenant and ACL | `RAG-001` |
+| LLM10:2026 (LLM05:2025) | Improper Output Handling, now including insecure AI-generated code | Model output rendered as HTML or run as SQL | Encode / validate at the sink | `OUT-001` |
+
+### 2.5a OWASP Agentic (ASI) and MCP Top 10: when the system has agents and tools
+
+For agents and tool servers, add two more checklists. Use them the same way: as a coverage check over your DFD, not as the analysis itself.
+
+| OWASP Agentic 2026 (ASI) | In one line | Lab rule / where in this repo |
+|---|---|---|
+| ASI01 Agent Goal Hijack | Injected content changes the agent's goal | `TB-001`, `TRI-001`; [module 05](../05-agent-security/) |
+| ASI02 Tool Misuse | Legitimate tools used in harmful ways | `TB-001`, `REP-001` |
+| ASI03 Identity & Privilege Abuse | Agent credentials too broad or misused | `ID-001` |
+| ASI04 Agentic Supply Chain | Malicious tools, plugins, MCP servers, prompts | [module 04](../04-mcp-security/), [module 06](../06-ai-devsecops/) |
+| ASI05 Unexpected Code Execution | Agent writes or triggers code that runs unsafely | `OUT-001`; sandboxing in module 05 |
+| ASI06 Memory & Context Poisoning | Planted content persists in memory | stretch rule `MEM-001` below |
+| ASI07 Insecure Inter-Agent Communication | Agent messages not authenticated or validated | `TB-002` on agent-to-agent flows |
+| ASI08 Cascading Failures | One error spreads through connected agents | (process: validation between steps) |
+| ASI09 Human-Agent Trust Exploitation | Agent persuades humans to approve harm | approval UX in module 05 |
+| ASI10 Rogue Agents | Agent acts outside its purpose | monitoring and kill switch (`REQ-IR-01`, lesson 04) |
+
+| OWASP MCP Top 10 (beta) | In one line |
+|---|---|
+| MCP01 Token Mismanagement & Secret Exposure | Tokens in configs, logs or prompts; token passthrough |
+| MCP02 Privilege Escalation via Scope Creep | Tool scopes grow beyond the task |
+| MCP03 Tool Poisoning | Instructions hidden in tool descriptions or metadata |
+| MCP04 Software Supply Chain Attacks & Dependency Tampering | Malicious or tampered servers and packages |
+| MCP05 Command Injection & Execution | Tool arguments reach a shell or interpreter |
+| MCP06 Prompt Injection via Contextual Payloads | Injections inside resources and tool results |
+| MCP07 Insufficient Authentication & Authorization | Servers that do not verify who calls or what they may do |
+| MCP08 Lack of Audit and Telemetry | No record of tool invocations |
+| MCP09 Shadow MCP Servers | Unapproved servers outside the inventory |
+| MCP10 Context Injection & Over-Sharing | Too much data placed in the shared context |
+
+Deep dives: [module 04 (MCP)](../04-mcp-security/) and [module 05 (agents)](../05-agent-security/). Verify both lists at the source; the MCP list is a beta.
 
 ### 2.6 Abuse cases
 
@@ -116,14 +150,16 @@ A **use case** says what a legitimate user wants. An **abuse case** says what an
 
 | # | Abuse case (attacker voice) | Entry point | ATLAS / OWASP |
 |---|---|---|---|
-| 1 | "I email support with hidden text so the copilot mails me the CRM export." | inbound email | T0051 / LLM01, LLM06 |
-| 2 | "I put a markdown image in my email so the agent's browser sends me the answer." | inbound email → UI | T0051 / LLM05 |
-| 3 | "I'm a Globex customer; I ask about Initech's contract and the KB answers." | chat → retriever | — / LLM08 |
-| 4 | "I send 10,000 emails with 50-page bodies to burn their AI budget." | inbound email | T0029 / LLM10 |
-| 5 | "I make the copilot fetch `http://169.254.169.254/` to read cloud metadata." | `http_fetch` tool | — / LLM06 (SSRF) |
-| 6 | "I'm an intern; I ask the copilot for any customer's full record via `crm_query`." | tool identity | — / LLM06 |
-| 7 | "I read the shared logs and find customers' personal data and the system-prompt secret." | logs | — / LLM02, LLM07 |
-| 8 | "My email gets indexed into the KB, so every future answer about refunds quotes my fake policy." | email → KB | T0051 / LLM04 |
+| 1 | "I email support with hidden text so the copilot mails me the CRM export." | inbound email | T0051 / LLM01, LLM03 · ASI01 |
+| 2 | "I put a markdown image in my email so the agent's browser sends me the answer." | inbound email → UI | T0051 / LLM10 |
+| 3 | "I'm a Globex customer; I ask about Initech's contract and the KB answers." | chat → retriever | — / LLM09 |
+| 4 | "I send 10,000 emails with 50-page bodies to burn their AI budget." | inbound email | T0029 / LLM06 |
+| 5 | "I make the copilot fetch `http://169.254.169.254/` to read cloud metadata." | `http_fetch` tool | — / LLM03 (SSRF) · ASI02 |
+| 6 | "I'm an intern; I ask the copilot for any customer's full record via `crm_query`." | tool identity | — / LLM03 · ASI03 |
+| 7 | "I read the shared logs and find customers' personal data and the system-prompt secret." | logs | — / LLM02, LLM08 |
+| 8 | "My email gets indexed into the KB, so every future answer about refunds quotes my fake policy." | email → KB | T0051 / LLM05 |
+
+(OWASP ids in this table are the 2026 numbers.)
 
 ### 2.7 The lethal trifecta
 
@@ -151,6 +187,43 @@ Scoring is for **ordering work**, not for precision. Use a simple, explained sca
 2. A **threat register**: threat statements with STRIDE / ATLAS / OWASP tags, scores, owners. Use [`risk-register.csv`](../00-program/templates/risk-register.csv).
 3. **Security requirements** and tests (lesson 04).
 4. **Residual-risk acceptances**: a named owner, a reason, a compensating control and an **expiry date**. Use [`threat-model-template.md`](../00-program/templates/threat-model-template.md).
+
+### 2.10 Choosing a method: STRIDE, PASTA, LINDDUN, DREAD, attack trees and MAESTRO
+
+STRIDE is not the only method. Architects pick (and combine) methods by the question they need answered.
+
+| Method | Type | How it works | Strengths | Weak spots for AI | Use it when |
+|---|---|---|---|---|---|
+| **STRIDE** (Microsoft, 1999) | Threat enumeration | Six threat classes, applied per DFD element | Fast, systematic, easy to teach, tool support | Does not prompt AI-specific attacks (needs AI lenses, section 2.3) | Component-level review of any design; the default |
+| **PASTA** (UcedaVélez and Morana, 2015) | Risk-centric process, 7 stages | Business objectives → technical scope → decomposition → threat analysis → weakness analysis → attack modeling → risk and countermeasures | Ties threats to business impact; uses threat intelligence and attack simulation | Heavy; needs time and senior people | Business-critical AI systems where leaders must see impact |
+| **LINDDUN** (KU Leuven) | Privacy threat enumeration | Linking, Identifying, Non-repudiation, Detecting, Data disclosure, Unawareness/unintervenability, Non-compliance, per DFD element | Covers privacy harms STRIDE misses (inference, linking, lack of user control) | Not about attackers taking control | Any AI system with personal data: training sets, RAG over HR files, memory |
+| **DREAD** | Risk scoring | Damage, Reproducibility, Exploitability, Affected users, Discoverability, each scored (often 1–10) and averaged | Simple numbers | Subjective; Microsoft itself moved away from it; "discoverability" rewards obscurity | Only if your organization already uses it; we use likelihood × impact (section 2.8) |
+| **Attack trees** (Schneier, 1999) | Goal decomposition | Root = attacker goal; children joined by AND (all needed) or OR (any is enough); leaves get probability or cost | Shows the cheapest path and where one control cuts the most; good for deep dives | Big trees get hard to maintain; numbers are estimates | One high-value goal (steal the model, move money, exfiltrate a tenant) |
+| **MAESTRO** (Cloud Security Alliance, 2025) | Layered framework for agentic AI | Analyze threats per layer of a 7-layer agent reference architecture, and *between* layers and agents | Built for multi-agent systems; covers ecosystem and observability layers | New; less tooling and fewer worked examples | Agentic and multi-agent systems ([module 05](../05-agent-security/)) |
+
+**PASTA applied to AI, in one line per stage:** (1) business goals and harms (for example "no refund fraud, no cross-customer leak"); (2) technical scope (models, providers, tools, data); (3) decompose (the DFD from lesson 02); (4) threat analysis (ATLAS, OWASP, threat intelligence on who targets you); (5) weaknesses (no ACL filter, shared token); (6) attack modeling (attack trees, red-team simulation); (7) risk and countermeasures (scored, owned, tested).
+
+**MAESTRO's seven layers** (as described by CSA and the ISC2 study guide; verify the current version): 1 Foundation models · 2 Data operations (data, retrieval, vector stores) · 3 Agent frameworks · 4 Deployment and infrastructure · 5 Evaluation and observability · 6 Security and compliance (cuts across all layers) · 7 Agent ecosystem (multi-agent interaction, marketplaces, users). The key idea: look for threats that cross layers, for example a poisoned document (layer 2) that hijacks a planner (layer 3) which then misuses a cloud credential (layer 4) without any log (layer 5).
+
+**Attack trees as code.** The lab now has [`attack_tree.py`](lab/attack_tree.py): HelpDesk Copilot v0 as an attack tree with AND/OR maths.
+
+![Attack tree for HelpDesk Copilot v0](../images/01-attack-tree-helpdesk.svg)
+
+Read the numbers as *relative*, not exact. They still teach two design rules: an **AND** branch dies when you cut its cheapest hard leg (quarantine the email reader), while an **OR** node needs *every* child closed (blocking one of three exit channels changes almost nothing).
+
+**How to combine them in practice**
+
+| Situation | Combination |
+|---|---|
+| New LLM feature, normal risk | STRIDE per element + AI lenses + OWASP LLM 2026 check + trifecta test |
+| Feature handling personal data | Add LINDDUN for privacy threats |
+| Agentic or multi-agent system | Add MAESTRO layers + OWASP ASI check; MCP Top 10 if it uses MCP |
+| One crown-jewel goal | Attack tree for that goal |
+| Board-level or high-impact system | Run it as PASTA so threats map to business impact |
+
+**Tools.** Microsoft Threat Modeling Tool and OWASP Threat Dragon are free and STRIDE-based, with built-in diagrams; commercial platforms (for example IriusRisk and ThreatModeler) support several methods and more automatic threat generation. Threat model as code (this lab, or open-source tools such as pytm) fits CI pipelines best. Whatever the tool, the AI-specific knowledge has to come from you.
+
+**Running a threat-modeling program at scale.** Use tiers: specialists do full models for high-risk AI systems, teams do focused models for medium risk, and low-risk features use a self-service template. Start with high-value applications, then expand. Measure **process** (share of AI features with a current model, time to complete, share of threats with a mitigation) and **outcome** (fewer design flaws found late or in production, incidents traced to unmodeled flows). Feed incidents back into the models.
 
 ---
 
@@ -197,16 +270,16 @@ Expected output (first findings and the summary; the full report lists all 26):
 ```text
 Threat model: HelpDesk Copilot v0 (vulnerable)
 ==============================================================================
-[CRITICAL] RAG-001  F05                  score 20  STRIDE I   OWASP LLM02, LLM08
+[CRITICAL] RAG-001  F05                  score 20  STRIDE I   OWASP:2026 LLM02, LLM09
            kb_vector_store -> copilot_api returns restricted chunks without acl_filter, tenant_filter. Similarity is not authorization.
            fix: Filter by tenant and ACL inside the query, using the server-side identity, before ranking.
-[CRITICAL] TB-001   F07                  score 20  STRIDE TE  OWASP LLM01, LLM06
+[CRITICAL] TB-001   F07                  score 20  STRIDE TE  OWASP:2026 LLM01, LLM03
            Content from ['inbound_email'] can drive send_email with no hard gate.
            fix: Add tool_authz (server-side policy with the user's permissions) and human_approval for high-impact actions.
-[CRITICAL] TB-001   F08                  score 20  STRIDE TE  OWASP LLM01, LLM06
+[CRITICAL] TB-001   F08                  score 20  STRIDE TE  OWASP:2026 LLM01, LLM03
            Content from ['inbound_email'] can drive http_fetch with no hard gate.
            fix: Add tool_authz (server-side policy with the user's permissions) and human_approval for high-impact actions.
-[CRITICAL] TRI-001  llm                  score 25  STRIDE I   OWASP LLM01, LLM02, LLM06
+[CRITICAL] TRI-001  llm                  score 25  STRIDE I   OWASP:2026 LLM01, LLM02, LLM03
            llm has private data ['F04', 'F11'], untrusted content from ['inbound_email'] and exfiltration channels ['send_email', 'http_fetch', 'web_ui:markdown-images'].
            fix: Remove one leg: no external channel for this model, or no private data, or no untrusted content. Gating a channel only lowers likelihood.
 ...
@@ -228,7 +301,7 @@ Expected output:
 ```text
 Threat model: HelpDesk Copilot v1 (secure)
 ==============================================================================
-[MEDIUM  ] DOS-001  F03                  score  9  STRIDE D   OWASP LLM10 [ACCEPTED]
+[MEDIUM  ] DOS-001  F03                  score  9  STRIDE D   OWASP:2026 LLM06 [ACCEPTED]
            No rate limit on the entry point inbound_email -> copilot_api.
            fix: Add per-user, per-sender and per-tenant rate limits at the gateway.
 ------------------------------------------------------------------------------
@@ -302,8 +375,37 @@ Look at Part 3 of the test file: removing one control from the secure design bri
 3. In the secure design, change `F07`'s `identity` from `user` to `service` and make `draft_reply` `classification: confidential`. Which rule fires?
 4. Add a component `web_search` (type `tool`, `capabilities: [external_comms]`) and a flow `llm -> web_search` with perfect hygiene: `tls, schema_validation, tool_authz, audit_log`. Predict the trifecta severity. (Critical: good tool hygiene does not remove an exfiltration channel. `test_adding_an_email_tool_to_the_secure_model_reopens_the_trifecta` proves the same idea.)
 
+### Step 7: Attack trees as code
+
+```powershell
+python 01-ai-security-fundamentals/lab/demo.py
+```
+
+Part E of the expected output:
+
+```text
+PART E - attack tree for HelpDesk Copilot v0 (attack_tree.py)
+root: Steal customer data through HelpDesk Copilot
+P(success) with no controls: 0.83   cheapest path: ['rag_no_acl']
+soft control only (model follows injection 50% -> 10%): 0.70
+apply ONE hard control                                     P(root)
+------------------------------------------------------------------
+retriever: tenant and ACL filter before ranking            0.57
+quarantine: the model with tools never reads raw email     0.67
+redaction before logging; no secrets in prompts            0.79
+restrict log access to the security team                   0.79
+tool broker: fixed recipients + human approval             0.82
+egress proxy: allowlisted domains only                     0.82
+output: image and link allowlist                           0.82
+three hard controls, one per branch ['data_in_logs', 'rag_no_acl', 'send_mail']: P(root) = 0.00
+```
+
+Then run `python -m pytest 01-ai-security-fundamentals/lab/test_attack_tree.py -v`. Predict before you run: if you change the leaf `model_follows` from 0.5 to 0.9 (a weaker model), which control rises in the ranking? Why is `model_follows` never in the ranking? (It has no hard control; model behavior can only be made less likely.)
+
 ### Stretch goals
 
+- Build an attack tree for "move money through the refund agent" (interview Q8) and find the single best hard control.
+- Add a LINDDUN pass to your own design: for each data store, write one Linking, one Identifying and one Unawareness threat.
 - Add a rule `MEM-001`: a model writes to a `datastore` named like `*memory*` without `schema_validation`. Add a fixture flow and a test.
 - Export the open findings to CSV in the column format of [`risk-register.csv`](../00-program/templates/risk-register.csv).
 - Add an `atlas` field to `Finding` and fill it for each rule (check the current ATLAS IDs).
@@ -395,7 +497,7 @@ Threat statement: "An external sender can make the assistant send private emails
 
 <details><summary><b>Q8. Design exercise: threat-model a customer-support agent that can issue refunds up to $500.</b></summary>
 
-Key threats: injection through customer messages to trigger refunds (LLM01/LLM06); refunds to the wrong account (tampering of arguments); repeated small refunds under the limit (abuse of business logic); no audit trail (repudiation); cost abuse (LLM10). Controls: the refund tool only refunds the *original payment* of an order the authenticated customer owns; the amount is capped by the order value; per-customer and per-day limits; human approval above a threshold or when untrusted content is in context; full audit logs; anomaly alerts on refund rate. Tests: injected "refund $500 to card X" executes nothing; a refund for another customer's order is denied.
+Key threats: injection through customer messages to trigger refunds (LLM01:2026 and LLM03:2026 Excessive Agency, was LLM06:2025; ASI01 Agent Goal Hijack); refunds to the wrong account (tampering of arguments); repeated small refunds under the limit (abuse of business logic); no audit trail (repudiation); cost abuse (LLM06:2026 Unbounded Consumption, was LLM10:2025). Controls: the refund tool only refunds the *original payment* of an order the authenticated customer owns; the amount is capped by the order value; per-customer and per-day limits; human approval above a threshold or when untrusted content is in context; full audit logs; anomaly alerts on refund rate. Tests: injected "refund $500 to card X" executes nothing; a refund for another customer's order is denied.
 </details>
 
 <details><summary><b>Q9. Why should a threat model be "as code"? What are the limits?</b></summary>
@@ -428,6 +530,36 @@ Define triggers that require an update: new tool, new data source, new model or 
 "Before we build, we draw how information moves through the system and ask four questions: what are we building, what can go wrong, what will we do about it, and did it work. For AI, the big question is: if the AI is tricked, what is the worst it can do? We design so that answer is 'not much', and we prove it with automated tests that run on every change."
 </details>
 
+<details><summary><b>Q15. STRIDE vs PASTA vs MAESTRO: when would you choose each?</b></summary>
+
+STRIDE for a fast, component-by-component enumeration of any design; it is my default inside every review. PASTA when the system is business-critical and leaders need threats tied to business impact: its seven stages go from business objectives through decomposition, threat and weakness analysis and attack modeling to risk-based countermeasures. MAESTRO when the system is agentic or multi-agent: its seven layers (foundation models, data operations, agent frameworks, deployment, evaluation and observability, security and compliance, agent ecosystem) make me look at threats between layers and between agents. They combine: PASTA as the process, STRIDE and MAESTRO for enumeration inside stage 4.
+</details>
+
+<details><summary><b>Q16. What does LINDDUN add that STRIDE misses?</b></summary>
+
+Privacy threats that are not about an attacker breaking in: linking records across datasets, identifying a person from "anonymous" data, detecting that someone is in a dataset (membership inference is a perfect AI example), people being unaware of or unable to control how their data is used, and non-compliance with privacy law. For AI systems that train on, retrieve or remember personal data, I run LINDDUN next to STRIDE.
+</details>
+
+<details><summary><b>Q17. How do attack trees help an architect choose controls?</b></summary>
+
+The root is the attacker's goal; children are joined by AND (all steps needed) or OR (any path works). With rough probabilities or costs on the leaves, you can compute the cheapest path and see which single control lowers the root the most. Two rules fall out: cut an AND branch at its cheapest hard leg, and remember that an OR node needs every child closed. In my lab, blocking one of three exfiltration channels lowered the root probability from 0.83 to 0.82, while an ACL filter on retrieval lowered it to 0.57, and one hard control per branch made it 0.
+</details>
+
+<details><summary><b>Q18. Why don't you use DREAD for scoring?</b></summary>
+
+DREAD averages five subjective 1–10 scores, and people disagree a lot on them; "discoverability" also rewards hiding a flaw instead of fixing it. Microsoft itself moved away from it. I use likelihood × impact with written scale definitions, plus explicit factors (exposure, reversibility, blast radius, autonomy, detectability), and I settle disputes with evidence from a test.
+</details>
+
+<details><summary><b>Q19. What changed in the OWASP Top 10 for LLM Applications 2026, and does it change your threat model?</b></summary>
+
+The main changes: Excessive Agency moved up to LLM03; System Prompt Leakage became LLM08 Hidden Context Exposure, which also covers tool schemas, policy logic and workflow rules; Prompt Injection now explicitly includes cross-modal (image and audio) attacks; Sensitive Information Disclosure adds reasoning traces, logs, embeddings and side channels; Improper Output Handling (now LLM10) includes insecure AI-generated code. My threat model does not change because of a renumbering: the threats come from the DFD. I update the tags and use the new scope as a checklist, for example checking that no access logic hides in tool descriptions. Verify the list at the source.
+</details>
+
+<details><summary><b>Q20. How would you measure whether a threat-modeling program is working?</b></summary>
+
+Process metrics: share of AI features with a current threat model, time to complete one, share of high threats with a mitigation and a test. Outcome metrics: fewer design flaws found late (pen test, production), incidents traced to flows that were never modeled, and expired risk acceptances. I start with a baseline and use tiers (deep models for high-risk systems, templates for low-risk) so the program scales.
+</details>
+
 ---
 
 ## 8. Checklist (definition of done)
@@ -436,6 +568,8 @@ Define triggers that require an update: new tool, new data source, new model or 
 - [ ] I wrote at least 15 threat statements for my own system, tagged with STRIDE and OWASP (and ATLAS where it fits), and scored them.
 - [ ] I filled in [`threat-model-template.md`](../00-program/templates/threat-model-template.md) and a few rows of [`risk-register.csv`](../00-program/templates/risk-register.csv) for my system (copies in my journal, not edits to the templates).
 - [ ] `python -m pytest 01-ai-security-fundamentals/lab/test_threat_model.py` passes, and I did the four "break it yourself" exercises.
+- [ ] I can say when to use STRIDE, PASTA, LINDDUN, attack trees and MAESTRO, and I built one attack tree for my own system (`test_attack_tree.py` passes).
+- [ ] I tagged my threats with OWASP LLM 2026 ids (and ASI / MCP ids where the system has agents or MCP).
 - [ ] Week 4 journal entry: my top three risks, the leg of the trifecta I would break, and one accepted risk with owner and expiry.
 
 ## 9. References
@@ -444,7 +578,15 @@ Define triggers that require an update: new tool, new data source, new model or 
 - Adam Shostack, *Threat Modeling: Designing for Security* (Wiley, 2014)
 - Microsoft, *STRIDE* and the Threat Modeling Tool, https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats
 - MITRE ATLAS, https://atlas.mitre.org/
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (released August 2026; verify at the source), https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications (December 2025), https://genai.owasp.org/
+- OWASP MCP Top 10 (beta), https://owasp.org/www-project-mcp-top-10/
+- Tony UcedaVélez and Marco Morana, *Risk Centric Threat Modeling: Process for Attack Simulation and Threat Analysis* (Wiley, 2015)
+- LINDDUN privacy threat modeling, https://linddun.org/
+- Bruce Schneier, *Attack Trees*, Dr. Dobb's Journal (1999), https://www.schneier.com/academic/archives/1999/12/attack_trees.html
+- Cloud Security Alliance, *Agentic AI Threat Modeling Framework: MAESTRO* (2025), https://cloudsecurityalliance.org/blog/2025/02/06/agentic-ai-threat-modeling-framework-maestro
+- OWASP Threat Dragon, https://owasp.org/www-project-threat-dragon/
+- From your library: *Advanced Threat Modeling: Methodologies and Implementation Strategies for Security Architects* (STRIDE, PASTA, DREAD, attack trees, tools, program rollout and metrics); *ISC2 AI Security Study Guide*, objective 6.1 (STRIDE for AI, PASTA, MAESTRO, threat actors) and Appendix A (ATLAS tactics)
 - Simon Willison, *The lethal trifecta for AI agents* (2025), https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
 - Invariant Labs, *GitHub MCP Exploited: Accessing private repositories via MCP* (2025), https://invariantlabs.ai/blog/mcp-github-vulnerability
 - NIST AI 100-2 E2023, *Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations* (newer editions exist; check the current one), https://doi.org/10.6028/NIST.AI.100-2e2023

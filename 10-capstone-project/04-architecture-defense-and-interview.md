@@ -307,7 +307,7 @@ The gateway abstracts the model API, prompts and tests are provider-neutral, and
 
 ### 7.3 Portfolio guide
 
-Your portfolio is three to six repositories that each tell one story. Suggested set from this program:
+Your portfolio is three to six repositories that each tell one story. The roadmap's six portfolio projects (scope, labs they build on, demo, README outline and interview story) are described in detail in [`portfolio-projects.md`](portfolio-projects.md). A compact view:
 
 | Repo | Shows | Source |
 |---|---|---|
@@ -342,7 +342,8 @@ Polish checklist:
 ## 9. References
 
 - [Portfolio and interview guide](../00-program/portfolio-and-interview-guide.md) · [assessment rubric](../00-program/assessment-rubric.md)
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (verify the current list at the source), https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications 2026, https://genai.owasp.org/ · OWASP MCP Top 10 (beta), https://owasp.org/www-project-mcp-top-10/
 - MITRE ATLAS, https://atlas.mitre.org/
 - NIST AI Risk Management Framework, https://www.nist.gov/itl/ai-risk-management-framework
 - Simon Willison, "The lethal trifecta", https://simonwillison.net/tags/prompt-injection/

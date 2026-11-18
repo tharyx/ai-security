@@ -3,7 +3,7 @@
 Layers (each switchable, so the harness can measure what each one is worth):
 
     S1  No secret in the prompt (nothing to leak).
-    S2  Consumption limits (LLM10): input size cap, per-user rate limit, per-user token
+    S2  Consumption limits (LLM06:2026, was LLM10:2025): input size cap, per-user rate limit, per-user token
         budget, tool-loop guard. Injected as a ``Limits`` object from ``limits.py``.
     S3  Tool policy: only ``lookup_order``, with a strict argument schema.
     S4  Output guard: canary scan, harmful-content moderation, HTML escaping, size cap.

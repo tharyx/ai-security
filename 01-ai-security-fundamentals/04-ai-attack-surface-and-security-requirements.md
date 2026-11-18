@@ -8,7 +8,7 @@
 | **Prerequisites** | [Lesson 03](03-ai-threat-modeling.md) (threat statements, risk scoring) |
 | **Lab** | [`lab/threat_model.py`](lab/threat_model.py) `--requirements`: part 3, "from findings to requirements" |
 | **Templates** | [`security-test-case.md`](../00-program/templates/security-test-case.md) · [`threat-model-template.md`](../00-program/templates/threat-model-template.md) |
-| **Maps to** | OWASP LLM03 Supply Chain, LLM04 Data and Model Poisoning (plus the rest of the Top 10) · MITRE ATLAS AML.T0010 (ML Supply Chain Compromise) · NIST AI RMF: MANAGE function · NIST SSDF (SP 800-218) |
+| **Maps to** | OWASP Top 10 for LLM Applications 2026: LLM04:2026 Supply Chain (was LLM03:2025), LLM05:2026 Data and Model Poisoning (was LLM04:2025), plus the rest of the list · OWASP Agentic ASI04 Agentic Supply Chain · OWASP MCP04 Software Supply Chain Attacks · MITRE ATLAS AML.T0010 (ML Supply Chain Compromise) · NIST AI RMF: MANAGE function · NIST SSDF (SP 800-218) · Roadmap Domain A (AI Security overall) |
 
 ---
 
@@ -48,6 +48,61 @@ The **attack surface** is every point where an attacker can send data into the s
 | **Model** | Inference API, system prompt, weights and adapters, safety tuning, outputs | Jailbreak, extraction, backdoors, system-prompt leakage | No secrets in prompts, rate limits, provenance and signing, evaluation | [02](../02-llm-security/), [06](../06-ai-devsecops/) |
 | **Data** | Training data, RAG documents, vector index, logs and feedback, evaluation sets | Poisoning, cross-tenant leaks, embedding inversion, sensitive logs | Source allowlists, ACL-filtered retrieval, redaction, retention limits | [03](../03-rag-security/) |
 | **Infrastructure** | GPU hosts and clusters, model registry, secrets, CI/CD, cloud IAM and network | Exposed dashboards, stolen keys, dependency confusion, over-shared storage | Private networking, workload identity, secrets manager, signed artifacts, IaC scanning | [06](../06-ai-devsecops/), [09](../09-enterprise-architecture/) |
+
+### 2.2a The eight security domains of an AI system (roadmap Domain A)
+
+The six layers answer "where can an attacker get in?". Security teams are usually organized by **domain** instead. Use this table to check that every domain has an owner and a control set for your AI system.
+
+| Domain | Main threats | Hard controls | OWASP 2026 / ASI / MCP | Deep dive |
+|---|---|---|---|---|
+| **Data security** | Leakage of training, RAG and log data; poisoning; cross-tenant access; data kept too long | Classification, minimization, ACL-filtered retrieval, encryption, retention and deletion that also covers vectors and backups | LLM02, LLM05, LLM09 | [03 RAG](../03-rag-security/), [07](../07-ai-governance/) |
+| **Model security: integrity** | Tampered weights or adapters, backdoors, unsafe file formats | Approved registry, safetensors, hashes and signatures, evaluation of the exact artifact, two-person approval for model changes | LLM04, LLM05; ASI04 | [06 DevSecOps](../06-ai-devsecops/) |
+| **Model security: extraction and theft** | Copying the model through its API (distillation attacks); stealing weights or checkpoints | Rate limits and quotas per account, account verification, query-pattern monitoring, no raw logits or probabilities unless needed, encrypted and access-logged weight storage | LLM02 | [02 model threats](../02-llm-security/model-threats/) |
+| **Model security: backdoors** | Hidden triggers from poisoned data, third-party fine-tunes or adapters | Trusted sources only, data provenance, red-team and trigger-search evals, keep the ability to roll back | LLM05 | [02](../02-llm-security/), [06](../06-ai-devsecops/) |
+| **Infrastructure (GPU, containers, K8s)** | Exposed cluster dashboards and job APIs, GPU hijacking, data remanence on shared GPUs, container escape, over-privileged pods | Private clusters, authN on every management API, minimal non-root images, K8s RBAC and network policies, dedicated or partitioned GPUs for sensitive tenants, patched drivers | LLM06 (cost) | [06](../06-ai-devsecops/), [09](../09-enterprise-architecture/) |
+| **API security** | Missing authN/Z, broken object-level authorization, stolen API keys (**LLMjacking**), abuse and denial of wallet | AI gateway: SSO/OIDC, per-user and per-tenant authorization, rate limits and token budgets, key rotation, spend alerts | LLM06, LLM03; MCP07 | [09](../09-enterprise-architecture/) |
+| **Supply chain** | Malicious packages, models, datasets, plugins and MCP servers; hallucinated package names | Pinned dependencies with hashes, AI-BOM, scanning, allowlisted registries and servers, provenance checks | LLM04; ASI04; MCP04, MCP09 | [04 MCP](../04-mcp-security/), [06](../06-ai-devsecops/) |
+| **Runtime security** | Injection in progress, abuse, unusual tool calls, cost spikes, model behavior drift | Audit logs of prompts, retrievals and tool calls (redacted), anomaly detection on tokens and tools, canaries, behavioral test suites, kill switch | LLM01, LLM06; ASI10; MCP08 | [06](../06-ai-devsecops/), [10](../10-capstone-project/) |
+| **Network security** | Exfiltration, SSRF to cloud metadata, lateral movement, spoofed services | Private endpoints, deny-by-default security groups, egress proxy with domain allowlist, mTLS and **service identity** between components | LLM03, LLM10; ASI02 | [09](../09-enterprise-architecture/) |
+| **Cloud AI services** (for example Amazon Bedrock, Azure AI Foundry / Azure OpenAI, Google Vertex AI) | Over-broad IAM on model invocation, public endpoints, data residency mistakes, missing invocation logs, unclear provider data use | Least-privilege IAM roles for invoke, private connectivity (PrivateLink / Private Endpoint / Private Service Connect style), provider guardrail features as a soft layer, invocation logging to your SIEM, region pinning, contract terms on data use and retention | LLM02, LLM06 | [09](../09-enterprise-architecture/) |
+
+**Shared responsibility for cloud AI.** The provider secures the model and the platform it runs on. You still own your data, prompts, connectors, identities, network paths, logging and how outputs are used. Most failures in this repo sit on the customer side of that line. Feature names and options change often, so check each provider's current security documentation before you design.
+
+### 2.2b Reference architecture: putting the domains together
+
+The roadmap asks you to design "an AI application security architecture with IAM, secrets, network isolation, logging, encryption and runtime protection". Here is one that the rest of the repo builds on:
+
+![AI application security architecture](../images/01-ai-app-security-architecture.svg)
+
+| Requirement from the roadmap | Where it sits in the picture | Lab or module that tests it |
+|---|---|---|
+| **IAM** | SSO/MFA at the gateway; workload identity per service; tools call backends with delegated user tokens | `ID-001` in this lab; [05 agent identity](../05-agent-security/) |
+| **Secrets** | Vault or cloud secrets manager; short-lived credentials; nothing secret in prompts or tool descriptions | `SEC-001`; [04 MCP token handling](../04-mcp-security/) |
+| **Network isolation** | Private network, no public IPs, private endpoint to the model, egress proxy | `REQ-TOOL-02`; [09](../09-enterprise-architecture/) |
+| **Logging** | Redacted audit logs of prompts, retrievals and tool calls, sent to a SIEM | `REP-001`; [06](../06-ai-devsecops/) |
+| **Encryption** | TLS on every hop; KMS-managed keys at rest for vector DB, logs and model artifacts | `REQ-ENC-01` |
+| **Runtime protection** | Gateway limits, DLP, soft injection detectors, anomaly alerts, kill switch | `DOS-001`; [06 runtime monitoring](../06-ai-devsecops/) |
+
+### 2.2c The AI threat landscape: who attacks, and how AI changes attacks
+
+| Actor | Typical goal against AI systems |
+|---|---|
+| Nation-state groups | Steal model weights and data, espionage, disinformation, sabotage |
+| Cybercriminals | Fraud, data theft, resale of jailbreaks, stolen AI compute (LLMjacking) |
+| Competitors | Model extraction and distillation, data theft |
+| Hacktivists | Embarrass the brand with harmful outputs |
+| Researchers and curious users | Jailbreak demos (often disclosed responsibly) |
+| Malicious insiders | Poisoning, weight theft, exfiltration through AI tools |
+| Negligent insiders | Shadow AI; pasting sensitive data into public tools |
+| Non-human actors | Compromised or misaligned agents, malicious tools, attack bots |
+
+It helps to sort AI-related attacks into three groups:
+
+1. **Attacks on AI:** prompt injection, poisoning, extraction, adversarial examples, backdoors. Most of this repo.
+2. **Attacks through AI:** using a company's own assistant or agent as the path to its data and systems (the lethal trifecta, confused deputies, AI worms that spread through assistants, such as the Morris II research worm of 2024).
+3. **Attacks with AI:** attackers using AI to work faster: AI-written phishing, deepfakes and synthetic personas, AI-assisted vulnerability discovery, **AI-orchestrated intrusions** where agents perform most attack steps (Anthropic reported such a campaign in November 2025), and **LLMjacking** (a term from Sysdig researchers in 2024 for abusing stolen cloud AI credentials). Defenders must assume faster, cheaper attacks against everything, not only against AI systems.
+
+New attack surface also comes from AI-assisted development: **package hallucination (slopsquatting)**, where a model suggests a package name that does not exist and an attacker registers it, and insecure AI-generated code (now part of LLM10:2026 Improper Output Handling).
 
 ### 2.3 Attack paths cross layers
 
@@ -336,6 +391,34 @@ Keep it small and tied to real threats in the threat model; store it next to the
 "The map shows every door into our AI system: the chat window, but also our data, our tools, our model suppliers and our cloud servers. Requirements are the locks we promise to put on each door. Tests check every day that the locks are still there. Without the map we miss doors; without tests the locks quietly disappear."
 </details>
 
+<details><summary><b>Q14. Walk through the security domains of an AI platform: data, model, infrastructure, API, supply chain, runtime, network, cloud.</b></summary>
+
+- **Data:** classification, minimization, ACL-filtered retrieval, encryption, retention and deletion (including vectors).
+- **Model:** integrity (signed, hashed, safe formats), extraction (rate limits, query monitoring, no raw logits), backdoors (trusted sources, evals, rollback).
+- **Infrastructure:** private GPU clusters and K8s with RBAC and network policies, authenticated management APIs, isolated GPUs for sensitive tenants.
+- **API:** gateway with SSO, per-user authorization, rate limits, token budgets, key rotation.
+- **Supply chain:** pinned and scanned dependencies, AI-BOM, approved model and MCP sources.
+- **Runtime:** redacted audit logs, anomaly detection, canaries, kill switch.
+- **Network:** private endpoints, egress allowlists, mTLS and service identity.
+- **Cloud AI:** least-privilege invoke roles, private connectivity, invocation logging, region pinning, contract terms.
+Each domain needs an owner and at least one test.
+</details>
+
+<details><summary><b>Q15. How do you protect a proprietary model against extraction through its API?</b></summary>
+
+Extraction looks like normal use at high volume, so: authenticate every caller and verify accounts; per-account and per-tenant quotas and rate limits; return only the text needed (no logits or probabilities unless required); monitor for systematic query patterns (broad coverage, templated prompts, many new accounts from one source); make terms of service clear; and protect the weights themselves with encryption, access logging and restricted storage. Watermarking outputs can help with attribution but is not a prevention control.
+</details>
+
+<details><summary><b>Q16. What changes when the model runs on Amazon Bedrock, Azure AI Foundry or Vertex AI instead of your own GPUs?</b></summary>
+
+The provider takes on patching and securing the model platform and hardware. You keep data classification, IAM for who may invoke which model, network paths (use private connectivity instead of public endpoints), logging of invocations to your SIEM, guardrail configuration, region and residency choices, and contract review on data use and retention. You lose some visibility (no GPU-level controls), so contracts and provider attestations become part of your evidence. I would check each provider's current documentation, because features change often.
+</details>
+
+<details><summary><b>Q17. How has AI changed the attacker side, and what does that mean for defenders?</b></summary>
+
+Attackers use AI for phishing, deepfakes and fake identities, for finding vulnerabilities faster, and, in reported cases, for running most steps of an intrusion with agents. They also steal AI credentials to use paid models for free (LLMjacking). For defenders: patch faster, protect AI API keys like admin keys with spend alerts, use out-of-band verification for voice and video requests, monitor new joiners' access (synthetic personas), and automate detection and response so it keeps up with machine-speed attacks.
+</details>
+
 ---
 
 ## 8. Checklist (definition of done)
@@ -343,6 +426,7 @@ Keep it small and tied to real threats in the threat model; store it next to the
 - [ ] I mapped my system across all six layers with at least two entry points per layer.
 - [ ] I wrote at least five requirements in "good" style, each with a test idea and an owner.
 - [ ] I completed the traceability matrix in Step 3.
+- [ ] For my system, every one of the eight security domains (section 2.2a) has an owner and at least one control, and I can draw the reference architecture (section 2.2b) from memory.
 - [ ] `python -m pytest 01-ai-security-fundamentals` passes.
 - [ ] **Phase 1 gate** (week 4): DFD with boundaries, 15+ prioritized threats, every high risk has a control, a test and an owner, no secrets in prompts or source control, and I can explain why prompt wording cannot enforce authorization.
 
@@ -356,5 +440,11 @@ Keep it small and tied to real threats in the threat model; store it next to the
 - Carlini et al., *Poisoning Web-Scale Training Datasets is Practical* (2023), https://arxiv.org/abs/2302.10149
 - IETF RFC 2119, *Key words for use in RFCs to Indicate Requirement Levels*, https://www.rfc-editor.org/rfc/rfc2119
 - NIST SP 800-218, *Secure Software Development Framework (SSDF)*, https://csrc.nist.gov/pubs/sp/800/218/final
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (verify at the source), https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications (December 2025), https://genai.owasp.org/
+- OWASP MCP Top 10 (beta), https://owasp.org/www-project-mcp-top-10/
 - OWASP AI Exchange, https://owaspai.org/
+- Sysdig, *LLMjacking: Stolen Cloud Credentials Used in New AI Attack* (2024), https://sysdig.com/blog/llmjacking-stolen-cloud-credentials-used-in-new-ai-attack/
+- Anthropic, *Disrupting the first reported AI-orchestrated cyber espionage campaign* (November 2025), search the Anthropic newsroom: https://www.anthropic.com/news
+- Cohen, Bitton and Nassi, *Here Comes The AI Worm* (Morris II, 2024), https://arxiv.org/abs/2403.02817
+- From your library: *The AI Security Glossary* (sections on supply chain, agentic risks and AI-enabled attacks); *ISC2 AI Security Study Guide* objectives 1.1 (AI ecosystem and hardware), 4.2 (secure AI infrastructure) and 6.1 (threat actors)

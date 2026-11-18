@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Training-data provenance and validation gate with a release gate</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">The poisoning gate: three checks, three different attackers</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Each layer stops one attacker. Switch one off in the lab and the next layer has to catch it.</text>
+
+  <!-- sources -->
+  <rect x="40" y="110" width="210" height="62" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="145" y="137" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Approved batches</text>
+  <text x="145" y="158" text-anchor="middle" font-size="12" fill="#475569">curated · vendor · reports</text>
+
+  <rect x="40" y="190" width="210" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="145" y="217" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">1 Outsider upload</text>
+  <text x="145" y="238" text-anchor="middle" font-size="12" fill="#991b1b">unapproved source</text>
+
+  <rect x="40" y="270" width="210" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="145" y="297" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">2 Insider edit</text>
+  <text x="145" y="318" text-anchor="middle" font-size="12" fill="#991b1b">batch changed after approval</text>
+
+  <rect x="40" y="350" width="210" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="145" y="377" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">3 Compromised vendor</text>
+  <text x="145" y="398" text-anchor="middle" font-size="12" fill="#991b1b">poison inside approved digest</text>
+
+  <!-- arrows to P1 -->
+  <line x1="250" y1="141" x2="296" y2="230" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="250" y1="221" x2="296" y2="245" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+  <line x1="250" y1="301" x2="296" y2="262" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+  <line x1="250" y1="381" x2="296" y2="278" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+
+  <!-- P1 -->
+  <rect x="300" y="190" width="190" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="395" y="220" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">P1 Provenance</text>
+  <text x="395" y="243" text-anchor="middle" font-size="13" fill="#166534">source on allowlist?</text>
+  <text x="395" y="263" text-anchor="middle" font-size="13" fill="#166534">SHA-256 = approved?</text>
+  <text x="395" y="286" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">HARD</text>
+
+  <!-- P2 -->
+  <rect x="540" y="190" width="190" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="635" y="220" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">P2 Validation</text>
+  <text x="635" y="243" text-anchor="middle" font-size="13" fill="#166534">rare trigger words</text>
+  <text x="635" y="263" text-anchor="middle" font-size="13" fill="#166534">label vs reference model</text>
+  <text x="635" y="286" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">SOFT (statistics)</text>
+
+  <!-- train -->
+  <rect x="780" y="190" width="150" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="855" y="240" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af">Train</text>
+  <text x="855" y="263" text-anchor="middle" font-size="13" fill="#1e40af">candidate model</text>
+
+  <!-- P3 -->
+  <rect x="980" y="190" width="180" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="1070" y="220" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">P3 Release gate</text>
+  <text x="1070" y="243" text-anchor="middle" font-size="13" fill="#166534">accuracy ok?</text>
+  <text x="1070" y="263" text-anchor="middle" font-size="13" fill="#166534">trigger flips labels?</text>
+  <text x="1070" y="286" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">HARD (blocks release)</text>
+
+  <line x1="490" y1="245" x2="536" y2="245" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="730" y1="245" x2="776" y2="245" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="930" y1="245" x2="976" y2="245" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- outcomes -->
+  <rect x="300" y="340" width="190" height="72" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="395" y="368" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Rejects 1 and 2</text>
+  <text x="395" y="390" text-anchor="middle" font-size="12" fill="#475569">batch never reaches training</text>
+
+  <rect x="540" y="340" width="190" height="72" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="635" y="368" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Quarantines 3</text>
+  <text x="635" y="390" text-anchor="middle" font-size="12" fill="#475569">samples go to human review</text>
+
+  <rect x="980" y="340" width="180" height="72" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1070" y="368" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Backstop for 3</text>
+  <text x="1070" y="390" text-anchor="middle" font-size="12" fill="#475569">if P2 was off or fooled</text>
+
+  <line x1="395" y1="300" x2="395" y2="336" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="635" y1="300" x2="635" y2="336" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="1070" y1="300" x2="1070" y2="336" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- registry -->
+  <rect x="780" y="440" width="380" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="970" y="468" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Model registry: signed, versioned, with data lineage</text>
+  <text x="970" y="488" text-anchor="middle" font-size="12" fill="#475569">rollback = redeploy the last good version</text>
+  <line x1="1110" y1="412" x2="1110" y2="436" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <text x="40" y="465" font-size="14" fill="#475569">Blind spots to remember:</text>
+  <text x="40" y="487" font-size="13" fill="#475569">P1 trusts whatever a reviewer approved.</text>
+  <text x="40" y="507" font-size="13" fill="#475569">P2 needs a clean, trusted reference set.</text>
+  <text x="40" y="527" font-size="13" fill="#475569">P3 only finds triggers it thinks to try (ordinary-word triggers can slip past).</text>
+</svg>

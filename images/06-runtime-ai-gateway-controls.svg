@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Runtime controls in a model-serving gateway</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="660" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Runtime controls in a model-serving gateway</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Every request passes the same hard checks, in order, and leaves a redacted log line and a trace.</text>
+
+  <!-- callers -->
+  <rect x="40" y="110" width="230" height="120" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="58" y="138" font-size="16" font-weight="700" fill="#92400e">Callers</text>
+  <g font-size="13" fill="#334155">
+    <text x="58" y="162">support app (client key)</text>
+    <text x="58" y="182">research notebook</text>
+    <text x="58" y="202">agents and batch jobs</text>
+  </g>
+
+  <rect x="40" y="250" width="230" height="150" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="58" y="278" font-size="16" font-weight="700" fill="#991b1b">Attacker</text>
+  <g font-size="13" fill="#7f1d1d">
+    <text x="58" y="302">no key, or a stolen key</text>
+    <text x="58" y="322">probes model names</text>
+    <text x="58" y="342">floods, huge prompts</text>
+    <text x="58" y="362">injection asking for keys</text>
+    <text x="58" y="382">fake tenant in the body</text>
+  </g>
+
+  <path d="M270 170 L318 220" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M270 325 L318 280" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+
+  <!-- gateway -->
+  <rect x="324" y="100" width="476" height="390" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="3"/>
+  <text x="562" y="130" font-size="17" font-weight="700" fill="#166534" text-anchor="middle">Model gateway (policy enforcement point)</text>
+  <g font-size="13" fill="#14532d">
+    <rect x="342" y="144" width="440" height="40" rx="8" fill="#ffffff" stroke="#16a34a"/>
+    <text x="354" y="169"><tspan font-weight="700">L1 Authenticate</tspan>  hashed key → principal, team, tenant</text>
+    <rect x="342" y="190" width="440" height="40" rx="8" fill="#ffffff" stroke="#16a34a"/>
+    <text x="354" y="215"><tspan font-weight="700">L3 Payload limits</tspan>  prompt size, max_tokens cap per model</text>
+    <rect x="342" y="236" width="440" height="40" rx="8" fill="#ffffff" stroke="#16a34a"/>
+    <text x="354" y="261"><tspan font-weight="700">L2 Model access</tspan>  team → allowed deployments only</text>
+    <rect x="342" y="282" width="440" height="40" rx="8" fill="#ffffff" stroke="#16a34a"/>
+    <text x="354" y="307"><tspan font-weight="700">L3 Rate + quota</tspan>  bucket per user and tenant, team quota</text>
+    <rect x="342" y="328" width="440" height="40" rx="8" fill="#fffbeb" stroke="#d97706"/>
+    <text x="354" y="353" fill="#92400e"><tspan font-weight="700">L5 Input guard (soft)</tspan>  flags injection hints</text>
+    <rect x="342" y="374" width="440" height="40" rx="8" fill="#ffffff" stroke="#16a34a"/>
+    <text x="354" y="399"><tspan font-weight="700">L4 Secrets</tspan>  key read from vault per call, never in prompt</text>
+    <rect x="342" y="420" width="440" height="40" rx="8" fill="#ffffff" stroke="#16a34a"/>
+    <text x="354" y="445"><tspan font-weight="700">L6 Output guard</tspan>  no key or canary leaves the gateway</text>
+  </g>
+  <text x="562" y="480" font-size="12" fill="#475569" text-anchor="middle">Identity and limits never come from the body or from X-Forwarded-For.</text>
+
+  <!-- vault and provider -->
+  <rect x="850" y="110" width="310" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="868" y="138" font-size="16" font-weight="700" fill="#166534">Secrets manager (vault)</text>
+  <g font-size="13" fill="#14532d">
+    <text x="868" y="162">versioned provider key</text>
+    <text x="868" y="182">every read audited (no values)</text>
+    <text x="868" y="202">rotate, then retire the old version</text>
+  </g>
+  <rect x="850" y="260" width="310" height="120" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="868" y="288" font-size="16" font-weight="700" fill="#1e3a8a">Hosted model provider</text>
+  <g font-size="13" fill="#1e3a8a">
+    <text x="868" y="312">support-chat · research-large</text>
+    <text x="868" y="332">accepts only the current key</text>
+    <text x="868" y="352">bills by tokens</text>
+  </g>
+  <path d="M850 180 Q815 300 800 395" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#g)"/>
+  <text x="816" y="250" font-size="12" fill="#166534">key at</text>
+  <text x="816" y="265" font-size="12" fill="#166534">call time</text>
+  <path d="M800 400 L848 330" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- telemetry -->
+  <rect x="40" y="520" width="1120" height="110" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="58" y="546" font-size="16" font-weight="700" fill="#334155">Telemetry path (L7 logs + L8 spans)</text>
+  <g font-size="13" fill="#334155">
+    <rect x="58" y="560" width="230" height="54" rx="8" fill="#ffffff" stroke="#64748b"/>
+    <text x="70" y="582">spans: gen_ai.* + aisec.*</text>
+    <text x="70" y="602">prompt hash, never the prompt</text>
+    <rect x="330" y="560" width="230" height="54" rx="8" fill="#ffffff" stroke="#64748b"/>
+    <text x="342" y="582">redacted log line</text>
+    <text x="342" y="602">keys and emails masked</text>
+    <rect x="602" y="560" width="250" height="54" rx="8" fill="#f0fdf4" stroke="#16a34a"/>
+    <text x="614" y="582" fill="#14532d">monitor rules RT-001 … RT-007</text>
+    <text x="614" y="602" fill="#14532d">fixed severity, correlation</text>
+    <rect x="894" y="560" width="250" height="54" rx="8" fill="#ffffff" stroke="#64748b"/>
+    <text x="906" y="582">SIEM, on-call, playbook</text>
+    <text x="906" y="602">least-disruptive action first</text>
+  </g>
+  <path d="M288 587 L328 587" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M560 587 L600 587" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M852 587 L892 587" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M562 490 L562 518" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+</svg>

@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [vector-db-security](../vector-db-security/) (metadata and namespaces); basic authN vs authZ |
 | **Lab** | [`lab/`](lab/): runs offline, no API key needed |
-| **Maps to** | OWASP LLM08:2025 Vector and Embedding Weaknesses · LLM02:2025 Sensitive Information Disclosure · OWASP Top 10 (web) A01:2021 Broken Access Control · NIST AI 600-1 (information security) · CIS Control 6 (access control management) |
+| **Maps to** | OWASP LLM09:2026 Vector and Embedding Weaknesses (was LLM08:2025) · LLM02:2026 Sensitive Information Disclosure (unchanged from 2025) · OWASP API Security API1:2023 Broken Object Level Authorization · OWASP Top 10 (web) A01:2021 Broken Access Control · OWASP GenAI Data Security DSGAI01, DSGAI11, DSGAI13 · MCP07 Insufficient Authentication & Authorization (when retrieval is exposed as an MCP tool or resource) · NIST AI 600-1 (information security) · CIS Control 6 (access control management) |
 
 ---
 
@@ -20,7 +20,7 @@ Some public examples:
 - **2024, Slack AI (reported by PromptArmor):** content in a public channel could steer Slack AI into revealing data from private channels the attacker could not read, through a crafted link. Retrieval crossed a permission boundary and the answer carried the data out.
 - **2024–2025, Microsoft 365 Copilot "oversharing":** Microsoft's deployment guidance tells customers to fix overly broad SharePoint permissions before rollout, because Copilot can surface anything a user already has access to. The assistant respected permissions, but the permissions were wrong. ACL hygiene in the source systems is part of RAG security.
 - **2025, "EchoLeak" in Microsoft 365 Copilot (CVE-2025-32711):** a crafted email could make Copilot retrieve internal data and exfiltrate it with zero clicks. Microsoft fixed it on the server side. Retrieval scope plus untrusted content plus an output channel equals a leak.
-- **OWASP LLM08:2025** lists "unauthorized access and data leakage" and "cross-context information leaks" in multi-tenant vector stores as core risks.
+- **OWASP LLM09:2026** (Vector and Embedding Weaknesses, numbered LLM08 in the 2025 list) covers unauthorized access, data leakage and cross-context leaks in multi-tenant vector stores. The OWASP GenAI Data Security risk **DSGAI11** (cross-context and multi-user conversation bleed) adds that post-filtering after ranking can leak fragments or metadata from another tenant.
 
 The pattern: **the system treated "most similar" as "allowed"**, or took identity from somewhere the user controls.
 
@@ -84,6 +84,45 @@ Source systems change permissions all the time: people leave teams, folders get 
 - If the source ACL can't be fetched, **deny** (fail closed).
 - Some ACL types are hard to copy: per-user link sharing, "anyone in the org with the link", deny rules, inherited permissions with breaks. Decide how each maps, and when in doubt, don't index.
 
+### 2.6 BOLA: the API version of the same bug
+
+RAG products have more endpoints than "ask": *open the source document*, citation links, previews, "related documents", export. Each takes a document ID. **Broken Object Level Authorization (BOLA, OWASP API1:2023)** is when the API returns an object by ID without checking that the caller may access it. It is the most common API flaw, and it is exactly "similarity is not authorization" in another form: *knowing an ID is not authorization*.
+
+The OWASP object-level authorization checklist in your library maps to RAG like this:
+
+| Checklist item (paraphrased) | In a RAG product |
+|---|---|
+| Check authorization on every request that reads an object | Check every chunk, every citation and every "open document" call, not only the chat endpoint |
+| Don't rely on IDs or identity sent by the client; use the session | Tenant, user and groups come from the session; the doc ID in a citation link is just a lookup key |
+| Deny by default | Missing ACL metadata or unknown document → deny |
+| Use policies and hierarchy (roles, groups, ownership) | Group ACLs, named users, the record's subject, classification rules |
+| Don't depend on IDs being hard to guess | Random UUIDs slow attackers down; they do not authorize anyone |
+| Log failed and denied access | Denials are security events (and a reconnaissance signal) |
+
+Return the **same** response for "does not exist" and "not allowed" (for example `404`), so the API does not confirm that a hidden document exists. The [secure HR assistant](../secure-hr-assistant/) has an `/documents/{id}` endpoint and a test for this.
+
+### 2.7 What a typical tutorial pipeline looks like
+
+Framework tutorials teach the happy path. A typical LangChain-style example (paraphrased in our own code, not copied) looks like this:
+
+```python
+chunks = splitter.split_documents(loader.load())           # metadata: {"source": ..., "page": ...}
+db = VectorStore.from_documents(chunks, embeddings)          # one shared collection
+retriever = db.as_retriever(search_kwargs={"k": 4})          # no filter: every chunk is searchable
+answer = qa_chain.invoke({"query": user_question})           # top-4 straight into the prompt
+```
+
+Nothing is wrong with this for learning, but for an enterprise it has no tenant, no ACL in the chunk metadata, no filter in the retriever, and no check on what comes back. The LangChain/RAG walkthrough in your library builds pipelines like this (loaders, splitters, a hosted vector store, `as_retriever()` with `k` and a distance metric) and never adds an access filter, because access control is not its topic. The secure version adds three things:
+
+```python
+meta = {"source": doc_id, "tenant": t, "allowed_groups": acl.groups, "acl_version": acl.version}
+filt = build_filter(principal)                # server-side: tenant AND group overlap
+retriever = db.as_retriever(search_kwargs={"k": 4, "filter": filt})
+hits = [c for c in retriever.invoke(q) if can_read(principal, c)]   # re-check before the prompt
+```
+
+Filter syntax differs between vector stores and framework versions (some take a dict, some a store-specific expression, FAISS has no server-side metadata filter at all). Check the documentation of the exact version you use, and test that the filter really runs inside the search.
+
 ---
 
 ## 3. Defend it
@@ -145,7 +184,7 @@ Files:
 | [`secure_rag.py`](lab/secure_rag.py) | `SecureRagApp` with switchable pre-filter, re-check and citation validation |
 | [`attacks.py`](lab/attacks.py) | Users, sessions, index, source ACLs, attacks, benign requests, and the test oracle `can_really_read` |
 | [`demo.py`](lab/demo.py) | Scorecard |
-| [`test_access_control.py`](lab/test_access_control.py) | 55 tests, including a full user × document matrix |
+| [`test_access_control.py`](lab/test_access_control.py) | 68 tests, including a full user × document matrix and checks on the prompt the model received |
 
 The MockLLM copies the `<context>` block into its answer. So **anything that reaches the context leaks**, which makes authorization failures easy to see.
 
@@ -195,7 +234,9 @@ Open [`lab/vulnerable_rag.py`](lab/vulnerable_rag.py) and find the six `VULN` co
 python -m pytest 03-rag-security/access-control -v
 ```
 
-You should see `55 passed`. The most important test is `test_full_matrix_every_user_against_every_sensitive_doc`. It asks for every sensitive document **using the document's own text** (the most similar query possible) as every user, and checks the result against the oracle `can_really_read`, which uses the source-system ACLs. Build this matrix for every RAG system you review.
+You should see `68 passed`. The most important test is `test_full_matrix_every_user_against_every_sensitive_doc`. It asks for every sensitive document **using the document's own text** (the most similar query possible) as every user, and checks the result against the oracle `can_really_read`, which uses the source-system ACLs. Build this matrix for every RAG system you review.
+
+Part 4 of the tests (`test_secure_app_never_puts_forbidden_text_into_the_prompt`) covers the roadmap scenario **"authorization happens before content reaches the model"**. It inspects `MockLLM.calls`, the prompts the model actually received, instead of the answer. A real model might not repeat a forbidden chunk, but once the chunk is in the prompt it has already reached the model, its provider and its logs.
 
 ### Step 4: Break it yourself
 
@@ -347,20 +388,27 @@ A chunk or summary must never mix content from documents with different ACLs, or
 "Our AI assistant can search almost all our documents. If it doesn't check who is asking, it will happily show the salary file to whoever asks the right question, or show one customer another customer's data. So the assistant checks permissions before it reads anything, using the same permissions as SharePoint and our other systems, and we test this automatically for every user and every sensitive document."
 </details>
 
+<details><summary><b>Q15. What is BOLA, and where do you look for it in a RAG product?</b></summary>
+
+Broken Object Level Authorization (OWASP API1:2023): an endpoint returns an object by ID without checking the caller's rights. In RAG, look beyond the chat endpoint: "open source document", citation links, previews, export, "related documents", feedback and admin APIs. Every one needs a server-side check with identity from the session, deny by default, the same response for "missing" and "forbidden", and logging of denials.
+</details>
+
 ---
 
 ## 8. Checklist (definition of done)
 
 - [ ] I can explain "similarity is not authorization" and the seven steps without notes.
 - [ ] I can explain pre-filter vs post-filter, with trade-offs.
-- [ ] `python -m pytest 03-rag-security/access-control` passes.
+- [ ] `python -m pytest 03-rag-security/access-control` passes (68 tests).
 - [ ] I did the six "break it yourself" exercises.
 - [ ] I added a new user and a new sensitive document to the matrix test.
 - [ ] Week 11 journal: my cross-tenant test plan and the revocation SLA I would propose for HR data, with reasons.
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025, LLM08 Vector and Embedding Weaknesses and LLM02 Sensitive Information Disclosure: https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026, LLM09 Vector and Embedding Weaknesses (LLM08 in 2025) and LLM02 Sensitive Information Disclosure (verify the current list at the source): https://genai.owasp.org/llm-top-10/
+- OWASP API Security Top 10 2023, API1 Broken Object Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+- OWASP GenAI Security Project, *GenAI Data Security Risks and Mitigations 2026* (DSGAI11, DSGAI13): https://genai.owasp.org/
 - OWASP Top 10 (2021), A01 Broken Access Control: https://owasp.org/Top10/A01_2021-Broken_Access_Control/
 - OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - PromptArmor, *Data exfiltration from Slack AI via indirect prompt injection* (2024): https://promptarmor.substack.com/

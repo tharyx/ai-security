@@ -25,6 +25,8 @@ components:
     user_auth: oidc
     rate_limits: true
     token_budget: true
+    model_routing: allowlist          # approved models per data class; failover only to approved models
+    cache_scope: per_tenant           # cache key = tenant + user + model + prompt hash
     guardrails:
       input: []                       # DRIFT: Model Armor template detached after false positives
       output: [pii, secrets]
@@ -59,6 +61,7 @@ components:
     zone: app
     service: orchestrator on Cloud Run
     identity: sa-agent
+    downstream_auth: token_exchange   # RFC 8693 token exchange: tools see the agent AND the user
     approval_required_for: [write]
     limits: {max_steps: 8, max_cost_usd: 2.0}
     kill_switch: true
@@ -69,6 +72,7 @@ components:
     zone: tools
     service: tool broker on Cloud Run
     identity: sa-mcp
+    downstream_auth: own_identity     # broker uses its own scoped identity; never forwards user tokens
     tool_registry: allowlist
     egress: deny_by_default
 
@@ -91,11 +95,11 @@ components:
     exports_to_siem: true
 
 identities:
-  - {id: sa-gateway, credential: short_lived, permissions: ["modelarmor.templates.useToSanitize"]}
-  - {id: sa-rag, credential: short_lived, permissions: ["roles/aiplatform.user on vector index"]}
-  - {id: sa-agent, credential: short_lived, permissions: ["roles/aiplatform.user on approved endpoint"]}
-  - {id: sa-mcp, credential: short_lived, permissions: ["roles/datastore.viewer on tool-registry"]}
-  - {id: sa-tool-change, credential: short_lived, permissions: ["ticketing.create_change"]}
+  - {id: sa-gateway, owner: ai-platform@acme.example, credential: short_lived, permissions: ["modelarmor.templates.useToSanitize"]}
+  - {id: sa-rag, owner: ai-platform@acme.example, credential: short_lived, permissions: ["roles/aiplatform.user on vector index"]}
+  - {id: sa-agent, owner: ai-platform@acme.example, credential: short_lived, permissions: ["roles/aiplatform.user on approved endpoint"]}
+  - {id: sa-mcp, owner: ai-platform@acme.example, credential: short_lived, permissions: ["roles/datastore.viewer on tool-registry"]}
+  - {id: sa-tool-change, owner: ai-platform@acme.example, credential: short_lived, permissions: ["ticketing.create_change"]}
 
 keys:
   - {id: kms-ai-data, managed_by: customer, rotation: true}
@@ -122,6 +126,11 @@ flows:
   - {from: agent, to: mcp-gateway}
   - {from: mcp-gateway, to: tool-change}
   - {from: ai-gateway, to: audit-logs}
+
+assessment:
+  redteam_schedule: weekly            # attack suite against staging every week
+  redteam_on_change: true            # any model, prompt or tool change re-runs it
+  drift_detection: true              # declared design compared with the observed system
 
 exceptions:
   - control: GR-01

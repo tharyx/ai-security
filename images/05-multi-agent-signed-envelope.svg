@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Zero trust between agents: every message is checked</title>
+<defs>
+<marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+</defs>
+<rect width="1200" height="660" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Zero trust between agents: every message is checked</text>
+<text x="40" y="80" font-size="16" fill="#475569">A name in a message proves nothing: verify who signed it, that it is fresh, and that the sender may ask.</text>
+
+<rect x="40" y="120" width="260" height="110" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="170" y="155" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">triage-agent</text>
+<text x="170" y="180" font-size="13" text-anchor="middle" fill="#991b1b">reads PUBLIC tickets (untrusted)</text>
+<text x="170" y="200" font-size="13" text-anchor="middle" fill="#991b1b">holds only its own key</text>
+<text x="170" y="220" font-size="13" text-anchor="middle" fill="#991b1b">may invoke nobody</text>
+
+<rect x="40" y="260" width="260" height="110" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="170" y="295" font-size="16" font-weight="700" text-anchor="middle" fill="#92400e">planner-agent</text>
+<text x="170" y="320" font-size="13" text-anchor="middle" fill="#92400e">supervisor; signs with its key</text>
+<text x="170" y="340" font-size="13" text-anchor="middle" fill="#92400e">may ask ops to restart</text>
+<text x="170" y="360" font-size="13" text-anchor="middle" fill="#92400e">staging services</text>
+
+<rect x="40" y="400" width="260" height="110" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="170" y="435" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">Forged or replayed</text>
+<text x="170" y="460" font-size="13" text-anchor="middle" fill="#991b1b">"sender": "planner-agent"</text>
+<text x="170" y="480" font-size="13" text-anchor="middle" fill="#991b1b">but signed by triage, or</text>
+<text x="170" y="500" font-size="13" text-anchor="middle" fill="#991b1b">captured and sent again later</text>
+
+<polyline points="300,175 350,175 350,300 368,300" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+<polyline points="300,315 368,315" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="300,455 350,455 350,330 368,330" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+
+<rect x="370" y="110" width="460" height="440" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="600" y="140" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">ops-agent checks every envelope (default deny)</text>
+<rect x="390" y="155" width="420" height="52" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+<text x="405" y="178" font-size="14" font-weight="700" fill="#166534">M1 Signature</text>
+<text x="405" y="197" font-size="13" fill="#166534">verified with the CLAIMED sender's registered key</text>
+<rect x="390" y="215" width="420" height="52" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+<text x="405" y="238" font-size="14" font-weight="700" fill="#166534">M2 Recipient, freshness, nonce</text>
+<text x="405" y="257" font-size="13" fill="#166534">addressed to me, under 60 s old, nonce never seen</text>
+<rect x="390" y="275" width="420" height="52" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+<text x="405" y="298" font-size="14" font-weight="700" fill="#166534">M3 Invocation policy</text>
+<text x="405" y="317" font-size="13" fill="#166534">may THIS sender ask for THIS intent? (allowlist)</text>
+<rect x="390" y="335" width="420" height="52" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+<text x="405" y="358" font-size="14" font-weight="700" fill="#166534">M4 Payload schema</text>
+<text x="405" y="377" font-size="13" fill="#166534">peer payload is data: dev or staging only, no extra fields</text>
+<rect x="390" y="395" width="420" height="52" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+<text x="405" y="418" font-size="14" font-weight="700" fill="#166534">C1 Circuit breaker</text>
+<text x="405" y="437" font-size="13" fill="#166534">opens after 5 actions or 2 failures in a minute</text>
+<rect x="390" y="455" width="420" height="52" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="405" y="478" font-size="14" font-weight="700" fill="#1e40af">Execute and log</text>
+<text x="405" y="497" font-size="13" fill="#1e40af">sender, decision and result go to the audit trail</text>
+<text x="600" y="535" font-size="13" text-anchor="middle" fill="#166534">Any failed check stops the message; nothing below it runs.</text>
+
+<rect x="880" y="140" width="280" height="110" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1020" y="175" font-size="16" font-weight="700" text-anchor="middle" fill="#334155">Staging service</text>
+<text x="1020" y="200" font-size="13" text-anchor="middle" fill="#334155">restarted only when the</text>
+<text x="1020" y="220" font-size="13" text-anchor="middle" fill="#334155">planner's genuine, fresh,</text>
+<text x="1020" y="240" font-size="13" text-anchor="middle" fill="#334155">in-policy request arrives</text>
+<polyline points="810,481 850,481 850,195 878,195" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#g)"/>
+
+<rect x="880" y="300" width="280" height="190" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1020" y="333" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">Denied and logged</text>
+<text x="900" y="360" font-size="13" fill="#991b1b">bad or missing signature</text>
+<text x="900" y="382" font-size="13" fill="#991b1b">replayed nonce / stale message</text>
+<text x="900" y="404" font-size="13" fill="#991b1b">triage-agent may not request restart</text>
+<text x="900" y="426" font-size="13" fill="#991b1b">env = prod is not allowed</text>
+<text x="900" y="448" font-size="13" fill="#991b1b">circuit breaker open</text>
+<text x="900" y="470" font-size="13" fill="#991b1b">(lab: test_multi_agent.py)</text>
+<polyline points="830,390 878,390" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+
+<rect x="40" y="575" width="1120" height="60" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="60" y="600" font-size="14" font-weight="700" fill="#334155">S1 Pinned agent cards (ASI04)</text>
+<text x="60" y="622" font-size="13" fill="#475569">Before any message is sent, the peer's agent card (name, endpoint, capabilities) must match the SHA-256 recorded at review. A changed card is refused.</text>
+</svg>

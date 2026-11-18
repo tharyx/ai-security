@@ -104,6 +104,25 @@ Details are in [lesson 04](04-architecture-defense-and-interview.md).
 11. Red-team report and incident-exercise record.
 12. Final architecture presentation and residual-risk statement.
 
+### 2.6a Checklist: the ten roadmap deliverables
+
+The program roadmap names **ten final deliverables**. The twelve items above cover all of them. Use this table as your final checklist: each row says where the deliverable lives in your capstone repo, which template or reference lab to start from, and what evidence proves it is done.
+
+| # | Roadmap deliverable | Path in your capstone repo | Start from (this repo) | Done when |
+|---|---|---|---|---|
+| 1 | Architecture document | `docs/architecture.md`, `infra/architecture.yaml` | [Module 09 lesson 01](../09-enterprise-architecture/01-enterprise-ai-reference-architecture.md) (capstone layers, section 2.8); [reviewer](../09-enterprise-architecture/lab/reviewer.py) | Diagram with trust zones; reviewer gate PASS in CI |
+| 2 | Threat model and risk assessment | `docs/threat-model.md`, `docs/risk-register.csv` | [`threat-model-template.md`](../00-program/templates/threat-model-template.md), [`risk-register.csv`](../00-program/templates/risk-register.csv); [Module 01 lab](../01-ai-security-fundamentals/lab/) | Abuse cases A1–A12 + yours, each with an owner and treatment |
+| 3 | Secure LLM app | `app/` (gateway, identity, output DLP) | [`lab/ops_assistant.py`](lab/ops_assistant.py); [gateway lab](../09-enterprise-architecture/lab/gateway/) | AT01–AT15 green with soft layers off |
+| 4 | Secure RAG | `app/retrieval/`, `docs/adr/` (isolation model) | [Module 03 access-control lab](../03-rag-security/access-control/lab/) | Cross-tenant and cross-group canary tests green (AT03, AT03b) |
+| 5 | Secure MCP server and gateway | `app/broker/`, `policy/tools.yaml` | [Module 04 labs](../04-mcp-security/); broker in `ops_assistant.py` | Registry, schemas, authZ, no token passthrough (AT05–AT08; IAM-06) |
+| 6 | Agent security framework | `docs/agent-policy.md`, `app/agent/` | [Module 05 labs](../05-agent-security/) | Identity, least privilege, approval, limits, kill switch (AT04, AT09, AT13) |
+| 7 | Automated AI red-team suite | `tests/attacks/`, CI job | [`lab/attacks.py`](lab/attacks.py); [Module 02 security-testing harness](../02-llm-security/security-testing/lab/) | Runs on every model/prompt/tool change and weekly; results table in README |
+| 8 | Governance and compliance docs | `docs/ai-inventory-entry.md`, `docs/compliance.md`, `docs/residual-risk.md` | [Module 07 lab](../07-ai-governance/lab/), [Module 08 lab](../08-ai-compliance/lab/) | Inventory, signed risk acceptances, compliance applicability (EU AI Act, DPDP, GDPR) |
+| 9 | CI/CD automation | `.github/workflows/ci.yml` | [Module 06 CI/CD lab](../06-ai-devsecops/cicd/lab/) | Tests, secret and dependency scanning, reviewer, attack suite on every PR |
+| 10 | IR playbook | `docs/runbooks/`, `docs/incident-exercise.md` | [`ai-incident-playbook.md`](../00-program/templates/ai-incident-playbook.md); [lesson 03](03-red-team-and-incident-exercise.md) section 2.7; [`lab/drill.py`](lab/drill.py) | At least two playbook cards; one drill or tabletop with TTD and TTC recorded |
+
+Optional extension: an AI-assisted SOC triage pipeline over your audit log ([lesson 05](05-ai-soc-monitoring-extension.md)).
+
 ### 2.7 Suggested repository layout
 
 ```text
@@ -164,7 +183,7 @@ Run the reference acceptance suite to see what a passing week-34 gate looks like
 python -m pytest 10-capstone-project
 ```
 
-Expected last line: `37 passed` (time differs per machine).
+Expected last line: `49 passed` (time differs per machine).
 
 ### Step 2: Build your traceability table
 
@@ -298,4 +317,5 @@ A README that states the problem, shows the architecture, explains the threat mo
 - NIST AI Risk Management Framework and Playbook, https://www.nist.gov/itl/ai-risk-management-framework
 - NIST SP 800-218A, *Secure Software Development Practices for Generative AI and Dual-Use Foundation Models* (2024), https://csrc.nist.gov/pubs/sp/800/218/a/final
 - ISO/IEC 42001:2023 AI management systems, https://www.iso.org/standard/81230.html
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (verify the current list at the source), https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications 2026, https://genai.owasp.org/ · OWASP MCP Top 10 (beta), https://owasp.org/www-project-mcp-top-10/

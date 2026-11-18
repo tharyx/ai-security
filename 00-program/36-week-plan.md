@@ -18,7 +18,7 @@ Module: [`02-llm-security/`](../02-llm-security/)
 | 5 | Prompt injection, direct/indirect, instruction/data separation | Controlled prompt-injection test harness |
 | 6 | Sensitive data disclosure, system prompt exposure, privacy | Synthetic secret-leak tests and redaction controls |
 | 7 | Output handling, structured output, tool calling, code execution | Schema validation and safe output handling |
-| 8 | Model abuse, denial of service, supply chain, evaluation | Rate limits, quotas, model/dependency inventory; Phase 2 gate |
+| 8 | Model threats: poisoning, extraction, DoS, misinformation, supply chain (`02/model-threats`) | Rate limits, quotas, model/dependency inventory; Phase 2 gate |
 
 ## Month 3 — RAG security
 
@@ -58,7 +58,7 @@ Module: [`06-ai-devsecops/`](../06-ai-devsecops/)
 | 21 | Secure AI SDLC, requirements, design review and testing | AI security gates in SDLC |
 | 22 | Model/dataset provenance, artifacts, dependencies and licenses | Model bill of materials/inventory |
 | 23 | Containers, Kubernetes, secrets, network and workload identity | Hardened deployment baseline |
-| 24 | CI/CD, adversarial testing, telemetry and incident response | Reproducible pipeline; Phase 6 gate |
+| 24 | CI/CD gates + runtime security: secrets, rate limits, monitoring, vuln mgmt (`06/runtime-security`) | Reproducible pipeline; Phase 6 gate |
 
 ## Month 7 — Multi-cloud AI security architecture
 

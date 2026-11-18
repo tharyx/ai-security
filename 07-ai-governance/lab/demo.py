@@ -3,6 +3,7 @@
 From the repository root:
     python 07-ai-governance/lab/demo.py            # both fixture sets
     python 07-ai-governance/lab/demo.py --details  # also print every finding
+    python 07-ai-governance/lab/demo.py --part 2   # only lessons 05-06: docs, approval, incidents, policies
 
 The date is fixed (AS_OF) so the output is the same every run.
 """
@@ -16,9 +17,14 @@ from pathlib import Path
 
 import yaml
 
+import doc_validator
+import incident_triage
+import model_approval
+import policy_lint
 import risk_register
 from secure_register import GovernedRegister, discover_shadow_ai, governance_kpis
-from vulnerable_register import SpreadsheetRegister, naive_residual
+from vulnerable_register import (SpreadsheetRegister, naive_can_deploy_model, naive_incident_severity,
+                                 naive_model_approval, naive_residual)
 
 AS_OF = date(2026, 11, 15)
 FIX = Path(__file__).with_name("fixtures")
@@ -74,17 +80,67 @@ def register_section(label: str, systems_file: str, risks_file: str, details: bo
         print("none")
 
 
+def documentation_section() -> None:
+    print("\n=== Model cards, datasheets and disclosure (doc_validator.py) ===")
+    for label in ("vulnerable", "governed"):
+        pack = yaml.safe_load((FIX / f"documentation_{label}.yaml").read_text(encoding="utf-8"))
+        found = doc_validator.validate_pack(pack, AS_OF)
+        print(f"{label:10} {len(found):>2} finding(s): {short_codes([f.code for f in found])}")
+
+
+def approval_section() -> None:
+    print("\n=== Model approval gates (model_approval.py) ===")
+    print(f"{'request':8} {'model':14} {'version':8} {'tier':7} {'naive':9} {'gated':9} findings")
+    registry = []
+    for req in load_yaml("model_requests.yaml"):
+        d = model_approval.assess_request(req, AS_OF)
+        registry.append(d)
+        print(f"{d.request_id:8} {d.model:14} {d.version:8} {d.tier:7} {naive_model_approval(req):9} "
+              f"{d.decision:9} {short_codes([c for c, _ in d.findings])}")
+    good = next(d for d in registry if d.decision == "APPROVED" and d.system_id == "AI-002")
+    print("deploy check, same model name and version but a swapped artifact:")
+    print(f"  naive (name only): {naive_can_deploy_model({good.model}, good.model)}")
+    ok, why = model_approval.can_deploy(registry, "AI-002", good.model, "0" * 64, AS_OF)
+    print(f"  gated (by hash):   {ok} - {why}")
+
+
+def incident_section() -> None:
+    print("\n=== AI incident triage (incident_triage.py) ===")
+    print(f"{'incident':8} {'naive':6} {'triage':6} {'category':48} clock flags for Module 08")
+    for inc in load_yaml("incidents.yaml"):
+        t = incident_triage.triage(inc)
+        flags = ",".join(k for k, v in t.clock_flags.items() if v) or "-"
+        print(f"{t.incident_id:8} {naive_incident_severity(inc):6} {t.severity:6} {t.category[:48]:48} {flags}")
+
+
+def policy_section() -> None:
+    print("\n=== AI policy pack (policy_lint.py) ===")
+    folder = Path(__file__).resolve().parents[1] / "policies"
+    results = policy_lint.lint_folder(folder, AS_OF)
+    total = sum(len(policy_lint.requirements((folder / n).read_text(encoding="utf-8"))) for n in results)
+    bad = {n: len(f) for n, f in results.items() if f}
+    print(f"{len(results)} policies, {total} testable requirements, findings: {bad or 'none'}")
+
+
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--details", action="store_true", help="print every finding")
+    p.add_argument("--part", type=int, choices=[1, 2], help="1 = registers (lessons 01-04); 2 = lessons 05-06")
     args = p.parse_args()
-    print(f"As of {AS_OF}. Spreadsheet = vulnerable_register.py; governed = secure_register.py + risk_register.py")
-    register_section("vulnerable", "systems_vulnerable.yaml", "risks_vulnerable.csv", args.details)
-    register_section("governed", "systems_governed.yaml", "risks_governed.csv", args.details)
-    print("\nCodes: GOV-00 schema, 01 unowned, 02 no intended use, 03 weak oversight, 04 tier under-declared,")
-    print("05 missing control, 06 review overdue, 07 prohibited, 08 no risk entry, 09 expired exception.")
-    print("RISK-01 no owner, 02 overdue treatment, 03 above appetite with no plan, 04 invalid acceptance,")
-    print("05 closed on a planned control, 06 bad scores. Run with --details to see every message.")
+    if args.part != 2:
+        print(f"As of {AS_OF}. Spreadsheet = vulnerable_register.py; governed = secure_register.py + risk_register.py")
+        register_section("vulnerable", "systems_vulnerable.yaml", "risks_vulnerable.csv", args.details)
+        register_section("governed", "systems_governed.yaml", "risks_governed.csv", args.details)
+        print("\nCodes: GOV-00 schema, 01 unowned, 02 no intended use, 03 weak oversight, 04 tier under-declared,")
+        print("05 missing control, 06 review overdue, 07 prohibited, 08 no risk entry, 09 expired exception.")
+        print("RISK-01 no owner, 02 overdue treatment, 03 above appetite with no plan, 04 invalid acceptance,")
+        print("05 closed on a planned control, 06 bad scores. Run with --details to see every message.")
+    if args.part != 1:
+        print(f"\nPart 2 (as of {AS_OF}): documentation, model approval, incident triage, policy pack")
+        documentation_section()
+        approval_section()
+        incident_section()
+        policy_section()
 
 
 if __name__ == "__main__":

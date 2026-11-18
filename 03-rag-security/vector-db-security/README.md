@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Module 01](../../01-ai-security-fundamentals/) embeddings basics; [document-security](../document-security/) (how chunks are made) |
 | **Lab** | [`lab/`](lab/): runs offline, no API key, no vector-DB product needed |
-| **Maps to** | OWASP LLM08:2025 Vector and Embedding Weaknesses · LLM02:2025 Sensitive Information Disclosure · NIST AI 600-1 (data privacy, information security) · GDPR Art. 17 (right to erasure) · CIS Controls 3 (data protection) and 6 (access control management) |
+| **Maps to** | OWASP LLM09:2026 Vector and Embedding Weaknesses (was LLM08:2025) · LLM02:2026 Sensitive Information Disclosure (2026 adds embeddings and logs explicitly) · OWASP GenAI Data Security DSGAI13 Vector Store Platform Data Security, DSGAI18 Inference & Data Reconstruction, DSGAI17 Data Availability & Resilience, DSGAI07 Lifecycle · OWASP AI Testing Guide AITG-APP-08 · NIST AI 600-1 (data privacy, information security) · GDPR Art. 17 (right to erasure) · CIS Controls 3 (data protection) and 6 (access control management) |
 
 ---
 
@@ -18,7 +18,8 @@ A vector database stores three things for every chunk: the **vector** (a list of
 Some public examples and research:
 
 - **2023, Morris et al., *"Text Embeddings Reveal (Almost) As Much As Text"*:** their method (vec2text) rebuilt most short input texts exactly from their embeddings alone. Vectors are not a safe "anonymized" form of text.
-- **2025, OWASP LLM08 "Vector and Embedding Weaknesses":** OWASP added a dedicated Top-10 entry for risks such as unauthorized access, cross-context leaks, embedding inversion and data poisoning in vector stores.
+- **2025, OWASP LLM08 "Vector and Embedding Weaknesses"** (renumbered **LLM09** in the 2026 list): OWASP added a dedicated Top-10 entry for risks such as unauthorized access, cross-context leaks, embedding inversion and data poisoning in vector stores.
+- **2024, Qdrant snapshot vulnerabilities:** the OWASP *GenAI Data Security Risks 2026* document (DSGAI13, DSGAI05) cites CVE-2024-3584 (path traversal through snapshot upload) and CVE-2024-3829 (arbitrary file upload). Import and restore paths of a vector database are attack surface too.
 - **2023, ChatGPT outage (OpenAI incident report):** a bug in a Redis client library caused some users to see titles from other users' chat histories. A cache shared across users is a data-leak path.
 - **2017, open MongoDB and Elasticsearch servers:** attackers mass-wiped databases that were reachable from the internet without authentication and left ransom notes. Any data store with an exposed, unauthenticated admin API is at the same risk. Vector databases are no exception.
 
@@ -75,6 +76,29 @@ Retrieval filters usually look like `allowed_groups ∩ user_groups ≠ ∅`. Th
 - Which identities can **write** records? Which can **update metadata**? Which can do both?
 - Can a user-facing feature (notes, bookmarks, "upload your file") write to the same collection as company documents?
 - Can a DB admin, a replica or a backup restore change metadata without anyone noticing?
+
+### 2.6 Encryption and access control for embeddings
+
+Roadmap row: *Embeddings → leakage → access control and encryption.* The OWASP DSGAI13 entry gives a useful maturity ladder. In our words:
+
+| Tier | Controls |
+|---|---|
+| **Foundational** | Encryption at rest and in transit for vectors, metadata **and snapshots**; private networking only; authentication and authorization on **every** endpoint (query, insert, delete, snapshot import); tenant scoping enforced by the server, never only by a client-supplied filter; non-root services |
+| **Hardening** | Integrity checks (checksums, signatures) on bulk and snapshot imports, no symlinks, imports in a sandbox; top-*k* and rate limits per identity; alerts on k-NN sweeps and cross-tenant result patterns; deletion applied to snapshots, backups and caches; patching and image scanning |
+| **Advanced** | Per-tenant envelope encryption (a tenant's data key wrapped by a key in a KMS), so an access-control failure yields unreadable data; embedding scope minimization (don't embed what the use case does not need); full query logging with identity, filters, result counts and egress volume |
+
+Two honest limits:
+
+- **Encryption at rest protects disks, snapshots and backups, not queries.** The database must decrypt to compute similarity, so a caller with query access still gets results. Authorization is still the main control. (Encryption "in use", for example confidential computing, exists but is not the default.)
+- **Who holds the key matters more than the algorithm.** If the vector DB admin can read the key, encryption does not separate them from the data. Keep keys in a KMS, used only by the services that need them, and log key use.
+
+The [secure HR assistant](../secure-hr-assistant/) has a runnable (simulated) version: a data key per document, metadata bound to the ciphertext, decryption only after authorization, and crypto-shredding on delete.
+
+### 2.7 Inference, membership and availability
+
+- **Membership and attribute inference (DSGAI18).** Even without text, similarity scores and result counts can tell an attacker *whether* something exists ("is there a document about a merger with X?"). Return only authorized results, don't expose raw scores to users, and rate-limit probing.
+- **Stale replicas (DSGAI17).** After a failover, a replica that is hours behind can serve data deleted on the primary, including data deleted under a privacy request. Apply tombstones to replicas, monitor replica lag, and signal (or fail closed) when the index is stale.
+- **Saturation.** High-recall queries in a loop, often from agents, can slow or crash a shared vector tier. Per-identity limits and circuit breakers belong in the baseline.
 
 ---
 
@@ -298,7 +322,12 @@ Someone with write access inserts records crafted to rank first for target quest
 It depends on the data classification and the provider's terms. You are sharing the text with the provider. Check retention and training-use terms, regional processing, and whether a private endpoint is offered. For highly sensitive data, consider a self-hosted embedding model. Either way, document it in your data-flow diagram and DPIA (data protection impact assessment).
 </details>
 
-<details><summary><b>Q13. Explain to an executive why the vector database needs the same protection as our main database.</b></summary>
+<details><summary><b>Q13. Does encrypting the vector store at rest stop embedding leakage?</b></summary>
+
+Partly. It protects disks, snapshots, backups and stolen files, if the key is held outside the database (a KMS) and per-tenant keys are used. It does not protect against anyone who can query, because the database decrypts to search. You still need authentication on every endpoint, server-side tenant scoping, authorization of results, query limits and monitoring. Also secure the import and restore paths (snapshot uploads have had path-traversal bugs).
+</details>
+
+<details><summary><b>Q14. Explain to an executive why the vector database needs the same protection as our main database.</b></summary>
 
 "The AI search index is not just numbers. It keeps copies of our documents, and research shows the numbers themselves can be turned back into text. If someone reaches it, they get our documents. If we forget to delete from it, we break our privacy promises. So we lock it down like any production database."
 </details>
@@ -316,7 +345,9 @@ It depends on the data classification and the provider's terms. You are sharing 
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025, LLM08 Vector and Embedding Weaknesses: https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026, LLM09 Vector and Embedding Weaknesses (LLM08 in 2025; verify the current list at the source): https://genai.owasp.org/llm-top-10/
+- OWASP GenAI Security Project, *GenAI Data Security Risks and Mitigations 2026* (DSGAI13, DSGAI17, DSGAI18): https://genai.owasp.org/
+- NVD, CVE-2024-3584 (Qdrant snapshot path traversal): https://nvd.nist.gov/vuln/detail/CVE-2024-3584
 - Morris et al., *Text Embeddings Reveal (Almost) As Much As Text* (2023): https://arxiv.org/abs/2310.06816
 - OpenAI, *March 20 ChatGPT outage: Here's what happened* (2023): https://openai.com/index/march-20-chatgpt-outage/
 - GDPR Article 17, Right to erasure: https://gdpr-info.eu/art-17-gdpr/

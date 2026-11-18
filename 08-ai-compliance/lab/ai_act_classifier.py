@@ -2,9 +2,9 @@
 
     EDUCATIONAL TOOL - NOT LEGAL ADVICE. It simplifies Regulation (EU) 2024/1689 to teach
     the *shape* of the decision. Real classification needs the official text, current
-    Commission guidelines and qualified legal counsel. Dates and some obligations may be
-    changed by later EU acts (the Commission proposed a "Digital Omnibus" in Nov 2025):
-    check the current status before relying on any date here.
+    Commission guidelines and qualified legal counsel. Dates follow the AI Act as amended
+    by the Digital Omnibus on AI, Regulation (EU) 2026/1744 (in force 27 July 2026), which
+    moved the high-risk dates. Laws keep changing: verify every date at the source.
 
 Input: one YAML mapping of answers per AI system (see fixtures/ai_act_cases.yaml).
 Output: categories, the obligations for the organization's *role*, the date each one
@@ -27,14 +27,15 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, ValidationError
 
 DISCLAIMER = "Educational, not legal advice. Verify against the official text and current EU guidance."
-DATES_NOTE = ("Dates are those in Regulation (EU) 2024/1689 as adopted. Later EU acts may change them: "
-              "check the current status.")
+DATES_NOTE = ("Dates: Regulation (EU) 2024/1689 as amended by the Digital Omnibus, Regulation (EU) 2026/1744 "
+              "(in force 27 Jul 2026). Verify at the source before relying on them.")
 
-# Key application dates (Article 113, as adopted).
+# Key application dates (Article 113 as amended by Regulation (EU) 2026/1744).
 D_PROHIBITED = date(2025, 2, 2)    # Chapters I-II: definitions, AI literacy, prohibited practices
-D_GPAI = date(2025, 8, 2)          # GPAI obligations, governance, penalties
-D_GENERAL = date(2026, 8, 2)       # most other obligations, incl. Annex III high-risk and Art 50
-D_ANNEX_I = date(2027, 8, 2)       # Art 6(1): high-risk safety components of Annex I products
+D_GPAI = date(2025, 8, 2)          # GPAI obligations, governance, penalties (unchanged by the Omnibus)
+D_TRANSPARENCY = date(2026, 8, 2)  # Art 50 transparency (not delayed; check marking grace periods)
+D_ANNEX_III = date(2027, 12, 2)    # stand-alone (Annex III) high-risk duties - was 2 Aug 2026 before the Omnibus
+D_ANNEX_I = date(2028, 8, 2)       # Art 6(1): high-risk AI embedded in Annex I products - was 2 Aug 2027
 
 PROHIBITED = {
     "harmful_manipulation": "subliminal, manipulative or deceptive techniques causing significant harm",
@@ -166,10 +167,11 @@ def classify(raw: dict) -> Classification:
                 "and no profiling")
             if a.role == "provider":
                 add(_ob("Art 6(4)", "Document why the system is not high-risk before placing it on the market",
-                        D_GENERAL))
+                        D_ANNEX_III))
                 add(_ob("Art 49(2)", "Register the system in the EU database even though it is not high-risk",
-                        D_GENERAL))
-            c.open_questions.append("Does the Art 6(3) exception really fit? Ask counsel to review the record.")
+                        D_ANNEX_III))
+            c.open_questions.append("Does the Art 6(3) exception really fit? Ask counsel to review the record. "
+                                    "Also check whether the Omnibus changed the Art 49(2) registration duty.")
         else:
             high_risk = True
             if a.art6_3_exception != "none" and a.profiling:
@@ -177,30 +179,33 @@ def classify(raw: dict) -> Classification:
             why(f"Art 6(2) + Annex III area: {a.annex_iii_area}")
     if high_risk:
         c.categories.append("high_risk")
-        when = D_ANNEX_I if a.annex_i_safety_component and a.annex_iii_area == "none" else D_GENERAL
+        when = D_ANNEX_I if a.annex_i_safety_component and a.annex_iii_area == "none" else D_ANNEX_III
         _high_risk_obligations(a, add, when, c.open_questions)
 
     # 4. Transparency (Art 50) --------------------------------------------------------
     transparency = []
     if a.role == "provider" and a.interacts_with_people:
         transparency.append(_ob("Art 50(1)", "Tell people they are interacting with an AI system "
-                                             "(unless obvious)", D_GENERAL))
+                                             "(unless obvious)", D_TRANSPARENCY))
     if a.role == "provider" and a.generates_synthetic_content:
         transparency.append(_ob("Art 50(2)", "Mark synthetic audio, image, video or text in a "
-                                             "machine-readable way", D_GENERAL))
+                                             "machine-readable way", D_TRANSPARENCY))
     if a.role == "deployer" and a.emotion_or_biometric_categorisation:
         transparency.append(_ob("Art 50(3)", "Inform people exposed to emotion recognition or "
-                                             "biometric categorisation", D_GENERAL))
+                                             "biometric categorisation", D_TRANSPARENCY))
     if a.role == "deployer" and a.deep_fake:
         transparency.append(_ob("Art 50(4)", "Disclose that deep-fake content is artificially "
-                                             "generated or manipulated", D_GENERAL))
+                                             "generated or manipulated", D_TRANSPARENCY))
     if a.role == "deployer" and a.public_interest_text:
         transparency.append(_ob("Art 50(4)", "Disclose AI-generated text published on matters of public "
-                                             "interest, unless under human editorial control", D_GENERAL))
+                                             "interest, unless under human editorial control", D_TRANSPARENCY))
     if transparency:
         c.categories.append("transparency")
         why("Art 50 transparency duties apply")
         c.obligations.extend(transparency)
+        if any(o.ref == "Art 50(2)" for o in transparency):
+            c.open_questions.append("Art 50(2) marking: the Omnibus gives some systems already on the market a "
+                                    "short grace period (around 2 Dec 2026). Verify which date applies to you.")
 
     # 5. General-purpose AI models (a separate track, at model level) ------------------
     if a.gpai_model_provider:

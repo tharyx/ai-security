@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | Kubernetes basics (Pod, Deployment, Service, Namespace); the [Docker lesson](../docker/) |
 | **Lab** | [`lab/`](lab/): runs offline, no cluster needed |
-| **Maps to** | OWASP LLM10:2025 Unbounded Consumption (limits) · OWASP LLM02:2025 Sensitive Information Disclosure · NSA/CISA Kubernetes Hardening Guidance · CIS Kubernetes Benchmark · Kubernetes Pod Security Standards |
+| **Maps to** | OWASP LLM06:2026 Unbounded Consumption [LLM10:2025] (limits) · OWASP LLM02:2026 Sensitive Information Disclosure [LLM02:2025] · OWASP Agentic ASI03 Identity & Privilege Abuse (workload identity) · OWASP MCP01 Token Mismanagement & Secret Exposure · NSA/CISA Kubernetes Hardening Guidance · CIS Kubernetes Benchmark · Kubernetes Pod Security Standards |
 
 ---
 

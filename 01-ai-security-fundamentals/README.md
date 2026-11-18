@@ -15,17 +15,19 @@ Why start here? Because most AI security failures are not clever model attacks. 
 | # | Lesson | Weeks | You will be able to… | Lab |
 |---|---|---|---|---|
 | 01 | [AI, ML and LLM basics for security engineers](01-ai-ml-llm-basics-for-security.md) | 1–2 | Explain the lifecycle, assets and actors; tokens, context windows, embeddings, transformers, fine-tuning vs RAG, tool calling and agents, each with its security implication | Tiny embeddings: similarity is not authorization; context window and cost |
+| 01b | [Inside the LLM: neural networks, transformers, inference and training](01b-inside-the-llm-transformers-inference-and-training.md) | 1–2 | Explain neural networks, attention, the inference lifecycle (prefill, decode, KV cache, sampling), and training vs fine-tuning (LoRA/QLoRA) vs deployment with the risks of each | Tiny attention: an injected token takes over; sampling rates; LoRA arithmetic |
 | 02 | [AI system architecture and trust boundaries](02-ai-system-architecture-and-trust-boundaries.md) | 3 | Draw a data-flow diagram with trust zones, list untrusted inputs, follow taint, and treat model output as untrusted | Threat model as code, part 1: describe the system |
-| 03 | [Threat modeling AI systems](03-ai-threat-modeling.md) | 4 | Apply STRIDE, MITRE ATLAS and the OWASP LLM Top 10 2025; write abuse cases; score risk; spot the lethal trifecta | Threat model as code, part 2: find and score threats |
-| 04 | [The AI attack surface and security requirements](04-ai-attack-surface-and-security-requirements.md) | 4 | Map the attack surface across six layers and turn threats into testable requirements with evidence | Threat model as code, part 3: requirements and CI gate |
+| 03 | [Threat modeling AI systems](03-ai-threat-modeling.md) | 4 | Apply STRIDE, MITRE ATLAS and the OWASP LLM Top 10 2026 (plus Agentic and MCP lists); choose between STRIDE, PASTA, LINDDUN, attack trees and MAESTRO; write abuse cases; score risk; spot the lethal trifecta | Threat model as code, part 2; attack trees as code |
+| 04 | [The AI attack surface and security requirements](04-ai-attack-surface-and-security-requirements.md) | 4 | Map the attack surface across six layers and eight security domains (data, model, infra, API, supply chain, runtime, network, cloud); know the threat landscape; turn threats into testable requirements with evidence | Threat model as code, part 3: requirements and CI gate |
+| — | [AI security glossary](glossary.md) | all | Look up about 160 terms, each with its security meaning and OWASP 2026 / ASI / MCP ids | — |
 
 ## The lab
 
 Everything runs offline with no API keys. From the repository root:
 
 ```powershell
-python 01-ai-security-fundamentals/lab/demo.py                    # scorecard for all three parts
-python -m pytest 01-ai-security-fundamentals -v                   # 78 tests
+python 01-ai-security-fundamentals/lab/demo.py                    # scorecard, parts A to E
+python -m pytest 01-ai-security-fundamentals -v                   # 108 tests
 python 01-ai-security-fundamentals/lab/threat_model.py 01-ai-security-fundamentals/lab/designs/vulnerable_design.yaml
 ```
 
@@ -33,12 +35,16 @@ python 01-ai-security-fundamentals/lab/threat_model.py 01-ai-security-fundamenta
 |---|---|
 | [`lab/tiny_embeddings.py`](lab/tiny_embeddings.py) | Pure-Python bag-of-words embeddings and cosine similarity; a naive and a secure retriever (switchable tenant, ACL and source filters); context-window assembly and token budgets |
 | [`lab/threat_model.py`](lab/threat_model.py) | Threat model as code: validates a YAML design, follows taint, runs 11 rules (boundary crossings, untrusted → privileged, lethal trifecta, RAG without ACL, model output handling, confused deputy, cost, audit…), generates STRIDE-per-element candidates, scores risk, handles expiring risk acceptances, derives requirements, and exits 1 for CI |
+| [`lab/tiny_llm.py`](lab/tiny_llm.py) | Pure-Python attention (softmax over dot products) showing an injected token taking over, a soft trusted-token bias vs a hard mask; temperature, top-k and top-p sampling rates; LoRA and quantization arithmetic |
+| [`lab/attack_tree.py`](lab/attack_tree.py) | Attack trees as code: AND/OR probability and cost, cheapest path, and which single hard control lowers the root the most |
 | [`lab/designs/vulnerable_design.yaml`](lab/designs/vulnerable_design.yaml) | HelpDesk Copilot v0: a hackathon design with `VULN` comments |
 | [`lab/designs/secure_design.yaml`](lab/designs/secure_design.yaml) | HelpDesk Copilot v1: the same product after review, with one documented accepted risk |
 | [`lab/demo.py`](lab/demo.py) | Prints the vulnerable-vs-secure scorecard |
-| [`lab/test_tiny_embeddings.py`](lab/test_tiny_embeddings.py), [`lab/test_threat_model.py`](lab/test_threat_model.py) | Impact-based tests; tests that switch off one control and prove the finding or leak returns |
+| [`lab/test_tiny_embeddings.py`](lab/test_tiny_embeddings.py), [`lab/test_tiny_llm.py`](lab/test_tiny_llm.py), [`lab/test_threat_model.py`](lab/test_threat_model.py), [`lab/test_attack_tree.py`](lab/test_attack_tree.py) | Impact-based tests; tests that switch off one control and prove the finding or leak returns |
 
 ## Key concepts glossary
+
+The short list below covers this module. The full [AI security glossary](glossary.md) has about 160 terms.
 
 | Term | Meaning in one or two sentences |
 |---|---|
@@ -59,7 +65,10 @@ python 01-ai-security-fundamentals/lab/threat_model.py 01-ai-security-fundamenta
 | **Confused deputy** | A privileged component tricked into using its privileges for a less-privileged requester. |
 | **STRIDE** | Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege. |
 | **MITRE ATLAS** | ATT&CK-style knowledge base of tactics, techniques and case studies of attacks on AI systems. |
-| **OWASP LLM Top 10 (2025)** | Community list of the ten main LLM application risks, LLM01–LLM10. |
+| **OWASP LLM Top 10 (2026)** | Community list of the ten main LLM application risks, LLM01–LLM10, renumbered in August 2026 (for example System Prompt Leakage, LLM07:2025, became LLM08:2026 Hidden Context Exposure). |
+| **OWASP Agentic Top 10 / MCP Top 10** | Companion lists for agents (ASI01–ASI10) and MCP deployments (MCP01–MCP10, beta). |
+| **Attention** | The transformer step where every token weighs every other token by softmax over dot products; it has no notion of trust. |
+| **LoRA / QLoRA** | Fine-tuning that trains small adapter matrices beside frozen weights (QLoRA: on a 4-bit base). The adapter is a small, swappable file. |
 | **Abuse case** | A use case written from the attacker's point of view. |
 | **Lethal trifecta** | Private data + untrusted content + an exfiltration channel in one model context. |
 | **Risk score** | Likelihood × impact (1–25), used to order work. |
@@ -69,7 +78,7 @@ python 01-ai-security-fundamentals/lab/threat_model.py 01-ai-security-fundamenta
 
 ## How the lessons connect
 
-1. **Lesson 01** gives you the parts list: data, model, context, retrieval, tools, people. You learn that each part has a security property you cannot assume (similarity is not permission; the prompt is not a boundary; output is not trusted).
+1. **Lessons 01 and 01b** give you the parts list and how the model works inside: data, model, context, retrieval, tools, people. You learn that each part has a security property you cannot assume (similarity is not permission; the prompt is not a boundary; output is not trusted).
 2. **Lesson 02** wires the parts together into a **data-flow diagram** and marks trust zones. You describe it as YAML so a tool can check it, and you see taint spread from one email to every component.
 3. **Lesson 03** asks "what can go wrong?" across that diagram with STRIDE, AI lenses, ATLAS, OWASP and the lethal trifecta, and **scores** the answers.
 4. **Lesson 04** widens the view to the **whole attack surface** (including supply chain and infrastructure) and closes the loop: every high risk becomes a **requirement**, a **test** and **evidence**.
@@ -84,7 +93,7 @@ Deliverables (put them in your `journal/` folder):
 
 1. **Lifecycle and asset inventory** (lesson 01): ten stages, assets and actors.
 2. **DFD with trust boundaries** (lesson 02), drawn by hand or with any tool, *and* the same design as YAML in `lab/designs/` (your own file).
-3. **Threat register** (lesson 03): at least 15 threat statements, tagged with STRIDE, OWASP LLM 2025 and ATLAS where it fits, scored, using [`risk-register.csv`](../00-program/templates/risk-register.csv) columns.
+3. **Threat register** (lesson 03): at least 15 threat statements, tagged with STRIDE, OWASP LLM 2026 (ASI and MCP ids where relevant) and ATLAS where it fits, scored, using [`risk-register.csv`](../00-program/templates/risk-register.csv) columns.
 4. **Lethal-trifecta analysis:** which model contexts have all three legs, and which leg you break.
 5. **Attack-surface map** (lesson 04) across six layers, with remove / restrict / isolate / monitor decisions.
 6. **Requirements and tests:** at least eight requirements in MUST form with an owner and a test idea each; a traceability matrix; one requirement implemented as a real pytest test.
@@ -151,7 +160,7 @@ Validate at each sink, using the sink's own rules:
 - **APIs:** strict schemas, server-side authorization as the end user, egress allowlists, approval for side effects.
 - **Other models or memory:** treat as untrusted input again.
 
-This is OWASP LLM05, and it chains with LLM01: injection creates the malicious output, and poor output handling turns it into XSS, SQL injection or SSRF.
+This is OWASP LLM10:2026 Improper Output Handling (was LLM05:2025), and it chains with LLM01: injection creates the malicious output, and poor output handling turns it into XSS, SQL injection or SSRF.
 </details>
 
 <details><summary><b>Q8. What would you put on a one-page "AI security baseline" every new feature must meet?</b></summary>
@@ -183,7 +192,8 @@ New tools or broader tool scopes; new data sources (including auto-ingested emai
 
 ## References
 
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (verify at the source), https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications (December 2025), https://genai.owasp.org/ · OWASP MCP Top 10 (beta), https://owasp.org/www-project-mcp-top-10/
 - MITRE ATLAS, https://atlas.mitre.org/
 - NIST AI Risk Management Framework 1.0 and the Generative AI Profile (NIST AI 600-1), https://www.nist.gov/itl/ai-risk-management-framework
 - Threat Modeling Manifesto, https://www.threatmodelingmanifesto.org/
@@ -196,3 +206,41 @@ New tools or broader tool scopes; new data sources (including auto-ingested emai
 ---
 
 **Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).
+
+## Roadmap coverage
+
+How this module covers Phase 1 of the target roadmap, Domain A and skills-matrix row 1.
+
+| Roadmap topic | Where it is covered |
+|---|---|
+| AI / ML / DL / GenAI architecture | [01 §2.1–2.2](01-ai-ml-llm-basics-for-security.md), [01b §2.1–2.2](01b-inside-the-llm-transformers-inference-and-training.md) (AI family, learning paradigms, network architectures) |
+| Neural networks, transformers and attention | [01b §2.2–2.3](01b-inside-the-llm-transformers-inference-and-training.md); lab [`tiny_llm.py`](lab/tiny_llm.py) Part 1; diagram `01-transformer-attention.svg` |
+| LLM architecture and the inference lifecycle | [01 §2.3](01-ai-ml-llm-basics-for-security.md), [01b §2.6](01b-inside-the-llm-transformers-inference-and-training.md) (prefill, decode, KV cache, sampling, serving); lab Part 2 |
+| Tokenization, embeddings and vector databases | [01 §2.3–2.4](01-ai-ml-llm-basics-for-security.md) + lab [`tiny_embeddings.py`](lab/tiny_embeddings.py); [01b §2.4–2.5](01b-inside-the-llm-transformers-inference-and-training.md) |
+| Model training, fine-tuning (LoRA / QLoRA) and deployment, with risks | [01 §2.5](01-ai-ml-llm-basics-for-security.md), [01b §2.7](01b-inside-the-llm-transformers-inference-and-training.md); lab Part 3; diagram `01-training-to-deployment-risks.svg` |
+| How agents work (fundamentals) | [01 §2.6](01-ai-ml-llm-basics-for-security.md), [01b §2.8](01b-inside-the-llm-transformers-inference-and-training.md); deep dive in [module 05](../05-agent-security/) |
+| AI threat landscape and attack surfaces | [04 §2.1–2.3](04-ai-attack-surface-and-security-requirements.md) (six layers, threat actors, attacks on / through / with AI) |
+| Threat modeling (STRIDE, PASTA, LINDDUN, attack trees, MAESTRO, ATLAS, OWASP 2026 / ASI / MCP) | [03](03-ai-threat-modeling.md); labs [`threat_model.py`](lab/threat_model.py), [`attack_tree.py`](lab/attack_tree.py) |
+| Domain A: data, model (integrity, extraction, backdoors), infrastructure, API, supply chain, runtime, network, cloud | [04 §2.2a](04-ai-attack-surface-and-security-requirements.md) |
+| Domain A build: architecture with IAM, secrets, network isolation, logging, encryption, runtime protection | [04 §2.2b](04-ai-attack-surface-and-security-requirements.md); diagram `01-ai-app-security-architecture.svg` |
+| Skills matrix row 1: explain transformer/LLM architecture; embeddings, tokens and inference; training and fine-tuning | [01b interview Q1–Q10](01b-inside-the-llm-transformers-inference-and-training.md#7-interview-preparation), [01 interview](01-ai-ml-llm-basics-for-security.md#7-interview-preparation) |
+| Vocabulary for every later module | [glossary.md](glossary.md) |
+
+**ISC2 AI Security, Domain 1 check** (objectives as listed in the ISC2 AI Security study guide in your library; not an official ISC2 document):
+
+| Objective | Covered in |
+|---|---|
+| 1.1 AI types, ML paradigms, neural network types, AI hardware | [01b §2.1, 2.2, 2.10](01b-inside-the-llm-transformers-inference-and-training.md) |
+| 1.2 GenAI and modern architectures: LLMs, multimodal, prompt concepts, RAG, fine-tuning (PEFT, LoRA, QLoRA), agents, tokens, embeddings, vector DBs | [01](01-ai-ml-llm-basics-for-security.md), [01b §2.3–2.8](01b-inside-the-llm-transformers-inference-and-training.md) |
+| 1.3 Limitations and performance: hallucination, non-determinism, drift, model collapse, metrics, human-in/on/out-of-the-loop | [01b §2.9](01b-inside-the-llm-transformers-inference-and-training.md) |
+| 6.1 (related) threat modeling methods, threat actors, MITRE ATLAS 2026 tactics | [03 §2.4, 2.10](03-ai-threat-modeling.md), [04 §2.2c](04-ai-attack-surface-and-security-requirements.md) |
+
+## Further reading from your library
+
+Titles of documents in the owner's local `Documents/` folder (not in the repo). Read them in this order:
+
+- **The AI Security Glossary.** Read sections 1–3 alongside week 1, the agentic-risk and supply-chain sections in week 4; compare its definitions with [glossary.md](glossary.md).
+- **AI Engineering (Pachaar and Chawla, DailyDoseofDS).** Chapter "LLMs" (how LLMs are built and trained, generation parameters, decoding strategies, MoE); "Fine-tuning" (LoRA variants, QLoRA, SFT vs RFT); "Prompting vs RAG vs fine-tuning"; "AI Agents" (building blocks, memory types, the five levels of agency, deployment strategies).
+- **Building Agentic AI (Ozdemir).** Chapter 1 only for this module: context windows, alignment, inference parameters, prompt caching, tool calling, ReAct; and the "workflows versus agents" discussion in chapter 4.
+- **ISC2 AI Security Study Guide (pilot exam).** Domain 1 in full; objective 6.1 for STRIDE-for-AI, PASTA, MAESTRO and threat actors; Appendix A for the OWASP 2026 list and the 16 MITRE ATLAS tactics. AI-generated and unofficial: verify facts at the source.
+- **Advanced Threat Modeling: Methodologies and Implementation Strategies for Security Architects.** The STRIDE, PASTA, DREAD and attack-tree sections, the threat-model-as-code and tool-comparison sections, and the FAQ on metrics and scaling. It is not AI-specific; add the AI lenses from lesson 03.

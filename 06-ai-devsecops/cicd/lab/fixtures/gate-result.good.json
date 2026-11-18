@@ -1,0 +1,7 @@
+{
+  "_comment": "What the release-gate job uploads as an artifact for the deploy job.",
+  "decision": "APPROVED",
+  "generated_at": "2026-11-18T09:10:00Z",
+  "image_digest": "sha256:4f9c2a7e1b3d5c6a8e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d",
+  "model_sha256": "91eecc3e61072c765156ca1ca58cb40ff36116c0088326da48077a43aab1d7ed"
+}

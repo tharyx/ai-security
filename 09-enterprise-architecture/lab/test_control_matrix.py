@@ -52,6 +52,22 @@ def test_every_control_states_an_outcome_and_an_owner(control):
     assert control.responsibility in {"customer", "shared", "provider"}
 
 
+@pytest.mark.parametrize("control", MATRIX, ids=IDS)
+def test_owasp_mappings_use_valid_2026_ids(control):
+    """LLM ids use the 2026 list (LLM01..LLM10); ASI and MCP ids exist in their lists."""
+    valid = {f"{p}{n:02d}" for p in ("LLM", "ASI", "MCP") for n in range(1, 11)}
+    for field, prefix in (("owasp_llm", "LLM"), ("owasp_asi", "ASI"), ("owasp_mcp", "MCP")):
+        for rid in getattr(control, field):
+            assert rid in valid and rid.startswith(prefix), f"{control.id}.{field}: {rid}"
+
+
+def test_agentic_and_mcp_risks_are_covered_by_the_matrix():
+    asi = {r for c in MATRIX for r in c.owasp_asi}
+    mcp = {r for c in MATRIX for r in c.owasp_mcp}
+    assert {"ASI02", "ASI03", "ASI04"} <= asi
+    assert {"MCP01", "MCP03", "MCP07", "MCP08", "MCP09"} <= mcp
+
+
 def test_matrix_rejects_unknown_fields():
     bad = {"controls": [{"id": "X-1", "family": "x", "title": "t", "severity": "high",
                          "responsibility": "customer", "check": "key_rotation",

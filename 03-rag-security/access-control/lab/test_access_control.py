@@ -159,3 +159,32 @@ def test_post_filter_only_costs_recall():
     assert pre.citations and pre.citations[0]["doc_id"] == "red-eng-handbook"
     assert post.citations == []  # the only slot went to a blue chunk, which the re-check removed
     assert any(e["kind"] == "cross_tenant_blocked" for e in post_app.events)
+
+
+# ---------- Part 4: authorization happens BEFORE content reaches the model -------------
+# Roadmap scenario: "authz happens before content reaches the model". Grade the PROMPT the
+# model received, not only what it chose to say: a real model may not repeat the text,
+# but once it is in the context it has already reached the model, its provider and its logs.
+
+def context_sent_to_model(llm):
+    return llm.calls[-1][-1]["content"].split("</context>")[0]
+
+
+# citation_smuggling is left out: it leaks through the citation list, AFTER the model.
+@pytest.mark.parametrize("name", [n for n in attacks.ATTACKS if n != "citation_smuggling"])
+def test_vulnerable_app_puts_forbidden_text_into_the_prompt(name):
+    user, claims, question = attacks.ATTACKS[name]
+    llm = MockLLM()
+    V.VulnerableRagApp(attacks.INDEX, attacks.USERS, attacks.SESSIONS, llm).ask(
+        {"session": session(user), "question": question, **claims})
+    assert attacks.leaked_canaries(user, context_sent_to_model(llm))
+
+
+@pytest.mark.parametrize("name", list(attacks.ATTACKS))
+def test_secure_app_never_puts_forbidden_text_into_the_prompt(name):
+    user, claims, question = attacks.ATTACKS[name]
+    llm = MockLLM()
+    S.SecureRagApp(attacks.INDEX, attacks.USERS, attacks.SESSIONS, attacks.SOURCE_ACL, llm).ask(
+        session(user), question, **claims)
+    if llm.calls:  # no call at all is also fine (e.g. no session)
+        assert attacks.leaked_canaries(user, context_sent_to_model(llm)) == []

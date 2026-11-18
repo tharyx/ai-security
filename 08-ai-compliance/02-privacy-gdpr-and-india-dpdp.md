@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Module 03 RAG security](../03-rag-security/) (chunks, indexes, metadata); [Lesson 01](01-eu-ai-act.md) |
 | **Lab** | [`lab/privacy_rights.py`](lab/privacy_rights.py), `demo.py` section 3, `test_privacy_and_incidents.py` |
-| **Maps to** | GDPR (Regulation (EU) 2016/679) Art 5, 6, 9, 12–22, 25, 28, 32–35 · India Digital Personal Data Protection Act 2023 and DPDP Rules · OWASP LLM02:2025 Sensitive Information Disclosure · NIST AI 600-1 risk 4 (data privacy) · ISO/IEC 42001 A.7 (data for AI) |
+| **Maps to** | GDPR (Regulation (EU) 2016/679) Art 5, 6, 9, 12–22, 25, 28, 32–35 · India Digital Personal Data Protection Act 2023 and DPDP Rules · OWASP LLM02:2026 Sensitive Information Disclosure (LLM02:2025; the 2026 edition adds reasoning traces, logs and embeddings) · OWASP GenAI Data Security Risks and Mitigations 2026 (DSGAI01, DSGAI07, DSGAI08) · NIST AI 600-1 risk 4 (data privacy) · ISO/IEC 42001 A.7 (data for AI) |
 
 > **Educational, not legal advice.** Privacy law is detailed and depends on facts and jurisdiction. Use this lesson to ask the right questions and build the right controls; get privacy counsel and your DPO for real decisions. For India's DPDP Rules in particular, **check the current notified text and commencement dates.**
 
@@ -21,7 +21,7 @@ AI systems collect personal data in new places: prompts, retrieved documents, em
 - **2024, noyb complaint against OpenAI (Austria):** the privacy group noyb complained that ChatGPT produced a wrong date of birth for a public figure and that the error could not be corrected. Under GDPR, personal data must be accurate and people have a right to rectification. That applies to what a model *says* about people.
 - **December 2024, EDPB Opinion 28/2024:** the European Data Protection Board gave its opinion on AI models and personal data: when a model can be considered anonymous, how legitimate interest can be assessed for development and deployment, and what happens when a model was trained on unlawfully processed data.
 - **2022, Clearview AI:** several EU authorities fined Clearview AI (Italy: EUR 20 million) for scraping facial images to build a biometric database without a legal basis.
-- **2023, India:** Parliament passed the Digital Personal Data Protection Act, 2023. The DPDP Rules were notified in **November 2025**, with obligations commencing in phases. Many AI products built in India for Indian users fall under it.
+- **2023, India:** Parliament passed the Digital Personal Data Protection Act, 2023. The DPDP Rules were notified on 13/14 **November 2025**, with obligations commencing in phases: some rules at once, consent-manager provisions after about 12 months (November 2026), and most operational duties (notice, security safeguards, breach reporting, children's data) after about 18 months (**around 13 May 2027**). Many AI products built in India for Indian users fall under it.
 
 ---
 
@@ -104,7 +104,15 @@ What the Act establishes (check the current Rules for detail and timing):
 | Publicly available data | The Act does not apply to personal data made publicly available by the Data Principal themselves (or under a legal obligation). Read this carefully before relying on it for scraping |
 | Penalties | Set in the Act's Schedule; the highest (for failing to take reasonable security safeguards) is up to INR 250 crore |
 
-**DPDP Rules.** Notified in November 2025. They set details such as notice content, consent managers, breach intimation, data retention for certain fiduciaries, children's consent and SDF duties, with a **phased commencement** (most fiduciary duties after a transition period). **Check the official notification for which duties are in force on the date you assess.**
+**DPDP Rules 2025.** Notified on 13/14 November 2025. They set details such as notice content, consent managers, breach intimation, security safeguards, data retention for certain fiduciaries, children's consent and Significant Data Fiduciary duties. Commencement is **phased**:
+
+| Phase (approximate; verify in the official notification) | What starts |
+|---|---|
+| On notification (Nov 2025) | Definitions and the Data Protection Board's set-up provisions |
+| About 12 months later (Nov 2026) | Consent-manager provisions |
+| About 18 months later (around 13 May 2027) | Most operational duties: notices, reasonable security safeguards, breach intimation (to the Board and each affected person, plus a detailed report to the Board within 72 hours), retention and erasure, children's data |
+
+For an AI architect this means: design for the full regime now (the 2027 deadline is close for systems you build today), and in incident runbooks mark which duties are in force on the incident date. The lab's `incident_clock.py` does exactly that. **Check the official notification for which duties are in force on the date you assess.**
 
 **GDPR vs DPDP for an AI architect, in short:**
 
@@ -310,7 +318,7 @@ Usually a processor for your inference traffic, under a DPA, if it only processe
 
 <details><summary><b>Q8. What are the key roles and grounds under India's DPDP Act?</b></summary>
 
-Data Principal (the person), Data Fiduciary (decides purpose and means), Data Processor, Significant Data Fiduciary (with extra duties such as a DPO in India, an independent data auditor and periodic DPIAs), Consent Manager and the Data Protection Board. Processing needs consent or one of the listed legitimate uses; there is no broad legitimate-interests ground. Detailed procedures are in the DPDP Rules notified in November 2025, which commence in phases, so check what is in force.
+Data Principal (the person), Data Fiduciary (decides purpose and means), Data Processor, Significant Data Fiduciary (with extra duties such as a DPO in India, an independent data auditor and periodic DPIAs), Consent Manager and the Data Protection Board. Processing needs consent or one of the listed legitimate uses; there is no broad legitimate-interests ground. Detailed procedures are in the DPDP Rules notified in November 2025, which commence in phases (most operational duties, including breach reporting, around May 2027), so check what is in force.
 </details>
 
 <details><summary><b>Q9. Name three differences between GDPR and DPDP that matter for AI products.</b></summary>
@@ -350,6 +358,7 @@ Show the data map, the erasure procedure, automated erasure drills with receipts
 - European Data Protection Board (guidelines on DPIA, automated decisions; Opinion 28/2024 on AI models): https://www.edpb.europa.eu/
 - Digital Personal Data Protection Act, 2023 and DPDP Rules: Ministry of Electronics and Information Technology, https://www.meity.gov.in/
 - Regulation (EU) 2024/1689 (EU AI Act), Art 26(6) and 26(9): https://eur-lex.europa.eu/eli/reg/2024/1689/oj
-- OWASP LLM02:2025 Sensitive Information Disclosure: https://genai.owasp.org/llm-top-10/
+- OWASP LLM02:2026 Sensitive Information Disclosure (LLM02 in the 2025 edition too): https://genai.owasp.org/llm-top-10/
+- OWASP GenAI Data Security Risks and Mitigations 2026: https://genai.owasp.org/
 - NIST AI 600-1, Generative AI Profile (data privacy risk): https://doi.org/10.6028/NIST.AI.600-1
 - Italian Garante per la protezione dei dati personali (ChatGPT decisions): https://www.garanteprivacy.it/

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="912" viewBox="0 0 1200 912" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>OWASP MCP Top 10 (2025 beta) mapped to controls and lessons</title>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+  <rect width="1200" height="912" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">OWASP MCP Top 10 (2025, beta): risk, hard control, lesson</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Every risk has a deterministic control and at least one lab test in this module. Names may change while the list is in beta.</text>
+  <text x="255" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Risk (what goes wrong)</text>
+  <text x="730" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">Hard control (in code or runtime)</text>
+  <text x="1075" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Lesson / lab</text>
+  <rect x="40" y="132" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="159" font-size="14" font-weight="700" fill="#991b1b">MCP01  Token mismanagement and secret exposure</text>
+  <text x="56" y="181" font-size="12" fill="#475569">tokens in logs, env vars and plain-text configs</text>
+  <path d="M472 164.0 L506 164.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="132" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="169.0" font-size="14" font-weight="700" fill="#166534">Vault references, minimal launch env, log redaction</text>
+  <path d="M952 164.0 L986 164.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="132" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="159" text-anchor="middle" font-size="13" fill="#0f172a">authentication</text>
+  <text x="1075" y="179" text-anchor="middle" font-size="13" fill="#0f172a">secure-operations</text>
+  <rect x="40" y="206" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="233" font-size="14" font-weight="700" fill="#991b1b">MCP02  Privilege escalation via scope creep</text>
+  <text x="56" y="255" font-size="12" fill="#475569">an update quietly asks for admin:all</text>
+  <path d="M472 238.0 L506 238.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="206" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="243.0" font-size="14" font-weight="700" fill="#166534">Scope baseline in registry, per-agent tool allowlist</text>
+  <path d="M952 238.0 L986 238.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="206" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="233" text-anchor="middle" font-size="13" fill="#0f172a">authentication</text>
+  <text x="1075" y="253" text-anchor="middle" font-size="13" fill="#0f172a">secure-operations</text>
+  <rect x="40" y="280" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="307" font-size="14" font-weight="700" fill="#991b1b">MCP03  Tool poisoning</text>
+  <text x="56" y="329" font-size="12" fill="#475569">hidden orders in descriptions; rug pulls</text>
+  <path d="M472 312.0 L506 312.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="280" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="317.0" font-size="14" font-weight="700" fill="#166534">Scanner + human review, pinned definition hashes</text>
+  <path d="M952 312.0 L986 312.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="280" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="307" text-anchor="middle" font-size="13" fill="#0f172a">mcp-server</text>
+  <text x="1075" y="327" text-anchor="middle" font-size="13" fill="#0f172a">tool-security</text>
+  <rect x="40" y="354" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="381" font-size="14" font-weight="700" fill="#991b1b">MCP04  Supply chain and dependency tampering</text>
+  <text x="56" y="403" font-size="12" fill="#475569">typosquats; same version, new code</text>
+  <path d="M472 386.0 L506 386.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="354" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="391.0" font-size="14" font-weight="700" fill="#166534">Registry, pinned version + artifact digest, sandbox</text>
+  <path d="M952 386.0 L986 386.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="354" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="381" text-anchor="middle" font-size="13" fill="#0f172a">mcp-server</text>
+  <text x="1075" y="401" text-anchor="middle" font-size="13" fill="#0f172a">secure-operations</text>
+  <rect x="40" y="428" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="455" font-size="14" font-weight="700" fill="#991b1b">MCP05  Command injection and execution</text>
+  <text x="56" y="477" font-size="12" fill="#475569">shell strings, option injection, traversal</text>
+  <path d="M472 460.0 L506 460.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="428" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="465.0" font-size="14" font-weight="700" fill="#166534">No shell, argv allowlist, '--', path confinement</text>
+  <path d="M952 460.0 L986 460.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="428" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="465.0" text-anchor="middle" font-size="13" fill="#0f172a">tool-security</text>
+  <rect x="40" y="502" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="529" font-size="14" font-weight="700" fill="#991b1b">MCP06  Prompt injection via contextual payloads</text>
+  <text x="56" y="551" font-size="12" fill="#475569">a resource or tool result gives orders</text>
+  <path d="M472 534.0 L506 534.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="502" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="539.0" font-size="14" font-weight="700" fill="#166534">Untrusted labels, session taint, approval</text>
+  <path d="M952 534.0 L986 534.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="502" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="529" text-anchor="middle" font-size="13" fill="#0f172a">tool-security</text>
+  <text x="1075" y="549" text-anchor="middle" font-size="13" fill="#0f172a">secure-operations</text>
+  <rect x="40" y="576" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="603" font-size="14" font-weight="700" fill="#991b1b">MCP07  Insufficient authentication and authorization</text>
+  <text x="56" y="625" font-size="12" fill="#475569">no token checks, wrong audience, passthrough</text>
+  <path d="M472 608.0 L506 608.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="576" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="613.0" font-size="14" font-weight="700" fill="#166534">Resource server: iss, aud, exp, scope; token exchange</text>
+  <path d="M952 608.0 L986 608.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="576" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="613.0" text-anchor="middle" font-size="13" fill="#0f172a">authentication</text>
+  <rect x="40" y="650" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="677" font-size="14" font-weight="700" fill="#991b1b">MCP08  Lack of audit and telemetry</text>
+  <text x="56" y="699" font-size="12" fill="#475569">nobody can say who called what</text>
+  <path d="M472 682.0 L506 682.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="650" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="687.0" font-size="14" font-weight="700" fill="#166534">Hash-chained decision log, detections, SIEM</text>
+  <path d="M952 682.0 L986 682.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="650" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="677" text-anchor="middle" font-size="13" fill="#0f172a">secure-operations</text>
+  <text x="1075" y="697" text-anchor="middle" font-size="13" fill="#0f172a">mcp-server</text>
+  <rect x="40" y="724" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="751" font-size="14" font-weight="700" fill="#991b1b">MCP09  Shadow MCP servers</text>
+  <text x="56" y="773" font-size="12" fill="#475569">community servers added to IDE configs</text>
+  <path d="M472 756.0 L506 756.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="724" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="761.0" font-size="14" font-weight="700" fill="#166534">Config discovery vs registry, endpoint policy</text>
+  <path d="M952 756.0 L986 756.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="724" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="761.0" text-anchor="middle" font-size="13" fill="#0f172a">secure-operations</text>
+  <rect x="40" y="798" width="430" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="825" font-size="14" font-weight="700" fill="#991b1b">MCP10  Context injection and over-sharing</text>
+  <text x="56" y="847" font-size="12" fill="#475569">tenant B gets tenant A's cached result</text>
+  <path d="M472 830.0 L506 830.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="510" y="798" width="440" height="64" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="524" y="835.0" font-size="14" font-weight="700" fill="#166534">Per tenant/user/session context, args-only payloads</text>
+  <path d="M952 830.0 L986 830.0" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="990" y="798" width="170" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="835.0" text-anchor="middle" font-size="13" fill="#0f172a">secure-operations</text>
+  <text x="40" y="888" font-size="13" fill="#475569">Red: untrusted input or attacker goal. Green: hard control. Grey: where you practise it. Full table with test names: 04-mcp-security/README.md.</text>
+</svg>

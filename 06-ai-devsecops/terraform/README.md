@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | Basic Terraform (`resource`, `variable`, `plan`); cloud basics (VPC, IAM, object storage); [Module 01](../../01-ai-security-fundamentals/) trust boundaries |
 | **Lab** | [`lab/`](lab/): runs offline, no cloud account and no Terraform install needed |
-| **Maps to** | OWASP LLM02:2025 Sensitive Information Disclosure · OWASP LLM03:2025 Supply Chain · NIST SP 800-218A (SSDF for generative AI) · NIST AI RMF *MANAGE* · CIS AWS Foundations Benchmark |
+| **Maps to** | OWASP LLM02:2026 Sensitive Information Disclosure [LLM02:2025] · OWASP LLM04:2026 Supply Chain [LLM03:2025] · NIST SP 800-218A (SSDF for generative AI) · NIST AI RMF *MANAGE* · CIS AWS Foundations Benchmark |
 
 ---
 
@@ -431,7 +431,7 @@ A model file is executable in practice. Pickle-based formats run code on load, a
 
 - Terraform, *JSON Output Format* (plan representation): https://developer.hashicorp.com/terraform/internals/json-format
 - NIST SP 800-218A, *Secure Software Development Practices for Generative AI and Dual-Use Foundation Models* (2024): https://csrc.nist.gov/pubs/sp/800/218/a/final
-- OWASP Top 10 for LLM Applications 2025: https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications (2026 list; numbers changed from 2025): https://genai.owasp.org/llm-top-10/
 - AWS, *Security best practices for Amazon S3*: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html
 - AWS, *Configure OpenID Connect in AWS* (GitHub docs): https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 - Oligo Security, *ShadowRay* research (March 2024), Oligo blog: https://www.oligo.security/blog

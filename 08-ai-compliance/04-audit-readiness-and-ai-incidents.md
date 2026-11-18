@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Lesson 03](03-control-mapping-and-evidence.md) (evidence), [Module 07](../07-ai-governance/) (register, risk register), [`00-program/templates/ai-incident-playbook.md`](../00-program/templates/ai-incident-playbook.md) |
 | **Lab** | [`lab/incident_clock.py`](lab/incident_clock.py), `evidence_checker.py`, `demo.py` section 4 |
-| **Maps to** | EU AI Act Art 11–13, 18–19, 26(5)–(6), 72–73 · GDPR Art 33–34 · CERT-In Directions (28 April 2022) · India DPDP Act s.8(6) · ISO/IEC 42001 clause 9.2 (internal audit), Annex A.8 · NIST AI RMF MANAGE 4 · SOC 2 CC7.3–CC7.4 |
+| **Maps to** | EU AI Act Art 11–13, 18–19, 26(5)–(6), 72–73 · GDPR Art 33–34 · CERT-In Directions (28 April 2022) · India DPDP Act s.8(6) · ISO/IEC 42001 clause 9.2 (internal audit), Annex A.8 · NIST AI RMF MANAGE 4 · SOC 2 CC7.3–CC7.4 · CERT-In AI Security Auditing Guidelines domain 8.6 (deep dive in [Lesson 06](06-cert-in-ai-security-audit.md)) · triage input from [Module 07 Lesson 06](../07-ai-governance/06-model-approval-lifecycle-and-ai-incidents.md) |
 
 > **Educational, not legal advice.** Reporting duties have conditions and exceptions that the lab does not model. Use your organization's incident policy and counsel; check the current texts, especially the DPDP Rules.
 
@@ -90,7 +90,7 @@ Some of these are also **legally reportable**:
 | EU AI Act Art 55 | Serious incident with a systemic-risk GPAI model | GPAI provider → AI Office | Without undue delay |
 | GDPR Art 33–34 | Personal data breach | Controller → supervisory authority; and people if high risk | 72 hours (if risk to people) |
 | CERT-In Directions | Listed types of cyber incident | Organization → CERT-In | 6 hours |
-| DPDP Act s.8(6) + Rules | Personal data breach | Data Fiduciary → Data Protection Board and each affected Data Principal | Set by the Rules; check commencement |
+| DPDP Act s.8(6) + Rules | Personal data breach | Data Fiduciary → Data Protection Board and each affected Data Principal | Without delay; Rules add a detailed report to the Board within 72 hours. Breach rules expected to commence around 13 May 2027: verify |
 
 ![AI incident: one event, several clocks](../images/08-ai-incident-reporting-flow.svg)
 
@@ -146,11 +146,15 @@ Scenario: prompt injection made the CV-screening product leak applicant data (EU
 Aware at 2026-11-14 09:00.
   CERT-In    notify CERT-In                                          by 2026-11-14 15:00 (Directions 28 Apr 2022: 6 hours)
   GDPR       notify lead supervisory authority                       by 2026-11-17 09:00 (Art 33: 72 hours)
-  EU AI Act  notify market surveillance authority                    by 2026-11-29 09:00 (Art 73: serious incident -> 15 days)
-  DPDP Act   notify Data Protection Board + affected Data Principals without delay       (s.8(6) + DPDP Rules 2025: check commencement and current timelines)
+  EU AI Act  notify market surveillance authority                    by 2026-11-29 09:00 (Art 73: serious incident -> 15 days; practice only: Art 73 applies from 2027-12-02)
+  DPDP Act   notify Data Protection Board + affected Data Principals without delay       (s.8(6); Rules breach duties not yet commenced (expected ~2027-05-13))
 ```
 
-Six hours is the first deadline. Is this an AI Act "serious incident" at all? A data leak may infringe fundamental-rights obligations (privacy, non-discrimination), but that is a legal judgment. The engine assumes yes; your triage must decide.
+Six hours is the first deadline. Two clocks are not binding yet on this date: the DPDP Rules' breach duties (expected around May 2027) and Art 73 for an Annex III system (from 2 December 2027 after the Digital Omnibus). The lab still shows them so your runbook is ready; for a real incident before those dates, follow the duties in force (and contracts or customer commitments that may ask for more).
+
+Where do the input flags come from? From triage: Module 07's [`incident_triage.py`](../07-ai-governance/lab/incident_triage.py) outputs the same flag names (`personal_data_breach`, `eu_personal_data`, `india_reportable_cyber_incident`, `eu_serious_incident`...). Triage by impact first, then start the clocks.
+
+Six hours is still the first deadline. Is this an AI Act "serious incident" at all? A data leak may infringe fundamental-rights obligations (privacy, non-discrimination), but that is a legal judgment. The engine assumes yes; your triage must decide.
 
 ### Step 2: Read the clock rules and tests
 

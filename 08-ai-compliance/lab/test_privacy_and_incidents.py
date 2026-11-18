@@ -103,3 +103,25 @@ def test_breach_unlikely_to_risk_people_does_not_start_the_gdpr_clock():
 
 def test_no_incident_flags_means_no_clocks():
     assert clock.reporting_clocks({"aware_at": AWARE}) == []
+
+
+def test_dpdp_rules_clock_is_phased():
+    # DPDP Rules 2025 were notified in Nov 2025; breach-reporting duties commence ~18 months later.
+    before = clock.reporting_clocks({"aware_at": AWARE, "personal_data_breach": True,
+                                     "india_personal_data": True})
+    assert [c.regime for c in before] == ["DPDP Act"] and "not yet commenced" in before[0].basis
+    later = datetime(2027, 6, 1, 9, 0)
+    after = clock.reporting_clocks({"aware_at": later, "personal_data_breach": True,
+                                    "india_personal_data": True})
+    rules = next(c for c in after if c.regime == "DPDP Rules")
+    assert rules.deadline == later + timedelta(hours=72)
+
+
+def test_ai_act_clock_is_practice_only_before_the_omnibus_high_risk_date():
+    base = {"eu_high_risk_provider": True, "eu_serious_incident": True}
+    before = clock.reporting_clocks({**base, "aware_at": AWARE})[0]
+    assert "practice only" in before.basis and "2027-12-02" in before.basis
+    after = clock.reporting_clocks({**base, "aware_at": datetime(2028, 1, 10, 9, 0)})[0]
+    assert "practice only" not in after.basis
+    product = clock.reporting_clocks({**base, "aware_at": datetime(2028, 1, 10, 9, 0), "annex_i_product": True})[0]
+    assert "2028-08-02" in product.basis

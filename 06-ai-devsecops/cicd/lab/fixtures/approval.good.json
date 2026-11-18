@@ -1,0 +1,11 @@
+{
+  "run_id": 4242,
+  "environment": "production",
+  "state": "approved",
+  "triggered_by": "lee.dev",
+  "commit_authors": ["lee.dev"],
+  "approved_by": "priya.sec",
+  "approved_at": "2026-11-18T09:40:00Z",
+  "digest": "sha256:4f9c2a7e1b3d5c6a8e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d",
+  "comment": "Eval report and AI-BOM reviewed; rollback plan in ticket CHG-1234 (lab)."
+}

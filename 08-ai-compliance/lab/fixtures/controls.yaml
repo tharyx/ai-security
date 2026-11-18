@@ -2,6 +2,9 @@
 # EDUCATIONAL: mappings are simplified and at article / clause / category level.
 # Verify every reference against the current official texts (and your licensed ISO copies)
 # before using it in a real audit. ISO 42001 is mapped to Annex A *areas*, not control numbers.
+# cert_in_ai = CERT-In AI Security Auditing Guidelines v1.0 (Nov 2026): section numbers of its core audit
+# domains (8.x), risk tiering (5) and contestability (11). Domain 8.4 (ethics, bias and fairness) has no
+# control here on purpose: it is an exercise in Lesson 06.
 # An empty list means "this framework has no direct requirement here" - that is a finding too.
 
 - id: CTL-INV
@@ -13,6 +16,7 @@
     nist_ai_rmf: ["GOVERN 1.6 AI system inventory"]
     soc2: []
     iso_27001: ["A.5.9 inventory of information and other associated assets"]
+    cert_in_ai: ["8.1 governance and accountability"]
   evidence:
     - {type: register_export, max_age_days: 31, automated: true}
 
@@ -25,6 +29,7 @@
     nist_ai_rmf: ["MAP 5 impacts characterized", "MANAGE 1 risks prioritized and treated"]
     soc2: ["CC3.2 risk identification and analysis"]
     iso_27001: ["Clause 6.1.2 risk assessment"]
+    cert_in_ai: ["5 risk tiering and AI impact assessment (AIIA)", "8.3 model risk management"]
   evidence:
     - {type: risk_register_export, max_age_days: 92}
     - {type: risk_review_minutes, max_age_days: 92}
@@ -38,6 +43,7 @@
     nist_ai_rmf: ["MAP 3 human oversight defined"]
     soc2: []
     iso_27001: []
+    cert_in_ai: ["8.8 human oversight and decision accountability", "11 contestability and decision review"]
   evidence:
     - {type: oversight_procedure, max_age_days: 365}
     - {type: override_log_sample, max_age_days: 92, automated: true}
@@ -51,6 +57,7 @@
     nist_ai_rmf: ["MANAGE 4 post-deployment monitoring"]
     soc2: ["CC7.2 monitoring for anomalies"]
     iso_27001: ["A.8.15 logging", "A.8.16 monitoring activities"]
+    cert_in_ai: ["8.6 security, adversarial resilience and incident reporting", "8.7 monitoring, drift and validation"]
   evidence:
     - {type: logging_config_export, max_age_days: 31, automated: true}
     - {type: retention_test_result, max_age_days: 365, automated: true}
@@ -64,6 +71,7 @@
     nist_ai_rmf: ["MEASURE 2 trustworthy characteristics evaluated"]
     soc2: ["CC8.1 change management"]
     iso_27001: ["A.8.29 security testing in development and acceptance"]
+    cert_in_ai: ["8.6 security, adversarial resilience and incident reporting", "8.3 model risk management"]
   evidence:
     - {type: ci_test_report, max_age_days: 31, automated: true}
 
@@ -76,6 +84,7 @@
     nist_ai_rmf: ["MEASURE 2.7 security and resilience"]
     soc2: ["CC6.1 logical access"]
     iso_27001: ["A.5.15 access control"]
+    cert_in_ai: ["8.6 security, adversarial resilience and incident reporting"]
   evidence:
     - {type: iam_policy_export, max_age_days: 31, automated: true}
     - {type: access_review_signoff, max_age_days: 92}
@@ -89,6 +98,7 @@
     nist_ai_rmf: ["GOVERN 6 third-party risk", "MANAGE 3 third-party risks managed"]
     soc2: ["CC9.2 vendor and business partner risk"]
     iso_27001: ["A.5.19 supplier relationships"]
+    cert_in_ai: ["8.9 third-party and AI supply-chain assurance"]
   evidence:
     - {type: vendor_assessment, max_age_days: 365}
 
@@ -101,6 +111,7 @@
     nist_ai_rmf: ["MANAGE 4 incident response and recovery"]
     soc2: ["CC7.3 incident evaluation", "CC7.4 incident response"]
     iso_27001: ["A.5.24 incident management planning", "A.5.26 response to incidents"]
+    cert_in_ai: ["8.6 security, adversarial resilience and incident reporting"]
   evidence:
     - {type: incident_runbook, max_age_days: 365}
     - {type: tabletop_exercise_report, max_age_days: 365}
@@ -114,6 +125,7 @@
     nist_ai_rmf: ["MAP 2 system knowledge limits documented"]
     soc2: []
     iso_27001: []
+    cert_in_ai: ["8.5 explainability and transparency"]
   evidence:
     - {type: system_card, max_age_days: 180}
 
@@ -126,6 +138,7 @@
     nist_ai_rmf: ["MEASURE 2.10 privacy risk examined"]
     soc2: ["Privacy criteria (P series)"]
     iso_27001: ["A.5.34 privacy and protection of PII"]
+    cert_in_ai: ["8.2 data lifecycle, quality and privacy"]
   evidence:
     - {type: dpia, max_age_days: 365}
     - {type: erasure_test_receipt, max_age_days: 92, automated: true}

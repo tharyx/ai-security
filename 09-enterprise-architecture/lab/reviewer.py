@@ -101,13 +101,19 @@ class Component(Strict):
     immutable: bool = False
     retention_days: int = 30
     exports_to_siem: bool = False
+    # Gateway settings. Unspecified routing = any model name is passed through.
+    model_routing: Literal["allowlist", "open"] = "open"
+    cache_scope: Literal["per_tenant", "global", "none"] = "none"
+    # How an agent or tool gateway authenticates to downstream services.
+    downstream_auth: Literal["token_exchange", "own_identity", "passthrough"] = "passthrough"
 
 
 class Identity(Strict):
     id: str
-    kind: Literal["workload", "ci", "human"] = "workload"
+    kind: Literal["workload", "agent", "mcp_server", "ci", "human"] = "workload"
     credential: Literal["short_lived", "static_key"] = "static_key"
     permissions: list[str] = []
+    owner: str | None = None  # accountable human or team for this identity
 
 
 class Key(Strict):
@@ -141,6 +147,13 @@ class RiskException(Strict):
     expires: date
 
 
+class Assessment(Strict):
+    """How the running platform is re-assessed after go-live (continuous assessment)."""
+    redteam_schedule: Literal["daily", "weekly", "monthly", "none"] = "none"
+    redteam_on_change: bool = False  # model, prompt or tool change re-runs the attack suite
+    drift_detection: bool = False    # declared design is compared with the observed system
+
+
 class Architecture(Strict):
     name: str
     cloud: Literal["aws", "azure", "gcp"]
@@ -154,6 +167,7 @@ class Architecture(Strict):
     logging: Logging = Logging()
     flows: list[Flow] = []
     exceptions: list[RiskException] = []
+    assessment: Assessment = Assessment()
 
     @model_validator(mode="after")
     def _references_must_resolve(self) -> "Architecture":
@@ -200,7 +214,9 @@ class Control(Strict):
     severity: Literal["critical", "high", "medium", "low"]
     responsibility: Literal["customer", "shared", "provider"]
     check: str
-    owasp_llm: list[str] = []
+    owasp_llm: list[str] = []  # OWASP Top 10 for LLM Applications, 2026 numbering
+    owasp_asi: list[str] = []  # OWASP Top 10 for Agentic Applications 2026
+    owasp_mcp: list[str] = []  # OWASP MCP Top 10 (beta)
     cis_v8: list[int] = []
     outcome: str
     clouds: dict[str, CloudMapping]
@@ -296,6 +312,26 @@ def user_authentication(a: Architecture) -> CheckResult:
         return CheckResult("fail", "no AI gateway: nowhere to authenticate users")
     bad = [f"{g.id} user_auth={g.user_auth}" for g in gateways if g.user_auth not in ("oidc", "saml")]
     return _result(bad)
+
+
+@check
+def identity_ownership(a: Architecture) -> CheckResult:
+    """Non-human identities (workloads, agents, MCP servers, CI) need an accountable owner."""
+    nhis = [i for i in a.identities if i.kind != "human"]
+    if not nhis:
+        return CheckResult("n/a", "no non-human identities declared")
+    orphans = [i.id for i in nhis if not (i.owner and i.owner.strip())]
+    return _result([f"no owner: {', '.join(orphans)}"] if orphans else [])
+
+
+@check
+def no_token_passthrough(a: Architecture) -> CheckResult:
+    """Agents and tool gateways must not forward the user's token (confused deputy, MCP01)."""
+    actors = a.of_type("agent_runtime", "mcp_gateway")
+    if not actors:
+        return CheckResult("n/a", "no agents or tool gateways")
+    return _result([f"{c.id} forwards the user's token (downstream_auth=passthrough)"
+                    for c in actors if c.downstream_auth == "passthrough"])
 
 
 @check
@@ -431,6 +467,26 @@ def output_guardrails(a: Architecture) -> CheckResult:
 
 
 @check
+def model_routing(a: Architecture) -> CheckResult:
+    gws = a.of_type("ai_gateway")
+    if not gws:
+        return CheckResult("fail", "no AI gateway to route models")
+    return _result([f"{g.id} model_routing={g.model_routing} (any model name is passed through)"
+                    for g in gws if g.model_routing != "allowlist"])
+
+
+@check
+def cache_isolation(a: Architecture) -> CheckResult:
+    gws = a.of_type("ai_gateway")
+    if not gws:
+        return CheckResult("fail", "no AI gateway")
+    if all(g.cache_scope == "none" for g in gws):
+        return CheckResult("n/a", "no response cache")
+    return _result([f"{g.id} cache_scope=global (answers can cross tenants)"
+                    for g in gws if g.cache_scope == "global"])
+
+
+@check
 def tool_gateway(a: Architecture) -> CheckResult:
     tools, agents = a.of_type("tool"), a.of_type("agent_runtime")
     if not tools and not agents:
@@ -515,6 +571,18 @@ def abuse_limits(a: Architecture) -> CheckResult:
             problems.append(f"{g.id} has no rate limits")
         if not g.token_budget:
             problems.append(f"{g.id} has no token budget")
+    return _result(problems)
+
+
+@check
+def continuous_assessment(a: Architecture) -> CheckResult:
+    s, problems = a.assessment, []
+    if s.redteam_schedule == "none":
+        problems.append("no scheduled red-team run")
+    if not s.redteam_on_change:
+        problems.append("model/prompt/tool changes do not re-run the attack suite")
+    if not s.drift_detection:
+        problems.append("no drift detection between design and running system")
     return _result(problems)
 
 

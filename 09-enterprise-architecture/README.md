@@ -22,8 +22,11 @@ Most real AI incidents so far (leaked keys, public databases, broken tenant isol
 | 02 | [AWS AI security: Bedrock and SageMaker](02-aws-ai-security.md) | 25 | Secure Bedrock with IAM, PrivateLink, KMS, CloudTrail, Bedrock Guardrails |
 | 03 | [Azure AI security: AI Foundry and Azure OpenAI](03-azure-ai-security.md) | 26 | Secure Azure OpenAI with Entra ID, Private Endpoints, Key Vault, Azure Monitor, Prompt Shields |
 | 04 | [Google Cloud AI security: Vertex AI](04-gcp-ai-security.md) | 27 | Secure Vertex AI with service accounts, VPC-SC, PSC, CMEK, audit logs, Model Armor |
-| 05 | [Multi-cloud control matrix, shared responsibility and ADRs](05-multi-cloud-control-matrix-and-shared-responsibility.md) | 28 | Prove control equivalence, explain shared responsibility, write ADRs, run a design review |
-| Lab | [`lab/`](lab/): architecture-as-code reviewer | 25–28 | Review YAML designs against a 21-control matrix; find gaps with severity and per-cloud fixes |
+| 05 | [Multi-cloud control matrix, shared responsibility and ADRs](05-multi-cloud-control-matrix-and-shared-responsibility.md) | 28 | Prove control equivalence, explain shared responsibility, write ADRs, run a design review with the architect's questions |
+| 06 | [Secure LLM / AI gateway](06-secure-llm-ai-gateway.md) | 25–26 | Build and attack a gateway: authN, routing by data class, rate limits, budgets, DLP, guardrail hooks, cache isolation, safe failover, redacted logs |
+| 07 | [Centralized AI IAM and zero trust](07-centralized-ai-iam-and-zero-trust.md) | 26–27 | Design one identity plane for users, apps, agents and MCP servers; apply NIST SP 800-207A multi-tier policies; delegation without token passthrough |
+| 08 | [Continuous assessment and AI SecOps](08-continuous-assessment-and-ai-secops.md) | 28 | Run drift detection, posture trends, exception alerts and assessment cadence; measure attack surface minutes; hand off to the SOC |
+| Lab | [`lab/`](lab/): reviewer, gateway and posture labs | 25–28 | Review YAML designs against a 26-control matrix; attack a gateway; detect drift |
 
 ## Module architecture
 
@@ -51,20 +54,28 @@ Most real AI incidents so far (leaked keys, public databases, broken tenant isol
 | **Architecture-as-code** | A machine-readable description of components, identities and data flows that tools can check |
 | **Time-bound exception** | A risk acceptance with approver and expiry date; never for critical controls |
 | **Drift** | When the running system no longer matches the approved design |
+| **Data class** | The sensitivity label of a request (public, internal, confidential) that decides which models may receive it |
+| **Token exchange (on-behalf-of)** | Swapping a user's token for a new, short-lived, audience-bound token that names both the agent and the user (RFC 8693) |
+| **Token passthrough** | Forwarding the user's own token to a downstream service; forbidden for agents and MCP servers |
+| **Non-human identity (NHI)** | Any identity that is not a person: workloads, pipelines, agents, MCP servers, API keys |
+| **Multi-tier policy** | Network-tier rules (subnets, ports) plus identity-tier rules (who may call what), as in NIST SP 800-207A |
+| **AI-SPM** | AI security posture management: continuous discovery and configuration assessment of AI assets |
+| **Attack surface minutes** | Time from a weakness becoming exploitable until controls contain it |
 
 ## How the lessons connect
 
 - **Lesson 01** gives the cloud-neutral blueprint and the invariants. Every later lesson implements the same blueprint.
 - **Lessons 02–04** implement it on each cloud. Use the **same** control IDs from the matrix in all three, so your notes line up.
 - **Lesson 05** joins them: the matrix proves equivalence, the shared-responsibility map says who owns each control, ADRs record choices, and the checklist ends in a gate decision.
-- The **lab** runs through all five lessons: one reviewer, one matrix, five fixtures (vulnerable, three secure clouds, one drifted design with exceptions).
+- **Lesson 06** zooms into the gateway block, **lesson 07** into the identity plane, and **lesson 08** turns the one-time review into a continuous loop that feeds the SOC.
+- The **lab** runs through all eight lessons: one reviewer, one matrix, five fixtures (vulnerable, three secure clouds, one drifted design with exceptions), a secure AI gateway, and a posture job.
 - **Next:** [Module 10 (capstone)](../10-capstone-project/) uses this platform as the base for the secure AI operations assistant.
 
 ## Lab at a glance
 
 ```text
 lab/
-├── control_matrix.yaml        # 21 controls x (AWS, Azure, GCP) with evidence and OWASP/CIS mappings
+├── control_matrix.yaml        # 26 controls x (AWS, Azure, GCP) with evidence and OWASP LLM 2026 / ASI / MCP / CIS mappings
 ├── reviewer.py                # strict schema, attribute checks, graph checks, exceptions, CLI + CSV
 ├── architectures/
 │   ├── vulnerable_aws.yaml    # the hackathon build: 17 VULN comments
@@ -73,14 +84,25 @@ lab/
 │   ├── secure_gcp.yaml
 │   └── drifted_gcp.yaml       # six months later: drift + valid / expired / rejected exceptions
 ├── demo.py                    # scorecard: every control x every design
-├── test_control_matrix.py     # the matrix maps every control to all three clouds
-└── test_reviewer.py           # attack-style tests + mutation tests (break one control, catch exactly it)
+├── test_control_matrix.py     # the matrix maps every control to all three clouds; OWASP ids are valid
+├── test_reviewer.py           # attack-style tests + mutation tests (break one control, catch exactly it)
+├── posture.py / assess.py     # continuous assessment: drift, posture trend, exceptions, cadence (lesson 08)
+├── test_posture.py
+└── gateway/                   # lesson 06: vulnerable_gateway.py, ai_gateway.py, attacks.py, demo.py, test_ai_gateway.py
 ```
 
 ```powershell
 python 09-enterprise-architecture/lab/demo.py
-python -m pytest 09-enterprise-architecture
+python 09-enterprise-architecture/lab/gateway/demo.py
+python 09-enterprise-architecture/lab/assess.py
+python -m pytest 09-enterprise-architecture        # 271 tests
 ```
+
+![Secure AI gateway pipeline](../images/09-secure-ai-gateway-pipeline.svg)
+
+![Centralized AI identity and zero trust](../images/09-centralized-ai-iam-zero-trust.svg)
+
+![Continuous assessment loop](../images/09-continuous-assessment-loop.svg)
 
 ![Architecture-as-code review pipeline](../images/09-architecture-as-code-review.svg)
 
@@ -149,9 +171,31 @@ Gateway logs (user, tenant, model, tokens, decision, correlation ID), guardrail 
 Because the hard parts (identity, tenant isolation, egress, tool approval, logging) are the same for every AI feature and are easy to get subtly wrong. Building them once in the platform makes them consistent, testable and auditable, lets product teams move faster, and gives us one place to react when a new attack appears. Product teams still own their prompts, data and use-case risks.
 </details>
 
+<details><summary><b>Q11. Design the identity model for an agent platform with thousands of agents.</b></summary>
+
+Identities are issued only through a pipeline tied to the AI inventory (owner, purpose, environment, review date), with attested short-lived credentials and no ambient credentials by default. Agents act for users through token exchange; tools receive audience-bound tokens, never the user's token. mTLS with identity-tier rules between services, network-tier rules underneath. Measure coverage: share on short-lived identity, median credential lifetime, identities without owners (target zero). Reviewer controls IAM-01..IAM-06 check the design; lesson 07.
+</details>
+
+<details><summary><b>Q12. A stolen refresh token is used from a residential proxy to call your AI APIs. How do you detect and prevent this?</b></summary>
+
+Detect on context mismatch at refresh (device, client, network and TLS fingerprint against the issuing session), not only on geography. Prevent with sender-constrained tokens (DPoP or mTLS-bound) so possession alone is not enough, short access-token lifetimes and managed devices for sensitive apps. Contain by revoking sessions and treating every token on the infected device as compromised. At the gateway, per-caller budgets limit the damage meanwhile.
+</details>
+
+<details><summary><b>Q13. What belongs in an AI gateway, and what does not?</b></summary>
+
+In: authentication, schema and size checks, rate limits, token budgets, DLP, guardrail hooks, routing by data class, cache scoping, safe failover, redacted logging. Not in: business authorization for tools (the broker and PDP), retrieval ACLs (the RAG service), and agent approvals. The gateway is the front door, not the whole house (lesson 06).
+</details>
+
+<details><summary><b>Q14. How do you know the platform is still secure six months after the design review?</b></summary>
+
+Continuous assessment: drift detection between the approved architecture file and the observed system, scheduled reviewer and red-team runs with a posture trend, change-triggered tests, alerts before exceptions expire, and metrics such as attack surface minutes. Regressions page an owner (lesson 08).
+</details>
+
 ## References
 
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (verify the current list at the source), https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications 2026, https://genai.owasp.org/ · OWASP MCP Top 10 (beta), https://owasp.org/www-project-mcp-top-10/
+- NIST SP 800-207A, *Zero Trust Architecture Model for Access Control in Cloud-Native Applications in Multi-Cloud Environments*, https://csrc.nist.gov/pubs/sp/800/207/a/final
 - NIST AI 600-1, *Generative AI Profile*, https://doi.org/10.6028/NIST.AI.600-1
 - Google Secure AI Framework (SAIF), https://saif.google/
 - AWS Generative AI Security Scoping Matrix, https://aws.amazon.com/ai/generative-ai/security/scoping-matrix/
@@ -159,6 +203,35 @@ Because the hard parts (identity, tenant isolation, egress, tool approval, loggi
 - Google Cloud shared responsibility and shared fate, https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate
 - MITRE ATLAS, https://atlas.mitre.org/
 - Program files: [assessment rubric](../00-program/assessment-rubric.md) · [portfolio and interview guide](../00-program/portfolio-and-interview-guide.md) · [templates](../00-program/templates/)
+
+
+## Roadmap coverage
+
+| Roadmap topic (phase 9 and domain A) | Where it is covered |
+|---|---|
+| Enterprise AI security architecture | [Lesson 01](01-enterprise-ai-reference-architecture.md) (blocks, invariants, seven design principles) |
+| Cloud AI security (Bedrock, Azure AI, Vertex) | Lessons [02](02-aws-ai-security.md), [03](03-azure-ai-security.md), [04](04-gcp-ai-security.md); matrix in [05](05-multi-cloud-control-matrix-and-shared-responsibility.md) |
+| Secure LLM gateway | [Lesson 06](06-secure-llm-ai-gateway.md) + [`lab/gateway/`](lab/gateway/); controls GW-01, GW-02, OPS-01 |
+| Centralized AI IAM | [Lesson 07](07-centralized-ai-iam-and-zero-trust.md); controls IAM-01..IAM-06 |
+| RAG and MCP architecture; agent controls | Lesson 01 blocks; controls DATA-03, TOOL-01, AGT-01, AGT-02; Modules [03](../03-rag-security/)–[05](../05-agent-security/) |
+| Continuous AI security assessment | [Lesson 08](08-continuous-assessment-and-ai-secops.md) + `lab/posture.py`, `lab/assess.py`; control OPS-02; `drifted_gcp.yaml` |
+| SecOps and IR | Lesson 08 section 2.5; [Module 10 lessons 03 and 05](../10-capstone-project/) |
+| Domain A build: IAM, secrets, network isolation, logging, encryption, runtime protection | Lesson 01 section 2.7 (one control family each) |
+| API security (authN/Z, rate limits) | Lesson 06 sections 2.2 and 2.7 |
+| Network (isolation, egress, service identity) | NET-01..NET-04; lesson 07 (multi-tier policies) |
+| Capstone layers (user access through compliance) | Lesson 01 section 2.8 |
+| OWASP LLM 2026, Agentic (ASI) and MCP Top 10 mappings | `owasp_llm` / `owasp_asi` / `owasp_mcp` in [`lab/control_matrix.yaml`](lab/control_matrix.yaml) |
+
+## Further reading from your library
+
+- **NIST SP 800-207A, Zero Trust Architecture Model for Access Control in Cloud-Native Applications in Multi-Cloud Environments:** read the identity-based segmentation requirements, the multi-tier policy section and the monitoring framework (lessons 07 and 08).
+- **AI Security Architecture Study Guide (OWASP LLM, Agentic and MCP Top 10 with a cross-cutting model):** read Part 4: the seven design principles, the reference layers, the refund-agent walk-through and the architect's review checklist (lessons 01 and 05).
+- **Securing the Agentic Cloud (2026 edition):** read the chapters on detection at machine speed (attack surface minutes, five readiness domains, layered response), zero trust for agents (agent lifecycle) and identity for agents ("three-body problem") (lessons 07 and 08).
+- **End-to-End API Security:** read the API gateway pattern, access control options and rate limiting (lesson 06).
+- **API Security Testing Handbook:** use the chapters on authentication, JWT, BOLA/IDOR, mass assignment and rate limiting as a test plan for your gateway (lesson 06).
+- **AI Security pilot exam study guide (ISC2-style, community-written):** read Domain 4, Secure AI Architecture, Engineering and IAM, as a self-check of lessons 01, 06 and 07.
+- **IAM & Zero Trust: 30 interview scenarios:** practice the workload identity, secretless, token theft, cloud entitlement and identity detection scenarios (lesson 07 interview questions).
+- **AI Cybersecurity Roadmap 2026–2030:** skim the yearly themes, the staged autonomy levels and the "AI security control plane" (lesson 08 outlook).
 
 ---
 

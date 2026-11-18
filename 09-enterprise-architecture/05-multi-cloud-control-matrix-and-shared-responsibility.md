@@ -54,13 +54,13 @@ So the honest statement is **"equivalent outcome, different mechanisms, with the
 
 ### 2.3 The control matrix as code
 
-The lab's [`control_matrix.yaml`](lab/control_matrix.yaml) has 21 controls in seven families. Each row has:
+The lab's [`control_matrix.yaml`](lab/control_matrix.yaml) has 26 controls in eight families (identity, network, data, guardrails, gateway, tools-agents, logging, operations). Each row has:
 
 - `id`, `family`, `title`, `severity`,
 - `outcome`: the cloud-neutral statement,
 - `responsibility`: `customer`, `shared` or `provider`,
 - `check`: the reviewer function that tests an architecture file,
-- `owasp_llm` and `cis_v8` mappings,
+- `owasp_llm` (OWASP Top 10 for LLM Applications **2026** numbering), `owasp_asi` (OWASP Top 10 for Agentic Applications 2026), `owasp_mcp` (OWASP MCP Top 10, beta) and `cis_v8` mappings. A test checks that every id is a valid id of its list,
 - `clouds.aws|azure|gcp.services` and `.evidence`: how to deliver it and what proof an auditor wants.
 
 Because it is code, it has **tests** ([`test_control_matrix.py`](lab/test_control_matrix.py)): every control must map to all three clouds, have evidence, have an automated check, and every check must belong to exactly one control. The matrix can never quietly lose a cloud or a check.
@@ -146,6 +146,8 @@ Use it in every AI design review. Each line maps to a control id so findings lan
 | Identity | Do users sign in with enterprise SSO, and is the tenant taken from the token? | IAM-04 |
 | Identity | Are there any static keys (cloud keys, model API keys, SA keys)? | IAM-01 |
 | Identity | Does each component have its own least-privilege identity? | IAM-02, IAM-03 |
+| Identity | Does every non-human identity (agent, MCP server, pipeline) have a named owner? | IAM-05 |
+| Identity | Do agents and tool gateways use their own identity or token exchange, never the user's token? | IAM-06 |
 | Network | Can anything reach the model, index, agent or tools without the gateway? | NET-04 |
 | Network | Are model endpoints and data stores private, with the public door closed? | NET-01, NET-02 |
 | Network | Can agents and tools reach only allowlisted destinations? | NET-03 |
@@ -153,6 +155,8 @@ Use it in every AI design review. Each line maps to a control id so findings lan
 | Data | Are confidential stores on customer-managed keys with rotation? | DATA-01, DATA-02 |
 | Data | Have we recorded the provider's retention, caching and training terms? | DATA-04 |
 | Guardrails | Are input and output screened, and are the results logged? | GR-01, GR-02 |
+| Gateway | Does the gateway route only to approved models per data class, also during failover? | GW-01 |
+| Gateway | Are response and semantic caches keyed by tenant? | GW-02 |
 | Tools/agents | Is there one tool gateway with a registry, schemas and tenant checks? | TOOL-01 |
 | Tools/agents | Do writes need a human who sees the exact action? | AGT-01 |
 | Tools/agents | Are there step and cost limits and a tested kill switch? | AGT-02 |
@@ -160,9 +164,29 @@ Use it in every AI design review. Each line maps to a control id so findings lan
 | Logging | Are logs redacted, immutable and kept at least a year? | LOG-02 |
 | Operations | Are there per-user/tenant quotas and budget alerts? | OPS-01 |
 | Operations | Are remaining secrets in a secrets manager and rotated? | SEC-01 |
+| Operations | Does the red-team suite run on every change and on a schedule, and is drift detected? | OPS-02 |
 | Governance | Is the use case in the AI inventory, with a risk owner? | Module 07 |
 | Governance | Are exceptions dated, owned and below critical? | reviewer exceptions |
 | Decisions | Is there an ADR for the provider choice, isolation model and logging of content? | ADRs |
+
+#### The architect's questions (add them to every AI design review)
+
+The checklist above is about **controls**. These twelve questions are about **design reasoning**. They are adapted, in our own words, from the architect review checklist in the *AI Security Architecture Study Guide* (see "Further reading" in the module README). A reviewer should be able to answer each one from the design pack, not from memory.
+
+| # | Question | Good answer looks like | Links to |
+|---|---|---|---|
+| 1 | Trifecta: does any single agent session have private data, untrusted input **and** an outbound channel? | One leg is removed, or a human gate sits on the outbound action | NET-03, AGT-01 |
+| 2 | Where is every authorization decision made? | In code (PDP / broker), with the **end user's** identity, never by the model | DATA-03, TOOL-01 |
+| 3 | Can you list every source that enters the context and its trust level? | A context trust map: system, user, internal-verified, external-untrusted | GR-01 |
+| 4 | For each tool: narrowest scope, who approves it, is its definition pinned? | Registry entry with owner, scope, side-effect class, hash of the description | TOOL-01 ([Module 04](../04-mcp-security/)) |
+| 5 | Does each agent have its own identity, and do downstream systems see the delegated user? | Agent identity + token exchange; audience-bound tokens | IAM-03, IAM-06 |
+| 6 | Blast radius: if this agent is fully compromised, what is the worst outcome? | A short, written answer, and a design change that makes it smaller | AGT-01, AGT-02 |
+| 7 | Do approvers see the real action (not the model's summary), and is approval fatigue managed? | Exact tool, arguments and untrusted sources shown; two people for high risk | AGT-01 |
+| 8 | Is generated code or tool execution sandboxed, with no ambient secrets and restricted egress? | Sandbox per run, no network by default | NET-03 ([Module 05](../05-agent-security/)) |
+| 9 | Are memory and RAG writes validated, scoped per tenant and user, and reversible? | Provenance, TTL, rollback; deletion propagates to embeddings | DATA-03 ([Module 03](../03-rag-security/)) |
+| 10 | Can you trace any action end to end and stop an agent in under a minute? | Correlation IDs across components; a tested kill switch with a drill record | LOG-01, AGT-02 |
+| 11 | Are models, prompts, MCP servers and dependencies inventoried, pinned and verified? | AI-BOM; approved-model routing; signed artifacts | GW-01 ([Module 06](../06-ai-devsecops/)) |
+| 12 | Do automated red-team and regression evaluations gate every model, prompt or tool change? | The suite runs in CI on those changes and on a schedule | OPS-02 |
 
 **Gate decision:** *pass* (no open critical/high), *pass with conditions* (open mediums with dated tickets), or *fail*. Write it down with the reviewer's name and date.
 
@@ -200,7 +224,7 @@ Redirect it to a file (`> matrix.csv`) and open it in a spreadsheet. The YAML st
 python -m pytest 09-enterprise-architecture
 ```
 
-Expected last line: `151 passed` (the time differs per machine). Read [`test_control_matrix.py`](lab/test_control_matrix.py) and [`test_reviewer.py`](lab/test_reviewer.py). Which test would fail if someone deleted the `gcp` mapping of `LOG-01`? Which would fail if someone wrote a new check but forgot to link it to a control?
+Expected last line: `271 passed` (the time differs per machine; the count includes the gateway and posture labs from lessons 06 and 08). Read [`test_control_matrix.py`](lab/test_control_matrix.py) and [`test_reviewer.py`](lab/test_reviewer.py). Which test would fail if someone deleted the `gcp` mapping of `LOG-01`? Which would fail if someone wrote a new check but forgot to link it to a control?
 
 ### Step 3: Break the matrix (predict first)
 
@@ -330,7 +354,7 @@ Generate as much as possible from IaC or cloud APIs (for example from `terraform
 - [ ] My AWS, Azure and GCP designs pass the reviewer (or have only dated, non-critical exceptions).
 - [ ] I can explain three provider differences that change the security outcome.
 - [ ] I wrote at least two ADRs with options, consequences, residual risk, owner and review date.
-- [ ] I ran a design review with the checklist and recorded a gate decision.
+- [ ] I ran a design review with the checklist **and** the twelve architect's questions, and recorded a gate decision.
 - [ ] Week 28 journal entry and the Phase 7 gate in [`00-program/assessment-rubric.md`](../00-program/assessment-rubric.md).
 
 ## 9. References

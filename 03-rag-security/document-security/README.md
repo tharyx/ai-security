@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Module 01](../../01-ai-security-fundamentals/) trust boundaries; [Prompt injection](../../02-llm-security/prompt-injection/) (indirect injection) |
 | **Lab** | [`lab/`](lab/): runs offline, no API key needed |
-| **Maps to** | OWASP LLM04:2025 Data and Model Poisoning · LLM01:2025 Prompt Injection (indirect) · LLM02:2025 Sensitive Information Disclosure · LLM08:2025 Vector and Embedding Weaknesses · NIST AI 600-1 (information integrity, data privacy) |
+| **Maps to** | OWASP LLM05:2026 Data and Model Poisoning (was LLM04:2025) · LLM01:2026 Prompt Injection (indirect) · LLM02:2026 Sensitive Information Disclosure · LLM09:2026 Vector and Embedding Weaknesses (was LLM08:2025) · OWASP Agentic ASI06 Memory & Context Poisoning (when an agent's RAG memory is poisoned) · OWASP GenAI Data Security DSGAI04, DSGAI05, DSGAI07, DSGAI21 · OWASP AI Testing Guide AITG-APP-02, AITG-APP-08 · NIST AI 600-1 (information integrity, data privacy) |
 
 ---
 
@@ -68,6 +68,41 @@ Three ideas to keep in mind:
 | **PII swept in** | HR exports, ticket attachments with phone numbers and IDs | Nobody asked "should this be searchable by everyone?" |
 
 **Poisoning vs indirect injection.** Injection *tells* the model to do something ("say X", "call this tool"). Poisoning *informs* the model with false content and lets normal behavior do the rest. Injection can sometimes be detected; poisoning usually cannot, because it looks like normal text. The main defense against poisoning is **controlling who can write to the corpus** (source trust and review), not content scanning.
+
+### 2.4 Chunking strategies and data classification
+
+Chunking decides what one "unit of retrieval" contains. It is usually tuned for answer quality, but it is also a **security decision**: access checks, classification labels and deletion all work per chunk. The *AI Engineering* book in your library describes five common strategies; here is what each one means for security:
+
+| Strategy | How it splits | Security effect |
+|---|---|---|
+| **Fixed-size** (with overlap) | Every N characters, words or tokens | Easy, but blind to structure: one chunk can mix a public paragraph with a restricted one, and the overlap copies text into two chunks |
+| **Recursive** | By paragraphs/sections first, then smaller if too long | Better: follows the document's own boundaries most of the time |
+| **Document-structure-based** | By headings, sections, fields | Best fit for classification when the source labels sections or fields (HR systems, ticket fields, labeled Office documents) |
+| **Semantic** | Joins sentences while their embeddings stay similar | Boundaries follow meaning, not labels; a restricted sentence on the same topic can join a public chunk |
+| **LLM-based** | Asks a model to cut the text | Sends the full text to a model (a data flow to review); the cut can be influenced by text inside the document |
+
+Rules that make chunking safe:
+
+1. **A chunk never crosses a classification or permission boundary.** Split at section, field or document boundaries first; only then by size.
+2. **Every chunk carries its own label**: the classification of its content, or the *strictest* label of everything in it. Never "the label of the first section".
+3. **Labels propagate to everything derived** from the chunk: vectors, caches, summaries, evaluation sets, fine-tuning data (OWASP DSGAI07 makes this point strongly: classification that stops at the raw data protects nothing once AI processing starts).
+4. **Overlap copies data.** With overlap, text from section A also lives in a chunk of section B. Turn overlap off at classification boundaries.
+5. **Unknown label → don't index** (fail closed), or route to a restricted index.
+
+The [secure HR assistant](../secure-hr-assistant/) shows a fixed-size chunker putting pay data into an `internal` chunk, and a section-based chunker that keeps it out (`test_chunks_follow_sections_and_never_mix_classifications`).
+
+![Classification-aware chunking](../../images/03-classification-aware-chunking.svg)
+
+### 2.5 The OWASP GenAI data-security view of ingestion
+
+The OWASP *GenAI Data Security Risks and Mitigations 2026* document lists data risks that start at ingestion. The ones that matter most here:
+
+| Risk | Ingestion angle | Control in this lesson |
+|---|---|---|
+| DSGAI04 Data, Model & Artifact Poisoning | Malicious or false content enters a trusted corpus | Source registry, review, quarantine, provenance |
+| DSGAI05 Data Integrity & Validation Failures | Files that pass format checks but carry bad content, and import paths (archives, snapshots) that write outside their folder | Magic-byte checks, archive limits, zip-slip checks, sandboxed parsers |
+| DSGAI07 Data Governance, Lifecycle & Classification | Data enters without a label, so no downstream control can act on it; derived copies outlive deletion | Classification at ingestion and label propagation (section 2.4); provenance for deletion |
+| DSGAI21 Disinformation via Data Poisoning | An attacker only needs write access to a source the system trusts | Trust tiers, review of high-impact sources, evaluation (see [retrieval-reranking](../retrieval-reranking/)) |
 
 ---
 
@@ -314,7 +349,12 @@ Source connector, source document ID and version, sha256 of the original file, t
 Detectors have false positives. A legitimate security policy may contain the words "ignore previous instructions" as an example. Quarantine keeps the file, its hash and the reasons, so a reviewer can release it, and the security team keeps evidence of real attacks. Silent drops lose both. Rejection is right for files that are unsafe to parse (wrong type, bombs, path traversal).
 </details>
 
-<details><summary><b>Q14. Explain RAG poisoning to a non-technical executive.</b></summary>
+<details><summary><b>Q14. How does chunking affect classification and access control?</b></summary>
+
+Access checks and labels work per chunk. Fixed-size or semantic chunking can mix a restricted paragraph into a chunk labeled with a lower class, and overlap copies text across chunks. Split at section or field boundaries first, give each chunk the label of its content (or the strictest label it contains), disable overlap across boundaries, and propagate the label to vectors, caches and summaries. An unknown label means "don't index".
+</details>
+
+<details><summary><b>Q15. Explain RAG poisoning to a non-technical executive.</b></summary>
 
 "Our assistant answers questions by reading our documents. If someone can add or change a document, they can change the answers. They don't need to hack the AI. They just need to write a convincing page. So we control which sources the assistant reads, we check new content before it goes live, and every answer shows where it came from."
 </details>
@@ -332,7 +372,9 @@ Detectors have false positives. A legitimate security policy may contain the wor
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM04, LLM08): https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (LLM01, LLM02, LLM05, LLM09; verify the current list at the source): https://genai.owasp.org/llm-top-10/
+- OWASP GenAI Security Project, *GenAI Data Security Risks and Mitigations 2026* (DSGAI04, DSGAI05, DSGAI07, DSGAI21): https://genai.owasp.org/
+- OWASP AI Testing Guide (AITG-APP-02 Indirect Prompt Injection, AITG-APP-08 Embedding Manipulation): https://owasp.org/www-project-ai-testing-guide/
 - Greshake et al., *Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection* (2023): https://arxiv.org/abs/2302.12173
 - Zou et al., *PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models* (2024): https://arxiv.org/abs/2402.07867
 - Johann Rehberger, Embrace The Red blog (ASCII smuggling and Copilot research): https://embracethered.com/blog/

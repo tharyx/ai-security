@@ -1,0 +1,30 @@
+{
+  "_comment": "FICTIONAL advisories for the lab. IDs use the LAB-ADV prefix so they can never be mistaken for real CVEs.",
+  "advisories": [
+    {
+      "id": "LAB-ADV-001", "source": "CVE", "kind": "dependency", "component": "fastserve",
+      "introduced": "1.0.0", "fixed": "1.5.0", "severity": "high", "known_exploited": true,
+      "summary": "Inference server exposes an unauthenticated job-submission endpoint"
+    },
+    {
+      "id": "LAB-ADV-002", "source": "red-team", "kind": "model", "component": "support-llm",
+      "introduced": "3.0.0", "fixed": "3.0.1", "severity": "medium", "known_exploited": false,
+      "summary": "Model follows instructions hidden in markdown tables (jailbreak regression)"
+    },
+    {
+      "id": "LAB-ADV-003", "source": "internal", "kind": "prompt", "component": "prompt:support-system",
+      "introduced": "6", "fixed": "8", "severity": "medium", "known_exploited": false,
+      "summary": "System prompt template includes tool schemas and refund limits (hidden context exposure)"
+    },
+    {
+      "id": "LAB-ADV-004", "source": "vendor", "kind": "dependency", "component": "vectorstore-lite",
+      "introduced": "2.0.0", "fixed": null, "severity": "medium", "known_exploited": false,
+      "summary": "Crafted query can bypass metadata filters; no fixed version yet"
+    },
+    {
+      "id": "LAB-ADV-005", "source": "GHSA", "kind": "dependency", "component": "tokenizer-lib",
+      "introduced": "0.1.0", "fixed": "0.8.0", "severity": "low", "known_exploited": false,
+      "summary": "Excessive memory use on very long inputs"
+    }
+  ]
+}

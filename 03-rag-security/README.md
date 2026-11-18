@@ -1,12 +1,12 @@
 # Module 03: RAG Security
 
-> **Weeks:** 9–12 (Month 3) · **Time:** ~40 hours · **Outcome:** you can design, build and test a multi-tenant RAG system with secure ingestion, a hardened vector store, authorization-aware retrieval, provenance and provable deletion.
+> **Weeks:** 9–12 (Month 3) · **Time:** ~50 hours · **Outcome:** you can design, build and test a multi-tenant RAG system with secure ingestion, classification-aware chunking, a hardened and encrypted vector store, authorization-aware retrieval and reranking, a response gate (DLP, citation validation), audit logging and provable deletion.
 
 | | |
 |---|---|
 | **Prerequisites** | [Module 01](../01-ai-security-fundamentals/) (trust boundaries, embeddings); [Module 02](../02-llm-security/) (prompt injection, output handling) |
-| **Labs** | Three offline labs, no API keys: `python -m pytest 03-rag-security` |
-| **Maps to** | OWASP LLM08:2025 Vector and Embedding Weaknesses · LLM04:2025 Data and Model Poisoning · LLM01:2025 Prompt Injection · LLM02:2025 Sensitive Information Disclosure · NIST AI 600-1 · GDPR Art. 17 |
+| **Labs** | Five offline labs plus the Portfolio Project 2 reference build, no API keys: `python -m pytest 03-rag-security` (238 tests) |
+| **Maps to** | OWASP Top 10 for LLM Applications 2026: LLM09:2026 Vector and Embedding Weaknesses (was LLM08:2025) · LLM05:2026 Data and Model Poisoning (was LLM04:2025) · LLM01:2026 Prompt Injection · LLM02:2026 Sensitive Information Disclosure · LLM10:2026 Improper Output Handling (was LLM05:2025) · LLM07:2026 Misinformation (was LLM09:2025) · LLM08:2026 Hidden Context Exposure (was LLM07:2025 System Prompt Leakage) · OWASP Agentic ASI06 Memory & Context Poisoning (agentic RAG) · OWASP MCP06 Prompt Injection via Contextual Payloads and MCP10 Context Injection & Over-Sharing (RAG exposed through MCP) · OWASP GenAI Data Security DSGAI01, 04, 05, 07, 11, 13, 15, 17, 18, 21 · OWASP API1:2023 BOLA · NIST AI 600-1 · GDPR Art. 17 · India DPDP Act |
 
 ---
 
@@ -38,10 +38,13 @@ The naive path (top) sends the nearest neighbors straight to the model. A junior
 |---|---|---|---|---|
 | 1 | [Document security](document-security/) | 9, 12 | Build an ingestion pipeline that validates files, strips hidden text, labels trust and provenance, redacts PII and quarantines poisoned docs | 25 |
 | 2 | [Vector DB security](vector-db-security/) | 10 | Fix orphan chunks, cache leaks, backup resurrection, ACL metadata tampering and an open admin API in a pure-Python vector store | 23 |
-| 3 | [Access control](access-control/) | 11 | Stop cross-tenant and cross-role leaks with server-side identity, pre-filtering, per-chunk re-checks, fail-closed rules and citation validation | 55 |
-| – | [Module mini-project](#6-module-mini-project-rag-red-team-suite-week-12) | 12 | Combine all three into a RAG red-team suite (Phase 3 gate) | yours |
+| 3 | [Access control](access-control/) | 11 | Stop cross-tenant and cross-role leaks with server-side identity, pre-filtering, per-chunk re-checks, fail-closed rules, citation validation and BOLA-safe document APIs; prove that authorization happens before the prompt | 68 |
+| 4 | [Retrieval and reranking](retrieval-reranking/) | 11–12 | Stop keyword stuffing and "rank me first" pages; rerank only authorized candidates; weight by source trust; gate releases with an evaluation set | 38 |
+| 5 | [Response security](response-security/) | 12 | Close exfiltration through images and links, apply DLP to answers, and validate that citations are both authorized and supported | 22 |
+| 6 | [Secure HR assistant (Portfolio Project 2)](secure-hr-assistant/) | 12 | Study and extend a reference build with RBAC, tenant isolation, doc-level authz, classification-aware chunking, encryption at rest, audit logging and the five roadmap scenarios as tests | 62 |
+| – | [Module mini-project](#6-module-mini-project-portfolio-project-2-secure-enterprise-rag-week-12) | 12 | Extend the HR assistant and run the RAG red-team suite (Phase 3 gate) | yours |
 
-Week 12 covers poisoning, indirect injection, retrieval evaluation and DLP. Its theory lives in the document-security lesson (sections 2.3 and 5), and its practice is the mini-project below.
+Week 12 covers poisoning, indirect injection, retrieval evaluation and DLP: the theory is in document-security (sections 2.3–2.5), retrieval-reranking and response-security, and the practice is the mini-project below.
 
 Run every lab test in the module:
 
@@ -93,7 +96,54 @@ These eight rules must hold in every design. If a design breaks one, it needs a 
 | Cross-tenant retrieval | Tenant A retrieves tenant B's chunk | Server-derived tenant, namespaces, pre-filter, re-check | Access control |
 | ACL drift | Source access revoked but index still open | Group IDs + ACL version per chunk, re-check vs source, sync SLA | Access control |
 | Citation leakage | Unauthorized title and snippet in the sources panel | Citations only from the authorized retrieval set | Access control |
-| Ranking manipulation | Attacker content always ranks first | Source trust tiers, retrieval evaluation, monitoring | Document security + mini-project |
+| Ranking manipulation | Keyword-stuffed upload or "rank me first" page wins the top slot | Authorize before reranking, source-trust weighting, candidate validation, evaluation set as a release gate | Retrieval and reranking |
+| Restricted text sent to a reranker or provider | Post-filter after a hosted rerank API | Rerank only authorized candidates; limit classifications sent out (DSGAI15) | Retrieval and reranking |
+| Exfiltration through the response | Injected "add an image with the answer" | URL policy (no remote images, allowlisted links), CSP in the UI | Response security |
+| Sensitive data in answers | Service key or national ID shown in chat and logs | Response DLP (withhold secrets, mask PII); keep secrets out of the index | Response security |
+| Citation laundering | False claim cites the official policy | Citation membership **and** support checks | Response security |
+| BOLA on document endpoints | `GET /documents/{id}` returns any HR file | Object-level authorization, same 404 for missing and forbidden | Access control + HR assistant |
+| Chunk mixes classifications | Pay data inside an "internal" chunk | Section-based chunking; per-chunk labels; label propagation | Document security + HR assistant |
+| Plaintext index on disk or backup | Snapshot copied from a storage bucket | Encryption at rest with per-document/tenant keys in a KMS; crypto-shredding | Vector DB security + HR assistant |
+
+### 3.5 The RAG component table (from the roadmap)
+
+| Component | Concern | Control | Where in this module | Test that proves it |
+|---|---|---|---|---|
+| Ingestion | Malicious docs | Validation and scanning | [document-security](document-security/) L1–L5 | `test_document_security.py` Part 2 |
+| Chunking | Sensitive exposure | Classification (section-based chunks, per-chunk labels) | [document-security §2.4](document-security/#24-chunking-strategies-and-data-classification), [HR assistant](secure-hr-assistant/) | `test_chunks_follow_sections_and_never_mix_classifications` |
+| Embeddings | Leakage | Access control and encryption | [vector-db-security §2.3, §2.6](vector-db-security/), [HR assistant](secure-hr-assistant/) L5 | `test_encryption_at_rest_no_canary_or_pii_in_raw_storage`, `test_exported_vectors_alone_reveal_the_text` |
+| Vector DB | Unauthorized retrieval | Tenant isolation and RBAC | [vector-db-security](vector-db-security/) L1–L8 | `test_namespaces_isolate_tenants`, `test_secure_admin_api_requires_token_and_admin_role` |
+| Retrieval | Cross-user leak | Authz-aware filtering | [access-control](access-control/) | `test_full_matrix_every_user_against_every_sensitive_doc` |
+| Reranking | Manipulated relevance | Input validation and evaluation | [retrieval-reranking](retrieval-reranking/) | `test_no_attacker_document_reaches_the_context`, `test_release_gate_*` |
+| Generation | Injection | Trust boundaries and output validation | [document-security](document-security/), [response-security](response-security/), Module 02 | `test_scenario_2_malicious_pdf_cannot_override_the_system_prompt` |
+| Response | Disclosure | DLP and policy | [response-security](response-security/) | `test_no_attack_has_impact_on_the_secure_responder` |
+
+### 3.6 The five roadmap scenarios, as tests
+
+| Scenario | Named test |
+|---|---|
+| User A never retrieves User B's docs | `secure-hr-assistant`: `test_scenario_1_user_a_never_retrieves_user_b_docs` (also the access-control matrix test) |
+| A malicious PDF can't override the system prompt | `secure-hr-assistant`: `test_scenario_2_malicious_pdf_cannot_override_the_system_prompt` |
+| An unauthorized user can't get HR docs | `secure-hr-assistant`: `test_scenario_3_unauthorized_user_cannot_get_hr_docs` (also `hr_doc_to_engineer` in access-control) |
+| Deleting a source invalidates its chunks and embeddings | `secure-hr-assistant`: `test_scenario_4_deleting_a_source_invalidates_its_chunks_and_embeddings` (also `test_secure_delete_removes_every_version_and_reports_evidence` in vector-db-security) |
+| Authz happens before content reaches the model | `secure-hr-assistant`: `test_scenario_5_authorization_happens_before_content_reaches_the_model`; access-control: `test_secure_app_never_puts_forbidden_text_into_the_prompt` |
+
+### 3.7 OWASP GenAI data-security risks that touch RAG
+
+The OWASP *GenAI Data Security Risks and Mitigations 2026* document lists 21 data risks (DSGAI01–DSGAI21). These are the ones this module covers:
+
+| Risk | RAG meaning | Lesson |
+|---|---|---|
+| DSGAI01 Sensitive Data Leakage | Overshared sources, retrieval of sensitive passages, exfiltration via rendered output, deletion that misses embeddings | access-control, response-security, vector-db-security |
+| DSGAI04 Data, Model & Artifact Poisoning | Poisoned documents in the corpus | document-security |
+| DSGAI05 Data Integrity & Validation Failures | Files and snapshot imports that pass format checks but are malicious | document-security, vector-db-security |
+| DSGAI07 Governance, Lifecycle & Classification | Labels that don't propagate to chunks and vectors; erasure that misses derived copies | document-security §2.4, HR assistant |
+| DSGAI11 Cross-Context & Multi-User Bleed | Shared indexes, caches and post-filters leaking across users or tenants | access-control, vector-db-security |
+| DSGAI13 Vector Store Platform Data Security | Open endpoints, unencrypted vectors and snapshots, weak tenant scoping | vector-db-security §2.6 |
+| DSGAI15 Over-Broad Context Windows | Stuffing whole records into prompts; sending restricted text to providers and rerankers | retrieval-reranking, response-security |
+| DSGAI17 Availability & Resilience | Saturated vector DB, stale replica after failover serving deleted data | vector-db-security §2.7, retrieval-reranking |
+| DSGAI18 Inference & Data Reconstruction | Embedding inversion and membership inference through similarity queries | vector-db-security |
+| DSGAI21 Disinformation via Data Poisoning | False content in a trusted source, presented as grounded and cited | retrieval-reranking, document-security |
 
 ---
 
@@ -122,6 +172,13 @@ These eight rules must hold in every design. If a design breaks one, it needs a 
 | **Orphan chunk** | A chunk whose document was deleted or replaced but which is still in the index |
 | **Tombstone** | A record of a deletion, replayed after restores so deleted data stays deleted |
 | **Canary** | A unique fake secret placed in data; if it appears where it shouldn't, you have proven a leak |
+| **Reranker** | A second-stage model (cross-encoder, rerank API or LLM) that re-scores the top candidates before they go into the prompt |
+| **Hybrid search** | Combining keyword (BM25) and vector search results |
+| **Golden set** | A reviewed list of questions with the expected source, used to evaluate retrieval quality and safety |
+| **Response gate** | Code between the model and the user that applies URL policy, citation checks and DLP |
+| **Envelope encryption** | Data is encrypted with a data key; the data key is encrypted ("wrapped") by a key held in a KMS |
+| **Crypto-shredding** | Deleting a key so every copy encrypted with it, including backups, becomes unreadable |
+| **BOLA** | Broken Object Level Authorization: an API returns an object by ID without checking the caller's rights |
 
 ---
 
@@ -132,20 +189,26 @@ Follow one document through the system:
 1. **Document security (in):** a file arrives. It is validated, cleaned, labeled with tenant, trust, ACL and provenance, and redacted. Bad files are rejected or quarantined. *If this stage fails, attacker text or personal data becomes part of the index.*
 2. **Vector DB security (stored):** the chunks become vectors and records with metadata. The store keeps tenants apart, protects who can write ACL metadata, deletes completely and has a locked admin API. *If this stage fails, the ACL metadata that retrieval relies on can't be trusted, and "deleted" data comes back.*
 3. **Access control (out):** a user asks a question. Their identity comes from the server, the search runs only over what they may read, every chunk is re-checked against the source ACL, and citations are validated. *If this stage fails, every other control is bypassed by just asking.*
+4. **Retrieval and reranking (choose):** among the authorized chunks, the ranker picks the few that go into the prompt, weighted by source trust and checked for manipulation. *If this stage fails, an attacker's page becomes the answer.*
+5. **Response (leave):** the answer passes a gate: no exfiltration links or images, no secrets or unmasked personal data, only supported citations. *If this stage fails, authorized data still walks out.*
+
+The [secure HR assistant](secure-hr-assistant/) puts all five stages in one small application, with encryption and an audit log around them.
 
 Each stage depends on the one before it. Access control trusts the metadata that ingestion created and the vector store protected. That is why the module is taught in this order, and why the mini-project tests the whole chain.
 
 ---
 
-## 6. Module mini-project: RAG red-team suite (week 12)
+## 6. Module mini-project: Portfolio Project 2, Secure Enterprise RAG (week 12)
 
-**Goal:** a two-tenant knowledge assistant with a red-team test suite that a security reviewer would accept as the **Phase 3 gate**.
+**Goal:** an HR document assistant with **RBAC, tenant isolation, document-level authorization, encryption and audit logging**, plus a red-team test suite that a security reviewer would accept as the **Phase 3 gate**. This is Portfolio Project 2 from the roadmap.
 
-**Build** (reuse code from the three labs):
+**Start from the reference build** in [secure-hr-assistant/](secure-hr-assistant/). It already meets the five requirements in plain Python and has the five roadmap scenarios as named tests. Your job:
 
-- Tenants `red` and `blue`, each with users in different groups and synthetic confidential documents holding canaries.
-- Ingestion from `SecureIngestor` → storage in a `SecureVectorStore`-style store with namespaces → retrieval with `SecureRagApp`-style authorization.
-- A server-side principal from a session, never from the request.
+1. Run the prototype-vs-secure scorecard and explain every row.
+2. Add at least three extensions from its README (revocation SLA, deny rules, per-tenant key hierarchy, bulk-read alerts, retention, pseudonymization), each with an impact test.
+3. Plug in the reranking controls ([retrieval-reranking](retrieval-reranking/)) and the full response gate ([response-security](response-security/)): URL policy and citation support checks.
+4. Run the test matrix below against your build and record the metrics.
+5. Optional: replace one simulated layer with a real tool (pgvector row-level security, Chroma or FAISS with server-built filters, a real KMS).
 
 **Test matrix** (each one is an automated test that asserts impact):
 
@@ -163,6 +226,13 @@ Each stage depends on the one before it. Access control trusts the metadata that
 | Citation to an unauthorized document | Removed from answer and sources |
 | Document deleted | No chunk, vector, cache entry or restored copy returns it; `verify_deleted` evidence |
 | PII in a document | Redacted before embedding |
+| Keyword-stuffed or "rank me first" document | Never in the context; release gate blocks a regression |
+| Answer contains an exfil image or link | Removed before rendering |
+| Answer contains a secret or a national ID | Secret: answer withheld; ID: masked |
+| Citation not supported by its source | Removed; user sees a note |
+| `GET /documents/{id}` for a forbidden doc | Same 404 as a missing doc; denial audited |
+| Raw storage / backup copy | No canary or personal data in plaintext |
+| Audit log | Hash chain verifies; no raw text, queries or personal data |
 | Benign questions for each role | Still answered correctly |
 
 **Measure** (put these in your journal as the module's evaluation metrics):
@@ -174,6 +244,7 @@ Each stage depends on the one before it. Access control trusts the metadata that
 - **Injection impact:** tools executed or data leaked because of retrieved text.
 - **Deletion SLA:** time from request to `verify_deleted` = all zeros.
 - **Stale ACL behavior** and **revocation SLA**.
+- **Attacker-in-context rate** on the golden set (target zero) and **hit@1**.
 - **Latency and cost** of the security layers (security that is too slow gets removed).
 
 **Design exercises** (write half a page each):
@@ -184,7 +255,7 @@ Each stage depends on the one before it. Access control trusts the metadata that
 4. Define source trust tiers for your organization and what each tier may do.
 5. Write a deletion runbook that covers every copy in the deletion-lifecycle diagram.
 
-**Acceptance criteria:** cross-tenant tests pass; authorization happens before context construction; missing or stale ACLs fail closed; citations are access-checked; deletion covers derived data with evidence; retrieved content is treated as untrusted; benign tests pass.
+**Acceptance criteria:** the five roadmap scenario tests pass; cross-tenant and user × document tests pass; authorization happens before decryption and before context construction; missing or stale ACLs fail closed; chunks never mix classifications; raw storage holds no plaintext sensitive data; citations are access-checked and supported; the response gate closes exfil channels; deletion covers derived data with evidence; the audit log verifies and holds no raw text; benign tests pass.
 
 **Production design decisions to document:** vector-store encryption and key ownership, backup isolation and retention, index versioning, metadata integrity, data residency, deletion guarantees, and what your embedding and LLM providers can see (prompts, chunks, vectors).
 
@@ -192,7 +263,7 @@ Each stage depends on the one before it. Access control trusts the metadata that
 
 ## 7. Interview preparation: system design
 
-These questions cross all three lessons. Lesson READMEs have more focused questions.
+These questions cross all the lessons. Lesson READMEs have more focused questions.
 
 <details><summary><b>Q1. Design an enterprise RAG assistant over SharePoint, Confluence and Jira for 20,000 employees. What are your security requirements?</b></summary>
 
@@ -260,11 +331,35 @@ Log per request: principal, query ID, retrieved chunk IDs with tenant and trust 
 I'd write the residual risks down and get the data owners to sign off.
 </details>
 
+<details><summary><b>Q11. Walk through what happens to one HR document, from upload to deletion, in a secure design.</b></summary>
+
+Ingestion: the source registry sets tenant and trust; uploads wait for review; the file is validated, scanned and split by section, each chunk with its own classification, the document ACL (roles and named users) and the subject. Storage: text and vectors are sealed with the document's data key from a KMS; metadata stays readable for filtering. Retrieval: the principal comes from the session; authorization runs on metadata before decryption; only allowed chunks are decrypted, ranked by relevance × trust, and sent to the model. Response: the gate checks links, citations and DLP. Every step is audited without raw text. Deletion: cascade delete, cache clear, key destroyed (crypto-shredding), tombstone for restores, and `verify_deleted()` evidence.
+</details>
+
 ---
 
-## 8. References
+## 8. Tools for the real world (optional)
 
-- OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM04, LLM08): https://genai.owasp.org/llm-top-10/
+The labs use plain Python so you can read every line. When you move to real tools, keep the same controls and check what each product guarantees (defaults change between versions):
+
+| Area | Tools (from the roadmap) | Security question to answer |
+|---|---|---|
+| Vector store | FAISS, Chroma, pgvector | Where is the metadata filter enforced? FAISS is a library with no server, auth or metadata filter of its own; Chroma has collections and metadata filters; pgvector inherits PostgreSQL roles and row-level security |
+| Frameworks | LangChain, LlamaIndex | Is the filter built server-side from the principal and passed into the retriever? Are loaders fetching untrusted URLs? |
+| Evaluation | Ragas, DeepEval | Add safety metrics (attacker-in-context, unauthorized retrieval) next to quality metrics (context precision/recall, faithfulness) |
+| Keys | Cloud KMS, HashiCorp Vault transit | Who can use the keys, is key use logged, can you shred per tenant or document? |
+| Monitoring | OpenTelemetry, SIEM | Are traces masked? Do logs hold IDs and hashes instead of raw text? |
+
+---
+
+## 9. References
+
+- OWASP Top 10 for LLM Applications 2026 (released August 2026; verify the current list and numbering at the source): https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications 2026 (ASI01–ASI10): https://genai.owasp.org/
+- OWASP MCP Top 10 (beta): https://owasp.org/www-project-mcp-top-10/
+- OWASP GenAI Security Project, *GenAI Data Security Risks and Mitigations 2026* and *GenAI Data Security Best Practices v2.0*: https://genai.owasp.org/
+- OWASP AI Testing Guide: https://owasp.org/www-project-ai-testing-guide/
+- OWASP API Security Top 10 2023: https://owasp.org/API-Security/
 - Zou et al., *PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models* (2024): https://arxiv.org/abs/2402.07867
 - Morris et al., *Text Embeddings Reveal (Almost) As Much As Text* (2023): https://arxiv.org/abs/2310.06816
 - Greshake et al., *Not what you've signed up for* (indirect prompt injection, 2023): https://arxiv.org/abs/2302.12173
@@ -273,6 +368,41 @@ I'd write the residual risks down and get the data owners to sign off.
 - MITRE ATLAS (techniques for LLM prompt injection and data poisoning; check the current IDs): https://atlas.mitre.org/
 - OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - GDPR Article 17, Right to erasure: https://gdpr-info.eu/art-17-gdpr/
+
+---
+
+## 10. Roadmap coverage
+
+| Roadmap topic (Phase 3 and section C) | Where it is covered |
+|---|---|
+| RAG architecture and ingestion | Module README §1, §3; [document-security](document-security/) |
+| Parsing and chunking | [document-security](document-security/) §2.2, §2.4 (five chunking strategies and their security effects) |
+| Embeddings and vector storage | [vector-db-security](vector-db-security/) §2.3–2.7 |
+| Retrieval and **reranking** | [access-control](access-control/) (retrieval); [retrieval-reranking](retrieval-reranking/) (reranking, manipulation, evaluation) |
+| Vector DB access control | [vector-db-security](vector-db-security/) L1–L8; [HR assistant](secure-hr-assistant/) L4 |
+| Cross-tenant leakage | [access-control](access-control/); [vector-db-security](vector-db-security/); [HR assistant](secure-hr-assistant/) |
+| Document poisoning | [document-security](document-security/); [retrieval-reranking](retrieval-reranking/) |
+| Indirect injection via retrieved docs | [document-security](document-security/); [response-security](response-security/); HR scenario 2 |
+| Data exfiltration | [response-security](response-security/) (images, links, DLP); [vector-db-security](vector-db-security/) (exports, admin API) |
+| Source authorization and citation validation | [access-control](access-control/) L4 (membership); [response-security](response-security/) L2 (support) |
+| Chunking → classification | [document-security](document-security/) §2.4; [HR assistant](secure-hr-assistant/) L3 |
+| Embeddings → access control and encryption | [vector-db-security](vector-db-security/) §2.6; [HR assistant](secure-hr-assistant/) L5 |
+| Reranking → input validation and evaluation | [retrieval-reranking](retrieval-reranking/) L3–L5 and release gate |
+| Generation → trust boundaries and output validation | [response-security](response-security/); HR response gate |
+| Response → DLP and policy | [response-security](response-security/) L3 |
+| The five section-C scenarios | §3.6 above (named tests) |
+| Hands-on: secure enterprise RAG with document-level permissions | [secure-hr-assistant](secure-hr-assistant/) + §6 mini-project |
+| Portfolio Project 2 (RBAC, tenant isolation, doc-level authz, encryption, audit logging) | [secure-hr-assistant](secure-hr-assistant/) §3 requirement → code → test table |
+| Tools: FAISS, Chroma, pgvector, LlamaIndex, Ragas | §8 above; optional steps in each lesson |
+
+## 11. Further reading from your library
+
+- **OWASP GenAI Data Security Risks and Mitigations 2026:** read DSGAI01 (leakage), DSGAI07 (classification and lifecycle), DSGAI11 (cross-context bleed), DSGAI13 (vector store platform), DSGAI15 (over-broad context), DSGAI17 (availability), DSGAI18 (inference) and DSGAI21 (disinformation). Note the Tier 1/2/3 mitigations in each.
+- **OWASP GenAI Data Security Best Practices v2.0, Part 1:** Chapter 2 (the context window as a "trust-domain fusion" problem and the six core principles) and Chapter 3 (AI-DSPM and its KPIs, such as the share of vector stores with tenant scoping and encryption).
+- **OWASP AI Testing Guide:** AITG-APP-02 (indirect prompt injection), AITG-APP-03 (sensitive data leak), AITG-APP-08 (embedding manipulation: hidden instructions, inversion, cross-tenant leakage, semantic poisoning) and AITG-DAT-02 (runtime exfiltration). Use them as test checklists for the mini-project.
+- **Object-level authorization (OWASP API A1) checklist:** the first section; map each item to your document endpoints (see access-control §2.6).
+- **LangChain/RAG code walkthrough, Part 2:** the sections on text splitters, vector stores and retrievers, and the Cohere reranking example. Read them as a typical pipeline and mark where tenant, ACL, filter and response checks are missing.
+- **AI Engineering (Pachaar and Chawla):** the RAG chapter: the eight-step RAG pipeline (including re-ranking), the five chunking strategies, HyDE and the RAG architecture variants.
 
 ---
 

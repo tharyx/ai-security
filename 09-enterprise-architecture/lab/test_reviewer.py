@@ -79,6 +79,8 @@ MUTATIONS = {
     "IAM-02": lambda d: d["identities"][0]["permissions"].append("bedrock:*"),
     "IAM-03": lambda d: comp(d, "rag_service").update(identity=comp(d, "ai_gateway")["identity"]),
     "IAM-04": lambda d: comp(d, "ai_gateway").update(user_auth="api_key"),
+    "IAM-05": lambda d: d["identities"][2].pop("owner"),
+    "IAM-06": lambda d: comp(d, "agent_runtime").update(downstream_auth="passthrough"),
     "NET-01": lambda d: comp(d, "model_endpoint").update(public_network_access=True),
     "NET-02": lambda d: comp(d, "vector_store").update(public_network_access=True),
     "NET-03": lambda d: comp(d, "agent_runtime").update(egress="allow_all"),
@@ -89,12 +91,15 @@ MUTATIONS = {
     "DATA-04": lambda d: comp(d, "model_endpoint")["data_use"].update(training_opt_out=False),
     "GR-01": lambda d: comp(d, "ai_gateway")["guardrails"].update(input=[]),
     "GR-02": lambda d: comp(d, "ai_gateway")["guardrails"].update(output=["url_allowlist"]),
+    "GW-01": lambda d: comp(d, "ai_gateway").pop("model_routing"),
+    "GW-02": lambda d: comp(d, "ai_gateway").update(cache_scope="global"),
     "TOOL-01": _add_flow("agent", "tool-change"),
     "AGT-01": lambda d: comp(d, "agent_runtime").update(approval_required_for=[]),
     "AGT-02": lambda d: comp(d, "agent_runtime").update(kill_switch=False),
     "LOG-01": lambda d: d["logging"].update(model_invocation_logs=False),
     "LOG-02": lambda d: comp(d, "log_store").update(immutable=False),
     "OPS-01": lambda d: comp(d, "ai_gateway").update(rate_limits=False),
+    "OPS-02": lambda d: d["assessment"].update(drift_detection=False),
     "SEC-01": lambda d: d["secrets"]["inline"].append("DB_PASSWORD in container env"),
 }
 
@@ -182,7 +187,43 @@ def test_single_tenant_design_marks_tenant_isolation_not_applicable():
 def test_review_can_be_scoped_to_some_control_families():
     report = run(raw("vulnerable_aws"), families=["identity"])
     assert {f.family for f in report.findings} == {"identity"}
-    assert failed(report) == {"IAM-01", "IAM-02", "IAM-03", "IAM-04"}
+    assert failed(report) == {"IAM-01", "IAM-02", "IAM-03", "IAM-04", "IAM-05", "IAM-06"}
+
+
+# ---------- Part 5: identity, gateway and continuous-assessment controls ----------
+
+def test_an_agent_identity_without_owner_is_an_orphan():
+    data = raw("secure_gcp")
+    data["identities"].append({"id": "sa-notebook-agent", "kind": "agent", "credential": "short_lived"})
+    f = next(f for f in run(data).findings if f.control_id == "IAM-05")
+    assert f.status == "FAIL" and "sa-notebook-agent" in f.detail
+
+
+def test_a_human_identity_does_not_need_the_nhi_owner_field():
+    data = raw("secure_aws")
+    data["identities"].append({"id": "alice", "kind": "human", "credential": "short_lived"})
+    assert run(data).status_of("IAM-05") == "PASS"
+
+
+def test_token_passthrough_on_the_tool_gateway_is_caught_too():
+    data = raw("secure_azure")
+    comp(data, "mcp_gateway")["downstream_auth"] = "passthrough"
+    f = next(f for f in run(data).findings if f.control_id == "IAM-06")
+    assert f.status == "FAIL" and "mcp-gateway" in f.detail
+
+
+def test_a_gateway_without_any_cache_is_not_applicable_for_cache_isolation():
+    data = raw("secure_aws")
+    comp(data, "ai_gateway")["cache_scope"] = "none"
+    assert run(data).status_of("GW-02") == "N/A"
+
+
+def test_missing_assessment_block_defaults_to_no_continuous_assessment():
+    data = raw("secure_gcp")
+    del data["assessment"]
+    f = next(f for f in run(data).findings if f.control_id == "OPS-02")
+    assert f.status == "FAIL" and "drift" in f.detail
+    assert run(data).gate_passed  # medium: a finding, not a blocker
 
 
 def test_resource_wildcards_are_not_mistaken_for_action_wildcards():

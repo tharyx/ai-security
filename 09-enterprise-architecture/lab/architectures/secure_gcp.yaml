@@ -21,6 +21,8 @@ components:
     user_auth: oidc                   # Identity-Aware Proxy / workforce identity
     rate_limits: true
     token_budget: true
+    model_routing: allowlist          # approved models per data class; failover only to approved models
+    cache_scope: per_tenant           # cache key = tenant + user + model + prompt hash
     guardrails:
       input: [prompt_attack, pii]     # Model Armor template
       output: [pii, secrets, url_allowlist]
@@ -65,6 +67,7 @@ components:
     zone: app
     service: orchestrator on Cloud Run (ADK-based)
     identity: sa-agent
+    downstream_auth: token_exchange   # RFC 8693 token exchange: tools see the agent AND the user
     approval_required_for: [write]
     limits: {max_steps: 8, max_cost_usd: 2.0}
     kill_switch: true
@@ -75,6 +78,7 @@ components:
     zone: tools
     service: tool broker on Cloud Run behind internal load balancer
     identity: sa-mcp
+    downstream_auth: own_identity     # broker uses its own scoped identity; never forwards user tokens
     tool_registry: allowlist
     egress: deny_by_default
 
@@ -105,13 +109,13 @@ components:
     exports_to_siem: true             # Google SecOps or another SIEM
 
 identities:
-  - {id: sa-gateway, credential: short_lived, permissions: ["modelarmor.templates.useToSanitize"]}
-  - {id: sa-rag, credential: short_lived, permissions: ["roles/aiplatform.user on vector index"]}
-  - {id: sa-agent, credential: short_lived, permissions: ["roles/aiplatform.user on approved endpoint"]}
-  - {id: sa-mcp, credential: short_lived, permissions: ["roles/datastore.viewer on tool-registry"]}
-  - {id: sa-tool-metrics, credential: short_lived, permissions: ["roles/monitoring.viewer"]}
-  - {id: sa-tool-change, credential: short_lived, permissions: ["ticketing.create_change"]}
-  - {id: wif-github-deploy, kind: ci, credential: short_lived, permissions: ["roles/run.developer on ops-assistant"]}
+  - {id: sa-gateway, owner: ai-platform@acme.example, credential: short_lived, permissions: ["modelarmor.templates.useToSanitize"]}
+  - {id: sa-rag, owner: ai-platform@acme.example, credential: short_lived, permissions: ["roles/aiplatform.user on vector index"]}
+  - {id: sa-agent, owner: ai-platform@acme.example, credential: short_lived, permissions: ["roles/aiplatform.user on approved endpoint"]}
+  - {id: sa-mcp, owner: ai-platform@acme.example, credential: short_lived, permissions: ["roles/datastore.viewer on tool-registry"]}
+  - {id: sa-tool-metrics, owner: ai-platform@acme.example, credential: short_lived, permissions: ["roles/monitoring.viewer"]}
+  - {id: sa-tool-change, owner: ai-platform@acme.example, credential: short_lived, permissions: ["ticketing.create_change"]}
+  - {id: wif-github-deploy, owner: ai-platform@acme.example, kind: ci, credential: short_lived, permissions: ["roles/run.developer on ops-assistant"]}
 
 keys:
   - {id: kms-ai-data, managed_by: customer, rotation: true}
@@ -140,5 +144,10 @@ flows:
   - {from: mcp-gateway, to: tool-change}
   - {from: ai-gateway, to: audit-logs}
   - {from: mcp-gateway, to: audit-logs}
+
+assessment:
+  redteam_schedule: weekly            # attack suite against staging every week
+  redteam_on_change: true            # any model, prompt or tool change re-runs it
+  drift_detection: true              # declared design compared with the observed system
 
 exceptions: []

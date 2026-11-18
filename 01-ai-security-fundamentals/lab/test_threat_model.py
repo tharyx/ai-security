@@ -204,3 +204,19 @@ def test_secure_design_has_more_stride_candidates_with_mapped_controls():
     def covered(d):
         return sum(bool(t.controls) for t in tm.stride_candidates(d))
     assert covered(secure()) > covered(vulnerable())
+
+
+# ---------- Part 6: OWASP mapping uses the 2026 list ------------------------------------
+
+def test_every_finding_uses_a_valid_owasp_2026_id():
+    for f in tm.analyze(vulnerable(), TODAY):
+        ids = [x.strip() for x in f.owasp.split(",") if x.strip() != "-"]
+        assert all(i in tm.OWASP_LLM_2026 for i in ids), (f.rule, f.owasp)
+
+
+def test_owasp_2025_to_2026_mapping_is_a_complete_one_to_one_renumbering():
+    assert sorted(tm.OWASP_2025_TO_2026) == sorted(tm.OWASP_LLM_2026)
+    assert sorted(tm.OWASP_2025_TO_2026.values()) == sorted(tm.OWASP_LLM_2026)
+    # the two moves most often asked about
+    assert tm.OWASP_2025_TO_2026["LLM07"] == "LLM08"   # System Prompt Leakage -> Hidden Context Exposure
+    assert tm.OWASP_2025_TO_2026["LLM06"] == "LLM03"   # Excessive Agency moved up

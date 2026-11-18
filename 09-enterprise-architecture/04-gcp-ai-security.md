@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [01 Reference architecture](01-enterprise-ai-reference-architecture.md); basic Google Cloud (projects, IAM, VPC) |
 | **Lab** | [`lab/`](lab/) with [`secure_gcp.yaml`](lab/architectures/secure_gcp.yaml) and [`drifted_gcp.yaml`](lab/architectures/drifted_gcp.yaml) |
-| **Maps to** | OWASP LLM01, LLM02, LLM06, LLM08 · CIS Controls v8 (3, 6, 8, 12) · Google SAIF · NIST AI RMF MANAGE |
+| **Maps to** | OWASP LLM Top 10 2026: LLM01, LLM02, LLM03 Excessive Agency [2025: LLM06], LLM09 Vector and Embedding Weaknesses [2025: LLM08] · OWASP Agentic ASI03 · CIS Controls v8 (3, 6, 8, 12) · Google SAIF · NIST AI RMF MANAGE |
 
 > **Check the current docs.** Google Cloud renames AI products often (for example, the products around Vertex AI Search and Agent Builder). Features, defaults and data-retention terms also change. Verify every detail against current Google Cloud documentation.
 

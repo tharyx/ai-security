@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [01 Brief](01-capstone-brief-and-requirements.md), [02 Milestones](02-milestones-and-deliverables.md); [Module 02 security testing](../02-llm-security/); [Module 06](../06-ai-devsecops/) incident response |
 | **Lab** | [`lab/attacks.py`](lab/attacks.py), [`lab/demo.py`](lab/demo.py), [`lab/drill.py`](lab/drill.py) |
-| **Maps to** | MITRE ATLAS · OWASP LLM Top 10 2025 · NIST AI 600-1 (red teaming, incident disclosure) · NIST SP 800-61 Rev. 3 (incident response) |
+| **Maps to** | MITRE ATLAS · OWASP Top 10 for LLM Applications 2026 (LLM01, LLM02, LLM03 Excessive Agency [2025: LLM06], LLM06 Unbounded Consumption [2025: LLM10]) · OWASP Agentic ASI01, ASI02, ASI06, ASI10 · OWASP MCP08 Lack of Audit and Telemetry · NIST AI 600-1 (red teaming, incident disclosure) · NIST SP 800-61 Rev. 3 (incident response) |
 
 ---
 
@@ -58,7 +58,7 @@ Start from the system's capabilities (the "what can it *do*" lesson):
 | Evidence tampering | Log injection (newlines, fake JSON), causing redaction to hide attack content, editing logs | Audit log |
 | Persistence | Planting instructions in content that will be re-indexed or remembered | Ingestion, memory |
 
-Map each attempt to **MITRE ATLAS** techniques and **OWASP LLM** ids in your report, so readers can compare with other systems.
+Map each attempt to **MITRE ATLAS** techniques and **OWASP** ids (LLM 2026, Agentic ASI, MCP) in your report, so readers can compare with other systems.
 
 ### 2.4 Metrics
 
@@ -98,6 +98,55 @@ Follow your normal process (NIST SP 800-61 Rev. 3 aligns incident response with 
 5. **Learn:** blameless review; add the payload to the regression suite; add or tune detections; update the risk register.
 
 Use [`00-program/templates/ai-incident-playbook.md`](../00-program/templates/ai-incident-playbook.md) for the playbook format.
+
+### 2.7 Playbook cards: triage, investigation, response, recovery
+
+The *AI Cyber Incident Playbook* in your library writes each AI incident type as a structured card and drills it with simulated evidence. Its structure is a good model for your capstone runbooks. In our own words, each card has:
+
+| Part | What you write | Why it matters |
+|---|---|---|
+| Rule and starting priority | Detection name; priority now, and when it changes (for example P1 while data is moving, P2 after verified containment) | Priority follows impact, not the alert name |
+| Trigger | The sequence of facts that fires the rule, within a time window | Single events are noisy; sequences are signals |
+| Correlation identity | What ties events together (correlation ID, token fingerprint, process tree), and what is **not** enough (an IP alone) | Wrong grouping gives wrong scope |
+| Minimum sources | The logs you must have to decide | If a source is missing, say so instead of guessing |
+| Triage steps (with an owner each) | 4–8 numbered checks, each owned by L1, L2, the AI platform owner or the service owner | Clear hand-offs under stress |
+| Scope and hunting | Where else to search (same payload, same credential, same tenant) | The alert rarely shows the whole incident |
+| Benign explanations to test | Legitimate reasons for the same pattern (an approved load test, a delayed meter, a proxy change) | Avoids false accusations and wasted containment |
+| Containment (per owner) | Kill switch, revoke token or key, quarantine content, block egress, rate-limit | Fast and reversible first |
+| Eradication | Remove the root cause (poisoned page, leaked key source, over-broad permission) | Stops recurrence |
+| Recovery and validation | Restore, re-index, replay the attack, run the suites, confirm old access is denied | Prove it is fixed |
+| Closure criteria | Exact conditions to close, and what stays open (for example final billing) | No "closed" without evidence |
+| Exercise questions | 3–5 questions with worked answers | Turns the card into training |
+
+Two lessons from that playbook are worth copying exactly: **separate facts from interpretation** (an enumeration request does not prove consumption; a budget alert does not revoke a key), and **never use a leaked credential to "test" it** from an analyst machine.
+
+**The four phases mapped to this lab's drill (`drill.py`):**
+
+| Phase | Drill step | Evidence in the audit log |
+|---|---|---|
+| Triage | T+2 detect, T+3 pull all events for the correlation ID | `possible_injection` + `tool_denied`, same `cid` |
+| Investigation | T+3 root cause; T+5 search for the same payload in other pages | `retrieval` with `untrusted=[...]`; the second planted page |
+| Response (containment) | T+4 kill switch engaged; tool calls fail closed | `tool_denied` with "kill switch engaged" |
+| Recovery | T+5 quarantine, re-index, release, replay; T+6 evidence and follow-ups | hash chain intact; zero change requests |
+
+**Example card for your capstone (fill in the gaps for your build):**
+
+| Field | Capstone value |
+|---|---|
+| Rule and priority | `injection_reached_broker`; P2, raise to P1 if any write tool executed |
+| Trigger | `possible_injection` and `tool_denied` with the same correlation ID within one request |
+| Correlation identity | correlation ID, then user + tenant; document ID for scope. A user name alone is not enough on a shared account |
+| Minimum sources | assistant audit log (hash chain verified), retrieval log with document versions, wiki edit history, broker and approval records |
+| Triage | 1 L1: verify the hash chain and pull all events for the ID. 2 L1: list untrusted documents in context. 3 L2: confirm whether any tool **executed** (not only proposed). 4 Wiki owner: who edited the page, and when |
+| Scope and hunting | search all community pages and the index for the same directive; other users who retrieved the page |
+| Benign explanations | a runbook author pasting an example tool call; a red-team test inside the agreed window |
+| Containment | kill switch for write tools (platform on-call); export then quarantine the page (wiki owner); suspend the editor's account only after evidence review |
+| Eradication | remove the directive; add an ingestion check for tool-call syntax in community content |
+| Recovery and validation | re-index, release the kill switch, replay the attack, run AT04/AT05 and the attack suite |
+| Closure | no executed write linked to the payload; replay clean; regression test added; risk register updated |
+| Exercise questions | Does a denied tool call prove intent? Why export before quarantine? What if the replay finds a second page? |
+
+Write a second card yourself for **stolen gateway credentials** (see the gateway lab in [Module 09 lesson 06](../09-enterprise-architecture/06-secure-llm-ai-gateway.md)): trigger = a new consumer for one credential + unapproved model probes + budget spike; containment = revoke at the gateway and verify that the old credential is denied.
 
 ---
 
@@ -316,6 +365,7 @@ Automated attack suites on every change (code, prompt, model, tools). Manual red
 - [ ] Automated attack suite in CI; manual attempts recorded with results.
 - [ ] At least three detection rules with tests.
 - [ ] Incident drill or tabletop run, with TTD and TTC recorded.
+- [ ] Two playbook cards (section 2.7): indirect injection and stolen gateway credentials.
 - [ ] Every finding has severity, reproduction, fix and retest status, and a regression test.
 
 ## 9. References

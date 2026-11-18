@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Secure HR assistant: reference architecture for Portfolio Project 2</title>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="660" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" font-size="28" font-weight="bold" fill="#0f172a">Secure HR assistant: reference architecture</text>
+  <text x="600" y="70" text-anchor="middle" font-size="16" fill="#475569">RBAC, tenant isolation, doc-level authz, encryption, audit. Authorization runs on metadata, before decryption.</text>
+
+  <!-- Ingestion lane -->
+  <text x="40" y="108" font-size="16" font-weight="bold" fill="#0f172a">Ingestion</text>
+  <rect x="40" y="120" width="200" height="80" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="140" y="150" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Sources</text>
+  <text x="140" y="172" text-anchor="middle" font-size="12" fill="#475569">HR system, policy site,</text>
+  <text x="140" y="188" text-anchor="middle" font-size="12" fill="#475569">uploads (untrusted)</text>
+
+  <rect x="280" y="120" width="220" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="390" y="150" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L2 Ingestion gate</text>
+  <text x="390" y="172" text-anchor="middle" font-size="12" fill="#475569">registry sets tenant + trust</text>
+  <text x="390" y="188" text-anchor="middle" font-size="12" fill="#475569">uploads reviewed; injection scan</text>
+
+  <rect x="540" y="120" width="220" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="650" y="150" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L3 Chunk by section</text>
+  <text x="650" y="172" text-anchor="middle" font-size="12" fill="#475569">one classification per chunk</text>
+  <text x="650" y="188" text-anchor="middle" font-size="12" fill="#475569">ACL: roles + users + subject</text>
+
+  <rect x="800" y="120" width="170" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="885" y="150" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L5 Seal</text>
+  <text x="885" y="172" text-anchor="middle" font-size="12" fill="#475569">text + vector encrypted</text>
+  <text x="885" y="188" text-anchor="middle" font-size="12" fill="#475569">metadata bound (AAD)</text>
+
+  <rect x="1010" y="120" width="150" height="80" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1085" y="150" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Key service</text>
+  <text x="1085" y="172" text-anchor="middle" font-size="12" fill="#475569">KMS stand-in: one</text>
+  <text x="1085" y="188" text-anchor="middle" font-size="12" fill="#475569">data key per document</text>
+
+  <line x1="240" y1="160" x2="276" y2="160" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="500" y1="160" x2="536" y2="160" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="760" y1="160" x2="796" y2="160" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="1006" y1="160" x2="974" y2="160" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Store -->
+  <rect x="540" y="240" width="430" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="755" y="268" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Vector store: one namespace per tenant</text>
+  <text x="755" y="292" text-anchor="middle" font-size="13" fill="#475569">plaintext: IDs, tenant, ACL, classification, subject, trust</text>
+  <text x="755" y="312" text-anchor="middle" font-size="13" fill="#475569">ciphertext: chunk text and vector</text>
+  <line x1="885" y1="200" x2="885" y2="236" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Query lane -->
+  <text x="40" y="378" font-size="16" font-weight="bold" fill="#0f172a">Question</text>
+  <rect x="40" y="390" width="200" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="140" y="420" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">API (FastAPI)</text>
+  <text x="140" y="442" text-anchor="middle" font-size="12" fill="#475569">/ask · /documents/{id}</text>
+  <text x="140" y="460" text-anchor="middle" font-size="12" fill="#475569">L9 BOLA check, admin delete</text>
+
+  <rect x="280" y="390" width="220" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="390" y="420" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L1 Principal</text>
+  <text x="390" y="442" text-anchor="middle" font-size="12" fill="#475569">user, tenant, roles from session</text>
+  <text x="390" y="460" text-anchor="middle" font-size="12" fill="#475569">client fields ignored + audited</text>
+
+  <rect x="540" y="390" width="220" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="650" y="420" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L4 Authorize metadata</text>
+  <text x="650" y="442" text-anchor="middle" font-size="12" fill="#475569">tenant · RBAC · named users</text>
+  <text x="650" y="460" text-anchor="middle" font-size="12" fill="#475569">restricted: HR or subject only</text>
+
+  <rect x="800" y="390" width="170" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="885" y="420" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Decrypt, rank</text>
+  <text x="885" y="442" text-anchor="middle" font-size="12" fill="#475569">authorized chunks only</text>
+  <text x="885" y="460" text-anchor="middle" font-size="12" fill="#475569">relevance x source trust</text>
+
+  <rect x="1010" y="390" width="150" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1085" y="425" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Model</text>
+  <text x="1085" y="447" text-anchor="middle" font-size="12" fill="#475569">no secrets in prompt</text>
+
+  <line x1="240" y1="435" x2="276" y2="435" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="500" y1="435" x2="536" y2="435" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="760" y1="435" x2="796" y2="435" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="970" y1="435" x2="1006" y2="435" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="650" y1="330" x2="650" y2="386" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Response gate -->
+  <rect x="800" y="520" width="360" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="980" y="550" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L6 Response gate</text>
+  <text x="980" y="572" text-anchor="middle" font-size="12" fill="#475569">citations from the authorized set only</text>
+  <text x="980" y="590" text-anchor="middle" font-size="12" fill="#475569">national IDs masked · prompt echo withheld</text>
+  <line x1="1085" y1="480" x2="1085" y2="516" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Deletion and audit -->
+  <rect x="40" y="520" width="340" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="210" y="550" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L7 Deletion (hr-admin)</text>
+  <text x="210" y="572" text-anchor="middle" font-size="12" fill="#475569">cascade, clear cache, shred key, tombstone</text>
+  <text x="210" y="590" text-anchor="middle" font-size="12" fill="#475569">verify_deleted() evidence</text>
+
+  <rect x="420" y="520" width="340" height="80" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="590" y="550" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">L8 Audit log (hash-chained)</text>
+  <text x="590" y="572" text-anchor="middle" font-size="12" fill="#475569">who, action, decision, chunk IDs, query hash</text>
+  <text x="590" y="590" text-anchor="middle" font-size="12" fill="#475569">never raw text, queries or personal data</text>
+
+  <text x="600" y="636" text-anchor="middle" font-size="13" fill="#475569">LabCipher in the lab is a teaching stand-in. Production: AES-256-GCM from a vetted library, keys in a KMS or HSM.</text>
+</svg>

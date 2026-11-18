@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Module 01](../01-ai-security-fundamentals/) trust boundaries; Modules [02](../02-llm-security/)–[05](../05-agent-security/) controls (LLM, RAG, MCP, agents) |
 | **Lab** | [`lab/`](lab/): architecture-as-code reviewer, runs offline |
-| **Maps to** | OWASP LLM Top 10 2025 (LLM01, LLM02, LLM06, LLM08, LLM10) · NIST AI RMF (MAP, MANAGE) · NIST AI 600-1 · CIS Controls v8 (3, 5, 6, 8, 12) · Google SAIF |
+| **Maps to** | OWASP Top 10 for LLM Applications 2026: LLM01 Prompt Injection, LLM02 Sensitive Information Disclosure, LLM03 Excessive Agency [2025: LLM06], LLM06 Unbounded Consumption [2025: LLM10], LLM09 Vector and Embedding Weaknesses [2025: LLM08] · OWASP Agentic Top 10 (ASI02, ASI03, ASI04) · OWASP MCP Top 10 beta (MCP07, MCP09) · NIST AI RMF (MAP, MANAGE) · NIST AI 600-1 · CIS Controls v8 (3, 5, 6, 8, 12) · Google SAIF |
 
 ---
 
@@ -90,6 +90,51 @@ In an enterprise, architecture lives in **code** (Terraform, Bicep, CloudFormati
 - **Infrastructure-as-code scanners** (Checkov, tfsec/Trivy, cloud-native policy engines) check single resources: "is this bucket public?"
 - **Architecture-as-code review** checks the *system*: "is there any path from the internet to the model that skips the gateway?" That needs a model of components and data flows, which is what this module's lab builds.
 
+### 2.6 Seven design principles behind the invariants
+
+The *AI Security Architecture Study Guide* in your library groups architect thinking into seven principles. Here they are in short form, with the place where this repo enforces each one:
+
+| # | Principle (in plain words) | What it means in a design | Where you see it |
+|---|---|---|---|
+| 1 | The model is not a security boundary | Authorization, limits and validation live in code outside the model. System prompts are for behavior, not for security. | Invariant 4; DATA-03; the broker in [Module 05](../05-agent-security/) |
+| 2 | Break the "lethal trifecta" | No single agent session should combine private data, untrusted input and an outbound channel without a gate (approval, split agents, egress block). | NET-03 egress; AGT-01 approval; [lethal trifecta picture](../images/01-lethal-trifecta.svg) |
+| 3 | Zero trust for context | Everything that enters the context window is untrusted: prompts, RAG chunks, tool results, tool descriptions, memory, other agents' output. Label provenance; validate output with schemas. | GR-01/GR-02; trust labels in [Module 10](../10-capstone-project/) |
+| 4 | Least privilege **and** least agency | Fewer tools, narrower scopes, less autonomy, shorter lifetimes (just-in-time, task-scoped tokens). | IAM-02, TOOL-01, AGT-01, AGT-02 |
+| 5 | Agents are identities | Each agent has its own workload identity; downstream systems see agent **and** user (token exchange); no token passthrough; no secrets in context. | IAM-03, IAM-05, IAM-06; [lesson 07](07-centralized-ai-iam-and-zero-trust.md) |
+| 6 | Layered defense, deterministic first | Assume every layer fails sometimes. For high-impact actions, prefer permissions, sandboxes and egress rules over classifiers. | The Hard/Soft column in every Defend table |
+| 7 | Observability and kill switches | Trace every step with identities; tamper-evident logs; per-agent and per-tool disable switches that work in seconds; tested runbooks. | LOG-01, LOG-02, AGT-02; [lesson 08](08-continuous-assessment-and-ai-secops.md) |
+
+### 2.7 The six security services every AI application needs
+
+The roadmap's "AI security overall" build asks for an application architecture with **IAM, secrets, network isolation, logging, encryption and runtime protection**. In this platform each one is a shared service, with a control id you can test:
+
+| Service | Platform block | Controls | Cloud examples (lessons 02–04) |
+|---|---|---|---|
+| IAM | IdP + workload identity + PDP | IAM-01..IAM-06 | IAM roles / managed identities / service accounts |
+| Secrets | Secrets manager, fetched by workload identity | SEC-01 | Secrets Manager / Key Vault / Secret Manager |
+| Network isolation | Private endpoints, no bypass, egress proxy | NET-01..NET-04 | PrivateLink / Private Link / PSC + VPC-SC |
+| Logging | Central SIEM, redacted immutable logs | LOG-01, LOG-02 | CloudTrail / Activity Log / Cloud Audit Logs |
+| Encryption | Customer-managed keys per data zone | DATA-01, DATA-02 | KMS / Key Vault keys / Cloud KMS |
+| Runtime protection | Gateway limits and routing, guardrails, agent limits, continuous assessment | GW-01, GW-02, GR-01, GR-02, AGT-02, OPS-01, OPS-02 | Bedrock Guardrails / Prompt Shields / Model Armor |
+
+### 2.8 The capstone layers on this architecture
+
+The roadmap lists eleven layers for the final capstone. The reference architecture has a home for every one of them:
+
+| Capstone layer | Controls asked for | Block in this architecture | Where you build or check it |
+|---|---|---|---|
+| User access | SSO, MFA, RBAC | IdP + PDP at the gateway | IAM-04; [lesson 07](07-centralized-ai-iam-and-zero-trust.md) |
+| AI gateway | AuthN, rate limiting, DLP | AI gateway | [lesson 06](06-secure-llm-ai-gateway.md) + `lab/gateway/`; GW-01, GW-02, OPS-01 |
+| LLM | Prompt security, output validation | Guardrail service + output handling | GR-01, GR-02; [Module 02](../02-llm-security/) |
+| RAG | Tenant isolation, document ACLs | RAG platform, data zones | DATA-03; [Module 03](../03-rag-security/) |
+| MCP | Tool allowlisting, server verification | MCP / tool gateway | TOOL-01, IAM-06; [Module 04](../04-mcp-security/) |
+| Agent | Identity, least privilege, approval | Agent runtime + broker | IAM-03, AGT-01, AGT-02; [Module 05](../05-agent-security/) |
+| Infrastructure | Terraform, Kubernetes, network policies | Landing zone, private networking | NET-01..04; [Module 06](../06-ai-devsecops/) |
+| Supply chain | Model provenance, dependency scanning | Approved-model routing; model registry | GW-01; [Module 06](../06-ai-devsecops/) |
+| Monitoring | SIEM, audit logs, anomaly detection | Observability / SIEM | LOG-01, LOG-02, OPS-02; [lesson 08](08-continuous-assessment-and-ai-secops.md) |
+| Governance | Inventory, risk register, policies | ADRs, dated exceptions, owners | IAM-05, exceptions; [Module 07](../07-ai-governance/) |
+| Compliance | NIST, ISO, DPDP, EU AI Act mapping | Control matrix with evidence per cloud | [lesson 05](05-multi-cloud-control-matrix-and-shared-responsibility.md); [Module 08](../08-ai-compliance/) |
+
 ---
 
 ## 3. Defend it
@@ -150,6 +195,8 @@ IAM-01   high      FAIL            pass            pass            pass         
 IAM-02   high      FAIL            pass            pass            pass            pass            
 IAM-03   medium    FAIL            pass            pass            pass            pass            
 IAM-04   critical  FAIL            pass            pass            pass            pass            
+IAM-05   high      FAIL            pass            pass            pass            pass            
+IAM-06   high      FAIL            pass            pass            pass            pass            
 NET-01   high      FAIL            pass            pass            pass            pass            
 NET-02   high      FAIL            pass            pass            pass            pass            
 NET-03   high      FAIL            pass            pass            pass            FAIL            
@@ -160,15 +207,18 @@ DATA-03  critical  FAIL            pass            pass            pass         
 DATA-04  medium    FAIL            pass            pass            pass            pass            
 GR-01    medium    FAIL            pass            pass            pass            accepted        
 GR-02    medium    FAIL            pass            pass            pass            pass            
+GW-01    high      FAIL            pass            pass            pass            pass            
+GW-02    high      FAIL            pass            pass            pass            pass            
 TOOL-01  high      FAIL            pass            pass            pass            pass            
 AGT-01   high      FAIL            pass            pass            pass            pass            
 AGT-02   high      FAIL            pass            pass            pass            pass            
 LOG-01   high      FAIL            pass            pass            pass            pass            
 LOG-02   medium    FAIL            pass            pass            pass            pass            
 OPS-01   medium    FAIL            pass            pass            pass            pass            
+OPS-02   medium    FAIL            pass            pass            pass            pass            
 SEC-01   high      FAIL            pass            pass            pass            pass            
 ---------------------------------------------------------------------------------------------------
-open findings      20              0               0               0               2               
+open findings      25              0               0               0               2               
 review gate        FAIL            PASS            PASS            PASS            FAIL            
 
 Same outcome, different services (NET-01, private model access):
@@ -185,13 +235,13 @@ Tip: break a secure file (e.g. set egress: allow_all on the agent) and re-run.
 
 ### Step 2: Review the hackathon design yourself first
 
-Open [`lab/architectures/vulnerable_aws.yaml`](lab/architectures/vulnerable_aws.yaml). It has 17 `VULN` comments. **Before** you run the reviewer, write in your journal which control each VULN breaks and how severe it is. Then compare with the reviewer:
+Open [`lab/architectures/vulnerable_aws.yaml`](lab/architectures/vulnerable_aws.yaml). It has 22 `VULN` comments. **Before** you run the reviewer, write in your journal which control each VULN breaks and how severe it is. Then compare with the reviewer:
 
 ```powershell
 python 09-enterprise-architecture/lab/reviewer.py 09-enterprise-architecture/lab/architectures/vulnerable_aws.yaml
 ```
 
-Expected output (first lines; the full report lists all 20 open findings with a fix each):
+Expected output (first lines; the full report lists all 25 open findings with a fix each):
 
 ```text
 Architecture review: ops-assistant-hackathon (aws)
@@ -207,7 +257,7 @@ FAIL     critical DATA-03  Tenant and document permissions are enforced server-s
                           fix: On aws: Bedrock Knowledge Bases metadata filters set by your code; OpenSearch fine-grained access control; index per tenant
 ...
 ------------------------------------------------------------------------------
-open: 3 critical, 10 high, 7 medium, 0 low | accepted: 0
+open: 3 critical, 14 high, 8 medium, 0 low | accepted: 0
 GATE: FAIL (open critical/high findings)
 ```
 
@@ -228,7 +278,7 @@ Run the tests:
 python -m pytest 09-enterprise-architecture -v
 ```
 
-Look at `test_breaking_one_control_is_caught_precisely`: it breaks **one** control at a time in each secure design (21 controls × 3 clouds) and checks the reviewer catches exactly that control. This is **mutation testing** for your security checks.
+Look at `test_breaking_one_control_is_caught_precisely`: it breaks **one** control at a time in each secure design (26 controls × 3 clouds) and checks the reviewer catches exactly that control. This is **mutation testing** for your security checks.
 
 ### Step 4: Break it yourself
 
@@ -384,7 +434,8 @@ These are where the critical findings usually are.
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (verify the current list at the source), https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications 2026 and OWASP MCP Top 10 (beta), https://genai.owasp.org/ · https://owasp.org/www-project-mcp-top-10/
 - NIST AI 600-1, *Generative AI Profile* (2024), https://doi.org/10.6028/NIST.AI.600-1
 - NIST AI Risk Management Framework 1.0, https://www.nist.gov/itl/ai-risk-management-framework
 - Google Secure AI Framework (SAIF), https://saif.google/

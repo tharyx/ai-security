@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | Basic Python; basic web security (authentication, authorization, injection). No ML background needed. |
 | **Lab** | [`lab/tiny_embeddings.py`](lab/tiny_embeddings.py) and [`lab/demo.py`](lab/demo.py) (Part A and B): runs offline, no API key |
-| **Maps to** | OWASP LLM Top 10 2025: LLM02 Sensitive Information Disclosure, LLM08 Vector and Embedding Weaknesses, LLM10 Unbounded Consumption · NIST AI RMF: MAP function · MITRE ATLAS: AML.T0024 (Exfiltration via ML Inference API) |
+| **Maps to** | OWASP Top 10 for LLM Applications 2026: LLM02:2026 Sensitive Information Disclosure (same number in 2025), LLM09:2026 Vector and Embedding Weaknesses (was LLM08:2025), LLM06:2026 Unbounded Consumption (was LLM10:2025) · NIST AI RMF: MAP function · MITRE ATLAS: AML.T0024 (Exfiltration via ML Inference API) |
 
 ---
 
@@ -68,6 +68,8 @@ Security must cover the whole lifecycle, not only the moment a user types a prom
 
 **The key fact:** the model receives **one stream of tokens**. System prompt, user question and a stranger's email all arrive in the same stream. Nothing in the model enforces which tokens are commands and which are data. This is the root of prompt injection ([Module 02](../02-llm-security/prompt-injection/)).
 
+> **Go deeper (week 2):** [lesson 01b](01b-inside-the-llm-transformers-inference-and-training.md) explains neural networks, the transformer block, attention (with a lab that shows an injected token taking over attention), the full inference lifecycle (prefill, decode, KV cache, sampling) and the hardware underneath. Unknown words: see the [module glossary](glossary.md).
+
 ### 2.4 Embeddings and vector search
 
 An **embedding** is a list of numbers (a **vector**) that represents the meaning of a text. Texts with similar meaning get vectors that point in similar directions. **Cosine similarity** measures this: 1.0 means "same direction", 0 means "nothing in common".
@@ -96,6 +98,8 @@ These are often confused. They change *different things* and so carry *different
 
 **Rule of thumb:** if data goes into **weights** (training, fine-tuning) you cannot reliably delete it or control who sees it later. If data goes into **context** (RAG, prompt) you control it per request, so you can apply access control. That is why RAG is usually the safer choice for private, per-user data.
 
+**Fine-tuning in practice** is usually **parameter-efficient**: **LoRA** freezes the model and trains two small matrices per layer (often well under 1% of the parameters); **QLoRA** does the same on a 4-bit compressed base model. The result is a small **adapter** file: cheap to make, easy to share, and easy to swap for a poisoned one. Training stages (pre-training, instruction tuning, RLHF/DPO), quantization and deployment options, each with its risks, are in [lesson 01b, section 2.7](01b-inside-the-llm-transformers-inference-and-training.md#27-training-fine-tuning-and-deployment-with-the-risks-of-each).
+
 ### 2.6 Tool calling and agents
 
 **Tool calling** (also "function calling"): you describe tools to the model (`get_order(order_id)`), the model replies with a structured request to call one, and **your code** runs it and returns the result. The model never runs anything itself. It *proposes*; your code *disposes*.
@@ -116,7 +120,8 @@ Security meaning:
 | Non-determinism | One clean test run proves little | Repeat tests, measure rates, test impact | [02 security testing](../02-llm-security/security-testing/) |
 | Context window | Truncation, cost, long-context attacks | Token budgets; reserve system prompt; reject oversize input | This lab, Part B |
 | Embeddings | Similarity ≠ permission; inversion | Pre-filter by tenant/ACL; protect the index | This lab, Part A; [03 RAG](../03-rag-security/) |
-| Fine-tuning | Data baked into weights | Keep secrets and personal data out of training sets | [06 DevSecOps](../06-ai-devsecops/) |
+| Fine-tuning (LoRA / QLoRA) | Data baked into weights; safety can erode; adapters can be poisoned | Keep secrets and personal data out of training sets; evaluate base + adapter; sign adapters | [01b](01b-inside-the-llm-transformers-inference-and-training.md), [06 DevSecOps](../06-ai-devsecops/) |
+| Attention | Any token can win attention, including injected ones | Keep untrusted text out of privileged contexts | [01b](01b-inside-the-llm-transformers-inference-and-training.md) lab |
 | Tool calling | Model proposes real actions | Schema + server-side authz + approval | [04 MCP](../04-mcp-security/), [05 agents](../05-agent-security/) |
 | Hosted inference | Data leaves your boundary | Data classification, contracts, redaction | [07 governance](../07-ai-governance/) |
 
@@ -163,7 +168,7 @@ python -m pip install -e ".[dev]"
 python 01-ai-security-fundamentals/lab/demo.py
 ```
 
-Expected output (Parts A and B; Part C belongs to lessons 02–04):
+Expected output (Parts A and B; Part C belongs to lessons 02–04, Part D to lesson 01b, Part E to lesson 03):
 
 ```text
 PART A - similarity is not authorization (tiny_embeddings.py)
@@ -254,7 +259,7 @@ A company indexes its whole SharePoint into one vector store for an internal ass
 
 **Scenario B: the public chatbot bill (hypothetical).**
 A startup launches a free chatbot. A script sends 50,000 maximum-length prompts overnight. The monthly AI budget is gone by morning.
-- *What went wrong:* no per-user or per-IP rate limits, no token cap per request, no spending alert. This is OWASP **LLM10 Unbounded Consumption**.
+- *What went wrong:* no per-user or per-IP rate limits, no token cap per request, no spending alert. This is OWASP **LLM06:2026 Unbounded Consumption** (was LLM10:2025).
 - *Investigate:* group usage by API key, IP and user; look at the token-count distribution; check whether output length was capped too.
 - *Fix:* input and output token caps, per-user and per-tenant quotas, rate limits at the gateway, bot protection on sign-up, and budget alerts with an automatic cut-off.
 
@@ -357,7 +362,7 @@ Attention lets every token influence how every other token is interpreted. There
 
 <details><summary><b>Q13. What is "denial of wallet" and how do you prevent it?</b></summary>
 
-An attack that makes you pay: long prompts, many requests, long outputs, or agent loops that burn tokens and GPU time. OWASP calls the category LLM10 Unbounded Consumption. Prevent it with per-request input and output token caps, per-user and per-tenant quotas, rate limits, loop and step limits for agents, spending alerts with automatic cut-off, and authentication for any expensive endpoint.
+An attack that makes you pay: long prompts, many requests, long outputs, or agent loops that burn tokens and GPU time. OWASP calls the category LLM06:2026 Unbounded Consumption (LLM10 in the 2025 list). Prevent it with per-request input and output token caps, per-user and per-tenant quotas, rate limits, loop and step limits for agents, spending alerts with automatic cut-off, and authentication for any expensive endpoint.
 </details>
 
 <details><summary><b>Q14. Explain to an executive why AI security is "a system problem, not a model problem".</b></summary>
@@ -384,6 +389,6 @@ An attack that makes you pay: long prompts, many requests, long outputs, or agen
 - Anthropic, *Many-shot jailbreaking* (2024), https://www.anthropic.com/research/many-shot-jailbreaking
 - OpenAI, *March 20 ChatGPT outage: here's what happened* (2023), https://openai.com/index/march-20-chatgpt-outage/
 - *Moffatt v. Air Canada*, 2024 BCCRT 149, https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (verify at the source), https://genai.owasp.org/llm-top-10/
 - NIST AI Risk Management Framework (AI RMF 1.0), https://www.nist.gov/itl/ai-risk-management-framework
 - MITRE ATLAS, https://atlas.mitre.org/

@@ -22,7 +22,7 @@ Modules without subfolders (01, 07, 08, 09, 10) put their lessons in the module 
 
 ## Subtopic README template
 
-1. **Header block:** module, week(s) from `00-program/36-week-plan.md`, time estimate, one-line "You will…", prerequisites, lab link, and mappings (OWASP LLM Top 10 2025 / OWASP Agentic / MITRE ATLAS / NIST AI RMF / CIS, as relevant).
+1. **Header block:** module, week(s) from `00-program/36-week-plan.md`, time estimate, one-line "You will…", prerequisites, lab link, and mappings (OWASP LLM Top 10 **2026** / OWASP Agentic Top 10 (ASI) / OWASP MCP Top 10 / MITRE ATLAS / NIST AI RMF / CIS, as relevant). When citing an OWASP LLM item, use the 2026 number and give the 2025 number in brackets on first mention.
 2. **Why this matters:** 3–5 real, public incidents or research results, each one sentence. **Only cite incidents you are certain are real.** Never invent CVE numbers, dates, companies or figures. If unsure, write a clearly labeled *hypothetical* scenario instead.
 3. **Understand it:** root cause first, then taxonomy. Use tables and at least one diagram.
 4. **Defend it:** a layered controls table (marking each layer Hard/Soft/Process), design patterns, and a "What does NOT work on its own" list.

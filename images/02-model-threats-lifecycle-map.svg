@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Where model-level attacks enter the AI lifecycle, and the control for each</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Model threats: where they enter, and what stops them</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Build-time attacks change what the model IS. Inference-time attacks change what the model DOES or who gets it.</text>
+
+  <!-- phase labels -->
+  <text x="270" y="122" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">BUILD TIME</text>
+  <line x1="40" y1="130" x2="660" y2="130" stroke="#94a3b8" stroke-width="2"/>
+  <text x="845" y="122" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">INFERENCE TIME</text>
+  <line x1="730" y1="130" x2="1160" y2="130" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- stage row -->
+  <rect x="40" y="150" width="200" height="90" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="140" y="188" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Data sources</text>
+  <text x="140" y="212" text-anchor="middle" font-size="13" fill="#475569">vendor · users · web</text>
+
+  <rect x="270" y="150" width="200" height="90" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="370" y="188" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af">Training / tuning</text>
+  <text x="370" y="212" text-anchor="middle" font-size="13" fill="#1e40af">weights are learned</text>
+
+  <rect x="500" y="150" width="200" height="90" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600" y="188" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Registry and hub</text>
+  <text x="600" y="212" text-anchor="middle" font-size="13" fill="#475569">model files · packages</text>
+
+  <rect x="730" y="150" width="200" height="90" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="830" y="188" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Serving API</text>
+  <text x="830" y="212" text-anchor="middle" font-size="13" fill="#92400e">queries in, answers out</text>
+
+  <rect x="960" y="150" width="200" height="90" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1060" y="188" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">People and systems</text>
+  <text x="1060" y="212" text-anchor="middle" font-size="13" fill="#92400e">decisions · code · tools</text>
+
+  <line x1="240" y1="195" x2="266" y2="195" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="470" y1="195" x2="496" y2="195" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="700" y1="195" x2="726" y2="195" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="930" y1="195" x2="956" y2="195" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- attack row -->
+  <text x="40" y="276" font-size="14" font-weight="700" fill="#991b1b">ATTACK</text>
+  <rect x="40" y="285" width="200" height="90" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="140" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Poisoned samples</text>
+  <text x="140" y="340" text-anchor="middle" font-size="13" fill="#991b1b">backdoor trigger</text>
+  <text x="140" y="360" text-anchor="middle" font-size="12" fill="#991b1b">LLM05:2026</text>
+
+  <rect x="270" y="285" width="200" height="90" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="370" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Tampered pipeline</text>
+  <text x="370" y="340" text-anchor="middle" font-size="13" fill="#991b1b">edited after review</text>
+  <text x="370" y="360" text-anchor="middle" font-size="12" fill="#991b1b">LLM05 · LLM04:2026</text>
+
+  <rect x="500" y="285" width="200" height="90" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="600" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Malicious model file</text>
+  <text x="600" y="340" text-anchor="middle" font-size="13" fill="#991b1b">pickle · typosquat · swap</text>
+  <text x="600" y="360" text-anchor="middle" font-size="12" fill="#991b1b">LLM04:2026 · ASI04</text>
+
+  <rect x="730" y="285" width="200" height="90" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="830" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Extraction, DoS</text>
+  <text x="830" y="340" text-anchor="middle" font-size="13" fill="#991b1b">mass queries, many keys</text>
+  <text x="830" y="360" text-anchor="middle" font-size="12" fill="#991b1b">LLM06:2026</text>
+
+  <rect x="960" y="285" width="200" height="90" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1060" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Over-trusted output</text>
+  <text x="1060" y="340" text-anchor="middle" font-size="13" fill="#991b1b">false facts · unsafe code</text>
+  <text x="1060" y="360" text-anchor="middle" font-size="12" fill="#991b1b">LLM07 · LLM10:2026</text>
+
+  <!-- control row -->
+  <text x="40" y="411" font-size="14" font-weight="700" fill="#166534">CONTROL</text>
+  <rect x="40" y="420" width="200" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="140" y="452" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Provenance gate</text>
+  <text x="140" y="474" text-anchor="middle" font-size="13" fill="#166534">approved source + digest</text>
+  <text x="140" y="494" text-anchor="middle" font-size="13" fill="#166534">validation, quarantine</text>
+
+  <rect x="270" y="420" width="200" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="370" y="452" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Release gate</text>
+  <text x="370" y="474" text-anchor="middle" font-size="13" fill="#166534">backdoor scan</text>
+  <text x="370" y="494" text-anchor="middle" font-size="13" fill="#166534">accuracy vs baseline</text>
+
+  <rect x="500" y="420" width="200" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="600" y="452" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Pin, hash, safe format</text>
+  <text x="600" y="474" text-anchor="middle" font-size="13" fill="#166534">AI-BOM, trusted publisher</text>
+  <text x="600" y="494" text-anchor="middle" font-size="13" fill="#166534">no pickle, signed files</text>
+
+  <rect x="730" y="420" width="200" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="830" y="452" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Budget, rate, labels</text>
+  <text x="830" y="474" text-anchor="middle" font-size="13" fill="#166534">probe detector</text>
+  <text x="830" y="494" text-anchor="middle" font-size="13" fill="#166534">watermark evidence</text>
+
+  <rect x="960" y="420" width="200" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="1060" y="452" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Grounding checks</text>
+  <text x="1060" y="474" text-anchor="middle" font-size="13" fill="#166534">citations, human handoff</text>
+  <text x="1060" y="494" text-anchor="middle" font-size="13" fill="#166534">code gate before merge</text>
+
+  <text x="40" y="560" font-size="14" fill="#475569">A learned backdoor cannot be filtered out at inference with confidence: stop it before training or before release.</text>
+  <text x="40" y="582" font-size="14" fill="#475569">Lab parts: A poisoning · B extraction · C misinformation · D supply chain · E AI-generated code.</text>
+</svg>

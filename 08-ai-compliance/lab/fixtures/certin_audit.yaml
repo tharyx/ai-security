@@ -1,0 +1,43 @@
+# CERT-In style audit scoping for ACME's AI systems. Synthetic data for the lab.
+# Scores: 1 low, 2 moderate, 3 high, 4 critical; scored before credit for controls.
+systems:
+  - system: internal-code-assistant
+    self_assessed_tier: 1
+    scores: {F1: 1, F2: 1, F3: 2, F4: 1, F5: 1, F6: 1, F7: 1, F8: 2}
+  - system: support-chatbot
+    self_assessed_tier: 1
+    scores: {F1: 2, F2: 2, F3: 2, F4: 3, F5: 2, F6: 2, F7: 3, F8: 2}
+  - system: cv-screening-provider
+    self_assessed_tier: 2
+    scores: {F1: 3, F2: 2, F3: 3, F4: 3, F5: 3, F6: 3, F7: 2, F8: 3}
+  - system: payments-ops-agent
+    self_assessed_tier: 2
+    scores: {F1: 3, F2: 3, F3: 2, F4: 2, F5: 2, F6: 2, F7: 2, F8: 2}
+    triggers: [executes_code_transactions_or_messages, privileged_access]
+  - system: grid-load-forecaster
+    scores: {F1: 4, F2: 3, F3: 3, F4: 4, F5: 4, F6: 4, F7: 3, F8: 3}
+    triggers: [controls_critical_infrastructure]
+
+findings:
+  - id: AISAG-2026-001
+    title: Prompt-injection regression suite not run for the last two releases
+    severity: High
+    domain: "8.6"
+    condition: CI logs show the injection suite was skipped on releases 2.2.0 and 2.3.0
+    criteria: AI Security Standard SEC-12; CERT-In guideline 8.6 adversarial testing
+    cause: The suite was made optional after a flaky test
+    effect: An injection regression could reach production unnoticed
+    recommendation: Make the suite a required CI check; fix the flaky test
+    owner: K. Menon (AppSec lead)
+    reported: 2026-11-16
+  - id: AISAG-2026-002
+    title: Model cards incomplete for two vendor models
+    severity: Moderate
+    domain: "8.3"
+    condition: Limitations and evaluation datasets missing
+    criteria: CERT-In guideline 8.3 model documentation; Model Approval Policy APR-02
+    cause: No validator in the release path
+    effect: Reviewers cannot judge fitness for use
+    recommendation: Run doc_validator.py as a release gate
+    owner: HR Tech team
+    reported: 2026-11-16

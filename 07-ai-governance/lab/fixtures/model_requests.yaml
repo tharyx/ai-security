@@ -1,0 +1,52 @@
+# Model approval requests. Synthetic data for the lab. Hashes are made-up teaching values.
+- request_id: MAR-001
+  system_id: AI-002
+  model: cv-summarizer
+  version: 2.3.0
+  artifact_sha256: 4f9a3c0b1d2e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f30
+  tier: high
+  change_type: major
+  requested_by: a.rao
+  third_party: true
+  vendor_assessment_date: 2026-04-15
+  model_card_findings: 0
+  evals: {quality: pass, security: pass, fairness: pass}
+  risk_entry: R-003
+  risk_owner_accepted: true
+  rollback_tested: true
+  approvals:
+    - {role: technical_owner, name: a.rao}
+    - {role: security, name: k.menon}
+    - {role: risk_owner, name: s.gupta}
+
+- request_id: MAR-002
+  system_id: AI-002
+  model: cv-summarizer
+  version: latest
+  artifact_sha256: TBD
+  tier: high
+  change_type: vendor_update
+  requested_by: a.rao
+  third_party: true
+  vendor_assessment_date: 2025-06-10
+  model_card_findings: 4
+  evals: {quality: pass}
+  approvals:
+    - {role: technical_owner, name: a.rao}
+    - {role: security, name: a.rao}
+
+- request_id: MAR-003
+  system_id: AI-003
+  model: code-helper
+  version: 1.8.2
+  artifact_sha256: 9b8a7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b
+  tier: medium
+  change_type: minor
+  requested_by: d.khan
+  third_party: true
+  vendor_assessment_date: 2026-02-01
+  model_card_findings: 0
+  evals: {quality: pass, security: pass}
+  approvals:
+    - {role: technical_owner, name: d.khan}
+    - {role: security, name: k.menon}

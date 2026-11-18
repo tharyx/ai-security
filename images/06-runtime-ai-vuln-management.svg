@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>AI vulnerability management: intake to fix</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">AI vulnerability management: intake to fix</text>
+  <text x="40" y="76" font-size="16" fill="#475569">An advisory only matters once it is matched to an inventory. Priority depends on where the weakness lives.</text>
+
+  <g font-size="13" fill="#334155">
+    <rect x="40" y="110" width="200" height="200" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="56" y="138" font-size="16" font-weight="700" fill="#991b1b">1 Intake</text>
+    <text x="56" y="164" fill="#7f1d1d">CVE / GHSA / OSV feeds</text>
+    <text x="56" y="184" fill="#7f1d1d">vendor and model-provider</text>
+    <text x="56" y="204" fill="#7f1d1d">advisories</text>
+    <text x="56" y="224" fill="#7f1d1d">red-team findings</text>
+    <text x="56" y="244" fill="#7f1d1d">internal reviews</text>
+    <text x="56" y="264" fill="#7f1d1d">known-exploited lists</text>
+
+    <rect x="270" y="110" width="210" height="200" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="286" y="138" font-size="16" font-weight="700" fill="#334155">2 Match inventory</text>
+    <text x="286" y="164">SBOM: packages, images</text>
+    <text x="286" y="184">AI-BOM: model, version,</text>
+    <text x="286" y="204">digest, adapters</text>
+    <text x="286" y="224">prompt template versions</text>
+    <text x="286" y="244">guardrail + tool config</text>
+    <text x="286" y="264">owner of each asset</text>
+
+    <rect x="510" y="110" width="220" height="200" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="526" y="138" font-size="16" font-weight="700" fill="#166534">3 Priority in context</text>
+    <text x="526" y="164" fill="#14532d">start: advisory severity</text>
+    <text x="526" y="184" fill="#14532d">+1 known exploited</text>
+    <text x="526" y="204" fill="#14532d">+1 internet-facing with</text>
+    <text x="526" y="224" fill="#14532d">tools or sensitive data</text>
+    <text x="526" y="244" fill="#14532d">−1 internal, no tools,</text>
+    <text x="526" y="264" fill="#14532d">public data only</text>
+
+    <rect x="760" y="110" width="180" height="200" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="776" y="138" font-size="16" font-weight="700" fill="#166534">4 SLA clock</text>
+    <text x="776" y="164" fill="#14532d">example policy:</text>
+    <text x="776" y="188" fill="#14532d">critical   7 days</text>
+    <text x="776" y="208" fill="#14532d">high      30 days</text>
+    <text x="776" y="228" fill="#14532d">medium   90 days</text>
+    <text x="776" y="248" fill="#14532d">low      180 days</text>
+    <text x="776" y="272" fill="#14532d">overdue → escalate</text>
+
+    <rect x="970" y="110" width="190" height="200" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="986" y="138" font-size="16" font-weight="700" fill="#1e3a8a">5 Close</text>
+    <text x="986" y="164" fill="#1e3a8a">fix through the pipeline</text>
+    <text x="986" y="184" fill="#1e3a8a">re-run AI eval suites</text>
+    <text x="986" y="204" fill="#1e3a8a">(updates change behavior)</text>
+    <text x="986" y="228" fill="#1e3a8a">or accept with an end</text>
+    <text x="986" y="248" fill="#1e3a8a">date + compensating</text>
+    <text x="986" y="268" fill="#1e3a8a">controls</text>
+  </g>
+  <path d="M240 210 L268 210" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M480 210 L508 210" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M730 210 L758 210" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M940 210 L968 210" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <text x="40" y="358" font-size="17" font-weight="700" fill="#0f172a">Four kinds of AI weakness, one register</text>
+  <g font-size="13" fill="#334155">
+    <rect x="40" y="374" width="265" height="150" rx="10" fill="#f8fafc" stroke="#64748b"/>
+    <text x="56" y="400" font-size="15" font-weight="700">Dependency</text>
+    <text x="56" y="424">inference server, vector DB,</text>
+    <text x="56" y="444">tokenizer, SDK, GPU driver,</text>
+    <text x="56" y="464">base image packages</text>
+    <text x="56" y="494" fill="#475569">fix: upgrade, re-test, redeploy</text>
+
+    <rect x="325" y="374" width="265" height="150" rx="10" fill="#eff6ff" stroke="#2563eb"/>
+    <text x="341" y="400" font-size="15" font-weight="700" fill="#1e3a8a">Model</text>
+    <text x="341" y="424">jailbreak the model falls for,</text>
+    <text x="341" y="444">unsafe file format, provider</text>
+    <text x="341" y="464">deprecation or advisory</text>
+    <text x="341" y="494" fill="#475569">fix: new version, adapter, retire</text>
+
+    <rect x="610" y="374" width="265" height="150" rx="10" fill="#fffbeb" stroke="#d97706"/>
+    <text x="626" y="400" font-size="15" font-weight="700" fill="#92400e">Prompt</text>
+    <text x="626" y="424">template leaks tool schemas</text>
+    <text x="626" y="444">or business rules (hidden</text>
+    <text x="626" y="464">context exposure)</text>
+    <text x="626" y="494" fill="#475569">fix: move rules to code, re-test</text>
+
+    <rect x="895" y="374" width="265" height="150" rx="10" fill="#f0fdf4" stroke="#16a34a"/>
+    <text x="911" y="400" font-size="15" font-weight="700" fill="#166534">Config</text>
+    <text x="911" y="424">guardrail off, tool scope too</text>
+    <text x="911" y="444">wide, limits missing, key</text>
+    <text x="911" y="464">never rotated</text>
+    <text x="911" y="494" fill="#475569">fix: policy as code, drift alert</text>
+  </g>
+</svg>

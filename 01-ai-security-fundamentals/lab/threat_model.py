@@ -178,6 +178,27 @@ RULES: dict[str, str] = {
     "TRI-001": "Lethal trifecta",
 }
 
+# OWASP Top 10 for LLM Applications 2026 (released August 2026). Findings use these ids.
+OWASP_LLM_2026: dict[str, str] = {
+    "LLM01": "Prompt Injection",
+    "LLM02": "Sensitive Information Disclosure",
+    "LLM03": "Excessive Agency",
+    "LLM04": "Supply Chain",
+    "LLM05": "Data and Model Poisoning",
+    "LLM06": "Unbounded Consumption",
+    "LLM07": "Misinformation",
+    "LLM08": "Hidden Context Exposure",
+    "LLM09": "Vector and Embedding Weaknesses",
+    "LLM10": "Improper Output Handling",
+}
+
+# 2025 id -> 2026 id, for reading older reports and course material.
+OWASP_2025_TO_2026: dict[str, str] = {
+    "LLM01": "LLM01", "LLM02": "LLM02", "LLM03": "LLM04", "LLM04": "LLM05",
+    "LLM05": "LLM10", "LLM06": "LLM03", "LLM07": "LLM08", "LLM08": "LLM09",
+    "LLM09": "LLM07", "LLM10": "LLM06",
+}
+
 
 def severity(likelihood: int, impact: int) -> str:
     """Risk = likelihood x impact on a 1-5 scale (max 25)."""
@@ -198,7 +219,7 @@ class Finding:
     likelihood: int
     impact: int
     stride: str             # letters, e.g. "TE"
-    owasp: str              # OWASP LLM Top 10 2025 ids
+    owasp: str              # OWASP Top 10 for LLM Applications 2026 ids (see OWASP_2025 below)
     message: str
     fix: str
     status: str = "open"    # open | accepted
@@ -261,7 +282,7 @@ def analyze(design: Design, today: date | None = None) -> list[Finding]:
                         "Require authn (SSO/OIDC) at the first hop; derive identity server-side."))
 
         if src.type in ("actor", "external_source") and not _has(f, "rate_limit"):
-            add(Finding("DOS-001", f.id, 3, 3, "D", "LLM10",
+            add(Finding("DOS-001", f.id, 3, 3, "D", "LLM06",
                         f"No rate limit on the entry point {src.id} -> {dst.id}.",
                         "Add per-user, per-sender and per-tenant rate limits at the gateway."))
 
@@ -270,7 +291,7 @@ def analyze(design: Design, today: date | None = None) -> list[Finding]:
             impact = 5 if {"external_comms", "payment", "delete"} & set(dst.capabilities) else 4
             soft = [c for c in f.controls if CONTROLS[c] == "soft"]
             note = f" Soft controls present ({', '.join(soft)}) do not count." if soft else ""
-            add(Finding("TB-001", f.id, 4, impact, "TE", "LLM01, LLM06",
+            add(Finding("TB-001", f.id, 4, impact, "TE", "LLM01, LLM03",
                         f"Content from {sorted(tainted[src.id])} can drive {dst.id} with no hard gate.{note}",
                         "Add tool_authz (server-side policy with the user's permissions) and "
                         "human_approval for high-impact actions."))
@@ -278,14 +299,14 @@ def analyze(design: Design, today: date | None = None) -> list[Finding]:
         if src.type == "model" and dst.type != "model":
             need = "output_encoding" if dst.type == "ui" else "schema_validation"
             if not _has(f, need):
-                add(Finding("OUT-001", f.id, 4, 4, "TE", "LLM05",
+                add(Finding("OUT-001", f.id, 4, 4, "TE", "LLM10",
                             f"Output of {src.id} reaches {dst.id} without {need}.",
                             "Treat model output as untrusted input: validate against a strict "
                             "schema before tools; encode before rendering."))
 
         if src.type == "model" and dst.type == "tool" and f.identity == "service" \
                 and CLASSIFICATION[dst.classification] >= CLASSIFICATION["confidential"]:
-            add(Finding("ID-001", f.id, 3, 5, "E", "LLM06",
+            add(Finding("ID-001", f.id, 3, 5, "E", "LLM03",
                         f"{dst.id} runs with a shared service identity, not the end user's.",
                         "Call tools on behalf of the user (delegated, scoped token) so the "
                         "backend enforces the user's own permissions."))
@@ -295,7 +316,7 @@ def analyze(design: Design, today: date | None = None) -> list[Finding]:
             missing = [c for c in ("acl_filter",) + (("tenant_filter",) if src.multi_tenant else ())
                        if c not in f.controls]
             if missing:
-                add(Finding("RAG-001", f.id, 4, 5, "I", "LLM02, LLM08",
+                add(Finding("RAG-001", f.id, 4, 5, "I", "LLM02, LLM09",
                             f"{src.id} -> {dst.id} returns {f.classification} chunks without "
                             f"{', '.join(missing)}. Similarity is not authorization.",
                             "Filter by tenant and ACL inside the query, using the server-side "
@@ -312,7 +333,7 @@ def analyze(design: Design, today: date | None = None) -> list[Finding]:
                         "with no training on your data and a short retention period."))
 
         if dst.type == "model" and f.contains_secrets:
-            add(Finding("SEC-001", f.id, 4, 4, "I", "LLM07",
+            add(Finding("SEC-001", f.id, 4, 4, "I", "LLM08",
                         f"{f.id} puts a secret into the prompt of {dst.id}.",
                         "Keep secrets in server-side config; the prompt is not a vault."))
 
@@ -338,14 +359,14 @@ def analyze(design: Design, today: date | None = None) -> list[Finding]:
     for m in (c for c in design.components if c.type == "model"):
         inbound = [f for f in design.flows if f.target == m.id]
         if not any(_has(f, "token_budget") for f in inbound):
-            add(Finding("DOS-001", m.id, 3, 3, "D", "LLM10",
+            add(Finding("DOS-001", m.id, 3, 3, "D", "LLM06",
                         f"No token budget on any request to {m.id}.",
                         "Cap input and output tokens per request and per user per day."))
         tri = trifecta(design, m.id, tainted)
         if tri["private"] and tri["untrusted"] and tri["channels"]:
             ungated = [c for c in tri["channels"] if not c.endswith("(approval)")]
             likelihood = 5 if ungated else 3
-            add(Finding("TRI-001", m.id, likelihood, 5, "I", "LLM01, LLM02, LLM06",
+            add(Finding("TRI-001", m.id, likelihood, 5, "I", "LLM01, LLM02, LLM03",
                         f"{m.id} has private data {tri['private']}, untrusted content from "
                         f"{tri['untrusted']} and exfiltration channels {tri['channels']}.",
                         "Remove one leg: no external channel for this model, or no private data, "
@@ -456,7 +477,7 @@ def report(design: Design, today: date | None = None) -> str:
     for f in findings:
         tag = "" if f.status == "open" else " [ACCEPTED]"
         lines.append(f"[{f.severity.upper():8}] {f.rule:8} {f.target:20} score {f.score:2}  "
-                     f"STRIDE {f.stride:3} OWASP {f.owasp}{tag}")
+                     f"STRIDE {f.stride:3} OWASP:2026 {f.owasp}{tag}")
         lines.append(f"           {f.message}")
         lines.append(f"           fix: {f.fix}")
     open_ = [f for f in findings if f.status == "open"]

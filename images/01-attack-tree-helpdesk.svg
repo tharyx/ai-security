@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Attack tree: steal customer data through HelpDesk Copilot v0</title>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Attack tree: steal customer data through HelpDesk Copilot v0</text>
+  <text x="40" y="80" font-size="16" fill="#475569">OR: any child is enough. AND: every child is needed. Numbers are made-up estimates from attack_tree.py.</text>
+  <rect x="380" y="100" width="440" height="66" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="600" y="124" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">GOAL (OR): steal customer data</text>
+  <text x="600" y="144" text-anchor="middle" font-size="12" fill="#991b1b">P = 0.83 with no controls; cheapest path: cross-tenant RAG</text>
+  <rect x="40" y="210" width="520" height="66" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="300" y="234" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">AND: indirect injection via inbound email</text>
+  <text x="300" y="254" text-anchor="middle" font-size="12" fill="#92400e">P = 0.47</text>
+  <rect x="600" y="210" width="290" height="66" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="745" y="234" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">AND: secrets + PII from shared logs</text>
+  <text x="745" y="254" text-anchor="middle" font-size="12" fill="#92400e">P = 0.18</text>
+  <rect x="920" y="210" width="240" height="66" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1040" y="234" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">LEAF: cross-tenant RAG</text>
+  <text x="1040" y="254" text-anchor="middle" font-size="12" fill="#991b1b">P = 0.60; fix: ACL filter</text>
+  <line x1="600" y1="166" x2="300" y2="208" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="600" y1="166" x2="745" y2="208" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="600" y1="166" x2="1040" y2="208" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="40" y="320" width="165" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="122" y="344" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">hidden-text email</text>
+  <text x="122" y="364" text-anchor="middle" font-size="12" fill="#991b1b">0.95; fix: quarantine</text>
+  <line x1="300" y1="276" x2="122" y2="318" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="215" y="320" width="165" height="62" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="298" y="344" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">model follows injection</text>
+  <text x="298" y="364" text-anchor="middle" font-size="12" fill="#334155">0.50; soft controls only</text>
+  <line x1="300" y1="276" x2="297" y2="318" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="390" y="320" width="165" height="62" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="472" y="344" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">OR: get the data out</text>
+  <text x="472" y="364" text-anchor="middle" font-size="12" fill="#92400e">P = 0.996</text>
+  <line x1="300" y1="276" x2="472" y2="318" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="600" y="320" width="140" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="670" y="344" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">log platform access</text>
+  <text x="670" y="364" text-anchor="middle" font-size="12" fill="#991b1b">0.20; fix: restrict</text>
+  <line x1="745" y1="276" x2="670" y2="318" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="750" y="320" width="140" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="820" y="344" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">PII + key in logs</text>
+  <text x="820" y="364" text-anchor="middle" font-size="12" fill="#991b1b">0.90; fix: redact</text>
+  <line x1="745" y1="276" x2="820" y2="318" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="230" y="430" width="160" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="310" y="454" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">send_email tool</text>
+  <text x="310" y="474" text-anchor="middle" font-size="12" fill="#991b1b">0.90; fix: broker</text>
+  <line x1="472" y1="382" x2="310" y2="428" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="400" y="430" width="160" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="480" y="454" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">markdown image</text>
+  <text x="480" y="474" text-anchor="middle" font-size="12" fill="#991b1b">0.80; fix: allowlist</text>
+  <line x1="472" y1="382" x2="480" y2="428" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="570" y="430" width="160" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="650" y="454" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">http_fetch tool</text>
+  <text x="650" y="474" text-anchor="middle" font-size="12" fill="#991b1b">0.80; fix: egress</text>
+  <line x1="472" y1="382" x2="650" y2="428" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="40" y="515" width="1120" height="105" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="54" y="539" font-size="15" font-weight="700" fill="#166534">What the maths says</text>
+  <text x="54" y="559" font-size="13" fill="#166534">One hard control: ACL filter 0.83 to 0.57; quarantine the email reader 0.83 to 0.67; block ONE exit channel 0.83 to 0.82.</text>
+  <text x="54" y="576" font-size="13" fill="#166534">Soft control only (model follows injection 50% to 10%): 0.83 to 0.70. One hard control per branch (ACL, quarantine, redaction): 0.00.</text>
+  <text x="54" y="593" font-size="13" fill="#166534">Lesson: cut an AND branch at its cheapest hard leg; an OR node needs every child closed.</text>
+</svg>

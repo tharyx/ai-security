@@ -21,9 +21,10 @@ Every lesson follows the same pattern: **insecure configuration → a Python pol
 | 1 | [Secure IaC for AI infrastructure (Terraform)](terraform/) | 21–22 | A policy checker over `terraform show -json` plans, with expiring waivers | TF-AI-001 … 060 (17) |
 | 2 | [Secure model-serving images and model files (Docker)](docker/) | 23 | A Dockerfile linter and a pickle scanner that never loads the file | DF-001 … 012 (12) + model scan |
 | 3 | [Hardened model serving on Kubernetes](kubernetes/) | 23 | A manifest checker: PSS, network isolation, workload identity, GPU pools | K8S-001 … 017 (17) |
-| 4 | [Secure AI delivery pipelines (CI/CD)](cicd/) | 24 | A GitHub Actions linter and an AI release gate over an AI-BOM and eval evidence | GHA-001 … 011 (11) + GATE-001 … 010 |
+| 4 | [Secure AI delivery pipelines (CI/CD)](cicd/) | 24 | A GitHub Actions linter, an AI release gate over an AI-BOM and eval evidence, and a deployment approval check | GHA-001 … 011 (11) + GATE-001 … 010 + ENV/APR (11) |
+| 5 | [AI runtime security](runtime-security/) | 24 | A vulnerable vs secure model-serving gateway (auth, model access, limits, vault, redacted logs, spans), a runtime monitor and an AI vulnerability register | L1–L8 + RT-001 … 007 |
 
-Week mapping from the [36-week plan](../00-program/36-week-plan.md): week 21 = secure AI SDLC and design-time gates (this page + Terraform); week 22 = model/dataset provenance and artifacts (Terraform artifact storage, the AI-BOM in [CI/CD](cicd/), model files in [Docker](docker/)); week 23 = containers, Kubernetes, secrets, network and workload identity; week 24 = CI/CD, adversarial testing gates, telemetry and incident response (Phase 6 gate).
+Week mapping from the [36-week plan](../00-program/36-week-plan.md): week 21 = secure AI SDLC and design-time gates (this page + Terraform); week 22 = model/dataset provenance and artifacts (Terraform artifact storage, the AI-BOM in [CI/CD](cicd/), model files in [Docker](docker/)); week 23 = containers, Kubernetes, secrets, network and workload identity; week 24 = CI/CD, adversarial testing gates, deployment approvals, then [runtime security](runtime-security/): secrets, model access control, gateway limits, telemetry, vulnerability management and incident response (Phase 6 gate).
 
 Run every lab test in the module:
 
@@ -31,7 +32,7 @@ Run every lab test in the module:
 python -m pytest 06-ai-devsecops
 ```
 
-Expected: `123 passed`.
+Expected: `173 passed`.
 
 ## Module architecture
 
@@ -46,7 +47,7 @@ Six things move to production, and each has its own gate:
 | **Model** | Pickle code execution, swapped weights, untested upgrades | safetensors only, model scan, AI eval bound to the digest, signature | [Docker](docker/), [CI/CD](cicd/) |
 | **Image** | Secrets in layers, root, big attack surface, CVEs | Multi-stage distroless, non-root, digest-pinned, SBOM, signed | [Docker](docker/) |
 | **Deploy** | Public endpoints, static keys, wildcard IAM, privileged pods | Policy as code on plans and manifests, OIDC, private endpoints, admission control | [Terraform](terraform/), [Kubernetes](kubernetes/) |
-| **Runtime** | Prompt injection with an exit path, exfiltration, GPU/cost abuse | Default-deny egress, quotas and limits, security telemetry, incident playbooks | [Kubernetes](kubernetes/), this page |
+| **Runtime** | Stolen keys, prompt injection with an exit path, exfiltration, GPU/cost abuse, unpatched runtimes | Gateway auth and model entitlements, quotas and limits, vault-managed keys, default-deny egress, security telemetry and detection, vulnerability SLAs, incident playbooks | [Runtime security](runtime-security/), [Kubernetes](kubernetes/), this page |
 
 The enterprise view of the same ideas, used again in the capstone:
 
@@ -78,6 +79,8 @@ The enterprise view of the same ideas, used again in the capstone:
 Threats this inventory helps with: malicious model files, compromised dependencies, poisoned datasets, unauthorized adapters and unreviewed model upgrades.
 
 ## Operate: telemetry and incident response (week 24)
+
+The hands-on version of this section is the [runtime security lesson](runtime-security/): a gateway that emits these fields as spans, detection rules over them, and a vulnerability register.
 
 **Security telemetry to collect** for every AI request (attributable, but redacted):
 
@@ -138,12 +141,13 @@ Use the [AI incident playbook template](../00-program/templates/ai-incident-play
 
 ## How the lessons connect
 
-All four labs use the same fictional team, *support-llm*, so the pieces fit together:
+All five labs use the same fictional team, *support-llm*, so the pieces fit together:
 
 1. **Terraform** builds the private platform: model bucket (CMEK, versioning), private model endpoint, private vector DB, and a CI role trusted through OIDC for *one* repo and environment (TF-AI-042).
 2. **Docker** builds the model-server image that runs there. It only accepts safetensors weights (DF-011, `pickle_scan.py`) and runs non-root on a distroless base.
 3. **Kubernetes** runs that image with PSS `restricted`, read-only FS, default-deny egress and workload identity, so the pod reads the model bucket from step 1 without a key (K8S-010).
 4. **CI/CD** ties it together: the release workflow uses the OIDC role from step 1 (GHA-005), scans the model with the Docker lesson's scanner, re-runs the Module 02 prompt-injection suite, and the release gate checks that the eval ran on the exact model digest in the AI-BOM before the signed image is deployed by digest.
+5. **Runtime security** runs in front of the deployed model: a gateway that authenticates each team's key, allows only entitled deployments, enforces token limits, reads the provider key from a vault at call time, and emits redacted spans that a monitor turns into alerts. Advisories for the components in the AI-BOM land in a vulnerability register with SLAs.
 
 The same rule shows up at several layers on purpose: "no static cloud keys" is TF-AI-041, K8S-010 and GHA-005. Defense in depth means a mistake that slips past one checker is caught by the next.
 
@@ -156,7 +160,9 @@ Build, in your own repository:
 1. **IaC** for the model store and endpoint (any cloud, or plan-only), checked by the Terraform policy checker in CI, with at least one documented waiver that expires.
 2. **A Dockerfile** for the app that passes the Docker linter, with weights in safetensors and a model scan step.
 3. **Kubernetes manifests** that pass the Kubernetes checker (PSS restricted, default deny, workload identity, limits).
-4. **A release workflow** that passes the workflow linter in `--release` mode, runs your AI security suites, writes JUnit, and calls the release gate with an AI-BOM you maintain.
+4. **A release workflow** that passes the workflow linter in `--release` mode, runs your AI security suites (including the [red-team harness](../02-llm-security/security-testing/)), writes JUnit, and calls the release gate with an AI-BOM you maintain.
+5. **A protected `production` environment** with required reviewers and self-review prevented, checked by `deploy_approval.py` (approval bound to the image digest).
+6. **A gateway in front of your model** with per-team model entitlements, token limits, a vault-held provider key, redacted logs and spans, plus three detection rules from the [runtime security lab](runtime-security/).
 
 **Prove it (record these in your journal):**
 
@@ -171,6 +177,8 @@ Build, in your own repository:
 - [ ] No static cloud keys where federation is available.
 - [ ] Containers hardened (non-root, read-only FS, digest-pinned).
 - [ ] Logs are attributable and redacted.
+- [ ] All six Portfolio Project 6 capabilities are present: model scanning, dependency scanning, secrets detection, LLM security tests, policy gates, deployment approvals ([coverage table](cicd/)).
+- [ ] A provider key rotation was rehearsed and the old key was proven denied.
 - [ ] One incident playbook from the table above was tabletop-tested, with notes.
 
 ## Interview questions (system design, cross-cutting)
@@ -276,13 +284,49 @@ The base practices (pinning, least privilege, signing, policy as code) are the s
 - NIST SP 800-218, *Secure Software Development Framework (SSDF)*: https://csrc.nist.gov/pubs/sp/800/218/final
 - NIST SP 800-218A, *SSDF Community Profile for Generative AI and Dual-Use Foundation Models* (2024): https://csrc.nist.gov/pubs/sp/800/218/a/final
 - NIST AI RMF 1.0 and the Generative AI Profile (NIST AI 600-1): https://www.nist.gov/itl/ai-risk-management-framework
-- OWASP Top 10 for LLM Applications 2025: https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (renumbered from 2025; e.g. Supply Chain is now LLM04, Unbounded Consumption LLM06): https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications (ASI01–ASI10) and OWASP MCP Top 10 (beta): https://genai.owasp.org/ · https://owasp.org/www-project-mcp-top-10/
+- CERT-In, *AI Security Auditing Guidelines* v1.0: https://www.cert-in.org.in/
 - OWASP Top 10 CI/CD Security Risks: https://owasp.org/www-project-top-10-ci-cd-security-risks/
 - SLSA: https://slsa.dev/ · Sigstore: https://www.sigstore.dev/ · CycloneDX ML-BOM: https://cyclonedx.org/capabilities/mlbom/
 - NIST SP 800-190, *Application Container Security Guide*: https://csrc.nist.gov/pubs/sp/800/190/final
 - Kubernetes Pod Security Standards: https://kubernetes.io/docs/concepts/security/pod-security-standards/
 - MITRE ATLAS (AML.T0010 ML Supply Chain Compromise): https://atlas.mitre.org/
 - Lesson-specific references are at the end of each lesson.
+
+
+## Roadmap coverage
+
+How the roadmap's Phase 6 topics (and the related capstone layers) map to this module:
+
+| Roadmap topic | Where it is covered |
+|---|---|
+| Secure AI SDLC | This page ([lifecycle gates](#secure-ai-sdlc-the-lifecycle-gates)), [CI/CD §2.1](cicd/) |
+| Model and dataset supply chain | [CI/CD §2.3–2.4](cicd/) (AI-BOM), [Docker](docker/) (model files) |
+| Artifact integrity and provenance | [CI/CD](cicd/) GATE-001/007, SLSA, cosign; [Docker](docker/) digests |
+| AI CI/CD security | [CI/CD](cicd/) GHA-001 … 011, release gate |
+| Container and K8s security for AI | [Docker](docker/), [Kubernetes](kubernetes/) |
+| Secrets management | [Runtime security §2.2](runtime-security/) (vault, rotation, never in prompts or logs); GHA-005, DF-004, K8S-009/010, TF-AI-041 |
+| API gateway and rate limiting | [Runtime security §2.4](runtime-security/); full LLM gateway architecture in [Module 09](../09-enterprise-architecture/) |
+| Model access control | [Runtime security §2.3](runtime-security/) (deployment entitlements, team quotas) |
+| AI runtime monitoring | [Runtime security §2.5](runtime-security/) (telemetry, spans, RT-001 … 007); [Operate](#operate-telemetry-and-incident-response-week-24) below |
+| AI red teaming and adversarial testing | [02 security testing](../02-llm-security/security-testing/) (harness, N runs, CI gate), wired in by [CI/CD](cicd/) stage 5 and GATE-009 |
+| AI vulnerability management | [Runtime security §2.6](runtime-security/) (`vuln_register.py`, SLAs, risk acceptance) |
+| Infrastructure as code | [Terraform](terraform/) |
+| Portfolio Project 6 (model scanning, dependency scanning, secrets detection, LLM security tests, policy gates, deployment approvals) | [CI/CD §2.8](cicd/) coverage table; approvals in `deploy_approval.py` |
+| Skills matrix: "implement monitoring and incident response" | [Runtime security §2.5–2.7](runtime-security/), incident table on this page, [capstone incident exercise](../10-capstone-project/03-red-team-and-incident-exercise.md) |
+
+## Further reading from your library
+
+Read these by title in your `Documents/` folder (not committed to the repo):
+
+- **CERT-In, *AI Security Auditing Guidelines* v1.0**: §8.6 (security, adversarial resilience, incident reporting), §10.3 and §10.3.1 (infrastructure hardening, secrets, patch SLAs, secure MLOps/LLMOps pipeline), §10.4 (AI-specific VAPT), §10.5 (SOC integration and AI detection rules). Best source for "what will an auditor ask for".
+- **ISC2 AI Security pilot exam study guide** (a community guide, not an official ISC2 publication): Domain 5, *Secure AI Operations and Incident Response*: telemetry list, triage taxonomy, containment ladder, preserve-versus-contain, vulnerability prioritization by context.
+- ***AI Cyber Incident Playbook*** (Izzmier Izzuddin): the stolen model gateway key case and the cloud-abuse-for-AI-workloads case; study how each detection is written as stages on one entity in a time window, and the "benign explanations to test" sections.
+- ***SentriX AI SOC* project overview**: an AI-assisted SOC design that correlates before the model, applies deterministic policy after it, and leaves response to the analyst. A good portfolio-project pattern.
+- ***API Security Testing Handbook*** (Yamini Yadav): the rate-limiting and authentication chapters (how limits are bypassed, what to test) and sensitive data exposure.
+- ***End-to-End API Security***: the API gateway pattern, API key versus OAuth/OIDC, rate limiting, payload protection, data masking and security-context propagation with JWTs.
+- ***Mastering AI-Powered DevSecOps*** (Brine Ketum): the chapters on securing AI/ML pipelines and on automated vulnerability remediation (automation levels). Skim; treat its statistics as marketing claims, not evidence.
 
 ---
 

@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Lesson 01](01-ai-ml-llm-basics-for-security.md) (tokens, RAG, tool calling) |
 | **Lab** | [`lab/threat_model.py`](lab/threat_model.py) and [`lab/designs/`](lab/designs/): part 1, "describe the system" |
-| **Maps to** | OWASP LLM01 Prompt Injection, LLM05 Improper Output Handling, LLM06 Excessive Agency · MITRE ATLAS AML.T0051 (LLM Prompt Injection) · NIST AI RMF: MAP 1, MAP 3 |
+| **Maps to** | OWASP Top 10 for LLM Applications 2026: LLM01:2026 Prompt Injection, LLM10:2026 Improper Output Handling (was LLM05:2025), LLM03:2026 Excessive Agency (was LLM06:2025) · OWASP Agentic ASI01 Agent Goal Hijack, ASI02 Tool Misuse · OWASP MCP06 Prompt Injection via Contextual Payloads · MITRE ATLAS AML.T0051 (LLM Prompt Injection) · NIST AI RMF: MAP 1, MAP 3 |
 
 ---
 
@@ -100,7 +100,7 @@ In this design, 12 of 13 flows cross a trust boundary, and one untrusted source 
 
 ![Model output sinks and the control each needs](../images/01-model-output-sinks.svg)
 
-Treat model output exactly like user input arriving at each **sink** (the place that uses it). The sink knows what "dangerous" means: HTML for a browser, SQL for a database, a URL for an HTTP client. This is OWASP **LLM05 Improper Output Handling**. The LangChain `exec` CVE above is a textbook example.
+Treat model output exactly like user input arriving at each **sink** (the place that uses it). The sink knows what "dangerous" means: HTML for a browser, SQL for a database, a URL for an HTTP client. This is OWASP **LLM10:2026 Improper Output Handling** (was LLM05:2025). The LangChain `exec` CVE above is a textbook example.
 
 ### 2.7 Identity propagation and the confused deputy
 
@@ -249,7 +249,7 @@ Run `python 01-ai-security-fundamentals/lab/threat_model.py 01-ai-security-funda
 
 **Scenario A: the report generator that ran SQL (hypothetical).**
 An analytics assistant turns questions into SQL. The model's SQL runs with the app's database account. A user types: "show my sales; also drop the audit table".
-- *What went wrong:* model output went straight into a SQL sink with a powerful account. That is LLM05 plus excessive privilege.
+- *What went wrong:* model output went straight into a SQL sink with a powerful account. That is LLM10:2026 (improper output handling) plus excessive privilege (LLM03:2026).
 - *Investigate:* database audit logs for statements from the app account; the prompt and generated SQL in the AI logs; which tables the account can change.
 - *Fix:* read-only database role limited to approved views; row-level security by user; parse the SQL and allow only `SELECT` on allowlisted tables; better still, have the model fill parameters for pre-written queries.
 
@@ -367,7 +367,7 @@ Code can be reviewed in pull requests, versioned with the system, checked automa
 - NVD, CVE-2023-29374 (LangChain LLMMathChain), https://nvd.nist.gov/vuln/detail/CVE-2023-29374
 - Johann Rehberger, *Hacking Google Bard: From Prompt Injection to Data Exfiltration* (2023), https://embracethered.com/blog/posts/2023/google-bard-data-exfiltration/
 - NVD, CVE-2025-32711 (Microsoft 365 Copilot "EchoLeak"), https://nvd.nist.gov/vuln/detail/CVE-2025-32711
-- OWASP Top 10 for LLM Applications 2025: LLM05 Improper Output Handling, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026: LLM10:2026 Improper Output Handling (verify at the source), https://genai.owasp.org/llm-top-10/
 - Microsoft, *Threat Modeling Tool* and DFD element guidance, https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool
 - IETF RFC 8693, *OAuth 2.0 Token Exchange*, https://www.rfc-editor.org/rfc/rfc8693
 - NIST AI RMF 1.0, https://www.nist.gov/itl/ai-risk-management-framework

@@ -48,14 +48,24 @@ def sec_result():
 
 def test_suite_loads_and_covers_the_key_owasp_risks():
     owasp = {c.owasp for c in SUITE.cases if not c.benign}
-    assert {"LLM01", "LLM05", "LLM06", "LLM07", "LLM10"} <= owasp
+    # OWASP LLM Top 10 2026 IDs: 01 injection, 03 agency, 06 consumption, 08 hidden context,
+    # 10 output handling (2025: 01, 06, 10, 07, 05).
+    assert {"LLM01", "LLM03", "LLM06", "LLM08", "LLM10"} <= owasp
     assert any(c.benign for c in SUITE.cases), "a suite without benign cases cannot see over-blocking"
+
+
+def test_every_attack_case_maps_to_an_ai_testing_guide_test():
+    """Shared IDs (OWASP AI Testing Guide) make findings comparable across teams and audits."""
+    attacks = [c for c in SUITE.cases if not c.benign]
+    assert all(c.aitg for c in attacks)
+    assert {"AITG-APP-01", "AITG-APP-05", "AITG-APP-06", "AITG-APP-07", "AITG-INF-02"} <=         {c.aitg for c in attacks}
 
 
 @pytest.mark.parametrize("bad_case", [
     {"detector": {"type": "contains_secret"}},           # unknown detector type
     {"detector": {"type": "contains"}},                  # detector without a value
     {"owasp": "LLM11"},                                  # not an OWASP LLM Top 10 id
+    {"aitg": "AITG-XYZ-01"},                             # not an AI Testing Guide category
     {"severity": "urgent"},                              # unknown severity
     {"turns": []},                                       # nothing to send
     {"detectr": {"type": "refused"}},                    # typo in a field name

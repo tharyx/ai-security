@@ -1,13 +1,13 @@
 # Secure AI Delivery Pipelines (CI/CD)
 
 > **Module:** 06 · AI DevSecOps · **Week:** 24 (builds on weeks 21–22: secure AI SDLC and model provenance) · **Time:** ~12 hours
-> **You will:** lint GitHub Actions workflows for the attacks that hit real projects, rebuild a release pipeline with every AI secure-delivery stage, and write an **AI release gate** that approves a model only when the AI-BOM and the eval evidence prove it is safe to ship.
+> **You will:** lint GitHub Actions workflows for the attacks that hit real projects, rebuild a release pipeline with every AI secure-delivery stage, write an **AI release gate** that approves a model only when the AI-BOM and the eval evidence prove it is safe to ship, and check that the **production deployment approval** is real (protected environment, separation of duties, same digest).
 
 | | |
 |---|---|
 | **Prerequisites** | Git and GitHub basics; YAML; the [prompt-injection lab](../../02-llm-security/prompt-injection/) (its test suite becomes a release gate here); the [Docker lesson](../docker/) for model scanning |
 | **Lab** | [`lab/`](lab/): runs offline, no GitHub account needed |
-| **Maps to** | OWASP LLM03:2025 Supply Chain · OWASP Top 10 CI/CD Security Risks · SLSA · NIST SP 800-218 / 800-218A (SSDF) · MITRE ATLAS AML.T0010 · NIST AI RMF *MEASURE* / *MANAGE* |
+| **Maps to** | OWASP LLM04:2026 Supply Chain [LLM03:2025] · OWASP Agentic ASI04 Agentic Supply Chain · OWASP MCP04 Software Supply Chain Attacks & Dependency Tampering · OWASP Top 10 CI/CD Security Risks · SLSA · NIST SP 800-218 / 800-218A (SSDF) · MITRE ATLAS AML.T0010 · NIST AI RMF *MEASURE* / *MANAGE* |
 
 ---
 
@@ -52,7 +52,7 @@ Every stage of an AI system's life produces **evidence**. The pipeline's job is 
 | 2 | SAST | Bandit, Semgrep, CodeQL | High-confidence high severity |
 | 3 | Dependency audit | pip-audit, OSV-Scanner, Dependabot | Known-exploited / critical vulnerabilities |
 | 4 | Unit + authorization tests | pytest | Any failure |
-| 5 | **AI security eval** | The [prompt-injection regression suite](../../02-llm-security/prompt-injection/), RAG tenant-isolation tests, MCP/agent tool-authorization tests, garak, PyRIT, promptfoo | Hard-control tests < 100%; soft metrics under threshold |
+| 5 | **AI security eval and red-team regression** | The [prompt-injection regression suite](../../02-llm-security/prompt-injection/), the [red-team harness with N runs per attack and a CI gate](../../02-llm-security/security-testing/), RAG tenant-isolation tests, MCP/agent tool-authorization tests, garak, PyRIT, promptfoo | Hard-control tests < 100%; attack success rate over threshold |
 | 6 | **Model scan + provenance** | `pickle_scan.py` ([Docker lesson](../docker/)), ModelScan; digest and source check | Unsafe format, unknown source, digest mismatch |
 | 7 | Image build + scan | Docker/BuildKit, Trivy, Grype | Critical CVEs in reachable packages |
 | 8 | SBOM + AI-BOM | Syft, CycloneDX tools | Missing BOM |
@@ -117,6 +117,49 @@ A YAML detail every tool must handle: YAML 1.1 parsers (including PyYAML) read t
 | GATE-009 | Eval suites | Required suite missing; injection and leakage < 100%; jailbreak < 95% |
 | GATE-010 | Dependency audit | Any critical vulnerability, or no audit result |
 
+### 2.7 Deployment approvals and environment protection
+
+A release gate proves the **evidence** is good. A deployment approval proves a **person with authority** looked at that evidence and said yes, for **this** artifact. In GitHub Actions this is a deployment *environment* (for example `production`) with protection rules. Other CI systems have the same idea (protected stages, manual approvals, change records).
+
+![Deployment approval: environment protection plus an approval bound to the digest](../../images/06-cicd-deployment-approval.svg)
+
+`deploy_approval.py` checks two things from records:
+
+| Check | Sev | Fails when |
+|---|---|---|
+| ENV-001 | HIGH | The production environment has no required reviewers |
+| ENV-002 | HIGH | Self-review is not prevented (the person who triggered the run can approve it) |
+| ENV-003 | HIGH | Any branch can deploy (no protected-branch or custom branch policy) |
+| ENV-004 | MEDIUM | Administrators can bypass the protection rules |
+| ENV-005 | HIGH | Long-lived cloud keys are stored as environment secrets (use OIDC) |
+| APR-001 | HIGH | No approved review is recorded |
+| APR-002 | CRITICAL | The approver started the release or authored its commits (no separation of duties) |
+| APR-003 | HIGH | The approver is not in the approver group |
+| APR-004 | CRITICAL | The approval, the release gate and the deploy step name different image digests |
+| APR-005 | HIGH | The gate did not pass, or the approval is older than the gate evidence |
+| APR-006 | MEDIUM | The approval is stale (default: older than 24 hours) |
+
+Why these matter:
+
+- **Separation of duties.** The person who builds or trains a model should not be the person who approves it for production. The CERT-In *AI Security Auditing Guidelines* (§10.3.1) expect production model promotion to need an approval independent of whoever started the build, where risk warrants. They also say automated retraining must not promote a model to production without validation and approval.
+- **Approve the digest, not the name.** "Approved v3" means nothing if a different image is deployed under the same tag. APR-004 binds the human decision to the digest the gate tested and the deploy step uses.
+- **Approve after the evidence.** An approval given before the gate ran approved a promise, not a result (APR-005).
+
+The environment JSON is modeled on the settings GitHub shows for an environment (required reviewers, prevent self-review, deployment branch policy, admin bypass, environment secrets). Field names change over time, so check the GitHub REST docs. In a real pipeline, a compliance job can fetch the run's review history from the GitHub API and pass it to this check, and keep the output as audit evidence.
+
+### 2.8 Portfolio Project 6 coverage: the AI DevSecOps pipeline
+
+The roadmap's Portfolio Project 6 asks for six capabilities. This is where each one lives:
+
+| Capability | In the pipeline | Lab evidence |
+|---|---|---|
+| **Model scanning** | Model file scan (stage 6), safetensors only, digest in the AI-BOM | `pickle_scan.py` ([Docker](../docker/)), GATE-002, GATE-005 |
+| **Dependency scanning** | `pip-audit` / OSV-Scanner (stage 3), image scan (stage 7), SBOM | GHA-009 "dependency audit", GATE-010; runtime follow-up in the [vulnerability register](../runtime-security/) |
+| **Secrets detection** | gitleaks / trufflehog with push protection (stage 1); no static cloud keys | GHA-009 "secret scan", GHA-005, ENV-005, DF-004, K8S-009/010 |
+| **LLM security tests** | Prompt-injection, leakage and jailbreak suites; red-team harness with N runs | GATE-009, JUnit import (Step 4), [02 security testing](../../02-llm-security/security-testing/) |
+| **Policy gates** | Workflow linter, Terraform and Kubernetes policy checks, the AI release gate | GHA-001 … 011, TF-AI-*, K8S-*, GATE-001 … 010 |
+| **Deployment approvals** | Protected `production` environment, required reviewers, approval bound to the digest | GHA-010, ENV-001 … 005, APR-001 … 006 (Step 5) |
+
 ---
 
 ## 3. Defend it
@@ -138,6 +181,7 @@ A YAML detail every tool must handle: YAML 1.1 parsers (including PyYAML) read t
 - **Plan with read, apply with write.** Separate jobs, separate cloud roles, and only the protected branch through a protected environment gets the write role (see TF-AI-042 in the [Terraform lesson](../terraform/)).
 - **Fail closed on evidence.** "No report" is a failure, not a skip.
 - **Exceptions are code.** Thresholds and waivers live in reviewed files with owners and expiry dates, not in someone's memory.
+- **Red-team regressions are tests.** Every attack that worked once (from a red-team exercise, a bug bounty or an incident) becomes a case in the [red-team suite](../../02-llm-security/security-testing/) and runs in CI with N attempts and a success-rate threshold. Scheduled runs catch provider-side model changes.
 - **Eval on every behavior change.** Model version, prompt template, tool list, retrieval config, guardrail config: each triggers the AI eval suite, and the result is bound to the new digest.
 
 ### What does NOT work on its own
@@ -160,7 +204,8 @@ A YAML detail every tool must handle: YAML 1.1 parsers (including PyYAML) read t
 | [`lab/secure/release.yml`](lab/secure/release.yml), [`pr-eval-bot.yml`](lab/secure/pr-eval-bot.yml) | Hardened workflows (placeholder SHAs, clearly fake) |
 | [`lab/workflow_lint.py`](lab/workflow_lint.py) | The workflow linter: 11 rules |
 | [`lab/release_gate.py`](lab/release_gate.py) | The AI release gate: 10 checks, JUnit import |
-| [`lab/fixtures/`](lab/fixtures/) | Good/bad AI-BOMs, good/bad eval reports, a tiny `support-llm-v3.safetensors` |
+| [`lab/deploy_approval.py`](lab/deploy_approval.py) | The deployment approval check: 5 environment rules and 6 approval checks |
+| [`lab/fixtures/`](lab/fixtures/) | Good/bad AI-BOMs, good/bad eval reports, a tiny `support-llm-v3.safetensors`, good/bad environment settings and approval records, a gate result |
 
 ### Step 1: Run the scorecard
 
@@ -285,13 +330,39 @@ RELEASE APPROVED
 
 The JUnit results replace the `prompt_injection` suite in the report, and `generated_at` becomes "now". Your timing line will differ.
 
-### Step 5: Run the tests
+### Step 5: Check the deployment approval
+
+The gate passed. Now a human approves the production deployment. Check that the approval is real:
+
+```powershell
+python 06-ai-devsecops/cicd/lab/deploy_approval.py --environment 06-ai-devsecops/cicd/lab/fixtures/env-production.bad.json --approval 06-ai-devsecops/cicd/lab/fixtures/approval.bad.json --gate 06-ai-devsecops/cicd/lab/fixtures/gate-result.good.json --deploy-digest sha256:4f9c2a7e1b3d5c6a8e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d --now 2026-11-18T12:00:00Z
+```
+
+```text
+FAIL  ENV-001  HIGH     Production environment requires reviewers  -> 0 reviewer entries, need 1
+FAIL  ENV-002  HIGH     Self-review is prevented  -> prevent_self_review is not enabled
+FAIL  ENV-003  HIGH     Only protected branches can deploy  -> any branch can deploy to this environment
+FAIL  ENV-004  MEDIUM   Administrators cannot bypass protection  -> admins can bypass (or the setting is unknown)
+FAIL  ENV-005  HIGH     No long-lived cloud keys stored as environment secrets  -> long-lived cloud credentials as secrets: ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY']; use OIDC
+ok    APR-001  HIGH     A recorded human approval exists
+FAIL  APR-002  CRITICAL Approver is not the person who started the release  -> approved by 'lee.dev', release started by 'lee.dev'
+FAIL  APR-003  HIGH     Approver belongs to the approver group  -> 'lee.dev' is not in the approver group
+FAIL  APR-004  CRITICAL Approval, release gate and deploy name the same digest  -> digest mismatch: approval=sha256:9a8b7c6d5e4f, gate=sha256:4f9c2a7e1b3d, deploy=sha256:4f9c2a7e1b3d
+FAIL  APR-005  HIGH     Approval came after a passing release gate  -> gate did not pass, or the approval is older than the gate evidence
+ok    APR-006  MEDIUM   Approval is fresh
+
+DEPLOY BLOCKED
+```
+
+APR-001 passes: there **is** an approval. That is the trap. The developer approved their own release, before the gate ran, for a different image. Now run the same command with `env-production.good.json` and `approval.good.json`: every line is `ok` and it ends with `DEPLOY APPROVED`.
+
+### Step 6: Run the tests
 
 ```powershell
 python -m pytest 06-ai-devsecops/cicd -v
 ```
 
-### Step 6: Break it yourself
+### Step 7: Break it yourself
 
 Predict, then run:
 
@@ -300,8 +371,9 @@ Predict, then run:
 3. In the secure `pr-eval-bot.yml`, move `${{ github.event.pull_request.title }}` from `env:` directly into the `echo`. Which rule fires? Write a PR title that would run a command (on paper only).
 4. In a copy of `02-llm-security/prompt-injection/lab/secure_app.py`, change the default of `enforce_tool_policy` to `False`, re-run Step 4, and watch GATE-009 block the release. **Revert the change afterwards.** This is the whole point of the gate: a regression in a hard control can't ship.
 5. In `eval-report.good.json`, change one character of `model.sha256`. Which check fails, and what real-world mistake does it represent?
+6. In `approval.good.json`, set `"approved_by": "lee.dev"`. Which two checks fail? Then set it back, set `triggered_by` to `release-bot`, and put `priya.sec` in `commit_authors`. Why should a commit author not approve, even if a bot started the run?
 
-### Step 7: Real tools (optional)
+### Step 8: Real tools (optional)
 
 None of these is needed for the tests.
 
@@ -343,6 +415,12 @@ A contributor opens a PR that changes `conftest.py`. Your eval bot uses `pull_re
 - *What went wrong:* fork code ran in a privileged context (secrets, write token) on a persistent machine inside your network. This is the pattern from the PyTorch runner research.
 - *Investigate:* the workflow run's logs and the runner host: new processes, cron jobs, outbound connections, modified tool caches; tokens and secrets visible to that job.
 - *Fix:* treat the runner as compromised and rebuild it. Move PR evals to `pull_request` on GitHub-hosted or ephemeral, isolated runners with no secrets. Run privileged GPU evals only after a maintainer approves, on a merged commit, or through a `workflow_run` design that never executes PR code.
+
+**Scenario D: approved, but not what was deployed.**
+An auditor asks for evidence that the model running in production was approved. The change ticket says "approved v3.0.0". The running image digest does not match any image the release gate tested.
+- *What went wrong:* the approval named a tag, and the tag was re-pushed after a hotfix. The deploy job pulled by tag. The person who pushed the hotfix also clicked "approve".
+- *Investigate:* compare the deployed digest with the gate result and the approval record; read the environment's protection settings and audit log; list who approved and who triggered each run.
+- *Fix:* deploy by digest only; bind approvals to the digest (APR-004); require reviewers with self-review prevented (ENV-001, ENV-002, APR-002); block admin bypass (ENV-004); run the approval check in the pipeline and keep its output as evidence.
 
 ---
 
@@ -464,6 +542,23 @@ Plus scheduled runs, because hosted models can change underneath you.
 "Before any new version of our AI goes live, an automatic checkpoint checks the paperwork: is this exactly the model we tested, did it pass our security tests, do we have the rights to use it and its data, and did it come from a source we trust? If any answer is 'no' or 'we don't know', it doesn't ship. That turns 'we think it's fine' into proof we can show auditors and customers."
 </details>
 
+<details><summary><b>Q15. What makes a production deployment approval meaningful, and how do you check it automatically?</b></summary>
+
+Four things:
+
+- The environment really requires reviewers, prevents self-review, allows only protected branches and blocks admin bypass.
+- The approver is in the approver group and is neither the person who started the release nor an author of its commits (separation of duties).
+- The approval came **after** a passing release gate.
+- The approval, the gate result and the deploy step all name the **same digest**.
+
+A small check like `deploy_approval.py` reads the environment settings and the run's review history and fails closed if any of this is missing.
+</details>
+
+<details><summary><b>Q16. How do AI red teaming and adversarial testing fit into the pipeline?</b></summary>
+
+At two speeds. In every PR and release: a deterministic regression suite against a mock (hard controls must pass 100%), and a red-team harness that runs each known attack N times against the real model and gates on the success rate per category ([02 security testing](../../02-llm-security/security-testing/)). On a schedule and before major releases: broader exploratory red teaming by people, with tools like garak, PyRIT or promptfoo. Every new finding becomes a regression case. If it shows a weakness that cannot be fixed at once, it also becomes an entry in the [vulnerability register](../runtime-security/) with an SLA.
+</details>
+
 ---
 
 ## 8. Checklist (definition of done)
@@ -471,7 +566,8 @@ Plus scheduled runs, because hosted models can change underneath you.
 - [ ] I can explain pwn requests, script injection, tag hijacking and OIDC subject checks without notes.
 - [ ] `python -m pytest 06-ai-devsecops/cicd` passes.
 - [ ] I ran Step 4 and saw the Module 02 suite feed the release gate.
-- [ ] I did the five "break it yourself" steps (and reverted step 4).
+- [ ] I did the six "break it yourself" steps (and reverted step 4).
+- [ ] I ran Step 5 and can explain why "an approval exists" is not the same as "the deployment is approved".
 - [ ] Optional: I ran zizmor or actionlint on the vulnerable workflows.
 - [ ] Week 24 journal entry: my release gate policy (which suites, which thresholds, who can grant exceptions).
 
@@ -487,4 +583,6 @@ Plus scheduled runs, because hosted models can change underneath you.
 - CISA alert on `tj-actions/changed-files` (CVE-2025-30066), March 2025: https://www.cisa.gov/
 - Codecov, *Bash Uploader security update* (2021): https://about.codecov.io/security-update/
 - John Stawinski, *Playing with Fire: How We Executed a Critical Supply Chain Attack on PyTorch* (2024): https://johnstawinski.com/
+- GitHub Docs, *Managing environments for deployment* (required reviewers, prevent self-review, deployment branches): https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment
+- CERT-In, *AI Security Auditing Guidelines* v1.0 (§10.3.1 secure MLOps/LLMOps pipeline controls): https://www.cert-in.org.in/
 - OpenSSF Scorecard: https://securityscorecards.dev/ · zizmor: https://docs.zizmor.sh/ · actionlint: https://github.com/rhysd/actionlint · pip-audit: https://github.com/pypa/pip-audit

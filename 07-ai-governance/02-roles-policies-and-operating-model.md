@@ -6,7 +6,8 @@
 | | |
 |---|---|
 | **Prerequisites** | [Lesson 01](01-ai-inventory-and-system-register.md) (the register) |
-| **Lab** | [`lab/`](lab/): exceptions, non-waivable findings and the release gate in `secure_register.py` |
+| **Lab** | [`lab/`](lab/): exceptions, non-waivable findings and the release gate in `secure_register.py`; `policy_lint.py` for the policy pack |
+| **Policy pack** | [`policies/`](policies/): seven templates (acceptable use, risk management, model approval, data governance, third-party risk, incident response, AI security standard) |
 | **Maps to** | NIST AI RMF GOVERN 1 (policies), GOVERN 2 (accountability), GOVERN 4 (culture), GOVERN 5 (engagement) · ISO/IEC 42001 clause 5 (leadership, AI policy, roles), Annex A.2–A.3 · EU AI Act Art 4 (AI literacy), Art 26(2) (competent oversight staff) |
 
 ---
@@ -89,6 +90,23 @@ draft → consult (security, privacy, legal, HR, works council if needed) → ap
 Triggers for an early review: a new law or regulator guidance; a serious incident; a new class of tool (for example agents); repeated exceptions to the same rule (the rule may be wrong).
 
 **Enforce in code where you can.** "Do not send customer data to unapproved AI tools" becomes a proxy rule plus DLP. "High-tier systems need human oversight" becomes the GOV-03 check in the release gate. A policy that is only words depends on everyone remembering it.
+
+**The full pack.** This repo's [`policies/`](policies/) folder has seven short templates with the same structure: purpose, scope, roles, numbered requirements that each say *how we check*, exceptions, review cycle and a NIST AI RMF / ISO/IEC 42001 mapping. `python 07-ai-governance/lab/policy_lint.py` checks that structure, so a policy without evidence or past its review date is a finding, just like a system without an owner.
+
+### 2.4b The board's role: what directors must see and decide
+
+The *Director's Guide to AI Governance* (Human Technology Institute with the Australian Institute of Company Directors, v2, June 2026) organizes board oversight in four elements. In our own words:
+
+| Element | What the board does | What you (the architect) give the board |
+|---|---|---|
+| **Strategy** | Links AI to the organization's goals; sets an AI risk appetite with management; checks data and infrastructure readiness | A one-page appetite statement with examples ("no autonomous decisions about people without human review") |
+| **Structure** | Assigns a senior accountable leader; maps AI responsibilities; decides when the board is consulted | The RACI, the board charter, and approval thresholds by tier |
+| **Practices** | Makes sure AI risks run through the existing risk framework; checks that cyber, data and AI controls connect (for example patching applies to AI stacks too); oversees vendor risk | Quarterly risk report: systems by tier, top residual risks, incidents, vendor issues |
+| **Enablers** | AI literacy for directors and staff; culture of responsible use; attention to the impact on employees | Training completion, shadow-AI trend, staff feedback |
+
+The guide's practical point for security people: boards should have **visibility**, not just a committee. They need to know where AI is used (including AI features inside SaaS and shadow use) and how AI, cybersecurity and data governance risks overlap. Its small-organization checklist starts with exactly what this module builds: an inventory, a risk appetite discussion, a named accountable leader, a proportionate approval process and a short AI policy.
+
+**Questions a director should be able to ask, and you should be able to answer with data:** Where are we using AI today, including in vendor products? Which systems could harm customers or staff, and who owns each? What is our appetite and where are we above it? Which vendors hold our data in AI services, and on what terms? What happened in our last AI incident, and what changed? Do our cyber controls cover the AI stack?
 
 ### 2.5 Exceptions: the safety valve
 
@@ -243,7 +261,7 @@ The AUP says "no customer data in public AI tools". Proxy logs show hundreds of 
 - Writing policy in legal language that engineers cannot turn into checks.
 - Two accountable owners for one system, or none.
 - Exceptions approved by the person asking for them.
-- Not training staff: the EU AI Act's AI-literacy duty (Art 4) applies to providers and deployers from 2 February 2025.
+- Not training staff: the EU AI Act's AI-literacy duty (Art 4) has applied to providers and deployers since 2 February 2025. The Digital Omnibus (Regulation (EU) 2026/1744) is reported to have softened its wording; check the current text, and train staff anyway.
 - Policy review only "when someone remembers".
 
 ---
@@ -315,6 +333,16 @@ A policy states intent and commitments ("we assess AI risk before use"). A stand
 "An advisory committee can warn us but can't stop us. When something goes wrong, regulators and the press will ask who had the authority to stop it and why they didn't. Clear decision rights mean a small group can say 'not yet' to the riskiest systems, while everything else moves fast through automatic checks."
 </details>
 
+<details><summary><b>Q14. What does a board need to see about AI, and what should it decide?</b></summary>
+
+See: where AI is used (including vendor features and shadow use), systems by tier with owners, top residual risks against appetite, incidents and near misses, vendor exposure, and literacy and adoption metrics. Decide: the AI risk appetite, who is accountable, which uses are off-limits, and acceptance of critical residual risks. The Director's Guide groups this as strategy, structure, practices and enablers.
+</details>
+
+<details><summary><b>Q15. How do you make a policy "testable"?</b></summary>
+
+Write each requirement as one numbered, observable rule with a named piece of evidence ("Use only approved AI tools" → proxy and CASB report of AI domains). Keep the how-to in the standard. Lint the pack for structure, evidence and review dates, as `policy_lint.py` does, and map each requirement to NIST AI RMF and ISO/IEC 42001 so audits reuse it.
+</details>
+
 ---
 
 ## 8. Checklist (definition of done)
@@ -322,6 +350,8 @@ A policy states intent and commitments ("we assess AI risk before use"). A stand
 - [ ] I drew ACME's operating model and RACI for five activities, with one "A" per row.
 - [ ] I wrote a one-page AI acceptable-use policy and marked which lines are technically enforced.
 - [ ] I ran the expiring-exception steps and explained why waived findings stay visible.
+- [ ] I adapted at least three templates from [`policies/`](policies/) to my capstone and `policy_lint.py` reports no findings.
+- [ ] I wrote a one-page board AI report with the four elements (strategy, structure, practices, enablers).
 - [ ] `python -m pytest 07-ai-governance` passes.
 - [ ] Journal: which exception would I refuse, and how would I explain that to the requester?
 

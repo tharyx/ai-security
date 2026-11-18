@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>AI runtime detection and response loop</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">AI runtime detection and response loop</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Code decides severity. Humans decide disruptive actions. Every incident leaves a new test, rule or register entry.</text>
+
+  <g font-size="12" fill="#334155">
+    <rect x="40" y="110" width="170" height="170" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="56" y="138" font-size="16" font-weight="700" fill="#334155">1 Prepare</text>
+    <text x="56" y="164">playbooks + runbooks</text>
+    <text x="56" y="184">RACI: who may roll back</text>
+    <text x="56" y="204">kill switch tested</text>
+    <text x="56" y="224">tabletop exercises</text>
+    <text x="56" y="244">retention, synced clocks</text>
+
+    <rect x="236" y="110" width="170" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="252" y="138" font-size="16" font-weight="700" fill="#166534">2 Detect</text>
+    <text x="252" y="164">spans and redacted logs</text>
+    <text x="252" y="184">rules per identity</text>
+    <text x="252" y="204">baselines, not guesses</text>
+    <text x="252" y="224">correlate weak signals</text>
+    <text x="252" y="244">alert if telemetry stops</text>
+
+    <rect x="432" y="110" width="170" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="448" y="138" font-size="16" font-weight="700" fill="#166534">3 Triage</text>
+    <text x="448" y="164">fixed severity per rule</text>
+    <text x="448" y="184">one signal = a lead</text>
+    <text x="448" y="204">several = an incident</text>
+    <text x="448" y="224">AI may summarize,</text>
+    <text x="448" y="244">not decide</text>
+
+    <rect x="628" y="110" width="170" height="170" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="644" y="138" font-size="16" font-weight="700" fill="#991b1b">4 Contain</text>
+    <text x="644" y="164" fill="#7f1d1d">preserve evidence first,</text>
+    <text x="644" y="184" fill="#7f1d1d">unless harm is ongoing</text>
+    <text x="644" y="204" fill="#7f1d1d">smallest action that</text>
+    <text x="644" y="224" fill="#7f1d1d">stops the harm</text>
+    <text x="644" y="244" fill="#7f1d1d">(ladder below)</text>
+
+    <rect x="824" y="110" width="170" height="170" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="840" y="138" font-size="16" font-weight="700" fill="#1e3a8a">5 Recover</text>
+    <text x="840" y="164" fill="#1e3a8a">rotate from clean path</text>
+    <text x="840" y="184" fill="#1e3a8a">prove old key denied</text>
+    <text x="840" y="204" fill="#1e3a8a">roll back, re-index</text>
+    <text x="840" y="224" fill="#1e3a8a">verify signed digest</text>
+    <text x="840" y="244" fill="#1e3a8a">owner sign-off</text>
+
+    <rect x="1020" y="110" width="150" height="170" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="1036" y="138" font-size="16" font-weight="700" fill="#92400e">6 Learn</text>
+    <text x="1036" y="164" fill="#92400e">regression test</text>
+    <text x="1036" y="184" fill="#92400e">new detection rule</text>
+    <text x="1036" y="204" fill="#92400e">vuln register entry</text>
+    <text x="1036" y="224" fill="#92400e">fix root cause</text>
+    <text x="1036" y="244" fill="#92400e">update playbook</text>
+  </g>
+  <path d="M210 195 L234 195" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M406 195 L430 195" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M602 195 L626 195" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M798 195 L822 195" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M994 195 L1018 195" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M1095 280 L1095 312 L125 312 L125 284" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a)"/>
+  <text x="610" y="330" font-size="13" fill="#475569" text-anchor="middle">lessons feed preparation: the same attack must be caught earlier next time</text>
+
+  <!-- containment ladder -->
+  <text x="40" y="378" font-size="17" font-weight="700" fill="#0f172a">Containment ladder: least to most disruptive to the business</text>
+  <g font-size="12" fill="#0f172a">
+    <rect x="40" y="394" width="132" height="76" rx="8" fill="#f0fdf4" stroke="#16a34a"/>
+    <text x="50" y="418">rate-limit or</text><text x="50" y="436">block identity</text>
+    <rect x="180" y="394" width="132" height="76" rx="8" fill="#f0fdf4" stroke="#16a34a"/>
+    <text x="190" y="418">tighten</text><text x="190" y="436">guardrails</text>
+    <rect x="320" y="394" width="132" height="76" rx="8" fill="#fffbeb" stroke="#d97706"/>
+    <text x="330" y="418">revoke and</text><text x="330" y="436">rotate keys</text>
+    <rect x="460" y="394" width="132" height="76" rx="8" fill="#fffbeb" stroke="#d97706"/>
+    <text x="470" y="418">disable tools,</text><text x="470" y="436">read-only agent</text>
+    <rect x="600" y="394" width="132" height="76" rx="8" fill="#fffbeb" stroke="#d97706"/>
+    <text x="610" y="418">quarantine</text><text x="610" y="436">data sources</text>
+    <rect x="740" y="394" width="132" height="76" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="750" y="418">isolate the</text><text x="750" y="436">endpoint</text>
+    <rect x="880" y="394" width="132" height="76" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="890" y="418">roll back model</text><text x="890" y="436">and config</text>
+    <rect x="1020" y="394" width="140" height="76" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="1030" y="418">kill switch:</text><text x="1030" y="436">agents, pipelines</text>
+  </g>
+  <path d="M40 490 L1158 490" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="40" y="512" font-size="13" fill="#475569">more disruption, more evidence lost if you skip preservation →</text>
+
+  <rect x="40" y="532" width="1120" height="52" rx="10" fill="#f8fafc" stroke="#64748b"/>
+  <text x="56" y="556" font-size="13" fill="#334155">Preserve before you change: model digest and weights, system prompt and guardrail config, tool permissions, index snapshot,</text>
+  <text x="56" y="574" font-size="13" fill="#334155">spans and gateway logs for the window, key fingerprints (never the key itself), pipeline logs and image digests.</text>
+</svg>

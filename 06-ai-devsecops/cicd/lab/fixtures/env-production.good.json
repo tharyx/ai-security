@@ -1,0 +1,14 @@
+{
+  "_comment": "Modeled on the settings GitHub returns for a deployment environment, plus the approver group's members. Lab data.",
+  "name": "production",
+  "protection_rules": [
+    {"type": "required_reviewers", "prevent_self_review": true,
+     "reviewers": [{"type": "Team", "reviewer": {"slug": "ai-release-approvers"}}]},
+    {"type": "wait_timer", "wait_timer": 10},
+    {"type": "branch_policy"}
+  ],
+  "deployment_branch_policy": {"protected_branches": true, "custom_branch_policies": false},
+  "can_admins_bypass": false,
+  "secrets": ["COSIGN_IDENTITY_HINT"],
+  "reviewer_members": ["priya.sec", "omar.platform"]
+}

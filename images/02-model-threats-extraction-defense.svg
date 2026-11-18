@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Model extraction through a prediction API and the layered controls against it</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Model extraction: copying a model through its own API</text>
+  <text x="40" y="80" font-size="16" fill="#475569">No weights are stolen. The attacker collects question/answer pairs and trains a "student" that imitates the "teacher".</text>
+
+  <!-- attacker -->
+  <rect x="40" y="130" width="200" height="120" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="140" y="165" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Attacker</text>
+  <text x="140" y="190" text-anchor="middle" font-size="13" fill="#991b1b">many fake accounts</text>
+  <text x="140" y="210" text-anchor="middle" font-size="13" fill="#991b1b">word-by-word probes</text>
+  <text x="140" y="230" text-anchor="middle" font-size="13" fill="#991b1b">random sweeps</text>
+
+  <!-- gateway -->
+  <rect x="300" y="110" width="330" height="250" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="465" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">API gateway (before the model)</text>
+  <text x="320" y="175" font-size="14" font-weight="700" fill="#166534">E1 Query budget</text>
+  <text x="480" y="175" font-size="13" fill="#166534">per key, per day</text>
+  <text x="320" y="205" font-size="14" font-weight="700" fill="#166534">E2 Rate limit</text>
+  <text x="480" y="205" font-size="13" fill="#166534">token bucket</text>
+  <text x="320" y="235" font-size="14" font-weight="700" fill="#166534">E4 Probe detector</text>
+  <text x="480" y="235" font-size="13" fill="#166534">block + alert SOC</text>
+  <text x="320" y="265" font-size="14" font-weight="700" fill="#166534">Account controls</text>
+  <text x="480" y="265" font-size="13" fill="#166534">verify sign-ups</text>
+  <text x="320" y="295" font-size="14" font-weight="700" fill="#166534">Terms of service</text>
+  <text x="480" y="295" font-size="13" fill="#166534">distillation banned</text>
+  <text x="320" y="335" font-size="12" fill="#475569">Per-key limits alone are bypassed by many keys.</text>
+
+  <!-- model -->
+  <rect x="690" y="150" width="180" height="90" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="780" y="190" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af">Teacher model</text>
+  <text x="780" y="213" text-anchor="middle" font-size="13" fill="#1e40af">proprietary</text>
+
+  <!-- response policy -->
+  <rect x="930" y="110" width="230" height="170" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="1045" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Response policy</text>
+  <text x="950" y="175" font-size="14" font-weight="700" fill="#166534">E3 Labels only</text>
+  <text x="950" y="195" font-size="12" fill="#166534">no probabilities, no logprobs,</text>
+  <text x="950" y="212" font-size="12" fill="#166534">no reasoning traces</text>
+  <text x="950" y="242" font-size="14" font-weight="700" fill="#166534">E5 Watermark</text>
+  <text x="950" y="262" font-size="12" fill="#166534">secret few answers are marked</text>
+
+  <line x1="240" y1="190" x2="296" y2="190" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+  <line x1="630" y1="195" x2="686" y2="195" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="870" y1="195" x2="926" y2="195" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- student -->
+  <rect x="40" y="400" width="250" height="100" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="165" y="435" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Student model</text>
+  <text x="165" y="458" text-anchor="middle" font-size="13" fill="#991b1b">trained on stolen answers</text>
+  <text x="165" y="478" text-anchor="middle" font-size="13" fill="#991b1b">copies the marks too</text>
+  <path d="M1045,280 C1045,380 600,450 294,450" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#r)"/>
+  <text x="620" y="420" font-size="13" fill="#991b1b">answers flow back to the attacker</text>
+
+  <!-- verification -->
+  <rect x="860" y="400" width="300" height="100" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1010" y="432" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Owner: verify_watermark()</text>
+  <text x="1010" y="455" text-anchor="middle" font-size="13" fill="#475569">suspect repeats our marked</text>
+  <text x="1010" y="475" text-anchor="middle" font-size="13" fill="#475569">answers? = evidence of copying</text>
+
+  <text x="40" y="540" font-size="14" fill="#475569">Measure success as fidelity: how often the copy agrees with the real model on fresh inputs (lab: 100% unprotected, 64% protected).</text>
+</svg>

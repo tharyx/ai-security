@@ -22,6 +22,8 @@ components:
     user_auth: oidc                   # Microsoft Entra ID
     rate_limits: true
     token_budget: true
+    model_routing: allowlist          # approved models per data class; failover only to approved models
+    cache_scope: per_tenant           # cache key = tenant + user + model + prompt hash
     guardrails:
       input: [prompt_attack, pii]     # Prompt Shields (Azure AI Content Safety)
       output: [pii, secrets, url_allowlist]
@@ -66,6 +68,7 @@ components:
     zone: app
     service: orchestrator on Azure Container Apps
     identity: mi-agent
+    downstream_auth: token_exchange   # RFC 8693 token exchange: tools see the agent AND the user
     approval_required_for: [write]
     limits: {max_steps: 8, max_cost_usd: 2.0}
     kill_switch: true                 # App Configuration feature flag
@@ -76,6 +79,7 @@ components:
     zone: tools
     service: API Management product for MCP/tool APIs + registry
     identity: mi-mcp
+    downstream_auth: own_identity     # broker uses its own scoped identity; never forwards user tokens
     tool_registry: allowlist
     egress: deny_by_default
 
@@ -106,13 +110,13 @@ components:
     exports_to_siem: true             # Microsoft Sentinel
 
 identities:
-  - {id: mi-gateway, credential: short_lived, permissions: ["Cognitive Services User on content-safety"]}
-  - {id: mi-rag, credential: short_lived, permissions: ["Search Index Data Reader on ops-index"]}
-  - {id: mi-agent, credential: short_lived, permissions: ["Cognitive Services OpenAI User on aoai-prod"]}
-  - {id: mi-mcp, credential: short_lived, permissions: ["Storage Table Data Reader on tool-registry"]}
-  - {id: mi-tool-metrics, credential: short_lived, permissions: ["Monitoring Reader on rg-workloads"]}
-  - {id: mi-tool-change, credential: short_lived, permissions: ["ticketing.create_change"]}
-  - {id: gh-deploy, kind: ci, credential: short_lived, permissions: ["deployment on rg-ops-assistant"]}
+  - {id: mi-gateway, owner: ai-platform@acme.example, credential: short_lived, permissions: ["Cognitive Services User on content-safety"]}
+  - {id: mi-rag, owner: ai-platform@acme.example, credential: short_lived, permissions: ["Search Index Data Reader on ops-index"]}
+  - {id: mi-agent, owner: ai-platform@acme.example, credential: short_lived, permissions: ["Cognitive Services OpenAI User on aoai-prod"]}
+  - {id: mi-mcp, owner: ai-platform@acme.example, credential: short_lived, permissions: ["Storage Table Data Reader on tool-registry"]}
+  - {id: mi-tool-metrics, owner: ai-platform@acme.example, credential: short_lived, permissions: ["Monitoring Reader on rg-workloads"]}
+  - {id: mi-tool-change, owner: ai-platform@acme.example, credential: short_lived, permissions: ["ticketing.create_change"]}
+  - {id: gh-deploy, owner: ai-platform@acme.example, kind: ci, credential: short_lived, permissions: ["deployment on rg-ops-assistant"]}
 
 keys:
   - {id: kv-ai-data, managed_by: customer, rotation: true}
@@ -141,5 +145,10 @@ flows:
   - {from: mcp-gateway, to: tool-change}
   - {from: ai-gateway, to: audit-logs}
   - {from: mcp-gateway, to: audit-logs}
+
+assessment:
+  redteam_schedule: weekly            # attack suite against staging every week
+  redteam_on_change: true            # any model, prompt or tool change re-runs it
+  drift_detection: true              # declared design compared with the observed system
 
 exceptions: []

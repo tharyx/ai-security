@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>MCP security gateway: six checks for every tool call</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">MCP security gateway: six checks for every tool call</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Portfolio Project 3 and the module mini-project. Any failed check is a deny event, and the call never reaches the server.</text>
+
+  <!-- request in -->
+  <rect x="40" y="110" width="330" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="205" y="141" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Tool call proposed by a host / agent</text>
+  <path d="M110 162 L110 196" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- six stages -->
+  <rect x="40" y="200" width="170" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="125" y="228" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">1 Server identity</text>
+  <text x="56" y="256" font-size="12" fill="#166534">in the registry?</text>
+  <text x="56" y="276" font-size="12" fill="#166534">version + artifact</text>
+  <text x="56" y="294" font-size="12" fill="#166534">digest match?</text>
+  <text x="56" y="314" font-size="12" fill="#166534">not shadow / typosquat</text>
+  <text x="125" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">MCP04 MCP09</text>
+
+  <rect x="230" y="200" width="170" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="315" y="228" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">2 Tool definition</text>
+  <text x="246" y="256" font-size="12" fill="#166534">hash of name,</text>
+  <text x="246" y="276" font-size="12" fill="#166534">description, schema</text>
+  <text x="246" y="294" font-size="12" fill="#166534">matches review?</text>
+  <text x="246" y="314" font-size="12" fill="#166534">unique tool name</text>
+  <text x="315" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">MCP03</text>
+
+  <rect x="420" y="200" width="170" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="505" y="228" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">3 Caller identity</text>
+  <text x="436" y="256" font-size="12" fill="#166534">token alg, signature</text>
+  <text x="436" y="276" font-size="12" fill="#166534">iss, aud, exp</text>
+  <text x="436" y="294" font-size="12" fill="#166534">user + agent known</text>
+  <text x="436" y="314" font-size="12" fill="#166534">no session-ID auth</text>
+  <text x="505" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">MCP07</text>
+
+  <rect x="610" y="200" width="170" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="695" y="228" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">4 Permissions</text>
+  <text x="626" y="256" font-size="12" fill="#166534">scope for this tool</text>
+  <text x="626" y="276" font-size="12" fill="#166534">agent tool allowlist</text>
+  <text x="626" y="294" font-size="12" fill="#166534">no scope creep</text>
+  <text x="626" y="314" font-size="12" fill="#166534">taint: needs approval?</text>
+  <text x="695" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">MCP02 MCP06</text>
+
+  <rect x="800" y="200" width="170" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="885" y="228" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">5 Credentials</text>
+  <text x="816" y="256" font-size="12" fill="#166534">token exchange or</text>
+  <text x="816" y="276" font-size="12" fill="#166534">per-user vault token</text>
+  <text x="816" y="294" font-size="12" fill="#166534">never passthrough</text>
+  <text x="816" y="314" font-size="12" fill="#166534">no secret in context</text>
+  <text x="885" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">MCP01 MCP07</text>
+
+  <rect x="990" y="200" width="170" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1075" y="228" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">6 Execution request</text>
+  <text x="1006" y="256" font-size="12" fill="#166534">strict schema</text>
+  <text x="1006" y="276" font-size="12" fill="#166534">path / URL / no shell</text>
+  <text x="1006" y="294" font-size="12" fill="#166534">args-only payload</text>
+  <text x="1006" y="314" font-size="12" fill="#166534">size, time, rate limits</text>
+  <text x="1075" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">MCP05 MCP10</text>
+
+  <path d="M212 285 L226 285" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M402 285 L416 285" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M592 285 L606 285" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M782 285 L796 285" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M972 285 L986 285" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- server -->
+  <path d="M1075 198 L1075 164" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="830" y="110" width="330" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="995" y="141" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">MCP server (result marked untrusted)</text>
+
+  <!-- deny path -->
+  <path d="M125 372 L125 436" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#r)"/>
+  <path d="M315 372 L315 436" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#r)"/>
+  <path d="M505 372 L505 436" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#r)"/>
+  <path d="M695 372 L695 436" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#r)"/>
+  <path d="M885 372 L885 436" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#r)"/>
+  <path d="M1075 372 L1075 436" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="140" y="410" font-size="12" font-weight="700" fill="#dc2626">deny</text>
+  <text x="1090" y="410" font-size="12" font-weight="700" fill="#334155">allow</text>
+
+  <!-- audit -->
+  <rect x="40" y="440" width="1120" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600" y="470" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Audit trail (MCP08): one hash-chained event per decision, allow and deny</text>
+  <text x="600" y="496" text-anchor="middle" font-size="13" fill="#475569">correlation ID, user, tenant, agent, session, server + version, tool, decision, reason, approver, args hash, result size. No tokens, no raw arguments.</text>
+
+  <text x="40" y="560" font-size="13" fill="#475569">Labs: mcp-server (1, 2), authentication (3, 5), secure-operations (1, 4, 5, audit), tool-security (6). The mini-project puts all six behind one entry point.</text>
+</svg>

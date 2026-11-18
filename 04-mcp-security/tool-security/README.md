@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [MCP servers](../mcp-server/); [prompt injection](../../02-llm-security/prompt-injection/); basic Linux shell and HTTP |
 | **Lab** | [`lab/`](lab/): runs offline; the network and the shell are fakes that only record what would happen |
-| **Maps to** | OWASP LLM01:2025 Prompt Injection · LLM05:2025 Improper Output Handling · LLM06:2025 Excessive Agency · OWASP Agentic AI Threats T2 (Tool Misuse), T11 (Unexpected RCE and Code Attacks) · CWE-22 (Path Traversal), CWE-78 (OS Command Injection), CWE-88 (Argument Injection), CWE-918 (SSRF) · MITRE ATLAS AML.T0051 |
+| **Maps to** | **OWASP MCP Top 10 (2025, beta):** MCP03 Tool Poisoning, MCP05 Command Injection & Execution, MCP06 Prompt Injection via Contextual Payloads · **OWASP LLM Top 10 2026:** LLM01 Prompt Injection [2025: LLM01] · LLM10 Improper Output Handling [2025: LLM05] · LLM03 Excessive Agency [2025: LLM06] · **OWASP Agentic Top 10 2026:** ASI02 Tool Misuse, ASI05 Unexpected Code Execution, ASI01 Agent Goal Hijack · **OWASP AI Testing Guide:** AITG-APP-02, AITG-APP-06, AITG-INF-03, AITG-INF-04 · CWE-22 (Path Traversal), CWE-78 (OS Command Injection), CWE-88 (Argument Injection), CWE-918 (SSRF) · MITRE ATLAS AML.T0051 |
 
 ---
 
@@ -97,6 +97,19 @@ Python detail: in Python 3.11, `ipaddress.ip_address("::ffff:169.254.169.254").i
 ### 2.6 Tool results are untrusted
 
 A tool result is **data written by someone else**: a web page, a GitHub issue, an email, a database row. If the host puts it into the model's context and then executes whatever the model proposes next, every tool becomes an injection channel. The lab's `indirect:*` cases show both a crude version (a shell command in a page) and a smarter one: a well-formed `fetch_url` call to an **allowlisted** host, used as a drop box. The allowlist cannot stop the second one. Only taint tracking can.
+
+### 2.7 How a tester checks MCP tools (OWASP AI Testing Guide)
+
+The *OWASP AI Testing Guide* gives test cases you can run against any tool-using system. Each one maps to a lab test here, so you can turn the lab into a test plan:
+
+| AI Testing Guide case | What the tester tries | Sign of a vulnerability | Lab test in this module |
+|---|---|---|---|
+| AITG-APP-02 Indirect prompt injection (incl. MCP tool metadata) | Hidden orders in a tool description or a fetched page | The agent follows them | `test_scanner_flags_poisoned_definitions`, `test_tool_result_hijacks_the_next_tool_call_in_vulnerable_server` |
+| AITG-APP-06 Agentic behavior limits | Ask the agent to call a tool directly with attacker-chosen arguments, skipping the intended workflow | A check that exists only in the agent (not in the tool) is bypassed | `test_schema_alone_stops_the_injected_shell_call`; authorization in the tool: `test_per_user_token_means_downstream_enforces_ownership` (authentication lab) |
+| AITG-INF-03 Plugin boundary violations | A low-privilege tool's input triggers a high-privilege one; an input exploits the tool itself; another user's ID in a "my data" tool | State changes, files read, or other users' data returned | `test_after_untrusted_content_side_effects_need_a_human`, `test_secure_run_command_rejects_injection`, `test_mcp10_cache_is_isolated_per_tenant_and_user` (secure-operations) |
+| AITG-INF-04 Capability misuse | A low-privilege role calls a high-privilege capability; innocent capabilities are chained into exfiltration | The action runs without a permission error | `test_mcp02_agent_allowlist_and_registry_scopes_stop_excessive_permissions` (secure-operations), `test_taint_alone_stops_egress_through_an_allowlisted_host` |
+
+The guide's main design advice matches this module: put authentication and authorization **inside the tool**, outside the agent's control, and never select data using information that came from the model. Judge a test by the system's state and the audit log, not by what the model says.
 
 ---
 
@@ -348,7 +361,17 @@ A sandbox limits the *blast radius* but not *legitimate* misuse: a server allowe
 Cap bytes at the source (stream and stop reading), cap the text passed to the model, and truncate with a clear marker; set timeouts; rate-limit calls; and alert on unusual sizes. Large results waste money, push important instructions out of the context window and can hide injected text in the middle.
 </details>
 
-<details><summary><b>Q13. Explain to an executive why AI tools need the same security as web apps.</b></summary>
+<details><summary><b>Q13. You are asked to pen-test an MCP server before launch. What is your test plan?</b></summary>
+
+1. **Definitions:** pull `tools/list`, scan every string (description and schema) for hidden instructions and invisible Unicode, and check for name collisions (MCP03).
+2. **Arguments:** for each tool, fuzz types, extra fields and sizes; try path traversal, SSRF encodings, shell and option injection (MCP05).
+3. **Authorization in the tool:** call tools directly with another user's IDs and with a low-privilege identity (AITG-APP-06, AITG-INF-04; MCP07).
+4. **Results:** plant instructions in data the tool returns (pages, tickets, resources) and check that a side effect after it needs approval (MCP06).
+5. **Runtime:** check the container (user, mounts, egress to metadata) and the logs (no tokens) (MCP01, deployment).
+Every finding becomes a regression test like the ones in these labs.
+</details>
+
+<details><summary><b>Q14. Explain to an executive why AI tools need the same security as web apps.</b></summary>
 
 "When our assistant uses a tool, it is filling in a form on a computer system. The difference is that the form can be filled in by anyone who manages to put words in front of the assistant: a web page, an email, a ticket. So each tool needs the same protections as a public website, plus a rule that risky actions need a person to say yes."
 </details>
@@ -375,4 +398,6 @@ Cap bytes at the source (stream and stop reading), cap the text passed to the mo
 - CWE-22, CWE-78, CWE-88, CWE-918: https://cwe.mitre.org/
 - AWS, *Use IMDSv2*: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 - Python `ipaddress` documentation: https://docs.python.org/3/library/ipaddress.html
-- OWASP Top 10 for LLM Applications 2025: https://genai.owasp.org/llm-top-10/
+- OWASP MCP Top 10 (2025, beta; MCP03, MCP05, MCP06): https://owasp.org/www-project-mcp-top-10/
+- OWASP Top 10 for LLM Applications 2026 (LLM01, LLM03, LLM10): https://genai.owasp.org/llm-top-10/
+- OWASP AI Testing Guide (AITG-APP-02, AITG-APP-06, AITG-INF-03, AITG-INF-04): https://owasp.org/www-project-ai-testing-guide/

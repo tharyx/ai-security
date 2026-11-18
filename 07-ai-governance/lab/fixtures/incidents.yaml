@@ -1,0 +1,41 @@
+# AI incidents for triage practice. Synthetic and hypothetical.
+- id: INC-01
+  summary: A hidden instruction in a customer email made the InboxBot agent forward support history to an outside address; still happening.
+  vector: prompt_injection
+  data_exposed: personal
+  unauthorized_actions: true
+  ongoing: true
+  containment_verified: false
+  jurisdictions: [eu, india]
+
+- id: INC-02
+  summary: The CV screening assistant summarized candidates with career gaps more negatively; 40 applicants affected; found in the monthly fairness check.
+  vector: biased_decision
+  data_exposed: none
+  decisions_about_people_wrong: true
+  people_harmed: individual
+  eu_high_risk_provider: true
+  fundamental_rights_infringed: true
+  jurisdictions: [eu]
+
+- id: INC-03
+  summary: An employee pasted an internal design document into a free consumer chatbot.
+  vector: shadow_ai_upload
+  data_exposed: internal
+  jurisdictions: [india]
+
+- id: INC-04
+  summary: The prompt-injection canary in the weekly red-team suite was blocked by the tool broker.
+  vector: prompt_injection
+  data_exposed: none
+  blocked_by_control: true
+  jurisdictions: [india]
+
+- id: INC-05
+  summary: A stolen model gateway key was used from an unknown host; keys rotated and abuse stopped (verified).
+  vector: key_theft
+  data_exposed: confidential
+  privileged_access: true
+  ongoing: true
+  containment_verified: true
+  jurisdictions: [india]

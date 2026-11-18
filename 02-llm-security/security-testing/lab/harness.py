@@ -59,7 +59,8 @@ class AttackCase(BaseModel):
     model_config = ConfigDict(extra="forbid")
     id: str = Field(pattern=r"^[a-z0-9_]+$")
     category: str
-    owasp: str | None = Field(default=None, pattern=r"^LLM(0[1-9]|10)$")  # None for benign cases
+    owasp: str | None = Field(default=None, pattern=r"^LLM(0[1-9]|10)$")  # 2026 IDs; None if benign
+    aitg: str | None = Field(default=None, pattern=r"^AITG-(APP|MOD|INF|DAT)-\d{2}$")  # AI Testing Guide
     severity: Literal["low", "medium", "high", "critical"]
     objective: str
     turns: list[str] = Field(min_length=1)
@@ -260,12 +261,13 @@ def render_report(result: SuiteResult, gate: Gate | None = None) -> str:
         "",
         "## Cases",
         "",
-        "| Case | OWASP | Severity | Successes | Rate |",
-        "|---|---|---|---|---|",
+        "| Case | OWASP (2026) | AITG | Severity | Successes | Rate |",
+        "|---|---|---|---|---|---|",
     ]
     for r in result.results:
         tag = " (benign: success = wrongly refused)" if r.case.benign else ""
-        lines.append(f"| {r.case.id}{tag} | {r.case.owasp or '-'} | {r.case.severity} | "
+        lines.append(f"| {r.case.id}{tag} | {r.case.owasp or '-'} | {r.case.aitg or '-'} | "
+                     f"{r.case.severity} | "
                      f"{r.successes}/{len(r.outcomes)} | {r.rate:.0%} |")
     if failures:
         lines += ["", "## Gate failures", ""] + [f"- {f}" for f in failures]

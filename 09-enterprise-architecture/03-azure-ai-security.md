@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [01 Reference architecture](01-enterprise-ai-reference-architecture.md); basic Azure (Entra ID, VNets, RBAC) |
 | **Lab** | [`lab/`](lab/) with [`architectures/secure_azure.yaml`](lab/architectures/secure_azure.yaml) |
-| **Maps to** | OWASP LLM01, LLM02, LLM06, LLM10 · CIS Controls v8 (3, 5, 6, 8, 12) · Microsoft AI shared responsibility model · NIST AI RMF MANAGE |
+| **Maps to** | OWASP LLM Top 10 2026: LLM01, LLM02, LLM03 Excessive Agency [2025: LLM06], LLM06 Unbounded Consumption [2025: LLM10] · OWASP Agentic ASI03 · CIS Controls v8 (3, 5, 6, 8, 12) · Microsoft AI shared responsibility model · NIST AI RMF MANAGE |
 
 > **Names change often on Azure.** "Azure AI Studio" became "Azure AI Foundry", and Microsoft continues to rename parts of this product family. Policy names, log categories and features also change. Check the current Microsoft Learn documentation before you rely on any detail here.
 

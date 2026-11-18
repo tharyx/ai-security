@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Prompt injection](../../02-llm-security/prompt-injection/) (indirect injection, `CALL_TOOL`); [Module 04](../../04-mcp-security/) OAuth basics (scopes, tokens) |
 | **Lab** | [`lab/`](lab/): runs offline, no API key needed, standard library tokens |
-| **Maps to** | OWASP LLM06:2025 Excessive Agency · OWASP *Agentic AI – Threats and Mitigations* (identity, privilege and traceability threats) · NIST AI RMF *Govern* and *Manage* · NIST SP 800-207 Zero Trust |
+| **Maps to** | OWASP LLM03:2026 Excessive Agency (was LLM06:2025) · OWASP Agentic Top 10 2026: **ASI03** Identity and Privilege Abuse, ASI07 (agent-to-agent identity), ASI10 (revocation and attribution) · OWASP MCP Top 10: MCP01 Token Mismanagement and Secret Exposure, MCP07 Insufficient Authentication and Authorization · NIST AI RMF *Govern* and *Manage* · NIST SP 800-207 and SP 800-207A Zero Trust |
 
 ---
 
@@ -103,6 +103,28 @@ When agents talk to agents (directly, through MCP, or with a protocol such as Go
 2. **Authenticated is not trustworthy.** Another agent's *message* is untrusted content. It may carry an injection it read somewhere else.
 3. **Never forward your own token.** Use token exchange to give the peer a narrower token of its own.
 4. **Keep the chain.** The receiving side should see the full `act` chain and the original `sub`, and apply policy to *the whole chain* (for example, deny if any hop is a disabled agent, as the lab's kill switch does).
+
+The [multi-agent trust](../multi-agent-trust/) lesson turns these four rules into a lab: signed envelopes, replay protection, an invocation policy and a circuit breaker.
+
+### 2.9 Zero trust for agent identity (NIST SP 800-207A applied)
+
+NIST SP 800-207A describes zero trust for cloud-native services. Its main idea is **identity-based segmentation**: decide access by verified service and user identity on every request, not by network location. Agents are services that can be steered, so the recommendations fit them well (paraphrased, applied to agents):
+
+| 800-207A recommendation | For an agent platform | Where in this module |
+|---|---|---|
+| Encrypt every connection between endpoints | TLS everywhere, including agent-to-agent and agent-to-tool | [multi-agent trust](../multi-agent-trust/) |
+| Each service presents a short-lived, verifiable identity, re-authenticated regularly (often mTLS) | Each agent has its own workload identity (for example SPIFFE); credentials last minutes | L1, L2 here; M1 in multi-agent trust |
+| Service-to-service authorization uses that identity | An invocation policy: which agent may call which tool or agent | M3 in multi-agent trust |
+| The end user gets a short-lived token, exchanged for one every hop can verify | The `sub` + `act` token from this lab, via token exchange | L3, L4 here |
+| The end user is authorized for the resource on every request | The resource re-checks the user's live permissions | L3 (`test_live_permission_change_takes_effect_before_token_expiry`) |
+| Enforcement points are always invoked, verifiable and independent of application code | Put checks in a gateway, broker or the resource server, never in the prompt | the `SecureCloudAPI.call` pattern |
+
+800-207A also says network-tier rules do not disappear: keep coarse network controls (for example, agent workloads cannot reach the internet or the metadata endpoint) and add identity-tier rules on top.
+
+### 2.10 Three kinds of identity at once
+
+Industry writing in 2026 (for example the Microsoft chapter of the SANS *Securing the Agentic Cloud* report in your library) describes agent identity as a "three-body problem": **workforce identities** (people), **classic non-human identities** (service accounts, keys) and **agentic identities** now interact, and a human may delegate to an agent that runs under an NHI and calls other agents. The practical requirements are the ones this lesson builds: each agent identity is scoped to its task, time-bound, monitored for behavior changes, revocable without breaking other workflows, and every action is attributable to the agent **and** the human and business process that authorized it.
+
 
 ---
 
@@ -343,6 +365,21 @@ It depends on the evidence, which is why attribution matters. If the agent acted
 "Today our AI assistants all use one master key. If anyone tricks any assistant, they get the master key's power, and afterwards we can't tell who did what. We're giving each assistant its own badge that only opens the doors it needs, only for the person it's helping, and only for a few minutes. Every door it opens is recorded in a log that nobody can secretly edit."
 </details>
 
+<details><summary><b>Q15. A permissions analysis shows your agents' roles use about 4% of the permissions they hold, and one role can be assumed by any principal in the account. What do you do?</b></summary>
+
+Fix the trust policy first: a role anyone can assume is the emergency, so scope it to the specific agent workload. Then right-size from data, not by hand: build a used-permission profile from access logs over a meaningful window, generate tighter policies, run them in monitor mode and watch the denials, then enforce. Add guardrails so drift cannot return (organisation-level denies for wildcard admin actions, policy checks in the IaC pipeline), and report unused permissions monthly. For agents, also split roles by task, so the profile reflects one job.
+</details>
+
+<details><summary><b>Q16. How does separation of duties apply to agents?</b></summary>
+
+The same toxic combinations as for people: an agent (or one agent chain) must not be able to create a payee *and* pay it, or request a change *and* approve it. Model forbidden pairs as rules over entitlements, evaluate them per agent identity and per delegation chain (including what it inherits from the user), block at request time, and require a second human for unavoidable cases. In this module: the requester can never approve their own request, and agents never hold approval rights.
+</details>
+
+<details><summary><b>Q17. How would you detect a stolen agent token being replayed?</b></summary>
+
+Bind tokens to the workload (mTLS or DPoP) so a copy is useless elsewhere; keep lifetimes short; and detect anomalies: use from a new network location or workload, a different client fingerprint than the issuing session, use after the session ended, an impossible sequence of actions, or calls outside the agent's baseline. On detection, revoke the session and every token in its chain, and look for the source of the theft (logs, prompts, environment variables).
+</details>
+
 ---
 
 ## 8. Checklist (definition of done)
@@ -355,7 +392,9 @@ It depends on the evidence, which is why attribution matters. If the agent acted
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025, LLM06:2025 Excessive Agency: https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
+- OWASP Top 10 for LLM Applications 2026 (LLM03:2026 Excessive Agency; check the current numbering at the source): https://genai.owasp.org/llm-top-10/
+- NIST SP 800-207A, *A Zero Trust Architecture Model for Access Control in Cloud-Native Applications in Multi-Cloud Environments*: https://csrc.nist.gov/pubs/sp/800/207/a/final
+- OWASP MCP Top 10 (beta): https://owasp.org/www-project-mcp-top-10/
 - OWASP GenAI Security Project, *Agentic AI – Threats and Mitigations* (2025): https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/
 - OWASP GenAI Security Project, *OWASP Top 10 for Agentic Applications for 2026*: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
 - RFC 8693, OAuth 2.0 Token Exchange: https://www.rfc-editor.org/rfc/rfc8693

@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Prompt injection](../../02-llm-security/prompt-injection/) (you need "indirect injection" and "the lethal trifecta"); JSON basics |
 | **Lab** | [`lab/`](lab/): pure Python, runs offline, no API key, no MCP SDK needed |
-| **Maps to** | OWASP LLM03:2025 Supply Chain · LLM01:2025 Prompt Injection · LLM06:2025 Excessive Agency · OWASP Agentic AI Threats T2 (Tool Misuse) · MITRE ATLAS AML.T0010 (ML Supply Chain Compromise), AML.T0051 (LLM Prompt Injection) · CIS Controls v8: 2 (Software Inventory), 8 (Audit Logs), 16 (Application Security) |
+| **Maps to** | **OWASP MCP Top 10 (2025, beta):** MCP03 Tool Poisoning, MCP04 Supply Chain & Dependency Tampering, MCP07 (local transport), MCP08 Audit & Telemetry, MCP09 Shadow MCP Servers · **OWASP LLM Top 10 2026:** LLM04 Supply Chain [2025: LLM03] · LLM01 Prompt Injection [2025: LLM01] · LLM03 Excessive Agency [2025: LLM06] · LLM08 Hidden Context Exposure [2025: LLM07] (tool definitions the user never sees) · **OWASP Agentic Top 10 2026:** ASI04 Agentic Supply Chain, ASI02 Tool Misuse · MITRE ATLAS AML.T0010 (ML Supply Chain Compromise), AML.T0051 (LLM Prompt Injection) · CIS Controls v8: 2 (Software Inventory), 8 (Audit Logs), 16 (Application Security) |
 
 ---
 
@@ -214,11 +214,11 @@ Predict the result *before* you run each one:
 ### Step 6: Try it with a real model or the real SDK (optional)
 
 - **Real model:** install [Ollama](https://ollama.com), run `ollama pull llama3.2`, set `$env:AISEC_LLM_BACKEND = "ollama"` and run the demo. The real model may or may not follow the hidden `<IMPORTANT>` text. Run it 5 times and record how often. Then explain why "it only worked 2 times out of 5" is still a failing grade.
-- **Real SDK:** install the official MCP Python SDK in a *separate* virtual environment and build a one-tool stdio server. Inspect the real `initialize` and `tools/list` messages with the MCP Inspector. Use a current Inspector version, keep it bound to localhost, and close it when you are done (remember CVE-2025-49596).
+- **Real SDK:** install the official MCP Python SDK in a *separate* virtual environment and build a one-tool stdio server (a short example is in [secure-operations step 5](../secure-operations/#step-5-real-tools-optional-never-needed-for-the-tests)). Inspect the real `initialize` and `tools/list` messages with the MCP Inspector. Use a current Inspector version, keep it bound to localhost, and close it when you are done (remember CVE-2025-49596). Then run `review_server()`-style hashing on the real `tools/list` output. These steps are optional; no test depends on them.
 
 ### Stretch goals
 
-- **Package pinning:** create a fake "package" file, record its SHA-256 in `ApprovedServer`, and refuse to start a server whose file digest differs.
+- **Package pinning:** create a fake "package" file, record its SHA-256 in `ApprovedServer`, and refuse to start a server whose file digest differs. (Compare your version with `SecureOpsGateway.connect()` in [secure-operations](../secure-operations/).)
 - **Change workflow:** when `tool_definition_changed` fires, write a review ticket (a JSON file) with a diff of the old and new description.
 - **Rate limit:** add a per-tool calls-per-minute limit to `SecureHost.call_tool` and a test for it.
 - **stdio for real:** start `servers.py` as a subprocess that reads JSON-RPC lines from stdin. What new risks appear when the host passes environment variables to the child process?
@@ -326,7 +326,12 @@ Treat them like any third-party dependency, plus prompt-level review: internal m
 Sampling lets a server ask the host's model to generate text. A malicious server can use it to inject the host's model with its own prompt, try to extract context, or burn tokens and money. Controls: allow sampling only for reviewed servers that need it, show the request to the user, limit what context is included, rate-limit it, and treat the output as untrusted for that server.
 </details>
 
-<details><summary><b>Q13. Explain to an executive why we need an MCP registry.</b></summary>
+<details><summary><b>Q13. Which OWASP MCP Top 10 items does a server registry address, and which does it not?</b></summary>
+
+It directly addresses MCP04 (supply chain: only reviewed names, versions and digests), MCP03 (tool poisoning, if definitions are pinned and re-checked) and MCP09 (shadow servers, together with endpoint discovery, because the registry is the list you compare against). It helps MCP02 if it stores the approved scopes. It does not stop command injection in an approved tool (MCP05), injected tool results (MCP06), weak token checks (MCP07) or over-shared context (MCP10): those need controls at call time.
+</details>
+
+<details><summary><b>Q14. Explain to an executive why we need an MCP registry.</b></summary>
 
 "MCP servers are like browser extensions for our AI assistants: small programs from many sources that can read our data and act for our staff. Today anyone can add one. A registry means we know which ones are running, someone has checked each one, and if one changes or goes bad we can switch it off for everyone in minutes."
 </details>
@@ -351,6 +356,7 @@ Sampling lets a server ask the host's model to generate text. A malicious server
 - Invariant Labs, *WhatsApp MCP Exploited* (2025): https://invariantlabs.ai/blog/whatsapp-mcp-exploited
 - CVE-2025-49596 (MCP Inspector): https://nvd.nist.gov/vuln/detail/CVE-2025-49596
 - CVE-2025-6514 (mcp-remote): https://nvd.nist.gov/vuln/detail/CVE-2025-6514
-- OWASP Top 10 for LLM Applications 2025 (LLM01, LLM03, LLM06): https://genai.owasp.org/llm-top-10/
-- OWASP GenAI Security Project, *Agentic AI – Threats and Mitigations* (2025): https://genai.owasp.org/
+- OWASP MCP Top 10 (2025, beta; MCP03, MCP04, MCP09): https://owasp.org/www-project-mcp-top-10/
+- OWASP Top 10 for LLM Applications 2026 (LLM01, LLM03, LLM04, LLM08): https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications 2026 (ASI02, ASI04): https://genai.owasp.org/
 - MITRE ATLAS: https://atlas.mitre.org/

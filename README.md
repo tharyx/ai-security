@@ -17,30 +17,40 @@ ai-security/
 │   ├── prompt-injection/
 │   ├── jailbreak/
 │   ├── data-leakage/
-│   └── security-testing/
+│   ├── security-testing/
+│   └── model-threats/          poisoning · extraction · misinformation · supply chain
 ├── 03-rag-security/
 │   ├── document-security/
 │   ├── vector-db-security/
-│   └── access-control/
+│   ├── access-control/
+│   ├── retrieval-reranking/    manipulated relevance · authorize-first ranking
+│   ├── response-security/      exfiltration via links/images · DLP · citation support
+│   └── secure-hr-assistant/    portfolio project 2: full secure RAG reference build
 ├── 04-mcp-security/
 │   ├── mcp-server/
 │   ├── authentication/
-│   └── tool-security/
+│   ├── tool-security/
+│   └── secure-operations/      OWASP MCP Top 10 · token hygiene · audit · shadow servers
 ├── 05-agent-security/
 │   ├── agent-identity/
 │   ├── permissions/
-│   └── sandboxing/
+│   ├── sandboxing/
+│   ├── multi-agent-trust/      signed agent messages · replay · circuit breakers
+│   ├── monitoring-and-response/ detection · containment · kill switch · IR runbook
+│   └── mini-project/           portfolio project 4: secure cloud agent (mock AWS)
 ├── 06-ai-devsecops/
 │   ├── terraform/
 │   ├── docker/
 │   ├── kubernetes/
-│   └── cicd/
-├── 07-ai-governance/
+│   ├── cicd/
+│   └── runtime-security/       secrets · model access · rate limits · monitoring · vuln mgmt
+├── 07-ai-governance/           + policies/ (7 policy templates)
 ├── 08-ai-compliance/
 ├── 09-enterprise-architecture/
 ├── 10-capstone-project/
 ├── aisec_lab/                     shared lab helpers (offline mock LLM, canaries)
 ├── images/                        all diagrams
+├── Documents/                     my reference PDFs (local only, git-ignored)
 ├── journal/                       my weekly learning notes
 └── PROGRESS.md                    week-by-week tracker
 ```
@@ -95,6 +105,26 @@ Each topic follows the [authoring guide](00-program/AUTHORING-GUIDE.md):
 - Phase gates: [`00-program/assessment-rubric.md`](00-program/assessment-rubric.md) · Interviews: [`00-program/portfolio-and-interview-guide.md`](00-program/portfolio-and-interview-guide.md)
 - Templates: [`00-program/templates/`](00-program/templates/) (threat model, risk register, test case, incident playbook)
 - Courses: [`00-program/learning-resources.md`](00-program/learning-resources.md) (KodeKloud and Udemy courses mapped to each module)
+- Skills checklist: [`00-program/COMPETENCIES.md`](00-program/COMPETENCIES.md) (21 competencies, each linked to the lab that proves it)
+- Portfolio: [`10-capstone-project/portfolio-projects.md`](10-capstone-project/portfolio-projects.md) (6 projects to show employers)
+- Tools: [`00-program/tools-stack.md`](00-program/tools-stack.md) · My documents: [`00-program/reference-library.md`](00-program/reference-library.md)
+
+## Specialization strategy
+
+The seven domains are related, but they are not equally deep. Don't try to become an expert in all of them at once. Go in this order:
+
+| Priority | Specialize in | Modules | Why |
+|---|---|---|---|
+| 1. Primary | **LLM + RAG security** | 02, 03 | The foundation of every enterprise GenAI system |
+| 2. Second | **MCP + agent security** | 04, 05 | Tool authorization, agent identity, execution boundaries: the fastest-growing risk |
+| 3. Engineering base | **AI security + AI DevSecOps** | 01, 06, 09 | Builds directly on your Terraform, cloud, CI/CD and Kubernetes experience |
+| 4. Enterprise | **Governance + compliance** | 07, 08 | Turns technical controls into policies, risk decisions and audit evidence |
+
+**Target roles:** AI Security Engineer · GenAI/LLM Security Engineer · AI Red Team Engineer · Agentic AI Security Engineer · AI Security DevSecOps Engineer · AI Security Architect · AI Governance & Risk Consultant.
+
+## Frameworks this repo follows
+
+OWASP Top 10 for LLM Applications **2026** · OWASP Top 10 for Agentic Applications **2026** · OWASP MCP Top 10 (beta) · OWASP AI Testing Guide · OWASP GenAI Data Security · MITRE ATLAS · NIST AI RMF + GenAI Profile · ISO/IEC 42001 / 23894 / 27001 · EU AI Act (with the 2026 Digital Omnibus) · GDPR · India DPDP Act and Rules · CERT-In AI Security Auditing Guidelines. Verify current versions at the source; they change often.
 
 ## Core principles (repeated everywhere, on purpose)
 

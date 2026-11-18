@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | Modules [01](../01-ai-security-fundamentals/)–[09](../09-enterprise-architecture/) (this capstone composes them) |
 | **Lab** | [`lab/`](lab/): offline vertical slice, attack suite and acceptance tests |
-| **Maps to** | OWASP LLM01, LLM02, LLM05, LLM06, LLM08, LLM10 · OWASP Agentic AI threats · MITRE ATLAS AML.T0051 · NIST AI RMF (MAP, MEASURE, MANAGE) |
+| **Maps to** | OWASP Top 10 for LLM Applications 2026: LLM01 Prompt Injection, LLM02 Sensitive Information Disclosure, LLM03 Excessive Agency [2025: LLM06], LLM06 Unbounded Consumption [2025: LLM10], LLM09 Vector and Embedding Weaknesses [2025: LLM08], LLM10 Improper Output Handling [2025: LLM05] · OWASP Agentic Top 10 2026 (ASI01, ASI02, ASI03, ASI08) · OWASP MCP Top 10 beta (MCP01, MCP07) · MITRE ATLAS AML.T0051 · NIST AI RMF (MAP, MEASURE, MANAGE) |
 
 ---
 
@@ -72,19 +72,21 @@ It must **never** modify production infrastructure by itself.
 
 ### 2.4 Abuse cases (what attackers will try)
 
-| # | Abuse case | OWASP / ATLAS |
+OWASP ids use the **2026** LLM list (2025 number in brackets on first use), the Agentic Top 10 (ASI) and the MCP Top 10 (beta). Verify ids at the source before citing them formally.
+
+| # | Abuse case | OWASP LLM 2026 / ASI / MCP / ATLAS |
 |---|---|---|
-| A1 | A wiki page contains a hidden instruction that makes the agent propose a rollback | LLM01 indirect injection · AML.T0051 |
-| A2 | A wiki page makes the agent call an exfiltration tool | LLM01, LLM06 |
-| A3 | A user sets `tenant_id` of another tenant in the request body | LLM02, broken access control |
-| A4 | An engineer asks for HR-only documents in the same tenant | LLM02, LLM08 |
-| A5 | A user asks the metrics tool for another tenant's service (confused deputy) | LLM06 |
-| A6 | A request for a tool that should not exist (`run_shell`) | LLM06 |
-| A7 | A viewer tries a write action | LLM06 |
-| A8 | A planted tool call loops forever (runaway cost) | LLM10 |
+| A1 | A wiki page contains a hidden instruction that makes the agent propose a rollback | LLM01 indirect injection · ASI01 Agent Goal Hijack · AML.T0051 |
+| A2 | A wiki page makes the agent call an exfiltration tool | LLM01, LLM03 Excessive Agency [2025: LLM06] · ASI02 Tool Misuse |
+| A3 | A user sets `tenant_id` of another tenant in the request body | LLM02, broken access control · ASI03 Identity and Privilege Abuse |
+| A4 | An engineer asks for HR-only documents in the same tenant | LLM02, LLM09 Vector and Embedding Weaknesses [2025: LLM08] · MCP10 Context Over-Sharing |
+| A5 | A user asks the metrics tool for another tenant's service (confused deputy) | LLM03 · ASI03 · MCP07 |
+| A6 | A request for a tool that should not exist (`run_shell`) | LLM03 · ASI02 · MCP05 Command Injection and Execution |
+| A7 | A viewer tries a write action | LLM03 · ASI03 |
+| A8 | A planted tool call loops forever (runaway cost) | LLM06 Unbounded Consumption [2025: LLM10] · ASI08 Cascading Failures |
 | A9 | Forged or expired tokens | Authentication |
-| A10 | Request flooding | LLM10 |
-| A11 | A user pastes an API key; it ends up in logs | LLM02 |
+| A10 | Request flooding | LLM06 |
+| A11 | A user pastes an API key; it ends up in logs | LLM02 · MCP01 Token Mismanagement and Secret Exposure |
 | A12 | The model endpoint fails mid-request | Availability, fail-safe |
 
 ### 2.5 Security requirements
@@ -227,7 +229,7 @@ Open [`lab/ops_assistant.py`](lab/ops_assistant.py). Follow `SecureOpsAssistant.
 python -m pytest 10-capstone-project -v
 ```
 
-Expected last line: `37 passed` (time differs). Test names start with the acceptance-test id (`test_AT04_...`), so you can run one requirement's tests:
+Expected last line: `49 passed` (time differs): 37 acceptance tests plus 12 tests for the optional SOC triage extension ([lesson 05](05-ai-soc-monitoring-extension.md)). Test names start with the acceptance-test id (`test_AT04_...`), so you can run one requirement's tests:
 
 ```powershell
 python -m pytest 10-capstone-project -k "AT04 or AT05" -vv
@@ -240,7 +242,7 @@ Expected:
 10-capstone-project/lab/test_acceptance.py::test_AT04b_approver_sees_the_untrusted_source_of_the_proposal PASSED [ 50%]
 10-capstone-project/lab/test_acceptance.py::test_AT05_unregistered_tools_do_not_exist[indirect_injection_exfil] PASSED [ 75%]
 10-capstone-project/lab/test_acceptance.py::test_AT05_unregistered_tools_do_not_exist[unregistered_tool] PASSED [100%]
-====================== 4 passed, 33 deselected in 0.15s =======================
+====================== 4 passed, 45 deselected in 0.55s =======================
 ```
 
 ### Step 4: Break it yourself
@@ -375,7 +377,8 @@ Egress control and model approval (SR-04): they live in the cloud configuration,
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025, https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2026 (verify the current list at the source), https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for Agentic Applications 2026, https://genai.owasp.org/ · OWASP MCP Top 10 (beta), https://owasp.org/www-project-mcp-top-10/
 - OWASP Agentic AI – Threats and Mitigations, https://genai.owasp.org/
 - MITRE ATLAS, https://atlas.mitre.org/
 - NIST AI 600-1, *Generative AI Profile*, https://doi.org/10.6028/NIST.AI.600-1

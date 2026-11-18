@@ -6,7 +6,7 @@
 | | |
 |---|---|
 | **Prerequisites** | [Module 07](../07-ai-governance/) (controls CTL-xx, risk register); [Lesson 01](01-eu-ai-act.md) |
-| **Lab** | [`lab/evidence_checker.py`](lab/evidence_checker.py), [`lab/fixtures/controls.yaml`](lab/fixtures/controls.yaml), `fixtures/evidence_vulnerable/` and `evidence_compliant/`, `demo.py` section 2 |
+| **Lab** | [`lab/evidence_checker.py`](lab/evidence_checker.py), [`lab/fixtures/controls.yaml`](lab/fixtures/controls.yaml), `fixtures/evidence_vulnerable/` and `evidence_compliant/`, [`lab/compliance_matrix.py`](lab/compliance_matrix.py) with [`fixtures/ai_risks.yaml`](lab/fixtures/ai_risks.yaml), [`lab/build_dashboard.py`](lab/build_dashboard.py), `demo.py` sections 2 and 5 |
 | **Maps to** | ISO/IEC 42001 clause 7.5 (documented information) and 9 · ISO/IEC 27001 · AICPA SOC 2 Trust Services Criteria · NIST AI RMF GOVERN 1 · EU AI Act Art 11, 18 (documentation and its retention) |
 
 > **Educational, not legal or audit advice.** The mappings in the lab are simplified and at article, clause or category level. Verify every reference against the current official texts and your licensed ISO copies.
@@ -33,7 +33,10 @@ Most organizations face several frameworks at once: a law (EU AI Act, GDPR), cer
 | **Law** | EU AI Act, GDPR, India DPDP | Regulators, courts | Legal compliance (or fines) |
 | **Certifiable standard** | ISO/IEC 27001, ISO/IEC 42001 | Accredited certification body | Certificate for a scope |
 | **Attestation report** | SOC 2 Type I / Type II | Independent CPA firm | Report with auditor opinion (not a certificate) |
-| **Voluntary framework / guidance** | NIST AI RMF, NIST AI 600-1, ISO/IEC 23894, OWASP | Yourself, customers | Better practice, shared vocabulary |
+| **Voluntary framework / guidance** | NIST AI RMF, NIST AI 600-1, ISO/IEC 23894, ISO/IEC 27090, OWASP lists, MITRE ATLAS | Yourself, customers | Better practice, shared vocabulary |
+| **Government audit guideline** | CERT-In AI Security Auditing Guidelines (India) | Auditors (CERT-In empanelled for higher tiers) | Audit scope, depth and finding severity ([Lesson 06](06-cert-in-ai-security-audit.md)) |
+
+The key distinction, again: **NIST AI RMF and OWASP are not laws. ISO/IEC 42001 is a certifiable management-system standard. GDPR, India's DPDP Act and the EU AI Act are law.** The full comparison table is in [Lesson 05](05-iso-standards-and-law-vs-standard.md).
 
 **SOC 2 in one paragraph.** An AICPA attestation against the Trust Services Criteria (security, plus optionally availability, processing integrity, confidentiality and privacy). **Type I** checks that controls are suitably designed at a point in time. **Type II** checks that they operated effectively over a period (often 6–12 months). The report describes the system, the controls, the tests and any exceptions. Read the exceptions and the complementary user entity controls.
 
@@ -106,6 +109,26 @@ pipelines & schedulers ──> evidence store (dated, hashed) ──> gap checke
 
 Examples: CI exports the test report on every release; a nightly job exports IAM and logging configuration; a monthly erasure drill writes a receipt; the gap checker runs daily and opens tickets for MISSING or STALE items. The audit then becomes a review of a system you already run.
 
+### 2.7 The compliance matrix: risks → controls → audit evidence
+
+![Risk to control to evidence matrix](../images/08-risk-control-evidence-matrix.svg)
+
+Framework coverage answers "which requirements are backed?". Management and auditors also ask the reverse question: **"for our top AI risks, is the treatment proven?"** The compliance matrix joins three things you already have:
+
+1. **Risks** (from the Module 07 risk register), each tagged with catalog IDs: OWASP LLM Top 10 **2026** (for example LLM01 Prompt Injection, LLM03 Excessive Agency, which was LLM06 in 2025), OWASP Agentic ASI01–ASI10 and OWASP MCP01–MCP10.
+2. **Controls** each risk relies on (`controls.yaml`), with their framework mappings.
+3. **Evidence status** of each control from the checker.
+
+Each risk gets a verdict: **PROVEN** (all its controls have good evidence), **PARTIAL**, **UNPROVEN** (controls exist only on paper today), **NO_CONTROL** (a design gap: no amount of evidence can fix it) or **BROKEN_LINK** (the risk names a control that does not exist). Read across a row and you have the auditor's whole story: risk, treatment, proof, and which law or standard it satisfies.
+
+| Risk (example) | OWASP 2026 / ASI / MCP | Controls | Evidence (vulnerable set) | Frameworks satisfied | Verdict |
+|---|---|---|---|---|---|
+| AR-01 Indirect prompt injection sends customer data out | LLM01, LLM02, ASI01, ASI02 | CTL-EVAL, CTL-ACCESS, CTL-LOG | CI report missing; IAM export manual; logging config stale | EU AI Act Art 12, 15; ISO/IEC 42001 A.6; ISO/IEC 27001 A.8.15; CERT-In 8.6 | UNPROVEN |
+| AR-02 Agent tool runs with more permission than the user | LLM03, ASI03, MCP02, MCP07 | CTL-ACCESS, CTL-HO | IAM export manual; override log missing | EU AI Act Art 14, 15; ISO/IEC 27001 A.5.15; CERT-In 8.8 | UNPROVEN |
+| AR-10 Fairness drifts after deployment | LLM07 | none | – | – | NO_CONTROL |
+
+The dashboard script turns the matrix, framework coverage, CERT-In domain status, the policy pack and the inventory into one page: the **compliance dashboard** of Portfolio Project 5.
+
 ---
 
 ## 3. Defend it
@@ -162,9 +185,10 @@ framework coverage (requirements backed by a control with good evidence):
   nist_ai_rmf   2/12  gaps: GOVERN 6 third-party risk; MANAGE 1 risks prioritized and treated; MANAGE 3 third-party risks managed ...
   soc2          0/8   gaps: CC3.2 risk identification and analysis; CC6.1 logical access; CC7.2 monitoring for anomalies ...
   iso_27001     1/10  gaps: A.5.15 access control; A.5.19 supplier relationships; A.5.24 incident management planning ...
+  cert_in_ai    2/10  gaps: 11 contestability and decision review; 5 risk tiering and AI impact assessment (AIIA); 8.2 data lifecycle, quality and privacy ...
 ```
 
-The checkbox check says all ten controls are compliant. The checker finds eight gaps, and the coverage report shows how each gap spreads across every framework the control maps to. The compliant set shows `OK` everywhere and full coverage (`eu_ai_act 14/14` … `iso_27001 10/10`).
+The checkbox check says all ten controls are compliant. The checker finds eight gaps, and the coverage report shows how each gap spreads across every framework the control maps to. The compliant set shows `OK` everywhere and full coverage (`eu_ai_act 14/14` … `cert_in_ai 10/10`). The sixth framework, `cert_in_ai`, maps each control to a CERT-In AI audit domain (Lesson 06).
 
 ### Step 2: See each evidence item
 
@@ -247,6 +271,62 @@ python -m pytest 08-ai-compliance/lab/test_evidence_checker.py -v
 ```
 
 Read `test_one_control_gap_shows_up_in_every_framework_it_maps_to`.
+
+### Step 6b: Build the compliance matrix and the dashboard
+
+```powershell
+python 08-ai-compliance/lab/demo.py --section 5
+```
+
+Expected output (section 5; section 6 is explained in Lesson 06):
+
+```text
+=== 5. Compliance matrix: AI risks -> controls -> audit evidence ===
+risk   rating    OWASP 2026 / ASI / MCP         controls (status, vulnerable set)              vulnerable  compliant
+----------------------------------------------------------------------------------------------------------------
+AR-03  Critical  LLM07                          CTL-HO(GAP), CTL-EVAL(GAP), CTL-DOC(OK)        PARTIAL     PROVEN
+AR-01  High      LLM01,LLM02,ASI01,ASI02        CTL-EVAL(GAP), CTL-ACCESS(GAP), CTL-LOG(GAP)   UNPROVEN    PROVEN
+AR-02  High      LLM03,ASI03,MCP02,MCP07        CTL-ACCESS(GAP), CTL-HO(GAP)                   UNPROVEN    PROVEN
+AR-04  High      LLM02,LLM09                    CTL-PRIV(GAP), CTL-LOG(GAP)                    UNPROVEN    PROVEN
+AR-06  High      LLM05,ASI04,ASI06,MCP03,MCP09  CTL-VEND(GAP), CTL-EVAL(GAP), CTL-INV(OK)      PARTIAL     PROVEN
+AR-07  High      ASI08,MCP08                    CTL-IR(GAP), CTL-LOG(GAP)                      UNPROVEN    PROVEN
+AR-08  High      LLM07,ASI09                    CTL-DOC(OK), CTL-HO(GAP)                       PARTIAL     PROVEN
+AR-10  High      LLM07                          -                                              NO_CONTROL  NO_CONTROL
+AR-05  Medium    LLM04,ASI04                    CTL-VEND(GAP), CTL-INV(OK)                     PARTIAL     PROVEN
+AR-09  Medium    LLM08,MCP10                    CTL-EVAL(GAP), CTL-ACM(UNKNOWN)                BROKEN_LINK BROKEN_LINK
+vulnerable proven 0/10; high/critical not proven: AR-03, AR-01, AR-02, AR-04, AR-06, AR-07, AR-08, AR-10
+compliant  proven 8/10; high/critical not proven: AR-10
+Full table with framework requirements: python 08-ai-compliance/lab/build_dashboard.py
+```
+
+Two lessons hide in the compliant column. Perfect evidence did **not** prove AR-10 (no control exists) or AR-09 (it names a control, `CTL-ACM`, that nobody built). Evidence checks find operating failures; only the matrix finds design gaps.
+
+Now build the full dashboard (Markdown to the screen, or a file):
+
+```powershell
+python 08-ai-compliance/lab/build_dashboard.py --set vulnerable
+python 08-ai-compliance/lab/build_dashboard.py --out journal/week-32/compliance-dashboard.html
+```
+
+The first lines of the vulnerable dashboard:
+
+```text
+# AI Governance and Compliance Dashboard (vulnerable, as of 2026-11-15)
+
+> Generated from lab data by `build_dashboard.py`. Synthetic data; educational, not legal advice.
+
+## Headline numbers
+
+| Measure | Value |
+|---|---|
+| AI systems in the register | 6 (high: 2, medium: 3, prohibited: 1) |
+| Policies in the pack | 7 (0 overdue for review) |
+| Controls with good evidence | 2/10 |
+| Top risks proven by evidence | 0/10 (0%) |
+| High/critical risks not proven | AR-03, AR-01, AR-02, AR-04, AR-06, AR-07, AR-08, AR-10 |
+```
+
+Exercise: add a control `CTL-FAIR` (fairness monitoring) to `controls.yaml` with evidence and a CERT-In `8.4 ethics, bias and fairness` mapping, link it from AR-10, add the evidence file and index entry, and re-run until AR-10 is PROVEN.
 
 ### Step 7: Build your own mapping (week-32 deliverable)
 

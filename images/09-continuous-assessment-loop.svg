@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Continuous AI security assessment loop: declared design, observed system, drift, posture and action</title>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="640" fill="#ffffff"/>
+  <text x="600" y="40" text-anchor="middle" font-size="28" font-weight="bold" fill="#0f172a">Continuous AI security assessment</text>
+  <text x="600" y="68" text-anchor="middle" font-size="16" fill="#475569">A review proves the design was secure on review day. This loop proves it is still secure today.</text>
+
+  <!-- top row -->
+  <rect x="40" y="110" width="250" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="165" y="140" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Approved design</text>
+  <text x="165" y="162" text-anchor="middle" font-size="12" fill="#475569">architecture.yaml + ADRs</text>
+  <text x="165" y="180" text-anchor="middle" font-size="12" fill="#475569">passed the reviewer gate</text>
+  <rect x="340" y="110" width="250" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="465" y="140" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Deploy and change</text>
+  <text x="465" y="162" text-anchor="middle" font-size="12" fill="#475569">IaC, new tools, new prompts,</text>
+  <text x="465" y="180" text-anchor="middle" font-size="12" fill="#475569">new models, hotfixes, pilots</text>
+  <rect x="640" y="110" width="250" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="765" y="140" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Observed system</text>
+  <text x="765" y="162" text-anchor="middle" font-size="12" fill="#475569">cloud inventory, AI-SPM, shadow AI</text>
+  <text x="765" y="180" text-anchor="middle" font-size="12" fill="#475569">and shadow MCP discovery</text>
+  <rect x="940" y="110" width="220" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1050" y="140" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Drift check</text>
+  <text x="1050" y="162" text-anchor="middle" font-size="12" fill="#475569">declared vs observed</text>
+  <text x="1050" y="180" text-anchor="middle" font-size="12" fill="#475569">posture.diff_architecture</text>
+
+  <line x1="290" y1="155" x2="336" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="590" y1="155" x2="636" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="890" y1="155" x2="936" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- bottom row (right to left) -->
+  <rect x="940" y="290" width="220" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1050" y="320" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Scheduled review</text>
+  <text x="1050" y="342" text-anchor="middle" font-size="12" fill="#475569">reviewer + control matrix</text>
+  <text x="1050" y="360" text-anchor="middle" font-size="12" fill="#475569">+ red-team suite</text>
+  <rect x="640" y="290" width="250" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="765" y="320" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Findings and trend</text>
+  <text x="765" y="342" text-anchor="middle" font-size="12" fill="#475569">posture score per run,</text>
+  <text x="765" y="360" text-anchor="middle" font-size="12" fill="#475569">regressions, expiring exceptions</text>
+  <rect x="340" y="290" width="250" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="465" y="320" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">SOC and owners</text>
+  <text x="465" y="342" text-anchor="middle" font-size="12" fill="#475569">regression = alert with an owner</text>
+  <text x="465" y="360" text-anchor="middle" font-size="12" fill="#475569">and a runbook (module 10)</text>
+  <rect x="40" y="290" width="250" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="165" y="320" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Decide and act</text>
+  <text x="165" y="342" text-anchor="middle" font-size="12" fill="#475569">fix, roll back, or dated exception;</text>
+  <text x="165" y="360" text-anchor="middle" font-size="12" fill="#475569">update design, ADR, risk register</text>
+
+  <line x1="1050" y1="200" x2="1050" y2="286" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="940" y1="335" x2="894" y2="335" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="640" y1="335" x2="594" y2="335" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="340" y1="335" x2="294" y2="335" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="165" y1="290" x2="165" y2="204" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- triggers and metric -->
+  <rect x="40" y="420" width="540" height="170" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  <text x="310" y="447" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">When does assessment run?</text>
+  <text x="60" y="476" font-size="13" fill="#0f172a">On every change: model, prompt, tool, MCP server, IaC (CI gate)</text>
+  <text x="60" y="500" font-size="13" fill="#0f172a">Weekly: automated red-team suite against staging</text>
+  <text x="60" y="524" font-size="13" fill="#0f172a">Monthly or daily: reviewer on the observed system (drift)</text>
+  <text x="60" y="548" font-size="13" fill="#0f172a">Quarterly: owners re-certify non-human identities</text>
+  <text x="60" y="572" font-size="13" fill="#0f172a">Twice a year and after big changes: manual, goal-based red team</text>
+
+  <rect x="620" y="420" width="540" height="170" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text x="890" y="447" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Measure the window, not only the count</text>
+  <rect x="650" y="470" width="480" height="24" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="890" y="487" text-anchor="middle" font-size="12" fill="#0f172a">monthly review: weakness exploitable for about four weeks</text>
+  <rect x="650" y="504" width="70" height="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="730" y="521" font-size="12" fill="#0f172a">daily drift job: less than one day</text>
+  <text x="890" y="556" text-anchor="middle" font-size="13" fill="#475569">"Attack surface minutes" = time from exploitable to contained.</text>
+  <text x="890" y="576" text-anchor="middle" font-size="13" fill="#475569">Shorter loops shrink it; that is the case for automation.</text>
+</svg>

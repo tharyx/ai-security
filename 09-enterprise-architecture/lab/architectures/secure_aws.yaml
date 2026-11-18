@@ -21,6 +21,8 @@ components:
     user_auth: oidc                   # IAM Identity Center / corporate IdP
     rate_limits: true
     token_budget: true
+    model_routing: allowlist          # approved models per data class; failover only to approved models
+    cache_scope: per_tenant           # cache key = tenant + user + model + prompt hash
     guardrails:
       input: [prompt_attack, pii]     # Bedrock Guardrails via ApplyGuardrail
       output: [pii, secrets, url_allowlist]
@@ -65,6 +67,7 @@ components:
     zone: app
     service: orchestrator on ECS Fargate
     identity: role-agent
+    downstream_auth: token_exchange   # RFC 8693 token exchange: tools see the agent AND the user
     approval_required_for: [write]
     limits: {max_steps: 8, max_cost_usd: 2.0}
     kill_switch: true                 # AppConfig flag + role session revocation
@@ -75,6 +78,7 @@ components:
     zone: tools
     service: tool broker on ECS Fargate (registry in DynamoDB)
     identity: role-mcp
+    downstream_auth: own_identity     # broker uses its own scoped identity; never forwards user tokens
     tool_registry: allowlist
     egress: deny_by_default
 
@@ -105,13 +109,13 @@ components:
     exports_to_siem: true
 
 identities:
-  - {id: role-gateway, credential: short_lived, permissions: ["bedrock:ApplyGuardrail", "execute-api:Invoke"]}
-  - {id: role-rag, credential: short_lived, permissions: ["aoss:APIAccessAll on collection/ops-kb", "bedrock:InvokeModel on titan-embed"]}
-  - {id: role-agent, credential: short_lived, permissions: ["bedrock:InvokeModel on approved-model-arn"]}
-  - {id: role-mcp, credential: short_lived, permissions: ["dynamodb:GetItem on tool-registry"]}
-  - {id: role-tool-metrics, credential: short_lived, permissions: ["cloudwatch:GetMetricData"]}
-  - {id: role-tool-change, credential: short_lived, permissions: ["ticketing:CreateChangeRequest"]}
-  - {id: role-ci-deploy, kind: ci, credential: short_lived, permissions: ["cloudformation:CreateChangeSet on ops-assistant-*"]}
+  - {id: role-gateway, owner: ai-platform@acme.example, credential: short_lived, permissions: ["bedrock:ApplyGuardrail", "execute-api:Invoke"]}
+  - {id: role-rag, owner: ai-platform@acme.example, credential: short_lived, permissions: ["aoss:APIAccessAll on collection/ops-kb", "bedrock:InvokeModel on titan-embed"]}
+  - {id: role-agent, owner: ai-platform@acme.example, credential: short_lived, permissions: ["bedrock:InvokeModel on approved-model-arn"]}
+  - {id: role-mcp, owner: ai-platform@acme.example, credential: short_lived, permissions: ["dynamodb:GetItem on tool-registry"]}
+  - {id: role-tool-metrics, owner: ai-platform@acme.example, credential: short_lived, permissions: ["cloudwatch:GetMetricData"]}
+  - {id: role-tool-change, owner: ai-platform@acme.example, credential: short_lived, permissions: ["ticketing:CreateChangeRequest"]}
+  - {id: role-ci-deploy, owner: ai-platform@acme.example, kind: ci, credential: short_lived, permissions: ["cloudformation:CreateChangeSet on ops-assistant-*"]}
 
 keys:
   - {id: kms-ai-data, managed_by: customer, rotation: true}
@@ -140,5 +144,10 @@ flows:
   - {from: mcp-gateway, to: tool-change}
   - {from: ai-gateway, to: audit-logs}
   - {from: mcp-gateway, to: audit-logs}
+
+assessment:
+  redteam_schedule: weekly            # attack suite against staging every week
+  redteam_on_change: true            # any model, prompt or tool change re-runs it
+  drift_detection: true              # declared design compared with the observed system
 
 exceptions: []

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>EU AI Act timeline after the Digital Omnibus, Regulation (EU) 2026/1744: high-risk dates moved, GPAI and prohibitions unchanged</title>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">EU AI Act timeline after the Digital Omnibus</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Regulation (EU) 2024/1689 as amended by Regulation (EU) 2026/1744 (in force 27 July 2026). Verify dates at the source.</text>
+
+  <line x1="60" y1="210" x2="1140" y2="210" stroke="#334155" stroke-width="4"/>
+  <g>
+    <circle cx="100" cy="210" r="11" fill="#64748b"/>
+    <circle cx="250" cy="210" r="11" fill="#dc2626"/>
+    <circle cx="400" cy="210" r="11" fill="#2563eb"/>
+    <circle cx="550" cy="210" r="11" fill="#64748b"/>
+    <circle cx="700" cy="210" r="11" fill="#d97706"/>
+    <circle cx="860" cy="210" r="13" fill="#16a34a"/>
+    <circle cx="1060" cy="210" r="13" fill="#16a34a"/>
+  </g>
+  <g font-size="15" font-weight="700" text-anchor="middle">
+    <text x="100" y="180" fill="#0f172a">1 Aug 2024</text>
+    <text x="250" y="180" fill="#991b1b">2 Feb 2025</text>
+    <text x="400" y="180" fill="#1e3a8a">2 Aug 2025</text>
+    <text x="550" y="150" fill="#0f172a">27 Jul 2026</text>
+    <text x="700" y="180" fill="#92400e">2 Aug 2026</text>
+    <text x="860" y="180" fill="#166534">2 Dec 2027</text>
+    <text x="1060" y="180" fill="#166534">2 Aug 2028</text>
+  </g>
+  <text x="550" y="170" font-size="13" text-anchor="middle" fill="#475569">Omnibus in force</text>
+  <g font-size="13" text-anchor="middle">
+    <text x="100" y="246" fill="#334155">entry into force</text>
+    <text x="250" y="246" fill="#991b1b">prohibited practices</text>
+    <text x="250" y="266" fill="#991b1b">(Art 5), AI literacy</text>
+    <text x="250" y="286" fill="#991b1b">(Art 4)</text>
+    <text x="400" y="246" fill="#1e3a8a">GPAI model duties,</text>
+    <text x="400" y="266" fill="#1e3a8a">governance, penalties</text>
+    <text x="400" y="286" fill="#1e3a8a">(unchanged)</text>
+    <text x="700" y="246" fill="#92400e">Art 50 transparency</text>
+    <text x="700" y="266" fill="#92400e">(not delayed; check</text>
+    <text x="700" y="286" fill="#92400e">marking grace period)</text>
+    <text x="860" y="246" fill="#166534">stand-alone high-risk</text>
+    <text x="860" y="266" fill="#166534">(Annex III: jobs, credit,</text>
+    <text x="860" y="286" fill="#166534">education, biometrics)</text>
+    <text x="1060" y="246" fill="#166534">high-risk AI embedded</text>
+    <text x="1060" y="266" fill="#166534">in products (Annex I,</text>
+    <text x="1060" y="286" fill="#166534">Art 6(1))</text>
+  </g>
+
+  <g font-size="13" fill="#475569" text-anchor="middle">
+    <text x="860" y="318">was 2 Aug 2026</text>
+    <text x="1060" y="318">was 2 Aug 2027</text>
+  </g>
+  <path d="M 700 330 C 760 360, 800 360, 852 330" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="776" y="372" font-size="12" text-anchor="middle" fill="#166534">moved about 16 months</text>
+
+  <rect x="40" y="400" width="540" height="130" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="60" y="430" font-size="16" font-weight="700" fill="#166534">What this means for a security architect</text>
+  <text x="60" y="456" font-size="14" fill="#0f172a">More time for Annex III conformity work, not less work.</text>
+  <text x="60" y="478" font-size="14" fill="#0f172a">Prohibitions, AI literacy, GPAI and chatbot disclosure</text>
+  <text x="60" y="500" font-size="14" fill="#0f172a">already apply. Logging, oversight and security testing</text>
+  <text x="60" y="522" font-size="14" fill="#0f172a">are good practice anyway: build them now.</text>
+
+  <rect x="620" y="400" width="540" height="130" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="640" y="430" font-size="16" font-weight="700" fill="#991b1b">Check before you plan</text>
+  <text x="640" y="456" font-size="14" fill="#991b1b">The Omnibus also changed other details (for example the</text>
+  <text x="640" y="478" font-size="14" fill="#991b1b">AI-literacy duty and new prohibited practices reported</text>
+  <text x="640" y="500" font-size="14" fill="#991b1b">from 2 Dec 2026). Read the Official Journal text and record</text>
+  <text x="640" y="522" font-size="14" fill="#991b1b">the source and the date you checked.</text>
+</svg>

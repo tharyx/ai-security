@@ -1,0 +1,74 @@
+# Documentation pack after the governance program fixed it. Synthetic data for the lab.
+# Checked by doc_validator.py. Hashes are made-up teaching values.
+datasheets:
+  - dataset_id: DS-101
+    name: Anonymized past applications (fine-tuning set)
+    version: "2026.09"
+    owner: HR Data Steward (P. Nair)
+    source: Internal applicant tracking system, 2023-2025 closed requisitions
+    source_type: internal
+    collection_method: Export of closed applications; names, contact data and photos removed before export
+    licence: Internal data, used under the HR data-processing record
+    classification: confidential
+    contains_personal_data: true
+    lawful_basis: Legitimate interest for model improvement, balanced in DPIA-2026-04
+    dpia_ref: DPIA-2026-04
+    retention: Delete 24 months after the model version is retired
+    known_gaps_and_biases:
+      - Few applications for senior roles before 2024
+      - Over-represents two metro locations
+    derived_artifacts:
+      - {name: ft-set-2026-09, classification: confidential}
+      - {name: eval-split-2026-09, classification: confidential}
+
+  - dataset_id: DS-102
+    name: CV summary evaluation set
+    version: "1.4"
+    owner: HR Tech QA lead (M. Iyer)
+    source: Synthetic CVs written by the QA team plus 200 consented real CVs
+    source_type: internal
+    collection_method: Written to cover job families, seniority levels and career gaps
+    licence: Internal
+    classification: confidential
+    contains_personal_data: true
+    lawful_basis: Explicit consent recorded per CV
+    dpia_ref: DPIA-2026-04
+    retention: Review yearly; delete consented CVs on withdrawal
+    known_gaps_and_biases:
+      - Synthetic CVs are cleaner than real ones
+
+model_cards:
+  - model_id: MDL-002
+    name: cv-summarizer
+    version: 2.3.0
+    artifact_sha256: 4f9a3c0b1d2e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f30
+    provider: GenAI Vendor B (base) + internal fine-tune
+    base_model: vendor-b-large-3
+    owner: HR Tech team lead (A. Rao)
+    intended_use: Summarize one application against the published job criteria for a recruiter.
+    out_of_scope_uses: [ranking or rejecting candidates, inferring age health or ethnicity]
+    training_data: [DS-101]
+    evaluation:
+      - {name: summary_faithfulness, type: quality, result: 0.93, threshold: 0.90, dataset: DS-102}
+      - {name: prompt_injection_regression, type: security, result: 1.0, threshold: 1.0, dataset: AISEC-PI-SUITE-v7}
+      - {name: gender_gap_in_summary_tone, type: fairness, result: 0.02, threshold: 0.05, higher_is_better: false, dataset: DS-102}
+    limitations:
+      - Weaker on CVs with long career gaps
+      - English only
+    human_oversight: A recruiter reads every summary and makes every shortlisting decision
+    explanation_available: true
+    last_updated: 2026-10-01
+
+systems:
+  - system_id: AI-002
+    interacts_with_people: false
+    publishes_generated_content: false
+    decisions_about_people: true
+    disclosure:
+      decision_notice: {main_reasons: true, human_review_route: true}
+  - system_id: AI-001
+    interacts_with_people: true
+    publishes_generated_content: false
+    decisions_about_people: false
+    disclosure:
+      ai_notice: "This reply was drafted with AI and checked by a support agent."

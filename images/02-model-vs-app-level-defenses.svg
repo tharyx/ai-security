@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Model-level defenses versus application-level controls</title>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Model-level defenses vs application-level controls</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Model-level defenses change the odds. Application-level controls limit the damage when the odds lose. You need both.</text>
+
+  <!-- model-level column -->
+  <rect x="40" y="110" width="540" height="380" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="310" y="145" text-anchor="middle" font-size="18" font-weight="700" fill="#1e40af">Model-level: inside the weights</text>
+  <text x="310" y="170" text-anchor="middle" font-size="13" fill="#1e40af">mostly owned by the model provider · probabilistic</text>
+  <text x="65" y="210" font-size="15" font-weight="700" fill="#1e40af">Safety and refusal training</text>
+  <text x="310" y="210" font-size="13" fill="#1e40af">jailbreaks wear it down</text>
+  <text x="65" y="245" font-size="15" font-weight="700" fill="#1e40af">Instruction hierarchy</text>
+  <text x="310" y="245" font-size="13" fill="#1e40af">system above user above data</text>
+  <text x="65" y="280" font-size="15" font-weight="700" fill="#1e40af">Adversarial training</text>
+  <text x="310" y="280" font-size="13" fill="#1e40af">robust to known attacks</text>
+  <text x="65" y="315" font-size="15" font-weight="700" fill="#1e40af">Data curation, dedup</text>
+  <text x="310" y="315" font-size="13" fill="#1e40af">less poisoning, less memorizing</text>
+  <text x="65" y="350" font-size="15" font-weight="700" fill="#1e40af">Differential privacy</text>
+  <text x="310" y="350" font-size="13" fill="#1e40af">limits what one record teaches</text>
+  <text x="65" y="385" font-size="15" font-weight="700" fill="#1e40af">Grounding fine-tunes</text>
+  <text x="310" y="385" font-size="13" fill="#1e40af">fewer hallucinations, not zero</text>
+  <text x="65" y="430" font-size="13" fill="#475569">You usually cannot verify these yourself, and a model upgrade</text>
+  <text x="65" y="450" font-size="13" fill="#475569">can change all of them at once. Treat them as soft layers.</text>
+
+  <!-- app-level column -->
+  <rect x="620" y="110" width="540" height="380" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="890" y="145" text-anchor="middle" font-size="18" font-weight="700" fill="#166534">Application-level: around the model</text>
+  <text x="890" y="170" text-anchor="middle" font-size="13" fill="#166534">owned by you · deterministic · testable in CI</text>
+  <text x="645" y="210" font-size="15" font-weight="700" fill="#166534">Authorization, isolation</text>
+  <text x="890" y="210" font-size="13" fill="#166534">context built as the user</text>
+  <text x="645" y="245" font-size="15" font-weight="700" fill="#166534">Tool policy, approvals</text>
+  <text x="890" y="245" font-size="13" fill="#166534">schemas, allowlists, HITL</text>
+  <text x="645" y="280" font-size="15" font-weight="700" fill="#166534">Output handling</text>
+  <text x="890" y="280" font-size="13" fill="#166534">encode, URL policy, code gate</text>
+  <text x="645" y="315" font-size="15" font-weight="700" fill="#166534">Limits and budgets</text>
+  <text x="890" y="315" font-size="13" fill="#166534">size, rate, tokens, steps</text>
+  <text x="645" y="350" font-size="15" font-weight="700" fill="#166534">Provenance gates</text>
+  <text x="890" y="350" font-size="13" fill="#166534">data, models, packages</text>
+  <text x="645" y="385" font-size="15" font-weight="700" fill="#166534">Grounding checks</text>
+  <text x="890" y="385" font-size="13" fill="#166534">citations, abstain, handoff</text>
+  <text x="645" y="430" font-size="13" fill="#475569">Each one gets a unit test that passes with the model</text>
+  <text x="645" y="450" font-size="13" fill="#475569">fully fooled. These carry high-impact risks.</text>
+
+  <!-- rule -->
+  <rect x="40" y="515" width="1120" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600" y="542" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Rule: if the model does exactly what the attacker wants, the application layer must still make the outcome acceptable.</text>
+  <text x="600" y="563" text-anchor="middle" font-size="13" fill="#475569">Use model-level defenses to lower the attack success rate and the alert noise, never as the only control in front of data, money or actions.</text>
+</svg>

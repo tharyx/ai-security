@@ -60,3 +60,29 @@ def naive_residual(row: dict) -> str:
     VULN 9: due dates, owners and acceptance expiry are never checked.
     """
     return "Low" if (row.get("controls") or "").strip() else "High"
+
+
+# ---------------------------------------------------------------- model governance and incidents
+def naive_model_approval(request: dict) -> str:
+    """'Someone said yes in the ticket.'
+
+    VULN 10: any approval counts, even the requester approving their own request.
+    VULN 11: the version is not pinned, so "latest" is approved and can change under you.
+    VULN 12: evaluations, model card, risk entry and vendor assessment are never looked at.
+    """
+    return "APPROVED" if request.get("approvals") else "REJECTED"
+
+
+def naive_can_deploy_model(approved_models: set[str], model: str) -> bool:
+    # VULN 13: matches on the model *name*, so a silently swapped artifact deploys.
+    return model in approved_models
+
+
+def naive_incident_severity(incident: dict) -> str:
+    """'The model said something odd: send it to the ML team as a quality bug.'
+
+    VULN 14: severity comes from the kind of technology, not from impact (data, privilege, actions,
+             people). Only "classic" security events such as stolen keys are treated as security.
+    VULN 15: no regulatory flags are produced, so the 6-hour and 72-hour clocks start late.
+    """
+    return "SEV2" if incident.get("vector") == "key_theft" else "SEV4"

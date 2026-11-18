@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Detect a rogue agent and contain it in seconds</title>
+<defs>
+<marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+</defs>
+<rect width="1200" height="640" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Detect a rogue agent and contain it in seconds</text>
+<text x="40" y="80" font-size="16" fill="#475569">OWASP ASI10: watch behavior from a control plane the agent cannot reach, and respond by risk and confidence.</text>
+
+<rect x="40" y="120" width="230" height="150" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="155" y="152" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">Agent proposes</text>
+<text x="155" y="178" font-size="13" text-anchor="middle" fill="#991b1b">compromised, poisoned</text>
+<text x="155" y="198" font-size="13" text-anchor="middle" fill="#991b1b">or drifting: detection</text>
+<text x="155" y="218" font-size="13" text-anchor="middle" fill="#991b1b">does not need to know why</text>
+<text x="155" y="248" font-size="12" text-anchor="middle" fill="#991b1b">http_post to paste.evil.example</text>
+
+<rect x="310" y="120" width="250" height="150" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="435" y="152" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">Detector vs baseline</text>
+<text x="325" y="178" font-size="12" fill="#166534">critical: tamper attempt, canary</text>
+<text x="325" y="198" font-size="12" fill="#166534">high: new destination, risky new tool</text>
+<text x="325" y="218" font-size="12" fill="#166534">high: burst of denials</text>
+<text x="325" y="238" font-size="12" fill="#166534">medium: rate spike, new low-risk tool</text>
+<text x="325" y="258" font-size="12" fill="#166534">baseline: 30 normal sessions</text>
+
+<rect x="600" y="120" width="300" height="150" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="750" y="152" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">Confidence-calibrated response</text>
+<text x="615" y="180" font-size="13" fill="#166534">low impact + normal: run on its own</text>
+<text x="615" y="204" font-size="13" fill="#166534">high impact: human checkpoint first</text>
+<text x="615" y="228" font-size="13" fill="#166534">high or critical finding: contain now</text>
+<text x="615" y="252" font-size="13" fill="#166534">3 medium findings: contain</text>
+
+<rect x="940" y="120" width="220" height="150" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1050" y="152" font-size="16" font-weight="700" text-anchor="middle" fill="#1e40af">Kill switch</text>
+<text x="1050" y="178" font-size="13" text-anchor="middle" fill="#1e40af">lives in the control plane</text>
+<text x="1050" y="198" font-size="13" text-anchor="middle" fill="#1e40af">no agent tool can reach it</text>
+<text x="1050" y="218" font-size="13" text-anchor="middle" fill="#1e40af">reset only by a named human</text>
+<text x="1050" y="238" font-size="13" text-anchor="middle" fill="#1e40af">with an incident ticket</text>
+
+<polyline points="270,195 308,195" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+<polyline points="560,195 598,195" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="900,195 938,195" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#g)"/>
+
+<text x="40" y="320" font-size="17" font-weight="700" fill="#0f172a">Four containment layers act in parallel when the switch trips</text>
+<rect x="40" y="340" width="265" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="172" y="372" font-size="15" font-weight="700" text-anchor="middle" fill="#166534">Identity</text>
+<text x="172" y="396" font-size="13" text-anchor="middle" fill="#166534">revoke credentials,</text>
+<text x="172" y="414" font-size="13" text-anchor="middle" fill="#166534">end sessions</text>
+<rect x="325" y="340" width="265" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="457" y="372" font-size="15" font-weight="700" text-anchor="middle" fill="#166534">Network</text>
+<text x="457" y="396" font-size="13" text-anchor="middle" fill="#166534">block egress,</text>
+<text x="457" y="414" font-size="13" text-anchor="middle" fill="#166534">isolate the workload</text>
+<rect x="610" y="340" width="265" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="742" y="372" font-size="15" font-weight="700" text-anchor="middle" fill="#166534">Application</text>
+<text x="742" y="396" font-size="13" text-anchor="middle" fill="#166534">disable all tools,</text>
+<text x="742" y="414" font-size="13" text-anchor="middle" fill="#166534">freeze state and queues</text>
+<rect x="895" y="340" width="265" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1027" y="372" font-size="15" font-weight="700" text-anchor="middle" fill="#166534">Data</text>
+<text x="1027" y="396" font-size="13" text-anchor="middle" fill="#166534">restrict data access,</text>
+<text x="1027" y="414" font-size="13" text-anchor="middle" fill="#166534">turn on enhanced logging</text>
+
+<rect x="40" y="460" width="540" height="150" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="60" y="490" font-size="16" font-weight="700" fill="#334155">Append-only, hash-chained trace (outside the agent)</text>
+<text x="60" y="516" font-size="13" fill="#475569">every PROPOSED action, not only successes</text>
+<text x="60" y="538" font-size="13" fill="#475569">agent, user, session, tool, decision, rule, findings</text>
+<text x="60" y="560" font-size="13" fill="#475569">hashes of sensitive arguments, not raw data</text>
+<text x="60" y="582" font-size="13" fill="#475569">replayable incident bundle for the responder</text>
+
+<rect x="620" y="460" width="540" height="150" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="640" y="490" font-size="16" font-weight="700" fill="#92400e">The metric: attack surface time</text>
+<text x="640" y="516" font-size="13" fill="#92400e">time from the first out-of-bounds action to containment</text>
+<text x="640" y="540" font-size="13" fill="#92400e">lab, rogue agent:   0 s (contained at the exfiltration)</text>
+<text x="640" y="562" font-size="13" fill="#92400e">lab, data hoarding: 2 s (three rate-spike findings)</text>
+<text x="640" y="584" font-size="13" fill="#92400e">naive runtime: never (the agent turned the switch back off)</text>
+</svg>

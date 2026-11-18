@@ -11,7 +11,11 @@
 #     customer = you build or switch it on;  shared = provider gives the feature, you
 #     must enable and configure it;  provider = the provider runs it for you.
 #   check:     name of the function in reviewer.py that tests an architecture file.
-#   owasp_llm: related OWASP Top 10 for LLM Applications 2025 risk ids.
+#   owasp_llm: related OWASP Top 10 for LLM Applications 2026 risk ids (2026 numbering;
+#              e.g. LLM03 = Excessive Agency, LLM06 = Unbounded Consumption).
+#   owasp_asi: related OWASP Top 10 for Agentic Applications 2026 ids (ASI01..ASI10).
+#   owasp_mcp: related OWASP MCP Top 10 (beta) ids (MCP01..MCP10). Lists change: verify
+#              every id at genai.owasp.org / owasp.org before you cite it formally.
 #   cis_v8:    related CIS Critical Security Controls v8 control numbers.
 
 version: 1
@@ -24,6 +28,8 @@ controls:
     responsibility: customer
     check: short_lived_credentials
     owasp_llm: [LLM02]
+    owasp_asi: [ASI03]
+    owasp_mcp: [MCP01]
     cis_v8: [5, 6]
     outcome: >
       Every service identity gets temporary credentials from the platform. No access keys
@@ -45,7 +51,9 @@ controls:
     severity: high
     responsibility: customer
     check: least_privilege
-    owasp_llm: [LLM06]
+    owasp_llm: [LLM03]
+    owasp_asi: [ASI03]
+    owasp_mcp: [MCP02]
     cis_v8: [6]
     outcome: >
       Each identity can call only the exact model, index or tool actions it needs.
@@ -67,7 +75,9 @@ controls:
     severity: medium
     responsibility: customer
     check: identity_per_component
-    owasp_llm: [LLM06]
+    owasp_llm: [LLM03]
+    owasp_asi: [ASI03]
+    owasp_mcp: []
     cis_v8: [5]
     outcome: >
       Gateway, RAG service, MCP gateway and agent runtime each have their own identity, so
@@ -89,7 +99,9 @@ controls:
     severity: critical
     responsibility: customer
     check: user_authentication
-    owasp_llm: [LLM02, LLM06]
+    owasp_llm: [LLM02, LLM03]
+    owasp_asi: [ASI03]
+    owasp_mcp: [MCP07]
     cis_v8: [6]
     outcome: >
       Every request carries a verified user identity and tenant from the enterprise IdP.
@@ -105,6 +117,56 @@ controls:
         services: Identity-Aware Proxy; Identity Platform; Apigee or API Gateway JWT validation
         evidence: IAP or JWT validation enabled on the AI front door; negative test results
 
+  - id: IAM-05
+    family: identity
+    title: Every non-human identity has a named owner (no orphaned agents or keys)
+    severity: high
+    responsibility: customer
+    check: identity_ownership
+    owasp_llm: [LLM03]
+    owasp_asi: [ASI03, ASI10]
+    owasp_mcp: [MCP09]
+    cis_v8: [5, 6]
+    outcome: >
+      Every workload, agent, MCP server and pipeline identity has an accountable human
+      owner and a recorded purpose, is reviewed regularly, and is removed when its system
+      is retired. Orphaned identities are a common breach path.
+    clouds:
+      aws:
+        services: IAM role tags (owner, purpose, review-by) enforced by AWS Config rules or tag policies; IAM Access Analyzer unused-access findings
+        evidence: Role inventory with owner tags; quarterly review of unused roles
+      azure:
+        services: Owners on service principals and managed identities in Entra ID; Entra access reviews; Entra Agent ID for agents (check current status)
+        evidence: Access-review results; the report of service principals without owners is empty
+      gcp:
+        services: Service account description and owner metadata; Cloud Asset Inventory; service account insights for unused accounts
+        evidence: Service account inventory with owners; unused accounts disabled
+
+  - id: IAM-06
+    family: identity
+    title: Agents and tool gateways never pass the user's token through to downstream services
+    severity: high
+    responsibility: customer
+    check: no_token_passthrough
+    owasp_llm: [LLM03]
+    owasp_asi: [ASI03, ASI07]
+    owasp_mcp: [MCP01, MCP07]
+    cis_v8: [6]
+    outcome: >
+      Downstream services receive either the caller's own scoped identity or a new,
+      short-lived, audience-bound token from a token exchange that names both the agent and
+      the user. The user's original token is never forwarded.
+    clouds:
+      aws:
+        services: One IAM role per agent via STS AssumeRole with session tags for the user; Amazon Bedrock AgentCore Identity (check current features); OAuth token exchange at your broker
+        evidence: CloudTrail shows downstream calls by the agent role with user session tags; tool APIs reject tokens with the wrong audience
+      azure:
+        services: Managed identity per agent; Entra on-behalf-of (OBO) flow for delegated access; API Management policy that removes the inbound Authorization header before backend calls
+        evidence: Entra sign-in logs show OBO tokens with the agent app id and the user; APIM policy export
+      gcp:
+        services: Service account per agent; short-lived tokens via service account impersonation; Security Token Service (STS) token exchange
+        evidence: Cloud Audit Logs show the agent service account and the delegation chain; audience checks tested in CI
+
   # ------------------------------------------------------------------- network
   - id: NET-01
     family: network
@@ -112,7 +174,9 @@ controls:
     severity: high
     responsibility: shared
     check: private_model_endpoint
-    owasp_llm: [LLM02, LLM10]
+    owasp_llm: [LLM02, LLM06]
+    owasp_asi: []
+    owasp_mcp: []
     cis_v8: [12]
     outcome: >
       Calls to the model API travel over a private path from your network, and the
@@ -134,7 +198,9 @@ controls:
     severity: high
     responsibility: shared
     check: private_data_stores
-    owasp_llm: [LLM02, LLM08]
+    owasp_llm: [LLM02, LLM09]
+    owasp_asi: []
+    owasp_mcp: []
     cis_v8: [3, 12]
     outcome: >
       Vector indexes, document buckets and log stores have no public endpoint and accept
@@ -156,7 +222,9 @@ controls:
     severity: high
     responsibility: customer
     check: egress_control
-    owasp_llm: [LLM01, LLM06]
+    owasp_llm: [LLM01, LLM03]
+    owasp_asi: [ASI02]
+    owasp_mcp: []
     cis_v8: [12, 13]
     outcome: >
       Code that acts on model output (agents, tool servers) can reach only allowlisted
@@ -178,7 +246,9 @@ controls:
     severity: critical
     responsibility: customer
     check: gateway_chokepoint
-    owasp_llm: [LLM01, LLM10]
+    owasp_llm: [LLM01, LLM06]
+    owasp_asi: []
+    owasp_mcp: [MCP09]
     cis_v8: [12]
     outcome: >
       There is no network path from the internet to a model, RAG service, agent or tool
@@ -202,6 +272,8 @@ controls:
     responsibility: shared
     check: customer_managed_keys
     owasp_llm: [LLM02]
+    owasp_asi: []
+    owasp_mcp: []
     cis_v8: [3]
     outcome: >
       Vector stores, document stores and logs that hold confidential data use keys you
@@ -224,6 +296,8 @@ controls:
     responsibility: customer
     check: key_rotation
     owasp_llm: []
+    owasp_asi: []
+    owasp_mcp: []
     cis_v8: [3]
     outcome: Every customer-managed key has automatic rotation switched on and an owner.
     clouds:
@@ -243,7 +317,9 @@ controls:
     severity: critical
     responsibility: customer
     check: tenant_isolation
-    owasp_llm: [LLM02, LLM08]
+    owasp_llm: [LLM02, LLM09]
+    owasp_asi: []
+    owasp_mcp: [MCP10]
     cis_v8: [3, 6]
     outcome: >
       Retrieval filters by the caller's verified tenant and groups BEFORE ranking. The
@@ -266,6 +342,8 @@ controls:
     responsibility: shared
     check: provider_data_terms
     owasp_llm: [LLM02]
+    owasp_asi: []
+    owasp_mcp: []
     cis_v8: [3]
     outcome: >
       You know (and wrote down) whether the provider stores prompts, for how long, for what
@@ -289,6 +367,8 @@ controls:
     responsibility: shared
     check: input_guardrails
     owasp_llm: [LLM01]
+    owasp_asi: [ASI01]
+    owasp_mcp: [MCP06]
     cis_v8: [13]
     outcome: >
       User prompts and retrieved documents are scanned for prompt-injection and jailbreak
@@ -310,7 +390,9 @@ controls:
     severity: medium
     responsibility: shared
     check: output_guardrails
-    owasp_llm: [LLM02, LLM05]
+    owasp_llm: [LLM02, LLM10]
+    owasp_asi: []
+    owasp_mcp: []
     cis_v8: [3]
     outcome: >
       Model output is checked for PII, secrets and non-allowlisted URLs before it reaches a
@@ -326,6 +408,56 @@ controls:
         services: Model Armor sensitive data and malicious URL filters; Sensitive Data Protection
         evidence: Template config; blocked-output metrics
 
+  # ------------------------------------------------------------------- gateway
+  - id: GW-01
+    family: gateway
+    title: The AI gateway routes only to approved models, also during failover
+    severity: high
+    responsibility: customer
+    check: model_routing
+    owasp_llm: [LLM02, LLM04]
+    owasp_asi: [ASI04]
+    owasp_mcp: []
+    cis_v8: [2, 3]
+    outcome: >
+      The gateway keeps an allowlist of approved models per data class. Requests for
+      unknown models are refused, and failover only moves to another model approved for
+      the same data class; otherwise the request fails closed.
+    clouds:
+      aws:
+        services: Gateway routing table in version control; IAM and SCP policies allowing bedrock:InvokeModel only on approved model ARNs
+        evidence: Routing config history; IAM/SCP export; invocation logs list only approved model IDs
+      azure:
+        services: Azure API Management AI gateway policies with an allowlist of backends; only approved model deployments in Azure OpenAI / AI Foundry; Azure Policy on allowed models (check current built-ins)
+        evidence: APIM policy export; deployment inventory; diagnostic logs list only approved deployments
+      gcp:
+        services: Apigee or gateway routing allowlist; Organization Policy that restricts Vertex AI Model Garden models (check the current constraint name); IAM on endpoints
+        evidence: Org Policy export; Vertex AI audit logs list only approved model IDs
+
+  - id: GW-02
+    family: gateway
+    title: Response and semantic caches are isolated per tenant
+    severity: high
+    responsibility: customer
+    check: cache_isolation
+    owasp_llm: [LLM02]
+    owasp_asi: []
+    owasp_mcp: [MCP10]
+    cis_v8: [3]
+    outcome: >
+      Every cache key includes the verified tenant (and the user for confidential data), so
+      one tenant can never receive an answer that was generated from another tenant's data.
+    clouds:
+      aws:
+        services: Cache keys built from verified JWT claims; ElastiCache or MemoryDB with per-tenant key prefixes and IAM authentication
+        evidence: Cache-key code review; cross-tenant canary test in CI
+      azure:
+        services: API Management semantic cache policies partitioned by tenant (vary-by; check current policy options); Azure Cache for Redis with tenant prefixes
+        evidence: APIM policy export showing the tenant partition; cross-tenant canary test in CI
+      gcp:
+        services: Apigee ResponseCache with the tenant in the cache key; Memorystore with tenant-scoped keys
+        evidence: Proxy policy export; cross-tenant canary test in CI
+
   # ------------------------------------------------------------ tools / agents
   - id: TOOL-01
     family: tools-agents
@@ -333,7 +465,9 @@ controls:
     severity: high
     responsibility: customer
     check: tool_gateway
-    owasp_llm: [LLM06, LLM03]
+    owasp_llm: [LLM03, LLM04]
+    owasp_asi: [ASI02, ASI04]
+    owasp_mcp: [MCP03, MCP04]
     cis_v8: [2, 6]
     outcome: >
       Only registered, reviewed tools are callable. Every call is authorized, validated
@@ -355,7 +489,9 @@ controls:
     severity: high
     responsibility: customer
     check: human_approval
-    owasp_llm: [LLM06]
+    owasp_llm: [LLM03]
+    owasp_asi: [ASI02, ASI09]
+    owasp_mcp: []
     cis_v8: [6]
     outcome: >
       An agent can propose a write (change, ticket, email, delete) but a person approves the
@@ -377,7 +513,9 @@ controls:
     severity: high
     responsibility: customer
     check: agent_limits
-    owasp_llm: [LLM10, LLM06]
+    owasp_llm: [LLM03, LLM06]
+    owasp_asi: [ASI08, ASI10]
+    owasp_mcp: []
     cis_v8: [4]
     outcome: >
       Each agent run has a maximum number of steps and a cost ceiling, and operators can
@@ -400,7 +538,9 @@ controls:
     severity: high
     responsibility: shared
     check: audit_logging
-    owasp_llm: [LLM10]
+    owasp_llm: [LLM06]
+    owasp_asi: [ASI10]
+    owasp_mcp: [MCP08]
     cis_v8: [8]
     outcome: >
       Who changed the platform (control plane) and who called which model and tool (data
@@ -423,6 +563,8 @@ controls:
     responsibility: customer
     check: log_protection
     owasp_llm: [LLM02]
+    owasp_asi: []
+    owasp_mcp: [MCP08]
     cis_v8: [8]
     outcome: >
       Prompts and outputs in logs are redacted for secrets and personal data, the log store
@@ -445,7 +587,9 @@ controls:
     severity: medium
     responsibility: shared
     check: abuse_limits
-    owasp_llm: [LLM10]
+    owasp_llm: [LLM06]
+    owasp_asi: []
+    owasp_mcp: []
     cis_v8: [13]
     outcome: >
       Per-user and per-tenant request and token limits exist at the gateway, with budget
@@ -461,13 +605,40 @@ controls:
         services: Apigee quota and spike arrest; Vertex AI quotas; Cloud Billing budgets
         evidence: Quota config; budget alert history
 
+  - id: OPS-02
+    family: operations
+    title: The platform is assessed continuously (red-team runs and drift detection)
+    severity: medium
+    responsibility: customer
+    check: continuous_assessment
+    owasp_llm: [LLM01, LLM04]
+    owasp_asi: [ASI10]
+    owasp_mcp: [MCP08]
+    cis_v8: [7, 18]
+    outcome: >
+      The automated red-team suite runs on every model, prompt or tool change and on a
+      schedule, and drift between the approved design and the running system is detected
+      automatically and turned into findings.
+    clouds:
+      aws:
+        services: Scheduled CI jobs running the attack suite; AWS Config and Security Hub for configuration drift; CloudFormation drift detection
+        evidence: Red-team run history with dates and results; drift reports; findings trend
+      azure:
+        services: Scheduled pipeline runs; Microsoft Defender for Cloud AI security posture management (check current features); Azure Policy compliance
+        evidence: Run history; posture recommendations trend; policy compliance history
+      gcp:
+        services: Scheduled Cloud Build jobs; Security Command Center posture and AI protection features (check current tiers); policy checks on IaC
+        evidence: Run history; findings trend; drift reports
+
   - id: SEC-01
     family: operations
     title: Secrets live in a secrets manager, never in config, images or prompts
     severity: high
     responsibility: customer
     check: secrets_management
-    owasp_llm: [LLM02, LLM07]
+    owasp_llm: [LLM02, LLM08]
+    owasp_asi: []
+    owasp_mcp: [MCP01]
     cis_v8: [3]
     outcome: >
       Remaining secrets (third-party API keys, DB passwords) are fetched at runtime by

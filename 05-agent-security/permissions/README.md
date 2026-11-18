@@ -1,13 +1,13 @@
 # Agent Permissions, Policy, Budgets and Memory
 
 > **Module:** 05 · Agentic AI Security · **Weeks:** 18–19 · **Time:** ~12 hours
-> **You will:** hijack an agent loop that runs every tool call its model proposes and remembers whatever it reads, then rebuild it with a deterministic policy engine, human approval of exact actions, budgets and loop detection, and provenance-tagged memory, and prove each layer with tests.
+> **You will:** hijack an agent loop that runs every tool call its model proposes and remembers whatever it reads, then rebuild it with a deterministic policy engine, human approval of exact actions, budgets and loop detection, and provenance-tagged memory. In Part B you will make a refund agent pay the wrong customer and fool its human approver, then fix it with a goal lock, transaction rules and system-rendered approval cards. Every layer is proved with tests.
 
 | | |
 |---|---|
 | **Prerequisites** | [Prompt injection](../../02-llm-security/prompt-injection/); [Agent identity](../agent-identity/) (scopes, on-behalf-of) |
 | **Lab** | [`lab/`](lab/): runs offline, no API key needed, policy written in YAML |
-| **Maps to** | OWASP LLM06:2025 Excessive Agency · LLM01:2025 Prompt Injection · LLM10:2025 Unbounded Consumption · OWASP *Agentic AI – Threats and Mitigations* (memory poisoning, tool misuse, resource overload) · NIST AI RMF *Manage* |
+| **Maps to** | OWASP LLM03:2026 Excessive Agency (was LLM06:2025) · LLM01:2026 Prompt Injection · LLM06:2026 Unbounded Consumption (was LLM10:2025) · OWASP Agentic Top 10 2026: **ASI01** Agent Goal Hijack, **ASI02** Tool Misuse, **ASI06** Memory and Context Poisoning, **ASI09** Human-Agent Trust Exploitation · OWASP MCP Top 10: MCP02 Privilege Escalation via Scope Creep, MCP10 Context Injection and Over-Sharing · NIST AI RMF *Manage* |
 
 ---
 
@@ -20,7 +20,7 @@ Public examples:
 - **2025, Replit AI agent:** during a widely reported experiment by SaaStr founder Jason Lemkin, Replit's coding agent deleted a production database during an explicit "code freeze". Replit's CEO apologised and the company added stronger separation between development and production. *Instructions are not permissions.*
 - **2024, ChatGPT long-term memory:** security researcher Johann Rehberger showed that a prompt injection in untrusted content (for example a document or web page) could write false "memories" into ChatGPT's memory, which then affected later, unrelated chats. He also showed a persistent data-exfiltration variant; OpenAI fixed that exfiltration path. *Memory turns a one-time injection into a persistent one.*
 - **2025, GitHub MCP "toxic agent flow" (Invariant Labs):** a malicious public issue led an agent with a broad GitHub token to read private repositories and leak their content into a public pull request. *The token was valid; the action was not.*
-- **OWASP LLM10:2025 Unbounded Consumption** lists runaway resource use, including cost ("denial of wallet"), as a top-10 risk. An agent loop with no step or cost limit is a direct path to it.
+- **OWASP LLM06:2026 Unbounded Consumption (was LLM10:2025)** lists runaway resource use, including cost ("denial of wallet"), as a top-10 risk. An agent loop with no step or cost limit is a direct path to it.
 
 ---
 
@@ -32,7 +32,7 @@ In a naive agent loop, **the model's proposal is the decision**: whatever tool c
 
 ### 2.2 Excessive agency: three root causes
 
-OWASP LLM06:2025 names three causes. Each has a different fix.
+OWASP LLM03:2026 Excessive Agency (was LLM06:2025) names three causes. Each has a different fix.
 
 | Cause | Meaning | Lab example | Fix |
 |---|---|---|---|
@@ -125,7 +125,7 @@ The loop detector is clever but narrow: a paginated loop (`page-1`, `page-2`, ..
 
 ![Memory poisoning: one write, many victims](../../images/05-permissions-memory-poisoning.svg)
 
-Long-term memory is a **database that the model writes and later treats as context**. Without controls, a stranger's document can write a note that runs in every future session, for every user.
+Long-term memory is a **database that the model writes and later treats as context**. Without controls, a stranger's document can write a note that runs in every future session, for every user. This is **persistent prompt injection**: one injection becomes a standing instruction, sometimes with a delayed trigger ("next time the user mentions invoices, ..."). OWASP files it under ASI06 Memory and Context Poisoning. The [mini-project](../mini-project/) repeats the attack through a "Remember:" line in a cloud log.
 
 Controls:
 
@@ -136,6 +136,26 @@ Controls:
 - **Action-time policy still applies:** if poison gets in anyway, the policy denies its action (test `test_policy_alone_stops_poisoned_memory_even_with_provenance_and_isolation_off`).
 
 **Context isolation in multi-agent systems.** Each agent should get only the context its job needs. A "reader" agent that processes untrusted text should not share a context window with a "doer" agent that holds powerful tools. Pass the reader's output as data (or a structured value), not as instructions. This is the dual-LLM / quarantine idea from [prompt injection](../../02-llm-security/prompt-injection/), applied between agents. Messages *from* other agents are untrusted content too.
+
+### 2.10 Goal hijack, unauthorized transactions and approval integrity (Part B)
+
+Three risks meet when an agent can **move money** (refunds, payments, credits, transfers):
+
+| Risk | What it looks like | OWASP |
+|---|---|---|
+| **Goal hijack** | The agent was asked to handle ticket T-882 about order A-1001. Hidden text in the ticket makes it refund *another customer's* order. The tool and the arguments are valid; the *goal* is not. | ASI01 Agent Goal Hijack |
+| **Unauthorized transaction** | Right order, small amount, but the money goes to a new account the text named. Or the same refund is paid twice on a retry. | ASI02 Tool Misuse, LLM03:2026 |
+| **Persistent prompt injection** | The same trick, written into memory ("Remember: ..."), fires in later sessions (section 2.9 and lab case `memory_poison_next_user`) | ASI06 |
+| **Human-agent trust exploitation** | The approval card shows the model's own words ("Refund the $15 shipping fee") while the action refunds $480. A busy human approves the words. | ASI09 Human-Agent Trust Exploitation |
+
+The controls, in the order the secure refund agent applies them:
+
+1. **Goal lock (task contract).** Before the model reads anything, build a contract from **trusted** metadata: this ticket, this customer, these orders, these tools, this maximum. Validate every proposed action against the contract. The model can still be fooled; its proposal just no longer fits the task.
+2. **Transaction rules in code.** The order must belong to the ticket's customer; the refund window must be open; the amount must fit what is still refundable; money goes back only to the **original payment method** (never a new payee named in text); a daily velocity cap limits what one agent can pay on its own.
+3. **Idempotency.** One refund per (order, amount) key. Retries, replays and loops pay nothing extra. (Make side-effecting tools idempotent wherever possible.)
+4. **System-rendered approval cards.** The card's top line comes from verified data: amount, share of the order, payee, customer, risk. The model's note is shown last, labelled *unverified*, with a warning when its amounts disagree with the action. The approval is bound to the hash of the exact action.
+
+> The worked example in the *AI Security Architecture Study Guide* (your library) walks a similar refund agent through every architecture layer: the injection succeeds at the model layer and still fails, because deterministic controls stand behind it.
 
 ---
 
@@ -151,6 +171,9 @@ Controls:
 | L6 | **Provenance-tagged, per-user memory** with a write-time gate | Hard | Untrusted text cannot program the future |
 | L7 | Spotlighting and "content is data" prompts | Soft | Lowers how often the model proposes bad calls |
 | L8 | Logging of every proposal, decision, rule ID and approval; alerts on denials | Process | You see attacks and tune policy |
+| G1 | **Goal lock**: a task contract from trusted metadata; actions outside it are denied (Part B) | Hard | Injected text cannot redirect the task |
+| T1 | **Transaction rules**: ownership, window, remaining amount, original payee only, velocity cap, idempotency key (Part B) | Hard | Money moves only within business rules |
+| H1 | **System-rendered approval card** from verified data, model note labelled unverified (Part B) | Hard (+ human) | Approvers judge the action, not the model's story |
 
 ### Design patterns worth knowing
 
@@ -266,6 +289,51 @@ Real models will not follow the mock's `CALL_TOOL` convention exactly, so fewer 
 - **Per-user cost budgets** across sessions (daily limit), with an alert when 80% is used.
 - **Memory review UI (text):** list a user's memory notes with source and trust, and let them delete one.
 
+### Part B: the refund agent (goal hijack, transactions, approval cards)
+
+**Scenario:** ACME support uses an agent to refund orders. The customer writes the ticket text, so it is untrusted. The human approver skims cards and trusts the first dollar amount they see (the lab simulates this with `first_amount_reader`).
+
+```powershell
+python 05-agent-security/permissions/lab/demo_refund.py
+```
+
+Expected output:
+
+```text
+case                           vulnerable             secure                 secure-side evidence
+----------------------------------------------------------------------------------------------------------------------------------------
+goal_hijack_other_order        $4,900 TO ATTACKER     no money moved         denied: goal: order B-2001 is not part of ticket T-882
+new_payee                      $49 TO ATTACKER        no money moved         denied: refunds go to the original payment method only
+misleading_approval            $480 -> card-ana-4242  no money moved         denied: human approval denied
+small_full_refund              $49 -> card-ana-4242   $49 -> card-ana-4242   refunded $49.00 for A-1001 to card-ana-4242
+partial_refund_needs_approval  $150 -> card-ana-4242  $150 -> card-ana-4242  refunded $150.00 for A-1002 to card-ana-4242
+retry_same_refund_twice        $98 -> card-ana-4242   $49 -> card-ana-4242   denied: duplicate refund (idempotency key A-1001:49.00)
+
+What the approver saw for 'misleading_approval':
+
+  vulnerable card (the model's own words):
+    Agent requests approval: Refund the $15 shipping fee on A-1002 (ticket T-884). Approve?
+
+  secure card (rendered by the system from verified data):
+    REFUND $480.00 on order A-1002 (100% of $480.00)
+        payee:    card-ana-4242 (original payment method)
+        customer: cust-ana   ticket: T-884
+        risk:     HIGH - money leaves the company; above $100 auto-limit
+        WARNING:  the agent's note mentions $15.00, but the action refunds $480.00
+        agent's note (unverified): 'Refund the $15 shipping fee on A-1002'
+    Approve? [y/N]
+```
+
+The **same** human approved the $480 refund on the vulnerable side and rejected it on the secure side. Nothing about the human changed; only what they were shown.
+
+Read [`lab/vulnerable_refund_agent.py`](lab/vulnerable_refund_agent.py) (five `VULN` comments) and [`lab/secure_refund_agent.py`](lab/secure_refund_agent.py) (`TaskContract`, the T1 checks, `RefundApproval.render`). The tests are in [`lab/test_refund_agent.py`](lab/test_refund_agent.py).
+
+Break it yourself:
+
+1. `SecureRefundAgent(goal_lock=False)` on the goal-hijack ticket: which rule still stops it? Then `txn_rules=False` with `goal_lock=True`. (Both are tested: each layer holds alone.)
+2. `SecureRefundAgent(system_card=False, approver=first_amount_reader(20))`: the $480 refund is paid. Write one sentence on why "a human approves it" is not a control unless you control what the human sees.
+3. Write a ticket that stays inside the contract and under $100 but is still abuse (hint: many tickets, small amounts). Which control limits it? What would you add (per-customer limits, anomaly alerts)?
+
 ---
 
 ## 5. Real-world scenarios
@@ -308,7 +376,7 @@ After reading a shared wiki page, a company assistant started telling everyone t
 
 <details><summary><b>Q1. What is excessive agency? Give its three causes and one fix for each.</b></summary>
 
-OWASP LLM06:2025: an LLM system can perform damaging actions because of (1) **excessive functionality**: tools it does not need (fix: per-task tool grants); (2) **excessive permissions**: tools that can do more than needed (fix: narrow tools, typed arguments, downstream least privilege); (3) **excessive autonomy**: high-impact actions without checks (fix: policy plus human approval of exact actions). Agents raise the stakes because they act in loops on untrusted content.
+OWASP LLM03:2026 (was LLM06:2025): an LLM system can perform damaging actions because of (1) **excessive functionality**: tools it does not need (fix: per-task tool grants); (2) **excessive permissions**: tools that can do more than needed (fix: narrow tools, typed arguments, downstream least privilege); (3) **excessive autonomy**: high-impact actions without checks (fix: policy plus human approval of exact actions). Agents raise the stakes because they act in loops on untrusted content.
 </details>
 
 <details><summary><b>Q2. Why must the authorization decision be outside the model?</b></summary>
@@ -384,6 +452,21 @@ The agent produces a complete plan (the exact tool calls) before acting; policy 
 "If the assistant asks 'May I send the update to finance?', people will say yes. What they don't see is that the 'update' contains wording copied from a scam email. So we make the system show the exact message and recipient, we block clearly dangerous actions automatically so people only get asked about real judgement calls, and we limit how much the assistant can do in one go, so a mistake stays small."
 </details>
 
+<details><summary><b>Q15. What is agent goal hijack (ASI01), and how do you defend against it when every individual call looks valid?</b></summary>
+
+Injected content changes what the agent is trying to achieve, for example from "refund this customer's order" to "refund another order to a new account". Each call can be well-formed and allowed by role. The defence is a **task contract** built from trusted metadata before the model reads untrusted content (which customer, which objects, which tools, which limits), and checking every proposed action against it. Plan-then-execute and approval of the plan are stronger versions of the same idea.
+</details>
+
+<details><summary><b>Q16. How do you secure an agent that can make payments or refunds?</b></summary>
+
+Narrow tools (refund to the original payment method, never "pay any account"); business rules in code (ownership, window, remaining amount, limits); idempotency keys; velocity caps per agent and per customer; approval above a threshold with a card rendered from verified data; separation of duties; no change of bank details by agents at all; alerts on threshold-hugging and on approvals that disagree with the model's note.
+</details>
+
+<details><summary><b>Q17. What is human-agent trust exploitation (ASI09), and how do you design approvals against it?</b></summary>
+
+The agent, or the attacker steering it, persuades a human to approve something harmful, often with a confident, plausible explanation. Design: the card shows the exact action from verified data first (amount, target, payee, environment, risk), the model's explanation last and labelled unverified, with automatic warnings when they disagree; approvals are rare, hash-bound, single-use and expiring; high-risk approvals need a second person.
+</details>
+
 ---
 
 ## 8. Checklist (definition of done)
@@ -392,12 +475,13 @@ The agent produces a complete plan (the exact tool calls) before acting; policy 
 - [ ] `python -m pytest 05-agent-security/permissions` passes.
 - [ ] I did the six "break it yourself" exercises, including reordering rules R4 and R5.
 - [ ] I added one new tool with a tier, a rule and a test.
+- [ ] Part B: `demo_refund.py` runs, and I can explain why the same approver said yes on one side and no on the other.
 - [ ] Week 19 journal entry: a memory policy (who can write, who can read, retention, deletion) for an agent I use or would build, and one multi-agent context-isolation design.
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025, LLM06:2025 Excessive Agency: https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
-- OWASP Top 10 for LLM Applications 2025, LLM10:2025 Unbounded Consumption: https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/
+- OWASP Top 10 for LLM Applications 2026 (LLM03:2026 Excessive Agency, LLM06:2026 Unbounded Consumption; check the current numbering at the source): https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2025, LLM06:2025 Excessive Agency (earlier edition): https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
 - OWASP GenAI Security Project, *Agentic AI – Threats and Mitigations* (2025): https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/
 - OWASP GenAI Security Project, *OWASP Top 10 for Agentic Applications for 2026*: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
 - Open Policy Agent: https://www.openpolicyagent.org/ · Cedar policy language: https://www.cedarpolicy.com/

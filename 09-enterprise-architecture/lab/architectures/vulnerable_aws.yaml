@@ -24,6 +24,8 @@ components:
       input: []                       # VULN 3: no prompt-attack screening
       output: []                      #         and no output DLP
     # egress not set -> allow_all (cloud default)
+    # VULN 18: model_routing not set -> "open": any model name in the request is passed through
+    cache_scope: global               # VULN 19: answer cache keyed only by prompt text, shared by all tenants
 
   - id: model
     type: model_endpoint
@@ -61,6 +63,7 @@ components:
     identity: role-app
     approval_required_for: []         # VULN 10: writes run without a human
     # VULN 11: no limits, no kill switch; egress allow_all
+    # VULN 20: downstream_auth not set -> "passthrough": the user's bearer token is forwarded to tools
 
   - id: tool-shell
     type: tool
@@ -86,6 +89,7 @@ identities:
   - id: role-app
     credential: static_key            # VULN 13: IAM user access key in the EC2 user data
     permissions: ["bedrock:*", "es:*", "s3:*"]   # VULN 14: wildcards
+    # VULN 21: no owner: nobody reviews or retires this identity
 
 keys: []
 
@@ -113,5 +117,8 @@ flows:
   - {from: agent, to: tool-shell}     # VULN 17: tools called directly, no gateway or registry
   - {from: agent, to: tool-change}
   - {from: ai-gateway, to: audit-logs}
+
+# VULN 22: no "assessment" block: no scheduled red team, no re-test on model or prompt
+# change, no drift detection. Nobody notices when the design changes in production.
 
 exceptions: []

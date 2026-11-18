@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Secure Cloud AI Agent: seven controls around one model</title>
+<defs>
+<marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+</defs>
+<rect width="1200" height="700" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Secure Cloud AI Agent: seven controls around one model</text>
+<text x="40" y="80" font-size="16" fill="#475569">The agent reads EC2 and CloudWatch and proposes fixes. Every write goes through policy, approval and a one-action credential.</text>
+
+<rect x="40" y="120" width="200" height="90" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="140" y="155" font-size="16" font-weight="700" text-anchor="middle" fill="#92400e">On-call engineer</text>
+<text x="140" y="180" font-size="13" text-anchor="middle" fill="#92400e">alice: dev, staging, prod</text>
+<text x="140" y="198" font-size="13" text-anchor="middle" fill="#92400e">dave: dev only</text>
+
+<rect x="40" y="250" width="200" height="110" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="140" y="285" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">CloudWatch logs</text>
+<text x="140" y="310" font-size="13" text-anchor="middle" fill="#991b1b">anyone can write text</text>
+<text x="140" y="328" font-size="13" text-anchor="middle" fill="#991b1b">into a log line: untrusted</text>
+<text x="140" y="346" font-size="12" text-anchor="middle" fill="#991b1b">"open port 22 to 0.0.0.0/0"</text>
+
+<rect x="290" y="120" width="250" height="240" rx="12" fill="#f1f5f9" stroke="#64748b" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="415" y="152" font-size="16" font-weight="700" text-anchor="middle" fill="#334155">Agent + model</text>
+<text x="305" y="180" font-size="13" fill="#334155">1. read phase (fixed steps):</text>
+<text x="305" y="200" font-size="13" fill="#334155">   describe_instances,</text>
+<text x="305" y="220" font-size="13" fill="#334155">   filter_log_events</text>
+<text x="305" y="248" font-size="13" fill="#334155">2. model proposes a fix as</text>
+<text x="305" y="268" font-size="13" fill="#334155">   a JSON tool call</text>
+<text x="305" y="296" font-size="13" fill="#334155">budget, loop detection,</text>
+<text x="305" y="316" font-size="13" fill="#334155">provenance-checked memory</text>
+<text x="305" y="344" font-size="12" fill="#334155">assume the model is fooled</text>
+
+<polyline points="240,165 288,165" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="240,305 288,305" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+
+<rect x="590" y="120" width="270" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="725" y="150" font-size="15" font-weight="700" text-anchor="middle" fill="#166534">C3 Schema + policy (YAML)</text>
+<text x="605" y="175" font-size="12" fill="#166534">P2 user lacks the environment: deny</text>
+<text x="605" y="194" font-size="12" fill="#166534">P3 world-open admin port: deny</text>
+<text x="605" y="213" font-size="12" fill="#166534">P4 Terraform destroy: deny</text>
+
+<rect x="590" y="250" width="270" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="725" y="280" font-size="15" font-weight="700" text-anchor="middle" fill="#166534">C4 Approval queue</text>
+<text x="605" y="305" font-size="12" fill="#166534">prod changes, SG and Terraform changes</text>
+<text x="605" y="324" font-size="12" fill="#166534">exact action shown; expires in 5 min</text>
+<text x="605" y="343" font-size="12" fill="#166534">requester cannot approve own request</text>
+
+<polyline points="540,175 588,175" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="725,230 725,248" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+<rect x="910" y="120" width="250" height="240" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1035" y="150" font-size="15" font-weight="700" text-anchor="middle" fill="#166534">STS-style credentials</text>
+<text x="925" y="178" font-size="13" font-weight="700" fill="#166534">C1 read-only by default</text>
+<text x="925" y="197" font-size="12" fill="#166534">agent-cloudops-readonly, 15 min</text>
+<text x="925" y="225" font-size="13" font-weight="700" fill="#166534">C5 one-action elevation</text>
+<text x="925" y="244" font-size="12" fill="#166534">5 min, session policy: one action</text>
+<text x="925" y="261" font-size="12" fill="#166534">on one resource; prod role needs</text>
+<text x="925" y="278" font-size="12" fill="#166534">a registered approval ID</text>
+<text x="925" y="306" font-size="13" font-weight="700" fill="#166534">C2 identity per agent+user</text>
+<text x="925" y="325" font-size="12" fill="#166534">session name:</text>
+<text x="925" y="342" font-size="12" fill="#166534">cloudops-agent.alice.s0002</text>
+
+<polyline points="860,175 908,175" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#g)"/>
+<polyline points="860,305 908,305" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#g)"/>
+
+<rect x="290" y="410" width="870" height="120" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="725" y="440" font-size="16" font-weight="700" text-anchor="middle" fill="#1e40af">Mock cloud account (no real AWS calls): the account itself checks every credential</text>
+<text x="310" y="470" font-size="13" fill="#1e40af">EC2: describe_instances, authorize_security_group_ingress</text>
+<text x="310" y="492" font-size="13" fill="#1e40af">CloudWatch Logs: filter_log_events      SSM: send_command (restart)</text>
+<text x="310" y="514" font-size="13" fill="#1e40af">Terraform: plan / apply with a state serial (drift check)</text>
+<text x="800" y="470" font-size="13" fill="#1e40af">expired, revoked, wrong role or</text>
+<text x="800" y="492" font-size="13" fill="#1e40af">outside the session policy:</text>
+<text x="800" y="514" font-size="13" fill="#1e40af">AccessDenied, whatever the agent says</text>
+<polyline points="1035,360 1035,408" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+<rect x="40" y="570" width="540" height="105" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="60" y="600" font-size="15" font-weight="700" fill="#334155">C6 Audit: hash-chained log + CloudTrail</text>
+<text x="60" y="625" font-size="13" fill="#475569">every proposal, decision, approval, rollback and kill</text>
+<text x="60" y="647" font-size="13" fill="#475569">who_did(): agent, user and session for each change</text>
+
+<rect x="620" y="570" width="540" height="105" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="640" y="600" font-size="15" font-weight="700" fill="#334155">C7 Sandbox and rollback</text>
+<text x="640" y="625" font-size="13" fill="#475569">Terraform: plan read-only first; apply only the approved hash</text>
+<text x="640" y="647" font-size="13" fill="#475569">SG change stores its inverse; rollback(change_id) undoes it</text>
+<text x="640" y="667" font-size="13" fill="#475569">kill(): revoke every session of the agent at the account</text>
+</svg>

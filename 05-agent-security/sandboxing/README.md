@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [Agent permissions](../permissions/) (budgets, kill switch idea); basic processes and environment variables |
 | **Lab** | [`lab/`](lab/): runs offline on Windows and Linux, standard library only, benign snippets |
-| **Maps to** | OWASP LLM05:2025 Improper Output Handling · LLM06:2025 Excessive Agency · OWASP *Agentic AI – Threats and Mitigations* (unexpected code execution) · CIS Docker / Kubernetes Benchmarks |
+| **Maps to** | OWASP LLM10:2026 Improper Output Handling (was LLM05:2025; now includes insecure AI-generated code) · LLM03:2026 Excessive Agency (was LLM06:2025) · OWASP Agentic Top 10 2026: **ASI05** Unexpected Code Execution, ASI10 (kill switch) · OWASP MCP Top 10: MCP05 Command Injection and Execution · CIS Docker / Kubernetes Benchmarks |
 
 ---
 
@@ -332,8 +332,9 @@ Not at run time. Pre-build images with approved, pinned, scanned dependencies. I
 
 ## 9. References
 
-- OWASP Top 10 for LLM Applications 2025, LLM05:2025 Improper Output Handling: https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/
-- OWASP Top 10 for LLM Applications 2025, LLM06:2025 Excessive Agency: https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
+- OWASP Top 10 for LLM Applications 2026 (LLM10:2026 Improper Output Handling, LLM03:2026 Excessive Agency; check the current numbering at the source): https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications 2025, LLM05:2025 Improper Output Handling (earlier edition): https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/
+- OWASP GenAI Security Project, *OWASP Top 10 for Agentic Applications for 2026* (ASI05): https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
 - OWASP GenAI Security Project, *Agentic AI – Threats and Mitigations* (2025): https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/
 - PEP 578, *Python Runtime Audit Hooks*: https://peps.python.org/pep-0578/
 - Python docs, command-line option `-I` (isolated mode): https://docs.python.org/3/using/cmdline.html#cmdoption-I

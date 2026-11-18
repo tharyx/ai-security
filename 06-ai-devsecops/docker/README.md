@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | Docker basics (`FROM`, `RUN`, `COPY`, layers); Python; [Terraform lesson](../terraform/) helps but is not required |
 | **Lab** | [`lab/`](lab/): runs offline, no Docker install needed |
-| **Maps to** | OWASP LLM03:2025 Supply Chain · OWASP LLM04:2025 Data and Model Poisoning · MITRE ATLAS AML.T0010 (ML Supply Chain Compromise) · NIST SP 800-190 (container security) · CIS Docker Benchmark |
+| **Maps to** | OWASP LLM04:2026 Supply Chain [LLM03:2025] · OWASP LLM05:2026 Data and Model Poisoning [LLM04:2025] · OWASP Agentic ASI04 Agentic Supply Chain, ASI05 Unexpected Code Execution (pickle loading) · MITRE ATLAS AML.T0010 (ML Supply Chain Compromise) · NIST SP 800-190 (container security) · CIS Docker Benchmark |
 
 ---
 

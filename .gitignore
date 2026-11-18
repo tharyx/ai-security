@@ -25,3 +25,6 @@ lab-output/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Personal reference PDFs: copyrighted and large, keep local only
+Documents/

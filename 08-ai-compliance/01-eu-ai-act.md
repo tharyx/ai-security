@@ -7,9 +7,9 @@
 |---|---|
 | **Prerequisites** | [Module 07](../07-ai-governance/) (register, tiers, risk) |
 | **Lab** | [`lab/ai_act_classifier.py`](lab/ai_act_classifier.py), [`lab/fixtures/ai_act_cases.yaml`](lab/fixtures/ai_act_cases.yaml), `demo.py` section 1 |
-| **Maps to** | Regulation (EU) 2024/1689 · NIST AI RMF MAP 1 (legal requirements in context) · ISO/IEC 42001 clause 4 (context, interested parties, legal requirements) |
+| **Maps to** | Regulation (EU) 2024/1689 as amended by the Digital Omnibus on AI, Regulation (EU) 2026/1744 · NIST AI RMF GOVERN 1.1 and MAP 1.1 (legal requirements in context) · ISO/IEC 42001 clause 4 (context, interested parties, legal requirements) · Art 15 cybersecurity maps to OWASP LLM01:2026 Prompt Injection and LLM05:2026 Data and Model Poisoning (LLM04:2025) |
 
-> **Educational, not legal advice.** This lesson simplifies a long regulation to teach its structure. Classification of a real system needs the official text, current European Commission guidelines and qualified legal counsel. **Dates and some rules may change:** in November 2025 the Commission proposed a "Digital Omnibus" package that would amend parts of the AI Act, including delaying some high-risk dates. Check the current status before relying on any date here.
+> **Educational, not legal advice.** This lesson simplifies a long regulation to teach its structure. Classification of a real system needs the official text, current European Commission guidelines and qualified legal counsel. **Dates changed in 2026:** the **Digital Omnibus on AI, Regulation (EU) 2026/1744**, was published in the Official Journal on 24 July 2026 and entered into force on **27 July 2026**. It moved the stand-alone (Annex III) high-risk obligations to **2 December 2027** and high-risk AI embedded in products (Annex I) to **2 August 2028**. Prohibitions and GPAI obligations are unchanged. This lesson and the lab use those dates. Laws keep changing: verify at the source and record the date you checked.
 
 ---
 
@@ -19,6 +19,7 @@ The EU AI Act is the first broad, binding AI law. It applies to organizations ou
 
 - **2024:** the AI Act was published in the EU Official Journal in July 2024 and entered into force on **1 August 2024**. Its obligations apply in phases.
 - **2 February 2025:** the bans on prohibited practices and the AI-literacy duty started to apply. In the same month the Commission published guidelines on prohibited practices and on the definition of an "AI system".
+- **27 July 2026:** the Digital Omnibus on AI (Regulation (EU) 2026/1744) entered into force and postponed the high-risk deadlines by about 16 months (Annex III) and 12 months (Annex I). Teams that had planned for 2 August 2026 gained time, but chatbot and synthetic-content transparency (Art 50) was not delayed.
 - **2022, Clearview AI and the Italian data protection authority:** the Garante fined Clearview AI EUR 20 million under GDPR, partly for scraping facial images to build a recognition database. Under the AI Act, building facial recognition databases by untargeted scraping is now a **prohibited practice** in its own right.
 - **2018, Amazon's experimental recruiting model (reported by Reuters):** it penalized CVs that mentioned "women's". Under the AI Act, AI used to recruit or select people is listed in **Annex III** as high-risk.
 - **Penalties** can reach EUR 35 million or 7% of worldwide annual turnover for prohibited practices, and EUR 15 million or 3% for many other obligations (Art 99; lower caps apply to SMEs).
@@ -85,17 +86,22 @@ Classify in a fixed order. Each step can end the analysis.
 
 ### 2.4 Timeline
 
-![EU AI Act timeline](../images/08-eu-ai-act-timeline.svg)
+![EU AI Act timeline after the Digital Omnibus](../images/08-eu-ai-act-timeline-omnibus.svg)
 
-| Date (as adopted) | What applies |
-|---|---|
-| 1 Aug 2024 | Entry into force |
-| 2 Feb 2025 | Prohibited practices (Art 5); AI literacy (Art 4) |
-| 2 Aug 2025 | GPAI model obligations; governance bodies; penalties |
-| 2 Aug 2026 | Most remaining obligations, including Annex III high-risk duties and Art 50 transparency |
-| 2 Aug 2027 | High-risk duties for Annex I products (Art 6(1)); GPAI models placed on the market before 2 Aug 2025 must comply |
+| Date (after the Omnibus) | What applies | Before the Omnibus |
+|---|---|---|
+| 1 Aug 2024 | Entry into force | same |
+| 2 Feb 2025 | Prohibited practices (Art 5); AI literacy (Art 4) | same |
+| 2 Aug 2025 | GPAI model obligations; governance bodies; penalties | same (unchanged) |
+| 27 Jul 2026 | Digital Omnibus, Regulation (EU) 2026/1744, in force | – |
+| 2 Aug 2026 | Art 50 transparency (chatbot notice, synthetic-content marking, deep-fake disclosure) | same; a short grace period for marking by some systems already on the market (around 2 Dec 2026): verify |
+| 2 Aug 2027 | GPAI models placed on the market before 2 Aug 2025 must comply | same |
+| **2 Dec 2027** | **Stand-alone high-risk duties (Annex III: employment, credit, education, biometrics...)** | was 2 Aug 2026 |
+| **2 Aug 2028** | **High-risk AI embedded in Annex I products (Art 6(1))** | was 2 Aug 2027 |
 
-Again: the Commission has proposed changes (the Digital Omnibus). Record the date you checked and your source.
+Other Omnibus changes are reported in secondary sources, for example two additional prohibited practices from 2 December 2026 (AI-generated non-consensual intimate imagery and child sexual abuse material) and softer wording for the AI-literacy duty (the ISC2 study guide in your library lists both). The lab does not model them: read the Official Journal text and record the source and date you checked.
+
+**Practical meaning.** The delay gives providers of Annex III systems more time for conformity assessment, quality management and technical documentation. It does not reduce the work, and it does not delay the security engineering you should do anyway (risk management, logging, oversight, adversarial testing).
 
 ### 2.5 Where security architects come in
 
@@ -149,19 +155,19 @@ Expected output (section 1):
 
 ```text
 === 1. EU AI Act classification (educational, not legal advice) ===
-case                       naive          engine categories          role      #obl  applies from (original dates)
+case                       naive          engine categories          role      #obl  applies from (after Omnibus)
 ----------------------------------------------------------------------------------------------------------------
-cv-screening-deployer      minimal_risk   high_risk                  deployer     9  2025-02-02, 2026-08-02
-cv-screening-provider      minimal_risk   high_risk                  provider    14  2025-02-02, 2026-08-02
-hr-document-router         minimal_risk   annex_iii_not_high_risk    provider     3  2025-02-02, 2026-08-02
-credit-scoring-bank        minimal_risk   high_risk                  deployer     9  2025-02-02, 2026-08-02
+cv-screening-deployer      minimal_risk   high_risk                  deployer     9  2025-02-02, 2027-12-02
+cv-screening-provider      minimal_risk   high_risk                  provider    14  2025-02-02, 2027-12-02
+hr-document-router         minimal_risk   annex_iii_not_high_risk    provider     3  2025-02-02, 2027-12-02
+credit-scoring-bank        minimal_risk   high_risk                  deployer     9  2025-02-02, 2027-12-02
 support-chatbot            limited_risk   transparency               provider     3  2025-02-02, 2026-08-02
 meeting-mood-monitor       minimal_risk   prohibited                 deployer     2  2025-02-02
 internal-code-assistant    limited_risk   minimal_risk               deployer     1  2025-02-02
 open-weights-model         minimal_risk   gpai_model                 provider     5  2025-02-02, 2025-08-02
 frontier-model             minimal_risk   gpai_systemic_risk         provider    10  2025-02-02, 2025-08-02
 india-only-app             limited_risk   out_of_scope               provider     0  -
-Dates are those in Regulation (EU) 2024/1689 as adopted. Later EU acts may change them: check the current status.
+Dates: Regulation (EU) 2024/1689 as amended by the Digital Omnibus, Regulation (EU) 2026/1744 (in force 27 Jul 2026). Verify at the source before relying on them.
 ```
 
 Count the naive classifier's errors: it calls a **prohibited** system "minimal", calls all three high-risk systems "minimal", gives a deployer a provider's chatbot duty, and claims EU duties for an India-only app.
@@ -173,17 +179,17 @@ python 08-ai-compliance/lab/demo.py --case cv-screening-deployer
 ```
 
 ```text
-cv-screening-deployer      minimal_risk   high_risk                  deployer     9  2025-02-02, 2026-08-02
+cv-screening-deployer      minimal_risk   high_risk                  deployer     9  2025-02-02, 2027-12-02
       WHY: Art 6(2) + Annex III area: employment
       Art 4         from 2025-02-02  AI literacy: staff who operate or use AI have sufficient AI literacy
-      Art 26(1)     from 2026-08-02  Use the system according to the provider's instructions for use
-      Art 26(2)     from 2026-08-02  Assign human oversight to people with competence, training and authority
-      Art 26(4)     from 2026-08-02  Make sure input data you control is relevant and representative
-      Art 26(5)     from 2026-08-02  Monitor operation; inform provider/authorities of risks and serious incidents
-      Art 26(6)     from 2026-08-02  Keep automatically generated logs under your control for at least six months
-      Art 26(11)    from 2026-08-02  Inform people that they are subject to the use of a high-risk AI system
-      Art 86        from 2026-08-02  Be ready to explain individual decisions to affected persons on request
-      Art 26(7)     from 2026-08-02  Inform workers' representatives and affected workers before use
+      Art 26(1)     from 2027-12-02  Use the system according to the provider's instructions for use
+      Art 26(2)     from 2027-12-02  Assign human oversight to people with competence, training and authority
+      Art 26(4)     from 2027-12-02  Make sure input data you control is relevant and representative
+      Art 26(5)     from 2027-12-02  Monitor operation; inform provider/authorities of risks and serious incidents
+      Art 26(6)     from 2027-12-02  Keep automatically generated logs under your control for at least six months
+      Art 26(11)    from 2027-12-02  Inform people that they are subject to the use of a high-risk AI system
+      Art 86        from 2027-12-02  Be ready to explain individual decisions to affected persons on request
+      Art 26(7)     from 2027-12-02  Inform workers' representatives and affected workers before use
       ASK COUNSEL: Art 25: putting your name on it, substantially modifying it, or changing its intended purpose can make YOU the provider. Is any of that planned?
 ```
 
@@ -194,13 +200,13 @@ python 08-ai-compliance/lab/demo.py --case cv-screening-provider
 ```
 
 ```text
-cv-screening-provider      minimal_risk   high_risk                  provider    14  2025-02-02, 2026-08-02
+cv-screening-provider      minimal_risk   high_risk                  provider    14  2025-02-02, 2027-12-02
       WHY: Art 6(3) exception refused: the system profiles natural persons
       WHY: Art 6(2) + Annex III area: employment
       Art 4         from 2025-02-02  AI literacy: staff who operate or use AI have sufficient AI literacy
-      Art 9         from 2026-08-02  Risk management system across the whole lifecycle
+      Art 9         from 2027-12-02  Risk management system across the whole lifecycle
       ...
-      Art 73        from 2026-08-02  Report serious incidents to market surveillance authorities
+      Art 73        from 2027-12-02  Report serious incidents to market surveillance authorities
 ```
 
 The vendor claimed the "preparatory task" exception. The engine refused it because the product profiles candidates.
@@ -211,7 +217,7 @@ The vendor claimed the "preparatory task" exception. The engine refused it becau
 python -m pytest 08-ai-compliance/lab/test_ai_act_classifier.py -v
 ```
 
-All tests pass. Read `test_incomplete_questionnaire_fails_closed`: delete one answer and the engine raises an error instead of guessing.
+All tests pass. Three tests pin the Omnibus dates: `test_omnibus_moved_annex_iii_high_risk_dates_but_not_transparency`, `test_on_todays_date_transparency_applies_but_high_risk_duties_do_not_yet` and `test_gpai_dates_unchanged_by_omnibus`. Read `test_incomplete_questionnaire_fails_closed`: delete one answer and the engine raises an error instead of guessing.
 
 ### Step 4: Build ACME's applicability matrix (week-32 deliverable)
 
@@ -272,7 +278,7 @@ Marketing adds "sentiment detection" to an internal staff assistant to measure e
 
 <details><summary><b>Q1. Summarize the EU AI Act's structure in one minute.</b></summary>
 
-It is risk-based. Some practices are prohibited. High-risk systems (Annex I products and Annex III areas such as employment, credit, education, law enforcement) carry heavy duties, mainly for providers, with specific duties for deployers. Some systems have transparency duties (chatbots, synthetic content, deep fakes). Everything else is minimal risk. General-purpose AI models have a separate track, with extra duties for systemic-risk models. Obligations apply in phases from 2025, and the exact dates should be checked because amendments have been proposed.
+It is risk-based. Some practices are prohibited. High-risk systems (Annex I products and Annex III areas such as employment, credit, education, law enforcement) carry heavy duties, mainly for providers, with specific duties for deployers. Some systems have transparency duties (chatbots, synthetic content, deep fakes). Everything else is minimal risk. General-purpose AI models have a separate track, with extra duties for systemic-risk models. Obligations apply in phases: prohibitions and literacy since February 2025, GPAI since August 2025, transparency from August 2026, and, after the Digital Omnibus (Regulation (EU) 2026/1744), Annex III high-risk duties from 2 December 2027 and Annex I from 2 August 2028.
 </details>
 
 <details><summary><b>Q2. Does the AI Act apply to an Indian company with no EU office?</b></summary>
@@ -320,9 +326,9 @@ Stop and escalate. Emotion recognition in the workplace is prohibited, and recru
 A required-answer questionnaire tied to the AI register; an engine that applies the decision order and lists obligations by role; open questions routed to counsel; results stored with answer source and date; re-classification triggered by changes in purpose, market, role or vendor; obligations mapped into the control set (Lesson 03) so they become engineering work with evidence.
 </details>
 
-<details><summary><b>Q11. How do you handle the uncertainty around dates and proposed amendments?</b></summary>
+<details><summary><b>Q11. The Digital Omnibus delayed high-risk obligations. Should we slow down?</b></summary>
 
-Plan to the adopted dates unless and until changes are formally adopted, track the legislative process, and record the source and date checked for every planning assumption. Many duties (risk management, logging, oversight, security testing) are good practice anyway, so building them early is low-regret.
+No. Plan to the dates in force (Regulation (EU) 2026/1744: Annex III from 2 December 2027, Annex I from 2 August 2028), but remember that prohibitions, AI literacy, GPAI duties and Art 50 transparency already apply. Use the extra time for conformity assessment and documentation, not to postpone security: risk management, logging, oversight and adversarial testing are good practice and are needed for incident handling today. Record the source and date you checked for every planning assumption, because the law can change again.
 </details>
 
 <details><summary><b>Q12. Explain the AI Act to a product manager in plain words.</b></summary>
@@ -348,4 +354,4 @@ Plan to the adopted dates unless and until changes are formally adopted, track t
 - AI Act Service Desk, implementation timeline: https://ai-act-service-desk.ec.europa.eu/en/ai-act/eu-ai-act-implementation-timeline
 - European Commission guidelines on prohibited AI practices and on the AI system definition (February 2025): via the policy page above.
 - General-Purpose AI Code of Practice (2025): via the policy page above.
-- European Commission "Digital Omnibus" proposals (November 2025): check the current legislative status on the Commission and EUR-Lex sites.
+- Digital Omnibus on AI, Regulation (EU) 2026/1744 (Official Journal, 24 July 2026; in force 27 July 2026): search EUR-Lex for "2026/1744" and verify the consolidated text of Regulation (EU) 2024/1689.

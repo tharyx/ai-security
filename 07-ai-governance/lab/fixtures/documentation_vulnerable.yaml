@@ -1,0 +1,59 @@
+# The documentation pack a busy team writes once and never checks. Synthetic data for the lab.
+datasheets:
+  - dataset_id: DS-101
+    name: Past applications
+    version: "1"
+    owner: HR
+    source: ATS export
+    source_type: internal
+    collection_method: TBD
+    licence: Internal
+    classification: confidential
+    contains_personal_data: true
+    retention: forever
+    known_gaps_and_biases: []
+    derived_artifacts:
+      - {name: ft-set, classification: internal}
+      - {name: embeddings-index, classification: ""}
+
+  - dataset_id: DS-900
+    name: Scraped job-board profiles
+    version: "0.1"
+    owner: Growth team
+    source: Public job boards
+    source_type: web_scraped
+    collection_method: Crawler
+    licence: ""
+    classification: internal
+    contains_personal_data: "unknown"
+    retention: TBD
+    known_gaps_and_biases: [unknown]
+
+model_cards:
+  - model_id: MDL-002
+    name: cv-summarizer
+    version: latest
+    artifact_sha256: TBD
+    provider: GenAI Vendor B
+    owner: HR Tech team
+    intended_use: General use
+    out_of_scope_uses: []
+    training_data: [DS-101, DS-777]
+    evaluation:
+      - {name: accuracy, type: quality, result: 0.81, threshold: 0.85}
+    limitations: [No known limitations]
+    human_oversight: TBD
+    explanation_available: n/a
+    last_updated: 2025-12-01
+
+systems:
+  - system_id: AI-002
+    interacts_with_people: false
+    publishes_generated_content: false
+    decisions_about_people: true
+    disclosure: {}
+  - system_id: AI-001
+    interacts_with_people: true
+    publishes_generated_content: true
+    decisions_about_people: false
+    disclosure: {ai_notice: ""}

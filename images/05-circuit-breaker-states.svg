@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>A circuit breaker stops one bad stage from becoming a cascade</title>
+<defs>
+<marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+</defs>
+<rect width="1200" height="600" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">A circuit breaker stops one bad stage from becoming a cascade</text>
+<text x="40" y="80" font-size="16" fill="#475569">OWASP ASI08: a deterministic breaker between agents bounds the blast radius of a bad plan.</text>
+
+<rect x="60" y="130" width="280" height="130" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="200" y="165" font-size="17" font-weight="700" text-anchor="middle" fill="#166534">CLOSED</text>
+<text x="200" y="192" font-size="13" text-anchor="middle" fill="#166534">actions flow to the next stage</text>
+<text x="200" y="212" font-size="13" text-anchor="middle" fill="#166534">count actions and failures</text>
+<text x="200" y="232" font-size="13" text-anchor="middle" fill="#166534">in a 60-second window</text>
+
+<rect x="460" y="130" width="280" height="130" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="600" y="165" font-size="17" font-weight="700" text-anchor="middle" fill="#991b1b">OPEN</text>
+<text x="600" y="192" font-size="13" text-anchor="middle" fill="#991b1b">refuse every action</text>
+<text x="600" y="212" font-size="13" text-anchor="middle" fill="#991b1b">raise an alert for a human</text>
+<text x="600" y="232" font-size="13" text-anchor="middle" fill="#991b1b">wait for the cooldown (300 s)</text>
+
+<rect x="860" y="130" width="280" height="130" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1000" y="165" font-size="17" font-weight="700" text-anchor="middle" fill="#92400e">HALF-OPEN</text>
+<text x="1000" y="192" font-size="13" text-anchor="middle" fill="#92400e">let ONE probe action through</text>
+<text x="1000" y="212" font-size="13" text-anchor="middle" fill="#92400e">success: close the breaker</text>
+<text x="1000" y="232" font-size="13" text-anchor="middle" fill="#92400e">failure: open it again</text>
+
+<polyline points="340,180 458,180" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+<text x="399" y="168" font-size="12" text-anchor="middle" fill="#991b1b">more than 5 actions</text>
+<text x="399" y="200" font-size="12" text-anchor="middle" fill="#991b1b">or 2 failures</text>
+<polyline points="740,180 858,180" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="799" y="168" font-size="12" text-anchor="middle" fill="#334155">cooldown over</text>
+<polyline points="1000,260 1000,300 200,300 200,262" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#g)"/>
+<text x="600" y="292" font-size="12" text-anchor="middle" fill="#166534">probe succeeded</text>
+<polyline points="940,260 940,280 640,280 640,262" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+<text x="790" y="275" font-size="12" text-anchor="middle" fill="#991b1b">probe failed</text>
+
+<text x="40" y="360" font-size="17" font-weight="700" fill="#0f172a">Lab: the planner asks ops-agent to restart 12 staging services; svc-02, -03 and -04 fail health checks</text>
+<text x="40" y="390" font-size="14" font-weight="700" fill="#991b1b">Without a breaker</text>
+<text x="40" y="460" font-size="14" font-weight="700" fill="#166534">With a breaker</text>
+
+<g font-size="12" text-anchor="middle">
+<rect x="200" y="372" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="235" y="394" fill="#334155">svc-01</text>
+<rect x="278" y="372" width="70" height="34" rx="6" fill="#fef2f2" stroke="#dc2626"/><text x="313" y="394" fill="#991b1b">svc-02 x</text>
+<rect x="356" y="372" width="70" height="34" rx="6" fill="#fef2f2" stroke="#dc2626"/><text x="391" y="394" fill="#991b1b">svc-03 x</text>
+<rect x="434" y="372" width="70" height="34" rx="6" fill="#fef2f2" stroke="#dc2626"/><text x="469" y="394" fill="#991b1b">svc-04 x</text>
+<rect x="512" y="372" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="547" y="394" fill="#334155">svc-05</text>
+<rect x="590" y="372" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="625" y="394" fill="#334155">svc-06</text>
+<rect x="668" y="372" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="703" y="394" fill="#334155">svc-07</text>
+<rect x="746" y="372" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="781" y="394" fill="#334155">svc-08</text>
+<rect x="824" y="372" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="859" y="394" fill="#334155">svc-09</text>
+<rect x="902" y="372" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="937" y="394" fill="#334155">svc-10</text>
+<rect x="980" y="372" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="1015" y="394" fill="#334155">svc-11</text>
+<rect x="1058" y="372" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="1093" y="394" fill="#334155">svc-12</text>
+
+<rect x="200" y="442" width="70" height="34" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="235" y="464" fill="#334155">svc-01</text>
+<rect x="278" y="442" width="70" height="34" rx="6" fill="#fef2f2" stroke="#dc2626"/><text x="313" y="464" fill="#991b1b">svc-02 x</text>
+<rect x="356" y="442" width="70" height="34" rx="6" fill="#fef2f2" stroke="#dc2626"/><text x="391" y="464" fill="#991b1b">svc-03 x</text>
+<rect x="434" y="442" width="694" height="34" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-dasharray="6 4"/><text x="781" y="464" fill="#166534">breaker OPEN after 2 failures: svc-04 ... svc-12 refused, alert raised</text>
+</g>
+<text x="200" y="430" font-size="13" fill="#991b1b">12 restarts run, 3 fail, nobody is told: the failure spreads to every service.</text>
+<text x="200" y="500" font-size="13" fill="#166534">3 restarts run, then the breaker stops the cascade and pages a human (lab: test_breaker_opens_after_repeated_failures).</text>
+
+<rect x="40" y="525" width="1120" height="55" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="60" y="548" font-size="13" fill="#334155">Also between stages: validate the upstream output (schema, size, targets) before acting on it; cap fan-out; and keep a kill switch and rollback ready.</text>
+<text x="60" y="568" font-size="13" fill="#334155">A breaker is a hard limit: it does not need to know WHY the plan is bad (hallucination, injection or a bug) to stop it from spreading.</text>
+</svg>

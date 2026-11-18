@@ -10,7 +10,7 @@ Each layer can be switched off, so you can prove which layer stopped which leak:
         on the allowlist are removed (closes the zero-click exfiltration channel).
     D5  Output DLP: secrets are always redacted; personal data (PII) is redacted
         unless it belongs to the user who is asking.
-    D6  HTML escaping before rendering: model output is text, never markup (LLM05).
+    D6  HTML escaping before rendering: model output is text, never markup (LLM10:2026).
     D7  Redacted, pseudonymized logging: useful for investigations, useless to a thief.
 
 D1-D3 stop the data from reaching the wrong place. D4-D6 catch it on the way out.

@@ -7,7 +7,7 @@
 |---|---|
 | **Prerequisites** | [01 Reference architecture](01-enterprise-ai-reference-architecture.md); basic AWS (IAM, VPC, S3) |
 | **Lab** | [`lab/`](lab/) with [`architectures/secure_aws.yaml`](lab/architectures/secure_aws.yaml) and [`vulnerable_aws.yaml`](lab/architectures/vulnerable_aws.yaml) |
-| **Maps to** | OWASP LLM02, LLM06, LLM10 · CIS Controls v8 (3, 5, 6, 8, 12) · AWS Generative AI Security Scoping Matrix · NIST AI RMF MANAGE |
+| **Maps to** | OWASP LLM Top 10 2026: LLM02, LLM03 Excessive Agency [2025: LLM06], LLM06 Unbounded Consumption [2025: LLM10] · OWASP Agentic ASI03 · CIS Controls v8 (3, 5, 6, 8, 12) · AWS Generative AI Security Scoping Matrix · NIST AI RMF MANAGE |
 
 > **Service names and features change fast.** Every AWS service, API and setting named here was correct to the best of our knowledge when written. Check the current AWS documentation before you rely on any of it.
 

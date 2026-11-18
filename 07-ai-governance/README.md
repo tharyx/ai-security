@@ -29,7 +29,10 @@ The lifecycle view from the original repository diagram is still useful: every s
 | 02 | [Roles, policies and the operating model](02-roles-policies-and-operating-model.md) | 29–30 (policy lifecycle again in 32) | Design the board and RACI, write an AI acceptable-use policy, run time-limited exceptions |
 | 03 | [AI risk management](03-ai-risk-management.md) | 30 | Use NIST AI RMF, NIST AI 600-1 and ISO/IEC 23894; score inherent and residual risk; assess vendors |
 | 04 | [ISO/IEC 42001 AI management system](04-iso-42001-ai-management-system.md) | 30 | Understand AIMS clauses and Annex A areas, plan certification, run a mini internal audit |
-| Lab | [`lab/`](lab/) | 29–30 | Governed register vs spreadsheet register, risk-register scorer, shadow-AI discovery |
+| 05 | [Model cards, data documentation and transparency](05-model-cards-data-documentation-and-transparency.md) | 29–30 | Write and validate model cards and datasheets, propagate data labels, decide what to disclose to whom |
+| 06 | [Model approval, lifecycle governance and AI incidents](06-model-approval-lifecycle-and-ai-incidents.md) | 30 | Approve model versions through gates, block silent swaps at deploy, triage AI incidents and start the legal clocks |
+| Pack | [`policies/`](policies/README.md) | 29–30 | Seven policy templates (AUP, risk, model approval, data, third-party questionnaire, incident response, AI security standard), linted like code |
+| Lab | [`lab/`](lab/) | 29–30 | Governed register vs spreadsheet register, risk-register scorer, shadow-AI discovery, documentation validator, model approval gates, incident triage, policy linter |
 
 Week-plan deliverables ([36-week plan](../00-program/36-week-plan.md)): week 29 → **AI system register**; week 30 → **AI risk register and treatment plan**.
 
@@ -57,6 +60,11 @@ Week-plan deliverables ([36-week plan](../00-program/36-week-plan.md)): week 29 
 | **ISO/IEC 42001** | Certifiable standard for an AI management system (AIMS) |
 | **Statement of Applicability (SoA)** | Which Annex A controls apply, why, and how they are implemented |
 | **Nonconformity** | A requirement that is not met; it needs a corrective action |
+| **Model card / datasheet** | Structured facts about one model version / one dataset; checked like code in Lesson 05 |
+| **Classification propagation** | Derived artifacts (embeddings, logs, fine-tune sets) keep at least the source data's label |
+| **Model approval** | A time-limited approval of one pinned artifact (hash) for one system, through tiered gates |
+| **Kill switch / degrade mode** | A tested way to turn off an AI system's risky parts (tools, autonomy) in minutes |
+| **SEV1–SEV4** | AI incident severity by impact (data, privilege, actions, people), not by "AI involved" |
 
 ## How the lessons connect
 
@@ -64,7 +72,10 @@ Week-plan deliverables ([36-week plan](../00-program/36-week-plan.md)): week 29 
 2. **Lesson 02** decides who acts on that list and by which rules, including how to bend a rule safely (exceptions).
 3. **Lesson 03** goes deep on each system's risks: scores, treatments, acceptance and vendors. High-tier systems cannot pass the release gate without an owned risk entry (GOV-08), which links lessons 01 and 03.
 4. **Lesson 04** wraps it all in a management system that runs every year and improves, and that a certification body can audit.
-5. **Module 08** then maps these controls to laws and standards and checks the evidence behind them.
+5. **Lesson 05** documents models and data so approvals, erasure and explanations are possible.
+6. **Lesson 06** governs change over the lifecycle: model versions are approved and pinned, and incidents are triaged by impact with flags that start Module 08's reporting clocks.
+7. **The policy pack** writes all of this down as seven checkable policies.
+8. **Module 08** then maps these controls to laws and standards and checks the evidence behind them.
 
 Main links to other modules: system cards describe the systems you secured in [Module 02](../02-llm-security/) (LLM), [03](../03-rag-security/) (RAG), [04](../04-mcp-security/) (MCP) and [05](../05-agent-security/) (agents); the release gate plugs into the CI/CD from [Module 06](../06-ai-devsecops/); the [capstone](../10-capstone-project/) needs your register, risk register and governance pack.
 
@@ -77,7 +88,12 @@ python 07-ai-governance/lab/demo.py                 # spreadsheet vs governed re
 python 07-ai-governance/lab/demo.py --details       # every finding
 python 07-ai-governance/lab/secure_register.py 07-ai-governance/lab/fixtures/systems_vulnerable.yaml --id AI-001
 python 07-ai-governance/lab/risk_register.py 07-ai-governance/lab/fixtures/risks_vulnerable.csv
-python -m pytest 07-ai-governance -v               # 53 tests
+python 07-ai-governance/lab/demo.py --part 2        # lessons 05-06: documentation, approval, incidents, policies
+python 07-ai-governance/lab/doc_validator.py 07-ai-governance/lab/fixtures/documentation_vulnerable.yaml
+python 07-ai-governance/lab/model_approval.py 07-ai-governance/lab/fixtures/model_requests.yaml
+python 07-ai-governance/lab/incident_triage.py 07-ai-governance/lab/fixtures/incidents.yaml
+python 07-ai-governance/lab/policy_lint.py 07-ai-governance/policies
+python -m pytest 07-ai-governance -v               # 83 tests
 ```
 
 | File | Role |
@@ -85,24 +101,31 @@ python -m pytest 07-ai-governance -v               # 53 tests
 | `vulnerable_register.py` | The "spreadsheet" register: trusts declared tiers, approves everything (VULN 1–9) |
 | `secure_register.py` | Governed register: schema (L1), rule-based tiering (L2), checks (L3), release gate (L4), exceptions, shadow-AI discovery, KPIs |
 | `risk_register.py` | Risk scorer: inherent, residual with evidence-based control credit, hygiene findings |
-| `fixtures/` | Vulnerable and governed system YAML, risk CSVs, synthetic proxy log |
-| `test_governance.py`, `test_risk_register.py` | Impact tests: what can deploy, which finding appears, what each layer catches |
+| `doc_validator.py` | Model cards (DOC-01..08), datasheets (DS-01..05) and disclosure checks (TR-01..03) |
+| `model_approval.py` | Model-version approval gates (MA-01..08) and the hash-based deploy check |
+| `incident_triage.py` | AI incident category, SEV1–4, first actions, OWASP 2026 / ASI IDs, and clock flags for Module 08 |
+| `policy_lint.py` | Checks the policy pack: sections, header, numbered requirements with evidence, review date, mapping (POL-01..06) |
+| `fixtures/` | Vulnerable and governed system YAML, risk CSVs, synthetic proxy log, documentation packs, model requests, incidents |
+| `test_governance.py`, `test_risk_register.py`, `test_model_governance.py` | Impact tests: what can deploy, which finding appears, what each layer catches |
 
 Finding codes: GOV-00 schema · 01 unowned · 02 no intended use · 03 weak oversight · 04 tier under-declared · 05 missing control · 06 review overdue · 07 prohibited · 08 no risk entry · 09 expired exception. RISK-01 no owner · 02 overdue treatment · 03 above appetite with no plan · 04 invalid acceptance · 05 closed on a planned control · 06 bad scores.
 
-## Module mini-project: "AI governance pack" for your capstone
+## Module mini-project: "AI governance pack" = Portfolio Project 5, part 1
+
+The roadmap's **Portfolio Project 5, "AI Governance & Compliance Framework"** has six parts: inventory, risk register, policy set, control mapping, evidence repository and compliance dashboard. Module 07 builds the first three; [Module 08](../08-ai-compliance/README.md#module-mini-project-compliance-pack--portfolio-project-5-part-2) builds the last three and the dashboard that pulls everything together.
 
 Produce, in your journal folder:
 
-1. **Register:** system cards (YAML) for every AI component of your capstone, validated by `secure_register.py`, with computed tiers and reasons.
-2. **Discovery memo:** where shadow AI could appear in your capstone organization and how you would detect it.
-3. **Operating model:** a one-page diagram, RACI for at least eight activities, and the board charter (what it approves, what it can block).
-4. **AI acceptable-use policy:** one to two pages, with a list of the lines that are technically enforced.
-5. **Risk register:** 15+ risks across security, privacy, safety, reliability, misuse and third parties, scored by `risk_register.py`, with treatments, owners and dates.
-6. **Vendor assessment:** one model provider, using the Lesson 03 table.
-7. **AIMS starter:** scope statement, draft SoA for the nine Annex A areas, three nonconformities with corrective actions, and a one-page management review.
+1. **Inventory (register):** system cards (YAML) for every AI component of your capstone, validated by `secure_register.py`, with computed tiers and reasons; a shadow-AI discovery memo.
+2. **Documentation:** a datasheet for each dataset and a model card for each model, with zero `doc_validator.py` findings; the disclosure block for every user-facing system.
+3. **Operating model:** a one-page diagram, RACI for at least eight activities, the board charter (what it approves, what it can block) and a one-page board AI report (strategy, structure, practices, enablers).
+4. **Policy set:** adapt the seven templates in [`policies/`](policies/) to your organization; `policy_lint.py` reports no findings.
+5. **Risk register:** 15+ risks across security, privacy, safety, reliability, misuse and third parties, with OWASP LLM 2026 / ASI / MCP IDs, scored by `risk_register.py`, with treatments, owners and dates.
+6. **Model approval and vendor review:** one approved model request (`model_approval.py`) and one completed vendor questionnaire (policy 05, Appendix A).
+7. **Incident readiness:** triage of three incident scenarios with `incident_triage.py`, and the kill-switch design for your highest-tier system.
+8. **AIMS starter:** scope statement, draft SoA for the nine Annex A areas, three nonconformities with corrective actions, and a one-page management review.
 
-**Acceptance criteria:** the inventory is complete; every high-tier system has an owned risk entry; frameworks are correctly distinguished (law vs standard vs framework vs guidance); every decision has an owner and date; evidence is reproducible by re-running the lab tools; review triggers are written down.
+**Acceptance criteria:** the inventory is complete; every high-tier system has an owned risk entry and an approved, pinned model; every policy requirement says how it is checked; frameworks are correctly distinguished (law vs standard vs framework vs guidance); every decision has an owner and date; evidence is reproducible by re-running the lab tools; review triggers are written down.
 
 ## Interview questions (cross-cutting, system-design style)
 
@@ -172,6 +195,8 @@ Verify current editions before use. For each source you rely on, record the edit
 - NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework
 - NIST AI 600-1, Generative AI Profile: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
 - NIST AI Resource Center (Playbook, crosswalks): https://airc.nist.gov/
+- OWASP Top 10 for LLM Applications 2026 and OWASP Top 10 for Agentic Applications: https://genai.owasp.org/
+- CERT-In AI Security Auditing Guidelines v1.0 (India): https://www.cert-in.org.in/
 - ISO/IEC 42001 (AI management system): https://www.iso.org/standard/42001
 - ISO/IEC 23894 (AI risk management guidance): https://www.iso.org/standard/77304.html
 - ISO/IEC 27001 (information security management system): https://www.iso.org/standard/27001
@@ -179,7 +204,7 @@ Verify current editions before use. For each source you rely on, record the edit
 
 **AI security catalogs used as risk sources**
 - OWASP GenAI Security Project: https://genai.owasp.org/
-- OWASP Top 10 for LLM Applications: https://genai.owasp.org/llm-top-10/
+- OWASP Top 10 for LLM Applications (2026 edition; renumbered from 2025): https://genai.owasp.org/llm-top-10/
 - OWASP MCP Top 10: https://owasp.org/www-project-mcp-top-10/
 - MITRE ATLAS: https://atlas.mitre.org/
 
@@ -196,3 +221,33 @@ Verify current editions before use. For each source you rely on, record the edit
 ---
 
 **Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).
+
+## Roadmap coverage
+
+| Roadmap topic (Module 7: AI Governance and Risk) | Where it is covered |
+|---|---|
+| Frameworks | Lesson 03 (NIST AI RMF, Playbook actions, NIST AI 600-1, ISO/IEC 23894), Lesson 04 (ISO/IEC 42001); legal frameworks in Module 08 |
+| Risk assessment | Lesson 03, `risk_register.py`; CERT-In eight-factor tiering in Module 08 Lesson 06 |
+| AI inventory | Lesson 01, `secure_register.py`, shadow-AI discovery |
+| Model cards and data documentation | Lesson 05, `doc_validator.py`, policy 04 |
+| Risk classification | Lesson 01 (rule-based tiers), Lesson 03 (scoring) |
+| Explainability and transparency | Lesson 05 sections 2.4–2.6 (audiences, disclosure patterns, TR checks) |
+| Accountability and human oversight | Lesson 02 (RACI, three lines, board duties), GOV-03, policy 01 |
+| Third-party AI risk | Lesson 03 section 2.8, policy 05 (questionnaire and vendor tiers), MA-05 |
+| AI incident management | Lesson 06 section 2.4, `incident_triage.py`, policy 06; reporting clocks in Module 08 Lesson 04 |
+| Lifecycle governance | Lesson 06 section 2.1 (nine stages and gates, retirement) |
+| Model governance (approve models and versions) | Lesson 06 section 2.2, `model_approval.py`, policy 03 |
+| Data governance (data ownership) | Lesson 05, policy 04 |
+| Auditing | Lesson 04 (internal audit), Module 08 Lessons 03, 04 and 06 |
+| Hands-on: enterprise AI governance framework and risk register | Lab + mini-project (Portfolio Project 5 part 1) |
+| Policies: AUP, risk management, model approval, data governance, third-party risk assessment, incident response, AI security standard | [`policies/`](policies/README.md) 01–07, checked by `policy_lint.py` |
+
+## Further reading from your library
+
+- **A Director's Guide to AI Governance** (Human Technology Institute, v2, 2026): the snapshot of board duties and Part 2 (operating model: strategy, structure, practices, enablers); Appendix C, the small-organization checklist. Use it for Lesson 02 and your board report.
+- **NIST AI RMF Playbook:** read GOVERN 1.6, 1.7, 4.3, 6.1–6.2; MAP 1.1, 2.2, 3.5, 4.1; MEASURE 2.7–2.9; MANAGE 2.3–2.4, 4.1–4.3 (the rows in Lesson 03's table), including the "transparency and documentation" questions under each.
+- **OWASP GenAI Data Security Risks and Mitigations 2026:** DSGAI03 (shadow AI), DSGAI07 (data governance, lifecycle and classification) and DSGAI08 (non-compliance) for Lesson 05 and policy 04.
+- **OWASP GenAI Data Security Best Practices v2.0, Part 1:** chapter 3 on AI data security posture management (continuous inventory and classification) for Lessons 01 and 05.
+- **AI Cyber Incident Playbook** (triage, investigation, response and recovery): read two or three playbooks (for example the ones on tool metadata redirecting an agent, persistent agent memory, and stolen model gateway keys) to see impact-based priority and evidence lists; compare with Lesson 06.
+- **ISC2 AI Security study guide** (unofficial, Nov 2026): Domain 2 (governance, ethics, risk and compliance) as a self-test for this module and Module 08.
+- **CERT-In AI Security Auditing Guidelines v1.0:** section 5 (risk tiering) and section 8.3 (model risk management) for Lessons 03 and 06; the rest is in Module 08 Lesson 06.
