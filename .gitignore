@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# Secrets — never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials*.json
+
+# Lab artifacts that may contain sensitive output
+*.log
+lab-output/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

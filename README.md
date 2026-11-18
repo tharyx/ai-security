@@ -33,6 +33,8 @@ By the end of 36 weeks, you should be able to:
 | `08-governance-compliance/` | AI governance, risk, privacy and compliance |
 | `09-capstone/` | Enterprise architecture project and acceptance tests |
 | `10-templates/` | Reusable threat model, risk register, test case and incident templates |
+| `journal/` | My weekly learning notes, labs and evidence |
+| `PROGRESS.md` | Week-by-week progress tracker |
 
 ## Recommended prerequisites
 You already have a strong platform/security engineering foundation. Refresh:
