@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Splunk at a glance</title>
+  <defs><marker id="ar" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#64748b"/></marker></defs>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Splunk at a glance</text>
+  <text x="40" y="78" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Forwarders send data to indexers. Search heads run SPL.</text>
+  <rect x="30" y="110" width="260" height="200" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="160.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Data sources</text>
+  <text x="160.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Windows event logs</text>
+  <text x="160.0" y="179" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Linux syslog</text>
+  <text x="160.0" y="198" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Firewall, cloud APIs</text>
+  <text x="160.0" y="217" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Universal Forwarder (UF)</text>
+  <text x="160.0" y="236" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">HTTP Event Collector</text>
+  <line x1="290" y1="210" x2="330" y2="210" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="330" y="110" width="270" height="200" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="465.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Indexer</text>
+  <text x="465.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Parses and stores events</text>
+  <text x="465.0" y="179" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">index = bucket of data</text>
+  <text x="465.0" y="198" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">sourcetype = format rules</text>
+  <text x="465.0" y="217" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Fields extracted at search</text>
+  <line x1="600" y1="210" x2="640" y2="210" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="640" y="110" width="270" height="200" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="775.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Search head</text>
+  <text x="775.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">SPL searches</text>
+  <text x="775.0" y="179" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Saved searches, alerts</text>
+  <text x="775.0" y="198" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Dashboards, reports</text>
+  <text x="775.0" y="217" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Enterprise Security (ES)</text>
+  <line x1="910" y1="210" x2="940" y2="210" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="940" y="110" width="230" height="200" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1055.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Analyst</text>
+  <text x="1055.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Investigate</text>
+  <text x="1055.0" y="179" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Triage notable events</text>
+  <text x="1055.0" y="198" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Tune</text>
+  <rect x="40" y="350" width="1120" height="80" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600.0" y="376" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">SPL reads left to right, like a Unix pipe:  index=main sourcetype=x | where ... | stats count by user | sort - count</text>
+  <rect x="40" y="450" width="1120" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="476" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Practice: Splunk Free / trial, plus Boss of the SOC (BOTS) public datasets</text>
+  <text x="600.0" y="500" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Verify the current download page and licence terms before you install.</text>
+</svg>

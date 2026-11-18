@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Shared responsibility: who secures what</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="640" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Shared responsibility: who secures what</text>
+<text x="40" y="80" font-size="16" fill="#475569">The provider secures the cloud itself. You secure what you put in it. The line moves with the service model.</text>
+<text x="420" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">On-premises</text>
+<text x="630" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">IaaS (VM)</text>
+<text x="840" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">PaaS (managed DB)</text>
+<text x="1050" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">SaaS (e-mail app)</text>
+<text x="40" y="169" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Data and classification</text>
+<rect x="330" y="135" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="420.0" y="166.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="540" y="135" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="630.0" y="166.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="750" y="135" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="840.0" y="166.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="960" y="135" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1050.0" y="166.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<text x="40" y="231" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Identities and access</text>
+<rect x="330" y="197" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="420.0" y="228.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="540" y="197" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="630.0" y="228.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="750" y="197" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="840.0" y="228.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="960" y="197" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1050.0" y="228.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<text x="40" y="293" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Application</text>
+<rect x="330" y="259" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="420.0" y="290.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="540" y="259" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="630.0" y="290.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="750" y="259" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="840.0" y="290.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="960" y="259" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1050.0" y="290.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<text x="40" y="355" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Runtime / OS / patches</text>
+<rect x="330" y="321" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="420.0" y="352.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="540" y="321" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="630.0" y="352.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="750" y="321" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="840.0" y="352.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<rect x="960" y="321" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1050.0" y="352.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<text x="40" y="417" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Network controls</text>
+<rect x="330" y="383" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="420.0" y="414.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="540" y="383" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="630.0" y="414.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="750" y="383" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="840.0" y="414.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="960" y="383" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1050.0" y="414.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<text x="40" y="479" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Hypervisor and hardware</text>
+<rect x="330" y="445" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="420.0" y="476.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="540" y="445" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="630.0" y="476.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<rect x="750" y="445" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="840.0" y="476.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<rect x="960" y="445" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1050.0" y="476.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<text x="40" y="541" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Physical data center</text>
+<rect x="330" y="507" width="180" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="420.0" y="538.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">You</text>
+<rect x="540" y="507" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="630.0" y="538.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<rect x="750" y="507" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="840.0" y="538.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<rect x="960" y="507" width="180" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1050.0" y="538.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Provider</text>
+<text x="40" y="600" text-anchor="start" font-size="14" fill="#475569">Always yours: data, identities, and who can reach what. Misconfiguration on your side is the #1 cloud breach cause.</text>
+</svg>

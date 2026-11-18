@@ -1,0 +1,14 @@
+{
+  "_note": "Synthetic, offline threat-intel table. All indicators are fake (documentation IP ranges, *.example domains).",
+  "indicators": [
+    {"indicator": "203.0.113.50", "type": "ip", "verdict": "malicious", "confidence": 0.9, "source": "feed-alpha", "tags": ["password-spray", "botnet"], "note": "Seen spraying many tenants"},
+    {"indicator": "203.0.113.99", "type": "ip", "verdict": "malicious", "confidence": 0.8, "source": "feed-beta", "tags": ["tor-exit"], "note": "Anonymizing network exit node"},
+    {"indicator": "198.51.100.77", "type": "ip", "verdict": "suspicious", "confidence": 0.5, "source": "feed-alpha", "tags": ["scanner"], "note": "Noisy internet scanner, low confidence"},
+    {"indicator": "198.51.100.200", "type": "ip", "verdict": "benign", "confidence": 0.95, "source": "internal-cmdb", "tags": ["corporate-vpn"], "note": "Corporate VPN egress. Geo-IP shows a different country."},
+    {"indicator": "login-update.example", "type": "domain", "verdict": "malicious", "confidence": 0.95, "source": "feed-alpha", "tags": ["phishing"], "note": "Credential harvesting page"},
+    {"indicator": "cdn-stage.example", "type": "domain", "verdict": "malicious", "confidence": 0.85, "source": "feed-beta", "tags": ["malware-delivery"], "note": "Hosts a PowerShell second stage"},
+    {"indicator": "files.cloudshare.example", "type": "domain", "verdict": "benign", "confidence": 0.6, "source": "internal-cmdb", "tags": ["cloud-storage"], "note": "Popular consumer file sharing. Not malicious by itself."},
+    {"indicator": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", "type": "sha256", "verdict": "benign", "confidence": 0.9, "source": "internal-cmdb", "tags": ["vendor-signed"], "note": "Signed installer of an approved backup agent"},
+    {"indicator": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "type": "sha256", "verdict": "benign", "confidence": 0.99, "source": "public-docs", "tags": ["test-file"], "note": "EICAR antivirus test file"}
+  ]
+}

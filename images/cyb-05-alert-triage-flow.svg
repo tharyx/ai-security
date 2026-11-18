@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Alert triage: one method for every alert</title>
+  <defs><marker id="ar" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#64748b"/></marker></defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Alert triage: one method for every alert</text>
+  <text x="40" y="78" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Enrich, check context, decide, then act or close with notes.</text>
+  <rect x="40" y="110" width="250" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="165.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">1 Read</text>
+  <text x="165.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">what fired, which rule</text>
+  <line x1="290" y1="150" x2="330" y2="150" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="330" y="110" width="250" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="455.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">2 Enrich</text>
+  <text x="455.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">IP, domain, hash, user, host</text>
+  <line x1="580" y1="150" x2="620" y2="150" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="620" y="110" width="250" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="745.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">3 Context</text>
+  <text x="745.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">asset value, change window</text>
+  <line x1="870" y1="150" x2="910" y2="150" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="910" y="110" width="250" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1035.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">4 Scope</text>
+  <text x="1035.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">other alerts, same user/IP</text>
+  <line x1="600" y1="190" x2="600" y2="230" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="440" y="230" width="320" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="256" font-size="17" font-weight="bold" fill="#0f172a" text-anchor="middle">5 Decide the verdict</text>
+  <rect x="40" y="330" width="250" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="165.0" y="356" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">true_positive</text>
+  <text x="165.0" y="380" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">real attack</text>
+  <line x1="600" y1="290" x2="165" y2="330" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="330" y="330" width="250" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="455.0" y="356" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">benign_true_positive</text>
+  <text x="455.0" y="380" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">real, but authorized</text>
+  <line x1="600" y1="290" x2="455" y2="330" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="620" y="330" width="250" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="745.0" y="356" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">false_positive</text>
+  <text x="745.0" y="380" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">rule was wrong</text>
+  <line x1="600" y1="290" x2="745" y2="330" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="910" y="330" width="250" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1035.0" y="356" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">needs_investigation</text>
+  <text x="1035.0" y="380" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">not sure yet</text>
+  <line x1="600" y1="290" x2="1035" y2="330" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text x="165" y="425" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">escalate L2/L3, contain</text>
+  <text x="455" y="425" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">close, document, request exception</text>
+  <text x="745" y="425" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">close, tune the rule</text>
+  <text x="1035" y="425" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">ask user, more enrichment</text>
+  <rect x="40" y="450" width="1120" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600.0" y="476" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">6 Write case notes: what, evidence, verdict, why, next step. The next analyst must understand it in 30 seconds.</text>
+</svg>

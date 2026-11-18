@@ -1,0 +1,24 @@
+title: Brute force - many failed logons for one account from one source
+id: cyb06-0001
+status: stable
+description: At least 10 failed logons for the same user from the same IP within 5 minutes (Windows or Linux).
+author: ai-security lab
+tags: [attack.credential_access, attack.t1110.001]
+level: high
+logsource:
+  category: authentication
+  product: windows, linux
+detection:
+  selection:
+    action: logon_failure
+    source:
+      - windows
+      - linux
+  condition: selection
+aggregation:
+  type: count
+  group_by: [src_ip, user]
+  threshold: 10
+  timeframe_minutes: 5
+falsepositives:
+  - A service account with a stale password (usually spread over hours, not minutes)

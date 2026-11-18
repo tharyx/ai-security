@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Switching, VLANs and routing</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Switching, VLANs and routing</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Switches work on MAC addresses inside one VLAN. Routers (or firewalls) move traffic between VLANs.</text>
+  <rect x="480" y="110" width="240" height="80" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="600.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Firewall / router</text>
+  <text x="600.0" y="156" text-anchor="middle" font-size="13" fill="#475569">inter-VLAN rules</text>
+  <rect x="480" y="250" width="240" height="70" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="600.0" y="274" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Core switch</text>
+  <text x="600.0" y="296" text-anchor="middle" font-size="13" fill="#475569">trunk ports (802.1Q tags)</text>
+  <line x1="600" y1="192" x2="600" y2="248" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="60" y="400" width="300" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="210.0" y="424" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">VLAN 10: Users</text>
+  <text x="210.0" y="446" text-anchor="middle" font-size="13" fill="#475569">192.0.2.0/26</text>
+  <text x="210.0" y="464" text-anchor="middle" font-size="13" fill="#475569">access ports</text>
+  <rect x="450" y="400" width="300" height="90" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="424" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">VLAN 20: Servers</text>
+  <text x="600.0" y="446" text-anchor="middle" font-size="13" fill="#475569">192.0.2.64/26</text>
+  <text x="600.0" y="464" text-anchor="middle" font-size="13" fill="#475569">DB, apps</text>
+  <rect x="840" y="400" width="300" height="90" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="990.0" y="424" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">VLAN 30: Guests</text>
+  <text x="990.0" y="446" text-anchor="middle" font-size="13" fill="#475569">192.0.2.128/26</text>
+  <text x="990.0" y="464" text-anchor="middle" font-size="13" fill="#475569">internet only</text>
+  <line x1="540" y1="322" x2="210" y2="398" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="600" y1="322" x2="600" y2="398" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="660" y1="322" x2="990" y2="398" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="40" y="130" text-anchor="start" font-size="15" fill="#0f172a" font-weight="bold">Why segment?</text>
+  <text x="40" y="156" text-anchor="start" font-size="14" fill="#475569">Limit lateral movement</text>
+  <text x="40" y="178" text-anchor="start" font-size="14" fill="#475569">Apply rules per zone</text>
+  <text x="40" y="200" text-anchor="start" font-size="14" fill="#475569">Shrink the blast radius</text>
+  <text x="850" y="130" text-anchor="start" font-size="15" fill="#0f172a" font-weight="bold">Attacks to know</text>
+  <text x="850" y="156" text-anchor="start" font-size="14" fill="#475569">VLAN hopping, ARP spoofing</text>
+  <text x="850" y="178" text-anchor="start" font-size="14" fill="#475569">MAC flooding, rogue DHCP</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Oracle DBA skills map to security skills</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Oracle DBA skills map to security skills</text>
+  <text x="40" y="76" font-size="16" fill="#475569">You already know the idea. Learn the new name and the attacker's view.</text>
+  <text x="160" y="118" text-anchor="middle" font-size="16" fill="#0f172a" font-weight="bold">What you know</text>
+  <text x="1000" y="118" text-anchor="middle" font-size="16" fill="#0f172a" font-weight="bold">What the job calls it</text>
+  <rect x="40" y="135" width="240" height="48" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="160.0" y="164.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Listener and ports</text>
+  <rect x="720" y="135" width="440" height="48" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="940.0" y="164.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Network ports, firewalls</text>
+  <line x1="284" y1="159" x2="716" y2="159" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="40" y="197" width="240" height="48" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="160.0" y="226.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Audit trail (AUD$)</text>
+  <rect x="720" y="197" width="440" height="48" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="940.0" y="226.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Logs, SIEM, detection</text>
+  <line x1="284" y1="221" x2="716" y2="221" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="40" y="259" width="240" height="48" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="160.0" y="288.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Roles and grants</text>
+  <rect x="720" y="259" width="440" height="48" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="940.0" y="288.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">IAM, least privilege</text>
+  <line x1="284" y1="283" x2="716" y2="283" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="40" y="321" width="240" height="48" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="160.0" y="350.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">RMAN, Data Guard</text>
+  <rect x="720" y="321" width="440" height="48" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="940.0" y="350.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">BC/DR, ransomware recovery</text>
+  <line x1="284" y1="345" x2="716" y2="345" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="40" y="383" width="240" height="48" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="160.0" y="412.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">AWR baselines</text>
+  <rect x="720" y="383" width="440" height="48" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="940.0" y="412.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Anomaly detection, baselining</text>
+  <line x1="284" y1="407" x2="716" y2="407" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="40" y="445" width="240" height="48" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="160.0" y="474.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Patching (CPU/PSU)</text>
+  <rect x="720" y="445" width="440" height="48" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="940.0" y="474.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Vulnerability management</text>
+  <line x1="284" y1="469" x2="716" y2="469" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+</svg>

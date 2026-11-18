@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Scanner modes: network vs agent, unauthenticated vs authenticated</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+<rect width="1200" height="440" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Scanner modes: network vs agent, unauthenticated vs authenticated</text>
+<text x="40" y="80" font-size="16" fill="#475569">Choose the mode by what you need to see. Most programs use several.</text>
+<rect x="40" y="110" width="540" height="130" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="310.0" y="152.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Unauthenticated (outside-in)</text>
+<text x="310.0" y="174.0" text-anchor="middle" font-size="13" fill="#475569">sees open ports and banners like an attacker</text>
+<text x="310.0" y="192.0" text-anchor="middle" font-size="13" fill="#475569">fast, no credentials, shallow</text>
+<text x="310.0" y="210.0" text-anchor="middle" font-size="13" fill="#475569">good for: internet-facing check</text>
+<rect x="620" y="110" width="540" height="130" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="890.0" y="152.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Authenticated (inside-out)</text>
+<text x="890.0" y="174.0" text-anchor="middle" font-size="13" fill="#475569">logs in with a read-only account</text>
+<text x="890.0" y="192.0" text-anchor="middle" font-size="13" fill="#475569">sees installed packages, patches, configs</text>
+<text x="890.0" y="210.0" text-anchor="middle" font-size="13" fill="#475569">good for: accurate patch status, fewer false positives</text>
+<rect x="40" y="270" width="540" height="130" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="310.0" y="312.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Network scanner (Nessus, OpenVAS, Qualys appliance)</text>
+<text x="310.0" y="334.0" text-anchor="middle" font-size="13" fill="#475569">sends probes across the network</text>
+<text x="310.0" y="352.0" text-anchor="middle" font-size="13" fill="#475569">needs reachability and firewall holes</text>
+<text x="310.0" y="370.0" text-anchor="middle" font-size="13" fill="#475569">good for: servers, devices, unmanaged gear</text>
+<rect x="620" y="270" width="540" height="130" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="890.0" y="312.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Agent-based (Qualys agent, Defender VM, Nessus agent)</text>
+<text x="890.0" y="334.0" text-anchor="middle" font-size="13" fill="#475569">small agent reports from the host</text>
+<text x="890.0" y="352.0" text-anchor="middle" font-size="13" fill="#475569">works for roaming laptops and cloud VMs</text>
+<text x="890.0" y="370.0" text-anchor="middle" font-size="13" fill="#475569">good for: always-on, no credentials to store</text>
+<text x="40" y="425" text-anchor="start" font-size="13" fill="#475569">Also: cloud posture scanning (CSPM), container image scanning, and web app scanning (DAST).</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>How a risk is built and treated</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#475569"/></marker></defs>
+<rect width="1200" height="480" fill="#ffffff"/>
+<text x="60" y="52" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">How a risk is built and treated</text>
+<text x="60" y="82" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Asset, threat and vulnerability give likelihood and impact; controls give residual risk</text>
+<rect x="60.0" y="120" width="240" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="180.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Asset</text>
+<text x="180.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">what we protect</text>
+<text x="180.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">and its value</text>
+<rect x="340.0" y="120" width="240" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="460.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Threat</text>
+<text x="460.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">what can go wrong</text>
+<text x="460.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">and who causes it</text>
+<rect x="620.0" y="120" width="240" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="740.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Vulnerability</text>
+<text x="740.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">the weakness</text>
+<text x="740.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">the threat uses</text>
+<rect x="900.0" y="120" width="240" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1020.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Risk</text>
+<text x="1020.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">likelihood x impact</text>
+<text x="1020.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">= inherent risk</text>
+<line x1="304.0" y1="170.0" x2="336.0" y2="170.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="584.0" y1="170.0" x2="616.0" y2="170.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="864.0" y1="170.0" x2="896.0" y2="170.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="60.0" y="290" width="240" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="180.0" y="318" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Controls</text>
+<text x="180.0" y="342" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">reduce likelihood</text>
+<text x="180.0" y="362" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">or impact</text>
+<rect x="340.0" y="290" width="240" height="100" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="460.0" y="318" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Residual risk</text>
+<text x="460.0" y="342" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">what is left</text>
+<text x="460.0" y="362" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">after controls</text>
+<rect x="620.0" y="290" width="240" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="740.0" y="318" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Compare to appetite</text>
+<text x="740.0" y="342" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">is it acceptable?</text>
+<rect x="900.0" y="290" width="240" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1020.0" y="318" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Treat</text>
+<text x="1020.0" y="342" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">mitigate, transfer,</text>
+<text x="1020.0" y="362" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">avoid, accept</text>
+<line x1="304.0" y1="340.0" x2="336.0" y2="340.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="584.0" y1="340.0" x2="616.0" y2="340.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="864.0" y1="340.0" x2="896.0" y2="340.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="60" y="430" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Risk appetite is set by leadership. Anything above it needs more treatment, or a named owner who signs the acceptance.</text>
+</svg>

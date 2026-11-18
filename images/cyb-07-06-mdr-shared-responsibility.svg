@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>MDR: who does what</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+<rect width="1200" height="470" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">MDR: who does what</text>
+<text x="40" y="80" font-size="16" fill="#475569">A service sits next to your SOC. The contract must say exactly where each task ends.</text>
+<rect x="40" y="110" width="540" height="300" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="310.0" y="210.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">MDR provider (24x7)</text>
+<text x="310.0" y="232.0" text-anchor="middle" font-size="13" fill="#475569">monitors your EDR/XDR telemetry</text>
+<text x="310.0" y="250.0" text-anchor="middle" font-size="13" fill="#475569">triages alerts, hunts threats</text>
+<text x="310.0" y="268.0" text-anchor="middle" font-size="13" fill="#475569">investigates, writes the case</text>
+<text x="310.0" y="286.0" text-anchor="middle" font-size="13" fill="#475569">contains per pre-agreed playbook</text>
+<text x="310.0" y="304.0" text-anchor="middle" font-size="13" fill="#475569">advice on remediation</text>
+<text x="310.0" y="322.0" text-anchor="middle" font-size="13" fill="#475569">SLA: time to detect / respond</text>
+<rect x="620" y="110" width="540" height="300" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="890.0" y="210.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Your internal SOC / IT / cloud team</text>
+<text x="890.0" y="232.0" text-anchor="middle" font-size="13" fill="#475569">owns the asset list and business context</text>
+<text x="890.0" y="250.0" text-anchor="middle" font-size="13" fill="#475569">approves risky actions (servers, DC)</text>
+<text x="890.0" y="268.0" text-anchor="middle" font-size="13" fill="#475569">fixes root cause: patch, config, reset</text>
+<text x="890.0" y="286.0" text-anchor="middle" font-size="13" fill="#475569">handles users, legal, comms</text>
+<text x="890.0" y="304.0" text-anchor="middle" font-size="13" fill="#475569">tunes exclusions, keeps agents healthy</text>
+<text x="890.0" y="322.0" text-anchor="middle" font-size="13" fill="#475569">owns the risk decision</text>
+<line x1="582" y1="250" x2="618" y2="250" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+<line x1="618" y1="270" x2="582" y2="270" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+<text x="600" y="440" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Shared: escalation contacts, approved response actions, weekly review, the SLA clock.</text>
+</svg>

@@ -1,0 +1,34 @@
+{"createdDateTime": "2026-11-10T02:00:00Z", "userPrincipalName": "alice@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:00:40Z", "userPrincipalName": "bob@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:01:20Z", "userPrincipalName": "carol@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:02:00Z", "userPrincipalName": "dave@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:02:40Z", "userPrincipalName": "erin@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:03:20Z", "userPrincipalName": "frank@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:04:00Z", "userPrincipalName": "grace@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:04:40Z", "userPrincipalName": "heidi@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:05:20Z", "userPrincipalName": "ivan@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:06:00Z", "userPrincipalName": "judy@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T02:07:00Z", "userPrincipalName": "bob@corp.example", "ipAddress": "198.51.100.66", "location": "NL", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T08:00:00Z", "userPrincipalName": "dave@corp.example", "ipAddress": "192.0.2.14", "location": "US", "appDisplayName": "Teams", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T08:04:00Z", "userPrincipalName": "bob@corp.example", "ipAddress": "192.0.2.12", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T08:08:00Z", "userPrincipalName": "heidi@corp.example", "ipAddress": "192.0.2.18", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T08:13:00Z", "userPrincipalName": "grace@corp.example", "ipAddress": "192.0.2.17", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T08:14:00Z", "userPrincipalName": "alice@corp.example", "ipAddress": "192.0.2.11", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T08:15:00Z", "userPrincipalName": "erin@corp.example", "ipAddress": "192.0.2.15", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T08:33:00Z", "userPrincipalName": "frank@corp.example", "ipAddress": "192.0.2.16", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T08:36:00Z", "userPrincipalName": "dave@corp.example", "ipAddress": "192.0.2.14", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T08:43:00Z", "userPrincipalName": "carol@corp.example", "ipAddress": "192.0.2.13", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T09:00:00Z", "userPrincipalName": "alice@corp.example", "ipAddress": "192.0.2.11", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T09:30:00Z", "userPrincipalName": "alice@corp.example", "ipAddress": "198.51.100.120", "location": "RO", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T09:40:00Z", "userPrincipalName": "carol@corp.example", "ipAddress": "192.0.2.40", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T09:40:50Z", "userPrincipalName": "dave@corp.example", "ipAddress": "192.0.2.40", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T09:41:40Z", "userPrincipalName": "erin@corp.example", "ipAddress": "192.0.2.40", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 50126}}
+{"createdDateTime": "2026-11-10T13:14:00Z", "userPrincipalName": "bob@corp.example", "ipAddress": "192.0.2.12", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T13:18:00Z", "userPrincipalName": "carol@corp.example", "ipAddress": "192.0.2.13", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T13:19:00Z", "userPrincipalName": "dave@corp.example", "ipAddress": "192.0.2.14", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T13:20:00Z", "userPrincipalName": "heidi@corp.example", "ipAddress": "192.0.2.18", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T13:21:00Z", "userPrincipalName": "grace@corp.example", "ipAddress": "192.0.2.17", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T13:49:00Z", "userPrincipalName": "frank@corp.example", "ipAddress": "192.0.2.16", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T13:53:00Z", "userPrincipalName": "erin@corp.example", "ipAddress": "192.0.2.15", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T13:56:00Z", "userPrincipalName": "alice@corp.example", "ipAddress": "192.0.2.11", "location": "US", "appDisplayName": "Office 365", "status": {"errorCode": 0}}
+{"createdDateTime": "2026-11-10T20:00:00Z", "userPrincipalName": "dave@corp.example", "ipAddress": "198.51.100.130", "location": "JP", "appDisplayName": "Teams", "status": {"errorCode": 0}}

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The CompTIA troubleshooting method</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="400" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">The CompTIA troubleshooting method</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Six steps. The same method works for a failing laptop and for an alert you must triage.</text>
+  <rect x="40" y="110" width="170" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="125.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">1 Identify</text>
+  <text x="125.0" y="156" text-anchor="middle" font-size="13" fill="#475569">ask, reproduce</text>
+  <text x="125.0" y="174" text-anchor="middle" font-size="13" fill="#475569">what changed?</text>
+  <rect x="230" y="110" width="170" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="315.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">2 Theory</text>
+  <text x="315.0" y="156" text-anchor="middle" font-size="13" fill="#475569">start simple</text>
+  <text x="315.0" y="174" text-anchor="middle" font-size="13" fill="#475569">list likely causes</text>
+  <line x1="214" y1="165.0" x2="226" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="420" y="110" width="170" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="505.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">3 Test</text>
+  <text x="505.0" y="156" text-anchor="middle" font-size="13" fill="#475569">confirm or reject</text>
+  <text x="505.0" y="174" text-anchor="middle" font-size="13" fill="#475569">escalate if stuck</text>
+  <line x1="404" y1="165.0" x2="416" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="610" y="110" width="170" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="695.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">4 Plan + fix</text>
+  <text x="695.0" y="156" text-anchor="middle" font-size="13" fill="#475569">plan, side effects</text>
+  <text x="695.0" y="174" text-anchor="middle" font-size="13" fill="#475569">implement</text>
+  <line x1="594" y1="165.0" x2="606" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="800" y="110" width="170" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="885.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">5 Verify</text>
+  <text x="885.0" y="156" text-anchor="middle" font-size="13" fill="#475569">full function</text>
+  <text x="885.0" y="174" text-anchor="middle" font-size="13" fill="#475569">prevent repeat</text>
+  <line x1="784" y1="165.0" x2="796" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="990" y="110" width="170" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1075.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">6 Document</text>
+  <text x="1075.0" y="156" text-anchor="middle" font-size="13" fill="#475569">findings, actions</text>
+  <text x="1075.0" y="174" text-anchor="middle" font-size="13" fill="#475569">outcomes</text>
+  <line x1="974" y1="165.0" x2="986" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="1100" y1="224" x2="1100" y2="270" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="1100" y1="272" x2="120" y2="272" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="120" y1="272" x2="120" y2="226" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="600" y="296" text-anchor="middle" font-size="13" fill="#475569">if the test fails, go back to step 2 with a new theory</text>
+  <text x="40" y="350" text-anchor="start" font-size="14" fill="#475569">In a SOC: identify = read the alert, theory = benign or malicious, test = check logs, fix = contain, document = ticket.</text>
+</svg>

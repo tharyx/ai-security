@@ -1,0 +1,15 @@
+# Synthetic SoA for the fictional Northwind Retail, first-year scope (12 controls shown).
+# Titles are short paraphrases, not the standard's wording.
+controls:
+  - {id: "5.1",  title: Security policies,                 applicable: true,  status: implemented, evidence: [policy-v3.pdf, board-approval.pdf]}
+  - {id: "5.15", title: Access control rules,              applicable: true,  status: implemented, evidence: [access-policy.pdf]}
+  - {id: "5.19", title: Supplier security,                 applicable: true,  status: partial,     evidence: [supplier-list.xlsx]}
+  - {id: "5.24", title: Incident management planning,      applicable: true,  status: implemented, evidence: []}
+  - {id: "5.30", title: ICT readiness for continuity,      applicable: true,  status: planned,     evidence: []}
+  - {id: "6.3",  title: Security awareness and training,   applicable: true,  status: implemented, evidence: [training-records-2026.csv]}
+  - {id: "7.4",  title: Physical security monitoring,      applicable: false, status: "no",        justification: ""}
+  - {id: "7.7",  title: Clear desk and clear screen,       applicable: false, status: "no",        justification: "Fully remote company; no shared office"}
+  - {id: "8.5",  title: Secure authentication,             applicable: true,  status: implemented, evidence: [mfa-report.csv]}
+  - {id: "8.13", title: Information backup,                applicable: true,  status: implemented, evidence: [restore-test-2026-10.pdf]}
+  - {id: "8.15", title: Logging,                           applicable: true,  status: partial,     evidence: [log-sources.xlsx]}
+  - {id: "8.99", title: Imaginary control,                 applicable: true,  status: implemented, evidence: [none.txt]}

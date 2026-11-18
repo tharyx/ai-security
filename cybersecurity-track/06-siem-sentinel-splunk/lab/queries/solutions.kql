@@ -1,0 +1,53 @@
+// KQL solutions. Paste events_datatable.kql above each query.
+// Not all tools run several queries at once: run them one at a time (separate each with a blank line, select one, Run).
+
+// Q1
+Events | where Source == "windows" and Action == "logon_failure" | count
+
+// Q2
+Events | where Source == "windows" and Action == "logon_failure"
+| summarize n = count() by SrcIp | top 1 by n desc
+
+// Q3
+Events | where Source == "entra" and Action == "logon_failure" and SrcIp == "198.51.100.66"
+| summarize dcount(User)
+
+// Q4  (prev() needs a sorted, serialized table)
+Events | where Source == "entra" and Action == "logon_success"
+| sort by User asc, TimeGenerated asc
+| extend PrevUser = prev(User), PrevCountry = prev(Country), PrevTime = prev(TimeGenerated)
+| where User == PrevUser and Country != PrevCountry and (TimeGenerated - PrevTime) <= 60m
+| project User, PrevCountry, Country, PrevTime, TimeGenerated
+
+// Q5
+Events | where Action == "group_add" and Group == "Domain Admins" | project Member
+
+// Q6
+Events | where Action == "process_create" and Process endswith "powershell.exe"
+| where CommandLine contains " -enc " or CommandLine contains " -encodedcommand "
+| count
+
+// Q7
+Events | where Action == "process_create" and Process endswith "powershell.exe"
+| where CommandLine contains " -enc " or CommandLine contains " -encodedcommand "
+| where ParentProcess endswith "WINWORD.EXE"
+| project Host
+
+// Q8
+Events | where Action == "network_allow" and DstPort !in (53, 80, 123, 443, 8080, 8443)
+| summarize by DstPort
+
+// Q9
+Events | where Action == "network_allow" and DstIp == "203.0.113.80"
+| summarize MB = sum(BytesOut) / 1000000
+
+// Q10
+Events | where Source == "linux" and Action == "logon_failure" | summarize dcount(SrcIp)
+
+// Q11
+Events | where Action == "logon_failure"
+| summarize n = count() by Hour = hourofday(TimeGenerated) | top 1 by n desc
+
+// Q12
+Events | where Source == "entra" and Action == "logon_success" and SrcIp == "198.51.100.66"
+| project User

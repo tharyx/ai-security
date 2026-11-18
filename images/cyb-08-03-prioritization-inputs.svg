@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="450" viewBox="0 0 1200 450" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>From scanner output to a ranked fix list</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+<rect width="1200" height="450" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">From scanner output to a ranked fix list</text>
+<text x="40" y="80" font-size="16" fill="#475569">CVSS is one input. Exploitation evidence and business context change the order.</text>
+<rect x="40" y="110" width="280" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="180.0" y="137.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">CVSS base</text>
+<text x="180.0" y="159.0" text-anchor="middle" font-size="13" fill="#475569">how severe (0-10)</text>
+<line x1="322" y1="142" x2="420" y2="250" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="188" width="280" height="64" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="180.0" y="215.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">EPSS</text>
+<text x="180.0" y="237.0" text-anchor="middle" font-size="13" fill="#475569">chance of exploitation, 30 days</text>
+<line x1="322" y1="220" x2="420" y2="250" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="266" width="280" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="180.0" y="293.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">CISA KEV</text>
+<text x="180.0" y="315.0" text-anchor="middle" font-size="13" fill="#475569">known exploited: yes/no</text>
+<line x1="322" y1="298" x2="420" y2="250" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="344" width="280" height="64" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="180.0" y="371.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Asset context</text>
+<text x="180.0" y="393.0" text-anchor="middle" font-size="13" fill="#475569">criticality + exposure</text>
+<line x1="322" y1="376" x2="420" y2="250" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="422" y="190" width="300" height="120" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="572.0" y="227.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Prioritizer</text>
+<text x="572.0" y="249.0" text-anchor="middle" font-size="13" fill="#475569">score 0-100</text>
+<text x="572.0" y="267.0" text-anchor="middle" font-size="13" fill="#475569">tier P1-P4</text>
+<text x="572.0" y="285.0" text-anchor="middle" font-size="13" fill="#475569">SSVC-style decision</text>
+<line x1="724" y1="250" x2="820" y2="250" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="822" y="110" width="338" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="991.0" y="137.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P1  act now</text>
+<text x="991.0" y="159.0" text-anchor="middle" font-size="13" fill="#475569">SLA: 3 days (example)</text>
+<rect x="822" y="188" width="338" height="64" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="991.0" y="215.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P2  schedule</text>
+<text x="991.0" y="237.0" text-anchor="middle" font-size="13" fill="#475569">SLA: 14 days (example)</text>
+<rect x="822" y="266" width="338" height="64" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="991.0" y="293.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P3  normal</text>
+<text x="991.0" y="315.0" text-anchor="middle" font-size="13" fill="#475569">SLA: 30 days (example)</text>
+<rect x="822" y="344" width="338" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="991.0" y="371.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P4  defer</text>
+<text x="991.0" y="393.0" text-anchor="middle" font-size="13" fill="#475569">SLA: 90 days (example)</text>
+<text x="40" y="440" text-anchor="start" font-size="13" font-weight="700" fill="#0f172a">Lab rule: a KEV-listed medium on an internet-facing asset outranks a 9.8 on an isolated lab box.</text>
+</svg>

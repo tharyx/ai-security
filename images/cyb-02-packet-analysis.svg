@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Packet analysis workflow and the TCP handshake</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Packet analysis workflow and the TCP handshake</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Capture, filter, follow the stream, then decide: normal or not?</text>
+  <rect x="40" y="110" width="200" height="100" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="140.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Capture</text>
+  <text x="140.0" y="156" text-anchor="middle" font-size="13" fill="#475569">NIC or tcpdump</text>
+  <text x="140.0" y="174" text-anchor="middle" font-size="13" fill="#475569">tshark -i</text>
+  <rect x="280" y="110" width="200" height="100" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="380.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">pcap file</text>
+  <text x="380.0" y="156" text-anchor="middle" font-size="13" fill="#475569">saved packets</text>
+  <text x="380.0" y="174" text-anchor="middle" font-size="13" fill="#475569">evidence</text>
+  <line x1="244" y1="160.0" x2="276" y2="160.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="520" y="110" width="200" height="100" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="620.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Filter</text>
+  <text x="620.0" y="156" text-anchor="middle" font-size="13" fill="#475569">display filters</text>
+  <text x="620.0" y="174" text-anchor="middle" font-size="13" fill="#475569">ip.addr, dns, http</text>
+  <line x1="484" y1="160.0" x2="516" y2="160.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="760" y="110" width="200" height="100" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="860.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Follow + stats</text>
+  <text x="860.0" y="156" text-anchor="middle" font-size="13" fill="#475569">stream, endpoints</text>
+  <text x="860.0" y="174" text-anchor="middle" font-size="13" fill="#475569">conversations</text>
+  <line x1="724" y1="160.0" x2="756" y2="160.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="1000" y="110" width="200" height="100" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1100.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Finding</text>
+  <text x="1100.0" y="156" text-anchor="middle" font-size="13" fill="#475569">normal or suspicious?</text>
+  <text x="1100.0" y="174" text-anchor="middle" font-size="13" fill="#475569">write it down</text>
+  <line x1="964" y1="160.0" x2="996" y2="160.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="40" y="270" text-anchor="start" font-size="16" fill="#0f172a" font-weight="bold">TCP three-way handshake</text>
+  <rect x="120" y="290" width="160" height="50" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="200.0" y="320.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Client</text>
+  <rect x="920" y="290" width="160" height="50" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1000.0" y="320.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Server</text>
+  <line x1="200" y1="340" x2="200" y2="500" stroke="#94a3b8" stroke-dasharray="4 4"/>
+  <line x1="1000" y1="340" x2="1000" y2="500" stroke="#94a3b8" stroke-dasharray="4 4"/>
+  <line x1="202" y1="380" x2="998" y2="400" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="600" y="380" text-anchor="middle" font-size="13" fill="#475569">SYN</text>
+  <line x1="998" y1="430" x2="202" y2="450" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="600" y="430" text-anchor="middle" font-size="13" fill="#475569">SYN, ACK</text>
+  <line x1="202" y1="480" x2="998" y2="500" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="600" y="480" text-anchor="middle" font-size="13" fill="#475569">ACK  (connection open)</text>
+  <text x="300" y="538" text-anchor="start" font-size="14" fill="#475569">Many SYNs with no ACK back = scan or SYN flood.  RST replies = closed port.</text>
+</svg>

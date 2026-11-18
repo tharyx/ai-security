@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Inside a SOC: tiers, tools and metrics</title>
+  <defs><marker id="ar" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#64748b"/></marker></defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Inside a SOC: tiers, tools and metrics</text>
+  <text x="40" y="78" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Work flows up the tiers. Tools feed alerts in at the bottom.</text>
+  <rect x="40" y="110" width="340" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="210.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">L1 Analyst: triage</text>
+  <text x="210.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Watch the queue, enrich, decide</text>
+  <text x="210.0" y="179" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">TP / benign TP / FP</text>
+  <text x="210.0" y="198" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Escalate with good notes</text>
+  <rect x="430" y="110" width="340" height="120" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">L2 Analyst: investigate</text>
+  <text x="600.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Scope the incident, pivot in logs</text>
+  <text x="600.0" y="179" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Contain: isolate host, reset account</text>
+  <text x="600.0" y="198" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Tune detections with L3</text>
+  <rect x="820" y="110" width="340" height="120" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="990.0" y="136" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">L3: hunt and respond</text>
+  <text x="990.0" y="160" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Threat hunting, forensics, malware</text>
+  <text x="990.0" y="179" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Detection engineering</text>
+  <text x="990.0" y="198" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Lead major incidents</text>
+  <line x1="380" y1="170" x2="430" y2="170" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text x="405.0" y="162.0" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">escalate</text>
+  <line x1="770" y1="170" x2="820" y2="170" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text x="795.0" y="162.0" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">escalate</text>
+  <rect x="40" y="260" width="1120" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600.0" y="286" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">SOC manager, incident commander, threat intel analyst, detection engineer: support roles around the tiers</text>
+  <rect x="40" y="340" width="210" height="85" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="145.0" y="366" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">SIEM</text>
+  <text x="145.0" y="390" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">collect, search, correlate</text>
+  <rect x="266" y="340" width="210" height="85" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="371.0" y="366" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">EDR / XDR</text>
+  <text x="371.0" y="390" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">endpoint telemetry + response</text>
+  <rect x="492" y="340" width="210" height="85" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="597.0" y="366" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">SOAR</text>
+  <text x="597.0" y="390" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">playbooks, automation</text>
+  <rect x="718" y="340" width="210" height="85" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="823.0" y="366" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">TIP / intel</text>
+  <text x="823.0" y="390" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">IOCs, reputation</text>
+  <rect x="944" y="340" width="210" height="85" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1049.0" y="366" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Ticketing</text>
+  <text x="1049.0" y="390" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">cases, SLAs, audit trail</text>
+  <text x="40" y="450" font-size="14" font-weight="bold" fill="#475569" text-anchor="start">Tool stack</text>
+  <rect x="40" y="470" width="1120" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600.0" y="496" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">Metrics: MTTD (time to detect) | MTTR (time to respond) | false-positive rate | alerts per shift</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Wi-Fi security: personal, enterprise and the evil twin</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="470" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Wi-Fi security: personal, enterprise and the evil twin</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Enterprise Wi-Fi (802.1X) gives each person their own login. Shared passwords do not.</text>
+  <rect x="40" y="150" width="190" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="135.0" y="174" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Laptop</text>
+  <text x="135.0" y="196" text-anchor="middle" font-size="13" fill="#475569">Wi-Fi client</text>
+  <rect x="330" y="150" width="190" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="425.0" y="174" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Access point</text>
+  <text x="425.0" y="196" text-anchor="middle" font-size="13" fill="#475569">WPA3 / WPA2 AES</text>
+  <rect x="630" y="150" width="200" height="90" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="730.0" y="174" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">RADIUS server</text>
+  <text x="730.0" y="196" text-anchor="middle" font-size="13" fill="#475569">checks identity</text>
+  <rect x="930" y="150" width="230" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1045.0" y="174" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Directory</text>
+  <text x="1045.0" y="196" text-anchor="middle" font-size="13" fill="#475569">Entra ID / Active Directory</text>
+  <line x1="232" y1="195" x2="328" y2="195" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="280.0" y="187.0" text-anchor="middle" font-size="13" fill="#475569">802.1X</text>
+  <line x1="522" y1="195" x2="628" y2="195" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="575.0" y="187.0" text-anchor="middle" font-size="13" fill="#475569">EAP</text>
+  <line x1="832" y1="195" x2="928" y2="195" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="330" y="320" width="190" height="80" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="425.0" y="344" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Evil twin AP</text>
+  <text x="425.0" y="366" text-anchor="middle" font-size="13" fill="#475569">same name, attacker</text>
+  <line x1="330" y1="340" x2="150" y2="244" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="200" y="310" text-anchor="middle" font-size="13" fill="#475569">lures client</text>
+  <text x="40" y="440" text-anchor="start" font-size="14" fill="#475569">Never use WEP or WPA (v1). Use WPA2 or WPA3 with a strong passphrase, or enterprise 802.1X. Turn off WPS.</text>
+</svg>

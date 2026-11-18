@@ -1,0 +1,16 @@
+# Tiny synthetic wordlist (the kind of weak passwords people really choose)
+password
+123456
+welcome1
+qwerty
+letmein
+summer2024
+dragon
+admin123
+iloveyou
+monkey
+football
+sunshine
+changeme
+passw0rd
+trustno1

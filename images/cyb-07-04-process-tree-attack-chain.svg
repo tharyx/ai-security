@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Reading a process tree: the lab attack chain</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+<rect width="1200" height="520" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Reading a process tree: the lab attack chain</text>
+<text x="40" y="80" font-size="16" fill="#475569">The parent-child pattern is the story. Word should never start PowerShell.</text>
+<rect x="40" y="110" width="220" height="56" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="150.0" y="133.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">explorer.exe</text>
+<text x="150.0" y="155.0" text-anchor="middle" font-size="13" fill="#475569">user desktop</text>
+<rect x="40" y="200" width="220" height="56" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="150.0" y="223.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">WINWORD.EXE</text>
+<text x="150.0" y="245.0" text-anchor="middle" font-size="13" fill="#475569">invoice_Nov.docm</text>
+<rect x="40" y="290" width="220" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="150.0" y="313.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">powershell.exe -Enc ...</text>
+<text x="150.0" y="335.0" text-anchor="middle" font-size="13" fill="#475569">parent = Office!</text>
+<line x1="150" y1="168" x2="150" y2="198" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="150" y1="258" x2="150" y2="288" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="400" width="225" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="152.5" y="423.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">certutil -urlcache</text>
+<text x="152.5" y="445.0" text-anchor="middle" font-size="13" fill="#475569">downloads file (T1105)</text>
+<line x1="150" y1="348" x2="152" y2="398" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="285" y="400" width="225" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="397.5" y="423.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">rundll32 update.dll</text>
+<text x="397.5" y="445.0" text-anchor="middle" font-size="13" fill="#475569">runs it from Public</text>
+<line x1="150" y1="348" x2="397" y2="398" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="530" y="400" width="225" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="642.5" y="423.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">mshta http://...</text>
+<text x="642.5" y="445.0" text-anchor="middle" font-size="13" fill="#475569">remote script (T1218)</text>
+<line x1="150" y1="348" x2="642" y2="398" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="800" y="90" width="360" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="980.0" y="113.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Rule EDR-001</text>
+<text x="980.0" y="135.0" text-anchor="middle" font-size="13" fill="#475569">Office app + PowerShell + encoded command</text>
+<rect x="800" y="170" width="360" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="980.0" y="193.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Rule EDR-002</text>
+<text x="980.0" y="215.0" text-anchor="middle" font-size="13" fill="#475569">certutil, rundll32, mshta as loaders</text>
+<rect x="800" y="250" width="360" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="980.0" y="273.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Rule EDR-003 (event 7045)</text>
+<text x="980.0" y="295.0" text-anchor="middle" font-size="13" fill="#475569">new service from C:\ProgramData: persistence</text>
+<rect x="800" y="330" width="360" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="980.0" y="353.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Rule EDR-004 (Sysmon 10)</text>
+<text x="980.0" y="375.0" text-anchor="middle" font-size="13" fill="#475569">non-system process reads LSASS memory: credentials</text>
+<text x="40" y="486" text-anchor="start" font-size="14" font-weight="700" fill="#0f172a">Result in the lab: score 100 -&gt; recommend isolate_host (simulated).</text>
+<text x="40" y="508" text-anchor="start" font-size="12" fill="#475569">Persistence (service) and LSASS access are separate events, not children of powershell.exe: correlate by host and time.</text>
+</svg>

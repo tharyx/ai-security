@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>From power button to login screen</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="470" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">From power button to login screen</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Each step is a place where an attacker can hide, and where a control can protect.</text>
+  <rect x="40" y="110" width="200" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="140.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">UEFI firmware</text>
+  <text x="140.0" y="156" text-anchor="middle" font-size="13" fill="#475569">POST, hardware check</text>
+  <text x="140.0" y="174" text-anchor="middle" font-size="13" fill="#475569">Secure Boot</text>
+  <rect x="280" y="110" width="200" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="380.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Boot loader</text>
+  <text x="380.0" y="156" text-anchor="middle" font-size="13" fill="#475569">Windows Boot Manager</text>
+  <text x="380.0" y="174" text-anchor="middle" font-size="13" fill="#475569">or GRUB</text>
+  <line x1="244" y1="165.0" x2="276" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="520" y="110" width="200" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="620.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">OS kernel</text>
+  <text x="620.0" y="156" text-anchor="middle" font-size="13" fill="#475569">loads drivers</text>
+  <text x="620.0" y="174" text-anchor="middle" font-size="13" fill="#475569">starts memory manager</text>
+  <line x1="484" y1="165.0" x2="516" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="760" y="110" width="200" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="860.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Services</text>
+  <text x="860.0" y="156" text-anchor="middle" font-size="13" fill="#475569">background programs</text>
+  <text x="860.0" y="174" text-anchor="middle" font-size="13" fill="#475569">security agents start</text>
+  <line x1="724" y1="165.0" x2="756" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="1000" y="110" width="200" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1100.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Login</text>
+  <text x="1100.0" y="156" text-anchor="middle" font-size="13" fill="#475569">user + password/MFA</text>
+  <text x="1100.0" y="174" text-anchor="middle" font-size="13" fill="#475569">session starts</text>
+  <line x1="964" y1="165.0" x2="996" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="40" y="262" text-anchor="start" font-size="16" fill="#0f172a" font-weight="bold">Hardware the OS manages</text>
+  <rect x="40" y="280" width="200" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="140.0" y="304" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">CPU</text>
+  <text x="140.0" y="326" text-anchor="middle" font-size="13" fill="#475569">runs instructions</text>
+  <text x="140.0" y="344" text-anchor="middle" font-size="13" fill="#475569">4 cores on your laptop</text>
+  <rect x="280" y="280" width="200" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="380.0" y="304" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">RAM</text>
+  <text x="380.0" y="326" text-anchor="middle" font-size="13" fill="#475569">fast, temporary</text>
+  <text x="380.0" y="344" text-anchor="middle" font-size="13" fill="#475569">lost at power off</text>
+  <rect x="520" y="280" width="200" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="620.0" y="304" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">SSD / disk</text>
+  <text x="620.0" y="326" text-anchor="middle" font-size="13" fill="#475569">permanent storage</text>
+  <text x="620.0" y="344" text-anchor="middle" font-size="13" fill="#475569">encrypt with BitLocker</text>
+  <rect x="760" y="280" width="200" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="860.0" y="304" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">NIC</text>
+  <text x="860.0" y="326" text-anchor="middle" font-size="13" fill="#475569">network card</text>
+  <text x="860.0" y="344" text-anchor="middle" font-size="13" fill="#475569">has a MAC address</text>
+  <rect x="1000" y="280" width="200" height="90" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1100.0" y="304" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">TPM</text>
+  <text x="1100.0" y="326" text-anchor="middle" font-size="13" fill="#475569">chip that holds keys</text>
+  <text x="1100.0" y="344" text-anchor="middle" font-size="13" fill="#475569">used by BitLocker</text>
+  <text x="40" y="420" text-anchor="start" font-size="14" fill="#475569">Malware that loads before the OS (a bootkit) can hide from tools running inside Windows. Secure Boot checks signatures first.</text>
+</svg>

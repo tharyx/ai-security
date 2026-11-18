@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Cloud logs to SIEM to analyst</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Cloud logs to SIEM to analyst</text>
+<text x="40" y="80" font-size="16" fill="#475569">Collect the control-plane, network and identity logs. Normalize, detect, then investigate.</text>
+<text x="60" y="125" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">AWS sources</text>
+<rect x="40" y="140" width="200" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="170.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">CloudTrail</text>
+<rect x="40" y="202" width="200" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="232.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">VPC Flow Logs</text>
+<rect x="40" y="264" width="200" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="294.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">GuardDuty findings</text>
+<rect x="40" y="326" width="200" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="356.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Security Hub</text>
+<text x="60" y="405" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Azure sources</text>
+<rect x="40" y="420" width="200" height="44" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="448.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Activity + Entra logs</text>
+<rect x="40" y="472" width="200" height="44" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="500.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Defender for Cloud</text>
+<rect x="320" y="160" width="200" height="80" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="420.0" y="194.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">S3 / SQS / Firehose</text>
+<text x="420.0" y="214.0" text-anchor="middle" font-size="13" fill="#475569">AWS transport</text>
+<rect x="320" y="420" width="200" height="80" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="420.0" y="454.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Event Hub / Diagnostics</text>
+<text x="420.0" y="474.0" text-anchor="middle" font-size="13" fill="#475569">Azure transport</text>
+<rect x="610" y="250" width="220" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="720.0" y="295.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">SIEM</text>
+<text x="720.0" y="315.0" text-anchor="middle" font-size="13" fill="#475569">Microsoft Sentinel</text>
+<text x="720.0" y="333.0" text-anchor="middle" font-size="13" fill="#475569">or Splunk</text>
+<rect x="910" y="180" width="250" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1035.0" y="210.0" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Detections</text>
+<text x="1035.0" y="230.0" text-anchor="middle" font-size="13" fill="#475569">KQL / SPL rules, UEBA,</text>
+<text x="1035.0" y="248.0" text-anchor="middle" font-size="13" fill="#475569">ATT&amp;CK mapping</text>
+<rect x="910" y="340" width="250" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1035.0" y="379.0" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">SOC triage</text>
+<text x="1035.0" y="399.0" text-anchor="middle" font-size="13" fill="#475569">incident, ticket, playbook</text>
+<line x1="240" y1="164" x2="320" y2="200" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="240" y1="226" x2="320" y2="200" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="240" y1="288" x2="320" y2="200" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="240" y1="350" x2="320" y2="200" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="240" y1="442" x2="320" y2="460" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="240" y1="494" x2="320" y2="470" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="520" y1="200" x2="610" y2="290" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="520" y1="460" x2="610" y2="340" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="830" y1="290" x2="910" y2="225" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="1035" y1="270" x2="1035" y2="340" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="40" y="545" text-anchor="start" font-size="14" fill="#475569">Turn on CloudTrail in every region and every account first. No logs means no investigation.</text>
+</svg>

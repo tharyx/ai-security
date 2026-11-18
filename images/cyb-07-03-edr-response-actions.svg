@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>EDR response actions: smallest action that stops the harm</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+<rect width="1200" height="430" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">EDR response actions: smallest action that stops the harm</text>
+<text x="40" y="80" font-size="16" fill="#475569">Escalate from light to heavy. Protected hosts need a human approval first.</text>
+<rect x="40" y="120" width="220" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="150.0" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Alert</text>
+<text x="150.0" y="182.0" text-anchor="middle" font-size="13" fill="#475569">high confidence?</text>
+<rect x="310" y="120" width="195" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="407.5" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Collect / triage</text>
+<text x="407.5" y="182.0" text-anchor="middle" font-size="13" fill="#475569">live response, get logs</text>
+<rect x="525" y="120" width="195" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="622.5" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Kill process tree</text>
+<text x="622.5" y="182.0" text-anchor="middle" font-size="13" fill="#475569">stop the running threat</text>
+<rect x="740" y="120" width="195" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="837.5" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Quarantine file</text>
+<text x="837.5" y="182.0" text-anchor="middle" font-size="13" fill="#475569">remove + keep the sample</text>
+<rect x="955" y="120" width="195" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1052.5" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Isolate host</text>
+<text x="1052.5" y="182.0" text-anchor="middle" font-size="13" fill="#475569">cut network, keep EDR link</text>
+<line x1="262" y1="165" x2="308" y2="165" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="310" y="250" text-anchor="start" font-size="13" fill="#475569">Lighter  ------------------------------------------------------&gt;  Heavier</text>
+<rect x="40" y="290" width="520" height="110" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="300.0" y="331.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Before isolating a server or domain controller</text>
+<text x="300.0" y="353.0" text-anchor="middle" font-size="13" fill="#475569">ask the service owner</text>
+<text x="300.0" y="371.0" text-anchor="middle" font-size="13" fill="#475569">business impact: a down DC stops logons</text>
+<rect x="620" y="290" width="540" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="890.0" y="331.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">After containment</text>
+<text x="890.0" y="353.0" text-anchor="middle" font-size="13" fill="#475569">preserve evidence, find scope (other hosts?)</text>
+<text x="890.0" y="371.0" text-anchor="middle" font-size="13" fill="#475569">eradicate, restore, un-isolate, lessons learned</text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>A STAR story from a DBA incident</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#475569"/></marker></defs>
+<rect width="1200" height="460" fill="#ffffff"/>
+<text x="60" y="52" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">A STAR story from a DBA incident</text>
+<text x="60" y="82" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Situation, Task, Action, Result: 90 seconds, first person, one result with a number</text>
+<rect x="60.0" y="120" width="240" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="180.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Situation</text>
+<text x="180.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">context in 2 sentences</text>
+<rect x="340.0" y="120" width="240" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="460.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Task</text>
+<text x="460.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">what was your job?</text>
+<rect x="620.0" y="120" width="240" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="740.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Action</text>
+<text x="740.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">what YOU did, step by step</text>
+<rect x="900.0" y="120" width="240" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1020.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Result</text>
+<text x="1020.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">number + what you learned</text>
+<line x1="304.0" y1="170.0" x2="336.0" y2="170.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="584.0" y1="170.0" x2="616.0" y2="170.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="864.0" y1="170.0" x2="896.0" y2="170.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="60" y="280" width="1080" height="80" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="600.0" y="308" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Translate DBA words into security words</text>
+<text x="600.0" y="332" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">listener logs -&gt; network telemetry  |  audit trail -&gt; evidence  |  RMAN restore -&gt; recovery  |  grants review -&gt; least privilege</text>
+<text x="60" y="400" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Prepare five stories. Each one should fit several questions: conflict, failure, pressure, learning, leadership.</text>
+</svg>

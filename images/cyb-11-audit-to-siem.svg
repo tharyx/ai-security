@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>From Oracle audit trail to SIEM alert</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="480" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">From Oracle audit trail to SIEM alert</text>
+<text x="40" y="80" font-size="16" fill="#475569">The DBA already knows the left side. The new work is moving it off the box and writing detections.</text>
+<rect x="40" y="170" width="190" height="100" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="135.0" y="205.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Oracle DB</text>
+<text x="135.0" y="225.0" text-anchor="middle" font-size="13" fill="#475569">Unified Audit trail</text>
+<text x="135.0" y="243.0" text-anchor="middle" font-size="13" fill="#475569">UNIFIED_AUDIT_TRAIL</text>
+<rect x="290" y="170" width="190" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="385.0" y="205.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Collector</text>
+<text x="385.0" y="225.0" text-anchor="middle" font-size="13" fill="#475569">syslog, agent,</text>
+<text x="385.0" y="243.0" text-anchor="middle" font-size="13" fill="#475569">or scheduled export</text>
+<rect x="540" y="170" width="190" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="635.0" y="205.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">SIEM</text>
+<text x="635.0" y="225.0" text-anchor="middle" font-size="13" fill="#475569">Sentinel / Splunk</text>
+<text x="635.0" y="243.0" text-anchor="middle" font-size="13" fill="#475569">parse + store</text>
+<rect x="790" y="170" width="190" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="885.0" y="205.0" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Detections</text>
+<text x="885.0" y="225.0" text-anchor="middle" font-size="13" fill="#475569">grants, mass SELECT,</text>
+<text x="885.0" y="243.0" text-anchor="middle" font-size="13" fill="#475569">audit changes</text>
+<rect x="1030" y="170" width="140" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1100.0" y="214.0" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">SOC</text>
+<text x="1100.0" y="234.0" text-anchor="middle" font-size="13" fill="#475569">triage</text>
+<line x1="230" y1="220" x2="290" y2="220" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="480" y1="220" x2="540" y2="220" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="730" y1="220" x2="790" y2="220" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="980" y1="220" x2="1030" y2="220" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="40" y="340" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Key point: ship logs off the database host. A DBA-level attacker can edit logs that stay on the box.</text>
+<text x="40" y="375" text-anchor="start" font-size="14" fill="#475569">Keep a read-only copy and a time-sync (NTP) so the timeline is trusted.</text>
+</svg>

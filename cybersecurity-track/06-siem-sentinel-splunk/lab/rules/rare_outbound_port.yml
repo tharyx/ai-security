@@ -1,0 +1,28 @@
+title: Allowed outbound connection on a rare destination port
+id: cyb06-0006
+status: experimental
+description: A host connects out on a port that is not in the common list (53, 80, 123, 443, 8080, 8443).
+author: ai-security lab
+tags: [attack.command_and_control, attack.t1571]
+level: medium
+logsource:
+  category: firewall
+detection:
+  selection:
+    action: network_allow
+  filter:
+    dst_port:
+      - 53
+      - 80
+      - 123
+      - 443
+      - 8080
+      - 8443
+  condition: selection and not filter
+aggregation:
+  type: count
+  group_by: [src_ip, dst_port]
+  threshold: 1
+  timeframe_minutes: 1440
+falsepositives:
+  - Internal tools on custom ports. Add them to the filter list after review.

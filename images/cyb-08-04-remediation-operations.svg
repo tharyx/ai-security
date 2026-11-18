@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="450" viewBox="0 0 1200 450" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Remediation operations: patch, mitigate or accept</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+<rect width="1200" height="450" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Remediation operations: patch, mitigate or accept</text>
+<text x="40" y="80" font-size="16" fill="#475569">Every finding ends in one of three states. Exceptions always expire.</text>
+<rect x="40" y="120" width="220" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="150.0" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Finding</text>
+<text x="150.0" y="182.0" text-anchor="middle" font-size="13" fill="#475569">tier + SLA clock starts</text>
+<rect x="330" y="120" width="250" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="455.0" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Can we patch in SLA?</text>
+<text x="455.0" y="182.0" text-anchor="middle" font-size="13" fill="#475569">change request + test</text>
+<line x1="262" y1="165" x2="328" y2="165" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="650" y="80" width="250" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="775.0" y="115.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Yes: patch</text>
+<text x="775.0" y="137.0" text-anchor="middle" font-size="13" fill="#475569">test &gt; change &gt; deploy &gt; re-scan</text>
+<rect x="650" y="190" width="250" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="775.0" y="225.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">No: mitigate</text>
+<text x="775.0" y="247.0" text-anchor="middle" font-size="13" fill="#475569">compensating control: WAF, ACL, disable</text>
+<rect x="650" y="300" width="250" height="80" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="775.0" y="335.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">No: accept risk</text>
+<text x="775.0" y="357.0" text-anchor="middle" font-size="13" fill="#475569">exception: owner, reason, end date</text>
+<line x1="582" y1="150" x2="648" y2="120" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="582" y1="165" x2="648" y2="230" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="582" y1="180" x2="648" y2="340" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="960" y="190" width="200" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1060.0" y="225.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Verify + report</text>
+<text x="1060.0" y="247.0" text-anchor="middle" font-size="13" fill="#475569">closed? SLA met?</text>
+<line x1="902" y1="120" x2="958" y2="215" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="902" y1="230" x2="958" y2="230" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="902" y1="340" x2="958" y2="250" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+<text x="40" y="420" text-anchor="start" font-size="13" fill="#475569">Dashed: an exception returns to the queue on its expiry date and is reviewed again.</text>
+</svg>

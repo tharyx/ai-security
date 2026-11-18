@@ -1,0 +1,4 @@
+id,asset,threat,vulnerability,likelihood,impact,owner,treatment,likelihood_reduction,impact_reduction,last_review,review_days,controls
+C-001,Laptop fleet,Lost or stolen laptop,No disk encryption,4,3,it-ops,mitigate,3,0,2026-10-15,90,Full disk encryption
+C-002,Vendor portal,Credential stuffing,No rate limiting,4,3,,mitigate,0,0,2026-11-05,90,
+C-003,Test database,Data copied to laptop,Production data used in test,3,4,db-lead,mitigate,1,2,2026-02-01,90,Data masking;Access review

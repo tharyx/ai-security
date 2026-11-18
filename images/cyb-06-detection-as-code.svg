@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Detection as code</title>
+  <defs><marker id="ar" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#64748b"/></marker></defs>
+  <rect width="1200" height="480" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Detection as code</text>
+  <text x="40" y="78" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Rules live in git, are tested, reviewed and deployed like software.</text>
+  <rect x="30" y="130" width="175" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="117.5" y="156" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Write</text>
+  <text x="117.5" y="180" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Sigma-like</text>
+  <text x="117.5" y="199" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">YAML rule</text>
+  <line x1="205" y1="175" x2="225" y2="175" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="225" y="130" width="175" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="312.5" y="156" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Test</text>
+  <text x="312.5" y="180" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">true positive +</text>
+  <text x="312.5" y="199" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">benign cases</text>
+  <line x1="400" y1="175" x2="420" y2="175" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="420" y="130" width="175" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="507.5" y="156" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Review</text>
+  <text x="507.5" y="180" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">pull request,</text>
+  <text x="507.5" y="199" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">peer review</text>
+  <line x1="595" y1="175" x2="615" y2="175" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="615" y="130" width="175" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="702.5" y="156" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Convert</text>
+  <text x="702.5" y="180" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Sigma to</text>
+  <text x="702.5" y="199" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">KQL / SPL</text>
+  <line x1="790" y1="175" x2="810" y2="175" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="810" y="130" width="175" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="897.5" y="156" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Deploy</text>
+  <text x="897.5" y="180" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">CI pushes</text>
+  <text x="897.5" y="199" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">to the SIEM</text>
+  <line x1="985" y1="175" x2="1005" y2="175" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="1005" y="130" width="175" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1092.5" y="156" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Tune</text>
+  <text x="1092.5" y="180" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">false-positive data</text>
+  <text x="1092.5" y="199" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">back to the rule</text>
+  <rect x="40" y="280" width="1120" height="150" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600.0" y="306" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Why</text>
+  <text x="600.0" y="330" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Version history: who changed which rule and why</text>
+  <text x="600.0" y="349" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Repeatable tests stop a tuning change from silently breaking a detection</text>
+  <text x="600.0" y="368" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">One rule format, many tools (Sentinel, Splunk, Elastic...)</text>
+  <text x="600.0" y="387" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Review catches rules that are too broad before they flood the queue</text>
+</svg>

@@ -1,0 +1,17 @@
+Return-Path: <bounce@mailer.badhost.example>
+Received: from unknown (HELO mailer.badhost.example) [198.51.100.77]
+	by mx.corp.example with SMTP; Mon, 16 Nov 2026 03:12:40 +0000
+Authentication-Results: mx.corp.example;
+ spf=fail smtp.mailfrom=badhost.example;
+ dkim=none;
+ dmarc=fail header.from=northwind.example
+From: "CEO Office" <ceo@northwind.example>
+Reply-To: <ceo.office.urgent@freemail.example>
+To: asha@corp.example
+Subject: URGENT wire transfer today
+Date: Mon, 16 Nov 2026 03:12:00 +0000
+Message-ID: <2002@badhost.example>
+Content-Type: text/plain; charset=utf-8
+
+Asha, I am in a meeting. I need you to pay a new supplier today.
+Do not call me. Reply to this email with confirmation.

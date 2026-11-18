@@ -1,0 +1,508 @@
+{
+  "Records": [
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T08:00:00Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "ListBuckets",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "198.51.100.7",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "svc-report",
+        "arn": "arn:aws:iam::111122223333:user/svc-report",
+        "accessKeyId": "AKIAEXAMPLESVC0"
+      },
+      "requestParameters": null,
+      "responseElements": null
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T08:30:00Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "GetObject",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.20",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "carol",
+        "arn": "arn:aws:iam::111122223333:user/carol",
+        "accessKeyId": "AKIAEXAMPLECAROL0"
+      },
+      "requestParameters": null,
+      "responseElements": null
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T08:55:00Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.10",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "alice",
+        "arn": "arn:aws:iam::111122223333:user/alice"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Success"
+      },
+      "additionalEventData": {
+        "MFAUsed": "Yes"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T09:00:00Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "DescribeInstances",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.10",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "alice",
+        "arn": "arn:aws:iam::111122223333:user/alice",
+        "accessKeyId": "AKIAEXAMPLEALICE0"
+      },
+      "requestParameters": null,
+      "responseElements": null
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T09:05:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateAccessKey",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.10",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "alice",
+        "arn": "arn:aws:iam::111122223333:user/alice",
+        "accessKeyId": "AKIAEXAMPLEALICE0"
+      },
+      "requestParameters": {
+        "userName": "svc-report"
+      },
+      "responseElements": {
+        "accessKey": {
+          "accessKeyId": "AKIAEXAMPLESVC1",
+          "userName": "svc-report"
+        }
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T09:10:00Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "PutBucketPolicy",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.10",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "alice",
+        "arn": "arn:aws:iam::111122223333:user/alice",
+        "accessKeyId": "AKIAEXAMPLEALICE0"
+      },
+      "requestParameters": {
+        "bucketName": "corp-logs",
+        "bucketPolicy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111122223333:role/Auditor"
+              },
+              "Action": "s3:GetObject",
+              "Resource": "arn:aws:s3:::corp-logs/*"
+            }
+          ]
+        }
+      },
+      "responseElements": null
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T09:20:00Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.30",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "bob",
+        "arn": "arn:aws:iam::111122223333:user/bob"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Failure"
+      },
+      "additionalEventData": {
+        "MFAUsed": "Yes"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T09:20:40Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.30",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "bob",
+        "arn": "arn:aws:iam::111122223333:user/bob"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Failure"
+      },
+      "additionalEventData": {
+        "MFAUsed": "Yes"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T09:21:30Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.30",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "bob",
+        "arn": "arn:aws:iam::111122223333:user/bob"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Success"
+      },
+      "additionalEventData": {
+        "MFAUsed": "Yes"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T09:30:00Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "ListBuckets",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "198.51.100.7",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "svc-report",
+        "arn": "arn:aws:iam::111122223333:user/svc-report",
+        "accessKeyId": "AKIAEXAMPLESVC1"
+      },
+      "requestParameters": null,
+      "responseElements": null
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T09:40:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "DeleteAccessKey",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.10",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "alice",
+        "arn": "arn:aws:iam::111122223333:user/alice",
+        "accessKeyId": "AKIAEXAMPLEALICE0"
+      },
+      "requestParameters": {
+        "userName": "svc-report",
+        "accessKeyId": "AKIAEXAMPLESVC0"
+      },
+      "responseElements": null
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T02:10:00Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.50",
+      "userIdentity": {
+        "type": "Root",
+        "accountId": "111122223333",
+        "arn": "arn:aws:iam::111122223333:root"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Success"
+      },
+      "additionalEventData": {
+        "MFAUsed": "No"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T03:00:00Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.99",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "erin",
+        "arn": "arn:aws:iam::111122223333:user/erin"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Failure"
+      },
+      "additionalEventData": {
+        "MFAUsed": "No"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T03:01:10Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.99",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "erin",
+        "arn": "arn:aws:iam::111122223333:user/erin"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Failure"
+      },
+      "additionalEventData": {
+        "MFAUsed": "No"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T03:02:20Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.99",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "erin",
+        "arn": "arn:aws:iam::111122223333:user/erin"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Failure"
+      },
+      "additionalEventData": {
+        "MFAUsed": "No"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T03:03:30Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.99",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "erin",
+        "arn": "arn:aws:iam::111122223333:user/erin"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Failure"
+      },
+      "additionalEventData": {
+        "MFAUsed": "No"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T03:04:40Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.99",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "erin",
+        "arn": "arn:aws:iam::111122223333:user/erin"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Failure"
+      },
+      "additionalEventData": {
+        "MFAUsed": "No"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T03:05:50Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.99",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "erin",
+        "arn": "arn:aws:iam::111122223333:user/erin"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Failure"
+      },
+      "additionalEventData": {
+        "MFAUsed": "No"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T03:07:00Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.99",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "erin",
+        "arn": "arn:aws:iam::111122223333:user/erin"
+      },
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Success"
+      },
+      "additionalEventData": {
+        "MFAUsed": "No"
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T11:30:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateAccessKey",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "192.0.2.20",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "carol",
+        "arn": "arn:aws:iam::111122223333:user/carol",
+        "accessKeyId": "AKIAEXAMPLECAROL0"
+      },
+      "requestParameters": {
+        "userName": "carol"
+      },
+      "responseElements": {
+        "accessKey": {
+          "accessKeyId": "AKIAEXAMPLENEW01",
+          "userName": "carol"
+        }
+      }
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T11:40:00Z",
+      "eventSource": "sts.amazonaws.com",
+      "eventName": "GetCallerIdentity",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.77",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "carol",
+        "arn": "arn:aws:iam::111122223333:user/carol",
+        "accessKeyId": "AKIAEXAMPLENEW01"
+      },
+      "requestParameters": null,
+      "responseElements": null
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T11:45:00Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "StopLogging",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.77",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "carol",
+        "arn": "arn:aws:iam::111122223333:user/carol",
+        "accessKeyId": "AKIAEXAMPLENEW01"
+      },
+      "requestParameters": {
+        "name": "org-trail"
+      },
+      "responseElements": null
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T11:50:00Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "PutBucketPolicy",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.77",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "carol",
+        "arn": "arn:aws:iam::111122223333:user/carol",
+        "accessKeyId": "AKIAEXAMPLENEW01"
+      },
+      "requestParameters": {
+        "bucketName": "corp-customer-exports",
+        "bucketPolicy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": "s3:GetObject",
+              "Resource": "arn:aws:s3:::corp-customer-exports/*"
+            }
+          ]
+        }
+      },
+      "responseElements": null
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-03-10T11:55:00Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "DeleteTrail",
+      "awsRegion": "ca-central-1",
+      "sourceIPAddress": "203.0.113.77",
+      "userIdentity": {
+        "type": "IAMUser",
+        "accountId": "111122223333",
+        "userName": "carol",
+        "arn": "arn:aws:iam::111122223333:user/carol",
+        "accessKeyId": "AKIAEXAMPLENEW01"
+      },
+      "requestParameters": {
+        "name": "org-trail"
+      },
+      "responseElements": null
+    }
+  ]
+}

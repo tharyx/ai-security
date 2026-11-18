@@ -1,0 +1,25 @@
+{
+  "_note": "Synthetic asset and user context, the kind a CMDB and an HR system would give you.",
+  "assets": {
+    "DC-01": {"criticality": "critical", "role": "domain controller", "owner": "infra"},
+    "FIN-WS-07": {"criticality": "high", "role": "finance workstation", "owner": "alice"},
+    "HR-WS-12": {"criticality": "medium", "role": "hr workstation", "owner": "erin"},
+    "TEST-VM-02": {"criticality": "low", "role": "av test machine", "owner": "secops"},
+    "MKT-LT-05": {"criticality": "low", "role": "marketing laptop", "owner": "carol"},
+    "VPN-GW": {"criticality": "high", "role": "vpn gateway", "owner": "network"}
+  },
+  "users": {
+    "alice": {"department": "finance", "vip": false, "travel_approved": false},
+    "bob": {"department": "finance", "vip": true, "travel_approved": false},
+    "carol": {"department": "marketing", "vip": false, "travel_approved": false},
+    "dave": {"department": "sales", "vip": false, "travel_approved": true, "travel_note": "HR travel record: Singapore, 10-14 Nov"},
+    "erin": {"department": "engineering", "vip": false, "travel_approved": false},
+    "svc-sccm": {"department": "it", "vip": false, "travel_approved": false, "service_account": true},
+    "helpdesk1": {"department": "it", "vip": false, "travel_approved": false}
+  },
+  "authorized_scanners": ["192.0.2.10"],
+  "change_windows": [
+    {"ticket": "CHG-4412", "host": "DC-01", "actor": "helpdesk1", "start": "2026-11-10T08:00:00Z", "end": "2026-11-10T10:00:00Z", "summary": "Add contractor to Server Operators group"},
+    {"ticket": "CHG-4420", "host": "FIN-WS-07", "actor": "svc-sccm", "start": "2026-11-10T01:00:00Z", "end": "2026-11-10T04:00:00Z", "summary": "Patch rollout with PowerShell script"}
+  ]
+}

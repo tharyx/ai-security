@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Incident response lifecycle (NIST SP 800-61 Rev. 3)</title>
+  <defs><marker id="ar" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#64748b"/></marker></defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Incident response lifecycle (NIST SP 800-61 Rev. 3)</text>
+  <text x="40" y="78" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Six practical steps. Rev. 3 ties them to the CSF 2.0 functions.</text>
+  <rect x="40" y="120" width="212" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="146.0" y="146" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Preparation</text>
+  <text x="146.0" y="170" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Govern / Identify / Protect</text>
+  <line x1="252" y1="165" x2="272" y2="165" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="272" y="120" width="212" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="378.0" y="146" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Detection &amp; analysis</text>
+  <text x="378.0" y="170" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Detect</text>
+  <line x1="484" y1="165" x2="504" y2="165" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="504" y="120" width="212" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="610.0" y="146" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Containment</text>
+  <text x="610.0" y="170" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Respond</text>
+  <line x1="716" y1="165" x2="736" y2="165" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="736" y="120" width="212" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="842.0" y="146" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Eradication</text>
+  <text x="842.0" y="170" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Respond</text>
+  <line x1="948" y1="165" x2="968" y2="165" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="968" y="120" width="212" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1074.0" y="146" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Recovery</text>
+  <text x="1074.0" y="170" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Recover</text>
+  <rect x="40" y="260" width="1120" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="600.0" y="286" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Lessons learned / improvement: feeds back into every phase (CSF 2.0 Identify: Improvement)</text>
+  <text x="600.0" y="310" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Post-incident review, new detections, updated playbooks and training</text>
+  <line x1="600" y1="330" x2="600" y2="365" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="40" y="365" width="540" height="120" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="310.0" y="391" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Rev. 2 (2012): 4 phases</text>
+  <text x="310.0" y="415" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Preparation</text>
+  <text x="310.0" y="434" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Detection &amp; Analysis</text>
+  <text x="310.0" y="453" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Containment, Eradication &amp; Recovery</text>
+  <text x="310.0" y="472" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Post-Incident Activity</text>
+  <rect x="620" y="365" width="540" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="890.0" y="391" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Rev. 3 (April 2025): CSF 2.0 community profile</text>
+  <text x="890.0" y="415" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Incident response is part of cyber risk management</text>
+  <text x="890.0" y="434" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">IR is not only an end-of-pipe activity:</text>
+  <text x="890.0" y="453" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">prepare and improve all the time</text>
+</svg>

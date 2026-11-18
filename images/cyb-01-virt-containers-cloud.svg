@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>VMs, containers and the cloud</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">VMs, containers and the cloud</text>
+  <text x="40" y="76" font-size="16" fill="#475569">More layers shared means faster and cheaper, but a smaller wall between workloads.</text>
+  <text x="210" y="112" text-anchor="middle" font-size="17" fill="#0f172a" font-weight="bold">Virtual machines</text>
+  <rect x="40" y="126" width="340" height="58" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="210.0" y="160.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">App A | App B</text>
+  <rect x="40" y="196" width="340" height="58" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="210.0" y="230.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Guest OS | Guest OS</text>
+  <rect x="40" y="266" width="340" height="58" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="210.0" y="300.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Hypervisor (Hyper-V, KVM)</text>
+  <rect x="40" y="336" width="340" height="58" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="210.0" y="370.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Hardware</text>
+  <text x="600" y="112" text-anchor="middle" font-size="17" fill="#0f172a" font-weight="bold">Containers</text>
+  <rect x="430" y="126" width="340" height="58" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600.0" y="160.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">App A | App B</text>
+  <rect x="430" y="196" width="340" height="58" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="230.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Container runtime (Docker)</text>
+  <rect x="430" y="266" width="340" height="58" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="600.0" y="300.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">One shared host OS</text>
+  <rect x="430" y="336" width="340" height="58" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600.0" y="370.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Hardware / VM</text>
+  <text x="990" y="112" text-anchor="middle" font-size="17" fill="#0f172a" font-weight="bold">Cloud (IaaS)</text>
+  <rect x="820" y="126" width="340" height="58" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="990.0" y="160.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Your data and identities</text>
+  <rect x="820" y="196" width="340" height="58" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="990.0" y="230.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Your OS, apps, config</text>
+  <rect x="820" y="266" width="340" height="58" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="990.0" y="300.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Provider: hypervisor, network</text>
+  <rect x="820" y="336" width="340" height="58" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="990.0" y="370.25" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Provider: data center</text>
+  <text x="40" y="450" text-anchor="start" font-size="14" fill="#475569">VM escape and container escape are rare but serious. Cloud: the provider secures the cloud, you secure what you put in it.</text>
+  <text x="40" y="474" text-anchor="start" font-size="14" fill="#475569">Most cloud incidents come from customer mistakes: open storage, weak identities, exposed keys.</text>
+</svg>

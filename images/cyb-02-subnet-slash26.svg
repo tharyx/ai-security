@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Subnetting a /24 into four /26 blocks</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="480" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Subnetting a /24 into four /26 blocks</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Each /26 has 64 addresses: 62 usable hosts, one network address, one broadcast address.</text>
+  <text x="40" y="110" text-anchor="start" font-size="16" fill="#0f172a" font-weight="bold">198.51.100.0/24  (256 addresses)</text>
+  <rect x="40" y="126" width="270" height="100" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="175.0" y="150" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">198.51.100.0/26</text>
+  <text x="175.0" y="172" text-anchor="middle" font-size="13" fill="#475569">net .0</text>
+  <text x="175.0" y="190" text-anchor="middle" font-size="13" fill="#475569">hosts .1-.62</text>
+  <text x="175.0" y="208" text-anchor="middle" font-size="13" fill="#475569">bcast .63</text>
+  <rect x="320" y="126" width="270" height="100" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="455.0" y="150" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">198.51.100.64/26</text>
+  <text x="455.0" y="172" text-anchor="middle" font-size="13" fill="#475569">net .64</text>
+  <text x="455.0" y="190" text-anchor="middle" font-size="13" fill="#475569">hosts .65-.126</text>
+  <text x="455.0" y="208" text-anchor="middle" font-size="13" fill="#475569">bcast .127</text>
+  <rect x="600" y="126" width="270" height="100" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="735.0" y="150" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">198.51.100.128/26</text>
+  <text x="735.0" y="172" text-anchor="middle" font-size="13" fill="#475569">net .128</text>
+  <text x="735.0" y="190" text-anchor="middle" font-size="13" fill="#475569">hosts .129-.190</text>
+  <text x="735.0" y="208" text-anchor="middle" font-size="13" fill="#475569">bcast .191</text>
+  <rect x="880" y="126" width="270" height="100" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1015.0" y="150" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">198.51.100.192/26</text>
+  <text x="1015.0" y="172" text-anchor="middle" font-size="13" fill="#475569">net .192</text>
+  <text x="1015.0" y="190" text-anchor="middle" font-size="13" fill="#475569">hosts .193-.254</text>
+  <text x="1015.0" y="208" text-anchor="middle" font-size="13" fill="#475569">bcast .255</text>
+  <text x="40" y="270" text-anchor="start" font-size="15" fill="#0f172a" font-weight="bold">Mask /26 in binary:</text>
+  <text x="40" y="300" text-anchor="start" font-size="17" fill="#0f172a">11111111.11111111.11111111.11000000  =  255.255.255.192</text>
+  <text x="40" y="330" text-anchor="start" font-size="15" fill="#475569">26 network bits + 6 host bits.  2^6 = 64 addresses.  Block size = 256 - 192 = 64.</text>
+  <text x="40" y="380" text-anchor="start" font-size="15" fill="#475569">Fast method for 198.51.100.77/26:  77 / 64 = 1 (round down)  -&gt;  network = 1 x 64 = .64</text>
+  <text x="40" y="404" text-anchor="start" font-size="15" fill="#475569">broadcast = network + 63 = .127.  Usable range .65 to .126.</text>
+  <text x="40" y="450" text-anchor="start" font-size="14" fill="#475569">Practice with the lab: python cybersecurity-track/02-networking/lab/demo.py</text>
+</svg>

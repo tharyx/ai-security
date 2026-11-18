@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>How AWS decides: allow or deny</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="460" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">How AWS decides: allow or deny</text>
+<text x="40" y="80" font-size="16" fill="#475569">Simplified order of checks for one request inside one account. Explicit deny always wins.</text>
+<rect x="40" y="150" width="160" height="100" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="120.0" y="185.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Request</text>
+<text x="120.0" y="205.0" text-anchor="middle" font-size="13" fill="#475569">who, action,</text>
+<text x="120.0" y="223.0" text-anchor="middle" font-size="13" fill="#475569">resource</text>
+<line x1="200" y1="200" x2="230" y2="200" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="230" y="150" width="160" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="310.0" y="185.0" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Explicit Deny?</text>
+<text x="310.0" y="205.0" text-anchor="middle" font-size="13" fill="#475569">any policy says</text>
+<text x="310.0" y="223.0" text-anchor="middle" font-size="13" fill="#475569">Deny: stop</text>
+<line x1="390" y1="200" x2="420" y2="200" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="420" y="150" width="160" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="500.0" y="185.0" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Org SCP</text>
+<text x="500.0" y="205.0" text-anchor="middle" font-size="13" fill="#475569">must allow</text>
+<text x="500.0" y="223.0" text-anchor="middle" font-size="13" fill="#475569">(guardrail)</text>
+<line x1="580" y1="200" x2="610" y2="200" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="610" y="150" width="160" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="690.0" y="185.0" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Boundary</text>
+<text x="690.0" y="205.0" text-anchor="middle" font-size="13" fill="#475569">permissions</text>
+<text x="690.0" y="223.0" text-anchor="middle" font-size="13" fill="#475569">boundary</text>
+<line x1="770" y1="200" x2="800" y2="200" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="800" y="150" width="160" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="880.0" y="185.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Allow found?</text>
+<text x="880.0" y="205.0" text-anchor="middle" font-size="13" fill="#475569">identity or</text>
+<text x="880.0" y="223.0" text-anchor="middle" font-size="13" fill="#475569">resource policy</text>
+<line x1="960" y1="200" x2="990" y2="200" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="990" y="150" width="160" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1070.0" y="185.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Result</text>
+<text x="1070.0" y="205.0" text-anchor="middle" font-size="13" fill="#475569">Allow, else</text>
+<text x="1070.0" y="223.0" text-anchor="middle" font-size="13" fill="#475569">implicit deny</text>
+<text x="40" y="310" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">SCPs and boundaries never grant anything. They only limit what the identity policy can allow.</text>
+<text x="40" y="340" text-anchor="start" font-size="14" fill="#475569">Session policies on assumed roles limit further. A role has a trust policy (who may assume it) and permission policies (what it may do).</text>
+<text x="40" y="370" text-anchor="start" font-size="14" fill="#475569">DBA parallel: SCP is like a profile or a PROXY restriction on top of grants. Deny is like a Database Vault realm that even a DBA cannot cross.</text>
+</svg>

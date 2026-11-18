@@ -1,0 +1,15 @@
+Return-Path: <support@northwlnd.example>
+Received: from mail.northwlnd.example (mail.northwlnd.example [203.0.113.45])
+	by mx.corp.example with ESMTPS; Mon, 16 Nov 2026 10:30:05 +0000
+Authentication-Results: mx.corp.example;
+ spf=pass smtp.mailfrom=northwlnd.example;
+ dkim=pass header.d=northwlnd.example;
+ dmarc=pass header.from=northwlnd.example
+From: "Northwind IT Support" <support@northwlnd.example>
+To: asha@corp.example
+Subject: Your password expires today
+Date: Mon, 16 Nov 2026 10:30:00 +0000
+Message-ID: <3003@northwlnd.example>
+Content-Type: text/html; charset=utf-8
+
+<p>Your password expires today. <a href="https://login.northwlnd.example/reset">https://login.northwind.example/reset</a></p>

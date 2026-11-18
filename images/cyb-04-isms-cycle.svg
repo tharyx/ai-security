@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>ISO/IEC 27001 ISMS: clauses 4-10 as a cycle</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#475569"/></marker></defs>
+<rect width="1200" height="500" fill="#ffffff"/>
+<text x="60" y="52" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">ISO/IEC 27001 ISMS: clauses 4-10 as a cycle</text>
+<text x="60" y="82" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Plan, Do, Check, Act, with leadership in the middle</text>
+<rect x="60.0" y="120" width="240" height="125" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="180.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Plan</text>
+<text x="180.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">4 Context</text>
+<text x="180.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">5 Leadership</text>
+<text x="180.0" y="212" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">6 Planning (risk)</text>
+<text x="180.0" y="232" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">7 Support</text>
+<rect x="340.0" y="120" width="240" height="125" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="460.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Do</text>
+<text x="460.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">8 Operation:</text>
+<text x="460.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">run risk assessment</text>
+<text x="460.0" y="212" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">and treatment</text>
+<rect x="620.0" y="120" width="240" height="125" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="740.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Check</text>
+<text x="740.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">9 Performance:</text>
+<text x="740.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">monitoring, internal</text>
+<text x="740.0" y="212" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">audit, management review</text>
+<rect x="900.0" y="120" width="240" height="125" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1020.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Act</text>
+<text x="1020.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">10 Improvement:</text>
+<text x="1020.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">nonconformity,</text>
+<text x="1020.0" y="212" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">corrective action</text>
+<line x1="304.0" y1="182.5" x2="336.0" y2="182.5" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="584.0" y1="182.5" x2="616.0" y2="182.5" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="864.0" y1="182.5" x2="896.0" y2="182.5" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="60" y="300" width="1080" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="600.0" y="328" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Annex A: 93 controls in 4 themes</text>
+<text x="600.0" y="352" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Organizational 37  |  People 8  |  Physical 14  |  Technological 34   -&gt;   chosen and justified in the Statement of Applicability</text>
+<text x="60" y="430" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Certification: Stage 1 (documents), Stage 2 (evidence), then yearly surveillance audits and a recertification in year 3.</text>
+</svg>

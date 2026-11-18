@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>From lab to job offer: the portfolio loop</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="440" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">From lab to job offer: the portfolio loop</text>
+<text x="40" y="80" font-size="16" fill="#475569">Each loop makes proof you can show in an interview.</text>
+<rect x="40" y="160" width="190" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="135.0" y="211.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Do a lab</text>
+<line x1="230" y1="205" x2="260" y2="205" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="260" y="160" width="190" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="355.0" y="211.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Write it up</text>
+<line x1="450" y1="205" x2="480" y2="205" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="480" y="160" width="190" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="575.0" y="211.0" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Publish</text>
+<line x1="670" y1="205" x2="700" y2="205" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="700" y="160" width="190" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="795.0" y="211.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Link it</text>
+<line x1="890" y1="205" x2="920" y2="205" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="920" y="160" width="190" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1015.0" y="211.0" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Talk about it</text>
+<text x="40" y="320" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Write-up: question, evidence, timeline, conclusion, what I would change.</text>
+<text x="40" y="350" text-anchor="start" font-size="14" fill="#475569">Publish: blog or GitHub Pages. Link: LinkedIn Featured section and GitHub README.</text>
+<text x="40" y="380" text-anchor="start" font-size="14" fill="#475569">Talk: use the STAR style (situation, task, action, result) with your own numbers.</text>
+</svg>

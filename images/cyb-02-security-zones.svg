@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Firewall, NAT, VPN, proxy and IDS/IPS in a typical network</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Firewall, NAT, VPN, proxy and IDS/IPS in a typical network</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Traffic crosses zones. Each crossing is a place to filter, log and inspect.</text>
+  <rect x="40" y="190" width="170" height="120" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="125.0" y="214" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Internet</text>
+  <text x="125.0" y="236" text-anchor="middle" font-size="13" fill="#475569">untrusted</text>
+  <text x="125.0" y="254" text-anchor="middle" font-size="13" fill="#475569">attackers + users</text>
+  <rect x="270" y="190" width="170" height="120" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="355.0" y="214" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Edge firewall</text>
+  <text x="355.0" y="236" text-anchor="middle" font-size="13" fill="#475569">NAT, allow list</text>
+  <text x="355.0" y="254" text-anchor="middle" font-size="13" fill="#475569">IPS inline</text>
+  <rect x="500" y="120" width="220" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="610.0" y="144" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">DMZ</text>
+  <text x="610.0" y="166" text-anchor="middle" font-size="13" fill="#475569">web server</text>
+  <text x="610.0" y="184" text-anchor="middle" font-size="13" fill="#475569">reverse proxy</text>
+  <text x="610.0" y="202" text-anchor="middle" font-size="13" fill="#475569">VPN gateway</text>
+  <rect x="500" y="290" width="220" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="610.0" y="314" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Internal firewall</text>
+  <text x="610.0" y="336" text-anchor="middle" font-size="13" fill="#475569">default deny</text>
+  <text x="610.0" y="354" text-anchor="middle" font-size="13" fill="#475569">logs to SIEM</text>
+  <rect x="780" y="190" width="220" height="120" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="890.0" y="214" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Internal LAN</text>
+  <text x="890.0" y="236" text-anchor="middle" font-size="13" fill="#475569">users, servers</text>
+  <text x="890.0" y="254" text-anchor="middle" font-size="13" fill="#475569">Oracle DB</text>
+  <rect x="1040" y="190" width="130" height="120" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1105.0" y="214" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">IDS tap</text>
+  <text x="1105.0" y="236" text-anchor="middle" font-size="13" fill="#475569">copy of traffic</text>
+  <text x="1105.0" y="254" text-anchor="middle" font-size="13" fill="#475569">alerts only</text>
+  <line x1="210" y1="250" x2="268" y2="250" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="440" y1="220" x2="498" y2="190" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="440" y1="280" x2="498" y2="340" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="720" y1="340" x2="778" y2="280" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="1000" y1="250" x2="1038" y2="250" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="40" y="450" text-anchor="start" font-size="14" fill="#475569">NAT: many private addresses share one public address (hides internal IPs, and is not a security control by itself).</text>
+  <text x="40" y="474" text-anchor="start" font-size="14" fill="#475569">VPN: encrypted tunnel into the network. Proxy: a middle server that fetches web pages for users and logs them.</text>
+  <text x="40" y="498" text-anchor="start" font-size="14" fill="#475569">IDS detects and alerts. IPS sits in line and can block. Both need tuning or the SOC drowns in noise.</text>
+</svg>

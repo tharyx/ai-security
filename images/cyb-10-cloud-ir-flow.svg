@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Cloud incident response: contain without destroying evidence</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Cloud incident response: contain without destroying evidence</text>
+<text x="40" y="80" font-size="16" fill="#475569">NIST-style phases with cloud actions. Snapshot first, then isolate. Do not delete the evidence.</text>
+<rect x="40" y="140" width="200" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="140.0" y="175.0" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Detect</text>
+<text x="140.0" y="195.0" text-anchor="middle" font-size="13" fill="#475569">GuardDuty, billing</text>
+<text x="140.0" y="213.0" text-anchor="middle" font-size="13" fill="#475569">alert, SIEM rule</text>
+<line x1="240" y1="190" x2="265" y2="190" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="265" y="140" width="200" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="365.0" y="175.0" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Contain</text>
+<text x="365.0" y="195.0" text-anchor="middle" font-size="13" fill="#475569">disable key, isolate</text>
+<text x="365.0" y="213.0" text-anchor="middle" font-size="13" fill="#475569">SG, block public</text>
+<line x1="465" y1="190" x2="490" y2="190" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="490" y="140" width="200" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="590.0" y="175.0" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Eradicate</text>
+<text x="590.0" y="195.0" text-anchor="middle" font-size="13" fill="#475569">rotate secrets,</text>
+<text x="590.0" y="213.0" text-anchor="middle" font-size="13" fill="#475569">remove persistence</text>
+<line x1="690" y1="190" x2="715" y2="190" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="715" y="140" width="200" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="815.0" y="175.0" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Recover</text>
+<text x="815.0" y="195.0" text-anchor="middle" font-size="13" fill="#475569">rebuild from IaC,</text>
+<text x="815.0" y="213.0" text-anchor="middle" font-size="13" fill="#475569">restore clean data</text>
+<line x1="915" y1="190" x2="940" y2="190" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="940" y="140" width="200" height="100" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1040.0" y="175.0" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Lessons</text>
+<text x="1040.0" y="195.0" text-anchor="middle" font-size="13" fill="#475569">detection gap,</text>
+<text x="1040.0" y="213.0" text-anchor="middle" font-size="13" fill="#475569">guardrail, SCP</text>
+<text x="40" y="300" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Leaked access key</text>
+<text x="280" y="300" text-anchor="start" font-size="14" fill="#475569">Deactivate key, attach deny policy, review CloudTrail for what it did, rotate.</text>
+<text x="40" y="350" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Public S3 bucket</text>
+<text x="280" y="350" text-anchor="start" font-size="14" fill="#475569">Turn on Block Public Access, list what was exposed, check access logs, notify owners.</text>
+<text x="40" y="400" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Crypto-mining instance</text>
+<text x="280" y="400" text-anchor="start" font-size="14" fill="#475569">Snapshot, isolate with a quarantine SG, find the entry (key or open port), terminate.</text>
+<text x="40" y="450" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Suspicious OAuth consent</text>
+<text x="280" y="450" text-anchor="start" font-size="14" fill="#475569">Revoke grant, disable app, reset sessions, hunt mailbox rules and data access.</text>
+</svg>

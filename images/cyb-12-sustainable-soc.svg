@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>A sustainable SOC career</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#475569"/></marker></defs>
+<rect width="1200" height="460" fill="#ffffff"/>
+<text x="60" y="52" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">A sustainable SOC career</text>
+<text x="60" y="82" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Protect your energy, and share what you learn. Both compound over years</text>
+<rect x="60.0" y="120" width="240" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="180.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Plan the week</text>
+<text x="180.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">3 priorities,</text>
+<text x="180.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">time blocks</text>
+<rect x="340.0" y="120" width="240" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="460.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Protect energy</text>
+<text x="460.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">breaks, sleep,</text>
+<text x="460.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">handover on time</text>
+<rect x="620.0" y="120" width="240" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="740.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Spot burnout</text>
+<text x="740.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">cynicism, dread,</text>
+<text x="740.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">no energy</text>
+<rect x="900.0" y="120" width="240" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1020.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Act early</text>
+<text x="1020.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">talk to lead,</text>
+<text x="1020.0" y="192" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">adjust load</text>
+<line x1="304.0" y1="170.0" x2="336.0" y2="170.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="584.0" y1="170.0" x2="616.0" y2="170.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="864.0" y1="170.0" x2="896.0" y2="170.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="60.0" y="270" width="240" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="180.0" y="298" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Learn</text>
+<text x="180.0" y="322" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">one lab or room</text>
+<text x="180.0" y="342" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">per week</text>
+<rect x="340.0" y="270" width="240" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="460.0" y="298" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Write</text>
+<text x="460.0" y="322" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">notes, then a</text>
+<text x="460.0" y="342" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">short blog post</text>
+<rect x="620.0" y="270" width="240" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="740.0" y="298" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Share</text>
+<text x="740.0" y="322" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">GitHub, LinkedIn,</text>
+<text x="740.0" y="342" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">no secrets</text>
+<rect x="900.0" y="270" width="240" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1020.0" y="298" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Feedback</text>
+<text x="1020.0" y="322" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">improve, repeat</text>
+<line x1="304.0" y1="315.0" x2="336.0" y2="315.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="584.0" y1="315.0" x2="616.0" y2="315.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="864.0" y1="315.0" x2="896.0" y2="315.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="60" y="400" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Never publish employer data, real incident details, customer names or anything under NDA. Use labs and synthetic data.</text>
+</svg>

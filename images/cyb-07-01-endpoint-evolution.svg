@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Endpoint security: AV to XDR</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+<rect width="1200" height="380" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Endpoint security: AV to XDR</text>
+<text x="40" y="80" font-size="16" fill="#475569">Each step keeps the old layer and adds visibility and response</text>
+<rect x="40" y="120" width="250" height="110" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="165.0" y="161.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Antivirus (AV)</text>
+<text x="165.0" y="183.0" text-anchor="middle" font-size="13" fill="#475569">known file signatures</text>
+<text x="165.0" y="201.0" text-anchor="middle" font-size="13" fill="#475569">blocks known bad files</text>
+<rect x="330" y="120" width="250" height="110" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="455.0" y="161.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">EPP</text>
+<text x="455.0" y="183.0" text-anchor="middle" font-size="13" fill="#475569">AV + NGAV + firewall</text>
+<text x="455.0" y="201.0" text-anchor="middle" font-size="13" fill="#475569">prevention on the device</text>
+<rect x="620" y="120" width="250" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="745.0" y="161.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">EDR</text>
+<text x="745.0" y="183.0" text-anchor="middle" font-size="13" fill="#475569">records endpoint activity</text>
+<text x="745.0" y="201.0" text-anchor="middle" font-size="13" fill="#475569">hunt, investigate, respond</text>
+<rect x="910" y="120" width="250" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1035.0" y="161.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">XDR</text>
+<text x="1035.0" y="183.0" text-anchor="middle" font-size="13" fill="#475569">EDR + email + identity + cloud</text>
+<text x="1035.0" y="201.0" text-anchor="middle" font-size="13" fill="#475569">one correlated incident</text>
+<line x1="292" y1="175.0" x2="328" y2="175.0" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="582" y1="175.0" x2="618" y2="175.0" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="872" y1="175.0" x2="908" y2="175.0" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="40" y="290" text-anchor="start" font-size="14" font-weight="700" fill="#0f172a">Question each layer answers:</text>
+<text x="164" y="320" text-anchor="middle" font-size="13" fill="#475569">Is this file known bad?</text>
+<text x="454" y="320" text-anchor="middle" font-size="13" fill="#475569">Can we stop it before it runs?</text>
+<text x="744" y="320" text-anchor="middle" font-size="13" fill="#475569">What happened, and how do we respond?</text>
+<text x="1034" y="320" text-anchor="middle" font-size="13" fill="#475569">How do all signals fit together?</text>
+<text x="40" y="358" text-anchor="start" font-size="13" fill="#475569">Same attacker, harder to catch: fileless and living-off-the-land attacks have no bad file for AV to find.</text>
+</svg>

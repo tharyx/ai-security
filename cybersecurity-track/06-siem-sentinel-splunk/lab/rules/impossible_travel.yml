@@ -1,0 +1,23 @@
+title: Impossible travel - successful sign-ins from two countries too close in time
+id: cyb06-0003
+status: experimental
+description: The same user signs in successfully from two different countries within 60 minutes.
+author: ai-security lab
+tags: [attack.initial_access, attack.t1078]
+level: medium
+logsource:
+  product: azure
+  service: signinlogs
+detection:
+  selection:
+    action: logon_success
+    source: entra
+  condition: selection
+aggregation:
+  type: country_change
+  field: country
+  group_by: [user]
+  timeframe_minutes: 60
+falsepositives:
+  - Corporate VPN or proxy exits in another country
+  - Mobile carriers that route traffic through another country

@@ -1,0 +1,19 @@
+[
+  {"id": "A-1001", "time": "2026-11-10T09:12:00Z", "rule": "impossible_travel", "host": "VPN-GW", "user": "alice", "src_ip": "198.51.100.200", "details": {"from_country": "DE", "to_country": "BR", "minutes_between": 40}},
+  {"id": "A-1002", "time": "2026-11-10T02:05:00Z", "rule": "password_spray", "host": "VPN-GW", "user": "multiple", "src_ip": "203.0.113.50", "details": {"distinct_users": 38, "attempts": 76, "window_minutes": 10}},
+  {"id": "A-1003", "time": "2026-11-10T02:16:00Z", "rule": "success_after_failures", "host": "VPN-GW", "user": "bob", "src_ip": "203.0.113.50", "details": {"failures_before_success": 2, "mfa": "not_required"}},
+  {"id": "A-1004", "time": "2026-11-10T03:30:00Z", "rule": "port_scan", "host": "DC-01", "user": "", "src_ip": "192.0.2.10", "details": {"ports_scanned": 1024, "window_minutes": 3}},
+  {"id": "A-1005", "time": "2026-11-10T02:10:00Z", "rule": "encoded_powershell", "host": "FIN-WS-07", "user": "svc-sccm", "details": {"parent": "ccmexec.exe", "cmdline_note": "-enc with long base64 string"}},
+  {"id": "A-1006", "time": "2026-11-10T14:41:00Z", "rule": "encoded_powershell", "host": "HR-WS-12", "user": "erin", "domain": "cdn-stage.example", "details": {"parent": "winword.exe", "cmdline_note": "-enc plus DownloadString"}},
+  {"id": "A-1007", "time": "2026-11-10T11:00:00Z", "rule": "av_detection", "host": "TEST-VM-02", "user": "secops", "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "details": {"signature": "EICAR-Test-File", "action": "quarantined"}},
+  {"id": "A-1008", "time": "2026-11-10T11:20:00Z", "rule": "av_detection", "host": "MKT-LT-05", "user": "carol", "file_hash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", "details": {"signature": "Heuristic.Generic.Installer", "action": "alert_only"}},
+  {"id": "A-1009", "time": "2026-11-10T23:50:00Z", "rule": "new_admin_member", "host": "DC-01", "user": "helpdesk1", "details": {"group": "Domain Admins", "added_member": "tmp-contractor", "change_ticket": ""}},
+  {"id": "A-1010", "time": "2026-11-10T08:40:00Z", "rule": "new_admin_member", "host": "DC-01", "user": "helpdesk1", "details": {"group": "Server Operators", "added_member": "contractor-q4", "change_ticket": "CHG-4412"}},
+  {"id": "A-1011", "time": "2026-11-10T16:05:00Z", "rule": "brute_force", "host": "VPN-GW", "user": "bob", "src_ip": "198.51.100.77", "details": {"failed_attempts": 12, "success_after": false}},
+  {"id": "A-1012", "time": "2026-11-10T10:15:00Z", "rule": "phishing_report", "host": "", "user": "carol", "domain": "login-update.example", "details": {"recipients": 3, "clicked": 1, "subject": "Password expires today"}},
+  {"id": "A-1013", "time": "2026-11-10T13:00:00Z", "rule": "brute_force", "host": "VPN-GW", "user": "carol", "src_ip": "192.0.2.77", "details": {"failed_attempts": 3, "success_after": true}},
+  {"id": "A-1014", "time": "2026-11-10T22:30:00Z", "rule": "data_exfil_volume", "host": "MKT-LT-05", "user": "carol", "domain": "files.cloudshare.example", "details": {"uploaded_mb": 4200, "baseline_mb": 150}},
+  {"id": "A-1015", "time": "2026-11-12T06:10:00Z", "rule": "impossible_travel", "host": "VPN-GW", "user": "dave", "src_ip": "192.0.2.150", "details": {"from_country": "US", "to_country": "SG", "minutes_between": 90}},
+  {"id": "A-1016", "time": "2026-11-12T07:00:00Z", "rule": "impossible_travel", "host": "VPN-GW", "user": "erin", "src_ip": "203.0.113.99", "details": {"from_country": "US", "to_country": "NL", "minutes_between": 25}},
+  {"id": "A-1017", "time": "2026-11-12T09:20:00Z", "rule": "brute_force", "host": "VPN-GW", "user": "alice", "src_ip": "192.0.2.88", "details": {"failed_attempts": 3, "success_after": false}}
+]

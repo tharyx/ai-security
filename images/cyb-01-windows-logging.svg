@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>How a Windows action becomes a SIEM alert</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="500" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">How a Windows action becomes a SIEM alert</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Know the event IDs. They are the words of the language you will read every day.</text>
+  <rect x="40" y="110" width="250" height="220" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="165.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">What happens</text>
+  <text x="165.0" y="156" text-anchor="middle" font-size="13" fill="#475569">Logon ok / fail</text>
+  <text x="165.0" y="174" text-anchor="middle" font-size="13" fill="#475569">New process</text>
+  <text x="165.0" y="192" text-anchor="middle" font-size="13" fill="#475569">New user account</text>
+  <text x="165.0" y="210" text-anchor="middle" font-size="13" fill="#475569">New service</text>
+  <text x="165.0" y="228" text-anchor="middle" font-size="13" fill="#475569">PowerShell run</text>
+  <rect x="350" y="110" width="240" height="220" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="470.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Event logs</text>
+  <text x="470.0" y="156" text-anchor="middle" font-size="13" fill="#475569">Security: 4624 4625 4688 4720</text>
+  <text x="470.0" y="174" text-anchor="middle" font-size="13" fill="#475569">System: 7045</text>
+  <text x="470.0" y="192" text-anchor="middle" font-size="13" fill="#475569">Sysmon: 1 3 11</text>
+  <text x="470.0" y="210" text-anchor="middle" font-size="13" fill="#475569">PowerShell: 4104</text>
+  <rect x="650" y="110" width="240" height="220" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="770.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Collector</text>
+  <text x="770.0" y="156" text-anchor="middle" font-size="13" fill="#475569">Defender for Endpoint</text>
+  <text x="770.0" y="174" text-anchor="middle" font-size="13" fill="#475569">Azure Monitor Agent</text>
+  <text x="770.0" y="192" text-anchor="middle" font-size="13" fill="#475569">Splunk forwarder</text>
+  <text x="770.0" y="210" text-anchor="middle" font-size="13" fill="#475569">Windows Event Forwarding</text>
+  <rect x="950" y="110" width="210" height="220" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1055.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">SIEM</text>
+  <text x="1055.0" y="156" text-anchor="middle" font-size="13" fill="#475569">Sentinel / Splunk</text>
+  <text x="1055.0" y="174" text-anchor="middle" font-size="13" fill="#475569">rules + KQL / SPL</text>
+  <text x="1055.0" y="192" text-anchor="middle" font-size="13" fill="#475569">alert -&gt; incident</text>
+  <line x1="292" y1="220" x2="348" y2="220" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="592" y1="220" x2="648" y2="220" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="892" y1="220" x2="948" y2="220" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="40" y="372" text-anchor="start" font-size="14" fill="#475569">Rule: no log, no detection. If 4688 (with command line) and Sysmon are not collected, you are blind to most attacks.</text>
+  <text x="40" y="396" text-anchor="start" font-size="14" fill="#475569">Audit policy decides what Windows writes. Collection decides what the SIEM sees. Check both.</text>
+</svg>

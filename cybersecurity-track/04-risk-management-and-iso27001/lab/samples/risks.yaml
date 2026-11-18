@@ -1,0 +1,99 @@
+# Synthetic risk register for a fictional company (Northwind Retail). Scales are 1-5.
+risks:
+  - id: R-001
+    asset: Customer database (Oracle)
+    threat: SQL injection from the public web app
+    vulnerability: Legacy form builds SQL by string concatenation
+    likelihood: 4
+    impact: 5
+    owner: db-lead
+    treatment: mitigate
+    last_review: 2026-10-20
+    review_days: 90
+    controls:
+      - {name: Parameterized queries in code, likelihood_reduction: 2}
+      - {name: Database activity monitoring, impact_reduction: 1}
+  - id: R-002
+    asset: Employee laptops
+    threat: Ransomware via phishing email
+    vulnerability: Users can run unsigned macros
+    likelihood: 4
+    impact: 4
+    owner: it-ops
+    treatment: mitigate
+    last_review: 2026-05-02
+    review_days: 90
+    controls:
+      - {name: Email filtering, likelihood_reduction: 1}
+      - {name: Offline backups tested quarterly, impact_reduction: 1}
+  - id: R-003
+    asset: Cloud storage bucket
+    threat: Public exposure of backups
+    vulnerability: No policy blocking public access
+    likelihood: 3
+    impact: 5
+    owner: ""
+    treatment: mitigate
+    last_review: 2026-09-01
+    review_days: 90
+    controls: []
+  - id: R-004
+    asset: Office Wi-Fi
+    threat: Guest user reaches internal network
+    vulnerability: Flat network, no segmentation
+    likelihood: 3
+    impact: 3
+    owner: net-lead
+    treatment: accept
+    last_review: 2026-08-15
+    review_days: 180
+    controls: []
+  - id: R-005
+    asset: Payroll supplier
+    threat: Supplier breach exposes employee data
+    vulnerability: No security review of the supplier
+    likelihood: 3
+    impact: 4
+    owner: procurement
+    treatment: transfer
+    last_review: 2026-11-01
+    review_days: 90
+    controls:
+      - {name: Cyber insurance and contract clause, impact_reduction: 1}
+  - id: R-006
+    asset: Admin accounts
+    threat: Password reuse leads to account takeover
+    vulnerability: No MFA for administrators
+    likelihood: 3
+    impact: 5
+    owner: iam-lead
+    treatment: mitigate
+    last_review: 2026-11-10
+    review_days: 90
+    controls:
+      - {name: MFA for all admins, likelihood_reduction: 2}
+      - {name: Privileged access vault, impact_reduction: 1}
+  - id: R-007
+    asset: Old file server
+    threat: Fire or hardware failure
+    vulnerability: Single site, no replica
+    likelihood: 2
+    impact: 3
+    owner: it-ops
+    treatment: mitigate
+    last_review: 2026-10-01
+    review_days: 180
+    controls:
+      - {name: Nightly backup copy to second site, impact_reduction: 1}
+  - id: R-008
+    asset: Marketing website
+    threat: Defacement
+    vulnerability: Outdated CMS plugin
+    likelihood: 2
+    impact: 2
+    owner: web-lead
+    treatment: mitigate
+    last_review: 2026-10-30
+    review_days: 90
+    controls:
+      - {name: Monthly patching, likelihood_reduction: 0}

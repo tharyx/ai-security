@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>A 11-hour study week</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="400" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">A 11-hour study week</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Job-relevant first. Every block ends with notes or a lab result you can show.</text>
+  <rect x="40" y="130" width="399.27272727272725" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="239.63636363636363" y="154" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Job-relevant</text>
+  <text x="239.63636363636363" y="176" text-anchor="middle" font-size="13" fill="#475569">4 h</text>
+  <text x="239.63636363636363" y="194" text-anchor="middle" font-size="13" fill="#475569">SOC, SIEM, cloud: lab + real alerts</text>
+  <rect x="447.27272727272725" y="130" width="297.45454545454544" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="596.0" y="154" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Cert study</text>
+  <text x="596.0" y="176" text-anchor="middle" font-size="13" fill="#475569">3 h</text>
+  <rect x="752.7272727272727" y="130" width="297.45454545454544" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="901.4545454545455" y="154" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Practice platform</text>
+  <text x="901.4545454545455" y="176" text-anchor="middle" font-size="13" fill="#475569">3 h</text>
+  <rect x="1058.1818181818182" y="130" width="93.81818181818181" height="110" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1105.0909090909092" y="154" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Review</text>
+  <text x="1105.0909090909092" y="176" text-anchor="middle" font-size="13" fill="#475569">1 h</text>
+  <text x="40" y="290" text-anchor="start" font-size="14" fill="#475569">Suggested week:  Mon/Tue evenings 1.5 h each (job-relevant)  |  Wed 1.5 h (cert)  |  Thu 1.5 h (practice)</text>
+  <text x="40" y="314" text-anchor="start" font-size="14" fill="#475569">Sat 3 h (cert 1.5 h + practice 1.5 h)  |  Sun 2.5 h (job-relevant lab 1 h + review 1 h + plan next week 0.5 h)</text>
+  <text x="40" y="360" text-anchor="start" font-size="14" fill="#475569">Total 11 h. Skipped week? Do not double up. Drop to 6 h and keep the streak.</text>
+</svg>

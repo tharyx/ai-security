@@ -1,0 +1,22 @@
+title: PowerShell started with an encoded command
+id: cyb06-0005
+status: stable
+description: powershell.exe launched with -enc or -EncodedCommand. Attackers use it to hide the command.
+author: ai-security lab
+tags: [attack.execution, attack.t1059.001, attack.defense_evasion, attack.t1027]
+level: high
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    action: process_create
+    process|endswith: powershell.exe
+    command_line|contains:
+      - ' -enc '
+      - ' -encodedcommand '
+  filter:
+    parent_process|endswith: ccmexec.exe
+  condition: selection and not filter
+falsepositives:
+  - Software deployment tools such as SCCM (filtered by parent process)

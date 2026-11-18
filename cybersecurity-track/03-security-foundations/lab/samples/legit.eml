@@ -1,0 +1,19 @@
+Return-Path: <hr@northwind.example>
+Received: from mail.northwind.example (mail.northwind.example [192.0.2.10])
+	by mx.corp.example with ESMTPS; Mon, 16 Nov 2026 09:01:12 +0000
+Authentication-Results: mx.corp.example;
+ spf=pass smtp.mailfrom=northwind.example;
+ dkim=pass header.d=northwind.example;
+ dmarc=pass header.from=northwind.example
+From: "HR Team" <hr@northwind.example>
+To: asha@corp.example
+Subject: Team lunch on Friday
+Date: Mon, 16 Nov 2026 09:00:00 +0000
+Message-ID: <1001@northwind.example>
+Content-Type: text/plain; charset=utf-8
+
+Hi Asha,
+The team lunch is on Friday at 12:30. Details are on the intranet:
+https://intranet.northwind.example/events
+Thanks,
+HR

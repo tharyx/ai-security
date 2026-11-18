@@ -1,0 +1,42 @@
+# SPL solutions. Each query starts with: index=main sourcetype=lab_events
+# Run them one at a time in the Search app (time range: All time).
+
+# Q1
+index=main sourcetype=lab_events log_source=windows action=logon_failure | stats count
+
+# Q2
+index=main sourcetype=lab_events log_source=windows action=logon_failure | stats count by src_ip | sort - count | head 1
+
+# Q3
+index=main sourcetype=lab_events log_source=entra action=logon_failure src_ip=198.51.100.66 | stats dc(user)
+
+# Q4  (streamstats compares each event with the one before it for the same user)
+index=main sourcetype=lab_events log_source=entra action=logon_success
+| sort 0 user _time
+| streamstats current=f window=1 last(country) as prev_country last(_time) as prev_time by user
+| where country!=prev_country AND (_time-prev_time)<=3600
+| table user prev_country country
+
+# Q5
+index=main sourcetype=lab_events action=group_add group_name="Domain Admins" | table member
+
+# Q6
+index=main sourcetype=lab_events action=process_create process="*powershell.exe" (command_line="* -enc *" OR command_line="* -encodedcommand *") | stats count
+
+# Q7
+index=main sourcetype=lab_events action=process_create process="*powershell.exe" (command_line="* -enc *" OR command_line="* -encodedcommand *") parent_process="*WINWORD.EXE" | table hostname
+
+# Q8
+index=main sourcetype=lab_events action=network_allow NOT dst_port IN (53,80,123,443,8080,8443) | stats count by dst_port
+
+# Q9
+index=main sourcetype=lab_events action=network_allow dst_ip=203.0.113.80 | stats sum(bytes_out) as bytes | eval MB=bytes/1000000
+
+# Q10
+index=main sourcetype=lab_events log_source=linux action=logon_failure | stats dc(src_ip)
+
+# Q11  (your user time zone must be UTC)
+index=main sourcetype=lab_events action=logon_failure | eval hour=strftime(_time,"%H") | stats count by hour | sort - count | head 1
+
+# Q12
+index=main sourcetype=lab_events log_source=entra action=logon_success src_ip=198.51.100.66 | table user

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>DNS lookup and DHCP in one picture</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">DNS lookup and DHCP in one picture</text>
+  <text x="40" y="76" font-size="16" fill="#475569">DHCP gives the laptop an address and a DNS server. DNS turns names into addresses.</text>
+  <rect x="40" y="120" width="190" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="135.0" y="144" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Client</text>
+  <text x="135.0" y="166" text-anchor="middle" font-size="13" fill="#475569">stub resolver</text>
+  <text x="135.0" y="184" text-anchor="middle" font-size="13" fill="#475569">asks one question</text>
+  <rect x="300" y="120" width="210" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="405.0" y="144" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Recursive resolver</text>
+  <text x="405.0" y="166" text-anchor="middle" font-size="13" fill="#475569">does the work</text>
+  <text x="405.0" y="184" text-anchor="middle" font-size="13" fill="#475569">caches answers</text>
+  <rect x="600" y="120" width="150" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="675.0" y="144" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Root</text>
+  <text x="675.0" y="166" text-anchor="middle" font-size="13" fill="#475569">points down</text>
+  <rect x="800" y="120" width="150" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="875.0" y="144" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">TLD server</text>
+  <text x="875.0" y="166" text-anchor="middle" font-size="13" fill="#475569">points down</text>
+  <rect x="1000" y="120" width="160" height="90" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1080.0" y="144" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Authoritative</text>
+  <text x="1080.0" y="166" text-anchor="middle" font-size="13" fill="#475569">owns the answer</text>
+  <line x1="230" y1="165" x2="296" y2="165" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="263.0" y="157.0" text-anchor="middle" font-size="13" fill="#475569">1</text>
+  <line x1="510" y1="140" x2="598" y2="140" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="554.0" y="132.0" text-anchor="middle" font-size="13" fill="#475569">2</text>
+  <line x1="750" y1="140" x2="798" y2="140" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="774.0" y="132.0" text-anchor="middle" font-size="13" fill="#475569">3</text>
+  <line x1="950" y1="140" x2="998" y2="140" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="974.0" y="132.0" text-anchor="middle" font-size="13" fill="#475569">4</text>
+  <line x1="1000" y1="190" x2="514" y2="190" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="760" y="212" text-anchor="middle" font-size="13" fill="#475569">5 answer: 192.0.2.80</text>
+  <text x="40" y="270" text-anchor="start" font-size="14" fill="#475569">SOC angle: DNS logs show every name a host tries. Tunneling = long random subdomains. DGA malware = many NXDOMAIN answers.</text>
+  <text x="40" y="320" text-anchor="start" font-size="16" fill="#0f172a" font-weight="bold">DHCP: DORA</text>
+  <rect x="40" y="336" width="250" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="165.0" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Discover</text>
+  <text x="165.0" y="382" text-anchor="middle" font-size="13" fill="#475569">client broadcasts</text>
+  <text x="165.0" y="400" text-anchor="middle" font-size="13" fill="#475569">who has an IP?</text>
+  <rect x="340" y="336" width="250" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="465.0" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Offer</text>
+  <text x="465.0" y="382" text-anchor="middle" font-size="13" fill="#475569">server proposes</text>
+  <text x="465.0" y="400" text-anchor="middle" font-size="13" fill="#475569">IP, mask, gateway, DNS</text>
+  <line x1="294" y1="381.0" x2="336" y2="381.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="640" y="336" width="250" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="765.0" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Request</text>
+  <text x="765.0" y="382" text-anchor="middle" font-size="13" fill="#475569">client accepts</text>
+  <text x="765.0" y="400" text-anchor="middle" font-size="13" fill="#475569">the offer</text>
+  <line x1="594" y1="381.0" x2="636" y2="381.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="940" y="336" width="250" height="90" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1065.0" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Acknowledge</text>
+  <text x="1065.0" y="382" text-anchor="middle" font-size="13" fill="#475569">server confirms</text>
+  <text x="1065.0" y="400" text-anchor="middle" font-size="13" fill="#475569">lease time starts</text>
+  <line x1="894" y1="381.0" x2="936" y2="381.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="40" y="470" text-anchor="start" font-size="14" fill="#475569">Rogue DHCP server = attacker hands out their own gateway or DNS (man in the middle). DHCP snooping on switches stops it.</text>
+</svg>

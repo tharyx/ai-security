@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Cloud network: VPC / VNet with security groups</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Cloud network: VPC / VNet with security groups</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Same ideas as on-prem (subnets, firewalls, routes), but built from API calls and easy to misconfigure.</text>
+  <rect x="40" y="150" width="140" height="90" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="110.0" y="200.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Internet</text>
+  <rect x="230" y="150" width="160" height="90" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="310.0" y="174" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Internet gateway</text>
+  <text x="310.0" y="196" text-anchor="middle" font-size="13" fill="#475569">public entry</text>
+  <rect x="440" y="110" width="720" height="380" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="460" y="138" text-anchor="start" font-size="15" fill="#0f172a" font-weight="bold">VPC / VNet 10.0.0.0/16</text>
+  <rect x="470" y="160" width="300" height="130" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="620.0" y="184" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Public subnet 10.0.1.0/24</text>
+  <text x="620.0" y="206" text-anchor="middle" font-size="13" fill="#475569">load balancer, bastion</text>
+  <text x="620.0" y="224" text-anchor="middle" font-size="13" fill="#475569">SG: allow 443 from internet</text>
+  <rect x="830" y="160" width="300" height="130" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="980.0" y="184" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Private subnet 10.0.2.0/24</text>
+  <text x="980.0" y="206" text-anchor="middle" font-size="13" fill="#475569">app servers</text>
+  <text x="980.0" y="224" text-anchor="middle" font-size="13" fill="#475569">SG: allow only from the LB</text>
+  <rect x="830" y="330" width="300" height="130" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="980.0" y="354" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Data subnet 10.0.3.0/24</text>
+  <text x="980.0" y="376" text-anchor="middle" font-size="13" fill="#475569">database</text>
+  <text x="980.0" y="394" text-anchor="middle" font-size="13" fill="#475569">SG: allow 1521 from app SG only</text>
+  <rect x="470" y="330" width="300" height="130" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="620.0" y="354" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">NAT gateway</text>
+  <text x="620.0" y="376" text-anchor="middle" font-size="13" fill="#475569">private hosts go out</text>
+  <text x="620.0" y="394" text-anchor="middle" font-size="13" fill="#475569">nobody comes in</text>
+  <line x1="182" y1="195" x2="228" y2="195" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="392" y1="195" x2="468" y2="215" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="772" y1="225" x2="828" y2="225" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="980" y1="292" x2="980" y2="328" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="830" y1="395" x2="772" y2="395" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="40" y="340" text-anchor="start" font-size="14" fill="#0f172a" font-weight="bold">Flow logs go to</text>
+  <text x="40" y="362" text-anchor="start" font-size="14" fill="#0f172a" font-weight="bold">your SIEM. Check:</text>
+  <text x="40" y="390" text-anchor="start" font-size="13" fill="#475569">No 0.0.0.0/0 on 22,</text>
+  <text x="40" y="410" text-anchor="start" font-size="13" fill="#475569">3389 or DB ports.</text>
+  <text x="40" y="520" text-anchor="start" font-size="14" fill="#475569">AWS: security groups (stateful) + NACLs. Azure: NSGs. Both default to deny inbound. Mistakes create the exposure.</text>
+</svg>

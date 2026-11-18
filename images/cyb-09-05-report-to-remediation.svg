@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>From pentest report to fixes</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+<rect width="1200" height="430" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">From pentest report to fixes</text>
+<text x="40" y="80" font-size="16" fill="#475569">A report is only useful if findings become tracked, owned, verified fixes.</text>
+<rect x="40" y="110" width="330" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="205.0" y="147.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Pentest report</text>
+<text x="205.0" y="169.0" text-anchor="middle" font-size="13" fill="#475569">executive summary</text>
+<text x="205.0" y="187.0" text-anchor="middle" font-size="13" fill="#475569">findings: severity, CVSS, evidence</text>
+<text x="205.0" y="205.0" text-anchor="middle" font-size="13" fill="#475569">remediation advice</text>
+<line x1="372" y1="170" x2="438" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="440" y="110" width="330" height="120" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="605.0" y="147.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Defender actions</text>
+<text x="605.0" y="169.0" text-anchor="middle" font-size="13" fill="#475569">ticket per finding, owner, due date</text>
+<text x="605.0" y="187.0" text-anchor="middle" font-size="13" fill="#475569">add detections for what was missed</text>
+<text x="605.0" y="205.0" text-anchor="middle" font-size="13" fill="#475569">feed risk register</text>
+<line x1="772" y1="170" x2="838" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="840" y="110" width="320" height="120" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1000.0" y="147.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Retest + metrics</text>
+<text x="1000.0" y="169.0" text-anchor="middle" font-size="13" fill="#475569">verify the fix</text>
+<text x="1000.0" y="187.0" text-anchor="middle" font-size="13" fill="#475569">time to remediate</text>
+<text x="1000.0" y="205.0" text-anchor="middle" font-size="13" fill="#475569">repeat findings = process problem</text>
+<rect x="40" y="270" width="1120" height="110" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="600.0" y="311.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Questions to ask after every test</text>
+<text x="600.0" y="333.0" text-anchor="middle" font-size="13" fill="#475569">Did we detect the tester? If not, which log or rule was missing?   How long until we noticed?</text>
+<text x="600.0" y="351.0" text-anchor="middle" font-size="13" fill="#475569">Which control stopped them?   Which finding is the root cause of the others?</text>
+</svg>

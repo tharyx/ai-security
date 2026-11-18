@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>NIST CSF 2.0: six functions</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#475569"/></marker></defs>
+<rect width="1200" height="460" fill="#ffffff"/>
+<text x="60" y="52" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">NIST CSF 2.0: six functions</text>
+<text x="60" y="82" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Govern sits in the middle. The other five run around it as a cycle</text>
+<rect x="450" y="120" width="300" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="600.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">GOVERN</text>
+<text x="600.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">strategy, roles, policy, supply chain</text>
+<rect x="60.0" y="260" width="190" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="155.0" y="288" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Identify</text>
+<text x="155.0" y="312" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">assets, risks</text>
+<rect x="282.5" y="260" width="190" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="377.5" y="288" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Protect</text>
+<text x="377.5" y="312" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">safeguards</text>
+<rect x="505.0" y="260" width="190" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="600.0" y="288" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Detect</text>
+<text x="600.0" y="312" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">find events</text>
+<rect x="727.5" y="260" width="190" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="822.5" y="288" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Respond</text>
+<text x="822.5" y="312" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">act on incidents</text>
+<rect x="950.0" y="260" width="190" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1045.0" y="288" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Recover</text>
+<text x="1045.0" y="312" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">restore services</text>
+<line x1="254.0" y1="305.0" x2="278.5" y2="305.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="476.5" y1="305.0" x2="501.0" y2="305.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="699.0" y1="305.0" x2="723.5" y2="305.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="921.5" y1="305.0" x2="946.0" y2="305.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="60" y="390" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Profiles describe Current and Target outcomes. Tiers (1 Partial to 4 Adaptive) describe how mature your risk practice is.</text>
+<text x="60" y="415" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">CSF 2.0 (Feb 2024) added Govern and widened scope to every organization, not only critical infrastructure.</text>
+</svg>

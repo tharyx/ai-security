@@ -1,0 +1,69 @@
+{"TimeCreated": "2026-11-10T01:00:00Z", "EventID": 4688, "Computer": "SQL-01", "SubjectUserName": "svc-backup", "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "ParentProcessName": "C:\\Windows\\System32\\svchost.exe", "CommandLine": "powershell.exe -ExecutionPolicy Bypass -File D:\\scripts\\backup.ps1"}
+{"TimeCreated": "2026-11-10T02:10:00Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:10:00Z", "EventID": 4688, "Computer": "FIN-WS-07", "SubjectUserName": "svc-sccm", "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "ParentProcessName": "C:\\Windows\\CCM\\CcmExec.exe", "CommandLine": "powershell.exe -NoProfile -enc VwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAnAGgAZQBsAGwAbwAgAGwAYQBiACcA"}
+{"TimeCreated": "2026-11-10T02:10:20Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:10:40Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:11:00Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:11:20Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:11:40Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:12:00Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:12:20Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:12:40Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:13:00Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:13:20Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T02:13:40Z", "EventID": 4625, "Computer": "RDP-SRV-01", "TargetUserName": "admin01", "IpAddress": "203.0.113.50", "LogonType": 10}
+{"TimeCreated": "2026-11-10T03:00:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T03:30:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T04:00:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T04:30:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T05:00:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T05:30:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T06:00:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T06:30:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T07:00:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T07:30:00Z", "EventID": 4625, "Computer": "SQL-01", "TargetUserName": "svc-backup", "IpAddress": "192.0.2.60", "LogonType": 3}
+{"TimeCreated": "2026-11-10T08:06:44Z", "EventID": 4624, "Computer": "WS-HEIDI", "TargetUserName": "heidi", "IpAddress": "192.0.2.18", "LogonType": 2}
+{"TimeCreated": "2026-11-10T08:11:50Z", "EventID": 4624, "Computer": "WS-GRACE", "TargetUserName": "grace", "IpAddress": "192.0.2.17", "LogonType": 2}
+{"TimeCreated": "2026-11-10T08:13:06Z", "EventID": 4624, "Computer": "WS-CAROL", "TargetUserName": "carol", "IpAddress": "192.0.2.13", "LogonType": 2}
+{"TimeCreated": "2026-11-10T08:17:36Z", "EventID": 4624, "Computer": "WS-DAVE", "TargetUserName": "dave", "IpAddress": "192.0.2.14", "LogonType": 2}
+{"TimeCreated": "2026-11-10T08:27:26Z", "EventID": 4624, "Computer": "WS-BOB", "TargetUserName": "bob", "IpAddress": "192.0.2.12", "LogonType": 2}
+{"TimeCreated": "2026-11-10T08:42:38Z", "EventID": 4624, "Computer": "WS-ALICE", "TargetUserName": "alice", "IpAddress": "192.0.2.11", "LogonType": 2}
+{"TimeCreated": "2026-11-10T08:46:23Z", "EventID": 4624, "Computer": "WS-ERIN", "TargetUserName": "erin", "IpAddress": "192.0.2.15", "LogonType": 2}
+{"TimeCreated": "2026-11-10T08:47:18Z", "EventID": 4624, "Computer": "WS-FRANK", "TargetUserName": "frank", "IpAddress": "192.0.2.16", "LogonType": 2}
+{"TimeCreated": "2026-11-10T09:04:00Z", "EventID": 4688, "Computer": "WS-ALICE", "SubjectUserName": "alice", "NewProcessName": "C:\\Program Files\\App\\chrome.exe", "ParentProcessName": "C:\\Windows\\explorer.exe", "CommandLine": "chrome.exe"}
+{"TimeCreated": "2026-11-10T09:05:00Z", "EventID": 4625, "Computer": "WS-BOB", "TargetUserName": "bob", "IpAddress": "192.0.2.30", "LogonType": 2}
+{"TimeCreated": "2026-11-10T09:05:25Z", "EventID": 4625, "Computer": "WS-BOB", "TargetUserName": "bob", "IpAddress": "192.0.2.30", "LogonType": 2}
+{"TimeCreated": "2026-11-10T09:05:50Z", "EventID": 4625, "Computer": "WS-BOB", "TargetUserName": "bob", "IpAddress": "192.0.2.30", "LogonType": 2}
+{"TimeCreated": "2026-11-10T09:18:00Z", "EventID": 4688, "Computer": "WS-FRANK", "SubjectUserName": "frank", "NewProcessName": "C:\\Program Files\\App\\outlook.exe", "ParentProcessName": "C:\\Windows\\explorer.exe", "CommandLine": "outlook.exe"}
+{"TimeCreated": "2026-11-10T10:10:09Z", "EventID": 4624, "Computer": "WS-BOB", "TargetUserName": "bob", "IpAddress": "192.0.2.12", "LogonType": 3}
+{"TimeCreated": "2026-11-10T10:20:00Z", "EventID": 4728, "Computer": "DC-01", "SubjectUserName": "helpdesk1", "Group": "Marketing-Share", "MemberName": "carol"}
+{"TimeCreated": "2026-11-10T10:33:04Z", "EventID": 4624, "Computer": "WS-ERIN", "TargetUserName": "erin", "IpAddress": "192.0.2.15", "LogonType": 3}
+{"TimeCreated": "2026-11-10T10:44:09Z", "EventID": 4624, "Computer": "WS-DAVE", "TargetUserName": "dave", "IpAddress": "192.0.2.14", "LogonType": 3}
+{"TimeCreated": "2026-11-10T10:47:45Z", "EventID": 4624, "Computer": "WS-FRANK", "TargetUserName": "frank", "IpAddress": "192.0.2.16", "LogonType": 3}
+{"TimeCreated": "2026-11-10T10:48:01Z", "EventID": 4624, "Computer": "WS-HEIDI", "TargetUserName": "heidi", "IpAddress": "192.0.2.18", "LogonType": 3}
+{"TimeCreated": "2026-11-10T10:53:46Z", "EventID": 4624, "Computer": "WS-CAROL", "TargetUserName": "carol", "IpAddress": "192.0.2.13", "LogonType": 3}
+{"TimeCreated": "2026-11-10T10:53:57Z", "EventID": 4624, "Computer": "WS-GRACE", "TargetUserName": "grace", "IpAddress": "192.0.2.17", "LogonType": 3}
+{"TimeCreated": "2026-11-10T10:54:52Z", "EventID": 4624, "Computer": "WS-ALICE", "TargetUserName": "alice", "IpAddress": "192.0.2.11", "LogonType": 3}
+{"TimeCreated": "2026-11-10T11:00:00Z", "EventID": 4732, "Computer": "DC-01", "SubjectUserName": "svc-provisioning", "Group": "Administrators", "MemberName": "svc-deploy2"}
+{"TimeCreated": "2026-11-10T12:00:33Z", "EventID": 4624, "Computer": "WS-ERIN", "TargetUserName": "erin", "IpAddress": "192.0.2.15", "LogonType": 2}
+{"TimeCreated": "2026-11-10T12:09:09Z", "EventID": 4624, "Computer": "WS-FRANK", "TargetUserName": "frank", "IpAddress": "192.0.2.16", "LogonType": 2}
+{"TimeCreated": "2026-11-10T12:15:34Z", "EventID": 4624, "Computer": "WS-ALICE", "TargetUserName": "alice", "IpAddress": "192.0.2.11", "LogonType": 2}
+{"TimeCreated": "2026-11-10T12:25:30Z", "EventID": 4624, "Computer": "WS-DAVE", "TargetUserName": "dave", "IpAddress": "192.0.2.14", "LogonType": 2}
+{"TimeCreated": "2026-11-10T12:27:55Z", "EventID": 4624, "Computer": "WS-BOB", "TargetUserName": "bob", "IpAddress": "192.0.2.12", "LogonType": 2}
+{"TimeCreated": "2026-11-10T12:32:41Z", "EventID": 4624, "Computer": "WS-CAROL", "TargetUserName": "carol", "IpAddress": "192.0.2.13", "LogonType": 2}
+{"TimeCreated": "2026-11-10T12:46:01Z", "EventID": 4624, "Computer": "WS-GRACE", "TargetUserName": "grace", "IpAddress": "192.0.2.17", "LogonType": 2}
+{"TimeCreated": "2026-11-10T12:54:40Z", "EventID": 4624, "Computer": "WS-HEIDI", "TargetUserName": "heidi", "IpAddress": "192.0.2.18", "LogonType": 2}
+{"TimeCreated": "2026-11-10T13:03:00Z", "EventID": 4688, "Computer": "WS-BOB", "SubjectUserName": "bob", "NewProcessName": "C:\\Program Files\\App\\excel.exe", "ParentProcessName": "C:\\Windows\\explorer.exe", "CommandLine": "excel.exe"}
+{"TimeCreated": "2026-11-10T13:37:00Z", "EventID": 4688, "Computer": "WS-DAVE", "SubjectUserName": "dave", "NewProcessName": "C:\\Program Files\\App\\cmd.exe", "ParentProcessName": "C:\\Windows\\explorer.exe", "CommandLine": "cmd.exe"}
+{"TimeCreated": "2026-11-10T13:48:00Z", "EventID": 4688, "Computer": "WS-CAROL", "SubjectUserName": "carol", "NewProcessName": "C:\\Program Files\\App\\notepad.exe", "ParentProcessName": "C:\\Windows\\explorer.exe", "CommandLine": "notepad.exe"}
+{"TimeCreated": "2026-11-10T14:05:26Z", "EventID": 4624, "Computer": "WS-ALICE", "TargetUserName": "alice", "IpAddress": "192.0.2.11", "LogonType": 3}
+{"TimeCreated": "2026-11-10T14:12:27Z", "EventID": 4624, "Computer": "WS-GRACE", "TargetUserName": "grace", "IpAddress": "192.0.2.17", "LogonType": 3}
+{"TimeCreated": "2026-11-10T14:32:22Z", "EventID": 4624, "Computer": "WS-CAROL", "TargetUserName": "carol", "IpAddress": "192.0.2.13", "LogonType": 3}
+{"TimeCreated": "2026-11-10T14:32:58Z", "EventID": 4624, "Computer": "WS-FRANK", "TargetUserName": "frank", "IpAddress": "192.0.2.16", "LogonType": 3}
+{"TimeCreated": "2026-11-10T14:33:35Z", "EventID": 4624, "Computer": "WS-ERIN", "TargetUserName": "erin", "IpAddress": "192.0.2.15", "LogonType": 3}
+{"TimeCreated": "2026-11-10T14:38:49Z", "EventID": 4624, "Computer": "WS-DAVE", "TargetUserName": "dave", "IpAddress": "192.0.2.14", "LogonType": 3}
+{"TimeCreated": "2026-11-10T14:41:00Z", "EventID": 4688, "Computer": "HR-WS-12", "SubjectUserName": "erin", "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "ParentProcessName": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE", "CommandLine": "powershell.exe -NoProfile -w hidden -EncodedCommand VwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAnAGgAZQBsAGwAbwAgAGwAYQBiACcA"}
+{"TimeCreated": "2026-11-10T14:46:56Z", "EventID": 4624, "Computer": "WS-BOB", "TargetUserName": "bob", "IpAddress": "192.0.2.12", "LogonType": 3}
+{"TimeCreated": "2026-11-10T14:59:44Z", "EventID": 4624, "Computer": "WS-HEIDI", "TargetUserName": "heidi", "IpAddress": "192.0.2.18", "LogonType": 3}
+{"TimeCreated": "2026-11-10T15:12:00Z", "EventID": 4688, "Computer": "WS-GRACE", "SubjectUserName": "grace", "NewProcessName": "C:\\Program Files\\App\\code.exe", "ParentProcessName": "C:\\Windows\\explorer.exe", "CommandLine": "code.exe"}
+{"TimeCreated": "2026-11-10T23:50:00Z", "EventID": 4728, "Computer": "DC-01", "SubjectUserName": "helpdesk1", "Group": "Domain Admins", "MemberName": "tmp-contractor"}

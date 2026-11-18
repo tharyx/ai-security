@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Certification roadmap for this learner</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="470" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Certification roadmap for this learner</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Foundations first, then the job-role certificates. Costs and dates: verify on the official pages.</text>
+  <rect x="40" y="110" width="250" height="110" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="165.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">1. A+ topics</text>
+  <text x="165.0" y="156" text-anchor="middle" font-size="13" fill="#475569">Core 1 / Core 2</text>
+  <text x="165.0" y="174" text-anchor="middle" font-size="13" fill="#475569">exam optional for you</text>
+  <rect x="340" y="110" width="250" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="465.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">2. Network+</text>
+  <text x="465.0" y="156" text-anchor="middle" font-size="13" fill="#475569">N10-009</text>
+  <text x="465.0" y="174" text-anchor="middle" font-size="13" fill="#475569">weeks 2-4</text>
+  <line x1="294" y1="165.0" x2="336" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="640" y="110" width="250" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="765.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">3. ISC2 CC</text>
+  <text x="765.0" y="156" text-anchor="middle" font-size="13" fill="#475569">entry security exam</text>
+  <text x="765.0" y="174" text-anchor="middle" font-size="13" fill="#475569">paid since May 2026</text>
+  <line x1="594" y1="165.0" x2="636" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="940" y="110" width="250" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1065.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">4. Security+</text>
+  <text x="1065.0" y="156" text-anchor="middle" font-size="13" fill="#475569">SY0-701 or SY0-801</text>
+  <text x="1065.0" y="174" text-anchor="middle" font-size="13" fill="#475569">the HR keyword</text>
+  <line x1="894" y1="165.0" x2="936" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="40" y="262" text-anchor="start" font-size="16" fill="#0f172a" font-weight="bold">Job-role certificates (pick by what your SOC and cloud team really use)</text>
+  <rect x="40" y="280" width="250" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="165.0" y="304" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">SC-200</text>
+  <text x="165.0" y="326" text-anchor="middle" font-size="13" fill="#475569">Defender XDR + Sentinel</text>
+  <text x="165.0" y="344" text-anchor="middle" font-size="13" fill="#475569">KQL</text>
+  <rect x="340" y="280" width="250" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="465.0" y="304" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Splunk Core</text>
+  <text x="465.0" y="326" text-anchor="middle" font-size="13" fill="#475569">Certified User / Power User</text>
+  <text x="465.0" y="344" text-anchor="middle" font-size="13" fill="#475569">SPL searches</text>
+  <rect x="640" y="280" width="250" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="765.0" y="304" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">CySA+</text>
+  <text x="765.0" y="326" text-anchor="middle" font-size="13" fill="#475569">blue-team analyst</text>
+  <text x="765.0" y="344" text-anchor="middle" font-size="13" fill="#475569">verify exam code</text>
+  <rect x="940" y="280" width="250" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1065.0" y="304" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">AZ-500 / AWS SCS</text>
+  <text x="1065.0" y="326" text-anchor="middle" font-size="13" fill="#475569">cloud security</text>
+  <text x="1065.0" y="344" text-anchor="middle" font-size="13" fill="#475569">match your cloud</text>
+  <line x1="1035" y1="220" x2="1035" y2="276" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="1090" y="254" text-anchor="middle" font-size="13" fill="#475569">then choose</text>
+  <text x="40" y="440" text-anchor="start" font-size="14" fill="#475569">Rule of thumb: study every topic, book only the exams that help your job or your CV.</text>
+</svg>

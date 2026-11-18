@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Shift handover and escalation</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#475569"/></marker></defs>
+<rect width="1200" height="480" fill="#ffffff"/>
+<text x="60" y="52" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Shift handover and escalation</text>
+<text x="60" y="82" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Hand over facts and next steps, not a story. Escalate early with a clear ask</text>
+<rect x="60.0" y="120" width="240" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="180.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Open items</text>
+<text x="180.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">ticket, severity, owner</text>
+<rect x="340.0" y="120" width="240" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="460.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">What I did</text>
+<text x="460.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">and what I saw</text>
+<rect x="620.0" y="120" width="240" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="740.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">What is next</text>
+<text x="740.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">next action + deadline</text>
+<rect x="900.0" y="120" width="240" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1020.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Watch for</text>
+<text x="1020.0" y="172" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">risks, noisy alerts</text>
+<line x1="304.0" y1="165.0" x2="336.0" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="584.0" y1="165.0" x2="616.0" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="864.0" y1="165.0" x2="896.0" y2="165.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="60.0" y="270" width="240" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="180.0" y="298" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">L1 analyst</text>
+<text x="180.0" y="322" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">triage, 15 min</text>
+<rect x="340.0" y="270" width="240" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="460.0" y="298" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">L2 / senior</text>
+<text x="460.0" y="322" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">deep analysis</text>
+<rect x="620.0" y="270" width="240" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="740.0" y="298" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Incident manager</text>
+<text x="740.0" y="322" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">severity 1, comms</text>
+<rect x="900.0" y="270" width="240" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1020.0" y="298" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Leadership / legal</text>
+<text x="1020.0" y="322" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">business decisions</text>
+<line x1="304.0" y1="315.0" x2="336.0" y2="315.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="584.0" y1="315.0" x2="616.0" y2="315.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="864.0" y1="315.0" x2="896.0" y2="315.0" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="60" y="400" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Escalate when: the severity matrix says so, the impact is growing, you are blocked, or you are unsure for more than 15-30 minutes.</text>
+<text x="60" y="425" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Say: what I know, what I do not know, what I need from you, and by when.</text>
+</svg>

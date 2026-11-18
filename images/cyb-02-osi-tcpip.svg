@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>OSI model and TCP/IP model</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="700" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">OSI model and TCP/IP model</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Use OSI to talk about where a problem or attack lives. TCP/IP is what the internet runs.</text>
+  <text x="40" y="112" text-anchor="start" font-size="14" fill="#0f172a" font-weight="bold">Layer</text>
+  <text x="300" y="112" text-anchor="start" font-size="14" fill="#0f172a" font-weight="bold">Examples</text>
+  <text x="620" y="112" text-anchor="start" font-size="14" fill="#0f172a" font-weight="bold">Typical attack</text>
+  <rect x="40" y="122" width="230" height="54" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="155.0" y="154.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">7 Application</text>
+  <text x="300" y="155" text-anchor="start" font-size="15" fill="#0f172a">HTTP, DNS, SMTP, SSH</text>
+  <text x="620" y="155" text-anchor="start" font-size="15" fill="#475569">phishing, SQL injection</text>
+  <rect x="40" y="188" width="230" height="54" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="155.0" y="220.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">6 Presentation</text>
+  <text x="300" y="221" text-anchor="start" font-size="15" fill="#0f172a">TLS, encoding, compression</text>
+  <text x="620" y="221" text-anchor="start" font-size="15" fill="#475569">weak TLS, downgrade</text>
+  <rect x="40" y="254" width="230" height="54" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="155.0" y="286.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">5 Session</text>
+  <text x="300" y="287" text-anchor="start" font-size="15" fill="#0f172a">session setup and teardown</text>
+  <text x="620" y="287" text-anchor="start" font-size="15" fill="#475569">session hijack</text>
+  <rect x="40" y="320" width="230" height="54" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="155.0" y="352.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">4 Transport</text>
+  <text x="300" y="353" text-anchor="start" font-size="15" fill="#0f172a">TCP, UDP (ports)</text>
+  <text x="620" y="353" text-anchor="start" font-size="15" fill="#475569">SYN flood, port scan</text>
+  <rect x="40" y="386" width="230" height="54" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="155.0" y="418.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">3 Network</text>
+  <text x="300" y="419" text-anchor="start" font-size="15" fill="#0f172a">IP, ICMP, routing</text>
+  <text x="620" y="419" text-anchor="start" font-size="15" fill="#475569">IP spoofing, ping sweep</text>
+  <rect x="40" y="452" width="230" height="54" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="155.0" y="484.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">2 Data link</text>
+  <text x="300" y="485" text-anchor="start" font-size="15" fill="#0f172a">Ethernet, MAC, VLAN, Wi-Fi</text>
+  <text x="620" y="485" text-anchor="start" font-size="15" fill="#475569">ARP spoofing, MAC flooding</text>
+  <rect x="40" y="518" width="230" height="54" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="155.0" y="550.6" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">1 Physical</text>
+  <text x="300" y="551" text-anchor="start" font-size="15" fill="#0f172a">cables, radio, ports</text>
+  <text x="620" y="551" text-anchor="start" font-size="15" fill="#475569">cable tap, jamming</text>
+  <rect x="930" y="122" width="230" height="186" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1045" y="220.0" text-anchor="middle" font-size="15" fill="#0f172a" font-weight="bold">TCP/IP: Application</text>
+  <rect x="930" y="320" width="230" height="54" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1045" y="352.0" text-anchor="middle" font-size="15" fill="#0f172a" font-weight="bold">Transport</text>
+  <rect x="930" y="386" width="230" height="54" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1045" y="418.0" text-anchor="middle" font-size="15" fill="#0f172a" font-weight="bold">Internet</text>
+  <rect x="930" y="452" width="230" height="120" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1045" y="517.0" text-anchor="middle" font-size="15" fill="#0f172a" font-weight="bold">Link</text>
+  <text x="40" y="640" text-anchor="start" font-size="14" fill="#475569">Memory trick (top to bottom): All People Seem To Need Data Processing.</text>
+  <text x="40" y="664" text-anchor="start" font-size="14" fill="#475569">Data units: segment (L4), packet (L3), frame (L2), bits (L1).</text>
+</svg>

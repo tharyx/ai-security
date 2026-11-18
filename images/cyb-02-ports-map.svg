@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Ports a SOC analyst must know</title>
+  <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Ports a SOC analyst must know</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Ports 0-1023 are well known. Attackers love the ones that give remote control.</text>
+  <rect x="40" y="110" width="360" height="120" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="220.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Remote admin</text>
+  <text x="220.0" y="156" text-anchor="middle" font-size="13" fill="#475569">22 SSH</text>
+  <text x="220.0" y="174" text-anchor="middle" font-size="13" fill="#475569">3389 RDP</text>
+  <text x="220.0" y="192" text-anchor="middle" font-size="13" fill="#475569">5985/5986 WinRM</text>
+  <rect x="420" y="110" width="360" height="120" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Web</text>
+  <text x="600.0" y="156" text-anchor="middle" font-size="13" fill="#475569">80 HTTP</text>
+  <text x="600.0" y="174" text-anchor="middle" font-size="13" fill="#475569">443 HTTPS</text>
+  <text x="600.0" y="192" text-anchor="middle" font-size="13" fill="#475569">8080, 8443 alt web</text>
+  <rect x="800" y="110" width="360" height="120" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="980.0" y="134" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Core network</text>
+  <text x="980.0" y="156" text-anchor="middle" font-size="13" fill="#475569">53 DNS</text>
+  <text x="980.0" y="174" text-anchor="middle" font-size="13" fill="#475569">67/68 DHCP</text>
+  <text x="980.0" y="192" text-anchor="middle" font-size="13" fill="#475569">123 NTP</text>
+  <rect x="40" y="260" width="360" height="120" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="220.0" y="284" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Mail</text>
+  <text x="220.0" y="306" text-anchor="middle" font-size="13" fill="#475569">25 SMTP</text>
+  <text x="220.0" y="324" text-anchor="middle" font-size="13" fill="#475569">587 submission</text>
+  <text x="220.0" y="342" text-anchor="middle" font-size="13" fill="#475569">993 IMAPS</text>
+  <rect x="420" y="260" width="360" height="120" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="600.0" y="284" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Windows / AD</text>
+  <text x="600.0" y="306" text-anchor="middle" font-size="13" fill="#475569">88 Kerberos</text>
+  <text x="600.0" y="324" text-anchor="middle" font-size="13" fill="#475569">389/636 LDAP(S)</text>
+  <text x="600.0" y="342" text-anchor="middle" font-size="13" fill="#475569">445 SMB, 135 RPC</text>
+  <rect x="800" y="260" width="360" height="120" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="980.0" y="284" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Databases</text>
+  <text x="980.0" y="306" text-anchor="middle" font-size="13" fill="#475569">1521 Oracle</text>
+  <text x="980.0" y="324" text-anchor="middle" font-size="13" fill="#475569">1433 SQL Server</text>
+  <text x="980.0" y="342" text-anchor="middle" font-size="13" fill="#475569">3306 MySQL, 5432 Postgres</text>
+  <text x="40" y="430" text-anchor="start" font-size="14" fill="#475569">Ranges:  0-1023 well-known  |  1024-49151 registered  |  49152-65535 dynamic (the client side of a connection)</text>
+  <text x="40" y="458" text-anchor="start" font-size="14" fill="#475569">Red boxes are the usual attacker targets: exposed 22, 3389, 445 on the internet is a finding, always.</text>
+  <text x="40" y="482" text-anchor="start" font-size="14" fill="#475569">Port numbers are defaults only. Malware can use 443 for anything, so check the traffic, not just the number.</text>
+</svg>

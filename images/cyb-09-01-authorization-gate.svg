@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Authorization first: the gate before any test</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+<rect width="1200" height="440" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Authorization first: the gate before any test</text>
+<text x="40" y="80" font-size="16" fill="#475569">No written permission, no test. Scope and rules of engagement define the lines.</text>
+<rect x="40" y="120" width="240" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="160.0" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Contract / permission</text>
+<text x="160.0" y="182.0" text-anchor="middle" font-size="13" fill="#475569">signed by an asset owner</text>
+<rect x="330" y="120" width="240" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="450.0" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Scope</text>
+<text x="450.0" y="182.0" text-anchor="middle" font-size="13" fill="#475569">IPs, apps, accounts, dates</text>
+<rect x="620" y="120" width="240" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="740.0" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Rules of engagement</text>
+<text x="740.0" y="182.0" text-anchor="middle" font-size="13" fill="#475569">no DoS, hours, contacts</text>
+<rect x="910" y="120" width="250" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1035.0" y="160.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Emergency contact</text>
+<text x="1035.0" y="182.0" text-anchor="middle" font-size="13" fill="#475569">stop word, escalation</text>
+<line x1="282" y1="165" x2="328" y2="165" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="572" y1="165" x2="618" y2="165" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="862" y1="165" x2="908" y2="165" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="270" width="540" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="310.0" y="302.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Allowed</text>
+<text x="310.0" y="324.0" text-anchor="middle" font-size="13" fill="#475569">your own lab, TryHackMe / HTB machines</text>
+<text x="310.0" y="342.0" text-anchor="middle" font-size="13" fill="#475569">a client with a signed agreement</text>
+<text x="310.0" y="360.0" text-anchor="middle" font-size="13" fill="#475569">your employer, with written approval</text>
+<rect x="620" y="270" width="540" height="110" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="890.0" y="302.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Not allowed</text>
+<text x="890.0" y="324.0" text-anchor="middle" font-size="13" fill="#475569">any system you do not own and have no permission for</text>
+<text x="890.0" y="342.0" text-anchor="middle" font-size="13" fill="#475569">'just checking' a friend's or a company's site</text>
+<text x="890.0" y="360.0" text-anchor="middle" font-size="13" fill="#475569">going outside the written scope</text>
+<text x="40" y="420" text-anchor="start" font-size="13" fill="#475569">Unauthorized access is a crime in most countries (for example CFAA in the US, Computer Misuse Act in the UK).</text>
+</svg>

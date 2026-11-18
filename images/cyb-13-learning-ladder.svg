@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Practice ladder: platforms mapped to the track</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Practice ladder: platforms mapped to the track</text>
+<text x="40" y="80" font-size="16" fill="#475569">Pick rooms and modules that match the module you study this week.</text>
+<rect x="40" y="130" width="340" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="159.0" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">TryHackMe</text>
+<text x="210.0" y="179.0" text-anchor="middle" font-size="13" fill="#475569">Cyber Security 101  &gt;  SOC Level 1  &gt;  SOC Level 2</text>
+<rect x="40" y="230" width="340" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="259.0" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">TryHackMe certs</text>
+<text x="210.0" y="279.0" text-anchor="middle" font-size="13" fill="#475569">SAL1 and SAL2 (check official page)</text>
+<rect x="430" y="130" width="340" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="600.0" y="159.0" text-anchor="middle" font-size="17" font-weight="700" fill="#92400e">HTB Academy</text>
+<text x="600.0" y="179.0" text-anchor="middle" font-size="13" fill="#475569">SOC Analyst job-role path  &gt;  HTB CDSA</text>
+<rect x="430" y="230" width="340" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="600.0" y="259.0" text-anchor="middle" font-size="17" font-weight="700" fill="#92400e">HTB Labs</text>
+<text x="600.0" y="279.0" text-anchor="middle" font-size="13" fill="#475569">Sherlocks: defensive investigations</text>
+<rect x="820" y="130" width="340" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="990.0" y="159.0" text-anchor="middle" font-size="17" font-weight="700" fill="#166534">Your lab repo</text>
+<text x="990.0" y="179.0" text-anchor="middle" font-size="13" fill="#475569">detections, tests, demos</text>
+<rect x="820" y="230" width="340" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="990.0" y="259.0" text-anchor="middle" font-size="17" font-weight="700" fill="#166534">Write-ups + blog</text>
+<text x="990.0" y="279.0" text-anchor="middle" font-size="13" fill="#475569">one post per finished lab</text>
+<line x1="380" y1="165" x2="430" y2="165" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="770" y1="165" x2="820" y2="165" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="380" y1="265" x2="430" y2="265" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="770" y1="265" x2="820" y2="265" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="40" y="380" width="1120" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="600.0" y="419.0" text-anchor="middle" font-size="17" font-weight="700" fill="#334155">Rule: study one track module, practice 2 rooms on that theme, write 1 note</text>
+<text x="600.0" y="439.0" text-anchor="middle" font-size="13" fill="#475569">e.g. cloud week: CloudTrail lab + a log-analysis room + a short post</text>
+</svg>

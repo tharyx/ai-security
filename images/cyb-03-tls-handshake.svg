@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>TLS in one picture</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#475569"/></marker></defs>
+<rect width="1200" height="520" fill="#ffffff"/>
+<text x="60" y="52" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">TLS in one picture</text>
+<text x="60" y="82" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">How a browser and a server agree on a secret, then talk safely</text>
+<rect x="60" y="120" width="220" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="170.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Browser (client)</text>
+<rect x="920" y="120" width="220" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1030.0" y="148" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Web server</text>
+<line x1="170" y1="190" x2="170" y2="470" stroke="#64748b" stroke-dasharray="6 5"/>
+<line x1="1030" y1="190" x2="1030" y2="470" stroke="#64748b" stroke-dasharray="6 5"/>
+<line x1="175" y1="230" x2="1025" y2="230" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="600.0" y="222.0" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">1. ClientHello: versions and cipher suites</text>
+<line x1="1025" y1="285" x2="175" y2="285" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="600.0" y="277.0" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">2. ServerHello + certificate (public key, signed by a CA)</text>
+<rect x="250" y="310" width="700" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="600.0" y="338" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">3. Client checks the certificate chain, name, dates, revocation</text>
+<line x1="175" y1="410" x2="1025" y2="410" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="600.0" y="402.0" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">4. Key exchange: both sides compute the same session key</text>
+<line x1="175" y1="455" x2="1025" y2="455" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="600.0" y="447.0" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">5. Encrypted data (symmetric, fast) with integrity check</text>
+<text x="60" y="500" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Asymmetric crypto and certificates prove identity and share the key. Symmetric crypto then protects the data.</text>
+</svg>
