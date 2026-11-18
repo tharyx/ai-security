@@ -193,3 +193,7 @@ A precise definition of low risk (reversible, scoped, rate-limited), policy-base
 - NIST AI 600-1, *Generative AI Profile*, https://doi.org/10.6028/NIST.AI.600-1
 - NIST SP 800-61 Rev. 3, incident response (2025), https://csrc.nist.gov/pubs/sp/800/61/r3/final
 - Program files: [36-week plan](../00-program/36-week-plan.md) · [assessment rubric](../00-program/assessment-rubric.md) · [portfolio and interview guide](../00-program/portfolio-and-interview-guide.md) · [templates](../00-program/templates/)
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).

@@ -94,6 +94,7 @@ Each topic follows the [authoring guide](00-program/AUTHORING-GUIDE.md):
 - Plan: [`00-program/36-week-plan.md`](00-program/36-week-plan.md) · Track: [`PROGRESS.md`](PROGRESS.md) · Log: [`journal/`](journal/)
 - Phase gates: [`00-program/assessment-rubric.md`](00-program/assessment-rubric.md) · Interviews: [`00-program/portfolio-and-interview-guide.md`](00-program/portfolio-and-interview-guide.md)
 - Templates: [`00-program/templates/`](00-program/templates/) (threat model, risk register, test case, incident playbook)
+- Courses: [`00-program/learning-resources.md`](00-program/learning-resources.md) (KodeKloud and Udemy courses mapped to each module)
 
 ## Core principles (repeated everywhere, on purpose)
 

@@ -273,3 +273,7 @@ I'd write the residual risks down and get the data owners to sign off.
 - MITRE ATLAS (techniques for LLM prompt injection and data poisoning; check the current IDs): https://atlas.mitre.org/
 - OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - GDPR Article 17, Right to erasure: https://gdpr-info.eu/art-17-gdpr/
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).

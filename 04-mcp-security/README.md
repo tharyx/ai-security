@@ -226,3 +226,7 @@ Evaluate: registry and definition pinning (does it detect rug pulls?); OAuth res
 - OWASP SSRF Prevention Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
 - NIST AI 600-1, *Generative AI Profile* (2024): https://doi.org/10.6028/NIST.AI.600-1
 - Simon Willison, "The lethal trifecta": https://simonwillison.net/tags/prompt-injection/
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).

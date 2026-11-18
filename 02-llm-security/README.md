@@ -257,3 +257,7 @@ Answer only from vetted, retrieved sources and show citations; refuse or hand of
 - Google, *Secure AI Framework (SAIF)*: https://safety.google/cybersecurity-advancements/saif/
 - Simon Willison's writing on prompt injection and the lethal trifecta: https://simonwillison.net/tags/prompt-injection/
 - Lesson-specific references are at the end of each lesson.
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).

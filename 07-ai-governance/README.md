@@ -192,3 +192,7 @@ Verify current editions before use. For each source you rely on, record the edit
 - Python: https://docs.python.org/3/
 - Pydantic: https://docs.pydantic.dev/
 - Repo templates: [`00-program/templates/`](../00-program/templates/) (risk register, threat model, incident playbook)
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).

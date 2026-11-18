@@ -283,3 +283,7 @@ The base practices (pinning, least privilege, signing, policy as code) are the s
 - Kubernetes Pod Security Standards: https://kubernetes.io/docs/concepts/security/pod-security-standards/
 - MITRE ATLAS (AML.T0010 ML Supply Chain Compromise): https://atlas.mitre.org/
 - Lesson-specific references are at the end of each lesson.
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).

@@ -264,3 +264,7 @@ Threat model (this module's week 17 exercise) with maximum blast radius per acti
 - MITRE ATLAS (adversarial threat landscape for AI systems): https://atlas.mitre.org/
 - Debenedetti et al., *Defeating Prompt Injections by Design* (CaMeL, 2025): https://arxiv.org/abs/2503.18813
 - Lesson references: [agent-identity](agent-identity/#9-references), [permissions](permissions/#9-references), [sandboxing](sandboxing/#9-references)
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).

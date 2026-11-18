@@ -187,3 +187,7 @@ Verify current editions before use. For each source you rely on, record the edit
 
 **Incident knowledge bases**
 - AI Incident Database: https://incidentdatabase.ai/ · OECD AI Incidents Monitor: https://oecd.ai/en/incidents
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).

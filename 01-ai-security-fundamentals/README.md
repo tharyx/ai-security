@@ -192,3 +192,7 @@ New tools or broader tool scopes; new data sources (including auto-ingested emai
 - Google, *Secure AI Framework (SAIF)*, https://safety.google/cybersecurity-advancements/saif/
 - OWASP AI Exchange, https://owaspai.org/
 - Program templates: [threat model](../00-program/templates/threat-model-template.md), [risk register](../00-program/templates/risk-register.csv), [security test case](../00-program/templates/security-test-case.md)
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).

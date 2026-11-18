@@ -159,3 +159,7 @@ Because the hard parts (identity, tenant isolation, egress, tool approval, loggi
 - Google Cloud shared responsibility and shared fate, https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate
 - MITRE ATLAS, https://atlas.mitre.org/
 - Program files: [assessment rubric](../00-program/assessment-rubric.md) · [portfolio and interview guide](../00-program/portfolio-and-interview-guide.md) · [templates](../00-program/templates/)
+
+---
+
+**Courses for this module (KodeKloud / Udemy):** see [00-program/learning-resources.md](../00-program/learning-resources.md).
