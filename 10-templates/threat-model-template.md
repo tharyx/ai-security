@@ -1,12 +1,10 @@
-# AI System Threat Model
+# AI System Threat Model Template
 
 ## System metadata
 - System name/ID:
-- Business owner:
-- Technical owner:
+- Business and technical owners:
 - Version/environment:
-- Intended use:
-- Out-of-scope use:
+- Intended and prohibited use:
 - Users/affected parties:
 - Data classification:
 - Model/provider/version:
@@ -22,34 +20,13 @@
 - Network paths:
 - Logging/telemetry:
 
-## Assets
-| Asset | Owner | Classification | Required protection |
-|---|---|---|---|
-
-## Threats
+## Threat register
 | ID | Actor | Entry point | Weakness | Impact | Likelihood | Severity | Control | Test | Owner | Status |
 |---|---|---|---|---|---|---|---|---|---|---|
 
 ## Security requirements
-- Authentication:
-- Authorization:
-- Tenant isolation:
-- Data minimization:
-- Encryption:
-- Secrets:
-- Model/data provenance:
-- Tool controls:
-- Human oversight:
-- Logging:
-- Retention/deletion:
-- Incident response:
+Authentication; authorization; tenant isolation; data minimization; encryption; secrets; model/data provenance; tool controls; human oversight; logging; retention/deletion; incident response.
 
 ## Residual risk and approvals
 | Risk | Rationale | Compensating control | Owner | Expiry | Approver |
 |---|---|---|---|---|---|
-
-## Review
-- Reviewer:
-- Date:
-- Decision:
-- Next review trigger:

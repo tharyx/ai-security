@@ -1,19 +1,16 @@
-# AI Security Test Case
+# AI Security Test Case Template
 
 - Test ID:
 - Domain: LLM / RAG / MCP / Agent / Cloud / Governance
-- Title:
-- Test owner:
-- Date:
-- Environment:
+- Title / owner / date:
+- Environment and authorization scope:
 - System/model/version:
-- Authorization/scope:
 
 ## Objective
 What security property is being tested?
 
 ## Preconditions
-Synthetic data, test identities, configuration and required setup.
+Synthetic data, test identities, configuration and setup.
 
 ## Steps
 1.
@@ -21,19 +18,16 @@ Synthetic data, test identities, configuration and required setup.
 3.
 
 ## Expected secure result
-Describe the required behavior, not just a preferred model response.
+Describe required behavior, not merely a preferred model response.
 
-## Actual result
-Record outcome and sanitized evidence.
+## Actual result and sanitized evidence
 
 ## Severity
 Critical / High / Medium / Low / Informational
 
-## Remediation
-Control owner, target date and implementation.
-
-## Regression
-- [ ] Test fails against vulnerable version.
+## Remediation and regression
+- [ ] Vulnerable version reproduces the issue.
+- [ ] Mitigation is implemented.
 - [ ] Test passes after mitigation.
-- [ ] Negative and boundary cases tested.
-- [ ] Evidence retained without secrets.
+- [ ] Negative and boundary cases are covered.
+- [ ] Evidence contains no secrets or personal data.
