@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-EVAL",
+  "evidence_type": "ci_test_report",
+  "collected": "2026-11-12",
+  "collected_by": "pipeline",
+  "summary": "injection regression suite 100% pass on release 2026.11.2"
+}

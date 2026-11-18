@@ -1,0 +1,42 @@
+# Admission control: the cluster-side twin of k8s_policy.py. For READING (and optional applying
+# to a test cluster). ValidatingAdmissionPolicy uses CEL and is built into Kubernetes
+# (admissionregistration.k8s.io/v1; check your cluster version supports it).
+#
+# k8s_policy.py runs in CI ("shift left") and gives fast feedback on a pull request.
+# This policy runs in the API server and blocks anything that skipped CI (kubectl apply by hand,
+# a compromised pipeline, a Helm chart from somewhere else). You want both.
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: model-serving-baseline
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups: ["apps"]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["deployments", "statefulsets"]
+  validations:
+    - expression: "object.spec.template.spec.containers.all(c, c.image.contains('@sha256:'))"
+      message: "Images in model-serving namespaces must be pinned by digest."
+    - expression: "!has(object.spec.template.spec.hostNetwork) || object.spec.template.spec.hostNetwork == false"
+      message: "hostNetwork is not allowed."
+    - expression: >-
+        object.spec.template.spec.containers.all(c,
+          has(c.resources) && has(c.resources.limits) &&
+          'memory' in c.resources.limits && 'cpu' in c.resources.limits)
+      message: "Every container needs CPU and memory limits."
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: model-serving-baseline
+spec:
+  policyName: model-serving-baseline
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        tenant: support-llm

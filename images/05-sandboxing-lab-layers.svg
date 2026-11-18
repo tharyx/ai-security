@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="610" viewBox="0 0 1200 610" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Soft vs hard layers in the sandbox lab</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs>
+<rect width="1200" height="610" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Soft vs hard layers in the sandbox lab</text>
+<text x="40" y="80" font-size="16" fill="#475569">The denylist and audit hook are useful signals. The process boundary and the scrubbed environment are what hold.</text>
+<rect x="40" y="120" width="260" height="190" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="170.0" y="183" font-size="16" font-weight="700" text-anchor="middle" fill="#92400e">Agent host process</text>
+<text x="170.0" y="205" font-size="13" text-anchor="middle" fill="#92400e">env: ACME_API_KEY=CANARY-ENV</text>
+<text x="170.0" y="224" font-size="13" text-anchor="middle" fill="#92400e">folder: project/.env</text>
+<text x="170.0" y="243" font-size="13" text-anchor="middle" fill="#92400e">the model wrote a snippet</text>
+<text x="170.0" y="262" font-size="13" text-anchor="middle" fill="#92400e">and wants to run it</text>
+<rect x="340" y="120" width="250" height="110" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="465.0" y="162" font-size="15" font-weight="700" text-anchor="middle" fill="#92400e">S1 AST denylist (soft)</text>
+<text x="465.0" y="182" font-size="13" text-anchor="middle" fill="#92400e">blocks &#x27;import os&#x27;, open()</text>
+<text x="465.0" y="202" font-size="13" text-anchor="middle" fill="#92400e">bypass: getattr + string join</text>
+<rect x="340" y="250" width="250" height="110" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="465.0" y="282" font-size="15" font-weight="700" text-anchor="middle" fill="#92400e">S2 audit hook (soft)</text>
+<text x="465.0" y="303" font-size="13" text-anchor="middle" fill="#92400e">blocks outside writes,</text>
+<text x="465.0" y="322" font-size="13" text-anchor="middle" fill="#92400e">sockets, new processes</text>
+<text x="465.0" y="341" font-size="13" text-anchor="middle" fill="#92400e">same process: can be defeated</text>
+<rect x="640" y="110" width="520" height="330" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="654" y="201" font-size="16" font-weight="700" fill="#166534">Child process: the hard boundary</text>
+<text x="654" y="223" font-size="14" fill="#166534">H1 separate OS process: a hang or crash stays there</text>
+<text x="654" y="243" font-size="14" fill="#166534">H2 environment allowlist: secrets are never copied in</text>
+<text x="654" y="263" font-size="14" fill="#166534">H3 new empty temp folder, deleted afterwards</text>
+<text x="654" y="283" font-size="14" fill="#166534">H4 python -I: ignores PYTHON* vars and user site</text>
+<text x="654" y="303" font-size="14" fill="#166534">H5 timeout, then kill</text>
+<text x="654" y="323" font-size="14" fill="#166534">H6 output cap, then kill</text>
+<text x="654" y="343" font-size="14" fill="#166534">H7 kill switch: refuse new runs, kill running ones</text>
+<text x="654" y="363" font-size="14" fill="#166534">(Linux only) CPU-time and file-size rlimits</text>
+<polyline points="300,175 340,175" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<polyline points="465,230 465,250" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<polyline points="590,305 640,305" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#g)"/>
+<text x="40" y="400" font-size="14" fill="#475569">Soft layers lower the odds and give you alerts.</text>
+<text x="40" y="422" font-size="14" fill="#475569">Hard layers decide the outcome when the odds lose.</text>
+<rect x="40" y="470" width="1120" height="110" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="600.0" y="512" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">Not covered by a plain subprocess (needs a container or VM)</text>
+<text x="600.0" y="534" font-size="13" text-anchor="middle" fill="#991b1b">a real filesystem jail (absolute paths still work without S2); network isolation;</text>
+<text x="600.0" y="553" font-size="13" text-anchor="middle" fill="#991b1b">memory limits on Windows; protection from kernel bugs. The test &#x27;honest_gap&#x27; proves the first one.</text>
+</svg>

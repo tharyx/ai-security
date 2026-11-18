@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-LOG",
+  "evidence_type": "retention_test_result",
+  "collected": "2026-09-30",
+  "collected_by": "scheduler",
+  "summary": "oldest log record 401 days; redaction sample passed"
+}

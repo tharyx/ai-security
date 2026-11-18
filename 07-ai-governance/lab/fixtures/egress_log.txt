@@ -1,0 +1,10 @@
+2026-11-02T09:14:03Z user=eng017 dept=engineering host=api.llm-vendor-a.example bytes_out=48211
+2026-11-02T09:15:44Z user=eng022 dept=engineering host=api.llm-vendor-a.example bytes_out=12007
+2026-11-02T09:31:10Z user=fin004 dept=finance host=chat.free-ai-tool.example bytes_out=310442
+2026-11-02T10:02:51Z user=fin009 dept=finance host=chat.free-ai-tool.example bytes_out=92211
+2026-11-02T10:05:12Z user=hr003 dept=hr host=intranet.acme.example bytes_out=1201
+2026-11-02T11:20:37Z user=sal014 dept=sales host=transcribe.ai-notes.example bytes_out=2210933
+2026-11-02T11:48:02Z user=sal002 dept=sales host=transcribe.ai-notes.example bytes_out=1873320
+2026-11-02T13:07:45Z user=sup031 dept=support host=api.genai-vendor-b.example bytes_out=8820
+2026-11-02T14:12:19Z user=fin004 dept=finance host=chat.free-ai-tool.example bytes_out=145900
+2026-11-02T15:40:00Z user=leg001 dept=legal host=chat.free-ai-tool.example bytes_out=56010

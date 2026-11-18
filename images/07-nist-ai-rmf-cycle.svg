@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>NIST AI RMF core functions and the twelve risks of the Generative AI Profile</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">NIST AI RMF: Govern, Map, Measure, Manage</text>
+  <text x="40" y="76" font-size="16" fill="#475569">GOVERN is cross-cutting. MAP, MEASURE and MANAGE repeat for each system and each change.</text>
+
+  <!-- GOVERN centre -->
+  <circle cx="330" cy="355" r="105" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+  <text x="330" y="338" text-anchor="middle" font-size="20" font-weight="700" fill="#1e3a8a">GOVERN</text>
+  <text x="330" y="362" text-anchor="middle" font-size="13" fill="#1e3a8a">policies, roles,</text>
+  <text x="330" y="380" text-anchor="middle" font-size="13" fill="#1e3a8a">culture, inventory,</text>
+  <text x="330" y="398" text-anchor="middle" font-size="13" fill="#1e3a8a">third-party risk</text>
+
+  <!-- MAP -->
+  <rect x="215" y="100" width="230" height="96" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="330" y="130" text-anchor="middle" font-size="18" font-weight="700" fill="#92400e">MAP</text>
+  <text x="330" y="153" text-anchor="middle" font-size="13" fill="#92400e">context, intended use,</text>
+  <text x="330" y="171" text-anchor="middle" font-size="13" fill="#92400e">categorize, find impacts</text>
+  <text x="330" y="188" text-anchor="middle" font-size="12" fill="#92400e">→ register, tier</text>
+
+  <!-- MEASURE -->
+  <rect x="470" y="490" width="230" height="96" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="585" y="520" text-anchor="middle" font-size="18" font-weight="700" fill="#166534">MEASURE</text>
+  <text x="585" y="543" text-anchor="middle" font-size="13" fill="#166534">test, evaluate, red-team,</text>
+  <text x="585" y="561" text-anchor="middle" font-size="13" fill="#166534">track metrics over time</text>
+  <text x="585" y="578" text-anchor="middle" font-size="12" fill="#166534">→ eval and test reports</text>
+
+  <!-- MANAGE -->
+  <rect x="40" y="490" width="230" height="96" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="155" y="520" text-anchor="middle" font-size="18" font-weight="700" fill="#991b1b">MANAGE</text>
+  <text x="155" y="543" text-anchor="middle" font-size="13" fill="#991b1b">prioritize, treat, accept,</text>
+  <text x="155" y="561" text-anchor="middle" font-size="13" fill="#991b1b">respond, monitor, retire</text>
+  <text x="155" y="578" text-anchor="middle" font-size="12" fill="#991b1b">→ risk register, incidents</text>
+
+  <path d="M445 160 C 560 200, 610 380, 590 484" stroke="#334155" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+  <path d="M470 545 L276 545" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M110 490 C 80 330, 120 190, 209 155" stroke="#334155" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+
+  <!-- GenAI profile panel -->
+  <rect x="720" y="100" width="440" height="486" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="740" y="130" font-size="17" font-weight="700" fill="#0f172a">NIST AI 600-1 GenAI Profile (2024)</text>
+  <text x="740" y="152" font-size="13" fill="#475569">12 risks that GenAI creates or makes worse:</text>
+  <g font-size="14" fill="#334155">
+    <text x="740" y="184">1  CBRN information or capabilities</text>
+    <text x="740" y="212">2  Confabulation</text>
+    <text x="740" y="240">3  Dangerous, violent or hateful content</text>
+    <text x="740" y="268">4  Data privacy</text>
+    <text x="740" y="296">5  Environmental impacts</text>
+    <text x="740" y="324">6  Harmful bias and homogenization</text>
+    <text x="740" y="352">7  Human-AI configuration</text>
+    <text x="740" y="380">8  Information integrity</text>
+    <text x="740" y="408">9  Information security</text>
+    <text x="740" y="436">10 Intellectual property</text>
+    <text x="740" y="464">11 Obscene, degrading or abusive content</text>
+    <text x="740" y="492">12 Value chain and component integration</text>
+  </g>
+  <text x="740" y="530" font-size="13" fill="#475569">Each risk has suggested actions tied to</text>
+  <text x="740" y="549" font-size="13" fill="#475569">GOVERN / MAP / MEASURE / MANAGE subcategories.</text>
+  <text x="740" y="572" font-size="12" fill="#475569">Short names here; see the profile for full wording.</text>
+
+  <text x="40" y="620" font-size="13" fill="#475569">The AI RMF (NIST AI 100-1, 2023) is voluntary. It describes outcomes; it is not a certification.</text>
+</svg>

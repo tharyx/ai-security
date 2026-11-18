@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Architecture of the lab's red-team evaluation harness and CI gate</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">The lab harness: from YAML to a CI exit code</text>
+  <text x="40" y="80" font-size="16" fill="#475569">The harness only calls target.respond(). It does not know how the target works, so any app can be plugged in.</text>
+
+  <!-- row 1: w=170, gap=26, x=40,236,432,628,824,1020 -->
+  <rect x="40" y="120" width="170" height="110" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="125" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">attack_suite.yaml</text>
+  <text x="125" y="176" text-anchor="middle" font-size="12" fill="#991b1b">14 cases: payload,</text>
+  <text x="125" y="194" text-anchor="middle" font-size="12" fill="#991b1b">OWASP id, severity,</text>
+  <text x="125" y="212" text-anchor="middle" font-size="12" fill="#991b1b">detector, gate limits</text>
+
+  <rect x="236" y="120" width="170" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="321" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">load_suite()</text>
+  <text x="321" y="176" text-anchor="middle" font-size="12" fill="#166534">pydantic validation:</text>
+  <text x="321" y="194" text-anchor="middle" font-size="12" fill="#166534">a typo fails loudly</text>
+  <text x="321" y="212" text-anchor="middle" font-size="12" fill="#166534">(exit code 2)</text>
+
+  <rect x="432" y="120" width="170" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="517" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">run_suite()</text>
+  <text x="517" y="176" text-anchor="middle" font-size="12" fill="#1e3a8a">each case × N runs,</text>
+  <text x="517" y="194" text-anchor="middle" font-size="12" fill="#1e3a8a">fresh target per run,</text>
+  <text x="517" y="212" text-anchor="middle" font-size="12" fill="#1e3a8a">seed from case id</text>
+
+  <rect x="628" y="120" width="170" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="713" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">detect()</text>
+  <text x="713" y="176" text-anchor="middle" font-size="12" fill="#1e3a8a">impact only: canary,</text>
+  <text x="713" y="194" text-anchor="middle" font-size="12" fill="#1e3a8a">tool ran, tokens, steps,</text>
+  <text x="713" y="212" text-anchor="middle" font-size="12" fill="#1e3a8a">served, refused</text>
+
+  <rect x="824" y="120" width="170" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="909" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Statistics</text>
+  <text x="909" y="176" text-anchor="middle" font-size="12" fill="#1e3a8a">ASR per category,</text>
+  <text x="909" y="194" text-anchor="middle" font-size="12" fill="#1e3a8a">Wilson 95% bound,</text>
+  <text x="909" y="212" text-anchor="middle" font-size="12" fill="#1e3a8a">false-refusal rate</text>
+
+  <rect x="1020" y="120" width="140" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="1090" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Gate</text>
+  <text x="1090" y="176" text-anchor="middle" font-size="12" fill="#166534">report.md</text>
+  <text x="1090" y="194" text-anchor="middle" font-size="12" fill="#166534">exit 0 = pass</text>
+  <text x="1090" y="212" text-anchor="middle" font-size="12" fill="#166534">exit 1 = fail</text>
+
+  <path d="M210 175 L230 175" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M406 175 L426 175" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M602 175 L622 175" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M798 175 L818 175" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M994 175 L1014 175" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- target box -->
+  <path d="M500 230 L500 284" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="508" y="262" font-size="12" fill="#475569">respond(user, msg)</text>
+  <path d="M700 290 L700 236" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="708" y="262" font-size="12" fill="#475569">reply: text, tokens, steps, tools</text>
+
+  <rect x="360" y="290" width="480" height="150" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="600" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Target (black box)</text>
+  <rect x="380" y="332" width="210" height="92" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+  <text x="485" y="358" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">vulnerable_target</text>
+  <text x="485" y="380" text-anchor="middle" font-size="12" fill="#92400e">secret in prompt, all tools,</text>
+  <text x="485" y="398" text-anchor="middle" font-size="12" fill="#92400e">no limits, raw output</text>
+  <rect x="610" y="332" width="210" height="92" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="715" y="358" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">secure_target</text>
+  <text x="715" y="380" text-anchor="middle" font-size="12" fill="#166534">+ Limits (size, rate, budget,</text>
+  <text x="715" y="398" text-anchor="middle" font-size="12" fill="#166534">loop guard), tool policy, guard</text>
+
+  <rect x="40" y="320" width="290" height="90" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="185" y="350" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">StochasticMockLLM(seed)</text>
+  <text x="185" y="372" text-anchor="middle" font-size="12" fill="#1e3a8a">refuses ~30% at random, like a real</text>
+  <text x="185" y="390" text-anchor="middle" font-size="12" fill="#1e3a8a">model at temperature &gt; 0 (or Ollama)</text>
+  <path d="M330 365 L374 365" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <rect x="870" y="320" width="290" height="90" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1015" y="350" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">CI pipeline</text>
+  <text x="1015" y="372" text-anchor="middle" font-size="12" fill="#334155">runs redteam_cli.py on every</text>
+  <text x="1015" y="390" text-anchor="middle" font-size="12" fill="#334155">model / prompt / tool change</text>
+  <path d="M1090 230 L1090 314" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <rect x="40" y="470" width="1120" height="62" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="600" y="497" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">0 successes in 10 runs does not prove 0%: the 95% upper bound is about 28%.</text>
+  <text x="600" y="518" text-anchor="middle" font-size="14" fill="#166534">More runs (and more variants) give a tighter claim. Hard layers make the rate truly 0 by design, not by luck.</text>
+</svg>

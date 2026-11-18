@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-HO",
+  "evidence_type": "override_log_sample",
+  "collected": "2026-10-31",
+  "collected_by": "pipeline",
+  "summary": "412 reviews, 37 overrides (9%) in October"
+}

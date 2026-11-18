@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="770" viewBox="0 0 1200 770" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Data-flow diagram of HelpDesk Copilot v0 with trust zones and numbered flows</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="770" fill="#ffffff"/>
+  <text x="40" y="42" font-size="28" font-weight="700" fill="#0f172a">HelpDesk Copilot v0: data flows and trust zones</text>
+  <text x="40" y="68" font-size="16" fill="#475569">Same system as lab/designs/vulnerable_design.yaml. Dashed boxes are trust zones; F-numbers match the YAML.</text>
+
+  <!-- zones -->
+  <rect x="30" y="140" width="230" height="150" rx="12" fill="#fef2f2" fill-opacity="0.5" stroke="#dc2626" stroke-width="2" stroke-dasharray="9 6"/>
+  <text x="44" y="162" font-size="13" font-weight="700" fill="#991b1b">internet (untrusted)</text>
+  <rect x="30" y="320" width="230" height="340" rx="12" fill="#fffbeb" fill-opacity="0.5" stroke="#d97706" stroke-width="2" stroke-dasharray="9 6"/>
+  <text x="44" y="342" font-size="13" font-weight="700" fill="#92400e">corp (semi-trusted)</text>
+  <rect x="300" y="140" width="390" height="520" rx="12" fill="#eff6ff" fill-opacity="0.4" stroke="#2563eb" stroke-width="2" stroke-dasharray="9 6"/>
+  <text x="314" y="162" font-size="13" font-weight="700" fill="#1e3a8a">app_backend (trusted)</text>
+  <rect x="740" y="140" width="210" height="190" rx="12" fill="#fffbeb" fill-opacity="0.5" stroke="#d97706" stroke-width="2" stroke-dasharray="9 6"/>
+  <text x="754" y="162" font-size="13" font-weight="700" fill="#92400e">model_provider (semi)</text>
+  <rect x="740" y="370" width="210" height="290" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2" stroke-dasharray="9 6"/>
+  <text x="754" y="392" font-size="13" font-weight="700" fill="#334155">data_tier (privileged)</text>
+  <rect x="1000" y="140" width="170" height="150" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2" stroke-dasharray="9 6"/>
+  <text x="1014" y="162" font-size="13" font-weight="700" fill="#334155">observability (semi)</text>
+
+  <!-- components -->
+  <rect x="55" y="185" width="180" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="145" y="215" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">inbound_email</text>
+  <text x="145" y="236" text-anchor="middle" font-size="12" fill="#991b1b">anyone can write one</text>
+
+  <rect x="55" y="360" width="180" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="145" y="388" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">support_agent</text>
+  <text x="145" y="407" text-anchor="middle" font-size="12" fill="#92400e">employee (actor)</text>
+
+  <rect x="55" y="540" width="180" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="145" y="570" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">web_ui</text>
+  <text x="145" y="591" text-anchor="middle" font-size="12" fill="#92400e">renders markdown</text>
+
+  <rect x="340" y="190" width="300" height="80" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="490" y="222" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">copilot_api</text>
+  <text x="490" y="244" text-anchor="middle" font-size="12" fill="#92400e">builds prompt, calls model, runs tools</text>
+
+  <rect x="320" y="500" width="110" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="375" y="527" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">send_email</text>
+  <text x="375" y="546" text-anchor="middle" font-size="11" fill="#991b1b">external comms</text>
+  <rect x="440" y="500" width="110" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="495" y="527" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">http_fetch</text>
+  <text x="495" y="546" text-anchor="middle" font-size="11" fill="#991b1b">any URL</text>
+  <rect x="560" y="500" width="110" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="615" y="527" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">crm_query</text>
+  <text x="615" y="546" text-anchor="middle" font-size="11" fill="#991b1b">read + write</text>
+
+  <rect x="765" y="190" width="160" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="845" y="226" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">llm</text>
+  <text x="845" y="247" text-anchor="middle" font-size="12" fill="#1e3a8a">third-party API</text>
+
+  <rect x="765" y="420" width="160" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="845" y="450" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">kb_vector_store</text>
+  <text x="845" y="470" text-anchor="middle" font-size="12" fill="#334155">shared, restricted</text>
+  <rect x="765" y="540" width="160" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="845" y="570" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">crm_db</text>
+  <text x="845" y="590" text-anchor="middle" font-size="12" fill="#334155">customer PII</text>
+
+  <rect x="1015" y="190" width="140" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1085" y="220" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">app_logs</text>
+  <text x="1085" y="240" text-anchor="middle" font-size="12" fill="#334155">many readers</text>
+
+  <!-- flows -->
+  <path d="M145 420 L145 534" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M235 575 L280 575 L280 245 L334 245" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M235 215 L334 215" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <path d="M640 225 L759 225" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M765 445 L710 445 L710 262 L646 262" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M145 185 L145 110 L960 110 L960 455 L931 455" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <path d="M845 270 L845 350 L375 350 L375 494" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <path d="M495 350 L495 494" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <path d="M615 350 L615 494" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <path d="M615 560 L615 635 L845 635 L845 616" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M670 520 L728 520 L728 252 L759 252" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M925 245 L980 245 L980 690 L145 690 L145 616" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <path d="M600 190 L600 92 L1085 92 L1085 184" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- flow labels -->
+  <g font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">
+    <rect x="128" y="463" width="34" height="18" rx="4" fill="#ffffff" stroke="#334155"/><text x="145" y="476">F01</text>
+    <rect x="263" y="400" width="34" height="18" rx="4" fill="#ffffff" stroke="#334155"/><text x="280" y="413">F02</text>
+    <rect x="268" y="206" width="34" height="18" rx="4" fill="#ffffff" stroke="#dc2626"/><text x="285" y="219">F03</text>
+    <rect x="683" y="216" width="34" height="18" rx="4" fill="#ffffff" stroke="#334155"/><text x="700" y="229">F04</text>
+    <rect x="693" y="380" width="34" height="18" rx="4" fill="#ffffff" stroke="#334155"/><text x="710" y="393">F05</text>
+    <rect x="390" y="101" width="210" height="18" rx="4" fill="#ffffff" stroke="#dc2626"/><text x="495" y="114">F06 emails auto-indexed into KB</text>
+    <rect x="365" y="341" width="250" height="18" rx="4" fill="#ffffff" stroke="#dc2626"/><text x="490" y="354">F07 · F08 · F09 tool calls chosen by the model</text>
+    <rect x="713" y="626" width="34" height="18" rx="4" fill="#ffffff" stroke="#334155"/><text x="730" y="639">F10</text>
+    <rect x="711" y="300" width="34" height="18" rx="4" fill="#ffffff" stroke="#334155"/><text x="728" y="313">F11</text>
+    <rect x="430" y="681" width="200" height="18" rx="4" fill="#ffffff" stroke="#dc2626"/><text x="530" y="694">F12 answer as raw markdown</text>
+    <rect x="760" y="83" width="200" height="18" rx="4" fill="#ffffff" stroke="#334155"/><text x="860" y="96">F13 full prompts to logs</text>
+  </g>
+
+  <!-- legend -->
+  <line x1="40" y1="728" x2="80" y2="728" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="90" y="733" font-size="13" fill="#0f172a">carries untrusted (tainted) content or model-chosen actions</text>
+  <line x1="520" y1="728" x2="560" y2="728" stroke="#334155" stroke-width="2"/>
+  <text x="570" y="733" font-size="13" fill="#0f172a">other flow</text>
+  <text x="40" y="756" font-size="13" fill="#475569">Every arrow that crosses a dashed line is a trust-boundary crossing. Each one needs an enforced rule: authenticate, authorize, validate, encrypt, constrain or reject.</text>
+</svg>

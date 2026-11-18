@@ -1,6 +1,8 @@
 # 36-Week Master Plan
 
 ## Month 1 — AI foundations and security architecture
+
+Module: [`01-ai-security-fundamentals/`](../01-ai-security-fundamentals/)
 | Week | Focus | Build / prove |
 |---|---|---|
 | 1 | AI/ML/GenAI landscape, lifecycle, actors and assets | Draw lifecycle and asset inventory |
@@ -9,6 +11,8 @@
 | 4 | Threat modeling, abuse cases, risk scoring, security requirements | Threat model review and Phase 1 gate |
 
 ## Month 2 — LLM application security
+
+Module: [`02-llm-security/`](../02-llm-security/)
 | Week | Focus | Build / prove |
 |---|---|---|
 | 5 | Prompt injection, direct/indirect, instruction/data separation | Controlled prompt-injection test harness |
@@ -17,6 +21,8 @@
 | 8 | Model abuse, denial of service, supply chain, evaluation | Rate limits, quotas, model/dependency inventory; Phase 2 gate |
 
 ## Month 3 — RAG security
+
+Module: [`03-rag-security/`](../03-rag-security/)
 | Week | Focus | Build / prove |
 |---|---|---|
 | 9 | Ingestion, parsing, chunking, metadata and provenance | Ingestion pipeline with file validation |
@@ -25,6 +31,8 @@
 | 12 | Poisoning, indirect injection, retrieval evaluation and DLP | RAG red-team suite; Phase 3 gate |
 
 ## Month 4 — MCP security
+
+Module: [`04-mcp-security/`](../04-mcp-security/)
 | Week | Focus | Build / prove |
 |---|---|---|
 | 13 | MCP architecture, hosts, clients, servers, tools/resources/prompts | Draw MCP data/control flow |
@@ -33,6 +41,8 @@
 | 16 | Logging, server registry, transport hardening and governance | MCP security gateway prototype; Phase 4 gate |
 
 ## Month 5 — Agentic AI security
+
+Module: [`05-agent-security/`](../05-agent-security/)
 | Week | Focus | Build / prove |
 |---|---|---|
 | 17 | Agent lifecycle, planner/executor, memory, orchestration | Threat-model a single agent |
@@ -41,6 +51,8 @@
 | 20 | Human approval, sandboxing, rollback, kill switch | Controlled cloud-read-only agent; Phase 5 gate |
 
 ## Month 6 — AI DevSecOps and model supply chain
+
+Module: [`06-ai-devsecops/`](../06-ai-devsecops/)
 | Week | Focus | Build / prove |
 |---|---|---|
 | 21 | Secure AI SDLC, requirements, design review and testing | AI security gates in SDLC |
@@ -49,6 +61,8 @@
 | 24 | CI/CD, adversarial testing, telemetry and incident response | Reproducible pipeline; Phase 6 gate |
 
 ## Month 7 — Multi-cloud AI security architecture
+
+Module: [`09-enterprise-architecture/`](../09-enterprise-architecture/)
 | Week | Focus | Build / prove |
 |---|---|---|
 | 25 | AWS AI services, IAM, network, logging, key management | AWS reference deployment design |
@@ -57,6 +71,8 @@
 | 28 | Multi-cloud control equivalence, portability and shared responsibility | Cloud control matrix; Phase 7 gate |
 
 ## Month 8 — AI governance, risk, privacy and compliance
+
+Module: [`07-ai-governance/`](../07-ai-governance/) and [`08-ai-compliance/`](../08-ai-compliance/)
 | Week | Focus | Build / prove |
 |---|---|---|
 | 29 | AI inventory, system context, intended use and classification | AI system register |
@@ -65,6 +81,8 @@
 | 32 | EU AI Act, India DPDP, audit evidence and policy lifecycle | Compliance applicability matrix; Phase 8 gate |
 
 ## Month 9 — Enterprise capstone and architecture defense
+
+Module: [`10-capstone-project/`](../10-capstone-project/)
 | Week | Focus | Build / prove |
 |---|---|---|
 | 33 | Architecture, threat model, security requirements and design review | Approved architecture pack |

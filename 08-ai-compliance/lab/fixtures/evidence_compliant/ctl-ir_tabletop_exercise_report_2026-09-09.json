@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-IR",
+  "evidence_type": "tabletop_exercise_report",
+  "collected": "2026-09-09",
+  "collected_by": "Security Operations",
+  "summary": "Tabletop: prompt-injection data leak; reporting clocks met in exercise"
+}

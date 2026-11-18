@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Isolation levels for agent-generated code</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs>
+<rect width="1200" height="620" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Isolation levels for agent-generated code</text>
+<text x="40" y="80" font-size="16" fill="#475569">Pick the boundary by how untrusted the code is and what sits next to it. Stronger isolation costs startup time and effort.</text>
+<rect x="40" y="120" width="172" height="290" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="126.0" y="186" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">In-process</text>
+<text x="126.0" y="208" font-size="13" text-anchor="middle" fill="#991b1b">exec() in the</text>
+<text x="126.0" y="226" font-size="13" text-anchor="middle" fill="#991b1b">agent itself</text>
+<text x="126.0" y="246" font-size="13" text-anchor="middle" fill="#991b1b"></text>
+<text x="126.0" y="264" font-size="13" text-anchor="middle" fill="#991b1b">Boundary: none</text>
+<text x="126.0" y="284" font-size="13" text-anchor="middle" fill="#991b1b">Shares memory,</text>
+<text x="126.0" y="302" font-size="13" text-anchor="middle" fill="#991b1b">secrets, files</text>
+<text x="126.0" y="322" font-size="13" text-anchor="middle" fill="#991b1b"></text>
+<text x="126.0" y="340" font-size="13" text-anchor="middle" fill="#991b1b">Never for</text>
+<text x="126.0" y="360" font-size="13" text-anchor="middle" fill="#991b1b">untrusted code</text>
+<rect x="228" y="120" width="172" height="290" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="314.0" y="186" font-size="16" font-weight="700" text-anchor="middle" fill="#92400e">OS process</text>
+<text x="314.0" y="208" font-size="13" text-anchor="middle" fill="#92400e">subprocess</text>
+<text x="314.0" y="226" font-size="13" text-anchor="middle" fill="#92400e">(this lab)</text>
+<text x="314.0" y="246" font-size="13" text-anchor="middle" fill="#92400e"></text>
+<text x="314.0" y="264" font-size="13" text-anchor="middle" fill="#92400e">Boundary: process</text>
+<text x="314.0" y="284" font-size="13" text-anchor="middle" fill="#92400e">+ OS user</text>
+<text x="314.0" y="302" font-size="13" text-anchor="middle" fill="#92400e">Same kernel and</text>
+<text x="314.0" y="322" font-size="13" text-anchor="middle" fill="#92400e">filesystem</text>
+<text x="314.0" y="340" font-size="13" text-anchor="middle" fill="#92400e">Add: env scrub,</text>
+<text x="314.0" y="360" font-size="13" text-anchor="middle" fill="#92400e">timeout, rlimits</text>
+<rect x="416" y="120" width="172" height="290" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="502.0" y="186" font-size="16" font-weight="700" text-anchor="middle" fill="#92400e">Container</text>
+<text x="502.0" y="208" font-size="13" text-anchor="middle" fill="#92400e">Docker, Podman</text>
+<text x="502.0" y="226" font-size="13" text-anchor="middle" fill="#92400e"></text>
+<text x="502.0" y="246" font-size="13" text-anchor="middle" fill="#92400e"></text>
+<text x="502.0" y="264" font-size="13" text-anchor="middle" fill="#92400e">Boundary:</text>
+<text x="502.0" y="284" font-size="13" text-anchor="middle" fill="#92400e">namespaces, cgroups,</text>
+<text x="502.0" y="302" font-size="13" text-anchor="middle" fill="#92400e">seccomp</text>
+<text x="502.0" y="322" font-size="13" text-anchor="middle" fill="#92400e">Shared host kernel:</text>
+<text x="502.0" y="340" font-size="13" text-anchor="middle" fill="#92400e">a kernel or runtime</text>
+<text x="502.0" y="360" font-size="13" text-anchor="middle" fill="#92400e">bug can escape</text>
+<rect x="604" y="120" width="172" height="290" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="690.0" y="186" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">gVisor</text>
+<text x="690.0" y="208" font-size="13" text-anchor="middle" fill="#166534">user-space kernel</text>
+<text x="690.0" y="226" font-size="13" text-anchor="middle" fill="#166534">(runsc)</text>
+<text x="690.0" y="246" font-size="13" text-anchor="middle" fill="#166534"></text>
+<text x="690.0" y="264" font-size="13" text-anchor="middle" fill="#166534">Boundary: syscalls</text>
+<text x="690.0" y="284" font-size="13" text-anchor="middle" fill="#166534">handled by gVisor,</text>
+<text x="690.0" y="302" font-size="13" text-anchor="middle" fill="#166534">few reach host</text>
+<text x="690.0" y="322" font-size="13" text-anchor="middle" fill="#166534">Cost: syscall</text>
+<text x="690.0" y="340" font-size="13" text-anchor="middle" fill="#166534">overhead, some</text>
+<text x="690.0" y="360" font-size="13" text-anchor="middle" fill="#166534">compat gaps</text>
+<rect x="792" y="120" width="172" height="290" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="878.0" y="186" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">microVM</text>
+<text x="878.0" y="208" font-size="13" text-anchor="middle" fill="#166534">Firecracker,</text>
+<text x="878.0" y="226" font-size="13" text-anchor="middle" fill="#166534">Kata Containers</text>
+<text x="878.0" y="246" font-size="13" text-anchor="middle" fill="#166534"></text>
+<text x="878.0" y="264" font-size="13" text-anchor="middle" fill="#166534">Boundary: hardware</text>
+<text x="878.0" y="284" font-size="13" text-anchor="middle" fill="#166534">virtualization</text>
+<text x="878.0" y="302" font-size="13" text-anchor="middle" fill="#166534">Own guest kernel</text>
+<text x="878.0" y="322" font-size="13" text-anchor="middle" fill="#166534">Boots fast; needs</text>
+<text x="878.0" y="340" font-size="13" text-anchor="middle" fill="#166534">KVM; most work</text>
+<text x="878.0" y="360" font-size="13" text-anchor="middle" fill="#166534">to operate</text>
+<rect x="980" y="120" width="172" height="290" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1066.0" y="186" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">WebAssembly</text>
+<text x="1066.0" y="208" font-size="13" text-anchor="middle" fill="#166534">Wasmtime, Pyodide</text>
+<text x="1066.0" y="226" font-size="13" text-anchor="middle" fill="#166534"></text>
+<text x="1066.0" y="246" font-size="13" text-anchor="middle" fill="#166534"></text>
+<text x="1066.0" y="264" font-size="13" text-anchor="middle" fill="#166534">Boundary: memory-</text>
+<text x="1066.0" y="284" font-size="13" text-anchor="middle" fill="#166534">safe VM; files and</text>
+<text x="1066.0" y="302" font-size="13" text-anchor="middle" fill="#166534">network only if</text>
+<text x="1066.0" y="322" font-size="13" text-anchor="middle" fill="#166534">granted</text>
+<text x="1066.0" y="340" font-size="13" text-anchor="middle" fill="#166534">Language and</text>
+<text x="1066.0" y="360" font-size="13" text-anchor="middle" fill="#166534">library limits</text>
+<defs><linearGradient id="sp" x1="0" x2="1"><stop offset="0" stop-color="#dc2626"/><stop offset="0.4" stop-color="#d97706"/><stop offset="1" stop-color="#16a34a"/></linearGradient></defs>
+<rect x="40" y="430" width="1120" height="12" rx="6" fill="url(#sp)"/>
+<text x="40" y="465" font-size="13" fill="#991b1b">weaker isolation, cheaper, faster to start</text>
+<text x="1160" y="465" font-size="13" text-anchor="end" fill="#166534">stronger isolation, more setup</text>
+<rect x="40" y="490" width="1120" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="600.0" y="527" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">Whatever the level, also do this</text>
+<text x="600.0" y="549" font-size="13" text-anchor="middle" fill="#166534">no secrets or cloud credentials inside; no host mounts or Docker socket; non-root; read-only root;</text>
+<text x="600.0" y="568" font-size="13" text-anchor="middle" fill="#166534">network off or egress allowlist; CPU, memory, time and output limits; fresh workspace; kill switch</text>
+</svg>

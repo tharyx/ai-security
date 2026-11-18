@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-LOG",
+  "evidence_type": "retention_test_result",
+  "collected": "2026-10-01",
+  "collected_by": "j.doe",
+  "summary": "screenshot of the log console"
+}

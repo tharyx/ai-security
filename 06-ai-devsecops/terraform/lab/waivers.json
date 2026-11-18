@@ -1,0 +1,10 @@
+[
+  {
+    "rule_id": "TF-AI-060",
+    "address": "<plan>",
+    "reason": "S3 data events for all AI buckets are captured by the organization CloudTrail owned by the security team.",
+    "approved_by": "security-architecture@acme.example",
+    "ticket": "SEC-1234",
+    "expires": "2027-05-31"
+  }
+]

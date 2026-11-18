@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Shared responsibility for AI services</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="690" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a" text-anchor="start">Shared responsibility for AI services</text>
+  <text x="40" y="80" font-size="16" fill="#475569" text-anchor="start">The more managed the service, the more the provider runs. Your data, identities, prompts and tools stay yours.</text>
+  <rect x="450" y="120" width="240" height="44" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="570.0" y="147.5" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">Self-hosted model (IaaS)</text>
+  <rect x="700" y="120" width="240" height="44" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="820.0" y="147.5" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">Managed model API (PaaS)</text>
+  <rect x="950" y="120" width="240" height="44" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1070.0" y="147.5" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">AI app / copilot (SaaS)</text>
+  <rect x="40" y="174" width="400" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="52" y="204.5" font-size="15" font-weight="700" fill="#334155" text-anchor="start">Usage policy, data classification, users</text>
+  <rect x="450" y="174" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="570.0" y="204.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="700" y="174" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="820.0" y="204.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="950" y="174" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1070.0" y="204.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="40" y="230" width="400" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="52" y="260.5" font-size="15" font-weight="700" fill="#334155" text-anchor="start">Identity, access and tenant isolation</text>
+  <rect x="450" y="230" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="570.0" y="260.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="700" y="230" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="820.0" y="260.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="950" y="230" width="240" height="50" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1070.0" y="260.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Shared</text>
+  <rect x="40" y="286" width="400" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="52" y="316.5" font-size="15" font-weight="700" fill="#334155" text-anchor="start">Prompts, RAG data, tools, agents</text>
+  <rect x="450" y="286" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="570.0" y="316.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="700" y="286" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="820.0" y="316.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="950" y="286" width="240" height="50" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1070.0" y="316.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Shared</text>
+  <rect x="40" y="342" width="400" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="52" y="372.5" font-size="15" font-weight="700" fill="#334155" text-anchor="start">Guardrail configuration and tuning</text>
+  <rect x="450" y="342" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="570.0" y="372.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="700" y="342" width="240" height="50" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="820.0" y="372.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Shared</text>
+  <rect x="950" y="342" width="240" height="50" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1070.0" y="372.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Shared</text>
+  <rect x="40" y="398" width="400" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="52" y="428.5" font-size="15" font-weight="700" fill="#334155" text-anchor="start">Logging, monitoring, incident response</text>
+  <rect x="450" y="398" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="570.0" y="428.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="700" y="398" width="240" height="50" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="820.0" y="428.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Shared</text>
+  <rect x="950" y="398" width="240" height="50" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1070.0" y="428.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Shared</text>
+  <rect x="40" y="454" width="400" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="52" y="484.5" font-size="15" font-weight="700" fill="#334155" text-anchor="start">Model weights, safety training, eval</text>
+  <rect x="450" y="454" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="570.0" y="484.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="700" y="454" width="240" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="820.0" y="484.5" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Provider</text>
+  <rect x="950" y="454" width="240" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1070.0" y="484.5" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Provider</text>
+  <rect x="40" y="510" width="400" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="52" y="540.5" font-size="15" font-weight="700" fill="#334155" text-anchor="start">Model hosting, patching, scaling</text>
+  <rect x="450" y="510" width="240" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="570.0" y="540.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Customer</text>
+  <rect x="700" y="510" width="240" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="820.0" y="540.5" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Provider</text>
+  <rect x="950" y="510" width="240" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1070.0" y="540.5" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Provider</text>
+  <rect x="40" y="566" width="400" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="52" y="596.5" font-size="15" font-weight="700" fill="#334155" text-anchor="start">Hardware, data centers, physical</text>
+  <rect x="450" y="566" width="240" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="570.0" y="596.5" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Provider</text>
+  <rect x="700" y="566" width="240" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="820.0" y="596.5" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Provider</text>
+  <rect x="950" y="566" width="240" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1070.0" y="596.5" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Provider</text>
+  <rect x="40" y="650" width="16" height="16" rx="3" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="62" y="663" font-size="13" fill="#475569" text-anchor="start">Customer configures and owns it</text>
+  <rect x="305.65" y="650" width="16" height="16" rx="3" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="327.65" y="663" font-size="13" fill="#475569" text-anchor="start">Provider gives the feature, you must enable and tune it</text>
+  <rect x="742.9000000000001" y="650" width="16" height="16" rx="3" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="764.9000000000001" y="663" font-size="13" fill="#475569" text-anchor="start">Provider runs it (check their attestations)</text>
+</svg>

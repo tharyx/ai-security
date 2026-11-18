@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>AI secure delivery pipeline: code, data, model, image, deploy, runtime</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="b" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker>
+  </defs>
+  <rect width="1200" height="660" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">AI secure delivery pipeline</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Six things move to production. Each one has its own attacks and its own gate. Evidence travels with the artifact.</text>
+
+  <!-- threat row -->
+  <text x="40" y="104" font-size="13" font-weight="700" fill="#991b1b">WHAT GOES WRONG</text>
+  <g font-size="12" fill="#991b1b" text-anchor="middle">
+    <rect x="40" y="112" width="165" height="78" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="122" y="135">leaked keys in Git</text><text x="122" y="155">malicious pull request</text><text x="122" y="175">hijacked action tag</text>
+    <rect x="235" y="112" width="165" height="78" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="317" y="135">poisoned samples</text><text x="317" y="155">unlicensed / PII data</text><text x="317" y="175">silent dataset swap</text>
+    <rect x="430" y="112" width="165" height="78" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="512" y="135">pickle file runs code</text><text x="512" y="155">swapped weights</text><text x="512" y="175">untested upgrade</text>
+    <rect x="625" y="112" width="165" height="78" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="707" y="135">secrets in layers</text><text x="707" y="155">root, shell, compilers</text><text x="707" y="175">known CVEs</text>
+    <rect x="820" y="112" width="165" height="78" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="902" y="135">public notebook / DB</text><text x="902" y="155">static cloud keys</text><text x="902" y="175">wildcard IAM</text>
+    <rect x="1015" y="112" width="165" height="78" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="1097" y="135">prompt injection</text><text x="1097" y="155">exfiltration (egress)</text><text x="1097" y="175">GPU / cost abuse</text>
+  </g>
+  <g stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5 4">
+    <path d="M122 192 L122 224" marker-end="url(#r)"/><path d="M317 192 L317 224" marker-end="url(#r)"/>
+    <path d="M512 192 L512 224" marker-end="url(#r)"/><path d="M707 192 L707 224" marker-end="url(#r)"/>
+    <path d="M902 192 L902 224" marker-end="url(#r)"/><path d="M1097 192 L1097 224" marker-end="url(#r)"/>
+  </g>
+
+  <!-- stage row -->
+  <g text-anchor="middle">
+    <rect x="40" y="230" width="165" height="72" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="122" y="260" font-size="17" font-weight="700" fill="#1e3a8a">1 Code</text><text x="122" y="284" font-size="12" fill="#1e3a8a">commit · pull request</text>
+    <rect x="235" y="230" width="165" height="72" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="317" y="260" font-size="17" font-weight="700" fill="#1e3a8a">2 Data</text><text x="317" y="284" font-size="12" fill="#1e3a8a">collect · label · clean</text>
+    <rect x="430" y="230" width="165" height="72" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="512" y="260" font-size="17" font-weight="700" fill="#1e3a8a">3 Model</text><text x="512" y="284" font-size="12" fill="#1e3a8a">train · fine-tune · pull</text>
+    <rect x="625" y="230" width="165" height="72" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="707" y="260" font-size="17" font-weight="700" fill="#1e3a8a">4 Image</text><text x="707" y="284" font-size="12" fill="#1e3a8a">build · scan · push</text>
+    <rect x="820" y="230" width="165" height="72" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="902" y="260" font-size="17" font-weight="700" fill="#1e3a8a">5 Deploy</text><text x="902" y="284" font-size="12" fill="#1e3a8a">IaC · Kubernetes</text>
+    <rect x="1015" y="230" width="165" height="72" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="1097" y="260" font-size="17" font-weight="700" fill="#1e3a8a">6 Runtime</text><text x="1097" y="284" font-size="12" fill="#1e3a8a">serve · observe</text>
+  </g>
+  <g stroke="#334155" stroke-width="2.5">
+    <path d="M205 266 L229 266" marker-end="url(#a)"/><path d="M400 266 L424 266" marker-end="url(#a)"/>
+    <path d="M595 266 L619 266" marker-end="url(#a)"/><path d="M790 266 L814 266" marker-end="url(#a)"/>
+    <path d="M985 266 L1009 266" marker-end="url(#a)"/>
+  </g>
+
+  <!-- gate row -->
+  <text x="40" y="332" font-size="13" font-weight="700" fill="#166534">GATE (BLOCKS THE PIPELINE)</text>
+  <g font-size="12" fill="#166534" text-anchor="middle">
+    <rect x="40" y="340" width="165" height="112" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="122" y="364">secret scan</text><text x="122" y="384">SAST + pip-audit</text><text x="122" y="404">actions pinned to SHA</text><text x="122" y="424">least-privilege token</text>
+    <rect x="235" y="340" width="165" height="112" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="317" y="364">source + license</text><text x="317" y="384">PII scrub record</text><text x="317" y="404">dataset hash</text><text x="317" y="424">datasheet in AI-BOM</text>
+    <rect x="430" y="340" width="165" height="112" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="512" y="364">safetensors only</text><text x="512" y="384">model file scan</text><text x="512" y="404">AI security eval</text><text x="512" y="424">sign + AI-BOM entry</text>
+    <rect x="625" y="340" width="165" height="112" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="707" y="364">multi-stage, distroless</text><text x="707" y="384">non-root, by digest</text><text x="707" y="404">SBOM + CVE scan</text><text x="707" y="424">cosign signature</text>
+    <rect x="820" y="340" width="165" height="112" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="902" y="364">policy-as-code</text><text x="902" y="384">OIDC, no static keys</text><text x="902" y="404">private endpoints</text><text x="902" y="424">human approval</text>
+    <rect x="1015" y="340" width="165" height="112" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="1097" y="364">default-deny egress</text><text x="1097" y="384">quotas + limits</text><text x="1097" y="404">security telemetry</text><text x="1097" y="424">incident playbooks</text>
+  </g>
+
+  <!-- evidence banner -->
+  <rect x="40" y="478" width="1140" height="52" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="510" font-size="15" font-weight="700" fill="#334155">Evidence:</text>
+  <text x="140" y="510" font-size="14" fill="#334155">AI-BOM (model + data + dependencies) · eval report for THIS digest · SBOM · SLSA provenance · signatures → the release gate</text>
+
+  <!-- lesson labels -->
+  <g font-size="13" fill="#475569" text-anchor="middle">
+    <text x="122" y="556">cicd/</text>
+    <text x="317" y="556">cicd/ (AI-BOM)</text>
+    <text x="512" y="556">docker/ + cicd/</text>
+    <text x="707" y="556">docker/</text>
+    <text x="902" y="556">terraform/ + kubernetes/</text>
+    <text x="1097" y="556">kubernetes/</text>
+  </g>
+
+  <!-- feedback loop -->
+  <path d="M1097 566 L1097 612 L122 612 L122 572" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#b)"/>
+  <rect x="380" y="600" width="440" height="26" rx="6" fill="#ffffff"/>
+  <text x="600" y="618" font-size="14" text-anchor="middle" fill="#1e3a8a">every incident and new attack becomes a regression test</text>
+</svg>

@@ -1,0 +1,484 @@
+# Multi-cloud AI platform control matrix (machine-readable).
+#
+# One row = one security OUTCOME. Each outcome maps to AWS, Azure and Google Cloud
+# services that can deliver it, plus the evidence an auditor would ask for.
+#
+# This is an outcome map, NOT a claim that the products are identical. Service names,
+# features and regional availability change often: verify every row against the
+# provider's current official documentation before you rely on it.
+#
+#   responsibility: who must configure the control for it to exist
+#     customer = you build or switch it on;  shared = provider gives the feature, you
+#     must enable and configure it;  provider = the provider runs it for you.
+#   check:     name of the function in reviewer.py that tests an architecture file.
+#   owasp_llm: related OWASP Top 10 for LLM Applications 2025 risk ids.
+#   cis_v8:    related CIS Critical Security Controls v8 control numbers.
+
+version: 1
+controls:
+  # ------------------------------------------------------------------ identity
+  - id: IAM-01
+    family: identity
+    title: Workloads use short-lived credentials, never static keys
+    severity: high
+    responsibility: customer
+    check: short_lived_credentials
+    owasp_llm: [LLM02]
+    cis_v8: [5, 6]
+    outcome: >
+      Every service identity gets temporary credentials from the platform. No access keys
+      or API keys live in code, images, environment variables or CI variables.
+    clouds:
+      aws:
+        services: IAM roles with STS temporary credentials; EKS Pod Identity or IRSA; IAM OIDC federation for CI
+        evidence: IAM credential report shows no active access keys for workload users
+      azure:
+        services: Managed identities; Entra workload identity federation; disableLocalAuth on Azure AI services
+        evidence: Azure Policy compliance for "local authentication methods should be disabled"
+      gcp:
+        services: Attached service accounts; Workload Identity Federation (also for GKE); org policy iam.disableServiceAccountKeyCreation
+        evidence: Org policy is enforced; no user-managed service account keys exist
+
+  - id: IAM-02
+    family: identity
+    title: Runtime identities have least privilege (no wildcards, no admin)
+    severity: high
+    responsibility: customer
+    check: least_privilege
+    owasp_llm: [LLM06]
+    cis_v8: [6]
+    outcome: >
+      Each identity can call only the exact model, index or tool actions it needs.
+      No "*" actions, no owner/admin roles on runtime identities.
+    clouds:
+      aws:
+        services: Scoped IAM policies (e.g. bedrock:InvokeModel on named model ARNs); IAM Access Analyzer; SCPs
+        evidence: Access Analyzer unused-access findings reviewed; no Action "*" in runtime roles
+      azure:
+        services: Azure RBAC with narrow built-in roles (e.g. Cognitive Services OpenAI User); PIM for humans
+        evidence: Role assignment export shows no Owner/Contributor on runtime identities
+      gcp:
+        services: Narrow IAM roles (e.g. roles/aiplatform.user) at resource level; IAM recommender; deny policies
+        evidence: Recommender findings reviewed; no basic roles (owner/editor) on service accounts
+
+  - id: IAM-03
+    family: identity
+    title: One identity per component (no shared service identity)
+    severity: medium
+    responsibility: customer
+    check: identity_per_component
+    owasp_llm: [LLM06]
+    cis_v8: [5]
+    outcome: >
+      Gateway, RAG service, MCP gateway and agent runtime each have their own identity, so
+      a compromise of one cannot reuse the permissions of another, and logs show who acted.
+    clouds:
+      aws:
+        services: One IAM role per service or pod (EKS Pod Identity); separate roles per agent
+        evidence: Role inventory maps 1:1 to components
+      azure:
+        services: One user-assigned managed identity per component; Entra Agent ID for agents (check current status)
+        evidence: Managed identity inventory maps 1:1 to components
+      gcp:
+        services: One service account per workload; Workload Identity Federation for GKE per namespace or KSA
+        evidence: Service account inventory maps 1:1 to components
+
+  - id: IAM-04
+    family: identity
+    title: Users authenticate with enterprise SSO (OIDC/SAML) at the AI gateway
+    severity: critical
+    responsibility: customer
+    check: user_authentication
+    owasp_llm: [LLM02, LLM06]
+    cis_v8: [6]
+    outcome: >
+      Every request carries a verified user identity and tenant from the enterprise IdP.
+      No anonymous access, no shared API key handed to users.
+    clouds:
+      aws:
+        services: IAM Identity Center or external IdP; Amazon Cognito; JWT authorizers on API Gateway or ALB OIDC auth
+        evidence: Gateway config rejects requests without a valid JWT; test case for expired token
+      azure:
+        services: Microsoft Entra ID; API Management validate-jwt policy; Conditional Access
+        evidence: APIM policy export shows validate-jwt on every AI API
+      gcp:
+        services: Identity-Aware Proxy; Identity Platform; Apigee or API Gateway JWT validation
+        evidence: IAP or JWT validation enabled on the AI front door; negative test results
+
+  # ------------------------------------------------------------------- network
+  - id: NET-01
+    family: network
+    title: Model endpoints are reached privately; public network access is off
+    severity: high
+    responsibility: shared
+    check: private_model_endpoint
+    owasp_llm: [LLM02, LLM10]
+    cis_v8: [12]
+    outcome: >
+      Calls to the model API travel over a private path from your network, and the
+      endpoint (or its account/perimeter) refuses calls from the public internet.
+    clouds:
+      aws:
+        services: VPC interface endpoints (AWS PrivateLink) for bedrock-runtime and SageMaker; VPC endpoint policies
+        evidence: Endpoint policy restricts principals and models; no NAT route needed for model calls
+      azure:
+        services: Private Endpoints (Azure Private Link) for Azure OpenAI / AI services; publicNetworkAccess Disabled
+        evidence: Resource shows public network access disabled; private DNS zone resolves to private IP
+      gcp:
+        services: Private Service Connect for Vertex AI; VPC Service Controls perimeter around aiplatform.googleapis.com
+        evidence: VPC-SC perimeter dry-run then enforced; PSC endpoint in use
+
+  - id: NET-02
+    family: network
+    title: Data stores (vector, object, logs) are private
+    severity: high
+    responsibility: shared
+    check: private_data_stores
+    owasp_llm: [LLM02, LLM08]
+    cis_v8: [3, 12]
+    outcome: >
+      Vector indexes, document buckets and log stores have no public endpoint and accept
+      traffic only from the application network.
+    clouds:
+      aws:
+        services: OpenSearch Serverless VPC endpoints and network policies; S3 Block Public Access; Aurora in private subnets
+        evidence: S3 Block Public Access on at account level; network policy denies public access
+      azure:
+        services: Private Endpoints for Azure AI Search, Storage and Cosmos DB; public network access disabled
+        evidence: Azure Policy compliance for private link on AI Search and Storage
+      gcp:
+        services: Vertex AI Vector Search private endpoints (PSC); Cloud Storage public access prevention; VPC-SC
+        evidence: Public access prevention enforced; resources inside the VPC-SC perimeter
+
+  - id: NET-03
+    family: network
+    title: Agent and tool runtimes have deny-by-default egress
+    severity: high
+    responsibility: customer
+    check: egress_control
+    owasp_llm: [LLM01, LLM06]
+    cis_v8: [12, 13]
+    outcome: >
+      Code that acts on model output (agents, tool servers) can reach only allowlisted
+      destinations, so an injected instruction cannot send data to an attacker host.
+    clouds:
+      aws:
+        services: Security groups with no 0.0.0.0/0 egress; AWS Network Firewall domain allowlist; no NAT for tool subnets
+        evidence: Firewall rule set and flow logs show only allowlisted destinations
+      azure:
+        services: Azure Firewall with FQDN rules; NSGs; Foundry managed VNet in approved-outbound-only mode
+        evidence: Firewall policy export; managed network isolation mode recorded
+      gcp:
+        services: VPC firewall egress deny rules; Secure Web Proxy allowlist; VPC Service Controls
+        evidence: Egress deny rule with priority evidence; proxy logs
+
+  - id: NET-04
+    family: network
+    title: All traffic to models, RAG and tools passes the AI gateway (no bypass path)
+    severity: critical
+    responsibility: customer
+    check: gateway_chokepoint
+    owasp_llm: [LLM01, LLM10]
+    cis_v8: [12]
+    outcome: >
+      There is no network path from the internet to a model, RAG service, agent or tool
+      that skips the gateway where authentication, quotas and guardrails are enforced.
+    clouds:
+      aws:
+        services: API Gateway or ALB plus your gateway service in front; private subnets for everything behind it
+        evidence: Data-flow diagram plus reachability analysis (VPC Reachability Analyzer)
+      azure:
+        services: Azure API Management as AI gateway in front of Azure OpenAI; backends private
+        evidence: Network diagram; backends reachable only from the APIM subnet
+      gcp:
+        services: Apigee or API Gateway / Load Balancing with Cloud Armor in front; backends private
+        evidence: Connectivity Tests results; firewall rules allow only the gateway
+
+  # ---------------------------------------------------------------------- data
+  - id: DATA-01
+    family: data
+    title: Confidential AI data is encrypted with customer-managed keys
+    severity: medium
+    responsibility: shared
+    check: customer_managed_keys
+    owasp_llm: [LLM02]
+    cis_v8: [3]
+    outcome: >
+      Vector stores, document stores and logs that hold confidential data use keys you
+      control, so you can audit key use and revoke access (crypto-shredding).
+    clouds:
+      aws:
+        services: AWS KMS customer managed keys on S3, OpenSearch, Bedrock resources that support CMK (check the list)
+        evidence: KMS key policy and CloudTrail Decrypt events for the data store
+      azure:
+        services: Customer-managed keys in Azure Key Vault or Managed HSM for AI services, AI Search and Storage
+        evidence: Resource encryption settings show CMK; Key Vault access logs
+      gcp:
+        services: CMEK with Cloud KMS (or Cloud HSM / Cloud EKM) for Vertex AI resources and Cloud Storage
+        evidence: Resource metadata shows the CMEK key; KMS audit logs
+
+  - id: DATA-02
+    family: data
+    title: Encryption keys rotate automatically
+    severity: medium
+    responsibility: customer
+    check: key_rotation
+    owasp_llm: []
+    cis_v8: [3]
+    outcome: Every customer-managed key has automatic rotation switched on and an owner.
+    clouds:
+      aws:
+        services: KMS automatic key rotation
+        evidence: GetKeyRotationStatus is true for each key
+      azure:
+        services: Key Vault key rotation policy
+        evidence: Rotation policy present on each key
+      gcp:
+        services: Cloud KMS automatic rotation period
+        evidence: rotationPeriod set on each key ring key
+
+  - id: DATA-03
+    family: data
+    title: Tenant and document permissions are enforced server-side during retrieval
+    severity: critical
+    responsibility: customer
+    check: tenant_isolation
+    owasp_llm: [LLM02, LLM08]
+    cis_v8: [3, 6]
+    outcome: >
+      Retrieval filters by the caller's verified tenant and groups BEFORE ranking. The
+      prompt never acts as the access-control layer.
+    clouds:
+      aws:
+        services: Bedrock Knowledge Bases metadata filters set by your code; OpenSearch fine-grained access control; index per tenant
+        evidence: Cross-tenant retrieval tests pass in CI
+      azure:
+        services: Azure AI Search security filters (security trimming) on group fields; index per tenant for strong isolation
+        evidence: Cross-tenant retrieval tests pass in CI
+      gcp:
+        services: Vertex AI Vector Search namespace filtering; Vertex AI Search data store access control; index per tenant
+        evidence: Cross-tenant retrieval tests pass in CI
+
+  - id: DATA-04
+    family: data
+    title: Provider data use and retention settings are reviewed and recorded
+    severity: medium
+    responsibility: shared
+    check: provider_data_terms
+    owasp_llm: [LLM02]
+    cis_v8: [3]
+    outcome: >
+      You know (and wrote down) whether the provider stores prompts, for how long, for what
+      purpose (abuse monitoring, caching, logging) and whether it may train on them.
+    clouds:
+      aws:
+        services: Amazon Bedrock data protection terms; model invocation logging is opt-in (your logs, your retention)
+        evidence: Signed data-flow record; invocation logging destination and retention
+      azure:
+        services: Azure OpenAI data, privacy and abuse-monitoring terms; modified abuse monitoring (approval required)
+        evidence: Record of abuse-monitoring status and approval, if any
+      gcp:
+        services: Vertex AI data governance terms; data caching setting; abuse-monitoring logging terms
+        evidence: Record of caching configuration and retention decision
+
+  # ---------------------------------------------------------------- guardrails
+  - id: GR-01
+    family: guardrails
+    title: Input guardrail detects prompt attacks (soft layer, for alerting)
+    severity: medium
+    responsibility: shared
+    check: input_guardrails
+    owasp_llm: [LLM01]
+    cis_v8: [13]
+    outcome: >
+      User prompts and retrieved documents are scanned for prompt-injection and jailbreak
+      patterns. Detections raise events. This lowers risk but never replaces hard controls.
+    clouds:
+      aws:
+        services: Amazon Bedrock Guardrails (prompt attack filter; ApplyGuardrail API for any model)
+        evidence: Guardrail ID and version attached; detection metrics in CloudWatch
+      azure:
+        services: Azure AI Content Safety Prompt Shields (user prompt and document attacks)
+        evidence: Content filter configuration; Prompt Shields results logged
+      gcp:
+        services: Model Armor (prompt injection and jailbreak detection) templates
+        evidence: Model Armor template attached; findings logged
+
+  - id: GR-02
+    family: guardrails
+    title: Output guardrail screens for sensitive data and unsafe links
+    severity: medium
+    responsibility: shared
+    check: output_guardrails
+    owasp_llm: [LLM02, LLM05]
+    cis_v8: [3]
+    outcome: >
+      Model output is checked for PII, secrets and non-allowlisted URLs before it reaches a
+      user, a renderer or a tool.
+    clouds:
+      aws:
+        services: Bedrock Guardrails sensitive information filters; Amazon Comprehend PII detection; your URL allowlist
+        evidence: Guardrail config; blocked-output metrics
+      azure:
+        services: Azure OpenAI content filters; Azure AI Language PII detection; your URL allowlist
+        evidence: Filter config; blocked-output metrics
+      gcp:
+        services: Model Armor sensitive data and malicious URL filters; Sensitive Data Protection
+        evidence: Template config; blocked-output metrics
+
+  # ------------------------------------------------------------ tools / agents
+  - id: TOOL-01
+    family: tools-agents
+    title: Agents reach tools only through an MCP/tool gateway with an allowlist registry
+    severity: high
+    responsibility: customer
+    check: tool_gateway
+    owasp_llm: [LLM06, LLM03]
+    cis_v8: [2, 6]
+    outcome: >
+      Only registered, reviewed tools are callable. Every call is authorized, validated
+      against a schema and logged at one choke point.
+    clouds:
+      aws:
+        services: Your tool broker on ECS/EKS; Amazon Bedrock AgentCore Gateway (check current status and features)
+        evidence: Registry export; denied-call logs for unknown tools
+      azure:
+        services: Azure API Management governing MCP servers and tool APIs (check current feature status)
+        evidence: Registry export; APIM policy and logs
+      gcp:
+        services: Your tool broker on Cloud Run/GKE behind Apigee; Vertex AI Agent Engine tool config (check current features)
+        evidence: Registry export; denied-call logs
+
+  - id: AGT-01
+    family: tools-agents
+    title: Side-effecting (write) actions need human approval
+    severity: high
+    responsibility: customer
+    check: human_approval
+    owasp_llm: [LLM06]
+    cis_v8: [6]
+    outcome: >
+      An agent can propose a write (change, ticket, email, delete) but a person approves the
+      exact action and arguments before it runs.
+    clouds:
+      aws:
+        services: Bedrock Agents user confirmation / return of control; Step Functions task-token approval pattern
+        evidence: Approval records linked to executed actions
+      azure:
+        services: Logic Apps or Power Automate approvals; your approval service in front of tools
+        evidence: Approval records linked to executed actions
+      gcp:
+        services: Workflows or Cloud Run approval service; Agent Engine with your confirmation step
+        evidence: Approval records linked to executed actions
+
+  - id: AGT-02
+    family: tools-agents
+    title: Agents have step and cost limits and a working kill switch
+    severity: high
+    responsibility: customer
+    check: agent_limits
+    owasp_llm: [LLM10, LLM06]
+    cis_v8: [4]
+    outcome: >
+      Each agent run has a maximum number of steps and a cost ceiling, and operators can
+      stop all agent tool execution at once.
+    clouds:
+      aws:
+        services: Limits in your orchestrator; feature flag (AppConfig); revoke role session (deny policy on aws:TokenIssueTime)
+        evidence: Kill-switch drill record with time-to-stop
+      azure:
+        services: Limits in your orchestrator; App Configuration feature flag; disable managed identity role assignment
+        evidence: Kill-switch drill record with time-to-stop
+      gcp:
+        services: Limits in your orchestrator; feature flag; disable the agent service account
+        evidence: Kill-switch drill record with time-to-stop
+
+  # ------------------------------------------------------------------- logging
+  - id: LOG-01
+    family: logging
+    title: Control-plane audit and model-invocation logs flow to a central SIEM
+    severity: high
+    responsibility: shared
+    check: audit_logging
+    owasp_llm: [LLM10]
+    cis_v8: [8]
+    outcome: >
+      Who changed the platform (control plane) and who called which model and tool (data
+      plane) is recorded and searchable in the security team's SIEM.
+    clouds:
+      aws:
+        services: AWS CloudTrail (organization trail); Bedrock model invocation logging; Security Lake or SIEM export
+        evidence: Org trail enabled; invocation logging config; SIEM query screenshots
+      azure:
+        services: Azure Activity Log; diagnostic settings for AI services; Log Analytics; Microsoft Sentinel
+        evidence: Diagnostic settings on each AI resource; Sentinel data connector
+      gcp:
+        services: Cloud Audit Logs (enable Data Access logs for Vertex AI); request-response logging; Google SecOps or SIEM sink
+        evidence: Audit config shows DATA_READ/DATA_WRITE enabled; log sink to SIEM
+
+  - id: LOG-02
+    family: logging
+    title: AI logs are redacted, tamper-resistant and retained long enough
+    severity: medium
+    responsibility: customer
+    check: log_protection
+    owasp_llm: [LLM02]
+    cis_v8: [8]
+    outcome: >
+      Prompts and outputs in logs are redacted for secrets and personal data, the log store
+      is immutable (WORM) and retention is at least one year.
+    clouds:
+      aws:
+        services: S3 Object Lock; CloudWatch Logs data protection policies; retention settings
+        evidence: Object Lock configuration; masking policy
+      azure:
+        services: Immutable blob storage; Log Analytics retention; your redaction step before logging
+        evidence: Immutability policy; retention settings
+      gcp:
+        services: Log bucket retention lock; Cloud Storage Bucket Lock; Sensitive Data Protection for redaction
+        evidence: Locked retention policy; redaction job config
+
+  # ---------------------------------------------------------------- operations
+  - id: OPS-01
+    family: operations
+    title: Rate limits, token quotas and budgets protect against abuse
+    severity: medium
+    responsibility: shared
+    check: abuse_limits
+    owasp_llm: [LLM10]
+    cis_v8: [13]
+    outcome: >
+      Per-user and per-tenant request and token limits exist at the gateway, with budget
+      alerts, so a loop or an attacker cannot run up unbounded cost.
+    clouds:
+      aws:
+        services: API Gateway throttling and usage plans; Bedrock service quotas; AWS Budgets alerts
+        evidence: Throttling config; budget alert history
+      azure:
+        services: API Management token limit policies; Azure OpenAI quota (TPM); Cost Management budgets
+        evidence: APIM policy export; budget alert history
+      gcp:
+        services: Apigee quota and spike arrest; Vertex AI quotas; Cloud Billing budgets
+        evidence: Quota config; budget alert history
+
+  - id: SEC-01
+    family: operations
+    title: Secrets live in a secrets manager, never in config, images or prompts
+    severity: high
+    responsibility: customer
+    check: secrets_management
+    owasp_llm: [LLM02, LLM07]
+    cis_v8: [3]
+    outcome: >
+      Remaining secrets (third-party API keys, DB passwords) are fetched at runtime by
+      workload identity from a managed secret store, and rotated.
+    clouds:
+      aws:
+        services: AWS Secrets Manager with rotation; IAM policies scoped to secret ARNs
+        evidence: Secret inventory with rotation status; secret scanning in CI
+      azure:
+        services: Azure Key Vault secrets with RBAC; Key Vault references in app settings
+        evidence: Secret inventory; secret scanning in CI
+      gcp:
+        services: Secret Manager with IAM per secret; rotation schedules
+        evidence: Secret inventory; secret scanning in CI

@@ -1,0 +1,131 @@
+# One AI control set, mapped to several frameworks ("test once, comply many").
+# EDUCATIONAL: mappings are simplified and at article / clause / category level.
+# Verify every reference against the current official texts (and your licensed ISO copies)
+# before using it in a real audit. ISO 42001 is mapped to Annex A *areas*, not control numbers.
+# An empty list means "this framework has no direct requirement here" - that is a finding too.
+
+- id: CTL-INV
+  title: AI system inventory with owners, intended use and risk tier
+  owner: AI Governance Office
+  maps_to:
+    eu_ai_act: ["Art 49 registration (EU database)"]
+    iso_42001: ["Clause 4.3 scope of the AIMS", "A.4 resources for AI systems"]
+    nist_ai_rmf: ["GOVERN 1.6 AI system inventory"]
+    soc2: []
+    iso_27001: ["A.5.9 inventory of information and other associated assets"]
+  evidence:
+    - {type: register_export, max_age_days: 31, automated: true}
+
+- id: CTL-RISK
+  title: AI risk assessment and treatment per system, reviewed on change
+  owner: AI Governance Office
+  maps_to:
+    eu_ai_act: ["Art 9 risk management system"]
+    iso_42001: ["Clause 6.1 AI risk assessment and treatment", "A.5 assessing impacts of AI systems"]
+    nist_ai_rmf: ["MAP 5 impacts characterized", "MANAGE 1 risks prioritized and treated"]
+    soc2: ["CC3.2 risk identification and analysis"]
+    iso_27001: ["Clause 6.1.2 risk assessment"]
+  evidence:
+    - {type: risk_register_export, max_age_days: 92}
+    - {type: risk_review_minutes, max_age_days: 92}
+
+- id: CTL-HO
+  title: Human oversight design - named reviewers who can override, with training
+  owner: Business system owner
+  maps_to:
+    eu_ai_act: ["Art 14 human oversight", "Art 26(2) deployer oversight staff"]
+    iso_42001: ["A.9 use of AI systems"]
+    nist_ai_rmf: ["MAP 3 human oversight defined"]
+    soc2: []
+    iso_27001: []
+  evidence:
+    - {type: oversight_procedure, max_age_days: 365}
+    - {type: override_log_sample, max_age_days: 92, automated: true}
+
+- id: CTL-LOG
+  title: AI event logging (prompts, tool calls, decisions) with redaction and retention
+  owner: Platform Security
+  maps_to:
+    eu_ai_act: ["Art 12 record-keeping", "Art 19 / 26(6) log retention"]
+    iso_42001: ["A.6 AI system life cycle"]
+    nist_ai_rmf: ["MANAGE 4 post-deployment monitoring"]
+    soc2: ["CC7.2 monitoring for anomalies"]
+    iso_27001: ["A.8.15 logging", "A.8.16 monitoring activities"]
+  evidence:
+    - {type: logging_config_export, max_age_days: 31, automated: true}
+    - {type: retention_test_result, max_age_days: 365, automated: true}
+
+- id: CTL-EVAL
+  title: Pre-release security and quality evaluation (red-team regression suite)
+  owner: AI Engineering
+  maps_to:
+    eu_ai_act: ["Art 15 accuracy, robustness and cybersecurity", "Art 9 testing"]
+    iso_42001: ["A.6 AI system life cycle"]
+    nist_ai_rmf: ["MEASURE 2 trustworthy characteristics evaluated"]
+    soc2: ["CC8.1 change management"]
+    iso_27001: ["A.8.29 security testing in development and acceptance"]
+  evidence:
+    - {type: ci_test_report, max_age_days: 31, automated: true}
+
+- id: CTL-ACCESS
+  title: Least-privilege access to models, prompts, data stores and tools
+  owner: Identity Team
+  maps_to:
+    eu_ai_act: ["Art 15 accuracy, robustness and cybersecurity"]
+    iso_42001: []
+    nist_ai_rmf: ["MEASURE 2.7 security and resilience"]
+    soc2: ["CC6.1 logical access"]
+    iso_27001: ["A.5.15 access control"]
+  evidence:
+    - {type: iam_policy_export, max_age_days: 31, automated: true}
+    - {type: access_review_signoff, max_age_days: 92}
+
+- id: CTL-VEND
+  title: Model provider and AI vendor assessment, with contract terms
+  owner: Third-Party Risk
+  maps_to:
+    eu_ai_act: ["Art 25 responsibilities along the value chain"]
+    iso_42001: ["A.10 third-party and customer relationships"]
+    nist_ai_rmf: ["GOVERN 6 third-party risk", "MANAGE 3 third-party risks managed"]
+    soc2: ["CC9.2 vendor and business partner risk"]
+    iso_27001: ["A.5.19 supplier relationships"]
+  evidence:
+    - {type: vendor_assessment, max_age_days: 365}
+
+- id: CTL-IR
+  title: AI incident response, including regulatory reporting clocks
+  owner: Security Operations
+  maps_to:
+    eu_ai_act: ["Art 73 serious incident reporting", "Art 26(5) deployer monitoring and reporting"]
+    iso_42001: ["A.8 information for interested parties"]
+    nist_ai_rmf: ["MANAGE 4 incident response and recovery"]
+    soc2: ["CC7.3 incident evaluation", "CC7.4 incident response"]
+    iso_27001: ["A.5.24 incident management planning", "A.5.26 response to incidents"]
+  evidence:
+    - {type: incident_runbook, max_age_days: 365}
+    - {type: tabletop_exercise_report, max_age_days: 365}
+
+- id: CTL-DOC
+  title: Technical documentation and model/system cards, kept current
+  owner: AI Engineering
+  maps_to:
+    eu_ai_act: ["Art 11 technical documentation (Annex IV)", "Art 13 instructions for use"]
+    iso_42001: ["A.6 AI system life cycle", "A.8 information for interested parties"]
+    nist_ai_rmf: ["MAP 2 system knowledge limits documented"]
+    soc2: []
+    iso_27001: []
+  evidence:
+    - {type: system_card, max_age_days: 180}
+
+- id: CTL-PRIV
+  title: Privacy impact assessment (DPIA) and data subject rights incl. RAG deletion
+  owner: Data Protection Officer
+  maps_to:
+    eu_ai_act: ["Art 26(9) deployer DPIA using provider information"]
+    iso_42001: ["A.5 assessing impacts of AI systems", "A.7 data for AI systems"]
+    nist_ai_rmf: ["MEASURE 2.10 privacy risk examined"]
+    soc2: ["Privacy criteria (P series)"]
+    iso_27001: ["A.5.34 privacy and protection of PII"]
+  evidence:
+    - {type: dpia, max_age_days: 365}
+    - {type: erasure_test_receipt, max_age_days: 92, automated: true}

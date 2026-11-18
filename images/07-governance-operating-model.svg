@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>AI governance operating model: board, three lines and the artifacts they run on</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">AI governance operating model</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Clear owners, an independent check, and a small set of artifacts that everyone uses.</text>
+
+  <rect x="40" y="96" width="1120" height="56" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600" y="121" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Board of directors / risk committee</text>
+  <text x="600" y="141" text-anchor="middle" font-size="13" fill="#475569">sets risk appetite · receives AI risk reports · owns the hardest trade-offs</text>
+
+  <rect x="40" y="176" width="1120" height="76" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="600" y="203" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">AI governance board (cross-functional)</text>
+  <text x="600" y="225" text-anchor="middle" font-size="14" fill="#1e3a8a">CISO · DPO / privacy · legal · risk · data / AI engineering · business sponsors · HR when people are affected</text>
+  <text x="600" y="243" text-anchor="middle" font-size="13" fill="#1e3a8a">approves high and critical systems · accepts high residual risk · approves policy and exceptions</text>
+
+  <!-- three lines -->
+  <rect x="40" y="290" width="350" height="190" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="215" y="320" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">1st line: build and own</text>
+  <g font-size="13" fill="#92400e">
+    <text x="60" y="350">• business owner (accountable for use)</text>
+    <text x="60" y="374">• technical owner (runs the system)</text>
+    <text x="60" y="398">• data, ML and platform engineers</text>
+    <text x="60" y="422">• fills the system card, runs controls,</text>
+    <text x="72" y="442">collects evidence, reports incidents</text>
+  </g>
+
+  <rect x="425" y="290" width="350" height="190" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="600" y="320" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">2nd line: oversee and challenge</text>
+  <g font-size="13" fill="#166534">
+    <text x="445" y="350">• AI governance office (runs the register)</text>
+    <text x="445" y="374">• security, privacy, risk, compliance</text>
+    <text x="445" y="398">• writes policy and standards</text>
+    <text x="445" y="422">• reviews tiers and risk assessments,</text>
+    <text x="457" y="442">says "no" or "not yet" with reasons</text>
+  </g>
+
+  <rect x="810" y="290" width="350" height="190" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="985" y="320" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">3rd line: independent assurance</text>
+  <g font-size="13" fill="#334155">
+    <text x="830" y="350">• internal audit</text>
+    <text x="830" y="374">• external auditors and certification</text>
+    <text x="842" y="394">bodies (ISO/IEC 42001, SOC 2)</text>
+    <text x="830" y="418">• tests that the system of controls</text>
+    <text x="842" y="438">works</text>
+    <text x="830" y="464" font-weight="700">• reports directly to the board</text>
+  </g>
+
+  <path d="M215 290 L215 258" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="225" y="276" font-size="12" fill="#475569">escalate, request exceptions</text>
+  <path d="M600 290 L600 258" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M1160 400 L1182 400 L1182 124 L1166 124" stroke="#334155" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a)"/>
+  <path d="M390 385 L419 385" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M425 400 L396 400" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- artifacts -->
+  <rect x="40" y="510" width="1120" height="100" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="540" font-size="16" font-weight="700" fill="#0f172a">Shared artifacts (the operating model runs on these)</text>
+  <text x="60" y="566" font-size="14" fill="#334155">AI policy · AI acceptable-use policy · standards · RACI · intake form · AI system register · risk register</text>
+  <text x="60" y="590" font-size="14" fill="#334155">exception register (owner, reason, expiry) · decision log · training records · board minutes</text>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Memory poisoning: one write, many victims</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs>
+<rect width="1200" height="620" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Memory poisoning: one write, many victims</text>
+<text x="40" y="80" font-size="16" fill="#475569">Long-term memory written from untrusted content programs every future session that reads it</text>
+<text x="40" y="125" font-size="17" font-weight="700" fill="#991b1b">Vulnerable: shared memory, no provenance</text>
+<rect x="40" y="140" width="200" height="100" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="140.0" y="177" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">Poisoned doc</text>
+<text x="140.0" y="199" font-size="13" text-anchor="middle" fill="#991b1b">read in alice&#x27;s</text>
+<text x="140.0" y="218" font-size="13" text-anchor="middle" fill="#991b1b">session (day 1)</text>
+<rect x="280" y="140" width="220" height="100" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="390.0" y="177" font-size="16" font-weight="700" text-anchor="middle" fill="#92400e">Auto-memory</text>
+<text x="390.0" y="199" font-size="13" text-anchor="middle" fill="#92400e">saves every</text>
+<text x="390.0" y="218" font-size="13" text-anchor="middle" fill="#92400e">&#x27;Remember:&#x27; line</text>
+<rect x="540" y="140" width="200" height="100" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="640.0" y="177" font-size="16" font-weight="700" text-anchor="middle" fill="#334155">Shared memory</text>
+<text x="640.0" y="199" font-size="13" text-anchor="middle" fill="#334155">one list for</text>
+<text x="640.0" y="218" font-size="13" text-anchor="middle" fill="#334155">every user</text>
+<rect x="780" y="140" width="180" height="100" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="870.0" y="178" font-size="16" font-weight="700" text-anchor="middle" fill="#92400e">bob&#x27;s session</text>
+<text x="870.0" y="200" font-size="12" text-anchor="middle" fill="#92400e">clean doc (day 5)</text>
+<text x="870.0" y="218" font-size="12" text-anchor="middle" fill="#92400e">memory in system prompt</text>
+<rect x="1000" y="140" width="160" height="100" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1080.0" y="177" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">Email to</text>
+<text x="1080.0" y="199" font-size="13" text-anchor="middle" fill="#991b1b">attacker</text>
+<text x="1080.0" y="218" font-size="13" text-anchor="middle" fill="#991b1b">every session</text>
+<polyline points="240,190 280,190" fill="none" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<polyline points="500,190 540,190" fill="none" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<polyline points="740,190 780,190" fill="none" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<polyline points="960,190 1000,190" fill="none" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<text x="40" y="300" font-size="17" font-weight="700" fill="#166534">Secure: provenance gate at write time, isolation at read time, policy at action time</text>
+<rect x="40" y="320" width="200" height="100" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="140.0" y="357" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">Poisoned doc</text>
+<text x="140.0" y="379" font-size="13" text-anchor="middle" fill="#991b1b">source = document</text>
+<text x="140.0" y="398" font-size="13" text-anchor="middle" fill="#991b1b">trusted = false</text>
+<rect x="40" y="450" width="200" height="100" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="140.0" y="487" font-size="16" font-weight="700" text-anchor="middle" fill="#1e3a8a">alice&#x27;s own words</text>
+<text x="140.0" y="509" font-size="13" text-anchor="middle" fill="#1e3a8a">source = user</text>
+<text x="140.0" y="528" font-size="13" text-anchor="middle" fill="#1e3a8a">trusted = true</text>
+<rect x="290" y="360" width="260" height="150" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="420.0" y="394" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">Provenance gate</text>
+<text x="420.0" y="416" font-size="13" text-anchor="middle" fill="#166534">untrusted + instruction-like</text>
+<text x="420.0" y="434" font-size="13" text-anchor="middle" fill="#166534">-&gt; REFUSED, event logged</text>
+<text x="420.0" y="454" font-size="13" text-anchor="middle" fill="#166534">untrusted + plain fact</text>
+<text x="420.0" y="472" font-size="13" text-anchor="middle" fill="#166534">-&gt; stored as data only</text>
+<text x="420.0" y="492" font-size="13" text-anchor="middle" fill="#166534">user&#x27;s words -&gt; trusted note</text>
+<rect x="600" y="360" width="220" height="150" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="710.0" y="412" font-size="16" font-weight="700" text-anchor="middle" fill="#334155">Memory store</text>
+<text x="710.0" y="434" font-size="13" text-anchor="middle" fill="#334155">note + user + source</text>
+<text x="710.0" y="454" font-size="13" text-anchor="middle" fill="#334155">+ trusted flag</text>
+<text x="710.0" y="472" font-size="13" text-anchor="middle" fill="#334155">read only by its owner</text>
+<rect x="870" y="330" width="290" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1015.0" y="362" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">Planner context</text>
+<text x="1015.0" y="384" font-size="13" text-anchor="middle" fill="#166534">trusted notes of THIS user,</text>
+<text x="1015.0" y="403" font-size="13" text-anchor="middle" fill="#166534">in a data block, not system</text>
+<rect x="870" y="450" width="290" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1015.0" y="482" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">Policy still decides</text>
+<text x="1015.0" y="504" font-size="13" text-anchor="middle" fill="#166534">even if poison gets in, R4</text>
+<text x="1015.0" y="523" font-size="13" text-anchor="middle" fill="#166534">denies the external email</text>
+<polyline points="240,370 290,400" fill="none" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<polyline points="240,500 290,470" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<polyline points="550,435 600,435" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#g)"/>
+<polyline points="820,410 870,380" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#g)"/>
+<polyline points="1015,420 1015,450" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#g)"/>
+<text x="40" y="590" font-size="14" fill="#475569">Memory turns a one-time injection into a persistent one that can reach other users. Treat every memory write as a privileged action.</text>
+</svg>

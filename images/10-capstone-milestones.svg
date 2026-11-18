@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Capstone milestones: weeks 33-36</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a" text-anchor="start">Capstone milestones: weeks 33-36</text>
+  <text x="40" y="80" font-size="16" fill="#475569" text-anchor="start">Each week ends with evidence a reviewer can check. Earlier modules feed each milestone.</text>
+  <rect x="40" y="110" width="265" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="172.5" y="139.0" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">01 fundamentals · 09 architecture</text>
+  <path d="M172 160 L172 188" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="40" y="190" width="265" height="170" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="172.5" y="244.0" font-size="16" font-weight="700" fill="#1e3a8a" text-anchor="middle">Week 33: Design + review</text>
+  <text x="172.5" y="262.5" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• context + data flows</text>
+  <text x="172.5" y="281.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• threat model</text>
+  <text x="172.5" y="299.5" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• security requirements</text>
+  <text x="172.5" y="318.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• ADRs + control matrix</text>
+  <rect x="40" y="380" width="265" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="172.5" y="413.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Gate: design approved</text>
+  <path d="M305 275 L323 275" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="325" y="110" width="265" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="457.5" y="139.0" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">02 LLM · 03 RAG · 04 MCP · 05</text>
+  <path d="M457 160 L457 188" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="325" y="190" width="265" height="170" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="457.5" y="244.0" font-size="16" font-weight="700" fill="#1e3a8a" text-anchor="middle">Week 34: Build the slice</text>
+  <text x="457.5" y="262.5" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• identity + RAG ACL</text>
+  <text x="457.5" y="281.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• tool broker + approval</text>
+  <text x="457.5" y="299.5" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• audit log + limits</text>
+  <text x="457.5" y="318.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• acceptance tests green</text>
+  <rect x="325" y="380" width="265" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="457.5" y="413.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Gate: tests pass in CI</text>
+  <path d="M590 275 L608 275" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="610" y="110" width="265" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="742.5" y="139.0" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">06 DevSecOps · 02 testing</text>
+  <path d="M742 160 L742 188" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="610" y="190" width="265" height="170" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="742.5" y="244.0" font-size="16" font-weight="700" fill="#1e3a8a" text-anchor="middle">Week 35: Attack + operate</text>
+  <text x="742.5" y="262.5" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• red-team suite</text>
+  <text x="742.5" y="281.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• monitoring + alerts</text>
+  <text x="742.5" y="299.5" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• incident exercise</text>
+  <text x="742.5" y="318.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• runbooks + kill switch</text>
+  <rect x="610" y="380" width="265" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="742.5" y="413.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Gate: test report</text>
+  <path d="M875 275 L893 275" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="895" y="110" width="265" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1027.5" y="139.0" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">07 governance · 08 compliance</text>
+  <path d="M1027 160 L1027 188" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="895" y="190" width="265" height="170" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1027.5" y="244.0" font-size="16" font-weight="700" fill="#1e3a8a" text-anchor="middle">Week 36: Govern + defend</text>
+  <text x="1027.5" y="262.5" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• AI inventory entry</text>
+  <text x="1027.5" y="281.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• risk acceptance</text>
+  <text x="1027.5" y="299.5" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• residual-risk statement</text>
+  <text x="1027.5" y="318.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">• architecture defense</text>
+  <rect x="895" y="380" width="265" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1027.5" y="413.5" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Gate: panel sign-off</text>
+  <text x="40" y="475" font-size="13" fill="#475569" text-anchor="start">Top row: which earlier modules each week builds on. Middle: the work. Bottom: the evidence gate.</text>
+  <text x="40" y="500" font-size="13" fill="#475569" text-anchor="start">Slip rule: never skip a gate. Cut scope (fewer tools, one cloud) instead of cutting tests or the threat model.</text>
+</svg>

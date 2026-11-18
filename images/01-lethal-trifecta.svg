@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The lethal trifecta: private data, untrusted content and an exfiltration channel</title>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">The lethal trifecta: when all three meet, data can be stolen</text>
+  <text x="40" y="80" font-size="16" fill="#475569">A rule of thumb from Simon Willison (2025). Use it in every design review of an LLM feature.</text>
+
+  <!-- Venn -->
+  <circle cx="250" cy="250" r="135" fill="#2563eb" fill-opacity="0.12" stroke="#2563eb" stroke-width="2.5"/>
+  <circle cx="420" cy="250" r="135" fill="#dc2626" fill-opacity="0.12" stroke="#dc2626" stroke-width="2.5"/>
+  <circle cx="335" cy="390" r="135" fill="#d97706" fill-opacity="0.14" stroke="#d97706" stroke-width="2.5"/>
+
+  <text x="200" y="210" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Private data</text>
+  <text x="200" y="232" text-anchor="middle" font-size="12" fill="#1e3a8a">inbox, CRM, RAG,</text>
+  <text x="200" y="248" text-anchor="middle" font-size="12" fill="#1e3a8a">files, secrets</text>
+
+  <text x="470" y="210" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Untrusted content</text>
+  <text x="470" y="232" text-anchor="middle" font-size="12" fill="#991b1b">emails, web pages,</text>
+  <text x="470" y="248" text-anchor="middle" font-size="12" fill="#991b1b">issues, tool results</text>
+
+  <text x="335" y="460" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Exfiltration channel</text>
+  <text x="335" y="482" text-anchor="middle" font-size="12" fill="#92400e">send email, fetch URL, open PR,</text>
+  <text x="335" y="498" text-anchor="middle" font-size="12" fill="#92400e">render a markdown image</text>
+
+  <text paint-order="stroke" stroke="#ffffff" stroke-width="5" x="335" y="300" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">DATA THEFT</text>
+  <text paint-order="stroke" stroke="#ffffff" stroke-width="4" x="335" y="318" text-anchor="middle" font-size="12" fill="#0f172a">one injection</text>
+  <text paint-order="stroke" stroke="#ffffff" stroke-width="4" x="335" y="333" text-anchor="middle" font-size="12" fill="#0f172a">is enough</text>
+
+  <!-- break one leg -->
+  <text x="640" y="128" font-size="18" font-weight="700" fill="#166534">Break at least one leg (hard controls)</text>
+
+  <rect x="640" y="145" width="520" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="658" y="174" font-size="15" font-weight="700" fill="#1e3a8a">Remove private data</text>
+  <text x="658" y="198" font-size="13" fill="#0f172a">A "quarantined" model reads the untrusted text but sees no</text>
+  <text x="658" y="218" font-size="13" fill="#0f172a">secrets and no other users' data. Retrieval filtered by ACL.</text>
+
+  <rect x="640" y="260" width="520" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="658" y="289" font-size="15" font-weight="700" fill="#991b1b">Remove untrusted content</text>
+  <text x="658" y="313" font-size="13" fill="#0f172a">The privileged model never sees raw outside text; it only gets</text>
+  <text x="658" y="333" font-size="13" fill="#0f172a">structured, validated fields (dual-LLM / CaMeL-style designs).</text>
+
+  <rect x="640" y="375" width="520" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="658" y="404" font-size="15" font-weight="700" fill="#92400e">Remove the exfiltration channel</text>
+  <text x="658" y="428" font-size="13" fill="#0f172a">No outbound tools; destinations fixed in code (egress allowlist);</text>
+  <text x="658" y="448" font-size="13" fill="#0f172a">no image or link rendering to unknown domains.</text>
+
+  <rect x="640" y="490" width="520" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="658" y="520" font-size="13" fill="#0f172a"><tspan font-weight="700">Not enough alone:</tspan> spotlighting, detectors, "please ignore" prompts.</text>
+</svg>

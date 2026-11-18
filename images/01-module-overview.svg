@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Module 01 overview: from understanding an AI system to testable security requirements</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Module 01: AI Security Fundamentals (weeks 1-4)</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Four lessons, one question each. The answers become the input for every later module.</text>
+
+  <!-- lesson 01 -->
+  <rect x="40" y="110" width="260" height="175" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="58" y="140" font-size="17" font-weight="700" fill="#1e3a8a">01 AI/ML/LLM basics</text>
+  <text x="58" y="162" font-size="13" fill="#475569">Weeks 1-2</text>
+  <text x="58" y="190" font-size="13" fill="#0f172a">lifecycle, actors, assets</text>
+  <text x="58" y="212" font-size="13" fill="#0f172a">tokens, context, embeddings</text>
+  <text x="58" y="234" font-size="13" fill="#0f172a">training vs fine-tuning vs RAG</text>
+  <text x="58" y="256" font-size="13" fill="#0f172a">tool calling and agents</text>
+  <text x="58" y="276" font-size="12" font-style="italic" fill="#1e3a8a">each with its security risk</text>
+
+  <!-- lesson 02 -->
+  <rect x="330" y="110" width="260" height="175" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="348" y="140" font-size="17" font-weight="700" fill="#1e3a8a">02 Architecture + trust</text>
+  <text x="348" y="162" font-size="13" fill="#475569">Week 3</text>
+  <text x="348" y="190" font-size="13" fill="#0f172a">data-flow diagrams</text>
+  <text x="348" y="212" font-size="13" fill="#0f172a">trust zones and boundaries</text>
+  <text x="348" y="234" font-size="13" fill="#0f172a">untrusted input sources</text>
+  <text x="348" y="256" font-size="13" fill="#0f172a">model output = untrusted input</text>
+
+  <!-- lesson 03 -->
+  <rect x="620" y="110" width="260" height="175" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="638" y="140" font-size="17" font-weight="700" fill="#1e3a8a">03 Threat modeling</text>
+  <text x="638" y="162" font-size="13" fill="#475569">Week 4</text>
+  <text x="638" y="190" font-size="13" fill="#0f172a">STRIDE for AI, MITRE ATLAS</text>
+  <text x="638" y="212" font-size="13" fill="#0f172a">OWASP LLM Top 10 (2025)</text>
+  <text x="638" y="234" font-size="13" fill="#0f172a">abuse cases, risk scoring</text>
+  <text x="638" y="256" font-size="13" fill="#0f172a">the lethal trifecta</text>
+
+  <!-- lesson 04 -->
+  <rect x="910" y="110" width="250" height="175" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="928" y="140" font-size="17" font-weight="700" fill="#1e3a8a">04 Attack surface + reqs</text>
+  <text x="928" y="162" font-size="13" fill="#475569">Week 4</text>
+  <text x="928" y="190" font-size="13" fill="#0f172a">6-layer attack-surface map</text>
+  <text x="928" y="212" font-size="13" fill="#0f172a">threat to requirement</text>
+  <text x="928" y="234" font-size="13" fill="#0f172a">requirement to test</text>
+  <text x="928" y="256" font-size="13" fill="#0f172a">evidence that it keeps working</text>
+
+  <path d="M300 197 L324 197" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M590 197 L614 197" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M880 197 L904 197" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- the four questions -->
+  <text x="170" y="312" text-anchor="middle" font-size="15" font-style="italic" fill="#475569">"What is it made of?"</text>
+  <text x="460" y="312" text-anchor="middle" font-size="15" font-style="italic" fill="#475569">"Where is the trust line?"</text>
+  <text x="750" y="312" text-anchor="middle" font-size="15" font-style="italic" fill="#475569">"What can go wrong?"</text>
+  <text x="1035" y="312" text-anchor="middle" font-size="15" font-style="italic" fill="#475569">"What must be true?"</text>
+
+  <!-- lab -->
+  <rect x="40" y="335" width="1120" height="80" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="60" y="366" font-size="17" font-weight="700" fill="#166534">Lab: threat model as code + tiny embeddings</text>
+  <text x="60" y="392" font-size="14" fill="#166534">YAML design (zones, components, flows, controls) -&gt; analyzer -&gt; findings with STRIDE, OWASP and a risk score -&gt; CI gate.</text>
+  <text x="60" y="408" font-size="13" fill="#166534">Plus: bag-of-words embeddings that prove "similarity is not authorization" and a context-window / token-budget demo.</text>
+
+  <!-- feeds -->
+  <rect x="40" y="440" width="1120" height="52" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="472" font-size="14" fill="#0f172a"><tspan font-weight="700">Feeds every later module:</tspan> 02 LLM · 03 RAG · 04 MCP · 05 Agents · 06 DevSecOps · 07-08 Governance and compliance · 09 Architecture · 10 Capstone</text>
+</svg>

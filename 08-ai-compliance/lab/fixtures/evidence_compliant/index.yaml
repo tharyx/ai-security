@@ -1,0 +1,115 @@
+# Evidence index (compliant set). Synthetic data for the lab.
+# collected_by: 'pipeline', 'scheduler' or 'cloud-config-export' = automated; anything else = a person.
+# sha256: normalized hash, see evidence_checker.py --hash
+- id: EV-001
+  control: CTL-INV
+  type: register_export
+  file: ctl-inv_register_export_2026-11-01.json
+  collected: 2026-11-01
+  collected_by: pipeline
+  sha256: ebe07bcb59cafe72d7c80fd59c3d998ce1c9100d93da5aaa1cb9a6703c688d18
+- id: EV-002
+  control: CTL-RISK
+  type: risk_register_export
+  file: ctl-risk_risk_register_export_2026-10-31.json
+  collected: 2026-10-31
+  collected_by: pipeline
+  sha256: be3f43dac60ec60ce946412d958efccd78becde8d757967381005f41ab7b4cf6
+- id: EV-003
+  control: CTL-RISK
+  type: risk_review_minutes
+  file: ctl-risk_risk_review_minutes_2026-10-20.md
+  collected: 2026-10-20
+  collected_by: AI Governance Board
+  sha256: c9ebe7c58b6a263bd9a6fbec26c4d834d361c2f0acdef0a892b9601c04380613
+- id: EV-004
+  control: CTL-HO
+  type: oversight_procedure
+  file: ctl-ho_oversight_procedure_2026-06-01.md
+  collected: 2026-06-01
+  collected_by: Head of Talent Acquisition
+  sha256: c23c3c1cd69e1f7d4a7afca940da9b6fc0bec60d1878c910e9f6f39f8c19e56a
+- id: EV-005
+  control: CTL-HO
+  type: override_log_sample
+  file: ctl-ho_override_log_sample_2026-10-31.json
+  collected: 2026-10-31
+  collected_by: pipeline
+  sha256: b7417d04614e592f56deedefd1882aecb14dea644447053b9d84c3c9c54849e0
+- id: EV-006
+  control: CTL-LOG
+  type: logging_config_export
+  file: ctl-log_logging_config_export_2026-11-10.json
+  collected: 2026-11-10
+  collected_by: cloud-config-export
+  sha256: 8ca85db78805b0c685bcc3e1bc80ced0f485ed026146ca4c1d4c9017b246eedc
+- id: EV-007
+  control: CTL-LOG
+  type: retention_test_result
+  file: ctl-log_retention_test_result_2026-09-30.json
+  collected: 2026-09-30
+  collected_by: scheduler
+  sha256: 23f869f046726389088c724e433d4b1e7ea2dc1ce88f4c8ae287fbccf18b64e5
+- id: EV-008
+  control: CTL-EVAL
+  type: ci_test_report
+  file: ctl-eval_ci_test_report_2026-11-12.json
+  collected: 2026-11-12
+  collected_by: pipeline
+  sha256: 284b786f108f9a91641383262868cd74a7c2e758a2a7a898b713d034026be3c8
+- id: EV-009
+  control: CTL-ACCESS
+  type: iam_policy_export
+  file: ctl-access_iam_policy_export_2026-11-10.json
+  collected: 2026-11-10
+  collected_by: cloud-config-export
+  sha256: 51cdb58e662c9b8e1c7ead8dddc582aa52a8146a50823be46cb4e3f8a3383081
+- id: EV-010
+  control: CTL-ACCESS
+  type: access_review_signoff
+  file: ctl-access_access_review_signoff_2026-10-05.md
+  collected: 2026-10-05
+  collected_by: Identity Team lead
+  sha256: ca6a009fa8b3609aceedb3488cca88fe8f099436f7c894bd142bd30bf2122343
+- id: EV-011
+  control: CTL-VEND
+  type: vendor_assessment
+  file: ctl-vend_vendor_assessment_2026-04-15.md
+  collected: 2026-04-15
+  collected_by: Third-Party Risk
+  sha256: 86e413fc2a6133883f20e73aa16054e0899d00e3923638c82e0e47f7f81d5a8a
+- id: EV-012
+  control: CTL-IR
+  type: incident_runbook
+  file: ctl-ir_incident_runbook_2026-05-20.md
+  collected: 2026-05-20
+  collected_by: Security Operations
+  sha256: 3424c62c04280a8bf119813ca22b964ac197e0c2fc049ec713b022ed49305a76
+- id: EV-013
+  control: CTL-IR
+  type: tabletop_exercise_report
+  file: ctl-ir_tabletop_exercise_report_2026-09-09.json
+  collected: 2026-09-09
+  collected_by: Security Operations
+  sha256: 6e41b356c4d8b133d466689d71e01bf98b999c280d3e3bc5dfee152603a752e8
+- id: EV-014
+  control: CTL-DOC
+  type: system_card
+  file: ctl-doc_system_card_2026-08-14.md
+  collected: 2026-08-14
+  collected_by: AI Engineering
+  sha256: 23d9d859a8daf193e30360e57a0fbba65df9527d4ad360a89559d8c149d2b546
+- id: EV-015
+  control: CTL-PRIV
+  type: dpia
+  file: ctl-priv_dpia_2026-03-01.md
+  collected: 2026-03-01
+  collected_by: Data Protection Officer
+  sha256: f0b8a4d41a5995e517f580957b7f6c69f36d9d8218b900218268c782446b57a0
+- id: EV-016
+  control: CTL-PRIV
+  type: erasure_test_receipt
+  file: ctl-priv_erasure_test_receipt_2026-11-02.json
+  collected: 2026-11-02
+  collected_by: pipeline
+  sha256: 6c4fdf1885725cc85f45ed38eef4c6c456c3835548306202f5b56fe556938a83

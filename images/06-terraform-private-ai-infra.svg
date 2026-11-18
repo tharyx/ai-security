@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Private AI infrastructure on AWS, with the policy rule that protects each part</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Private AI infrastructure (what the secure plan builds)</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Nothing AI-related has a public endpoint. Small grey text = the policy rule in lab/policy_check.py that enforces it.</text>
+
+  <!-- account / VPC -->
+  <rect x="270" y="100" width="900" height="470" rx="16" fill="#f8fafc" stroke="#64748b" stroke-width="2" stroke-dasharray="9 6"/>
+  <text x="290" y="128" font-size="15" font-weight="700" fill="#334155">AWS account · VPC with private subnets only</text>
+
+  <!-- column 1 -->
+  <rect x="300" y="150" width="250" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="425" y="178" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Security group</text>
+  <text x="425" y="200" font-size="13" fill="#166534" text-anchor="middle">443 from the VPC CIDR only</text>
+  <text x="425" y="218" font-size="13" fill="#166534" text-anchor="middle">no 0.0.0.0/0, no Ray/Jupyter ports</text>
+  <text x="425" y="239" font-size="11" fill="#475569" text-anchor="middle">TF-AI-030</text>
+
+  <rect x="300" y="290" width="250" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="425" y="318" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">IAM least privilege</text>
+  <text x="425" y="340" font-size="13" fill="#166534" text-anchor="middle">GetObject on one model prefix</text>
+  <text x="425" y="358" font-size="13" fill="#166534" text-anchor="middle">no Action "*", no access keys</text>
+  <text x="425" y="379" font-size="11" fill="#475569" text-anchor="middle">TF-AI-040 · TF-AI-041 · TF-AI-042</text>
+
+  <rect x="300" y="430" width="250" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="425" y="458" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Interface VPC endpoint</text>
+  <text x="425" y="480" font-size="13" fill="#166534" text-anchor="middle">sagemaker.runtime</text>
+  <text x="425" y="498" font-size="13" fill="#166534" text-anchor="middle">private DNS on</text>
+  <text x="425" y="519" font-size="11" fill="#475569" text-anchor="middle">TF-AI-013</text>
+
+  <!-- column 2 -->
+  <rect x="600" y="150" width="250" height="100" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="725" y="178" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">S3: models · data · logs</text>
+  <text x="725" y="200" font-size="13" fill="#334155" text-anchor="middle">public access blocked</text>
+  <text x="725" y="218" font-size="13" fill="#334155" text-anchor="middle">SSE-KMS · versioning · access logs</text>
+  <text x="725" y="239" font-size="11" fill="#475569" text-anchor="middle">TF-AI-001 … TF-AI-005</text>
+
+  <rect x="600" y="290" width="250" height="100" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="725" y="318" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">Vector DB (OpenSearch)</text>
+  <text x="725" y="340" font-size="13" fill="#334155" text-anchor="middle">VPC-only · named principal</text>
+  <text x="725" y="358" font-size="13" fill="#334155" text-anchor="middle">encrypted · HTTPS + TLS 1.2</text>
+  <text x="725" y="379" font-size="11" fill="#475569" text-anchor="middle">TF-AI-020 · TF-AI-021</text>
+
+  <rect x="600" y="430" width="250" height="100" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="725" y="458" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Model endpoint</text>
+  <text x="725" y="480" font-size="13" fill="#1e3a8a" text-anchor="middle">network isolation · in VPC</text>
+  <text x="725" y="498" font-size="13" fill="#1e3a8a" text-anchor="middle">volume encrypted with our key</text>
+  <text x="725" y="519" font-size="11" fill="#475569" text-anchor="middle">TF-AI-011 · TF-AI-012</text>
+
+  <!-- column 3 -->
+  <rect x="890" y="150" width="250" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1015" y="178" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">KMS customer key (CMEK)</text>
+  <text x="1015" y="200" font-size="13" fill="#166534" text-anchor="middle">rotation on</text>
+  <text x="1015" y="218" font-size="13" fill="#166534" text-anchor="middle">key policy decides who decrypts</text>
+  <text x="1015" y="239" font-size="11" fill="#475569" text-anchor="middle">TF-AI-003 · TF-AI-050</text>
+
+  <rect x="890" y="290" width="250" height="100" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1015" y="318" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Research notebook</text>
+  <text x="1015" y="340" font-size="13" fill="#1e3a8a" text-anchor="middle">no direct internet · no root</text>
+  <text x="1015" y="358" font-size="13" fill="#1e3a8a" text-anchor="middle">private subnet · KMS volume</text>
+  <text x="1015" y="379" font-size="11" fill="#475569" text-anchor="middle">TF-AI-010</text>
+
+  <rect x="890" y="430" width="250" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1015" y="458" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">CloudTrail data events</text>
+  <text x="1015" y="480" font-size="13" fill="#166534" text-anchor="middle">who read or replaced</text>
+  <text x="1015" y="498" font-size="13" fill="#166534" text-anchor="middle">a model or dataset object</text>
+  <text x="1015" y="519" font-size="11" fill="#475569" text-anchor="middle">TF-AI-060 (org trail: waiver)</text>
+
+  <!-- outside actors -->
+  <rect x="40" y="150" width="200" height="100" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="140" y="180" font-size="15" font-weight="700" fill="#991b1b" text-anchor="middle">Internet scanners</text>
+  <text x="140" y="203" font-size="13" fill="#991b1b" text-anchor="middle">look for open Ray,</text>
+  <text x="140" y="221" font-size="13" fill="#991b1b" text-anchor="middle">Jupyter, vector DBs</text>
+  <path d="M240 200 L292 200" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <path d="M258 188 L274 212 M274 188 L258 212" stroke="#dc2626" stroke-width="3"/>
+
+  <rect x="40" y="290" width="200" height="100" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="140" y="320" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">CI pipeline</text>
+  <text x="140" y="343" font-size="13" fill="#92400e" text-anchor="middle">GitHub OIDC token</text>
+  <text x="140" y="361" font-size="13" fill="#92400e" text-anchor="middle">sub = repo + environment</text>
+  <path d="M240 340 L292 340" stroke="#16a34a" stroke-width="2.5" marker-end="url(#g)"/>
+
+  <rect x="40" y="430" width="200" height="100" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="140" y="460" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Internal apps</text>
+  <text x="140" y="483" font-size="13" fill="#92400e" text-anchor="middle">RAG service, gateway</text>
+  <text x="140" y="501" font-size="13" fill="#92400e" text-anchor="middle">(inside the network)</text>
+  <path d="M240 480 L292 480" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M550 480 L592 480" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <text x="40" y="606" font-size="13" fill="#475569">AWS names shown. Azure: Private Endpoint, Key Vault CMK, Storage firewall, AI Search private link. GCP: Private Service Connect, CMEK, VPC Service Controls.</text>
+</svg>

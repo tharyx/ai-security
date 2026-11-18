@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Red-team and incident exercise loop</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a" text-anchor="start">Red-team and incident exercise loop</text>
+  <text x="40" y="80" font-size="16" fill="#475569" text-anchor="start">Attack the system, watch what the defenders see, respond with the runbook, and turn every finding into a test.</text>
+  <rect x="40" y="120" width="320" height="100" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="200.0" y="158.0" font-size="17" font-weight="700" fill="#334155" text-anchor="middle">1 Plan</text>
+  <text x="200.0" y="176.5" font-size="13.5" fill="#334155" text-anchor="middle">scope + rules of engagement</text>
+  <text x="200.0" y="195.0" font-size="13.5" fill="#334155" text-anchor="middle">success criteria, safety stop</text>
+  <rect x="440" y="120" width="320" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="600.0" y="158.0" font-size="17" font-weight="700" fill="#991b1b" text-anchor="middle">2 Attack</text>
+  <text x="600.0" y="176.5" font-size="13.5" fill="#991b1b" text-anchor="middle">run the attack suite</text>
+  <text x="600.0" y="195.0" font-size="13.5" fill="#991b1b" text-anchor="middle">+ manual creative attempts</text>
+  <rect x="840" y="120" width="320" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1000.0" y="158.0" font-size="17" font-weight="700" fill="#166534" text-anchor="middle">3 Detect</text>
+  <text x="1000.0" y="176.5" font-size="13.5" fill="#166534" text-anchor="middle">did an alert fire?</text>
+  <text x="1000.0" y="195.0" font-size="13.5" fill="#166534" text-anchor="middle">time to detect (TTD)</text>
+  <rect x="840" y="330" width="320" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1000.0" y="368.0" font-size="17" font-weight="700" fill="#166534" text-anchor="middle">4 Respond</text>
+  <text x="1000.0" y="386.5" font-size="13.5" fill="#166534" text-anchor="middle">follow the playbook</text>
+  <text x="1000.0" y="405.0" font-size="13.5" fill="#166534" text-anchor="middle">kill switch · revoke tokens</text>
+  <rect x="440" y="330" width="320" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="600.0" y="368.0" font-size="17" font-weight="700" fill="#1e3a8a" text-anchor="middle">5 Recover</text>
+  <text x="600.0" y="386.5" font-size="13.5" fill="#1e3a8a" text-anchor="middle">restore safe state</text>
+  <text x="600.0" y="405.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">verify with the test suite</text>
+  <rect x="40" y="330" width="320" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="200.0" y="368.0" font-size="17" font-weight="700" fill="#92400e" text-anchor="middle">6 Learn</text>
+  <text x="200.0" y="386.5" font-size="13.5" fill="#92400e" text-anchor="middle">blameless review</text>
+  <text x="200.0" y="405.0" font-size="13.5" fill="#92400e" text-anchor="middle">new tests · risk register</text>
+  <path d="M360 170 L438 170" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M760 170 L838 170" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M1000 220 L1000 328" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M840 380 L762 380" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M440 380 L362 380" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M200 330 L200 222" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="410" y="248" width="380" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600.0" y="276.75" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">Measure every round</text>
+  <text x="600.0" y="294.25" font-size="12.5" fill="#334155" text-anchor="middle">attack success rate · TTD · time to contain</text>
+  <rect x="40" y="470" width="1120" height="80" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="600.0" y="498.0" font-size="15" font-weight="700" fill="#991b1b" text-anchor="middle">Example inject (hypothetical drill)</text>
+  <text x="600.0" y="515.5" font-size="12.5" fill="#991b1b" text-anchor="middle">14:00 a wiki page gains a planted CALL_TOOL rollback · 14:03 broker denies, SIEM alert on tool_denied + possible_injection</text>
+  <text x="600.0" y="533.0" font-size="12.5" fill="#991b1b" text-anchor="middle">14:10 on-call follows playbook: find correlation ID, quarantine page, re-index, add the payload to the regression suite</text>
+  <text x="40" y="580" font-size="13" fill="#475569" text-anchor="start">Run purple-team style: attackers and defenders in the same room, sharing what each side saw.</text>
+</svg>

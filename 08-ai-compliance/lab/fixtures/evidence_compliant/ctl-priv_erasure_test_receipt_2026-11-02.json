@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-PRIV",
+  "evidence_type": "erasure_test_receipt",
+  "collected": "2026-11-02",
+  "collected_by": "pipeline",
+  "summary": "erasure drill: source, index, cache and logs cleared; backups expire in 35 days"
+}

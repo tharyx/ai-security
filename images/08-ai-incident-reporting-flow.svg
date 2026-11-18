@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>AI incident: triage questions, parallel regulatory clocks, containment and learning</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">AI incident: one event, several clocks</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Triage fast, because the shortest deadline may be hours, not days. Educational summary, not legal advice.</text>
+
+  <rect x="40" y="200" width="170" height="110" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="125" y="236" text-anchor="middle" font-size="17" font-weight="700" fill="#991b1b">Detect</text>
+  <text x="125" y="260" text-anchor="middle" font-size="13" fill="#991b1b">alert, user report,</text>
+  <text x="125" y="279" text-anchor="middle" font-size="13" fill="#991b1b">red team, vendor</text>
+  <text x="125" y="298" text-anchor="middle" font-size="12" fill="#991b1b">clock starts: "aware"</text>
+
+  <rect x="250" y="110" width="270" height="300" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="385" y="140" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">Triage questions</text>
+  <g font-size="13" fill="#1e3a8a">
+    <text x="268" y="170">• Is an AI system involved?</text>
+    <text x="268" y="196">• Harm to health, safety, rights?</text>
+    <text x="268" y="222">• Did anyone die? Critical</text>
+    <text x="280" y="240">infrastructure disrupted?</text>
+    <text x="268" y="266">• Personal data breached?</text>
+    <text x="268" y="292">• Which countries' people?</text>
+    <text x="268" y="318">• Our role: provider or deployer?</text>
+    <text x="268" y="344">• Is it a reportable cyber</text>
+    <text x="280" y="362">incident (e.g. CERT-In list)?</text>
+    <text x="268" y="390">• Who is incident commander?</text>
+  </g>
+
+  <path d="M210 255 L244 255" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- clocks -->
+  <g font-size="13">
+    <rect x="570" y="100" width="300" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="586" y="126" font-size="14" font-weight="700" fill="#991b1b">CERT-In (India): 6 hours</text>
+    <text x="586" y="148" fill="#991b1b">reportable cyber incidents</text>
+    <rect x="570" y="182" width="300" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="586" y="208" font-size="14" font-weight="700" fill="#92400e">GDPR Art 33: 72 hours</text>
+    <text x="586" y="230" fill="#92400e">to the supervisory authority, if risk</text>
+    <rect x="570" y="264" width="300" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="586" y="290" font-size="14" font-weight="700" fill="#1e3a8a">EU AI Act Art 73: 2/10/15 days</text>
+    <text x="586" y="312" fill="#1e3a8a">high-risk provider, serious incident</text>
+    <rect x="570" y="346" width="300" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="586" y="372" font-size="14" font-weight="700" fill="#0f172a">DPDP Act (India): Board + people</text>
+    <text x="586" y="394" fill="#475569">timing per DPDP Rules; check status</text>
+  </g>
+  <path d="M520 160 L564 135" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M520 220 L564 217" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M520 290 L564 299" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M520 360 L564 381" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- contain -->
+  <rect x="910" y="100" width="250" height="150" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="1035" y="130" text-anchor="middle" font-size="17" font-weight="700" fill="#166534">Contain and fix</text>
+  <g font-size="13" fill="#166534">
+    <text x="928" y="158">• kill switch / disable tool</text>
+    <text x="928" y="182">• rotate exposed credentials</text>
+    <text x="928" y="206">• preserve logs as evidence</text>
+    <text x="928" y="230">• hotfix + regression test</text>
+  </g>
+
+  <rect x="910" y="270" width="250" height="146" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1035" y="300" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">Learn</text>
+  <g font-size="13" fill="#334155">
+    <text x="928" y="328">• update risk register</text>
+    <text x="928" y="352">• update system card</text>
+    <text x="928" y="376">• add test to the suite</text>
+    <text x="928" y="400">• file post-incident report</text>
+  </g>
+  <path d="M870 135 L904 160" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M1035 250 L1035 264" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- footer -->
+  <rect x="40" y="440" width="1120" height="150" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="60" y="468" font-size="16" font-weight="700" fill="#92400e">Prepare before it happens</text>
+  <g font-size="14" fill="#92400e">
+    <text x="60" y="494">• a runbook that lists every clock, its trigger, the regulator and the template to use</text>
+    <text x="60" y="518">• logs kept long enough (high-risk deployers: at least six months) and protected from editing</text>
+    <text x="60" y="542">• contact paths to vendors and model providers, with notice duties in the contract</text>
+    <text x="60" y="566">• a tabletop exercise each year; its report is audit evidence (Module 08 lab: incident_clock.py)</text>
+  </g>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Module 09 map: design by outcome, then map to each cloud</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a" text-anchor="start">Module 09 map: design by outcome, then map to each cloud</text>
+  <text x="40" y="80" font-size="16" fill="#475569" text-anchor="start">One cloud-neutral reference architecture. Three provider mappings. One control matrix that proves equivalence.</text>
+  <rect x="40" y="120" width="300" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="190.0" y="154.75" font-size="16" font-weight="700" fill="#1e3a8a" text-anchor="middle">01 Reference architecture</text>
+  <text x="190.0" y="172.25" font-size="12.5" fill="#1e3a8a" text-anchor="middle">cloud-neutral building blocks</text>
+  <text x="190.0" y="189.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">gateway · PDP · RAG · MCP · agent</text>
+  <text x="190.0" y="207.25" font-size="12.5" fill="#1e3a8a" text-anchor="middle">weeks 25-28 (read first)</text>
+  <rect x="450" y="105" width="300" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="137.25" font-size="16" font-weight="700" fill="#92400e" text-anchor="middle">02 AWS AI security</text>
+  <text x="600.0" y="154.75" font-size="12.5" fill="#92400e" text-anchor="middle">Bedrock · SageMaker · week 25</text>
+  <rect x="450" y="190" width="300" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="222.25" font-size="16" font-weight="700" fill="#92400e" text-anchor="middle">03 Azure AI security</text>
+  <text x="600.0" y="239.75" font-size="12.5" fill="#92400e" text-anchor="middle">Foundry · Azure OpenAI · week 26</text>
+  <rect x="450" y="275" width="300" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="307.25" font-size="16" font-weight="700" fill="#92400e" text-anchor="middle">04 Google Cloud AI security</text>
+  <text x="600.0" y="324.75" font-size="12.5" fill="#92400e" text-anchor="middle">Vertex AI · week 27</text>
+  <rect x="860" y="120" width="300" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1010.0" y="154.75" font-size="16" font-weight="700" fill="#166534" text-anchor="middle">05 Control matrix + ADRs</text>
+  <text x="1010.0" y="172.25" font-size="12.5" fill="#166534" text-anchor="middle">control equivalence</text>
+  <text x="1010.0" y="189.75" font-size="12.5" fill="#166534" text-anchor="middle">shared responsibility</text>
+  <text x="1010.0" y="207.25" font-size="12.5" fill="#166534" text-anchor="middle">design review · week 28</text>
+  <path d="M340 175 L448 140" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M340 175 L448 225" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M340 175 L448 310" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M750 140 L858 165" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M750 225 L858 175" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M750 310 L858 190" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="40" y="390" width="520" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="300.0" y="425.25" font-size="17" font-weight="700" fill="#166534" text-anchor="middle">Lab: architecture-as-code review</text>
+  <text x="300.0" y="442.75" font-size="12.5" fill="#166534" text-anchor="middle">YAML design + control_matrix.yaml -&gt; reviewer.py</text>
+  <text x="300.0" y="460.25" font-size="12.5" fill="#166534" text-anchor="middle">severity-ranked gaps, cloud-specific fixes, CI gate</text>
+  <text x="300.0" y="477.75" font-size="12.5" fill="#166534" text-anchor="middle">mutation tests prove every check works</text>
+  <rect x="640" y="390" width="520" height="110" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="900.0" y="425.25" font-size="17" font-weight="700" fill="#334155" text-anchor="middle">Phase 7 gate (week 28)</text>
+  <text x="900.0" y="442.75" font-size="12.5" fill="#334155" text-anchor="middle">AWS / Azure / GCP designs pass the reviewer</text>
+  <text x="900.0" y="460.25" font-size="12.5" fill="#334155" text-anchor="middle">differences recorded in ADRs</text>
+  <text x="900.0" y="477.75" font-size="12.5" fill="#334155" text-anchor="middle">residual risk owned and dated</text>
+  <path d="M1010 230 L1010 365 L300 365 L300 388" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M560 445 L638 445" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="40" y="535" font-size="13" fill="#475569" text-anchor="start">Rule of the module: write the security OUTCOME first, then choose the provider service. Similar product names do not mean equal controls.</text>
+</svg>

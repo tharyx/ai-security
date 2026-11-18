@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>EU AI Act risk categories, the separate GPAI track, and operator roles</title>
+  <rect width="1200" height="760" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">EU AI Act: risk categories, GPAI models and roles</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Duties depend on the category of the use AND on your role. Educational summary, not legal advice.</text>
+
+  <!-- pyramid -->
+  <polygon points="330,100 390.75,190 269.25,190" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+  <polygon points="269.25,190 390.75,190 465,300 195,300" fill="#fed7aa" stroke="#d97706" stroke-width="2"/>
+  <polygon points="195,300 465,300 532.5,400 127.5,400" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <polygon points="127.5,400 532.5,400 600,500 60,500" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="330" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">Art 5</text>
+  <text x="330" y="252" text-anchor="middle" font-size="17" font-weight="700" fill="#92400e">High-risk</text>
+  <text x="330" y="274" text-anchor="middle" font-size="12" fill="#92400e">Art 6</text>
+  <text x="330" y="356" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Transparency</text>
+  <text x="330" y="376" text-anchor="middle" font-size="12" fill="#1e3a8a">Art 50</text>
+  <text x="330" y="456" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Minimal risk</text>
+  <text x="330" y="476" text-anchor="middle" font-size="12" fill="#166534">most AI systems</text>
+
+  <!-- leader lines -->
+  <path d="M362 145 L634 142" stroke="#94a3b8" stroke-width="1.5"/>
+  <path d="M430 246 L634 246" stroke="#94a3b8" stroke-width="1.5"/>
+  <path d="M500 350 L634 350" stroke="#94a3b8" stroke-width="1.5"/>
+  <path d="M567 450 L634 450" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- labels -->
+  <rect x="640" y="100" width="520" height="84" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="656" y="124" font-size="15" font-weight="700" fill="#991b1b">Unacceptable: prohibited practices</text>
+  <text x="656" y="146" font-size="13" fill="#991b1b">e.g. social scoring, emotion recognition at work or school,</text>
+  <text x="656" y="166" font-size="13" fill="#991b1b">untargeted face scraping, harmful manipulation. Since 2 Feb 2025.</text>
+
+  <rect x="640" y="196" width="520" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="656" y="220" font-size="15" font-weight="700" fill="#92400e">High-risk: Annex I products and Annex III areas</text>
+  <text x="656" y="242" font-size="13" fill="#92400e">biometrics, critical infrastructure, education, employment,</text>
+  <text x="656" y="262" font-size="13" fill="#92400e">essential services (e.g. credit), law enforcement, migration,</text>
+  <text x="656" y="282" font-size="13" fill="#92400e">justice. Art 6(3) exception possible unless it profiles people.</text>
+
+  <rect x="640" y="306" width="520" height="88" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="656" y="330" font-size="15" font-weight="700" fill="#1e3a8a">Transparency duties</text>
+  <text x="656" y="352" font-size="13" fill="#1e3a8a">say a chatbot is AI; mark synthetic content machine-readably;</text>
+  <text x="656" y="372" font-size="13" fill="#1e3a8a">disclose deep fakes and emotion recognition to the people exposed.</text>
+
+  <rect x="640" y="406" width="520" height="88" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="656" y="430" font-size="15" font-weight="700" fill="#166534">Minimal risk</text>
+  <text x="656" y="452" font-size="13" fill="#166534">e.g. spam filters, internal code assistants: no new duties</text>
+  <text x="656" y="472" font-size="13" fill="#166534">beyond AI literacy (Art 4); voluntary codes of conduct.</text>
+
+  <!-- GPAI -->
+  <rect x="40" y="524" width="1120" height="88" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="550" font-size="15" font-weight="700" fill="#0f172a">Separate track: general-purpose AI (GPAI) models, Chapter V (since 2 Aug 2025)</text>
+  <text x="60" y="574" font-size="13" fill="#334155">All GPAI model providers (Art 53): technical documentation, information for downstream providers, copyright policy, training-content summary.</text>
+  <text x="60" y="596" font-size="13" fill="#334155">Systemic-risk models (Art 51, 55): model evaluation incl. adversarial testing, risk mitigation, serious-incident reporting, cybersecurity.</text>
+
+  <!-- roles -->
+  <g font-size="12" text-anchor="middle">
+    <rect x="40" y="632" width="212" height="64" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="146" y="657" font-size="14" font-weight="700" fill="#1e3a8a">Provider</text>
+    <text x="146" y="678" fill="#1e3a8a">develops, places on market</text>
+    <rect x="267" y="632" width="212" height="64" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="373" y="657" font-size="14" font-weight="700" fill="#92400e">Deployer</text>
+    <text x="373" y="678" fill="#92400e">uses it under its authority</text>
+    <rect x="494" y="632" width="212" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="600" y="657" font-size="14" font-weight="700" fill="#0f172a">Importer</text>
+    <text x="600" y="678" fill="#475569">brings a non-EU system in</text>
+    <rect x="721" y="632" width="212" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="827" y="657" font-size="14" font-weight="700" fill="#0f172a">Distributor</text>
+    <text x="827" y="678" fill="#475569">makes it available</text>
+    <rect x="948" y="632" width="212" height="64" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="1054" y="657" font-size="13" font-weight="700" fill="#0f172a">Authorised representative</text>
+    <text x="1054" y="678" fill="#475569">acts for a non-EU provider</text>
+  </g>
+  <text x="40" y="728" font-size="13" fill="#475569">Art 25: rebranding, substantially modifying or changing the intended purpose of a high-risk system can make you its provider.</text>
+</svg>

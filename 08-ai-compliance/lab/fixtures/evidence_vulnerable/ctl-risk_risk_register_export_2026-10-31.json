@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-RISK",
+  "evidence_type": "risk_register_export",
+  "collected": "2026-10-31",
+  "collected_by": "pipeline",
+  "summary": "5 risks"
+}

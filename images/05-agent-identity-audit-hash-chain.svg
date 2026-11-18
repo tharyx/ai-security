@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="610" viewBox="0 0 1200 610" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Tamper-evident audit log (hash chain)</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs>
+<rect width="1200" height="610" fill="#ffffff"/>
+<text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Tamper-evident audit log (hash chain)</text>
+<text x="40" y="80" font-size="16" fill="#475569">Answering &quot;who did this?&quot; needs attribution in every entry AND proof that nobody edited the log</text>
+<rect x="40" y="120" width="250" height="150" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="54" y="163" font-size="16" font-weight="700" fill="#334155">entry 0</text>
+<text x="54" y="185" font-size="13" fill="#334155">session_start</text>
+<text x="54" y="204" font-size="13" fill="#334155">alice -&gt; summarizer</text>
+<text x="54" y="223" font-size="13" fill="#334155">prev: 0000...</text>
+<text x="54" y="242" font-size="13" fill="#334155">hash: 7c21...</text>
+<rect x="330" y="120" width="250" height="150" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="344" y="163" font-size="16" font-weight="700" fill="#334155">entry 1</text>
+<text x="344" y="185" font-size="13" fill="#334155">allow read_report</text>
+<text x="344" y="204" font-size="13" fill="#334155">alice -&gt; summarizer</text>
+<text x="344" y="223" font-size="13" fill="#334155">prev: 7c21...</text>
+<text x="344" y="242" font-size="13" fill="#334155">hash: a90e...</text>
+<rect x="620" y="120" width="250" height="150" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="634" y="163" font-size="16" font-weight="700" fill="#334155">entry 2</text>
+<text x="634" y="185" font-size="13" fill="#334155">allow delete_bucket</text>
+<text x="634" y="204" font-size="13" fill="#334155">bob -&gt; planner -&gt; janitor</text>
+<text x="634" y="223" font-size="13" fill="#334155">prev: a90e...</text>
+<text x="634" y="242" font-size="13" fill="#334155">hash: 3f4b...</text>
+<rect x="910" y="120" width="250" height="150" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="924" y="163" font-size="16" font-weight="700" fill="#334155">entry 3</text>
+<text x="924" y="185" font-size="13" fill="#334155">deny create_ticket</text>
+<text x="924" y="204" font-size="13" fill="#334155">alice -&gt; ticket-bot</text>
+<text x="924" y="223" font-size="13" fill="#334155">prev: 3f4b...</text>
+<text x="924" y="242" font-size="13" fill="#334155">hash: c615...</text>
+<polyline points="290,235 330,235" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#g)"/>
+<polyline points="580,235 620,235" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#g)"/>
+<polyline points="870,235 910,235" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#g)"/>
+<text x="600" y="300" font-size="14" text-anchor="middle" fill="#475569">hash = SHA-256(seq, time, prev, event)   -   each entry commits to everything before it</text>
+<rect x="40" y="330" width="540" height="130" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="310.0" y="372" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">Insider edits entry 2 (&quot;delete&quot; -&gt; &quot;read&quot;)</text>
+<text x="310.0" y="394" font-size="13" text-anchor="middle" fill="#991b1b">its stored hash no longer matches its content,</text>
+<text x="310.0" y="414" font-size="13" text-anchor="middle" fill="#991b1b">and entry 3&#x27;s prev no longer matches either</text>
+<text x="310.0" y="432" font-size="13" text-anchor="middle" fill="#991b1b">verify() -&gt; chain broken at entry 2</text>
+<rect x="620" y="330" width="540" height="130" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="890.0" y="372" font-size="16" font-weight="700" text-anchor="middle" fill="#991b1b">Insider deletes the newest entry</text>
+<text x="890.0" y="394" font-size="13" text-anchor="middle" fill="#991b1b">the remaining chain is still valid!</text>
+<text x="890.0" y="414" font-size="13" text-anchor="middle" fill="#991b1b">only an external anchor catches truncation</text>
+<text x="890.0" y="432" font-size="13" text-anchor="middle" fill="#991b1b">verify(anchor) -&gt; log does not match the anchor</text>
+<rect x="40" y="490" width="1120" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="600.0" y="522" font-size="16" font-weight="700" text-anchor="middle" fill="#166534">Anchor the head hash outside the agent&#x27;s reach</text>
+<text x="600.0" y="544" font-size="13" text-anchor="middle" fill="#166534">copy (length, head hash) to write-once storage or a separate log service every few minutes;</text>
+<text x="600.0" y="563" font-size="13" text-anchor="middle" fill="#166534">the agent and its operators get append-only access to the log, never update or delete</text>
+</svg>

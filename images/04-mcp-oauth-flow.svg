@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="840" viewBox="0 0 1200 840" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>MCP authorization flow: discovery, PKCE, audience-bound token, token exchange</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="840" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">MCP authorization (HTTP transports): the happy path</text>
+  <text x="40" y="80" font-size="16" fill="#475569">The MCP server is an OAuth resource server. The token is bound to it. Downstream calls get a new token.</text>
+
+  <!-- participants -->
+  <rect x="40" y="105" width="220" height="60" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="150" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">MCP client (host)</text>
+  <text x="150" y="152" text-anchor="middle" font-size="12" fill="#92400e">public client, user: alice</text>
+  <rect x="360" y="105" width="220" height="60" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="470" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">MCP server</text>
+  <text x="470" y="152" text-anchor="middle" font-size="12" fill="#92400e">resource server</text>
+  <rect x="680" y="105" width="220" height="60" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="790" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Authorization server</text>
+  <text x="790" y="152" text-anchor="middle" font-size="12" fill="#1e3a8a">login, consent, tokens</text>
+  <rect x="990" y="105" width="170" height="60" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1075" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Downstream API</text>
+  <text x="1075" y="152" text-anchor="middle" font-size="12" fill="#475569">e.g. ticket system</text>
+
+  <path d="M150 165 L150 770" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M470 165 L470 770" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M790 165 L790 770" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M1075 165 L1075 770" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <!-- discovery -->
+  <text x="310" y="200" text-anchor="middle" font-size="13" fill="#0f172a">1. POST /mcp (no token)</text>
+  <path d="M150 208 L464 208" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="310" y="238" text-anchor="middle" font-size="13" fill="#0f172a">2. 401 + WWW-Authenticate: resource_metadata</text>
+  <path d="M470 246 L156 246" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="310" y="276" text-anchor="middle" font-size="13" fill="#0f172a">3. GET protected resource metadata</text>
+  <path d="M150 284 L464 284" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="310" y="314" text-anchor="middle" font-size="13" fill="#0f172a">4. resource + authorization_servers</text>
+  <path d="M470 322 L156 322" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="470" y="352" text-anchor="middle" font-size="13" fill="#0f172a">5. GET authorization server metadata; register the client if needed</text>
+  <path d="M150 360 L784 360" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- PKCE -->
+  <text x="470" y="395" text-anchor="middle" font-size="13" fill="#0f172a">6. /authorize: code_challenge (S256) + resource = https://docs-mcp… + scope</text>
+  <path d="M150 403 L784 403" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="800" y="380" width="180" height="46" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="890" y="400" text-anchor="middle" font-size="12" fill="#1e3a8a">user logs in and</text>
+  <text x="890" y="417" text-anchor="middle" font-size="12" fill="#1e3a8a">consents to scopes</text>
+  <text x="470" y="440" text-anchor="middle" font-size="13" fill="#0f172a">7. authorization code (by redirect)</text>
+  <path d="M790 448 L156 448" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="470" y="478" text-anchor="middle" font-size="13" fill="#0f172a">8. /token: code + code_verifier + the same resource</text>
+  <path d="M150 486 L784 486" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="470" y="516" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">9. access token: aud = MCP server only, short-lived, narrow scopes</text>
+  <path d="M790 524 L156 524" stroke="#16a34a" stroke-width="2.5" marker-end="url(#g)"/>
+
+  <!-- use -->
+  <text x="310" y="556" text-anchor="middle" font-size="13" fill="#0f172a">10. POST /mcp + Authorization: Bearer</text>
+  <path d="M150 564 L464 564" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="380" y="578" width="180" height="46" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="470" y="598" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">11. check signature, iss,</text>
+  <text x="470" y="615" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">aud, exp, scope per tool</text>
+  <text x="630" y="652" text-anchor="middle" font-size="13" fill="#0f172a">12. token exchange (RFC 8693)</text>
+  <path d="M470 660 L784 660" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="630" y="688" text-anchor="middle" font-size="13" fill="#0f172a">13. new token: aud = API, act = MCP</text>
+  <path d="M790 696 L476 696" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="772" y="726" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">14. call the API with the NEW token (never alice's original token)</text>
+  <path d="M470 734 L1069 734" stroke="#16a34a" stroke-width="2.5" marker-end="url(#g)"/>
+  <rect x="995" y="742" width="160" height="40" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1075" y="767" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">checks aud + owner</text>
+
+  <text x="40" y="810" font-size="13" fill="#475569">Discovery: RFC 9728 (protected resource metadata), RFC 8414 (AS metadata). Binding: RFC 8707 resource indicators. PKCE: RFC 7636.</text>
+  <text x="40" y="830" font-size="13" fill="#475569">Stdio servers do not use this flow: they get credentials from the environment. Check the current MCP specification for exact rules.</text>
+</svg>

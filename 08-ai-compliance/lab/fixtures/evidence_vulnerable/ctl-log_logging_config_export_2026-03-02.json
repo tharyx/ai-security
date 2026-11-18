@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-LOG",
+  "evidence_type": "logging_config_export",
+  "collected": "2026-03-02",
+  "collected_by": "cloud-config-export",
+  "summary": "prompt logging on"
+}

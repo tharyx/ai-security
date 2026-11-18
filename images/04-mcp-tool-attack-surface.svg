@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The attack surface of one MCP tool call, stage by stage</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="720" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">One tool call, four places to attack it</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Text flows into the model at stage 1 and stage 4. Arguments flow out of the model at stage 2. Defend all four.</text>
+
+  <!-- stage headers -->
+  <rect x="40" y="105" width="260" height="70" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="170" y="135" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">1 Definition</text>
+  <text x="170" y="157" text-anchor="middle" font-size="12" fill="#92400e">tools/list: name, description, schema</text>
+  <rect x="320" y="105" width="260" height="70" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="450" y="135" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">2 Selection + arguments</text>
+  <text x="450" y="157" text-anchor="middle" font-size="12" fill="#1e3a8a">the model picks a tool and fills it in</text>
+  <rect x="600" y="105" width="260" height="70" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="730" y="135" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">3 Execution</text>
+  <text x="730" y="157" text-anchor="middle" font-size="12" fill="#92400e">files, shell, network, APIs</text>
+  <rect x="880" y="105" width="280" height="70" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1020" y="135" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">4 Result</text>
+  <text x="1020" y="157" text-anchor="middle" font-size="12" fill="#92400e">text returned to the model</text>
+  <path d="M300 140 L314 140" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M580 140 L594 140" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M860 140 L874 140" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <text x="40" y="205" font-size="14" font-weight="700" fill="#991b1b">ATTACKS</text>
+  <rect x="40" y="215" width="260" height="170" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="55" y="242" font-size="13" fill="#0f172a">• Tool poisoning: hidden orders</text>
+  <text x="55" y="262" font-size="13" fill="#0f172a">   in descriptions or schemas</text>
+  <text x="55" y="287" font-size="13" fill="#0f172a">• Shadowing: one server's text</text>
+  <text x="55" y="307" font-size="13" fill="#0f172a">   changes how another's tool works</text>
+  <text x="55" y="332" font-size="13" fill="#0f172a">• Invisible Unicode, name clashes</text>
+  <text x="55" y="357" font-size="13" fill="#0f172a">• Rug pull after approval</text>
+
+  <rect x="320" y="215" width="260" height="170" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="335" y="242" font-size="13" fill="#0f172a">• Command injection: ; &amp;&amp; | $( )</text>
+  <text x="335" y="267" font-size="13" fill="#0f172a">• Option injection: --output=…</text>
+  <text x="335" y="292" font-size="13" fill="#0f172a">• Path traversal: ../ , /abs, links</text>
+  <text x="335" y="317" font-size="13" fill="#0f172a">• SSRF: 169.254.169.254,</text>
+  <text x="335" y="337" font-size="13" fill="#0f172a">   localhost, redirects, rebinding</text>
+  <text x="335" y="362" font-size="13" fill="#0f172a">• Extra or oversized arguments</text>
+
+  <rect x="600" y="215" width="260" height="170" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="615" y="242" font-size="13" fill="#0f172a">• Server runs with too much power</text>
+  <text x="615" y="262" font-size="13" fill="#0f172a">   (the user's whole account)</text>
+  <text x="615" y="287" font-size="13" fill="#0f172a">• Escape from a weak sandbox</text>
+  <text x="615" y="312" font-size="13" fill="#0f172a">• Resource exhaustion: CPU, disk,</text>
+  <text x="615" y="332" font-size="13" fill="#0f172a">   endless loops, huge downloads</text>
+  <text x="615" y="357" font-size="13" fill="#0f172a">• Secrets read from env or files</text>
+
+  <rect x="880" y="215" width="280" height="170" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="895" y="242" font-size="13" fill="#0f172a">• Indirect prompt injection: a web</text>
+  <text x="895" y="262" font-size="13" fill="#0f172a">   page or issue tells the model to</text>
+  <text x="895" y="282" font-size="13" fill="#0f172a">   call the next tool</text>
+  <text x="895" y="307" font-size="13" fill="#0f172a">• Context flooding: 2 MB of text</text>
+  <text x="895" y="332" font-size="13" fill="#0f172a">• Secrets or other users' data</text>
+  <text x="895" y="352" font-size="13" fill="#0f172a">   returned in the result</text>
+
+  <text x="40" y="420" font-size="14" font-weight="700" fill="#166534">HARD CONTROLS</text>
+  <rect x="40" y="430" width="260" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="55" y="457" font-size="13" fill="#0f172a">• Server registry + human review</text>
+  <text x="55" y="482" font-size="13" fill="#0f172a">• Pin definition hashes; re-review</text>
+  <text x="55" y="502" font-size="13" fill="#0f172a">   on any change</text>
+  <text x="55" y="527" font-size="13" fill="#0f172a">• Unique tool names per host</text>
+  <text x="55" y="552" font-size="13" fill="#0f172a">• Scanner (aid, not a boundary)</text>
+
+  <rect x="320" y="430" width="260" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="335" y="457" font-size="13" fill="#0f172a">• Strict schema, extra = forbid</text>
+  <text x="335" y="482" font-size="13" fill="#0f172a">• No shell: argv list + allowlist</text>
+  <text x="335" y="507" font-size="13" fill="#0f172a">• Resolve real path inside root</text>
+  <text x="335" y="532" font-size="13" fill="#0f172a">• Host allowlist + IP check +</text>
+  <text x="335" y="552" font-size="13" fill="#0f172a">   connect to the checked IP</text>
+  <text x="335" y="577" font-size="13" fill="#0f172a">• Approval for side effects</text>
+
+  <rect x="600" y="430" width="260" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="615" y="457" font-size="13" fill="#0f172a">• Container / sandbox, non-root,</text>
+  <text x="615" y="477" font-size="13" fill="#0f172a">   read-only file system</text>
+  <text x="615" y="502" font-size="13" fill="#0f172a">• Egress firewall, no metadata IP</text>
+  <text x="615" y="527" font-size="13" fill="#0f172a">• Timeouts, CPU and memory caps</text>
+  <text x="615" y="552" font-size="13" fill="#0f172a">• Per-user, short-lived credentials</text>
+
+  <rect x="880" y="430" width="280" height="170" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="895" y="457" font-size="13" fill="#0f172a">• Mark results untrusted; taint the</text>
+  <text x="895" y="477" font-size="13" fill="#0f172a">   session; then side effects need</text>
+  <text x="895" y="497" font-size="13" fill="#0f172a">   a human</text>
+  <text x="895" y="522" font-size="13" fill="#0f172a">• Size limits and truncation</text>
+  <text x="895" y="547" font-size="13" fill="#0f172a">• Scan output for secrets/canaries</text>
+  <text x="895" y="572" font-size="13" fill="#0f172a">• Spotlighting (soft layer)</text>
+
+  <path d="M1020 600 L1020 640 L450 640 L450 606" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="8 5" fill="none" marker-end="url(#r)"/>
+  <text x="735" y="665" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">the result becomes input for the next selection: injection chains tool to tool</text>
+  <text x="40" y="700" font-size="13" fill="#475569">Lab: vulnerable_tools.py vs secure_tools.py, plus tool_scanner.py for stage 1.</text>
+</svg>

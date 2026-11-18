@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Multi-stage build for a model-serving image</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Multi-stage build: ship the result, not the workshop</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Only what you COPY --from the build stage reaches the final image. Tools, caches and build secrets stay behind.</text>
+
+  <!-- stage 1 -->
+  <rect x="40" y="110" width="360" height="250" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="60" y="142" font-size="17" font-weight="700" fill="#92400e">Stage 1 · build (thrown away)</text>
+  <g font-size="14" fill="#92400e">
+    <text x="60" y="174">FROM debian:12-slim@sha256:…</text>
+    <text x="60" y="202">apt-get install gcc, python3-venv</text>
+    <text x="60" y="230">pip install --require-hashes</text>
+    <text x="60" y="258">--index-url (one index only)</text>
+    <text x="60" y="286">RUN --mount=type=secret,id=netrc</text>
+    <text x="60" y="314">   secret exists only during this step</text>
+  </g>
+
+  <!-- arrow -->
+  <path d="M400 230 L486 230" stroke="#334155" stroke-width="3" marker-end="url(#a)"/>
+  <text x="443" y="214" font-size="13" fill="#334155" text-anchor="middle">COPY --from=build</text>
+  <text x="443" y="254" font-size="13" fill="#334155" text-anchor="middle">/venv only</text>
+
+  <!-- stage 2 -->
+  <rect x="492" y="110" width="360" height="250" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="512" y="142" font-size="17" font-weight="700" fill="#1e3a8a">Stage 2 · runtime (shipped)</text>
+  <g font-size="14" fill="#1e3a8a">
+    <text x="512" y="174">FROM distroless/python3:nonroot@sha256:…</text>
+    <text x="512" y="202">/venv + src/ + model.safetensors</text>
+    <text x="512" y="230">USER 65532:65532</text>
+    <text x="512" y="258">no shell · no apt · no gcc · no curl</text>
+    <text x="512" y="286">no ENV/ARG secrets</text>
+    <text x="512" y="314">ENTRYPOINT exec form</text>
+  </g>
+
+  <!-- runtime flags -->
+  <rect x="892" y="110" width="268" height="250" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="912" y="142" font-size="17" font-weight="700" fill="#166534">Set at run time</text>
+  <g font-size="14" fill="#166534">
+    <text x="912" y="174">read-only root filesystem</text>
+    <text x="912" y="202">drop ALL capabilities</text>
+    <text x="912" y="230">no privilege escalation</text>
+    <text x="912" y="258">seccomp RuntimeDefault</text>
+    <text x="912" y="286">CPU / memory / GPU limits</text>
+    <text x="912" y="314">egress deny by default</text>
+  </g>
+  <path d="M852 230 L886 230" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- left behind -->
+  <rect x="40" y="390" width="812" height="110" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="60" y="422" font-size="17" font-weight="700" fill="#991b1b">Left behind (an attacker in the container never gets these)</text>
+  <text x="60" y="452" font-size="14" fill="#991b1b">compilers and headers · package manager · pip cache · the .netrc build secret · git · shell</text>
+  <text x="60" y="480" font-size="14" fill="#991b1b">Fewer packages = fewer CVEs to patch and fewer tools for "living off the land".</text>
+
+  <rect x="892" y="390" width="268" height="110" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="912" y="422" font-size="15" font-weight="700" fill="#334155">Then, in CI</text>
+  <text x="912" y="448" font-size="14" fill="#334155">SBOM · CVE scan (Trivy)</text>
+  <text x="912" y="472" font-size="14" fill="#334155">sign the digest (cosign)</text>
+</svg>

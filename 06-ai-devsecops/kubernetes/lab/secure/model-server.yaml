@@ -1,0 +1,149 @@
+# SECURE model-serving deployment: the same service, hardened.
+# Each "FIX" names the rule in k8s_policy.py that it satisfies. The image digest is a placeholder.
+---
+# FIX (K8S-012): Pod Security Standards "restricted" is ENFORCED for every pod in this namespace.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ml-serving
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+    tenant: support-llm
+---
+# FIX (K8S-010, K8S-011): no Kubernetes API token; cloud access through workload identity.
+# EKS (IRSA) shown. GKE uses iam.gke.io/gcp-service-account, AKS uses azure.workload.identity/client-id.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: llm-server
+  namespace: ml-serving
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/support-llm-model-reader
+automountServiceAccountToken: false
+# FIX (K8S-016): no RoleBinding at all. The model server never talks to the Kubernetes API.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-server
+  namespace: ml-serving
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: llm-server}
+  template:
+    metadata:
+      labels: {app: llm-server}
+    spec:
+      serviceAccountName: llm-server
+      automountServiceAccountToken: false
+      securityContext:                           # FIX (K8S-002, K8S-005)
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile: {type: RuntimeDefault}
+      # FIX (K8S-017): only the dedicated, tainted GPU inference pool runs this pod.
+      nodeSelector:
+        node-pool: gpu-inference
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule
+      containers:
+        - name: server
+          image: ghcr.io/acme/support-llm@sha256:2222222222222222222222222222222222222222222222222222222222222222
+          ports:
+            - containerPort: 8080
+          securityContext:                       # FIX (K8S-001, K8S-003, K8S-004)
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          env:
+            - name: MODEL_PATH
+              value: /app/model/support-llm-v3.safetensors
+            - name: GATEWAY_SHARED_TOKEN          # FIX (K8S-009): a reference, not a value
+              valueFrom:
+                secretKeyRef: {name: llm-server-gateway-token, key: token}
+          resources:                             # FIX (K8S-008): bounded CPU, memory and GPU
+            requests: {cpu: "2", memory: 12Gi, nvidia.com/gpu: 1}
+            limits: {cpu: "4", memory: 16Gi, nvidia.com/gpu: 1}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp                              # writable scratch space; the root FS stays read-only
+          emptyDir: {sizeLimit: 1Gi}
+---
+# FIX (K8S-015): internal only. Users reach the model through the AI gateway (auth, quotas, guardrails).
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm-server
+  namespace: ml-serving
+spec:
+  type: ClusterIP
+  selector: {app: llm-server}
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+# FIX (K8S-013): default deny, in BOTH directions, for every pod in the namespace.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: ml-serving
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+---
+# Then allow only the flows the service needs.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-gateway-to-llm
+  namespace: ml-serving
+spec:
+  podSelector:
+    matchLabels: {app: llm-server}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: ai-gateway}
+          podSelector:
+            matchLabels: {app: gateway}
+      ports:
+        - {protocol: TCP, port: 8080}
+---
+# FIX (K8S-014): egress only to DNS and the vector database. No internet, no cloud metadata endpoint.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-llm-egress
+  namespace: ml-serving
+spec:
+  podSelector:
+    matchLabels: {app: llm-server}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: kube-system}
+          podSelector:
+            matchLabels: {k8s-app: kube-dns}
+      ports:
+        - {protocol: UDP, port: 53}
+        - {protocol: TCP, port: 53}
+    - to:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: vector-db}
+          podSelector:
+            matchLabels: {app: qdrant}
+      ports:
+        - {protocol: TCP, port: 6333}

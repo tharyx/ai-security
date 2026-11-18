@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="730" viewBox="0 0 1200 730" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>MCP architecture: host, clients, servers and trust boundaries</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="730" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">MCP architecture: who talks to whom</text>
+  <text x="40" y="80" font-size="16" fill="#475569">The host runs one MCP client per server. Every server is third-party code on the other side of a trust boundary.</text>
+
+  <!-- Host -->
+  <rect x="40" y="110" width="440" height="480" rx="16" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="60" y="140" font-size="17" font-weight="700" fill="#92400e">Host (the AI application)</text>
+  <rect x="65" y="160" width="185" height="75" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="157" y="192" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Model (LLM)</text>
+  <text x="157" y="214" text-anchor="middle" font-size="12" fill="#1e3a8a">sees tool descriptions</text>
+  <rect x="270" y="160" width="185" height="75" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="362" y="192" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">User + UI</text>
+  <text x="362" y="214" text-anchor="middle" font-size="12" fill="#475569">approves, sees results</text>
+  <rect x="65" y="262" width="390" height="55" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <text x="260" y="296" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">MCP client 1 · stdio</text>
+  <rect x="65" y="335" width="390" height="55" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <text x="260" y="369" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">MCP client 2 · Streamable HTTP</text>
+  <rect x="65" y="410" width="390" height="160" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="85" y="436" font-size="14" font-weight="700" fill="#92400e">Client features (the server asks the host)</text>
+  <text x="85" y="463" font-size="12" fill="#0f172a"><tspan font-weight="700">sampling:</tspan> use the host's model (human in the loop)</text>
+  <text x="85" y="488" font-size="12" fill="#0f172a"><tspan font-weight="700">elicitation:</tspan> ask the user a question (no secrets)</text>
+  <text x="85" y="513" font-size="12" fill="#0f172a"><tspan font-weight="700">roots:</tspan> folders the server may work in</text>
+  <text x="85" y="545" font-size="12" font-style="italic" fill="#92400e">A server can ask. The host and the user decide.</text>
+
+  <!-- Trust boundary -->
+  <path d="M535 105 L535 595" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="535" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#dc2626">trust boundary</text>
+
+  <path d="M455 290 L594 298" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M455 362 L594 425" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- Servers -->
+  <rect x="600" y="250" width="260" height="100" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="730" y="281" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Local server</text>
+  <text x="730" y="304" text-anchor="middle" font-size="12" fill="#92400e">child process of the host</text>
+  <text x="730" y="324" text-anchor="middle" font-size="12" fill="#92400e">runs with the user's rights</text>
+  <rect x="600" y="380" width="260" height="100" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="730" y="411" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Remote server</text>
+  <text x="730" y="434" text-anchor="middle" font-size="12" fill="#92400e">HTTPS + OAuth 2.1</text>
+  <text x="730" y="454" text-anchor="middle" font-size="12" fill="#92400e">another team's or vendor's code</text>
+
+  <rect x="900" y="150" width="260" height="200" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1030" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Server features</text>
+  <text x="915" y="208" font-size="12" fill="#0f172a"><tspan font-weight="700">tools:</tspan> actions; the model picks</text>
+  <text x="915" y="233" font-size="12" fill="#0f172a"><tspan font-weight="700">resources:</tspan> data; the app picks</text>
+  <text x="915" y="258" font-size="12" fill="#0f172a"><tspan font-weight="700">prompts:</tspan> templates; the user picks</text>
+  <text x="915" y="292" font-size="12" font-weight="700" fill="#991b1b">Names, descriptions, schemas and</text>
+  <text x="915" y="310" font-size="12" font-weight="700" fill="#991b1b">results are all untrusted input.</text>
+  <path d="M860 280 L894 250" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M860 410 L894 330" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <rect x="900" y="505" width="125" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="962" y="540" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Files, shell</text>
+  <text x="962" y="561" text-anchor="middle" font-size="12" fill="#475569">on the user's PC</text>
+  <rect x="1035" y="505" width="125" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1097" y="540" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">SaaS APIs</text>
+  <text x="1097" y="561" text-anchor="middle" font-size="12" fill="#475569">company data</text>
+  <path d="M860 340 L940 499" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M860 470 L1060 499" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- Message flow -->
+  <rect x="40" y="615" width="1120" height="56" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="649" font-size="14" fill="#0f172a"><tspan font-weight="700">JSON-RPC 2.0 flow: </tspan>initialize → notifications/initialized → tools/list → tools/call → … → notifications/tools/list_changed → tools/list again</text>
+  <text x="40" y="705" font-size="13" fill="#475569">Amber = semi-trusted application code · Blue = model · Red = untrusted content · Gray = data and systems the server can reach</text>
+</svg>

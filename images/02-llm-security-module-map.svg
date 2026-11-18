@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Module 02 map: where LLM attacks hit an application, and which lesson covers each</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Module 02 map: where attacks hit an LLM application</text>
+  <text x="40" y="80" font-size="16" fill="#475569">One request path, four lessons. Red arrows show where each attack enters. Green boxes are where we enforce.</text>
+
+  <!-- attack entry labels -->
+  <rect x="40" y="105" width="350" height="44" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="215" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Jailbreak + direct injection (chat box)</text>
+  <rect x="420" y="105" width="350" height="44" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="595" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Indirect injection (docs, email, web)</text>
+  <rect x="800" y="105" width="360" height="44" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="980" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Exfiltration (images, links, tools)</text>
+  <path d="M115 149 L115 196" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+  <path d="M500 149 L500 196" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+  <path d="M1070 196 L1070 153" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+
+  <!-- pipeline -->
+  <rect x="40" y="200" width="150" height="90" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="115" y="238" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">User</text>
+  <text x="115" y="260" text-anchor="middle" font-size="13" fill="#991b1b">or attacker</text>
+
+  <rect x="230" y="200" width="150" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="305" y="232" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Gateway</text>
+  <text x="305" y="254" text-anchor="middle" font-size="12" fill="#166534">auth · rate limit</text>
+  <text x="305" y="272" text-anchor="middle" font-size="12" fill="#166534">size · token budget</text>
+
+  <rect x="420" y="200" width="160" height="90" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="500" y="232" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Context builder</text>
+  <text x="500" y="254" text-anchor="middle" font-size="12" fill="#92400e">system prompt · memory</text>
+  <text x="500" y="272" text-anchor="middle" font-size="12" fill="#92400e">retrieved docs</text>
+
+  <rect x="620" y="200" width="150" height="90" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="695" y="238" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">LLM</text>
+  <text x="695" y="260" text-anchor="middle" font-size="12" fill="#1e3a8a">assume it is fooled</text>
+
+  <rect x="810" y="200" width="170" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="895" y="232" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Output handling</text>
+  <text x="895" y="254" text-anchor="middle" font-size="12" fill="#166534">moderation · policy · DLP</text>
+  <text x="895" y="272" text-anchor="middle" font-size="12" fill="#166534">URL allowlist · escape</text>
+
+  <rect x="1020" y="200" width="140" height="90" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1090" y="232" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">UI / tools</text>
+  <text x="1090" y="254" text-anchor="middle" font-size="12" fill="#92400e">browser renders</text>
+  <text x="1090" y="272" text-anchor="middle" font-size="12" fill="#92400e">tools take action</text>
+
+  <path d="M190 245 L224 245" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M380 245 L414 245" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M580 245 L614 245" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M770 245 L804 245" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M980 245 L1014 245" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- logs store -->
+  <rect x="420" y="315" width="560" height="40" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+  <text x="700" y="340" text-anchor="middle" font-size="14" fill="#334155">Logs · caches · traces (a leak path of their own: redact and isolate them)</text>
+
+  <!-- lesson cards -->
+  <rect x="40" y="385" width="265" height="130" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+  <text x="58" y="413" font-size="16" font-weight="700" fill="#0f172a">Prompt injection</text>
+  <text x="58" y="434" font-size="13" fill="#475569">Week 5 · LLM01</text>
+  <text x="58" y="458" font-size="13" fill="#0f172a">Untrusted text steers the app.</text>
+  <text x="58" y="478" font-size="13" fill="#0f172a">Fix: tool policy + output guard</text>
+  <text x="58" y="498" font-size="13" fill="#0f172a">outside the model.</text>
+
+  <rect x="325" y="385" width="265" height="130" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+  <text x="343" y="413" font-size="16" font-weight="700" fill="#0f172a">Jailbreak</text>
+  <text x="343" y="434" font-size="13" fill="#475569">Week 6 · LLM01 (safety bypass)</text>
+  <text x="343" y="458" font-size="13" fill="#0f172a">Role-play, encoding, many-shot,</text>
+  <text x="343" y="478" font-size="13" fill="#0f172a">multi-turn. Fix: input + output</text>
+  <text x="343" y="498" font-size="13" fill="#0f172a">moderation, policy checks.</text>
+
+  <rect x="610" y="385" width="265" height="130" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+  <text x="628" y="413" font-size="16" font-weight="700" fill="#0f172a">Data leakage</text>
+  <text x="628" y="434" font-size="13" fill="#475569">Weeks 6–7 · LLM02 · LLM05 · LLM07</text>
+  <text x="628" y="458" font-size="13" fill="#0f172a">Memory, cache, logs, prompt,</text>
+  <text x="628" y="478" font-size="13" fill="#0f172a">URLs. Fix: isolation, redaction,</text>
+  <text x="628" y="498" font-size="13" fill="#0f172a">URL allowlist, HTML escaping.</text>
+
+  <rect x="895" y="385" width="265" height="130" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="913" y="413" font-size="16" font-weight="700" fill="#1e3a8a">Security testing</text>
+  <text x="913" y="434" font-size="13" fill="#475569">Weeks 7–8 · LLM10 + all of above</text>
+  <text x="913" y="458" font-size="13" fill="#1e3a8a">Attack suite × N runs → attack</text>
+  <text x="913" y="478" font-size="13" fill="#1e3a8a">success rate → CI gate.</text>
+  <text x="913" y="498" font-size="13" fill="#1e3a8a">Limits for cost and loops.</text>
+
+  <!-- bottom band -->
+  <rect x="40" y="545" width="1120" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="600" y="571" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Design rule for the whole module</text>
+  <text x="600" y="593" text-anchor="middle" font-size="14" fill="#166534">Assume the model will be fooled. Enforce security in code before and after it, and prove it with tests.</text>
+</svg>

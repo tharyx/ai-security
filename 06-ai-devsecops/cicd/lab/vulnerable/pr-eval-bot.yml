@@ -1,0 +1,36 @@
+# VULNERABLE "evaluate every pull request on our GPU runner" bot. For READING and LINTING only.
+name: pr-eval-bot
+
+on:
+  # VULN (GHA-003): pull_request_target runs in the context of the BASE repository:
+  # it has secrets and a write token, even when the PR comes from a stranger's fork.
+  pull_request_target:
+    types: [opened, synchronize]
+
+permissions: write-all          # VULN (GHA-002)
+
+jobs:
+  eval:
+    # VULN (GHA-011): a fork PR gets to run code on our persistent, self-hosted GPU machine.
+    runs-on: [self-hosted, gpu]
+    steps:
+      # VULN (GHA-003, GHA-001, GHA-008): checks out the ATTACKER'S code into a privileged job.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Run model eval on the PR's code
+        # VULN (GHA-004): the PR title is attacker-controlled text spliced into bash.
+        run: |
+          echo "Evaluating PR: ${{ github.event.pull_request.title }}"
+          python eval/run_eval.py --endpoint "${{ secrets.MODEL_ENDPOINT }}"
+
+      - name: Comment results
+        uses: actions/github-script@v7      # VULN (GHA-001)
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "Eval finished for: ${{ github.event.pull_request.title }}"
+            })

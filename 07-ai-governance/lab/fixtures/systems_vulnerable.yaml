@@ -1,0 +1,96 @@
+# ACME's AI register as the teams filled it in. Synthetic data for the lab.
+# Every system here has at least one governance problem. Can you spot them before running the demo?
+
+- id: AI-001
+  name: InboxBot email summarizer
+  business_owner: Head of Customer Support
+  technical_owner: Support Platform team
+  intended_use: Summarize inbound customer emails for support agents so they can reply faster.
+  status: production
+  declared_tier: low
+  provider: LLM Vendor A
+  model: vendor-a-chat-2025-06
+  data_classes: [personal, internal]
+  affected_people: [customers, support agents]
+  use_domains: [customer_support]
+  decision_impact: none
+  tools:
+    - {name: send_email, side_effects: true}
+    - {name: export_customers, side_effects: true}
+  human_oversight: none
+  controls: [CTL-REG, CTL-AUP, CTL-LOG]
+  last_review: 2026-03-10
+  egress_domains: [api.llm-vendor-a.example]
+  exceptions:
+    - finding: GOV-05:CTL-RT
+      reason: Red team postponed until after launch
+      approved_by: CISO
+      expires: 2026-06-30
+
+- id: AI-002
+  name: CV screening assistant
+  business_owner: ""            # the sponsor left the company in July
+  technical_owner: HR Tech team
+  intended_use: Rank job applicants and automatically reject the bottom half before a recruiter sees them.
+  status: pilot
+  declared_tier: medium
+  provider: GenAI Vendor B
+  model: vendor-b-large-3
+  data_classes: [personal]
+  affected_people: [job applicants]
+  use_domains: [employment]
+  decision_impact: automated_decision
+  human_oversite: approve_each  # typo: a spreadsheet would never notice
+  controls: [CTL-REG, CTL-PRIV]
+  last_review: 2026-09-01
+  egress_domains: [api.genai-vendor-b.example]
+
+- id: AI-003
+  name: Internal code assistant
+  business_owner: VP Engineering
+  technical_owner: Developer Productivity team
+  intended_use: TBD
+  status: production
+  declared_tier: low
+  provider: LLM Vendor A
+  model: vendor-a-code-2025-04
+  data_classes: [internal, confidential]
+  affected_people: [engineers]
+  use_domains: [software_engineering]
+  controls: [CTL-REG]
+  last_review: 2026-01-20
+  egress_domains: [api.llm-vendor-a.example]
+
+- id: AI-004
+  name: Website support chatbot
+  business_owner: Head of Digital
+  technical_owner: Web Platform team
+  intended_use: Answer customer questions about orders, delivery and refund policy on the public website.
+  status: production
+  declared_tier: medium
+  provider: GenAI Vendor B
+  model: vendor-b-chat-2
+  data_classes: [personal, public]
+  affected_people: [customers, public]
+  use_domains: [customer_support]
+  external_facing: true
+  human_oversight: sample_review
+  controls: [CTL-REG, CTL-AUP, CTL-TM, CTL-EVAL, CTL-PRIV, CTL-VEND]
+  last_review: 2024-10-01
+  egress_domains: [api.genai-vendor-b.example]
+
+- id: AI-005
+  name: Meeting mood monitor
+  business_owner: Head of People Analytics
+  technical_owner: People Analytics team
+  intended_use: Score the emotions of employees from webcam video during meetings to measure engagement.
+  status: pilot
+  declared_tier: medium
+  provider: internal
+  model: emotion-cnn-v1
+  data_classes: [sensitive_personal]
+  affected_people: [employees]
+  use_domains: [workplace_emotion_recognition]
+  human_oversight: sample_review
+  controls: [CTL-REG]
+  last_review: 2026-10-01

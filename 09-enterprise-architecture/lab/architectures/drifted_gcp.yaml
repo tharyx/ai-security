@@ -1,0 +1,138 @@
+# The secure GCP design six months later. Teams made "temporary" changes, and some
+# were risk-accepted. This file teaches drift and time-bound exceptions:
+#   * one valid exception (still in date)        -> ACCEPTED
+#   * one expired exception                       -> back to FAIL
+#   * one exception on a CRITICAL control         -> rejected, still FAIL
+# The demo and tests review it with today = 2026-06-01. Synthetic example only.
+name: ops-assistant-gcp-drifted
+cloud: gcp
+environment: prod
+data_classification: confidential
+multi_tenant: true
+
+components:
+  - id: web
+    type: frontend
+    zone: public
+    service: External Application Load Balancer + Cloud Armor
+    public_network_access: true
+
+  - id: ai-gateway
+    type: ai_gateway
+    zone: app
+    service: Apigee + gateway on Cloud Run
+    identity: sa-gateway
+    user_auth: oidc
+    rate_limits: true
+    token_budget: true
+    guardrails:
+      input: []                       # DRIFT: Model Armor template detached after false positives
+      output: [pii, secrets]
+    egress: deny_by_default
+
+  - id: model
+    type: model_endpoint
+    zone: model
+    service: Vertex AI via Private Service Connect
+    public_network_access: false
+    private_endpoint: true
+    data_use: {training_opt_out: true, retention_reviewed: true}
+
+  - id: rag
+    type: rag_service
+    zone: app
+    service: retrieval service on Cloud Run
+    identity: sa-rag
+    retrieval_authz: server_side
+
+  - id: vectors
+    type: vector_store
+    zone: data
+    service: Vertex AI Vector Search
+    public_network_access: false
+    private_endpoint: true
+    encryption_key: kms-ai-data
+    tenant_isolation: server_side_filter
+
+  - id: agent
+    type: agent_runtime
+    zone: app
+    service: orchestrator on Cloud Run
+    identity: sa-agent
+    approval_required_for: [write]
+    limits: {max_steps: 8, max_cost_usd: 2.0}
+    kill_switch: true
+    egress: allow_all                 # DRIFT: opened "for one week" to call a vendor API
+
+  - id: mcp-gateway
+    type: mcp_gateway
+    zone: tools
+    service: tool broker on Cloud Run
+    identity: sa-mcp
+    tool_registry: allowlist
+    egress: deny_by_default
+
+  - id: tool-change
+    type: tool
+    zone: tools
+    service: change-request tool
+    identity: sa-tool-change
+    side_effects: write
+    egress: deny_by_default
+
+  - id: audit-logs
+    type: log_store
+    zone: security
+    service: Cloud Logging bucket
+    public_network_access: false
+    encryption_key: kms-logs
+    immutable: true
+    retention_days: 400
+    exports_to_siem: true
+
+identities:
+  - {id: sa-gateway, credential: short_lived, permissions: ["modelarmor.templates.useToSanitize"]}
+  - {id: sa-rag, credential: short_lived, permissions: ["roles/aiplatform.user on vector index"]}
+  - {id: sa-agent, credential: short_lived, permissions: ["roles/aiplatform.user on approved endpoint"]}
+  - {id: sa-mcp, credential: short_lived, permissions: ["roles/datastore.viewer on tool-registry"]}
+  - {id: sa-tool-change, credential: short_lived, permissions: ["ticketing.create_change"]}
+
+keys:
+  - {id: kms-ai-data, managed_by: customer, rotation: true}
+  - {id: kms-logs, managed_by: customer, rotation: true}
+
+secrets:
+  store: gcp-secret-manager
+  inline: []
+
+logging:
+  control_plane_audit: true
+  model_invocation_logs: true
+  prompt_redaction: true
+  sink: audit-logs
+
+flows:
+  - {from: internet, to: web}
+  - {from: web, to: ai-gateway}
+  - {from: internet, to: model, note: "data science notebook calls Vertex AI directly"}  # DRIFT: bypass
+  - {from: ai-gateway, to: rag}
+  - {from: rag, to: vectors}
+  - {from: ai-gateway, to: agent}
+  - {from: agent, to: model}
+  - {from: agent, to: mcp-gateway}
+  - {from: mcp-gateway, to: tool-change}
+  - {from: ai-gateway, to: audit-logs}
+
+exceptions:
+  - control: GR-01
+    reason: Model Armor false positives on runbook text; tuning ticket SEC-1234 open
+    approver: ciso@acme.example
+    expires: 2026-09-30               # still valid on 2026-06-01 -> ACCEPTED
+  - control: NET-03
+    reason: vendor API integration pilot
+    approver: platform-lead@acme.example
+    expires: 2026-03-31               # expired -> FAIL again
+  - control: NET-04
+    reason: data science notebooks need direct model access
+    approver: vp-data@acme.example
+    expires: 2026-12-31               # critical control -> cannot be accepted

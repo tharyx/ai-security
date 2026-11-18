@@ -1,0 +1,343 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.5",
+  "resource_changes": [
+    {
+      "address": "aws_kms_key.ai",
+      "mode": "managed", "type": "aws_kms_key", "name": "ai",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"description": "AI platform key: model artifacts, training data, endpoints", "enable_key_rotation": true, "deletion_window_in_days": 30, "is_enabled": true},
+        "after_unknown": {"arn": true, "id": true, "key_id": true, "policy": true}
+      }
+    },
+    {
+      "address": "aws_s3_bucket.model_artifacts",
+      "mode": "managed", "type": "aws_s3_bucket", "name": "model_artifacts",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"bucket": "acme-llm-model-artifacts", "force_destroy": false, "tags": {"team": "support-llm", "data_classification": "confidential"}},
+        "after_unknown": {"arn": true, "id": true, "region": true}
+      }
+    },
+    {
+      "address": "aws_s3_bucket.training_data",
+      "mode": "managed", "type": "aws_s3_bucket", "name": "training_data",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"bucket": "acme-llm-training-data", "force_destroy": false, "tags": {"team": "support-llm", "data_classification": "restricted"}},
+        "after_unknown": {"arn": true, "id": true, "region": true}
+      }
+    },
+    {
+      "address": "aws_s3_bucket.access_logs",
+      "mode": "managed", "type": "aws_s3_bucket", "name": "access_logs",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"bucket": "acme-llm-access-logs", "force_destroy": false, "tags": {"team": "support-llm", "purpose": "access-logs"}},
+        "after_unknown": {"arn": true, "id": true, "region": true}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_public_access_block.model_artifacts",
+      "mode": "managed", "type": "aws_s3_bucket_public_access_block", "name": "model_artifacts",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"block_public_acls": true, "block_public_policy": true, "ignore_public_acls": true, "restrict_public_buckets": true},
+        "after_unknown": {"bucket": true, "id": true}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_public_access_block.training_data",
+      "mode": "managed", "type": "aws_s3_bucket_public_access_block", "name": "training_data",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"block_public_acls": true, "block_public_policy": true, "ignore_public_acls": true, "restrict_public_buckets": true},
+        "after_unknown": {"bucket": true, "id": true}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_public_access_block.access_logs",
+      "mode": "managed", "type": "aws_s3_bucket_public_access_block", "name": "access_logs",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"block_public_acls": true, "block_public_policy": true, "ignore_public_acls": true, "restrict_public_buckets": true},
+        "after_unknown": {"bucket": true, "id": true}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_server_side_encryption_configuration.model_artifacts",
+      "mode": "managed", "type": "aws_s3_bucket_server_side_encryption_configuration", "name": "model_artifacts",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"rule": [{"apply_server_side_encryption_by_default": [{"sse_algorithm": "aws:kms"}], "bucket_key_enabled": true}]},
+        "after_unknown": {"bucket": true, "id": true, "rule": [{"apply_server_side_encryption_by_default": [{"kms_master_key_id": true}]}]}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_server_side_encryption_configuration.training_data",
+      "mode": "managed", "type": "aws_s3_bucket_server_side_encryption_configuration", "name": "training_data",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"rule": [{"apply_server_side_encryption_by_default": [{"sse_algorithm": "aws:kms"}], "bucket_key_enabled": true}]},
+        "after_unknown": {"bucket": true, "id": true, "rule": [{"apply_server_side_encryption_by_default": [{"kms_master_key_id": true}]}]}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_server_side_encryption_configuration.access_logs",
+      "mode": "managed", "type": "aws_s3_bucket_server_side_encryption_configuration", "name": "access_logs",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"rule": [{"apply_server_side_encryption_by_default": [{"sse_algorithm": "aws:kms"}], "bucket_key_enabled": true}]},
+        "after_unknown": {"bucket": true, "id": true, "rule": [{"apply_server_side_encryption_by_default": [{"kms_master_key_id": true}]}]}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_versioning.model_artifacts",
+      "mode": "managed", "type": "aws_s3_bucket_versioning", "name": "model_artifacts",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"versioning_configuration": [{"status": "Enabled"}]},
+        "after_unknown": {"bucket": true, "id": true, "versioning_configuration": [{"mfa_delete": true}]}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_versioning.training_data",
+      "mode": "managed", "type": "aws_s3_bucket_versioning", "name": "training_data",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"versioning_configuration": [{"status": "Enabled"}]},
+        "after_unknown": {"bucket": true, "id": true, "versioning_configuration": [{"mfa_delete": true}]}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_versioning.access_logs",
+      "mode": "managed", "type": "aws_s3_bucket_versioning", "name": "access_logs",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"versioning_configuration": [{"status": "Enabled"}]},
+        "after_unknown": {"bucket": true, "id": true, "versioning_configuration": [{"mfa_delete": true}]}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_logging.model_artifacts",
+      "mode": "managed", "type": "aws_s3_bucket_logging", "name": "model_artifacts",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"target_prefix": "model-artifacts/"},
+        "after_unknown": {"bucket": true, "id": true, "target_bucket": true}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_logging.training_data",
+      "mode": "managed", "type": "aws_s3_bucket_logging", "name": "training_data",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"target_prefix": "training-data/"},
+        "after_unknown": {"bucket": true, "id": true, "target_bucket": true}
+      }
+    },
+    {
+      "address": "aws_sagemaker_notebook_instance.research",
+      "mode": "managed", "type": "aws_sagemaker_notebook_instance", "name": "research",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"name": "support-llm-research", "instance_type": "ml.t3.medium", "direct_internet_access": "Disabled", "root_access": "Disabled", "subnet_id": "subnet-0aaa1111bbbb22223"},
+        "after_unknown": {"arn": true, "id": true, "role_arn": true, "url": true, "security_groups": true, "kms_key_id": true}
+      }
+    },
+    {
+      "address": "aws_sagemaker_model.support_llm",
+      "mode": "managed", "type": "aws_sagemaker_model", "name": "support_llm",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {
+          "name": "support-llm-v3", "enable_network_isolation": true,
+          "primary_container": [{"image": "111122223333.dkr.ecr.eu-west-1.amazonaws.com/support-llm@sha256:1111111111111111111111111111111111111111111111111111111111111111", "model_data_url": "s3://acme-llm-model-artifacts/support-llm/v3/model.tar.gz"}],
+          "vpc_config": [{"subnets": ["subnet-0aaa1111bbbb22223", "subnet-0ccc3333dddd44445"]}]
+        },
+        "after_unknown": {"arn": true, "id": true, "execution_role_arn": true, "vpc_config": [{"security_group_ids": true}]}
+      }
+    },
+    {
+      "address": "aws_sagemaker_endpoint_configuration.support_llm",
+      "mode": "managed", "type": "aws_sagemaker_endpoint_configuration", "name": "support_llm",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {
+          "name": "support-llm-v3",
+          "production_variants": [{"variant_name": "primary", "model_name": "support-llm-v3", "instance_type": "ml.g5.xlarge", "initial_instance_count": 1}]
+        },
+        "after_unknown": {"arn": true, "id": true, "kms_key_arn": true}
+      }
+    },
+    {
+      "address": "aws_sagemaker_endpoint.support_llm",
+      "mode": "managed", "type": "aws_sagemaker_endpoint", "name": "support_llm",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"name": "support-llm", "endpoint_config_name": "support-llm-v3"},
+        "after_unknown": {"arn": true, "id": true}
+      }
+    },
+    {
+      "address": "aws_vpc_endpoint.sagemaker_runtime",
+      "mode": "managed", "type": "aws_vpc_endpoint", "name": "sagemaker_runtime",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {
+          "vpc_id": "vpc-0a1b2c3d4e5f60718", "service_name": "com.amazonaws.eu-west-1.sagemaker.runtime",
+          "vpc_endpoint_type": "Interface", "private_dns_enabled": true,
+          "subnet_ids": ["subnet-0aaa1111bbbb22223", "subnet-0ccc3333dddd44445"]
+        },
+        "after_unknown": {"arn": true, "id": true, "security_group_ids": true, "dns_entry": true}
+      }
+    },
+    {
+      "address": "aws_security_group.model_endpoint",
+      "mode": "managed", "type": "aws_security_group", "name": "model_endpoint",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {
+          "name": "model-endpoint", "vpc_id": "vpc-0a1b2c3d4e5f60718",
+          "ingress": [
+            {"description": "HTTPS from inside the VPC only", "from_port": 443, "to_port": 443, "protocol": "tcp", "cidr_blocks": ["10.20.0.0/16"], "ipv6_cidr_blocks": [], "prefix_list_ids": [], "security_groups": [], "self": false}
+          ]
+        },
+        "after_unknown": {"arn": true, "id": true, "egress": true, "owner_id": true}
+      }
+    },
+    {
+      "address": "aws_opensearch_domain.vectors",
+      "mode": "managed", "type": "aws_opensearch_domain", "name": "vectors",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {
+          "domain_name": "support-llm-vectors", "engine_version": "OpenSearch_2.13",
+          "vpc_options": [{"subnet_ids": ["subnet-0aaa1111bbbb22223", "subnet-0ccc3333dddd44445"]}],
+          "encrypt_at_rest": [{"enabled": true}],
+          "node_to_node_encryption": [{"enabled": true}],
+          "domain_endpoint_options": [{"enforce_https": true, "tls_security_policy": "Policy-Min-TLS-1-2-2019-07"}],
+          "access_policies": "{\"Statement\":[{\"Action\":[\"es:ESHttpGet\",\"es:ESHttpPost\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111122223333:role/support-llm-rag-retriever\"},\"Resource\":\"arn:aws:es:eu-west-1:111122223333:domain/support-llm-vectors/*\"}],\"Version\":\"2012-10-17\"}"
+        },
+        "after_unknown": {"arn": true, "id": true, "endpoint": true, "encrypt_at_rest": [{"kms_key_id": true}], "vpc_options": [{"security_group_ids": true, "vpc_id": true}]}
+      }
+    },
+    {
+      "address": "aws_iam_role.sagemaker_exec",
+      "mode": "managed", "type": "aws_iam_role", "name": "sagemaker_exec",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {
+          "name": "support-llm-sagemaker",
+          "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sagemaker.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}"
+        },
+        "after_unknown": {"arn": true, "id": true, "unique_id": true}
+      }
+    },
+    {
+      "address": "aws_iam_role_policy.sagemaker_exec",
+      "mode": "managed", "type": "aws_iam_role_policy", "name": "sagemaker_exec",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {
+          "name": "read-model-artifacts",
+          "policy": "{\"Statement\":[{\"Action\":[\"s3:GetObject\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:s3:::acme-llm-model-artifacts/support-llm/*\"},{\"Action\":[\"s3:ListBucket\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:s3:::acme-llm-model-artifacts\"}],\"Version\":\"2012-10-17\"}"
+        },
+        "after_unknown": {"id": true, "role": true}
+      }
+    },
+    {
+      "address": "aws_iam_openid_connect_provider.github",
+      "mode": "managed", "type": "aws_iam_openid_connect_provider", "name": "github",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {"url": "https://token.actions.githubusercontent.com", "client_id_list": ["sts.amazonaws.com"]},
+        "after_unknown": {"arn": true, "id": true, "thumbprint_list": true}
+      }
+    },
+    {
+      "address": "aws_iam_role.ci_oidc",
+      "mode": "managed", "type": "aws_iam_role", "name": "ci_oidc",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"], "before": null,
+        "after": {
+          "name": "ci-oidc-deployer",
+          "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRoleWithWebIdentity\",\"Condition\":{\"StringEquals\":{\"token.actions.githubusercontent.com:aud\":\"sts.amazonaws.com\",\"token.actions.githubusercontent.com:sub\":\"repo:acme/support-llm:environment:production\"}},\"Effect\":\"Allow\",\"Principal\":{\"Federated\":\"arn:aws:iam::111122223333:oidc-provider/token.actions.githubusercontent.com\"}}],\"Version\":\"2012-10-17\"}"
+        },
+        "after_unknown": {"arn": true, "id": true, "unique_id": true}
+      }
+    }
+  ],
+  "configuration": {
+    "provider_config": {
+      "aws": {"name": "aws", "full_name": "registry.terraform.io/hashicorp/aws", "expressions": {"region": {"constant_value": "eu-west-1"}}}
+    },
+    "root_module": {
+      "resources": [
+        {"address": "aws_s3_bucket_public_access_block.model_artifacts", "mode": "managed", "type": "aws_s3_bucket_public_access_block", "name": "model_artifacts", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.model_artifacts.id", "aws_s3_bucket.model_artifacts"]}}},
+        {"address": "aws_s3_bucket_public_access_block.training_data", "mode": "managed", "type": "aws_s3_bucket_public_access_block", "name": "training_data", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.training_data.id", "aws_s3_bucket.training_data"]}}},
+        {"address": "aws_s3_bucket_public_access_block.access_logs", "mode": "managed", "type": "aws_s3_bucket_public_access_block", "name": "access_logs", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.access_logs.id", "aws_s3_bucket.access_logs"]}}},
+        {"address": "aws_s3_bucket_server_side_encryption_configuration.model_artifacts", "mode": "managed", "type": "aws_s3_bucket_server_side_encryption_configuration", "name": "model_artifacts", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.model_artifacts.id", "aws_s3_bucket.model_artifacts"]},
+                         "rule": [{"apply_server_side_encryption_by_default": [{"kms_master_key_id": {"references": ["aws_kms_key.ai.arn", "aws_kms_key.ai"]}, "sse_algorithm": {"constant_value": "aws:kms"}}]}]}},
+        {"address": "aws_s3_bucket_server_side_encryption_configuration.training_data", "mode": "managed", "type": "aws_s3_bucket_server_side_encryption_configuration", "name": "training_data", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.training_data.id", "aws_s3_bucket.training_data"]},
+                         "rule": [{"apply_server_side_encryption_by_default": [{"kms_master_key_id": {"references": ["aws_kms_key.ai.arn", "aws_kms_key.ai"]}, "sse_algorithm": {"constant_value": "aws:kms"}}]}]}},
+        {"address": "aws_s3_bucket_server_side_encryption_configuration.access_logs", "mode": "managed", "type": "aws_s3_bucket_server_side_encryption_configuration", "name": "access_logs", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.access_logs.id", "aws_s3_bucket.access_logs"]},
+                         "rule": [{"apply_server_side_encryption_by_default": [{"kms_master_key_id": {"references": ["aws_kms_key.ai.arn", "aws_kms_key.ai"]}, "sse_algorithm": {"constant_value": "aws:kms"}}]}]}},
+        {"address": "aws_s3_bucket_versioning.model_artifacts", "mode": "managed", "type": "aws_s3_bucket_versioning", "name": "model_artifacts", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.model_artifacts.id", "aws_s3_bucket.model_artifacts"]}}},
+        {"address": "aws_s3_bucket_versioning.training_data", "mode": "managed", "type": "aws_s3_bucket_versioning", "name": "training_data", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.training_data.id", "aws_s3_bucket.training_data"]}}},
+        {"address": "aws_s3_bucket_versioning.access_logs", "mode": "managed", "type": "aws_s3_bucket_versioning", "name": "access_logs", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.access_logs.id", "aws_s3_bucket.access_logs"]}}},
+        {"address": "aws_s3_bucket_logging.model_artifacts", "mode": "managed", "type": "aws_s3_bucket_logging", "name": "model_artifacts", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.model_artifacts.id", "aws_s3_bucket.model_artifacts"]},
+                         "target_bucket": {"references": ["aws_s3_bucket.access_logs.id", "aws_s3_bucket.access_logs"]},
+                         "target_prefix": {"constant_value": "model-artifacts/"}}},
+        {"address": "aws_s3_bucket_logging.training_data", "mode": "managed", "type": "aws_s3_bucket_logging", "name": "training_data", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"bucket": {"references": ["aws_s3_bucket.training_data.id", "aws_s3_bucket.training_data"]},
+                         "target_bucket": {"references": ["aws_s3_bucket.access_logs.id", "aws_s3_bucket.access_logs"]},
+                         "target_prefix": {"constant_value": "training-data/"}}},
+        {"address": "aws_sagemaker_endpoint_configuration.support_llm", "mode": "managed", "type": "aws_sagemaker_endpoint_configuration", "name": "support_llm", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"kms_key_arn": {"references": ["aws_kms_key.ai.arn", "aws_kms_key.ai"]}}},
+        {"address": "aws_sagemaker_notebook_instance.research", "mode": "managed", "type": "aws_sagemaker_notebook_instance", "name": "research", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"kms_key_id": {"references": ["aws_kms_key.ai.arn", "aws_kms_key.ai"]},
+                         "role_arn": {"references": ["aws_iam_role.sagemaker_exec.arn", "aws_iam_role.sagemaker_exec"]}}},
+        {"address": "aws_iam_role_policy.sagemaker_exec", "mode": "managed", "type": "aws_iam_role_policy", "name": "sagemaker_exec", "provider_config_key": "aws", "schema_version": 0,
+         "expressions": {"role": {"references": ["aws_iam_role.sagemaker_exec.id", "aws_iam_role.sagemaker_exec"]}}}
+      ]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+# SECURE pull-request eval bot. The commit SHAs are placeholders (see secure/release.yml).
+name: pr-eval-bot
+
+on:
+  # FIX (GHA-003): `pull_request` runs fork PRs with a read-only token and NO secrets.
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest          # FIX (GHA-011): fresh GitHub-hosted VM, thrown away after the job
+    steps:
+      - uses: actions/checkout@1111111111111111111111111111111111111111 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@2222222222222222222222222222222222222222 # v5
+        with:
+          python-version: "3.11"
+      - name: Offline eval with the mock model (no endpoint, no secrets needed)
+        # FIX (GHA-004): untrusted text goes in through an environment variable, so the shell
+        # treats it as data. It is never pasted into the script itself.
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "Evaluating PR: $PR_TITLE"
+          python -m pip install -e ".[dev]"
+          python -m pytest 02-llm-security/prompt-injection
+
+# Need to post a comment or use a GPU eval? Do it in a SEPARATE workflow triggered by
+# `workflow_run` that only downloads the result artifact, treats it as untrusted data,
+# and never checks out or runs the PR's code.

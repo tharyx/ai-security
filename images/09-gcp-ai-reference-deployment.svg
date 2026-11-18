@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Google Cloud reference deployment for the AI platform</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="720" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a" text-anchor="start">Google Cloud reference deployment for the AI platform</text>
+  <text x="40" y="80" font-size="16" fill="#475569" text-anchor="start">Vertex AI through Private Service Connect inside a VPC Service Controls perimeter, Model Armor as guardrail.</text>
+  <rect x="30" y="100" width="1140" height="90" rx="14" fill="#fff7f7" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="44" y="120" font-size="13" font-weight="700" fill="#991b1b" text-anchor="start">Internet</text>
+  <rect x="60" y="122" width="230" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="175.0" y="156.0" font-size="16" font-weight="700" fill="#991b1b" text-anchor="middle">Users (SSO)</text>
+  <rect x="330" y="117" width="330" height="66" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="495.0" y="146.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Load Balancer + Cloud Armor</text>
+  <text x="495.0" y="164.25" font-size="12.5" fill="#166534" text-anchor="middle">Apigee or API Gateway (JWT, quotas)</text>
+  <rect x="700" y="117" width="440" height="66" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="920.0" y="146.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Cloud Identity / workforce identity</text>
+  <text x="920.0" y="164.25" font-size="12.5" fill="#166534" text-anchor="middle">Identity-Aware Proxy · OIDC to the gateway</text>
+  <rect x="30" y="205" width="1140" height="330" rx="14" fill="#fbfcfd" stroke="#64748b" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="44" y="527" font-size="13" font-weight="700" fill="#334155" text-anchor="start">Organization · folder · project · VPC Service Controls perimeter</text>
+  <rect x="50" y="235" width="560" height="140" rx="14" fill="#fffdf6" stroke="#d97706" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="64" y="255" font-size="13" font-weight="700" fill="#92400e" text-anchor="start">VPC (Cloud Run / GKE)</text>
+  <rect x="70" y="268" width="250" height="92" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="195.0" y="293.25" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">AI gateway service</text>
+  <text x="195.0" y="310.75" font-size="12.5" fill="#166534" text-anchor="middle">quotas · token budget</text>
+  <text x="195.0" y="328.25" font-size="12.5" fill="#166534" text-anchor="middle">Model Armor calls</text>
+  <text x="195.0" y="345.75" font-size="12.5" fill="#166534" text-anchor="middle">own service account</text>
+  <rect x="340" y="268" width="250" height="92" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="465.0" y="293.25" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Agent + RAG services</text>
+  <text x="465.0" y="310.75" font-size="12.5" fill="#92400e" text-anchor="middle">one service account</text>
+  <text x="465.0" y="328.25" font-size="12.5" fill="#92400e" text-anchor="middle">step / cost limits</text>
+  <text x="465.0" y="345.75" font-size="12.5" fill="#92400e" text-anchor="middle">feature-flag kill switch</text>
+  <rect x="630" y="235" width="520" height="140" rx="14" fill="#f7faff" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="644" y="255" font-size="13" font-weight="700" fill="#1e3a8a" text-anchor="start">Private Service Connect + VPC-SC</text>
+  <rect x="650" y="268" width="230" height="92" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="765.0" y="293.25" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Vertex AI (Gemini)</text>
+  <text x="765.0" y="310.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">PSC endpoint</text>
+  <text x="765.0" y="328.25" font-size="12.5" fill="#1e3a8a" text-anchor="middle">inside VPC-SC perimeter</text>
+  <text x="765.0" y="345.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">roles/aiplatform.user</text>
+  <rect x="900" y="268" width="230" height="92" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1015.0" y="293.25" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Model Armor</text>
+  <text x="1015.0" y="310.75" font-size="12.5" fill="#166534" text-anchor="middle">prompt injection filter</text>
+  <text x="1015.0" y="328.25" font-size="12.5" fill="#166534" text-anchor="middle">sensitive data filter</text>
+  <text x="1015.0" y="345.75" font-size="12.5" fill="#166534" text-anchor="middle">malicious URL filter</text>
+  <rect x="70" y="395" width="250" height="120" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="195.0" y="434.25" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">Vertex AI Vector Search</text>
+  <text x="195.0" y="451.75" font-size="12.5" fill="#334155" text-anchor="middle">PSC endpoint</text>
+  <text x="195.0" y="469.25" font-size="12.5" fill="#334155" text-anchor="middle">namespace restricts</text>
+  <text x="195.0" y="486.75" font-size="12.5" fill="#334155" text-anchor="middle">CMEK (Cloud KMS)</text>
+  <rect x="340" y="395" width="250" height="120" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="465.0" y="434.25" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">Cloud Storage</text>
+  <text x="465.0" y="451.75" font-size="12.5" fill="#334155" text-anchor="middle">public access prevention</text>
+  <text x="465.0" y="469.25" font-size="12.5" fill="#334155" text-anchor="middle">uniform access</text>
+  <text x="465.0" y="486.75" font-size="12.5" fill="#334155" text-anchor="middle">CMEK (Cloud KMS)</text>
+  <rect x="650" y="395" width="230" height="120" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="765.0" y="434.25" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Tool broker + tools</text>
+  <text x="765.0" y="451.75" font-size="12.5" fill="#92400e" text-anchor="middle">registry allowlist</text>
+  <text x="765.0" y="469.25" font-size="12.5" fill="#92400e" text-anchor="middle">own service accounts</text>
+  <text x="765.0" y="486.75" font-size="12.5" fill="#92400e" text-anchor="middle">approval for writes</text>
+  <rect x="900" y="395" width="230" height="120" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1015.0" y="434.25" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Egress controls</text>
+  <text x="1015.0" y="451.75" font-size="12.5" fill="#166534" text-anchor="middle">firewall deny egress</text>
+  <text x="1015.0" y="469.25" font-size="12.5" fill="#166534" text-anchor="middle">Secure Web Proxy</text>
+  <text x="1015.0" y="486.75" font-size="12.5" fill="#166534" text-anchor="middle">VPC-SC blocks exfil</text>
+  <rect x="30" y="550" width="1140" height="130" rx="14" fill="#fbfcfd" stroke="#64748b" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="44" y="570" font-size="13" font-weight="700" fill="#334155" text-anchor="start">Shared security services</text>
+  <rect x="50" y="580" width="210" height="84" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="155.0" y="610.0" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Service accounts</text>
+  <text x="155.0" y="627.5" font-size="12.5" fill="#166534" text-anchor="middle">Workload Identity Fed.</text>
+  <text x="155.0" y="645.0" font-size="12.5" fill="#166534" text-anchor="middle">no SA keys (org policy)</text>
+  <rect x="275" y="580" width="210" height="84" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="380.0" y="610.0" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Cloud KMS / HSM</text>
+  <text x="380.0" y="627.5" font-size="12.5" fill="#166534" text-anchor="middle">CMEK keys</text>
+  <text x="380.0" y="645.0" font-size="12.5" fill="#166534" text-anchor="middle">rotation period</text>
+  <rect x="500" y="580" width="200" height="84" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="600.0" y="610.0" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Secret Manager</text>
+  <text x="600.0" y="627.5" font-size="12.5" fill="#166534" text-anchor="middle">IAM per secret</text>
+  <text x="600.0" y="645.0" font-size="12.5" fill="#166534" text-anchor="middle">rotation schedule</text>
+  <rect x="715" y="580" width="210" height="84" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="820.0" y="610.0" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">Cloud Audit Logs</text>
+  <text x="820.0" y="627.5" font-size="12.5" fill="#334155" text-anchor="middle">Admin Activity (on)</text>
+  <text x="820.0" y="645.0" font-size="12.5" fill="#334155" text-anchor="middle">Data Access (enable!)</text>
+  <rect x="940" y="580" width="210" height="84" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1045.0" y="610.0" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">SIEM (e.g. SecOps)</text>
+  <text x="1045.0" y="627.5" font-size="12.5" fill="#166534" text-anchor="middle">Security Command Center</text>
+  <text x="1045.0" y="645.0" font-size="12.5" fill="#166534" text-anchor="middle">locked log buckets</text>
+  <path d="M290 150 L328 150" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M495 183 L495 222 L295 222 L295 266" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M320 314 L338 314" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M590 300 L648 300" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="598" y="293" font-size="11" fill="#475569" text-anchor="start">private</text>
+  <path d="M195 360 L195 393" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M465 360 L465 393" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M560 360 L560 380 L765 380 L765 393" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M880 455 L898 455" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M925 622 L938 622" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="40" y="708" font-size="13" fill="#475569" text-anchor="start">Service names and features change. Verify every box against current Google Cloud documentation before you build.</text>
+</svg>

@@ -1,0 +1,213 @@
+# EU AI Act questionnaire answers for synthetic example systems.
+# EDUCATIONAL, NOT LEGAL ADVICE. Organizations and systems are invented.
+# Every question must be answered: the engine refuses to guess.
+
+- case: cv-screening-deployer
+  system: ACME uses a vendor CV-screening tool for EU job ads
+  is_ai_system: true
+  eu_nexus: true
+  exclusion: none
+  role: deployer
+  prohibited_practices: []
+  annex_i_safety_component: false
+  annex_iii_area: employment
+  art6_3_exception: none
+  profiling: true
+  interacts_with_people: false
+  generates_synthetic_content: false
+  emotion_or_biometric_categorisation: false
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: false
+  gpai_systemic_risk: false
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: false
+
+- case: cv-screening-provider
+  system: HR-tech vendor sells a CV ranking product in the EU
+  is_ai_system: true
+  eu_nexus: true
+  exclusion: none
+  role: provider
+  prohibited_practices: []
+  annex_i_safety_component: false
+  annex_iii_area: employment
+  art6_3_exception: preparatory_task   # the vendor claims "it only prepares a shortlist"
+  profiling: true                      # ... but it scores candidates' personal traits
+  interacts_with_people: false
+  generates_synthetic_content: false
+  emotion_or_biometric_categorisation: false
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: false
+  gpai_systemic_risk: false
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: false
+
+- case: hr-document-router
+  system: Routes incoming HR documents to the right folder (no assessment of people)
+  is_ai_system: true
+  eu_nexus: true
+  exclusion: none
+  role: provider
+  prohibited_practices: []
+  annex_i_safety_component: false
+  annex_iii_area: employment
+  art6_3_exception: narrow_procedural_task
+  profiling: false
+  interacts_with_people: false
+  generates_synthetic_content: false
+  emotion_or_biometric_categorisation: false
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: false
+  gpai_systemic_risk: false
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: false
+
+- case: credit-scoring-bank
+  system: A bank uses a vendor model to score consumer loan applications
+  is_ai_system: true
+  eu_nexus: true
+  exclusion: none
+  role: deployer
+  prohibited_practices: []
+  annex_i_safety_component: false
+  annex_iii_area: essential_services
+  art6_3_exception: none
+  profiling: true
+  interacts_with_people: false
+  generates_synthetic_content: false
+  emotion_or_biometric_categorisation: false
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: false
+  gpai_systemic_risk: false
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: true
+
+- case: support-chatbot
+  system: ACME builds and runs its own website support chatbot
+  is_ai_system: true
+  eu_nexus: true
+  exclusion: none
+  role: provider
+  prohibited_practices: []
+  annex_i_safety_component: false
+  annex_iii_area: none
+  art6_3_exception: none
+  profiling: false
+  interacts_with_people: true
+  generates_synthetic_content: true
+  emotion_or_biometric_categorisation: false
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: false
+  gpai_systemic_risk: false
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: false
+
+- case: meeting-mood-monitor
+  system: Scores employee emotions from webcam video in meetings
+  is_ai_system: true
+  eu_nexus: true
+  exclusion: none
+  role: deployer
+  prohibited_practices: [emotion_recognition_work_education]
+  annex_i_safety_component: false
+  annex_iii_area: biometrics
+  art6_3_exception: none
+  profiling: true
+  interacts_with_people: false
+  generates_synthetic_content: false
+  emotion_or_biometric_categorisation: true
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: false
+  gpai_systemic_risk: false
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: false
+
+- case: internal-code-assistant
+  system: Engineers use a licensed code assistant
+  is_ai_system: true
+  eu_nexus: true
+  exclusion: none
+  role: deployer
+  prohibited_practices: []
+  annex_i_safety_component: false
+  annex_iii_area: none
+  art6_3_exception: none
+  profiling: false
+  interacts_with_people: true
+  generates_synthetic_content: true
+  emotion_or_biometric_categorisation: false
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: false
+  gpai_systemic_risk: false
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: false
+
+- case: open-weights-model
+  system: A lab releases a general-purpose language model to EU developers
+  is_ai_system: true
+  eu_nexus: true
+  exclusion: none
+  role: provider
+  prohibited_practices: []
+  annex_i_safety_component: false
+  annex_iii_area: none
+  art6_3_exception: none
+  profiling: false
+  interacts_with_people: false
+  generates_synthetic_content: false
+  emotion_or_biometric_categorisation: false
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: true
+  gpai_systemic_risk: false
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: false
+
+- case: frontier-model
+  system: A very large general-purpose model presumed to have systemic risk
+  is_ai_system: true
+  eu_nexus: true
+  exclusion: none
+  role: provider
+  prohibited_practices: []
+  annex_i_safety_component: false
+  annex_iii_area: none
+  art6_3_exception: none
+  profiling: false
+  interacts_with_people: false
+  generates_synthetic_content: false
+  emotion_or_biometric_categorisation: false
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: true
+  gpai_systemic_risk: true
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: false
+
+- case: india-only-app
+  system: Loan-eligibility helper used only by customers in India
+  is_ai_system: true
+  eu_nexus: false
+  exclusion: none
+  role: provider
+  prohibited_practices: []
+  annex_i_safety_component: false
+  annex_iii_area: essential_services
+  art6_3_exception: none
+  profiling: true
+  interacts_with_people: true
+  generates_synthetic_content: false
+  emotion_or_biometric_categorisation: false
+  deep_fake: false
+  public_interest_text: false
+  gpai_model_provider: false
+  gpai_systemic_risk: false
+  public_body_or_public_service: false
+  credit_or_life_health_insurance: true

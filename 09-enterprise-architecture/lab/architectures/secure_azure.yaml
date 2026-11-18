@@ -1,0 +1,145 @@
+# Secure reference deployment of the "ops assistant" AI platform on Azure.
+# Synthetic example for the lab. Product names change (Azure AI Foundry is being
+# renamed): verify against current Microsoft Learn docs.
+name: ops-assistant-azure
+cloud: azure
+environment: prod
+data_classification: confidential
+multi_tenant: true
+
+components:
+  - id: web
+    type: frontend
+    zone: public
+    service: Azure Front Door + WAF + Static Web Apps
+    public_network_access: true
+
+  - id: ai-gateway
+    type: ai_gateway
+    zone: app
+    service: Azure API Management (internal VNet mode) with validate-jwt and token-limit policies
+    identity: mi-gateway
+    user_auth: oidc                   # Microsoft Entra ID
+    rate_limits: true
+    token_budget: true
+    guardrails:
+      input: [prompt_attack, pii]     # Prompt Shields (Azure AI Content Safety)
+      output: [pii, secrets, url_allowlist]
+    egress: deny_by_default
+
+  - id: model
+    type: model_endpoint
+    zone: model
+    service: Azure OpenAI in Azure AI Foundry (private endpoint, disableLocalAuth)
+    public_network_access: false
+    private_endpoint: true
+    data_use:
+      training_opt_out: true
+      retention_reviewed: true        # abuse monitoring status recorded
+
+  - id: rag
+    type: rag_service
+    zone: app
+    service: retrieval API on Azure Container Apps (VNet integrated)
+    identity: mi-rag
+    retrieval_authz: server_side      # AI Search security filter from Entra group claims
+
+  - id: vectors
+    type: vector_store
+    zone: data
+    service: Azure AI Search (private endpoint, CMK)
+    public_network_access: false
+    private_endpoint: true
+    encryption_key: kv-ai-data
+    tenant_isolation: server_side_filter
+
+  - id: docs
+    type: object_store
+    zone: data
+    service: Azure Blob Storage (private endpoint, shared key access disabled)
+    public_network_access: false
+    private_endpoint: true
+    encryption_key: kv-ai-data
+
+  - id: agent
+    type: agent_runtime
+    zone: app
+    service: orchestrator on Azure Container Apps
+    identity: mi-agent
+    approval_required_for: [write]
+    limits: {max_steps: 8, max_cost_usd: 2.0}
+    kill_switch: true                 # App Configuration feature flag
+    egress: deny_by_default           # Azure Firewall FQDN allowlist
+
+  - id: mcp-gateway
+    type: mcp_gateway
+    zone: tools
+    service: API Management product for MCP/tool APIs + registry
+    identity: mi-mcp
+    tool_registry: allowlist
+    egress: deny_by_default
+
+  - id: tool-metrics
+    type: tool
+    zone: tools
+    service: read-only Azure Monitor metrics tool
+    identity: mi-tool-metrics
+    side_effects: read
+    egress: deny_by_default
+
+  - id: tool-change
+    type: tool
+    zone: tools
+    service: change-request tool (creates a ticket only)
+    identity: mi-tool-change
+    side_effects: write
+    egress: deny_by_default
+
+  - id: audit-logs
+    type: log_store
+    zone: security
+    service: Log Analytics workspace + immutable blob archive
+    public_network_access: false
+    encryption_key: kv-logs
+    immutable: true
+    retention_days: 730
+    exports_to_siem: true             # Microsoft Sentinel
+
+identities:
+  - {id: mi-gateway, credential: short_lived, permissions: ["Cognitive Services User on content-safety"]}
+  - {id: mi-rag, credential: short_lived, permissions: ["Search Index Data Reader on ops-index"]}
+  - {id: mi-agent, credential: short_lived, permissions: ["Cognitive Services OpenAI User on aoai-prod"]}
+  - {id: mi-mcp, credential: short_lived, permissions: ["Storage Table Data Reader on tool-registry"]}
+  - {id: mi-tool-metrics, credential: short_lived, permissions: ["Monitoring Reader on rg-workloads"]}
+  - {id: mi-tool-change, credential: short_lived, permissions: ["ticketing.create_change"]}
+  - {id: gh-deploy, kind: ci, credential: short_lived, permissions: ["deployment on rg-ops-assistant"]}
+
+keys:
+  - {id: kv-ai-data, managed_by: customer, rotation: true}
+  - {id: kv-logs, managed_by: customer, rotation: true}
+
+secrets:
+  store: azure-key-vault
+  inline: []
+
+logging:
+  control_plane_audit: true           # Activity Log exported
+  model_invocation_logs: true         # diagnostic settings on the AI resource
+  prompt_redaction: true
+  sink: audit-logs
+
+flows:
+  - {from: internet, to: web}
+  - {from: web, to: ai-gateway}
+  - {from: ai-gateway, to: rag}
+  - {from: rag, to: vectors}
+  - {from: rag, to: docs}
+  - {from: ai-gateway, to: agent}
+  - {from: agent, to: model}
+  - {from: agent, to: mcp-gateway}
+  - {from: mcp-gateway, to: tool-metrics}
+  - {from: mcp-gateway, to: tool-change}
+  - {from: ai-gateway, to: audit-logs}
+  - {from: mcp-gateway, to: audit-logs}
+
+exceptions: []

@@ -1,0 +1,15 @@
+{
+  "model": {
+    "name": "support-llm",
+    "version": "3.0.0",
+    "sha256": "91eecc3e61072c765156ca1ca58cb40ff36116c0088326da48077a43aab1d7ed"
+  },
+  "generated_at": "2026-11-17T10:05:00Z",
+  "harness": "pytest + aisec_lab (offline)",
+  "suites": {
+    "prompt_injection": {"passed": 17, "failed": 0},
+    "data_leakage": {"passed": 9, "failed": 0},
+    "jailbreak": {"passed": 39, "failed": 1}
+  },
+  "dependency_audit": {"critical": 0, "high": 0}
+}

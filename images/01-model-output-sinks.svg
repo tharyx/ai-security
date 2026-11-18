@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Model output is untrusted input: validate it at every sink</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Model output is untrusted input</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Anyone who can influence the context can influence the output. Validate at the sink: the sink knows what "dangerous" means.</text>
+
+  <!-- model -->
+  <rect x="40" y="285" width="180" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="130" y="330" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">LLM</text>
+  <text x="130" y="352" text-anchor="middle" font-size="13" fill="#1e3a8a">text, JSON, code,</text>
+  <text x="130" y="370" text-anchor="middle" font-size="13" fill="#1e3a8a">tool calls</text>
+  <path d="M220 340 L280 340" stroke="#334155" stroke-width="2.5"/>
+  <path d="M280 142 L280 538" stroke="#334155" stroke-width="2.5"/>
+
+  <text x="330" y="122" font-size="13" font-weight="700" fill="#92400e">SINK (where output goes) and its risk</text>
+  <text x="720" y="122" font-size="13" font-weight="700" fill="#166534">HARD CONTROL at that sink</text>
+
+  <!-- rows: y = 110 + i*80 -->
+  <g>
+    <path d="M280 162 L324 162" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="330" y="132" width="340" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="346" y="157" font-size="15" font-weight="700" fill="#92400e">Browser / chat UI</text>
+    <text x="346" y="178" font-size="13" fill="#991b1b">XSS, markdown-image exfiltration</text>
+    <path d="M670 162 L714 162" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="720" y="132" width="440" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="736" y="167" font-size="13" fill="#166534">Encode output · allowlist image and link URLs · strict CSP</text>
+  </g>
+  <g>
+    <path d="M280 242 L324 242" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="330" y="212" width="340" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="346" y="237" font-size="15" font-weight="700" fill="#92400e">SQL / database</text>
+    <text x="346" y="258" font-size="13" fill="#991b1b">SQL injection, data change or loss</text>
+    <path d="M670 242 L714 242" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="720" y="212" width="440" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="736" y="247" font-size="13" fill="#166534">Parameterized queries · read-only role · row-level security</text>
+  </g>
+  <g>
+    <path d="M280 322 L324 322" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="330" y="292" width="340" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="346" y="317" font-size="15" font-weight="700" fill="#92400e">Shell / code runner</text>
+    <text x="346" y="338" font-size="13" fill="#991b1b">remote code execution</text>
+    <path d="M670 322 L714 322" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="720" y="292" width="440" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="736" y="327" font-size="13" fill="#166534">Avoid it. If needed: sandbox, no network, no secrets, time limits</text>
+  </g>
+  <g>
+    <path d="M280 402 L324 402" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="330" y="372" width="340" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="346" y="397" font-size="15" font-weight="700" fill="#92400e">Tool / API call</text>
+    <text x="346" y="418" font-size="13" fill="#991b1b">excessive agency, SSRF, confused deputy</text>
+    <path d="M670 402 L714 402" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="720" y="372" width="440" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="736" y="407" font-size="13" fill="#166534">Strict schema · authz as the end user · approval for side effects</text>
+  </g>
+  <g>
+    <path d="M280 482 L324 482" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="330" y="452" width="340" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="346" y="477" font-size="15" font-weight="700" fill="#92400e">Another LLM / agent / memory</text>
+    <text x="346" y="498" font-size="13" fill="#991b1b">injection chains, persistent poisoning</text>
+    <path d="M670 482 L714 482" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="720" y="452" width="440" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="736" y="487" font-size="13" fill="#166534">Treat as untrusted again · validate before storing in memory</text>
+  </g>
+  <g>
+    <path d="M280 538 L280 562 L324 562" fill="none" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="330" y="532" width="340" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="346" y="557" font-size="15" font-weight="700" fill="#92400e">A human decision</text>
+    <text x="346" y="578" font-size="13" fill="#991b1b">misinformation, fake "approved" claims</text>
+    <path d="M670 562 L714 562" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <rect x="720" y="532" width="440" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="736" y="567" font-size="13" fill="#166534">Show sources · process controls that do not trust the summary</text>
+  </g>
+  <text x="40" y="622" font-size="14" fill="#0f172a"><tspan font-weight="700">OWASP LLM05 (Improper Output Handling):</tspan> the same rules you use for user input apply to model output.</text>
+</svg>

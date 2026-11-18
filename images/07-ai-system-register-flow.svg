@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>From system card facts to a risk tier, required controls and a release decision</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">The AI system register: facts in, tier and controls out</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Teams describe facts. Written rules compute the tier. The team's own tier is only compared, never trusted.</text>
+
+  <!-- system card -->
+  <rect x="40" y="100" width="340" height="390" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="130" font-size="17" font-weight="700" fill="#0f172a">System card (facts)</text>
+  <g font-size="13" fill="#334155">
+    <text x="60" y="160">• id, name, lifecycle status</text>
+    <text x="60" y="186">• business owner + technical owner</text>
+    <text x="60" y="212">• intended use and prohibited uses</text>
+    <text x="60" y="238">• provider, model, version</text>
+    <text x="60" y="264">• data classes (personal, confidential)</text>
+    <text x="60" y="290">• affected people</text>
+    <text x="60" y="316">• use domain (employment, credit...)</text>
+    <text x="60" y="342">• decision impact: none / informs / auto</text>
+    <text x="60" y="368">• tools and whether they have side effects</text>
+    <text x="60" y="394">• human oversight level</text>
+    <text x="60" y="420">• controls in place, last review date</text>
+    <text x="60" y="446">• egress domains, approved exceptions</text>
+  </g>
+  <text x="60" y="476" font-size="12" fill="#475569">Strict schema: a typo fails loudly (GOV-00)</text>
+
+  <!-- rules -->
+  <rect x="420" y="100" width="370" height="390" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="440" y="130" font-size="17" font-weight="700" fill="#1e3a8a">Tiering rules (highest wins)</text>
+  <g font-size="13" fill="#1e3a8a">
+    <text x="440" y="164">prohibited use</text><text x="770" y="164" text-anchor="end" font-weight="700" fill="#991b1b">PROHIBITED</text>
+    <text x="440" y="200">high-impact domain + auto decision</text><text x="770" y="200" text-anchor="end" font-weight="700" fill="#991b1b">CRITICAL</text>
+    <text x="440" y="236">high-impact domain</text><text x="770" y="236" text-anchor="end" font-weight="700" fill="#92400e">HIGH</text>
+    <text x="440" y="272">side-effect tools + sensitive data</text><text x="770" y="272" text-anchor="end" font-weight="700" fill="#92400e">HIGH</text>
+    <text x="440" y="308">sensitive personal data</text><text x="770" y="308" text-anchor="end" font-weight="700" fill="#92400e">HIGH</text>
+    <text x="440" y="344">external-facing or personal data</text><text x="770" y="344" text-anchor="end" font-weight="700">MEDIUM</text>
+    <text x="440" y="380">confidential data to a vendor</text><text x="770" y="380" text-anchor="end" font-weight="700">MEDIUM</text>
+    <text x="440" y="416">none of the above</text><text x="770" y="416" text-anchor="end" font-weight="700" fill="#166534">LOW</text>
+  </g>
+  <text x="440" y="458" font-size="12" fill="#475569">Every match is recorded as a reason,</text>
+  <text x="440" y="475" font-size="12" fill="#475569">so the tier can be explained to an auditor.</text>
+
+  <!-- output -->
+  <rect x="830" y="100" width="330" height="390" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="850" y="130" font-size="17" font-weight="700" fill="#166534">Register entry</text>
+  <g font-size="13" fill="#166534">
+    <text x="850" y="164">• computed tier + reasons</text>
+    <text x="850" y="194">• required controls for that tier</text>
+    <text x="850" y="224">• missing controls</text>
+    <text x="850" y="254">• findings GOV-00 ... GOV-09</text>
+    <text x="850" y="284">• waived findings (still visible)</text>
+    <text x="850" y="314">• next review date (90-365 days)</text>
+  </g>
+  <rect x="850" y="340" width="290" height="56" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="995" y="364" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">APPROVED / BLOCKED</text>
+  <text x="995" y="384" text-anchor="middle" font-size="12" fill="#166534">CI/CD calls can_deploy(system_id)</text>
+  <text x="850" y="430" font-size="12" fill="#475569">Unknown system id = deny.</text>
+  <text x="850" y="448" font-size="12" fill="#475569">Retired systems keep their record.</text>
+
+  <path d="M380 295 L414 295" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M790 295 L824 295" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- warning -->
+  <rect x="40" y="515" width="1120" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="60" y="540" font-size="15" font-weight="700" fill="#991b1b">Tier gaming:</text>
+  <text x="165" y="540" font-size="14" fill="#991b1b">a team declares "low" for an assistant that can send email using customer data. The rules say HIGH.</text>
+  <text x="165" y="560" font-size="13" fill="#991b1b">Self-declared tiers only flag a GOV-04 mismatch. Lower risk by changing the design, not the label.</text>
+</svg>

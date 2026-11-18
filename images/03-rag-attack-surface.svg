@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>RAG attack surface: every stage adds a risk</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">RAG attack surface: every stage adds a risk</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Ingestion is offline, retrieval is online. Each lesson in this module covers one part of the pipeline.</text>
+  <text x="40" y="122" font-size="15" font-weight="700" fill="#0f172a" text-anchor="start">OFFLINE · ingestion and indexing</text>
+  <rect x="40" y="135" width="200" height="80" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="140.0" y="160.8" font-size="15" font-weight="700" fill="#991b1b" text-anchor="middle">Sources</text>
+  <text x="140.0" y="180.6" font-size="12.5" fill="#991b1b" text-anchor="middle">uploads · wiki · email</text>
+  <text x="140.0" y="198.7" font-size="12.5" fill="#991b1b" text-anchor="middle">HR · tickets · web</text>
+  <rect x="40" y="228" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="140.0" y="250.2" font-size="12" fill="#991b1b" text-anchor="middle">Poisoned documents</text>
+  <text x="140.0" y="267.6" font-size="12" fill="#991b1b" text-anchor="middle">hidden instructions</text>
+  <text x="140.0" y="285.0" font-size="12" fill="#991b1b" text-anchor="middle">fake 'official' labels</text>
+  <rect x="270" y="135" width="200" height="80" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="370.0" y="160.8" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Parse + validate</text>
+  <text x="370.0" y="180.6" font-size="12.5" fill="#92400e" text-anchor="middle">PDF · HTML · ZIP · OCR</text>
+  <text x="370.0" y="198.7" font-size="12.5" fill="#92400e" text-anchor="middle">text extraction</text>
+  <rect x="270" y="228" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="370.0" y="250.2" font-size="12" fill="#991b1b" text-anchor="middle">Malicious files, zip bombs</text>
+  <text x="370.0" y="267.6" font-size="12" fill="#991b1b" text-anchor="middle">parser bugs</text>
+  <text x="370.0" y="285.0" font-size="12" fill="#991b1b" text-anchor="middle">PII swept into the index</text>
+  <rect x="500" y="135" width="200" height="80" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="160.8" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Chunk + metadata</text>
+  <text x="600.0" y="180.6" font-size="12.5" fill="#92400e" text-anchor="middle">tenant · ACL · trust</text>
+  <text x="600.0" y="198.7" font-size="12.5" fill="#92400e" text-anchor="middle">provenance labels</text>
+  <rect x="500" y="228" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="600.0" y="250.2" font-size="12" fill="#991b1b" text-anchor="middle">ACL lost at chunking</text>
+  <text x="600.0" y="267.6" font-size="12" fill="#991b1b" text-anchor="middle">chunk mixes two scopes</text>
+  <text x="600.0" y="285.0" font-size="12" fill="#991b1b" text-anchor="middle">no provenance</text>
+  <rect x="730" y="135" width="200" height="80" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="830.0" y="160.8" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Embed</text>
+  <text x="830.0" y="180.6" font-size="12.5" fill="#1e3a8a" text-anchor="middle">embedding model</text>
+  <text x="830.0" y="198.7" font-size="12.5" fill="#1e3a8a" text-anchor="middle">text -&gt; vector</text>
+  <rect x="730" y="228" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="830.0" y="250.2" font-size="12" fill="#991b1b" text-anchor="middle">Vectors can leak text</text>
+  <text x="830.0" y="267.6" font-size="12" fill="#991b1b" text-anchor="middle">(inversion research)</text>
+  <text x="830.0" y="285.0" font-size="12" fill="#991b1b" text-anchor="middle">text sent to a 3rd party</text>
+  <rect x="960" y="135" width="200" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1060.0" y="160.8" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">Vector store</text>
+  <text x="1060.0" y="180.6" font-size="12.5" fill="#334155" text-anchor="middle">vectors · text</text>
+  <text x="1060.0" y="198.7" font-size="12.5" fill="#334155" text-anchor="middle">metadata · backups</text>
+  <rect x="960" y="228" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="1060.0" y="250.2" font-size="12" fill="#991b1b" text-anchor="middle">Open admin API</text>
+  <text x="1060.0" y="267.6" font-size="12" fill="#991b1b" text-anchor="middle">ACL metadata tampering</text>
+  <text x="1060.0" y="285.0" font-size="12" fill="#991b1b" text-anchor="middle">orphans · caches · backups</text>
+  <path d="M240 175 L268 175" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <path d="M470 175 L498 175" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <path d="M700 175 L728 175" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <path d="M930 175 L958 175" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="40" y="310" width="660" height="26" rx="6" fill="#dcfce7"/>
+  <text x="370" y="328" font-size="13" font-weight="700" fill="#166534" text-anchor="middle">Lesson: document-security (weeks 9 and 12)</text>
+  <rect x="730" y="310" width="430" height="26" rx="6" fill="#dcfce7"/>
+  <text x="945" y="328" font-size="13" font-weight="700" fill="#166534" text-anchor="middle">Lesson: vector-db-security (week 10)</text>
+  <text x="40" y="378" font-size="15" font-weight="700" fill="#0f172a" text-anchor="start">ONLINE · question, retrieval and answer</text>
+  <rect x="40" y="390" width="200" height="80" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="140.0" y="415.8" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">User + identity</text>
+  <text x="140.0" y="435.6" font-size="12.5" fill="#92400e" text-anchor="middle">session -&gt; tenant</text>
+  <text x="140.0" y="453.7" font-size="12.5" fill="#92400e" text-anchor="middle">and groups</text>
+  <rect x="40" y="483" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="140.0" y="505.2" font-size="12" fill="#991b1b" text-anchor="middle">Tenant from a client header</text>
+  <text x="140.0" y="522.6" font-size="12" fill="#991b1b" text-anchor="middle">prompt claims a role</text>
+  <text x="140.0" y="540.0" font-size="12" fill="#991b1b" text-anchor="middle">no session, still answers</text>
+  <rect x="270" y="390" width="200" height="80" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="370.0" y="415.8" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Retriever</text>
+  <text x="370.0" y="435.6" font-size="12.5" fill="#92400e" text-anchor="middle">top-k from the</text>
+  <text x="370.0" y="453.7" font-size="12.5" fill="#92400e" text-anchor="middle">vector store</text>
+  <rect x="270" y="483" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="370.0" y="505.2" font-size="12" fill="#991b1b" text-anchor="middle">Similarity used as authz</text>
+  <text x="370.0" y="522.6" font-size="12" fill="#991b1b" text-anchor="middle">cross-tenant results</text>
+  <text x="370.0" y="540.0" font-size="12" fill="#991b1b" text-anchor="middle">stale or missing ACLs</text>
+  <rect x="500" y="390" width="200" height="80" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="600.0" y="415.8" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Context builder</text>
+  <text x="600.0" y="435.6" font-size="12.5" fill="#92400e" text-anchor="middle">chunks -&gt; prompt</text>
+  <text x="600.0" y="453.7" font-size="12.5" fill="#92400e" text-anchor="middle">with labels</text>
+  <rect x="500" y="483" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="600.0" y="505.2" font-size="12" fill="#991b1b" text-anchor="middle">Indirect prompt injection</text>
+  <text x="600.0" y="522.6" font-size="12" fill="#991b1b" text-anchor="middle">too much context</text>
+  <text x="600.0" y="540.0" font-size="12" fill="#991b1b" text-anchor="middle">secrets in the prompt</text>
+  <rect x="730" y="390" width="200" height="80" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="830.0" y="415.8" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">LLM</text>
+  <text x="830.0" y="435.6" font-size="12.5" fill="#1e3a8a" text-anchor="middle">reads untrusted</text>
+  <text x="830.0" y="453.7" font-size="12.5" fill="#1e3a8a" text-anchor="middle">retrieved text</text>
+  <rect x="730" y="483" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="830.0" y="505.2" font-size="12" fill="#991b1b" text-anchor="middle">Follows planted text</text>
+  <text x="830.0" y="522.6" font-size="12" fill="#991b1b" text-anchor="middle">repeats poisoned facts</text>
+  <text x="830.0" y="540.0" font-size="12" fill="#991b1b" text-anchor="middle">leaks what it was given</text>
+  <rect x="960" y="390" width="200" height="80" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1060.0" y="415.8" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Answer + citations</text>
+  <text x="1060.0" y="435.6" font-size="12.5" fill="#92400e" text-anchor="middle">rendered to</text>
+  <text x="1060.0" y="453.7" font-size="12.5" fill="#92400e" text-anchor="middle">the user</text>
+  <rect x="960" y="483" width="200" height="72" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="1060.0" y="505.2" font-size="12" fill="#991b1b" text-anchor="middle">Unauthorized citations</text>
+  <text x="1060.0" y="522.6" font-size="12" fill="#991b1b" text-anchor="middle">PII or canary in output</text>
+  <text x="1060.0" y="540.0" font-size="12" fill="#991b1b" text-anchor="middle">unsafe links rendered</text>
+  <path d="M240 430 L268 430" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <path d="M470 430 L498 430" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <path d="M700 430 L728 430" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <path d="M930 430 L958 430" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="40" y="566" width="1120" height="26" rx="6" fill="#dcfce7"/>
+  <text x="600" y="584" font-size="13" font-weight="700" fill="#166534" text-anchor="middle">Lesson: access-control (week 11)  +  LLM-side controls from Module 02 (prompt injection, output handling)</text>
+  <text x="40" y="622" font-size="13" fill="#475569" text-anchor="start">Red boxes = what can go wrong at that stage. Read the module README for the controls.</text>
+</svg>

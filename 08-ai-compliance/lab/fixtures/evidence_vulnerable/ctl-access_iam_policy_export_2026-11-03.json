@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-ACCESS",
+  "evidence_type": "iam_policy_export",
+  "collected": "2026-11-03",
+  "collected_by": "IT admin",
+  "summary": "screenshot of IAM page"
+}

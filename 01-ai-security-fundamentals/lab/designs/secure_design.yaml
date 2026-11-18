@@ -1,0 +1,69 @@
+# HelpDesk Copilot v1 - the same product after a threat-model review.
+#
+# What changed (compare with vulnerable_design.yaml):
+#   * SSO, rate limits and token budgets on every entry point.
+#   * No secrets in prompts; a data-processing agreement (dpa) with the model provider.
+#   * Retrieval filters by tenant and ACL before ranking; emails are NOT indexed into the KB.
+#   * Lethal trifecta broken: the model that reads untrusted email has NO external channel.
+#     send_email and http_fetch are gone. The model writes a *draft*; a human sends it.
+#   * Every tool call: strict schema, server-side policy, the user's own identity, audit log.
+#   * Markdown is encoded and image/link URLs are allowlisted.
+#   * Logs are redacted.
+# The model is STILL tainted by email content. That is accepted: it can no longer do harm.
+
+name: HelpDesk Copilot v1 (secure)
+description: Same assistant, redesigned so a fooled model has a small blast radius.
+
+zones:
+  - {id: internet,       trust: untrusted,  description: Anyone on the internet}
+  - {id: corp,           trust: semi,       description: Employee laptops and browsers}
+  - {id: app_backend,    trust: trusted,    description: "Our API, orchestrator and tools"}
+  - {id: model_provider, trust: semi,       description: Third-party hosted LLM API under contract}
+  - {id: data_tier,      trust: privileged, description: Databases with customer data}
+  - {id: observability,  trust: semi,       description: Log platform many teams can read}
+
+components:
+  - {id: inbound_email,   type: external_source, zone: internet}
+  - {id: support_agent,   type: actor,        zone: corp}
+  - {id: web_ui,          type: ui,           zone: corp, renders_markdown: true}
+  - {id: copilot_api,     type: service,      zone: app_backend}
+  - {id: llm,             type: model,        zone: model_provider}
+  - {id: kb_vector_store, type: vector_store, zone: data_tier, classification: restricted, multi_tenant: true}
+  - {id: crm_db,          type: datastore,    zone: data_tier, classification: restricted}
+  - {id: draft_reply,     type: tool,         zone: app_backend, capabilities: [write],
+     description: Saves a reply draft on the ticket. Only a human can press Send.}
+  - {id: lookup_order,    type: tool,         zone: app_backend, classification: confidential,
+     capabilities: [read_private], description: Read-only order status for one customer}
+  - {id: app_logs,        type: log,          zone: observability}
+
+flows:
+  - {id: F01, from: support_agent, to: web_ui, data: question, controls: [authn, rate_limit]}
+  - {id: F02, from: web_ui, to: copilot_api, data: question, controls: [tls, authn, rate_limit]}
+  - {id: F03, from: inbound_email, to: copilot_api, data: email body,
+     controls: [tls, spotlighting, injection_detection]}   # soft layers: lower the odds only
+  - {id: F04, from: copilot_api, to: llm, data: system prompt + email + KB chunks,
+     classification: confidential, controls: [tls, dpa, token_budget, spotlighting]}
+  - {id: F05, from: kb_vector_store, to: copilot_api, data: KB chunks, classification: restricted,
+     controls: [tls, acl_filter, tenant_filter]}
+  - {id: F07, from: llm, to: draft_reply, data: "tool call (ticket_id, text)", identity: user,
+     controls: [tls, schema_validation, tool_authz, human_approval, audit_log]}
+  - {id: F09, from: llm, to: lookup_order, data: tool call (order_id), identity: user,
+     classification: confidential, controls: [tls, schema_validation, tool_authz, audit_log]}
+  - {id: F10, from: lookup_order, to: crm_db, data: parameterized query, classification: confidential,
+     controls: [authz]}
+  - {id: F11, from: lookup_order, to: llm, data: order status, classification: confidential,
+     controls: [tls, dpa, redaction]}
+  - {id: F12, from: llm, to: web_ui, data: answer (markdown), classification: confidential,
+     controls: [tls, output_encoding, url_allowlist]}
+  - {id: F13, from: copilot_api, to: app_logs, data: redacted prompts and decisions,
+     classification: confidential, controls: [tls, redaction]}
+
+accepted_risks:
+  # A documented, owned, time-limited exception - not a silent gap.
+  - rule: DOS-001
+    target: F03
+    reason: >-
+      The mail gateway already limits volume per sender, and the per-request token budget on F04
+      caps spend. Add a per-tenant rate limit before email processing runs 24/7.
+    owner: AI Platform Team
+    expires: 2027-06-30

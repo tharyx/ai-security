@@ -1,0 +1,14 @@
+{
+  "model": {
+    "name": "support-llm",
+    "version": "2.4.0",
+    "sha256": "5f0c1d2e3a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5"
+  },
+  "generated_at": "2026-10-01T08:00:00Z",
+  "harness": "pytest + aisec_lab (offline)",
+  "suites": {
+    "prompt_injection": {"passed": 22, "failed": 2},
+    "jailbreak": {"passed": 40, "failed": 0}
+  },
+  "dependency_audit": {"critical": 1, "high": 3}
+}

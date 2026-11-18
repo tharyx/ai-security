@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Layered jailbreak guardrails in the lab chatbot, and which layer stops which attack</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Jailbreak guardrails: layers around a model you cannot fix</text>
+  <text x="40" y="80" font-size="16" fill="#475569">The model's refusal training is just one more soft layer. Each attack in the lab is stopped by the first layer that sees it.</text>
+
+  <!-- pipeline: 7 boxes, w=140, gap=20, start x=50 -->
+  <rect x="50" y="120" width="140" height="96" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="120" y="160" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Message</text>
+  <text x="120" y="182" text-anchor="middle" font-size="12" fill="#991b1b">from the user</text>
+
+  <rect x="210" y="120" width="140" height="96" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="280" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">G2 Input</text>
+  <text x="280" y="172" text-anchor="middle" font-size="12" fill="#92400e">signal scoring</text>
+  <text x="280" y="190" text-anchor="middle" font-size="12" fill="#92400e">decode, normalize</text>
+
+  <rect x="370" y="120" width="140" height="96" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="440" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">G3 Session</text>
+  <text x="440" y="172" text-anchor="middle" font-size="12" fill="#92400e">signals summed</text>
+  <text x="440" y="190" text-anchor="middle" font-size="12" fill="#92400e">across turns</text>
+
+  <rect x="530" y="120" width="140" height="96" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="600" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">G1 + Model</text>
+  <text x="600" y="172" text-anchor="middle" font-size="12" fill="#1e3a8a">hardened prompt</text>
+  <text x="600" y="190" text-anchor="middle" font-size="12" fill="#1e3a8a">refusal training</text>
+
+  <rect x="690" y="120" width="140" height="96" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="760" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">G4 Output</text>
+  <text x="760" y="172" text-anchor="middle" font-size="12" fill="#92400e">moderation</text>
+  <text x="760" y="190" text-anchor="middle" font-size="12" fill="#92400e">classifier</text>
+
+  <rect x="850" y="120" width="140" height="96" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="920" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">G5 Policy</text>
+  <text x="920" y="172" text-anchor="middle" font-size="12" fill="#166534">price catalog, no</text>
+  <text x="920" y="190" text-anchor="middle" font-size="12" fill="#166534">promises or advice</text>
+
+  <rect x="1010" y="120" width="140" height="96" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1080" y="160" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Customer</text>
+  <text x="1080" y="182" text-anchor="middle" font-size="12" fill="#334155">sees the answer</text>
+
+  <path d="M190 168 L204 168" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M350 168 L364 168" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M510 168 L524 168" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M670 168 L684 168" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M830 168 L844 168" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M990 168 L1004 168" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- G6 band -->
+  <rect x="50" y="232" width="1100" height="40" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="600" y="257" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">G6 Abuse limits: every block is a strike · 3 strikes lock the session · stops cheap best-of-N retrying</text>
+
+  <!-- soft / hard legend -->
+  <rect x="210" y="284" width="620" height="30" rx="6" fill="#fef3c7"/>
+  <text x="520" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">SOFT: probabilistic, can be bypassed (lab classifiers are simple on purpose)</text>
+  <rect x="850" y="284" width="300" height="30" rx="6" fill="#dcfce7"/>
+  <text x="1000" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">HARD: deterministic code</text>
+
+  <!-- which layer stopped what -->
+  <text x="50" y="352" font-size="17" font-weight="700" fill="#0f172a">In the lab, the first layer that stops each attack</text>
+  <g font-size="14">
+    <rect x="50" y="368" width="1100" height="36" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="66" y="391" font-weight="700" fill="#92400e">G2 Input</text>
+    <text x="230" y="391" fill="#0f172a">role-play (DAN) · Base64 encoding · payload splitting · many-shot · adversarial suffix</text>
+
+    <rect x="50" y="410" width="1100" height="36" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="66" y="433" font-weight="700" fill="#92400e">G3 Session</text>
+    <text x="230" y="433" fill="#0f172a">Crescendo-style: persona set up in turn 1, harmful request in turn 2 (each turn alone looks fine)</text>
+
+    <rect x="50" y="452" width="1100" height="36" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="66" y="475" font-weight="700" fill="#92400e">G4 Output</text>
+    <text x="230" y="475" fill="#0f172a">fiction framing the input classifier did not know ("For a novel I am writing...")</text>
+
+    <rect x="50" y="494" width="1100" height="36" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="66" y="517" font-weight="700" fill="#166534">G5 Policy</text>
+    <text x="230" y="517" fill="#0f172a">brand disparagement · "$1, legally binding" offer · investment advice</text>
+
+    <rect x="50" y="536" width="1100" height="36" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="66" y="559" font-weight="700" fill="#1e3a8a">G1 alone</text>
+    <text x="230" y="559" fill="#0f172a">stops nothing in the lab: the hardened prompt is a request, and the mock model ignores it</text>
+  </g>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The AI release gate: evidence in, decision out</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">AI release gate: evidence in, decision out</text>
+  <text x="40" y="76" font-size="16" fill="#475569">The gate trusts files it can check, not people's memory. Missing or stale evidence counts as a failure.</text>
+
+  <!-- inputs -->
+  <rect x="40" y="105" width="300" height="140" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="133" font-size="16" font-weight="700" fill="#334155">AI-BOM (CycloneDX-style)</text>
+  <g font-size="13" fill="#334155">
+    <text x="60" y="157">model: SHA-256, format, source URL</text>
+    <text x="60" y="177">signature verified? scan verdict?</text>
+    <text x="60" y="197">model + dataset licenses</text>
+    <text x="60" y="217">model card: intended use, limits</text>
+  </g>
+
+  <rect x="40" y="265" width="300" height="120" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="293" font-size="16" font-weight="700" fill="#334155">Eval report</text>
+  <g font-size="13" fill="#334155">
+    <text x="60" y="317">model SHA-256 it was run on</text>
+    <text x="60" y="337">suites: injection, leakage, jailbreak</text>
+    <text x="60" y="357">generated_at · dependency audit</text>
+  </g>
+
+  <rect x="40" y="405" width="300" height="70" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="433" font-size="16" font-weight="700" fill="#334155">The model file itself</text>
+  <text x="60" y="456" font-size="13" fill="#334155">hashed by the gate, not trusted</text>
+
+  <path d="M340 175 L404 240" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M340 325 L404 300" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M340 440 L404 360" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- gate -->
+  <rect x="410" y="105" width="440" height="370" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="3"/>
+  <text x="630" y="137" font-size="18" font-weight="700" fill="#166534" text-anchor="middle">release_gate.py</text>
+  <g font-size="14" fill="#166534">
+    <text x="430" y="170" font-weight="700">Integrity</text>
+    <text x="430" y="192">001 BOM digest = file digest</text>
+    <text x="430" y="212">007 eval digest = BOM digest</text>
+    <text x="430" y="244" font-weight="700">Safety of the artifact</text>
+    <text x="430" y="266">002 safetensors, not pickle · 005 scan clean</text>
+    <text x="430" y="298" font-weight="700">Provenance and rights</text>
+    <text x="430" y="320">003 approved registry · 004 signature verified</text>
+    <text x="430" y="340">006 model + dataset licenses approved</text>
+    <text x="430" y="372" font-weight="700">Quality of the evidence</text>
+    <text x="430" y="394">008 fresh (≤ 7 days)</text>
+    <text x="430" y="414">009 injection + leakage 100%, jailbreak ≥ 95%</text>
+    <text x="430" y="434">010 zero critical dependency CVEs</text>
+  </g>
+  <text x="630" y="462" font-size="12" fill="#475569" text-anchor="middle">thresholds live in a reviewed policy file (policy as code)</text>
+
+  <!-- outputs -->
+  <rect x="900" y="130" width="260" height="120" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1030" y="162" font-size="17" font-weight="700" fill="#1e3a8a" text-anchor="middle">APPROVED</text>
+  <text x="1030" y="188" font-size="13" fill="#1e3a8a" text-anchor="middle">build · SBOM · sign digest</text>
+  <text x="1030" y="208" font-size="13" fill="#1e3a8a" text-anchor="middle">SLSA provenance</text>
+  <text x="1030" y="228" font-size="13" fill="#1e3a8a" text-anchor="middle">→ protected deploy</text>
+
+  <rect x="900" y="300" width="260" height="120" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1030" y="332" font-size="17" font-weight="700" fill="#991b1b" text-anchor="middle">BLOCKED</text>
+  <text x="1030" y="358" font-size="13" fill="#991b1b" text-anchor="middle">list of failed checks</text>
+  <text x="1030" y="378" font-size="13" fill="#991b1b" text-anchor="middle">fix the evidence, not the gate</text>
+  <text x="1030" y="398" font-size="13" fill="#991b1b" text-anchor="middle">exceptions: ticket + expiry</text>
+
+  <path d="M850 230 L894 196" stroke="#16a34a" stroke-width="2.5" marker-end="url(#g)"/>
+  <path d="M850 330 L894 356" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+
+  <text x="40" y="520" font-size="14" fill="#475569">Classic case it catches: the eval suite ran on last week's model, and a different file is about to ship (GATE-007).</text>
+</svg>

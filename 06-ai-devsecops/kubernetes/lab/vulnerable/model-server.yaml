@@ -1,0 +1,102 @@
+# VULNERABLE model-serving deployment. For READING and CHECKING only - do not apply it.
+# Every "VULN" comment names the rule in k8s_policy.py that must catch it.
+---
+# VULN (K8S-012): no Pod Security Standards label, so privileged pods are admitted.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ml-serving
+---
+# VULN (K8S-011): the Kubernetes API token is mounted into every pod by default.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: llm-server
+  namespace: ml-serving
+---
+# VULN (K8S-016): "the model server needed to read one ConfigMap, so we gave it cluster-admin".
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: llm-server-admin
+subjects:
+  - kind: ServiceAccount
+    name: llm-server
+    namespace: ml-serving
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-server
+  namespace: ml-serving
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: llm-server}
+  template:
+    metadata:
+      labels: {app: llm-server}
+    spec:
+      serviceAccountName: llm-server
+      hostNetwork: true                          # VULN (K8S-006): shares the node's network stack
+      # VULN (K8S-017): GPU pod with no nodeSelector/toleration: lands anywhere, and the GPU
+      # nodes are not reserved for trusted inference workloads.
+      containers:
+        - name: server
+          image: ghcr.io/acme/support-llm:latest # VULN (K8S-007): mutable tag
+          ports:
+            - containerPort: 8000
+          securityContext:
+            privileged: true                     # VULN (K8S-001): full access to the host
+            runAsUser: 0                         # VULN (K8S-002): root
+            # VULN (K8S-003, K8S-004, K8S-005): writable root FS, default capabilities, no seccomp
+          env:
+            - name: OPENAI_API_KEY               # VULN (K8S-009): secret in plain text in the manifest
+              value: sk-test-CANARY000000000000000000
+            - name: AWS_ACCESS_KEY_ID            # VULN (K8S-010): static cloud keys instead of workload identity
+              valueFrom:
+                secretKeyRef: {name: aws-static-keys, key: access_key_id}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef: {name: aws-static-keys, key: secret_access_key}
+          resources:
+            limits:
+              nvidia.com/gpu: 1                  # VULN (K8S-008): GPU limit, but no CPU/memory limits
+          volumeMounts:
+            - name: model-cache
+              mountPath: /models
+      volumes:
+        - name: model-cache                      # VULN (K8S-006): node filesystem shared across pods
+          hostPath:
+            path: /mnt/model-cache
+---
+# VULN (K8S-015): the raw model API gets a public cloud load balancer. No auth, no WAF, no quotas.
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm-server
+  namespace: ml-serving
+spec:
+  type: LoadBalancer
+  selector: {app: llm-server}
+  ports:
+    - port: 80
+      targetPort: 8000
+---
+# VULN (K8S-013, K8S-014): no default-deny policy, and this one allows egress to the whole internet,
+# which is exactly what a hijacked model server needs to download tools or send data out.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-egress
+  namespace: ml-serving
+spec:
+  podSelector: {}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - ipBlock: {cidr: 0.0.0.0/0}

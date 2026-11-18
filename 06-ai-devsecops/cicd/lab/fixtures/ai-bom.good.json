@@ -1,0 +1,50 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-17T09:30:00Z",
+    "component": {"type": "application", "name": "support-llm-service", "version": "3.0.0"}
+  },
+  "components": [
+    {
+      "type": "machine-learning-model",
+      "bom-ref": "model:support-llm@3.0.0",
+      "name": "support-llm",
+      "version": "3.0.0",
+      "hashes": [{"alg": "SHA-256", "content": "91eecc3e61072c765156ca1ca58cb40ff36116c0088326da48077a43aab1d7ed"}],
+      "licenses": [{"license": {"id": "Apache-2.0"}}],
+      "externalReferences": [
+        {"type": "distribution", "url": "https://models.acme.example/support-llm/3.0.0/support-llm-v3.safetensors"}
+      ],
+      "properties": [
+        {"name": "acme:model:format", "value": "safetensors"},
+        {"name": "acme:model:base-model", "value": "acme-base-7b@2.1.0"},
+        {"name": "acme:model:signature-verified", "value": "true"},
+        {"name": "acme:model:scan-verdict", "value": "SAFE"}
+      ],
+      "modelCard": {
+        "modelParameters": {
+          "task": "text-generation",
+          "datasets": [{"ref": "data:support-tickets-2026q3"}]
+        },
+        "considerations": {
+          "useCases": ["Summarize customer support emails for human agents"],
+          "technicalLimitations": ["May follow instructions hidden in emails; tools are gated outside the model"]
+        }
+      }
+    },
+    {
+      "type": "data",
+      "bom-ref": "data:support-tickets-2026q3",
+      "name": "support-tickets-2026q3",
+      "licenses": [{"license": {"name": "ACME-internal"}}],
+      "properties": [
+        {"name": "acme:data:classification", "value": "confidential"},
+        {"name": "acme:data:pii-scrubbed", "value": "true"},
+        {"name": "acme:data:legal-basis", "value": "contract"}
+      ]
+    }
+  ]
+}

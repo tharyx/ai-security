@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Four ways a CI workflow gets abused, and the fix for each</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Four ways a CI workflow gets abused</text>
+  <text x="40" y="76" font-size="16" fill="#475569">CI holds the keys to production: signing identity, registry push, cloud deploy role. Treat the workflow file as security-critical code.</text>
+
+  <g font-size="13" font-weight="700" fill="#475569">
+    <text x="40" y="108">ATTACKER CONTROLS</text><text x="320" y="108">WORKFLOW DOES</text><text x="600" y="108">IMPACT</text><text x="880" y="108">FIX (RULE)</text>
+  </g>
+
+  <!-- row 1 -->
+  <rect x="40" y="118" width="250" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="146" font-size="15" font-weight="700" fill="#991b1b">A third-party action</text>
+  <text x="56" y="170" font-size="13" fill="#991b1b">maintainer account or token</text>
+  <text x="56" y="190" font-size="13" fill="#991b1b">compromised; tag moved</text>
+  <rect x="320" y="118" width="250" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="336" y="146" font-size="15" font-weight="700" fill="#92400e">uses: some/action@v4</text>
+  <text x="336" y="170" font-size="13" fill="#92400e">runs whatever commit the tag</text>
+  <text x="336" y="190" font-size="13" fill="#92400e">points to today</text>
+  <rect x="600" y="118" width="250" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="616" y="146" font-size="15" font-weight="700" fill="#991b1b">Secrets dumped</text>
+  <text x="616" y="170" font-size="13" fill="#991b1b">into logs or sent out</text>
+  <text x="616" y="190" font-size="13" fill="#991b1b">(tj-actions, March 2025)</text>
+  <rect x="880" y="118" width="280" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="896" y="146" font-size="15" font-weight="700" fill="#166534">Pin to full commit SHA</text>
+  <text x="896" y="170" font-size="13" fill="#166534">allowlist actions; Renovate updates</text>
+  <text x="896" y="190" font-size="13" fill="#166534">GHA-001</text>
+
+  <!-- row 2 -->
+  <rect x="40" y="238" width="250" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="266" font-size="15" font-weight="700" fill="#991b1b">Code in a fork PR</text>
+  <text x="56" y="290" font-size="13" fill="#991b1b">setup.py, conftest.py,</text>
+  <text x="56" y="310" font-size="13" fill="#991b1b">a test, a build script</text>
+  <rect x="320" y="238" width="250" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="336" y="266" font-size="15" font-weight="700" fill="#92400e">pull_request_target</text>
+  <text x="336" y="290" font-size="13" fill="#92400e">+ checkout of the PR head</text>
+  <text x="336" y="310" font-size="13" fill="#92400e">+ run tests / install</text>
+  <rect x="600" y="238" width="250" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="616" y="266" font-size="15" font-weight="700" fill="#991b1b">"Pwn request"</text>
+  <text x="616" y="290" font-size="13" fill="#991b1b">stranger's code runs with</text>
+  <text x="616" y="310" font-size="13" fill="#991b1b">secrets + write token</text>
+  <rect x="880" y="238" width="280" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="896" y="266" font-size="15" font-weight="700" fill="#166534">Use pull_request for PR code</text>
+  <text x="896" y="290" font-size="13" fill="#166534">privileged step in a separate job</text>
+  <text x="896" y="310" font-size="13" fill="#166534">that never runs PR code · GHA-003</text>
+
+  <!-- row 3 -->
+  <rect x="40" y="358" width="250" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="386" font-size="15" font-weight="700" fill="#991b1b">Text fields</text>
+  <text x="56" y="410" font-size="13" fill="#991b1b">PR title, branch name,</text>
+  <text x="56" y="430" font-size="13" fill="#991b1b">issue body, commit message</text>
+  <rect x="320" y="358" width="250" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="336" y="386" font-size="15" font-weight="700" fill="#92400e">run: echo "${{ …title }}"</text>
+  <text x="336" y="410" font-size="13" fill="#92400e">value pasted into the script</text>
+  <text x="336" y="430" font-size="13" fill="#92400e">before bash even starts</text>
+  <rect x="600" y="358" width="250" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="616" y="386" font-size="15" font-weight="700" fill="#991b1b">Script injection</text>
+  <text x="616" y="410" font-size="13" fill="#991b1b">a title like  x"; curl … | sh</text>
+  <text x="616" y="430" font-size="13" fill="#991b1b">becomes shell code</text>
+  <rect x="880" y="358" width="280" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="896" y="386" font-size="15" font-weight="700" fill="#166534">Pass it through env:</text>
+  <text x="896" y="410" font-size="13" fill="#166534">env: TITLE: ${{ …title }}</text>
+  <text x="896" y="430" font-size="13" fill="#166534">run: echo "$TITLE" · GHA-004</text>
+
+  <!-- row 4 -->
+  <rect x="40" y="478" width="250" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="56" y="506" font-size="15" font-weight="700" fill="#991b1b">Any one leak</text>
+  <text x="56" y="530" font-size="13" fill="#991b1b">log line, debug step,</text>
+  <text x="56" y="550" font-size="13" fill="#991b1b">compromised action</text>
+  <rect x="320" y="478" width="250" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="336" y="506" font-size="15" font-weight="700" fill="#92400e">secrets.AWS_ACCESS_KEY_ID</text>
+  <text x="336" y="530" font-size="13" fill="#92400e">long-lived cloud keys</text>
+  <text x="336" y="550" font-size="13" fill="#92400e">stored as repo secrets</text>
+  <rect x="600" y="478" width="250" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="616" y="506" font-size="15" font-weight="700" fill="#991b1b">Valid until rotated</text>
+  <text x="616" y="530" font-size="13" fill="#991b1b">usable from anywhere,</text>
+  <text x="616" y="550" font-size="13" fill="#991b1b">often for months</text>
+  <rect x="880" y="478" width="280" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="896" y="506" font-size="15" font-weight="700" fill="#166534">OIDC federation</text>
+  <text x="896" y="530" font-size="13" fill="#166534">1-hour role; trust only repo+env</text>
+  <text x="896" y="550" font-size="13" fill="#166534">GHA-005 · TF-AI-042</text>
+
+  <g stroke="#334155" stroke-width="2.2">
+    <path d="M290 168 L314 168" marker-end="url(#a)"/><path d="M570 168 L594 168" marker-end="url(#a)"/><path d="M850 168 L874 168" marker-end="url(#a)"/>
+    <path d="M290 288 L314 288" marker-end="url(#a)"/><path d="M570 288 L594 288" marker-end="url(#a)"/><path d="M850 288 L874 288" marker-end="url(#a)"/>
+    <path d="M290 408 L314 408" marker-end="url(#a)"/><path d="M570 408 L594 408" marker-end="url(#a)"/><path d="M850 408 L874 408" marker-end="url(#a)"/>
+    <path d="M290 528 L314 528" marker-end="url(#a)"/><path d="M570 528 L594 528" marker-end="url(#a)"/><path d="M850 528 L874 528" marker-end="url(#a)"/>
+  </g>
+  <text x="40" y="604" font-size="13" fill="#475569">Plus: least-privilege permissions (GHA-002), persist-credentials: false (GHA-008), no self-hosted runners for PRs (GHA-011), protected environments (GHA-010).</text>
+</svg>

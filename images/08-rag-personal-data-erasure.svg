@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Where personal data lives in a RAG assistant and how each copy is erased</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Erasure in a RAG assistant: one person, many copies</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Deleting the source document is step one of six. Each copy needs its own method and its own evidence.</text>
+
+  <!-- request flow -->
+  <rect x="40" y="96" width="230" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="155" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Erasure request</text>
+  <rect x="320" y="96" width="270" height="56" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="455" y="120" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Find every copy</text>
+  <text x="455" y="140" text-anchor="middle" font-size="12" fill="#1e3a8a">data map keyed by subject id</text>
+  <rect x="640" y="96" width="250" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="765" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Delete, purge, redact</text>
+  <rect x="940" y="96" width="220" height="56" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1050" y="120" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Receipt</text>
+  <text x="1050" y="140" text-anchor="middle" font-size="12" fill="#475569">removed + pending, as evidence</text>
+  <path d="M270 124 L314 124" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M590 124 L634 124" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M890 124 L934 124" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- cards row 1 -->
+  <rect x="40" y="180" width="360" height="130" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="60" y="208" font-size="16" font-weight="700" fill="#0f172a">1 Source documents</text>
+  <text x="60" y="232" font-size="13" fill="#475569">tickets, emails, CRM records</text>
+  <text x="60" y="270" font-size="13" font-weight="700" fill="#166534">DELETE in the system of record</text>
+  <text x="60" y="290" font-size="12" fill="#166534">the easy part; most teams stop here</text>
+
+  <rect x="420" y="180" width="360" height="130" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="440" y="208" font-size="16" font-weight="700" fill="#0f172a">2 Vector index chunks</text>
+  <text x="440" y="232" font-size="13" fill="#475569">text copies + embeddings, keyed by doc id</text>
+  <text x="440" y="270" font-size="13" font-weight="700" fill="#166534">DELETE chunks by doc / subject id</text>
+  <text x="440" y="290" font-size="12" fill="#166534">needs subject ids stored as chunk metadata</text>
+
+  <rect x="800" y="180" width="360" height="130" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="820" y="208" font-size="16" font-weight="700" fill="#0f172a">3 Answer cache</text>
+  <text x="820" y="232" font-size="13" fill="#475569">answers built from those chunks</text>
+  <text x="820" y="270" font-size="13" font-weight="700" fill="#166534">PURGE entries that used them</text>
+  <text x="820" y="290" font-size="12" fill="#166534">or the old answer is served again</text>
+
+  <!-- cards row 2 -->
+  <rect x="40" y="330" width="360" height="130" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="60" y="358" font-size="16" font-weight="700" fill="#0f172a">4 Prompt and answer logs</text>
+  <text x="60" y="382" font-size="13" fill="#475569">personal data inside questions and answers</text>
+  <text x="60" y="420" font-size="13" font-weight="700" fill="#92400e">REDACT identifiers, keep the event</text>
+  <text x="60" y="440" font-size="12" fill="#92400e">AI logs may need keeping; PII in them may not</text>
+
+  <rect x="420" y="330" width="360" height="130" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="440" y="358" font-size="16" font-weight="700" fill="#0f172a">5 Backups</text>
+  <text x="440" y="382" font-size="13" fill="#475569">snapshots of stores and the index</text>
+  <text x="440" y="420" font-size="13" font-weight="700" fill="#92400e">EXPIRE on schedule (put beyond use)</text>
+  <text x="440" y="440" font-size="12" fill="#92400e">re-apply erasures if a backup is restored</text>
+
+  <rect x="800" y="330" width="360" height="130" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="820" y="358" font-size="16" font-weight="700" fill="#0f172a">6 Fine-tuned model weights</text>
+  <text x="820" y="382" font-size="13" fill="#475569">the model may have memorized fragments</text>
+  <text x="820" y="420" font-size="13" font-weight="700" fill="#991b1b">CANNOT delete a row from weights</text>
+  <text x="820" y="440" font-size="12" fill="#991b1b">retrain, filter outputs or document; ask DPO</text>
+
+  <!-- vendor band -->
+  <rect x="40" y="484" width="1120" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="510" font-size="15" font-weight="700" fill="#0f172a">7 Vendors (processors):</text>
+  <text x="250" y="510" font-size="14" fill="#334155">model API logs, abuse monitoring, sub-processors. Control by contract (DPA),</text>
+  <text x="250" y="530" font-size="14" fill="#334155">zero or short retention settings, and a written deletion confirmation.</text>
+
+  <text x="40" y="576" font-size="14" fill="#475569">Design rule: never put personal data where you cannot find it again. Keep subject ids in metadata; prefer RAG over fine-tuning</text>
+  <text x="40" y="598" font-size="14" fill="#475569">for personal data, because a document can be deleted and a weight cannot. Educational, not legal advice.</text>
+</svg>

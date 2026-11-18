@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>AI threat-modeling workflow organised around the four threat-modeling questions</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Threat modeling an AI system: four questions, ten steps</text>
+  <text x="40" y="80" font-size="16" fill="#475569">The four questions come from the Threat Modeling Manifesto. The steps under each are what you actually do.</text>
+
+  <rect x="40" y="110" width="260" height="290" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="56" y="140" font-size="16" font-weight="700" fill="#1e3a8a">1. What are we</text>
+  <text x="56" y="161" font-size="16" font-weight="700" fill="#1e3a8a">working on?</text>
+  <text x="56" y="196" font-size="13" fill="#0f172a">1 Purpose, users, prohibited use</text>
+  <text x="56" y="222" font-size="13" fill="#0f172a">2 Data-flow diagram: components,</text>
+  <text x="70" y="240" font-size="13" fill="#0f172a">flows, trust zones</text>
+  <text x="56" y="266" font-size="13" fill="#0f172a">3 Inventory: data, models,</text>
+  <text x="70" y="284" font-size="13" fill="#0f172a">prompts, tools, secrets, logs</text>
+  <text x="56" y="310" font-size="13" fill="#0f172a">4 Actors: users, attackers,</text>
+  <text x="70" y="328" font-size="13" fill="#0f172a">content authors, suppliers</text>
+  <text x="56" y="380" font-size="12" font-style="italic" fill="#1e3a8a">Output: DFD + asset list</text>
+
+  <rect x="330" y="110" width="260" height="290" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="346" y="140" font-size="16" font-weight="700" fill="#991b1b">2. What can go</text>
+  <text x="346" y="161" font-size="16" font-weight="700" fill="#991b1b">wrong?</text>
+  <text x="346" y="196" font-size="13" fill="#0f172a">5 STRIDE per element and flow</text>
+  <text x="346" y="222" font-size="13" fill="#0f172a">6 AI lenses: OWASP LLM Top 10,</text>
+  <text x="360" y="240" font-size="13" fill="#0f172a">MITRE ATLAS techniques</text>
+  <text x="346" y="266" font-size="13" fill="#0f172a">7 Abuse cases in attacker words</text>
+  <text x="360" y="284" font-size="13" fill="#0f172a">+ the lethal-trifecta check</text>
+  <text x="346" y="380" font-size="12" font-style="italic" fill="#991b1b">Output: threat statements</text>
+
+  <rect x="620" y="110" width="260" height="290" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="636" y="140" font-size="16" font-weight="700" fill="#92400e">3. What are we going</text>
+  <text x="636" y="161" font-size="16" font-weight="700" fill="#92400e">to do about it?</text>
+  <text x="636" y="196" font-size="13" fill="#0f172a">8 Score risk: likelihood x impact,</text>
+  <text x="650" y="214" font-size="13" fill="#0f172a">blast radius, reversibility</text>
+  <text x="636" y="240" font-size="13" fill="#0f172a">9 Choose controls: prevent,</text>
+  <text x="650" y="258" font-size="13" fill="#0f172a">detect, recover (hard first)</text>
+  <text x="650" y="284" font-size="13" fill="#0f172a">-&gt; security requirements</text>
+  <text x="650" y="310" font-size="13" fill="#0f172a">-&gt; owners and due dates</text>
+  <text x="636" y="380" font-size="12" font-style="italic" fill="#92400e">Output: risk register + reqs</text>
+
+  <rect x="910" y="110" width="250" height="290" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="926" y="140" font-size="16" font-weight="700" fill="#166534">4. Did we do a</text>
+  <text x="926" y="161" font-size="16" font-weight="700" fill="#166534">good enough job?</text>
+  <text x="926" y="196" font-size="13" fill="#0f172a">10 Prove it:</text>
+  <text x="940" y="222" font-size="13" fill="#0f172a">tests that show impact is</text>
+  <text x="940" y="240" font-size="13" fill="#0f172a">blocked, run in CI</text>
+  <text x="940" y="266" font-size="13" fill="#0f172a">residual risk accepted by</text>
+  <text x="940" y="284" font-size="13" fill="#0f172a">an owner, with an expiry</text>
+  <text x="940" y="310" font-size="13" fill="#0f172a">review with the team</text>
+  <text x="926" y="380" font-size="12" font-style="italic" fill="#166534">Output: evidence</text>
+
+  <path d="M300 255 L324 255" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M590 255 L614 255" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M880 255 L904 255" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M1035 400 L1035 440 L170 440 L170 406" fill="none" stroke="#334155" stroke-width="2.5" stroke-dasharray="8 5" marker-end="url(#a)"/>
+  <text x="600" y="432" text-anchor="middle" font-size="14" fill="#334155">repeat on every change: new tool, new data source, new model, new prompt</text>
+
+  <rect x="40" y="460" width="1120" height="44" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="488" font-size="14" fill="#0f172a"><tspan font-weight="700">Threat statement:</tspan> [actor] can [action] through [entry point] to affect [asset] because [weakness], resulting in [impact].</text>
+</svg>

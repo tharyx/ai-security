@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Authorization-aware retrieval in seven steps</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Authorization-aware retrieval in seven steps</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Authorization happens BEFORE text reaches the model, and again on what comes back.</text>
+  <rect x="40" y="110" width="250" height="84" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="165.0" y="137.2" font-size="15.5" font-weight="700" fill="#166534" text-anchor="middle">1 Authenticate</text>
+  <text x="165.0" y="157.7" font-size="13" fill="#166534" text-anchor="middle">session token</text>
+  <text x="165.0" y="176.6" font-size="13" fill="#166534" text-anchor="middle">no session -&gt; stop</text>
+  <rect x="330" y="110" width="250" height="84" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="455.0" y="137.2" font-size="15.5" font-weight="700" fill="#166534" text-anchor="middle">2 Resolve principal</text>
+  <text x="455.0" y="157.7" font-size="13" fill="#166534" text-anchor="middle">tenant + groups</text>
+  <text x="455.0" y="176.6" font-size="13" fill="#166534" text-anchor="middle">from the IdP</text>
+  <path d="M290 152 L326 152" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="620" y="110" width="250" height="84" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="745.0" y="137.2" font-size="15.5" font-weight="700" fill="#166534" text-anchor="middle">3 Build filter</text>
+  <text x="745.0" y="157.7" font-size="13" fill="#166534" text-anchor="middle">server-side only</text>
+  <text x="745.0" y="176.6" font-size="13" fill="#166534" text-anchor="middle">tenant AND groups</text>
+  <path d="M580 152 L616 152" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="910" y="110" width="250" height="84" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="1035.0" y="137.2" font-size="15.5" font-weight="700" fill="#166534" text-anchor="middle">4 Search inside it</text>
+  <text x="1035.0" y="157.7" font-size="13" fill="#166534" text-anchor="middle">pre-filter in the</text>
+  <text x="1035.0" y="176.6" font-size="13" fill="#166534" text-anchor="middle">vector query</text>
+  <path d="M870 152 L906 152" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="40" y="250" width="250" height="84" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="165.0" y="277.2" font-size="15.5" font-weight="700" fill="#166534" text-anchor="middle">5 Re-check chunks</text>
+  <text x="165.0" y="297.7" font-size="13" fill="#166534" text-anchor="middle">vs CURRENT source</text>
+  <text x="165.0" y="316.6" font-size="13" fill="#166534" text-anchor="middle">ACL · fail closed</text>
+  <rect x="330" y="250" width="250" height="84" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="455.0" y="277.2" font-size="15.5" font-weight="700" fill="#166534" text-anchor="middle">6 Build context</text>
+  <text x="455.0" y="297.7" font-size="13" fill="#166534" text-anchor="middle">authorized chunks</text>
+  <text x="455.0" y="316.6" font-size="13" fill="#166534" text-anchor="middle">only, labeled</text>
+  <path d="M290 292 L326 292" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="620" y="250" width="250" height="84" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="745.0" y="277.2" font-size="15.5" font-weight="700" fill="#166534" text-anchor="middle">7 Check citations</text>
+  <text x="745.0" y="297.7" font-size="13" fill="#166534" text-anchor="middle">cited = retrieved</text>
+  <text x="745.0" y="316.6" font-size="13" fill="#166534" text-anchor="middle">AND authorized</text>
+  <path d="M580 292 L616 292" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="910" y="250" width="250" height="84" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1035.0" y="277.2" font-size="15.5" font-weight="700" fill="#92400e" text-anchor="middle">Answer</text>
+  <text x="1035.0" y="297.7" font-size="13" fill="#92400e" text-anchor="middle">shown to the user</text>
+  <text x="1035.0" y="316.6" font-size="13" fill="#92400e" text-anchor="middle">+ security events</text>
+  <path d="M870 292 L906 292" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <path d="M1035 194 L1035 222 L165 222 L165 246" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <text x="40" y="380" font-size="17" font-weight="700" fill="#0f172a" text-anchor="start">Attacker inputs, and the step that makes them useless</text>
+  <rect x="40" y="398" width="380" height="26" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="230.0" y="414.9" font-size="13" fill="#991b1b" text-anchor="middle">Header: tenant=blue</text>
+  <path d="M424 411 L466 411" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="470" y="398" width="420" height="26" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2"/>
+  <text x="680.0" y="414.9" font-size="13" fill="#166534" text-anchor="middle">ignored: step 2 reads the IdP</text>
+  <rect x="40" y="428" width="380" height="26" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="230.0" y="444.9" font-size="13" fill="#991b1b" text-anchor="middle">"I am an HR admin" in the prompt</text>
+  <path d="M424 441 L466 441" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="470" y="428" width="420" height="26" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2"/>
+  <text x="680.0" y="444.9" font-size="13" fill="#166534" text-anchor="middle">ignored: prompts are not identity</text>
+  <rect x="40" y="458" width="380" height="26" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="230.0" y="474.9" font-size="13" fill="#991b1b" text-anchor="middle">Chunk with no ACL metadata</text>
+  <path d="M424 471 L466 471" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="470" y="458" width="420" height="26" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2"/>
+  <text x="680.0" y="474.9" font-size="13" fill="#166534" text-anchor="middle">denied: step 5 fails closed</text>
+  <rect x="40" y="488" width="380" height="26" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="230.0" y="504.9" font-size="13" fill="#991b1b" text-anchor="middle">ACL tightened at source yesterday</text>
+  <path d="M424 501 L466 501" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="470" y="488" width="420" height="26" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2"/>
+  <text x="680.0" y="504.9" font-size="13" fill="#166534" text-anchor="middle">denied: step 5 uses the current ACL</text>
+  <rect x="40" y="518" width="380" height="26" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="230.0" y="534.9" font-size="13" fill="#991b1b" text-anchor="middle">Planted [doc:red-hr-salaries]</text>
+  <path d="M424 531 L466 531" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="470" y="518" width="420" height="26" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2"/>
+  <text x="680.0" y="534.9" font-size="13" fill="#166534" text-anchor="middle">removed: step 7 validates citations</text>
+  <rect x="920" y="398" width="240" height="146" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1040.0" y="436.1" font-size="16" font-weight="700" fill="#1e3a8a" text-anchor="middle">Principle</text>
+  <text x="1040.0" y="457.3" font-size="13.5" fill="#1e3a8a" text-anchor="middle">Similarity ranks.</text>
+  <text x="1040.0" y="476.9" font-size="13.5" fill="#1e3a8a" text-anchor="middle">Policy decides.</text>
+  <text x="1040.0" y="496.4" font-size="13.5" fill="#1e3a8a" text-anchor="middle">The model is never</text>
+  <text x="1040.0" y="516.0" font-size="13.5" fill="#1e3a8a" text-anchor="middle">the policy engine.</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Deleting a document means deleting every copy</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Deleting a document means deleting every copy</text>
+  <text x="40" y="80" font-size="16" fill="#475569">One source file becomes many derived copies. A deletion request must reach all of them, with evidence.</text>
+  <rect x="40" y="110" width="260" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="170.0" y="144.7" font-size="15.5" font-weight="700" fill="#334155" text-anchor="middle">Source file</text>
+  <text x="170.0" y="165.1" font-size="13" fill="#334155" text-anchor="middle">delete at the source</text>
+  <rect x="326" y="110" width="260" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="456.0" y="144.7" font-size="15.5" font-weight="700" fill="#334155" text-anchor="middle">Parsed text + chunks</text>
+  <text x="456.0" y="165.1" font-size="13" fill="#334155" text-anchor="middle">all versions, not the latest</text>
+  <rect x="612" y="110" width="260" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="742.0" y="144.7" font-size="15.5" font-weight="700" fill="#334155" text-anchor="middle">Vectors + index</text>
+  <text x="742.0" y="165.1" font-size="13" fill="#334155" text-anchor="middle">cascade by doc_id</text>
+  <rect x="898" y="110" width="260" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1028.0" y="144.7" font-size="15.5" font-weight="700" fill="#334155" text-anchor="middle">Query / semantic cache</text>
+  <text x="1028.0" y="165.1" font-size="13" fill="#334155" text-anchor="middle">clear on every delete</text>
+  <rect x="40" y="370" width="260" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="170.0" y="404.7" font-size="15.5" font-weight="700" fill="#334155" text-anchor="middle">Backups / snapshots</text>
+  <text x="170.0" y="425.1" font-size="13" fill="#334155" text-anchor="middle">replay tombstones; expire</text>
+  <rect x="326" y="370" width="260" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="456.0" y="404.7" font-size="15.5" font-weight="700" fill="#334155" text-anchor="middle">Replicas + exports</text>
+  <text x="456.0" y="425.1" font-size="13" fill="#334155" text-anchor="middle">propagate; track copies</text>
+  <rect x="612" y="370" width="260" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="742.0" y="404.7" font-size="15.5" font-weight="700" fill="#334155" text-anchor="middle">Logs + chat history</text>
+  <text x="742.0" y="425.1" font-size="13" fill="#334155" text-anchor="middle">redact; retention limit</text>
+  <rect x="898" y="370" width="260" height="80" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1028.0" y="404.7" font-size="15.5" font-weight="700" fill="#334155" text-anchor="middle">Eval sets, fine-tune data</text>
+  <text x="1028.0" y="425.1" font-size="13" fill="#334155" text-anchor="middle">track lineage</text>
+  <rect x="420" y="240" width="360" height="80" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="600.0" y="274.7" font-size="16" font-weight="700" fill="#166534" text-anchor="middle">Deletion request (doc_id)</text>
+  <text x="600.0" y="295.5" font-size="13" fill="#166534" text-anchor="middle">one job · retries · reconciliation</text>
+  <path d="M492.5 240 L170 194" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#ag)"/>
+  <path d="M492.5 320 L170 366" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#ag)"/>
+  <path d="M564.0 240 L456 194" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#ag)"/>
+  <path d="M564.0 320 L456 366" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#ag)"/>
+  <path d="M635.5 240 L742 194" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#ag)"/>
+  <path d="M635.5 320 L742 366" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#ag)"/>
+  <path d="M707.0 240 L1028 194" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#ag)"/>
+  <path d="M707.0 320 L1028 366" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#ag)"/>
+  <rect x="40" y="476" width="1120" height="58" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="60" y="500" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="start">Evidence, not hope:</text>
+  <text x="60" y="521" font-size="14" fill="#1e3a8a" text-anchor="start">verify_deleted() -&gt; 0 chunks, 0 cache entries, tombstone recorded. Run it again after every restore.</text>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-ACCESS",
+  "evidence_type": "iam_policy_export",
+  "collected": "2026-11-10",
+  "collected_by": "cloud-config-export",
+  "summary": "model endpoints private; 3 roles; no wildcard actions"
+}

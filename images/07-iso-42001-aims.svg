@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>ISO/IEC 42001 AI management system: clauses as Plan-Do-Check-Act, Annex A areas, certification journey</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="700" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">ISO/IEC 42001: an AI management system (AIMS)</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Clauses 4-10 follow Plan-Do-Check-Act. Annex A lists reference controls you select with a Statement of Applicability.</text>
+
+  <!-- PDCA quadrants -->
+  <rect x="40" y="100" width="330" height="170" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="60" y="130" font-size="18" font-weight="700" fill="#1e3a8a">PLAN</text>
+  <g font-size="13" fill="#1e3a8a">
+    <text x="60" y="156">4 Context: scope, stakeholders, role</text>
+    <text x="60" y="180">5 Leadership: AI policy, roles</text>
+    <text x="60" y="204">6 Planning: AI risk assessment and</text>
+    <text x="74" y="224">treatment, AI system impact</text>
+    <text x="74" y="244">assessment, objectives, SoA</text>
+  </g>
+
+  <rect x="410" y="100" width="330" height="170" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="430" y="130" font-size="18" font-weight="700" fill="#92400e">DO</text>
+  <g font-size="13" fill="#92400e">
+    <text x="430" y="156">7 Support: resources, competence,</text>
+    <text x="444" y="176">awareness, communication,</text>
+    <text x="444" y="196">documented information</text>
+    <text x="430" y="222">8 Operation: run the planned controls,</text>
+    <text x="444" y="242">assessments and treatments</text>
+  </g>
+
+  <rect x="410" y="300" width="330" height="150" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="430" y="330" font-size="18" font-weight="700" fill="#166534">CHECK</text>
+  <g font-size="13" fill="#166534">
+    <text x="430" y="356">9 Performance evaluation:</text>
+    <text x="444" y="378">monitoring and measurement (KPIs)</text>
+    <text x="444" y="400">internal audit</text>
+    <text x="444" y="422">management review</text>
+  </g>
+
+  <rect x="40" y="300" width="330" height="150" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="60" y="330" font-size="18" font-weight="700" fill="#991b1b">ACT</text>
+  <g font-size="13" fill="#991b1b">
+    <text x="60" y="356">10 Improvement:</text>
+    <text x="74" y="378">nonconformity and corrective action</text>
+    <text x="74" y="400">continual improvement</text>
+  </g>
+
+  <path d="M370 185 L404 185" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M575 270 L575 294" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M410 375 L376 375" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M205 300 L205 276" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- Annex A -->
+  <rect x="780" y="100" width="380" height="350" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="800" y="130" font-size="17" font-weight="700" fill="#0f172a">Annex A: reference control areas</text>
+  <g font-size="13" fill="#334155">
+    <text x="800" y="160">A.2  Policies related to AI</text>
+    <text x="800" y="188">A.3  Internal organization</text>
+    <text x="800" y="216">A.4  Resources for AI systems</text>
+    <text x="800" y="244">A.5  Assessing impacts of AI systems</text>
+    <text x="800" y="272">A.6  AI system life cycle</text>
+    <text x="800" y="300">A.7  Data for AI systems</text>
+    <text x="800" y="328">A.8  Information for interested parties</text>
+    <text x="800" y="356">A.9  Use of AI systems</text>
+    <text x="800" y="384">A.10 Third-party and customer relationships</text>
+  </g>
+  <text x="800" y="416" font-size="12" fill="#475569">Paraphrased names. Annex B: implementation guidance.</text>
+  <text x="800" y="434" font-size="12" fill="#475569">Annex C: objectives, risk sources. Annex D: domains.</text>
+
+  <!-- certification journey -->
+  <text x="40" y="500" font-size="17" font-weight="700" fill="#0f172a">Certification journey (typical)</text>
+  <g font-size="13" text-anchor="middle">
+    <rect x="40" y="516" width="150" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="115" y="546" font-weight="700" fill="#0f172a">Gap analysis</text>
+    <text x="115" y="566" fill="#475569">scope, SoA draft</text>
+    <rect x="210" y="516" width="150" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="285" y="546" font-weight="700" fill="#92400e">Implement</text>
+    <text x="285" y="566" fill="#92400e">run, keep records</text>
+    <rect x="380" y="516" width="160" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="460" y="546" font-weight="700" fill="#166534">Internal audit</text>
+    <text x="460" y="566" fill="#166534">+ management review</text>
+    <rect x="560" y="516" width="150" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="635" y="546" font-weight="700" fill="#1e3a8a">Stage 1 audit</text>
+    <text x="635" y="566" fill="#1e3a8a">design, readiness</text>
+    <rect x="730" y="516" width="150" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="805" y="546" font-weight="700" fill="#1e3a8a">Stage 2 audit</text>
+    <text x="805" y="566" fill="#1e3a8a">does it work?</text>
+    <rect x="900" y="516" width="260" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+    <text x="1030" y="546" font-weight="700" fill="#166534">Certificate (3-year cycle)</text>
+    <text x="1030" y="566" fill="#166534">yearly surveillance audits</text>
+  </g>
+  <path d="M190 551 L204 551" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M360 551 L374 551" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M540 551 L554 551" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M710 551 L724 551" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M880 551 L894 551" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="40" y="610" width="1120" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="60" y="636" font-size="14" font-weight="700" fill="#991b1b">A certificate says the management system works for the certified scope.</text>
+  <text x="60" y="658" font-size="14" fill="#991b1b">It does not prove one product is secure, and it does not equal legal compliance (for example, with the EU AI Act).</text>
+</svg>

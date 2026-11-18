@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Anatomy of one LLM request: many sources, one token stream</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">One request, many authors, one token stream</text>
+  <text x="40" y="80" font-size="16" fill="#475569">The app concatenates text from different sources into the context window. The model sees only tokens.</text>
+
+  <!-- who wrote it -->
+  <text x="130" y="122" text-anchor="middle" font-size="13" fill="#1e3a8a">you (developer)</text>
+  <text x="335" y="122" text-anchor="middle" font-size="13" fill="#92400e">user + earlier answers</text>
+  <text x="560" y="122" text-anchor="middle" font-size="13" fill="#991b1b">whoever wrote the docs</text>
+  <text x="775" y="122" text-anchor="middle" font-size="13" fill="#991b1b">external APIs / web</text>
+  <text x="945" y="122" text-anchor="middle" font-size="13" fill="#92400e">the user</text>
+  <text x="1095" y="122" text-anchor="middle" font-size="13" fill="#1e3a8a">model writes</text>
+
+  <!-- segmented context window -->
+  <rect x="40" y="135" width="180" height="70" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="130" y="166" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">System prompt</text>
+  <text x="130" y="188" text-anchor="middle" font-size="12" fill="#1e3a8a">rules, persona, tools</text>
+  <rect x="220" y="135" width="230" height="70" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="335" y="166" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Chat history</text>
+  <text x="335" y="188" text-anchor="middle" font-size="12" fill="#92400e">earlier turns, memory</text>
+  <rect x="450" y="135" width="220" height="70" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="560" y="166" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Retrieved chunks</text>
+  <text x="560" y="188" text-anchor="middle" font-size="12" fill="#991b1b">RAG: emails, wikis, PDFs</text>
+  <rect x="670" y="135" width="210" height="70" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="775" y="166" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Tool results</text>
+  <text x="775" y="188" text-anchor="middle" font-size="12" fill="#991b1b">web pages, API JSON</text>
+  <rect x="880" y="135" width="130" height="70" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="945" y="166" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">User msg</text>
+  <text x="945" y="188" text-anchor="middle" font-size="12" fill="#92400e">this turn</text>
+  <rect x="1010" y="135" width="150" height="70" fill="#f8fafc" stroke="#64748b" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="1085" y="166" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Output</text>
+  <text x="1085" y="188" text-anchor="middle" font-size="12" fill="#334155">also uses the window</text>
+
+  <!-- window bracket -->
+  <path d="M40 220 L40 232 L1160 232 L1160 220" fill="none" stroke="#334155" stroke-width="2"/>
+  <text x="600" y="254" text-anchor="middle" font-size="14" fill="#0f172a">context window = input tokens + output tokens (a fixed, model-specific limit)</text>
+
+  <!-- tokens example -->
+  <rect x="40" y="275" width="1120" height="58" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="300" font-size="14" font-weight="700" fill="#0f172a">Tokens:</text>
+  <text x="125" y="300" font-size="14" fill="#0f172a" font-family="Consolas, monospace">"Ignore previous instructions" -"Ignore previous instructions" -&gt; [Ign][ore][ previous][ instructions]  (example split)gt; [Ignore][ previous][ instructions]   "tokenization" -"Ignore previous instructions" -&gt; [Ign][ore][ previous][ instructions]  (example split)gt; [token][ization]   (illustrative)</text>
+  <text x="60" y="322" font-size="13" fill="#475569">Rule of thumb for English: ~4 characters per token. Billing, limits and truncation are all counted in tokens.</text>
+
+  <!-- three consequences -->
+  <rect x="40" y="355" width="360" height="175" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="58" y="385" font-size="16" font-weight="700" fill="#991b1b">1. No separate channels</text>
+  <text x="58" y="412" font-size="13" fill="#0f172a">Instructions and data share one stream.</text>
+  <text x="58" y="434" font-size="13" fill="#0f172a">Text in a red block can act like a</text>
+  <text x="58" y="456" font-size="13" fill="#0f172a">command (prompt injection).</text>
+  <text x="58" y="490" font-size="13" font-weight="700" fill="#166534">Control: limit what a fooled model</text>
+  <text x="58" y="510" font-size="13" font-weight="700" fill="#166534">can reach and do.</text>
+
+  <rect x="420" y="355" width="360" height="175" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="438" y="385" font-size="16" font-weight="700" fill="#92400e">2. Every token costs</text>
+  <text x="438" y="412" font-size="13" fill="#0f172a">Money, latency and GPU time grow with</text>
+  <text x="438" y="434" font-size="13" fill="#0f172a">tokens. Long inputs and agent loops are</text>
+  <text x="438" y="456" font-size="13" fill="#0f172a">a denial-of-wallet attack.</text>
+  <text x="438" y="490" font-size="13" font-weight="700" fill="#166534">Control: per-request and per-user</text>
+  <text x="438" y="510" font-size="13" font-weight="700" fill="#166534">token budgets, rate limits.</text>
+
+  <rect x="800" y="355" width="360" height="175" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="818" y="385" font-size="16" font-weight="700" fill="#1e3a8a">3. Something must be dropped</text>
+  <text x="818" y="412" font-size="13" fill="#0f172a">When the window is full, the app decides</text>
+  <text x="818" y="434" font-size="13" fill="#0f172a">what to cut. Naive "keep the newest" code</text>
+  <text x="818" y="456" font-size="13" fill="#0f172a">can silently cut the system prompt.</text>
+  <text x="818" y="490" font-size="13" font-weight="700" fill="#166534">Control: reserve the system prompt;</text>
+  <text x="818" y="510" font-size="13" font-weight="700" fill="#166534">reject oversize input; cut old history.</text>
+</svg>

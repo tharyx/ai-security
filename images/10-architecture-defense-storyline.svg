@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Architecture defense: a 20-minute storyline</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a" text-anchor="start">Architecture defense: a 20-minute storyline</text>
+  <text x="40" y="80" font-size="16" fill="#475569" text-anchor="start">Tell one story: the problem, the design, how it fails, how you proved it holds, and what risk is left.</text>
+  <rect x="40" y="115" width="140" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="110.0" y="154.25" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Problem</text>
+  <text x="110.0" y="171.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">2 min</text>
+  <text x="110.0" y="189.25" font-size="12.5" fill="#1e3a8a" text-anchor="middle">users, data,</text>
+  <text x="110.0" y="206.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">what's at stake</text>
+  <rect x="203" y="115" width="140" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="273.0" y="154.25" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Architecture</text>
+  <text x="273.0" y="171.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">4 min</text>
+  <text x="273.0" y="189.25" font-size="12.5" fill="#1e3a8a" text-anchor="middle">trust zones,</text>
+  <text x="273.0" y="206.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">data flows</text>
+  <path d="M180 175 L201 175" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="366" y="115" width="140" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="436.0" y="154.25" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Threats</text>
+  <text x="436.0" y="171.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">3 min</text>
+  <text x="436.0" y="189.25" font-size="12.5" fill="#1e3a8a" text-anchor="middle">top 5 abuse</text>
+  <text x="436.0" y="206.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">cases</text>
+  <path d="M343 175 L364 175" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="529" y="115" width="140" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="599.0" y="154.25" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Controls</text>
+  <text x="599.0" y="171.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">4 min</text>
+  <text x="599.0" y="189.25" font-size="12.5" fill="#1e3a8a" text-anchor="middle">hard vs soft,</text>
+  <text x="599.0" y="206.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">why each</text>
+  <path d="M506 175 L527 175" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="692" y="115" width="140" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="762.0" y="154.25" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Evidence</text>
+  <text x="762.0" y="171.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">3 min</text>
+  <text x="762.0" y="189.25" font-size="12.5" fill="#1e3a8a" text-anchor="middle">tests, red</text>
+  <text x="762.0" y="206.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">team, metrics</text>
+  <path d="M669 175 L690 175" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="855" y="115" width="140" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="925.0" y="154.25" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Residual risk</text>
+  <text x="925.0" y="171.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">2 min</text>
+  <text x="925.0" y="189.25" font-size="12.5" fill="#1e3a8a" text-anchor="middle">what's left,</text>
+  <text x="925.0" y="206.75" font-size="12.5" fill="#1e3a8a" text-anchor="middle">who owns it</text>
+  <path d="M832 175 L853 175" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="1018" y="115" width="140" height="120" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1088.0" y="154.25" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Roadmap</text>
+  <text x="1088.0" y="171.75" font-size="12.5" fill="#166534" text-anchor="middle">2 min</text>
+  <text x="1088.0" y="189.25" font-size="12.5" fill="#166534" text-anchor="middle">next steps,</text>
+  <text x="1088.0" y="206.75" font-size="12.5" fill="#166534" text-anchor="middle">your ask</text>
+  <path d="M995 175 L1016 175" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="40" y="285" font-size="17" font-weight="700" fill="#0f172a" text-anchor="start">Answer pattern for any panel question</text>
+  <rect x="40" y="300" width="140" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="110.0" y="334.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Clarify</text>
+  <text x="110.0" y="352.25" font-size="12.5" fill="#166534" text-anchor="middle">the system</text>
+  <rect x="203" y="300" width="140" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="273.0" y="334.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Assets +</text>
+  <text x="273.0" y="352.25" font-size="12.5" fill="#166534" text-anchor="middle">boundaries</text>
+  <path d="M180 338 L201 338" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="366" y="300" width="140" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="436.0" y="334.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Invariant</text>
+  <text x="436.0" y="352.25" font-size="12.5" fill="#166534" text-anchor="middle">(what must hold)</text>
+  <path d="M343 338 L364 338" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="529" y="300" width="140" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="599.0" y="334.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Prevent</text>
+  <text x="599.0" y="352.25" font-size="12.5" fill="#166534" text-anchor="middle">(hard controls)</text>
+  <path d="M506 338 L527 338" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="692" y="300" width="140" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="762.0" y="334.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Detect +</text>
+  <text x="762.0" y="352.25" font-size="12.5" fill="#166534" text-anchor="middle">recover</text>
+  <path d="M669 338 L690 338" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="855" y="300" width="140" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="925.0" y="334.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Trade-offs</text>
+  <text x="925.0" y="352.25" font-size="12.5" fill="#166534" text-anchor="middle">+ residual risk</text>
+  <path d="M832 338 L853 338" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="1018" y="300" width="140" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1088.0" y="334.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Prove it</text>
+  <text x="1088.0" y="352.25" font-size="12.5" fill="#166534" text-anchor="middle">(test, metric)</text>
+  <path d="M995 338 L1016 338" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="40" y="400" width="1120" height="100" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="600.0" y="438.0" font-size="16" font-weight="700" fill="#334155" text-anchor="middle">Bring to the room</text>
+  <text x="600.0" y="456.0" font-size="13" fill="#334155" text-anchor="middle">one architecture diagram you can draw from memory · the demo scorecard · the acceptance-test list</text>
+  <text x="600.0" y="474.0" font-size="13" fill="#334155" text-anchor="middle">top risks with owners and dates · one decision you would change and why · numbers (TTD, cost per request)</text>
+  <text x="40" y="535" font-size="13" fill="#475569" text-anchor="start">If you do not know an answer: say so, say how you would find out, and what you would do safely meanwhile.</text>
+</svg>

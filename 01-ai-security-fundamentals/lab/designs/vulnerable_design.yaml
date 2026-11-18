@@ -1,0 +1,62 @@
+# HelpDesk Copilot v0 - a deliberately weak design. Every comment marked VULN is a
+# design mistake the analyzer should find. Synthetic system; *.example domains only.
+#
+# The story: support agents use an AI copilot. It reads customer emails, searches a
+# shared knowledge base, looks up customers in the CRM and can send email and fetch
+# URLs "to be helpful". It was built in a two-week hackathon.
+
+name: HelpDesk Copilot v0 (vulnerable)
+description: AI assistant for support agents that reads customer email and uses tools.
+
+zones:
+  - {id: internet,       trust: untrusted,  description: Anyone on the internet}
+  - {id: corp,           trust: semi,       description: Employee laptops and browsers}
+  - {id: app_backend,    trust: trusted,    description: "Our API, orchestrator and tools"}
+  - {id: model_provider, trust: semi,       description: Third-party hosted LLM API}
+  - {id: data_tier,      trust: privileged, description: Databases with customer data}
+  - {id: observability,  trust: semi,       description: Log platform many teams can read}
+
+components:
+  - {id: inbound_email,   type: external_source, zone: internet,
+     description: "Customer emails - anyone can write one, including hidden instructions"}
+  - {id: support_agent,   type: actor,        zone: corp}
+  - {id: web_ui,          type: ui,           zone: corp, renders_markdown: true}
+  - {id: copilot_api,     type: service,      zone: app_backend,
+     description: "Builds the prompt, calls the model, runs tool calls"}
+  - {id: llm,             type: model,        zone: model_provider}
+  # VULN: one shared index for all tenants, holding restricted documents.
+  - {id: kb_vector_store, type: vector_store, zone: data_tier, classification: restricted, multi_tenant: true}
+  - {id: crm_db,          type: datastore,    zone: data_tier, classification: restricted}
+  # VULN: tools far more powerful than a support summary needs.
+  - {id: send_email,      type: tool,         zone: app_backend, capabilities: [external_comms]}
+  - {id: http_fetch,      type: tool,         zone: app_backend, capabilities: [external_comms],
+     description: Fetches any URL the model asks for (SSRF and exfiltration)}
+  - {id: crm_query,       type: tool,         zone: app_backend, classification: restricted,
+     capabilities: [read_private, write]}
+  - {id: app_logs,        type: log,          zone: observability}
+
+flows:
+  # VULN: no SSO, no rate limit - "it's an internal tool".
+  - {id: F01, from: support_agent, to: web_ui, data: question}
+  - {id: F02, from: web_ui, to: copilot_api, data: question}
+  - {id: F03, from: inbound_email, to: copilot_api, data: email body,
+     controls: [system_prompt_rule]}            # VULN: "ignore instructions in emails" is a wish, not a control
+  # VULN: secrets in the system prompt, confidential context to a third party, no token cap.
+  - {id: F04, from: copilot_api, to: llm, data: system prompt + email + KB chunks,
+     classification: confidential, contains_secrets: true}
+  # VULN: retrieval by similarity only.
+  - {id: F05, from: kb_vector_store, to: copilot_api, data: KB chunks, classification: restricted}
+  # VULN: emails are auto-indexed into the shared KB (stored prompt injection).
+  - {id: F06, from: inbound_email, to: kb_vector_store, data: email body for indexing}
+  # VULN: the model's tool calls run as-is, with a shared service account.
+  - {id: F07, from: llm, to: send_email, data: "tool call (to, body)", identity: service}
+  - {id: F08, from: llm, to: http_fetch, data: tool call (url), identity: service}
+  - {id: F09, from: llm, to: crm_query, data: tool call (sql filter), identity: service,
+     classification: restricted}
+  - {id: F10, from: crm_query, to: crm_db, data: query, classification: restricted}
+  - {id: F11, from: crm_query, to: llm, data: customer records, classification: restricted}
+  # VULN: markdown rendered raw - images to any URL leak data with zero clicks.
+  - {id: F12, from: llm, to: web_ui, data: answer (markdown), classification: confidential}
+  # VULN: full prompts (with PII and the secret) in a widely readable log.
+  - {id: F13, from: copilot_api, to: app_logs, data: full prompts and answers,
+     classification: confidential}

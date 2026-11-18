@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Safe URL fetching for an MCP tool: the validation pipeline</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">fetch_url without SSRF: check, then connect to what you checked</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Each step blocks a different trick. Never validate with string prefixes or regexes on the raw URL.</text>
+
+  <rect x="40" y="115" width="150" height="90" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="115" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">URL from</text>
+  <text x="115" y="172" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">the model</text>
+
+  <rect x="215" y="115" width="150" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="290" y="147" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">1 Parse</text>
+  <text x="290" y="168" text-anchor="middle" font-size="12" fill="#166534">urlsplit; scheme is</text>
+  <text x="290" y="185" text-anchor="middle" font-size="12" fill="#166534">http or https only</text>
+
+  <rect x="390" y="115" width="150" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="465" y="147" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">2 No user-info</text>
+  <text x="465" y="168" text-anchor="middle" font-size="12" fill="#166534">reject user@host</text>
+  <text x="465" y="185" text-anchor="middle" font-size="12" fill="#166534">forms</text>
+
+  <rect x="565" y="115" width="150" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="640" y="147" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">3 Host allowlist</text>
+  <text x="640" y="168" text-anchor="middle" font-size="12" fill="#166534">exact host names</text>
+  <text x="640" y="185" text-anchor="middle" font-size="12" fill="#166534">the task needs</text>
+
+  <rect x="740" y="115" width="150" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="815" y="147" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">4 Resolve + IP</text>
+  <text x="815" y="168" text-anchor="middle" font-size="12" fill="#166534">every address must</text>
+  <text x="815" y="185" text-anchor="middle" font-size="12" fill="#166534">be global (ipaddress)</text>
+
+  <rect x="915" y="115" width="245" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="1037" y="147" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">5 Connect to checked IP</text>
+  <text x="1037" y="168" text-anchor="middle" font-size="12" fill="#166534">no second DNS lookup;</text>
+  <text x="1037" y="185" text-anchor="middle" font-size="12" fill="#166534">timeout, size cap, no auto-redirect</text>
+
+  <path d="M190 160 L209 160" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M365 160 L384 160" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M540 160 L559 160" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M715 160 L734 160" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M890 160 L909 160" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M1037 205 L1037 240 L290 240 L290 211" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#g)"/>
+  <text x="663" y="262" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">a 3xx redirect is a NEW URL: run every step again (max 3 hops)</text>
+
+  <!-- blocked examples -->
+  <text x="40" y="310" font-size="16" font-weight="700" fill="#0f172a">What each step stops (all from the lab)</text>
+  <rect x="215" y="325" width="150" height="150" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="290" y="352" text-anchor="middle" font-size="12" fill="#991b1b">file:///etc/passwd</text>
+  <text x="290" y="374" text-anchor="middle" font-size="12" fill="#991b1b">gopher://, ftp://</text>
+  <rect x="390" y="325" width="150" height="150" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="465" y="352" text-anchor="middle" font-size="12" fill="#991b1b">https://docs.acme</text>
+  <text x="465" y="369" text-anchor="middle" font-size="12" fill="#991b1b">.example@evil.example</text>
+  <text x="465" y="395" text-anchor="middle" font-size="12" fill="#991b1b">(real host is evil)</text>
+  <rect x="565" y="325" width="150" height="150" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="640" y="352" text-anchor="middle" font-size="12" fill="#991b1b">metadata.google</text>
+  <text x="640" y="369" text-anchor="middle" font-size="12" fill="#991b1b">.internal</text>
+  <text x="640" y="395" text-anchor="middle" font-size="12" fill="#991b1b">rebind.attacker</text>
+  <text x="640" y="412" text-anchor="middle" font-size="12" fill="#991b1b">.example</text>
+  <text x="640" y="438" text-anchor="middle" font-size="12" fill="#991b1b">any unknown host</text>
+  <rect x="740" y="325" width="150" height="150" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="815" y="352" text-anchor="middle" font-size="12" fill="#991b1b">169.254.169.254</text>
+  <text x="815" y="374" text-anchor="middle" font-size="12" fill="#991b1b">2852039166 (decimal)</text>
+  <text x="815" y="396" text-anchor="middle" font-size="11" fill="#991b1b">[::ffff:169.254.169.254]</text>
+  <text x="815" y="418" text-anchor="middle" font-size="11" fill="#991b1b">127.0.0.1, 10.x, 192.168.x</text>
+  <text x="815" y="440" text-anchor="middle" font-size="12" fill="#991b1b">name → private IP</text>
+  <rect x="915" y="325" width="245" height="150" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="1037" y="352" text-anchor="middle" font-size="12" fill="#991b1b">DNS rebinding: 1st answer public,</text>
+  <text x="1037" y="369" text-anchor="middle" font-size="12" fill="#991b1b">2nd answer 127.0.0.1</text>
+  <text x="1037" y="395" text-anchor="middle" font-size="12" fill="#991b1b">allowed host → 302 → metadata</text>
+  <text x="1037" y="421" text-anchor="middle" font-size="12" fill="#991b1b">2 MB response flooding the</text>
+  <text x="1037" y="438" text-anchor="middle" font-size="12" fill="#991b1b">model's context</text>
+
+  <rect x="40" y="500" width="1120" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="60" y="528" font-size="14" fill="#1e3a8a"><tspan font-weight="700">Also at the network layer:</tspan> run the server where it cannot reach 169.254.169.254 at all (egress firewall,</text>
+  <text x="60" y="552" font-size="14" fill="#1e3a8a">and on AWS require IMDSv2 tokens with a hop limit of 1). Code checks and network rules should both exist.</text>
+</svg>

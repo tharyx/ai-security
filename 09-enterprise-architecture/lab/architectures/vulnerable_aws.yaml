@@ -1,0 +1,117 @@
+# The same "ops assistant" platform as it really shipped after a hackathon.
+# It works. Users like it. It is also full of gaps. Every "VULN n" comment is a
+# mistake the reviewer should catch. Synthetic example only.
+name: ops-assistant-hackathon
+cloud: aws
+environment: prod
+data_classification: confidential
+multi_tenant: true
+
+components:
+  - id: web
+    type: frontend
+    zone: public
+    service: static site on S3 website hosting
+
+  - id: ai-gateway
+    type: ai_gateway
+    zone: app
+    service: Flask app on EC2 with a public IP
+    identity: role-app
+    user_auth: api_key                # VULN 1: one shared API key handed to every user
+    rate_limits: false                # VULN 2: no quotas, no token budget
+    guardrails:
+      input: []                       # VULN 3: no prompt-attack screening
+      output: []                      #         and no output DLP
+    # egress not set -> allow_all (cloud default)
+
+  - id: model
+    type: model_endpoint
+    zone: model
+    service: Amazon Bedrock over the public endpoint via NAT
+    # VULN 4: public_network_access / private_endpoint not set -> public path
+    # VULN 5: data_use not reviewed
+
+  - id: rag
+    type: rag_service
+    zone: app
+    service: retrieval code inside the same Flask app
+    identity: role-app                # VULN 6: identity shared with the gateway
+    retrieval_authz: prompt_only      # VULN 7: "only use documents from the user's tenant" in the prompt
+
+  - id: vectors
+    type: vector_store
+    zone: data
+    service: OpenSearch domain with a public endpoint
+    public_network_access: true       # VULN 8: public vector store
+    tenant_isolation: none            # VULN 9: one shared index, no filters
+    # encryption_key not set -> provider-managed key
+
+  - id: docs
+    type: object_store
+    zone: data
+    service: S3 bucket
+    public_network_access: false
+    private_endpoint: true
+
+  - id: agent
+    type: agent_runtime
+    zone: app
+    service: LangChain-style loop inside the Flask app
+    identity: role-app
+    approval_required_for: []         # VULN 10: writes run without a human
+    # VULN 11: no limits, no kill switch; egress allow_all
+
+  - id: tool-shell
+    type: tool
+    zone: tools
+    service: run_shell debug tool left enabled
+    side_effects: write
+
+  - id: tool-change
+    type: tool
+    zone: tools
+    service: change-request tool
+    side_effects: write
+
+  - id: audit-logs
+    type: log_store
+    zone: security
+    service: CloudWatch Logs group
+    public_network_access: false
+    retention_days: 30                # VULN 12: short retention, mutable, raw prompts
+    exports_to_siem: false
+
+identities:
+  - id: role-app
+    credential: static_key            # VULN 13: IAM user access key in the EC2 user data
+    permissions: ["bedrock:*", "es:*", "s3:*"]   # VULN 14: wildcards
+
+keys: []
+
+secrets:
+  store: null
+  inline:
+    - OPENSEARCH_MASTER_PASSWORD in EC2 user data   # VULN 15
+    - TICKETING_API_TOKEN in the system prompt
+
+logging:
+  control_plane_audit: true           # CloudTrail event history exists by default
+  model_invocation_logs: false
+  prompt_redaction: false
+  sink: audit-logs
+
+flows:
+  - {from: internet, to: web}
+  - {from: web, to: ai-gateway}
+  - {from: internet, to: rag, note: "debug /search endpoint left open"}   # VULN 16: bypasses the gateway
+  - {from: ai-gateway, to: rag}
+  - {from: rag, to: vectors}
+  - {from: rag, to: docs}
+  - {from: ai-gateway, to: agent}
+  - {from: agent, to: model}
+  - {from: agent, to: tool-shell}     # VULN 17: tools called directly, no gateway or registry
+  - {from: agent, to: tool-change}
+  - {from: ai-gateway, to: audit-logs}
+
+exceptions: []

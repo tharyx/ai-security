@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The AI lifecycle: assets and threats at each stage</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">The AI lifecycle: every stage has assets and threats</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Grey text = assets to protect. Red text = typical threats. Security must cover all ten stages, not only inference.</text>
+
+  <text x="40" y="118" font-size="14" font-weight="700" fill="#1e3a8a">BUILD TIME</text>
+  <!-- row 1 -->
+  <rect x="40" y="128" width="208" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="54" y="156" font-size="15" font-weight="700" fill="#1e3a8a">1 Data collection</text>
+  <text x="54" y="184" font-size="12" fill="#475569">raw data, labels, consent</text>
+  <text x="54" y="204" font-size="12" fill="#dc2626">poisoning, unlawful data</text>
+  <text x="54" y="224" font-size="12" fill="#dc2626">scraping private data</text>
+
+  <rect x="268" y="128" width="208" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="282" y="156" font-size="15" font-weight="700" fill="#1e3a8a">2 Preparation</text>
+  <text x="282" y="184" font-size="12" fill="#475569">parsers, filters, metadata</text>
+  <text x="282" y="204" font-size="12" fill="#dc2626">parser exploits</text>
+  <text x="282" y="224" font-size="12" fill="#dc2626">label tampering</text>
+
+  <rect x="496" y="128" width="208" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="510" y="156" font-size="15" font-weight="700" fill="#1e3a8a">3 Training / fine-tune</text>
+  <text x="510" y="184" font-size="12" fill="#475569">dataset, weights, adapters</text>
+  <text x="510" y="204" font-size="12" fill="#dc2626">backdoors, weight theft</text>
+  <text x="510" y="224" font-size="12" fill="#dc2626">memorized secrets / PII</text>
+
+  <rect x="724" y="128" width="208" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="738" y="156" font-size="15" font-weight="700" fill="#1e3a8a">4 Evaluate + package</text>
+  <text x="738" y="184" font-size="12" fill="#475569">eval sets, model artifact</text>
+  <text x="738" y="204" font-size="12" fill="#dc2626">unsafe formats (pickle)</text>
+  <text x="738" y="224" font-size="12" fill="#dc2626">supply chain, eval gaming</text>
+
+  <rect x="952" y="128" width="208" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="966" y="156" font-size="15" font-weight="700" fill="#1e3a8a">5 Deployment</text>
+  <text x="966" y="184" font-size="12" fill="#475569">runtime, endpoint, keys</text>
+  <text x="966" y="204" font-size="12" fill="#dc2626">misconfiguration</text>
+  <text x="966" y="224" font-size="12" fill="#dc2626">credential theft, open APIs</text>
+
+  <path d="M248 188 L262 188" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M476 188 L490 188" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M704 188 L718 188" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M932 188 L946 188" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <!-- connector from row 1 to row 2 -->
+  <path d="M1056 248 L1056 272 L144 272 L144 304" fill="none" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <text x="40" y="298" font-size="14" font-weight="700" fill="#92400e">RUN TIME</text>
+  <!-- row 2 -->
+  <rect x="40" y="310" width="208" height="120" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="54" y="338" font-size="15" font-weight="700" fill="#92400e">6 Inference</text>
+  <text x="54" y="366" font-size="12" fill="#475569">prompts, context, output</text>
+  <text x="54" y="386" font-size="12" fill="#dc2626">prompt injection, jailbreak</text>
+  <text x="54" y="406" font-size="12" fill="#dc2626">leakage, cost abuse</text>
+
+  <rect x="268" y="310" width="208" height="120" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="282" y="338" font-size="15" font-weight="700" fill="#92400e">7 Retrieval (RAG)</text>
+  <text x="282" y="366" font-size="12" fill="#475569">documents, chunks, vectors</text>
+  <text x="282" y="386" font-size="12" fill="#dc2626">cross-tenant leakage</text>
+  <text x="282" y="406" font-size="12" fill="#dc2626">poisoned documents</text>
+
+  <rect x="496" y="310" width="208" height="120" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="510" y="338" font-size="15" font-weight="700" fill="#92400e">8 Tools and agents</text>
+  <text x="510" y="366" font-size="12" fill="#475569">schemas, tokens, APIs, memory</text>
+  <text x="510" y="386" font-size="12" fill="#dc2626">excessive agency, SSRF</text>
+  <text x="510" y="406" font-size="12" fill="#dc2626">confused deputy</text>
+
+  <rect x="724" y="310" width="208" height="120" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="738" y="338" font-size="15" font-weight="700" fill="#92400e">9 Operations</text>
+  <text x="738" y="366" font-size="12" fill="#475569">logs, feedback, telemetry</text>
+  <text x="738" y="386" font-size="12" fill="#dc2626">sensitive data in logs</text>
+  <text x="738" y="406" font-size="12" fill="#dc2626">drift, feedback poisoning</text>
+
+  <rect x="952" y="310" width="208" height="120" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="966" y="338" font-size="15" font-weight="700" fill="#92400e">10 Retirement</text>
+  <text x="966" y="366" font-size="12" fill="#475569">artifacts, indexes, backups</text>
+  <text x="966" y="386" font-size="12" fill="#dc2626">incomplete deletion</text>
+  <text x="966" y="406" font-size="12" fill="#dc2626">keys and access left behind</text>
+
+  <path d="M248 370 L262 370" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M476 370 L490 370" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M704 370 L718 370" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M932 370 L946 370" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- actors -->
+  <rect x="40" y="455" width="1120" height="80" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="484" font-size="15" font-weight="700" fill="#0f172a">Actors who touch the lifecycle</text>
+  <text x="60" y="510" font-size="14" fill="#0f172a">data suppliers · labelers · ML engineers · MLOps / platform · app developers · end users · model providers</text>
+  <text x="60" y="528" font-size="13" fill="#dc2626">attackers: outside users, malicious content authors, compromised suppliers, insiders</text>
+</svg>

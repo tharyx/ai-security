@@ -16,20 +16,23 @@ For every topic: **Understand → Draw → Threat-model → Build → Attack →
 | 13–16 | MCP security | Approved server registry, scoped identity and tool broker |
 | 17–20 | Agent security | Bounded agent with identity, approval and kill switch |
 | 21–24 | AI DevSecOps | CI/CD security gates, provenance, container and runtime controls |
-| 25–28 | Multi-cloud AI security | AWS/Azure/GCP security outcome mapping |
-| 29–32 | Governance and compliance | AI inventory, risk treatment and evidence pack |
-| 33–36 | Enterprise capstone | Secure AI operations assistant and architecture defense |
+| 25–28 | Enterprise architecture (multi-cloud) — module 09 | AWS/Azure/GCP security outcome mapping |
+| 29–32 | Governance (07) and compliance (08) | AI inventory, risk treatment and evidence pack |
+| 33–36 | Capstone (10) | Secure AI operations assistant and architecture defense |
 
 ## Repository modules
-1. `01-foundations/01-ai-system-foundations.md`
-2. `02-llm-security/02-llm-security-deep-dive.md`
-3. `03-rag-security/03-rag-security-deep-dive.md`
-4. `04-mcp-security/04-mcp-security-deep-dive.md`
-5. `05-agent-security/05-agent-security-deep-dive.md`
-6. `06-ai-devsecops/06-ai-devsecops-deep-dive.md`
-7. `07-cloud-security/07-multi-cloud-ai-security-deep-dive.md`
-8. `08-governance-compliance/08-ai-governance-compliance-deep-dive.md`
-9. `09-capstone/09-enterprise-capstone.md`
+| # | Module | Lessons |
+|---|---|---|
+| 01 | [AI Security Fundamentals](../01-ai-security-fundamentals/) | AI basics for security, architecture and trust boundaries, threat modeling, attack surface |
+| 02 | [LLM Security](../02-llm-security/) | [prompt-injection](../02-llm-security/prompt-injection/), [jailbreak](../02-llm-security/jailbreak/), [data-leakage](../02-llm-security/data-leakage/), [security-testing](../02-llm-security/security-testing/) |
+| 03 | [RAG Security](../03-rag-security/) | [document-security](../03-rag-security/document-security/), [vector-db-security](../03-rag-security/vector-db-security/), [access-control](../03-rag-security/access-control/) |
+| 04 | [MCP Security](../04-mcp-security/) | [mcp-server](../04-mcp-security/mcp-server/), [authentication](../04-mcp-security/authentication/), [tool-security](../04-mcp-security/tool-security/) |
+| 05 | [Agent Security](../05-agent-security/) | [agent-identity](../05-agent-security/agent-identity/), [permissions](../05-agent-security/permissions/), [sandboxing](../05-agent-security/sandboxing/) |
+| 06 | [AI DevSecOps](../06-ai-devsecops/) | [terraform](../06-ai-devsecops/terraform/), [docker](../06-ai-devsecops/docker/), [kubernetes](../06-ai-devsecops/kubernetes/), [cicd](../06-ai-devsecops/cicd/) |
+| 07 | [AI Governance](../07-ai-governance/) | inventory, operating model, risk management, ISO/IEC 42001 |
+| 08 | [AI Compliance](../08-ai-compliance/) | EU AI Act, GDPR and India DPDP, control mapping and evidence, audit readiness |
+| 09 | [Enterprise Architecture](../09-enterprise-architecture/) | reference architecture, AWS, Azure, GCP, multi-cloud control matrix |
+| 10 | [Capstone Project](../10-capstone-project/) | brief, milestones, red-team exercise, architecture defense |
 
 ## Weekly timebox
 - 3 hours: concepts and official documentation.

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Architecture-as-code review pipeline</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a" text-anchor="start">Architecture-as-code review pipeline</text>
+  <text x="40" y="80" font-size="16" fill="#475569" text-anchor="start">Describe the platform in YAML, check it against a control matrix, and block the merge when a critical gap appears.</text>
+  <rect x="40" y="130" width="230" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="155.0" y="159.75" font-size="16" font-weight="700" fill="#92400e" text-anchor="middle">architecture.yaml</text>
+  <text x="155.0" y="177.25" font-size="12.5" fill="#92400e" text-anchor="middle">components · identities</text>
+  <text x="155.0" y="194.75" font-size="12.5" fill="#92400e" text-anchor="middle">keys · logging · flows</text>
+  <text x="155.0" y="212.25" font-size="12.5" fill="#92400e" text-anchor="middle">exceptions (dated)</text>
+  <rect x="40" y="260" width="230" height="100" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="155.0" y="289.75" font-size="16" font-weight="700" fill="#334155" text-anchor="middle">control_matrix.yaml</text>
+  <text x="155.0" y="307.25" font-size="12.5" fill="#334155" text-anchor="middle">21 outcomes</text>
+  <text x="155.0" y="324.75" font-size="12.5" fill="#334155" text-anchor="middle">AWS · Azure · GCP</text>
+  <text x="155.0" y="342.25" font-size="12.5" fill="#334155" text-anchor="middle">severity · evidence</text>
+  <rect x="330" y="115" width="200" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="430.0" y="146.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">1 Strict schema</text>
+  <text x="430.0" y="164.25" font-size="12.5" fill="#166534" text-anchor="middle">unknown key = error</text>
+  <rect x="330" y="200" width="200" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="430.0" y="231.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">2 Attribute checks</text>
+  <text x="430.0" y="249.25" font-size="12.5" fill="#166534" text-anchor="middle">public? CMK? auth?</text>
+  <rect x="330" y="285" width="200" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="430.0" y="316.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">3 Graph checks</text>
+  <text x="430.0" y="334.25" font-size="12.5" fill="#166534" text-anchor="middle">gateway bypass paths</text>
+  <rect x="570" y="200" width="210" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="675.0" y="231.75" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">4 Exceptions</text>
+  <text x="675.0" y="249.25" font-size="12.5" fill="#166534" text-anchor="middle">valid · expired · critical</text>
+  <rect x="830" y="115" width="330" height="100" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="995.0" y="144.75" font-size="16" font-weight="700" fill="#334155" text-anchor="middle">Report</text>
+  <text x="995.0" y="162.25" font-size="12.5" fill="#334155" text-anchor="middle">FAIL / PASS / ACCEPTED / N/A per control</text>
+  <text x="995.0" y="179.75" font-size="12.5" fill="#334155" text-anchor="middle">why + cloud-specific fix</text>
+  <text x="995.0" y="197.25" font-size="12.5" fill="#334155" text-anchor="middle">sorted by severity</text>
+  <rect x="830" y="240" width="330" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="995.0" y="269.75" font-size="16" font-weight="700" fill="#166534" text-anchor="middle">CI gate</text>
+  <text x="995.0" y="287.25" font-size="12.5" fill="#166534" text-anchor="middle">exit 1 on open critical/high</text>
+  <text x="995.0" y="304.75" font-size="12.5" fill="#166534" text-anchor="middle">medium = tracked warning</text>
+  <text x="995.0" y="322.25" font-size="12.5" fill="#166534" text-anchor="middle">runs on every pull request</text>
+  <rect x="830" y="365" width="330" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="995.0" y="394.75" font-size="16" font-weight="700" fill="#92400e" text-anchor="middle">ADR + exception register</text>
+  <text x="995.0" y="412.25" font-size="12.5" fill="#92400e" text-anchor="middle">decision, options, consequences</text>
+  <text x="995.0" y="429.75" font-size="12.5" fill="#92400e" text-anchor="middle">approver + expiry date</text>
+  <text x="995.0" y="447.25" font-size="12.5" fill="#92400e" text-anchor="middle">review date in calendar</text>
+  <path d="M270 180 L328 150" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M270 310 L328 320" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M430 185 L430 198" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M430 270 L430 283" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M530 320 L560 320 L560 235 L568 235" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M780 220 L810 220 L810 165 L828 165" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M780 245 L810 245 L810 290 L828 290" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M995 340 L995 363" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="330" y="390" width="450" height="80" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="555.0" y="418.0" font-size="15" font-weight="700" fill="#991b1b" text-anchor="middle">Typical gaps it catches</text>
+  <text x="555.0" y="435.5" font-size="12.5" fill="#991b1b" text-anchor="middle">debug route skips the gateway · shared static key</text>
+  <text x="555.0" y="453.0" font-size="12.5" fill="#991b1b" text-anchor="middle">prompt-only tenant filter · open agent egress</text>
+  <text x="40" y="500" font-size="13" fill="#475569" text-anchor="start">Mutation tests break one control at a time in a secure design and check the reviewer catches exactly that control.</text>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Token passthrough and shared admin keys versus token exchange</title>
+  <defs>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Whose authority does the MCP server use downstream?</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Two anti-patterns on the left. The pattern to use on the right.</text>
+
+  <!-- left panel -->
+  <rect x="40" y="105" width="545" height="440" rx="16" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="60" y="135" font-size="18" font-weight="700" fill="#991b1b">Anti-pattern A: token passthrough</text>
+  <rect x="60" y="155" width="140" height="60" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <text x="130" y="190" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Client</text>
+  <rect x="240" y="155" width="140" height="60" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <text x="310" y="190" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">MCP server</text>
+  <rect x="420" y="155" width="145" height="60" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  <text x="492" y="190" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">API</text>
+  <path d="M200 185 L234 185" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <path d="M380 185 L414 185" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <text x="310" y="240" text-anchor="middle" font-size="13" fill="#991b1b">the SAME token, aud = [mcp, api] or none</text>
+  <text x="60" y="270" font-size="13" fill="#0f172a">• Any server that gets the token can replay it to the API.</text>
+  <text x="60" y="292" font-size="13" fill="#0f172a">• The API cannot tell the MCP server was involved.</text>
+  <text x="60" y="314" font-size="13" fill="#0f172a">• MCP-side limits and logs are skipped. The spec forbids it.</text>
+
+  <text x="60" y="360" font-size="18" font-weight="700" fill="#991b1b">Anti-pattern B: shared admin key</text>
+  <rect x="60" y="380" width="140" height="60" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <text x="130" y="408" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Alice</text>
+  <text x="130" y="427" text-anchor="middle" font-size="12" fill="#92400e">"show ticket T-2"</text>
+  <rect x="240" y="380" width="140" height="60" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <text x="310" y="415" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">MCP server</text>
+  <rect x="420" y="380" width="145" height="60" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  <text x="492" y="408" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">API</text>
+  <text x="492" y="427" text-anchor="middle" font-size="12" fill="#475569">returns Bob's ticket</text>
+  <path d="M200 410 L234 410" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <path d="M380 410 L414 410" stroke="#dc2626" stroke-width="2.5" marker-end="url(#r)"/>
+  <text x="397" y="465" text-anchor="middle" font-size="13" fill="#991b1b">api_key = ADMIN (sees everyone)</text>
+  <text x="60" y="495" font-size="13" fill="#0f172a">• Confused deputy: the server uses ITS power for Alice's request.</text>
+  <text x="60" y="517" font-size="13" fill="#0f172a">• The API's per-user checks never run. Every user is admin.</text>
+
+  <!-- right panel -->
+  <rect x="615" y="105" width="545" height="440" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="635" y="135" font-size="18" font-weight="700" fill="#166534">Pattern: token exchange (RFC 8693)</text>
+  <rect x="635" y="160" width="140" height="60" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <text x="705" y="195" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Client</text>
+  <rect x="815" y="160" width="140" height="60" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <text x="885" y="195" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">MCP server</text>
+  <rect x="995" y="160" width="145" height="60" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  <text x="1067" y="195" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">API</text>
+  <rect x="815" y="290" width="140" height="60" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="885" y="318" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">Auth server</text>
+  <text x="885" y="337" text-anchor="middle" font-size="12" fill="#1e3a8a">exchange + policy</text>
+  <path d="M775 190 L809 190" stroke="#16a34a" stroke-width="2.5" marker-end="url(#g)"/>
+  <path d="M955 190 L989 190" stroke="#16a34a" stroke-width="2.5" marker-end="url(#g)"/>
+  <path d="M870 220 L870 284" stroke="#16a34a" stroke-width="2" marker-end="url(#g)"/>
+  <path d="M900 290 L900 226" stroke="#16a34a" stroke-width="2" marker-end="url(#g)"/>
+  <text x="635" y="250" font-size="12" font-weight="700" fill="#166534">token A</text>
+  <text x="635" y="267" font-size="12" fill="#166534">aud = MCP only</text>
+  <text x="965" y="250" font-size="12" font-weight="700" fill="#166534">token B</text>
+  <text x="965" y="267" font-size="12" fill="#166534">aud = API, sub = alice</text>
+  <text x="965" y="284" font-size="12" fill="#166534">act = MCP server</text>
+  <text x="965" y="301" font-size="12" fill="#166534">scope ⊆ A, 60 s life</text>
+  <text x="635" y="390" font-size="13" fill="#0f172a">• Each hop has its own audience. A stolen token A is useless</text>
+  <text x="635" y="410" font-size="13" fill="#0f172a">   at the API; token B is useless anywhere else.</text>
+  <text x="635" y="435" font-size="13" fill="#0f172a">• The user's identity reaches the API, so the API's own</text>
+  <text x="635" y="455" font-size="13" fill="#0f172a">   per-user checks run (Alice cannot read Bob's ticket).</text>
+  <text x="635" y="480" font-size="13" fill="#0f172a">• Scopes can only shrink. The audit trail shows both</text>
+  <text x="635" y="500" font-size="13" fill="#0f172a">   the user (sub) and the server acting for them (act).</text>
+
+  <text x="40" y="585" font-size="15" fill="#0f172a"><tspan font-weight="700">If the API does not support exchange:</tspan> use per-user OAuth tokens stored in a vault, keyed by user,</text>
+  <text x="40" y="610" font-size="15" fill="#0f172a">with the narrowest scopes. A shared service account is the last resort, and then the MCP server must do the per-user check.</text>
+</svg>

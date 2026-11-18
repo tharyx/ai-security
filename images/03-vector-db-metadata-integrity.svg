@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Who can write the ACL metadata decides who can read the data</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Who can write the ACL metadata decides who can read the data</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Retrieval filters trust metadata. So writes to ACL fields must be tightly limited and tamper-evident.</text>
+  <rect x="40" y="115" width="270" height="74" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="175.0" y="146.9" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Ingestion service</text>
+  <text x="175.0" y="166.6" font-size="12.5" fill="#166534" text-anchor="middle">role: ingest · writes + signs</text>
+  <rect x="40" y="225" width="270" height="74" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="175.0" y="256.9" font-size="15" font-weight="700" fill="#991b1b" text-anchor="middle">User feature (mallory)</text>
+  <text x="175.0" y="276.6" font-size="12.5" fill="#991b1b" text-anchor="middle">'notes' role · edits ACL field</text>
+  <rect x="40" y="335" width="270" height="74" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="175.0" y="366.9" font-size="15" font-weight="700" fill="#991b1b" text-anchor="middle">DB admin / bad replica</text>
+  <text x="175.0" y="386.6" font-size="12.5" fill="#991b1b" text-anchor="middle">edits the record directly</text>
+  <rect x="410" y="150" width="340" height="230" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="580" y="178" font-size="16" font-weight="700" fill="#334155" text-anchor="middle">Vector store record</text>
+  <text x="430" y="212" font-size="13.5" fill="#0f172a" text-anchor="start">text: "Confidential HR reorg plan..."</text>
+  <text x="430" y="239" font-size="13.5" fill="#0f172a" text-anchor="start">vector: [0.12, -0.40, 0.08, ...]</text>
+  <text x="430" y="266" font-size="13.5" fill="#0f172a" text-anchor="start">tenant: acme</text>
+  <text x="430" y="293" font-size="13.5" fill="#0f172a" text-anchor="start">allowed_groups: [acme:hr]</text>
+  <text x="430" y="320" font-size="13.5" fill="#0f172a" text-anchor="start">doc_id: hr-reorg · owner: svc-ingest</text>
+  <text x="430" y="347" font-size="13.5" font-weight="700" fill="#166534" text-anchor="start">sig: HMAC(ACL fields + text hash)</text>
+  <path d="M310 152 L406 200" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#ag)"/>
+  <text x="318" y="140" font-size="12" font-weight="700" fill="#166534" text-anchor="start">write + sign</text>
+  <path d="M310 262 L406 262" fill="none" stroke="#dc2626" stroke-width="2.2" marker-end="url(#ar)"/>
+  <rect x="330" y="270" width="64" height="22" rx="5" fill="#dc2626"/>
+  <text x="362" y="286" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">403</text>
+  <path d="M310 372 L406 330" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#ar)"/>
+  <text x="318" y="400" font-size="12" font-weight="700" fill="#991b1b" text-anchor="start">out-of-band edit</text>
+  <rect x="850" y="150" width="310" height="74" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="1005.0" y="181.9" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Retriever: verify HMAC</text>
+  <text x="1005.0" y="201.6" font-size="12.5" fill="#166534" text-anchor="middle">bad signature -&gt; drop + alert</text>
+  <rect x="850" y="250" width="310" height="74" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="1005.0" y="281.9" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">Check ACL vs user groups</text>
+  <text x="1005.0" y="301.6" font-size="12.5" fill="#166534" text-anchor="middle">missing ACL -&gt; deny</text>
+  <rect x="850" y="350" width="310" height="56" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1005.0" y="382.5" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">Context for the LLM</text>
+  <path d="M750 220 L846 190" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <path d="M1005 224 L1005 246" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <path d="M1005 324 L1005 346" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <rect x="410" y="430" width="340" height="56" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="580.0" y="453.1" font-size="14.5" font-weight="700" fill="#1e3a8a" text-anchor="middle">Signing key in KMS</text>
+  <text x="580.0" y="472.1" font-size="12" fill="#1e3a8a" text-anchor="middle">ingestion + retrieval only, never DB admins</text>
+  <path d="M410 458 L22 458 L22 152 L36 152" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#ag)"/>
+  <path d="M750 458 L1180 458 L1180 187 L1164 187" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#ag)"/>
+  <text x="40" y="520" font-size="13" fill="#475569" text-anchor="start">Signing stops out-of-band edits. It does NOT stop a caller who may use the signing path: write authorization does.</text>
+</svg>

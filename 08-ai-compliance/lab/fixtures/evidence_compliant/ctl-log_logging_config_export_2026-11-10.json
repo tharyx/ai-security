@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "control": "CTL-LOG",
+  "evidence_type": "logging_config_export",
+  "collected": "2026-11-10",
+  "collected_by": "cloud-config-export",
+  "summary": "prompt+tool-call logging on; PII redaction on; retention 400 days"
+}

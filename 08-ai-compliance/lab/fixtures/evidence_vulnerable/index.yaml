@@ -1,0 +1,87 @@
+# Evidence index (vulnerable set). Synthetic data for the lab.
+# collected_by: 'pipeline', 'scheduler' or 'cloud-config-export' = automated; anything else = a person.
+# sha256: normalized hash, see evidence_checker.py --hash
+- id: EV-001
+  control: CTL-INV
+  type: register_export
+  file: ctl-inv_register_export_2026-11-01.json
+  collected: 2026-11-01
+  collected_by: pipeline
+  sha256: eacd5e91f9a2ef978dd9fc0927d4ed6292db0c7ca3b7cc4c1f57030f643450f6
+- id: EV-002
+  control: CTL-RISK
+  type: risk_register_export
+  file: ctl-risk_risk_register_export_2026-10-31.json
+  collected: 2026-10-31
+  collected_by: pipeline
+  sha256: 68a3eb0a8bb69e7bb5525163d973e7612700dcd789adbffbab0594f6a945213f
+- id: EV-003
+  control: CTL-HO
+  type: oversight_procedure
+  file: ctl-ho_oversight_procedure_2026-06-01.md
+  collected: 2026-06-01
+  collected_by: HR Tech team
+  sha256: 8b1ba49174a5e91f9b9e907a53f7dd877da7ad596d798dee61dc45f43249beb4
+- id: EV-004
+  control: CTL-LOG
+  type: logging_config_export
+  file: ctl-log_logging_config_export_2026-03-02.json
+  collected: 2026-03-02
+  collected_by: cloud-config-export
+  sha256: 653a169b5ba9f2cfa07eb313f1c6676b3a7f619b9b83478eab0d1c7b74f42bb2
+- id: EV-005
+  control: CTL-LOG
+  type: retention_test_result
+  file: ctl-log_retention_test_result_2026-10-01.json
+  collected: 2026-10-01
+  collected_by: j.doe
+  sha256: b3d77113e6a39907a59e36d8bb75aa638a8074b8068d67d29e3f18969a698012
+- id: EV-006
+  control: CTL-EVAL
+  type: ci_test_report
+  file: ctl-eval_ci_test_report_2026-11-12.json
+  collected: 2026-11-12
+  collected_by: pipeline
+  sha256: 065ffdefe6849cd5da31334d054fea10a36b3f6d6925151dc2b6a386c1cc10ba
+- id: EV-007
+  control: CTL-ACCESS
+  type: iam_policy_export
+  file: ctl-access_iam_policy_export_2026-11-03.json
+  collected: 2026-11-03
+  collected_by: IT admin
+  sha256: 89c25dd17d783be60ced3f91e5db6877ccfb898b09681773f9f338b1149e70ef
+- id: EV-008
+  control: CTL-ACCESS
+  type: access_review_signoff
+  file: ctl-access_access_review_signoff_2026-10-05.md
+  collected: 2026-10-05
+  collected_by: Identity Team lead
+  sha256: ab1345c5777307019b5be3b56227625ee54175fae4d6b8d64bf31a685f0b936f
+- id: EV-009
+  control: CTL-VEND
+  type: vendor_assessment
+  file: ctl-vend_vendor_assessment_2025-06-10.md
+  collected: 2025-06-10
+  collected_by: Procurement
+  sha256: d2c2464905bc1b7a32c4c7096df17fbc69a754d00633c03ff8e27a65630ab475
+- id: EV-010
+  control: CTL-IR
+  type: incident_runbook
+  file: ctl-ir_incident_runbook_2026-05-20.md
+  collected: 2026-05-20
+  collected_by: Security Operations
+  sha256: 0b51ae9d12ef0a8c50af748cfbeb5c076d5b92d98202d14287db369596ff594e
+- id: EV-011
+  control: CTL-DOC
+  type: system_card
+  file: ctl-doc_system_card_2026-08-14.md
+  collected: 2026-08-14
+  collected_by: AI Engineering
+  sha256: 491c2756025616f5542341681f7f5c73e57c1a247268703a5f2843705e7186d0
+- id: EV-012
+  control: CTL-PRIV
+  type: dpia
+  file: ctl-priv_dpia_2026-03-01.md
+  collected: 2026-03-01
+  collected_by: Data Protection Officer
+  sha256: 1150e6cf6846eb63e77c1c627495194eb217d024e36a5494255d77e9e9014ed1

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Jailbreak versus prompt injection: same tricks, different target and victim</title>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Jailbreak vs prompt injection</text>
+  <text x="40" y="80" font-size="16" fill="#475569">They share techniques. They differ in what is attacked, who attacks, and who gets hurt.</text>
+
+  <!-- column headers -->
+  <rect x="200" y="105" width="440" height="50" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="420" y="137" text-anchor="middle" font-size="18" font-weight="700" fill="#991b1b">Jailbreak</text>
+  <rect x="680" y="105" width="480" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="920" y="137" text-anchor="middle" font-size="18" font-weight="700" fill="#92400e">Prompt injection</text>
+
+  <!-- rows -->
+  <g font-size="15">
+    <text x="40" y="195" font-weight="700" fill="#0f172a">What is attacked</text>
+    <text x="215" y="195" fill="#0f172a">The model's safety training</text>
+    <text x="695" y="195" fill="#0f172a">The app's instructions and trust boundary</text>
+    <line x1="40" y1="212" x2="1160" y2="212" stroke="#e2e8f0"/>
+
+    <text x="40" y="242" font-weight="700" fill="#0f172a">Who attacks</text>
+    <text x="215" y="242" fill="#0f172a">Usually the user in the chat box</text>
+    <text x="695" y="242" fill="#0f172a">The user (direct) or a third party (indirect)</text>
+    <line x1="40" y1="259" x2="1160" y2="259" stroke="#e2e8f0"/>
+
+    <text x="40" y="289" font-weight="700" fill="#0f172a">Goal</text>
+    <text x="215" y="289" fill="#0f172a">Content the model should refuse</text>
+    <text x="695" y="289" fill="#0f172a">Steal data, run tools, change decisions</text>
+    <line x1="40" y1="306" x2="1160" y2="306" stroke="#e2e8f0"/>
+
+    <text x="40" y="336" font-weight="700" fill="#0f172a">Who gets hurt</text>
+    <text x="215" y="336" fill="#0f172a">The brand, the public, regulators' trust</text>
+    <text x="695" y="336" fill="#0f172a">The victim user and the organization's data</text>
+    <line x1="40" y1="353" x2="1160" y2="353" stroke="#e2e8f0"/>
+
+    <text x="40" y="383" font-weight="700" fill="#0f172a">Main controls</text>
+    <text x="215" y="383" fill="#0f172a">Input + output moderation, policy checks</text>
+    <text x="695" y="383" fill="#0f172a">Least privilege, tool policy, output guard</text>
+    <line x1="40" y1="400" x2="1160" y2="400" stroke="#e2e8f0"/>
+
+    <text x="40" y="430" font-weight="700" fill="#0f172a">OWASP 2025</text>
+    <text x="215" y="430" fill="#0f172a">LLM01 (treated as a form of injection)</text>
+    <text x="695" y="430" fill="#0f172a">LLM01, chained with LLM02, LLM05, LLM06</text>
+  </g>
+
+  <!-- shared techniques -->
+  <rect x="40" y="460" width="1120" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+  <text x="600" y="488" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Shared techniques</text>
+  <text x="600" y="512" text-anchor="middle" font-size="14" fill="#334155">role-play and "modes" · override phrases · encoding (Base64, leetspeak) · payload splitting · many-shot · multi-turn escalation</text>
+</svg>

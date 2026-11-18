@@ -1,0 +1,115 @@
+# The same register after the governance program fixed it. Synthetic data for the lab.
+
+- id: AI-001
+  name: InboxBot email summarizer
+  business_owner: Head of Customer Support
+  technical_owner: Support Platform team
+  intended_use: Summarize inbound customer emails for support agents and draft replies to the original sender only.
+  prohibited_uses: [sending to new recipients, bulk export of customer data]
+  status: production
+  declared_tier: high
+  provider: LLM Vendor A
+  model: vendor-a-chat-2025-06
+  data_classes: [personal, internal]
+  affected_people: [customers, support agents]
+  use_domains: [customer_support]
+  decision_impact: none
+  tools:
+    - {name: send_reply, side_effects: true}
+  human_oversight: approve_each
+  controls: [CTL-REG, CTL-AUP, CTL-TM, CTL-EVAL, CTL-LOG, CTL-PRIV, CTL-VEND, CTL-HO, CTL-MON, CTL-IR]
+  last_review: 2026-09-15
+  egress_domains: [api.llm-vendor-a.example]
+  exceptions:
+    - finding: GOV-05:CTL-RT
+      reason: Red team booked for 2026-12-10; tool policy already tested in CI
+      approved_by: CISO
+      expires: 2027-01-31
+
+- id: AI-002
+  name: CV screening assistant
+  business_owner: Head of Talent Acquisition
+  technical_owner: HR Tech team
+  intended_use: Summarize each application against the published job criteria; a recruiter makes every shortlisting decision.
+  prohibited_uses: [automatic rejection, inferring age, health or ethnicity]
+  status: pilot
+  declared_tier: high
+  provider: GenAI Vendor B
+  model: vendor-b-large-3
+  data_classes: [personal]
+  affected_people: [job applicants]
+  use_domains: [employment]
+  decision_impact: informs_human
+  human_oversight: human_decides
+  controls: [CTL-REG, CTL-AUP, CTL-TM, CTL-EVAL, CTL-LOG, CTL-PRIV, CTL-VEND, CTL-HO, CTL-RT, CTL-MON, CTL-IR, CTL-IA]
+  last_review: 2026-10-20
+  egress_domains: [api.genai-vendor-b.example]
+
+- id: AI-003
+  name: Internal code assistant
+  business_owner: VP Engineering
+  technical_owner: Developer Productivity team
+  intended_use: Suggest code completions and explain code for ACME engineers inside the approved IDE plugin.
+  prohibited_uses: [pasting customer data or secrets]
+  status: production
+  declared_tier: medium
+  provider: LLM Vendor A
+  model: vendor-a-code-2025-04
+  data_classes: [internal, confidential]
+  affected_people: [engineers]
+  use_domains: [software_engineering]
+  controls: [CTL-REG, CTL-AUP, CTL-TM, CTL-EVAL, CTL-LOG, CTL-VEND]
+  last_review: 2026-08-01
+  egress_domains: [api.llm-vendor-a.example]
+
+- id: AI-004
+  name: Website support chatbot
+  business_owner: Head of Digital
+  technical_owner: Web Platform team
+  intended_use: Answer customer questions about orders, delivery and refund policy on the public website.
+  status: production
+  declared_tier: medium
+  provider: GenAI Vendor B
+  model: vendor-b-chat-2
+  data_classes: [personal, public]
+  affected_people: [customers, public]
+  use_domains: [customer_support]
+  external_facing: true
+  human_oversight: sample_review
+  controls: [CTL-REG, CTL-AUP, CTL-TM, CTL-EVAL, CTL-LOG, CTL-PRIV, CTL-VEND]
+  last_review: 2026-07-15
+  egress_domains: [api.genai-vendor-b.example]
+
+- id: AI-005
+  name: Meeting mood monitor
+  business_owner: Head of People Analytics
+  technical_owner: People Analytics team
+  intended_use: Retired. It scored employee emotions in meetings, which AI policy section 4 prohibits.
+  status: retired
+  declared_tier: prohibited
+  provider: internal
+  model: emotion-cnn-v1
+  data_classes: [sensitive_personal]
+  affected_people: [employees]
+  use_domains: [workplace_emotion_recognition]
+  human_oversight: sample_review
+  controls: [CTL-REG]
+  last_review: 2026-10-01
+
+- id: AI-006
+  name: Sales meeting notes
+  business_owner: Head of Sales
+  technical_owner: Sales Operations team
+  intended_use: Transcribe and summarize internal sales meetings; the meeting owner reviews notes before sharing.
+  prohibited_uses: [recording customers without notice]
+  status: pilot
+  declared_tier: medium
+  provider: AI Notes Co
+  model: notes-pro
+  data_classes: [personal, confidential]
+  affected_people: [employees, customers]
+  use_domains: [productivity]
+  human_oversight: approve_each
+  controls: [CTL-REG, CTL-AUP, CTL-TM, CTL-EVAL, CTL-LOG, CTL-PRIV, CTL-VEND]
+  last_review: 2026-11-01
+  egress_domains: [transcribe.ai-notes.example]

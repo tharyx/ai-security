@@ -1,0 +1,43 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:9b1f0a52-7c1e-4a8e-9f55-0d6c2b8f4e11",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-17T09:30:00Z",
+    "component": {"type": "application", "name": "support-llm-service", "version": "3.1.0"}
+  },
+  "components": [
+    {
+      "type": "machine-learning-model",
+      "bom-ref": "model:support-llm-ft@3.1.0",
+      "name": "support-llm-ft",
+      "version": "3.1.0",
+      "hashes": [],
+      "licenses": [{"license": {"name": "unknown"}}],
+      "externalReferences": [
+        {"type": "distribution", "url": "https://hub.example/random-user-4821/support-llm-finetune/pytorch_model.bin"}
+      ],
+      "properties": [
+        {"name": "acme:model:format", "value": "pickle"},
+        {"name": "acme:model:signature-verified", "value": "false"},
+        {"name": "acme:model:scan-verdict", "value": "UNSAFE"}
+      ],
+      "modelCard": {
+        "modelParameters": {
+          "task": "text-generation",
+          "datasets": [{"ref": "data:scraped-forum-posts"}]
+        }
+      }
+    },
+    {
+      "type": "data",
+      "bom-ref": "data:scraped-forum-posts",
+      "name": "scraped-forum-posts",
+      "licenses": [],
+      "properties": [
+        {"name": "acme:data:classification", "value": "unknown"}
+      ]
+    }
+  ]
+}

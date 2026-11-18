@@ -1,0 +1,144 @@
+# Secure reference deployment of the "ops assistant" AI platform on AWS.
+# Synthetic example for the lab. Service names: verify against current AWS docs.
+name: ops-assistant-aws
+cloud: aws
+environment: prod
+data_classification: confidential
+multi_tenant: true
+
+components:
+  - id: web
+    type: frontend
+    zone: public
+    service: CloudFront + AWS WAF + static site
+    public_network_access: true      # the front door is meant to be public
+
+  - id: ai-gateway
+    type: ai_gateway
+    zone: app
+    service: API Gateway (JWT authorizer) + gateway service on ECS Fargate
+    identity: role-gateway
+    user_auth: oidc                   # IAM Identity Center / corporate IdP
+    rate_limits: true
+    token_budget: true
+    guardrails:
+      input: [prompt_attack, pii]     # Bedrock Guardrails via ApplyGuardrail
+      output: [pii, secrets, url_allowlist]
+    egress: deny_by_default
+
+  - id: model
+    type: model_endpoint
+    zone: model
+    service: Amazon Bedrock (bedrock-runtime via interface VPC endpoint)
+    public_network_access: false      # VPC endpoint policy + SCP deny outside VPC endpoint
+    private_endpoint: true
+    data_use:
+      training_opt_out: true
+      retention_reviewed: true
+
+  - id: rag
+    type: rag_service
+    zone: app
+    service: retrieval service on ECS Fargate
+    identity: role-rag
+    retrieval_authz: server_side      # metadata filter built from the verified JWT
+
+  - id: vectors
+    type: vector_store
+    zone: data
+    service: OpenSearch Serverless (VPC endpoint, network policy private)
+    public_network_access: false
+    private_endpoint: true
+    encryption_key: kms-ai-data
+    tenant_isolation: per_tenant_index
+
+  - id: docs
+    type: object_store
+    zone: data
+    service: S3 (Block Public Access, bucket policy aws:SourceVpce)
+    public_network_access: false
+    private_endpoint: true
+    encryption_key: kms-ai-data
+
+  - id: agent
+    type: agent_runtime
+    zone: app
+    service: orchestrator on ECS Fargate
+    identity: role-agent
+    approval_required_for: [write]
+    limits: {max_steps: 8, max_cost_usd: 2.0}
+    kill_switch: true                 # AppConfig flag + role session revocation
+    egress: deny_by_default
+
+  - id: mcp-gateway
+    type: mcp_gateway
+    zone: tools
+    service: tool broker on ECS Fargate (registry in DynamoDB)
+    identity: role-mcp
+    tool_registry: allowlist
+    egress: deny_by_default
+
+  - id: tool-metrics
+    type: tool
+    zone: tools
+    service: read-only CloudWatch metrics tool
+    identity: role-tool-metrics
+    side_effects: read
+    egress: deny_by_default
+
+  - id: tool-change
+    type: tool
+    zone: tools
+    service: change-request tool (creates a ticket, never changes infra)
+    identity: role-tool-change
+    side_effects: write
+    egress: deny_by_default
+
+  - id: audit-logs
+    type: log_store
+    zone: security
+    service: S3 with Object Lock (log archive account)
+    public_network_access: false
+    encryption_key: kms-logs
+    immutable: true
+    retention_days: 400
+    exports_to_siem: true
+
+identities:
+  - {id: role-gateway, credential: short_lived, permissions: ["bedrock:ApplyGuardrail", "execute-api:Invoke"]}
+  - {id: role-rag, credential: short_lived, permissions: ["aoss:APIAccessAll on collection/ops-kb", "bedrock:InvokeModel on titan-embed"]}
+  - {id: role-agent, credential: short_lived, permissions: ["bedrock:InvokeModel on approved-model-arn"]}
+  - {id: role-mcp, credential: short_lived, permissions: ["dynamodb:GetItem on tool-registry"]}
+  - {id: role-tool-metrics, credential: short_lived, permissions: ["cloudwatch:GetMetricData"]}
+  - {id: role-tool-change, credential: short_lived, permissions: ["ticketing:CreateChangeRequest"]}
+  - {id: role-ci-deploy, kind: ci, credential: short_lived, permissions: ["cloudformation:CreateChangeSet on ops-assistant-*"]}
+
+keys:
+  - {id: kms-ai-data, managed_by: customer, rotation: true}
+  - {id: kms-logs, managed_by: customer, rotation: true}
+
+secrets:
+  store: aws-secrets-manager
+  inline: []
+
+logging:
+  control_plane_audit: true           # organization CloudTrail
+  model_invocation_logs: true         # Bedrock invocation logging -> S3 (redacted copy)
+  prompt_redaction: true
+  sink: audit-logs
+
+flows:
+  - {from: internet, to: web}
+  - {from: web, to: ai-gateway}
+  - {from: ai-gateway, to: rag}
+  - {from: rag, to: vectors}
+  - {from: rag, to: docs}
+  - {from: ai-gateway, to: agent}
+  - {from: agent, to: model}
+  - {from: agent, to: mcp-gateway}
+  - {from: mcp-gateway, to: tool-metrics}
+  - {from: mcp-gateway, to: tool-change}
+  - {from: ai-gateway, to: audit-logs}
+  - {from: mcp-gateway, to: audit-logs}
+
+exceptions: []

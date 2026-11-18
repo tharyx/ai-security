@@ -1,0 +1,14 @@
+# Keep the build context small and secret-free. Allowlist style: ignore everything,
+# then add back only what the Dockerfile copies.
+*
+!requirements.lock
+!src/
+!model/support-llm-v3.safetensors
+
+# Belt and braces, in case someone edits the allowlist above.
+**/.env
+**/*.pem
+**/*.key
+**/.git
+**/__pycache__
+**/*.ipynb

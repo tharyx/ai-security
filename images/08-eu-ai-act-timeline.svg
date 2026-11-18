@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>EU AI Act phased application timeline as adopted, with a warning to check for later changes</title>
+  <rect width="1200" height="480" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">EU AI Act: phased dates (as adopted)</text>
+  <text x="40" y="76" font-size="16" fill="#475569">Regulation (EU) 2024/1689. Obligations switch on in steps, not all at once.</text>
+
+  <line x1="80" y1="200" x2="1120" y2="200" stroke="#334155" stroke-width="4"/>
+  <g>
+    <circle cx="120" cy="200" r="11" fill="#64748b"/>
+    <circle cx="340" cy="200" r="11" fill="#dc2626"/>
+    <circle cx="560" cy="200" r="11" fill="#2563eb"/>
+    <circle cx="790" cy="200" r="11" fill="#d97706"/>
+    <circle cx="1020" cy="200" r="11" fill="#16a34a"/>
+  </g>
+  <g font-size="15" font-weight="700" text-anchor="middle">
+    <text x="120" y="170" fill="#0f172a">1 Aug 2024</text>
+    <text x="340" y="170" fill="#991b1b">2 Feb 2025</text>
+    <text x="560" y="170" fill="#1e3a8a">2 Aug 2025</text>
+    <text x="790" y="170" fill="#92400e">2 Aug 2026</text>
+    <text x="1020" y="170" fill="#166534">2 Aug 2027</text>
+  </g>
+  <g font-size="13" text-anchor="middle">
+    <text x="120" y="236" fill="#334155">entry into force</text>
+    <text x="340" y="236" fill="#991b1b">prohibited practices</text>
+    <text x="340" y="256" fill="#991b1b">(Art 5) and</text>
+    <text x="340" y="276" fill="#991b1b">AI literacy (Art 4)</text>
+    <text x="560" y="236" fill="#1e3a8a">GPAI model duties,</text>
+    <text x="560" y="256" fill="#1e3a8a">governance bodies,</text>
+    <text x="560" y="276" fill="#1e3a8a">penalties</text>
+    <text x="790" y="236" fill="#92400e">most of the rest: Annex III</text>
+    <text x="790" y="256" fill="#92400e">high-risk duties, Art 50</text>
+    <text x="790" y="276" fill="#92400e">transparency, enforcement</text>
+    <text x="1020" y="236" fill="#166534">Annex I product high-risk</text>
+    <text x="1020" y="256" fill="#166534">(Art 6(1)); older GPAI models</text>
+    <text x="1020" y="276" fill="#166534">must comply by now</text>
+  </g>
+
+  <rect x="40" y="320" width="1120" height="120" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="60" y="350" font-size="16" font-weight="700" fill="#991b1b">Check the current status before you plan</text>
+  <text x="60" y="376" font-size="14" fill="#991b1b">In November 2025 the European Commission proposed a "Digital Omnibus" package that would change some AI Act</text>
+  <text x="60" y="398" font-size="14" fill="#991b1b">rules and delay some high-risk dates. Proposals can change before adoption. Check the official EU AI Act pages,</text>
+  <text x="60" y="420" font-size="14" fill="#991b1b">the AI Office and counsel for the dates that apply to you today. Record the source and the date you checked.</text>
+</svg>

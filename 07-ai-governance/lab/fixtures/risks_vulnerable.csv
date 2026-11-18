@@ -1,0 +1,6 @@
+risk_id,system_id,domain,threat,asset,impact,likelihood,controls,owner,treatment,due_date,status,accepted_by,acceptance_expiry
+R-001,AI-001,LLM,Indirect prompt injection sends customer data out,Customer data,5,4,soft:Never-reveal instruction in system prompt:implemented; hard:Tool broker authorization:planned,AI Engineering,Build tool broker,2026-08-31,open,,
+R-002,AI-001,Privacy,Customer PII retained in vendor logs,Customer PII,4,3,process:Vendor DPA signed:tested,,,,open,,
+R-003,AI-002,Fairness,Biased ranking rejects qualified applicants,Applicant rights,5,4,soft:Prompt asks the model to be fair:tested,HR Tech team,,,accepted,HR Manager,2026-12-31
+R-004,AI-003,Supply chain,Source code retained by vendor for training,Source code,4,3,process:Vendor terms reviewed:implemented,Developer Productivity team,,,accepted,CISO,2026-03-31
+R-005,AI-004,LLM,Chatbot states a wrong refund policy,Customer trust and money,3,4,hard:Answers grounded in policy KB with citations:planned,Web Platform team,Ground answers,2026-06-30,closed,,

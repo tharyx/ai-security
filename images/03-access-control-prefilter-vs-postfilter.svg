@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Pre-filter vs post-filter</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">Pre-filter vs post-filter</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Where you apply the access filter changes both security and answer quality. Alice is in tenant red.</text>
+  <rect x="40" y="105" width="550" height="360" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <rect x="610" y="105" width="550" height="360" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="135" font-size="16" font-weight="700" fill="#991b1b" text-anchor="start">Post-filter: search everything, then remove</text>
+  <text x="630" y="135" font-size="16" font-weight="700" fill="#166534" text-anchor="start">Pre-filter: search only what Alice may read</text>
+  <text x="60" y="168" font-size="13" font-weight="700" fill="#334155" text-anchor="start">Whole index</text>
+  <rect x="60" y="178" width="150" height="30" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="135.0" y="196.9" font-size="13" fill="#991b1b" text-anchor="middle">blue handbook</text>
+  <rect x="60" y="212" width="150" height="30" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="135.0" y="230.9" font-size="13" fill="#991b1b" text-anchor="middle">blue runbook</text>
+  <rect x="60" y="246" width="150" height="30" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="135.0" y="264.9" font-size="13" fill="#166534" text-anchor="middle">red handbook</text>
+  <rect x="60" y="280" width="150" height="30" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="135.0" y="298.9" font-size="13" fill="#166534" text-anchor="middle">red deploy notes</text>
+  <rect x="60" y="314" width="150" height="30" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="135.0" y="332.9" font-size="13" fill="#166534" text-anchor="middle">red wiki page</text>
+  <path d="M214 250 L262 250" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <text x="270" y="168" font-size="13" font-weight="700" fill="#334155" text-anchor="start">top-k = 3</text>
+  <rect x="270" y="178" width="150" height="30" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="345.0" y="196.9" font-size="13" fill="#991b1b" text-anchor="middle">blue handbook</text>
+  <rect x="270" y="216" width="150" height="30" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="345.0" y="234.9" font-size="13" fill="#991b1b" text-anchor="middle">blue runbook</text>
+  <rect x="270" y="254" width="150" height="30" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="345.0" y="272.9" font-size="13" fill="#166534" text-anchor="middle">red handbook</text>
+  <path d="M424 250 L452 250" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <text x="458" y="168" font-size="13" font-weight="700" fill="#334155" text-anchor="start">after filter</text>
+  <rect x="458" y="178" width="118" height="30" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="517.0" y="196.8" font-size="12.5" fill="#166534" text-anchor="middle">red handbook</text>
+  <text x="60" y="376" font-size="13.5" fill="#991b1b" text-anchor="start">- 1 useful result instead of 3 (recall loss)</text>
+  <text x="60" y="398" font-size="13.5" fill="#991b1b" text-anchor="start">- one forgotten filter = a cross-tenant leak</text>
+  <text x="60" y="420" font-size="13.5" fill="#991b1b" text-anchor="start">- result counts and timing can reveal hidden docs</text>
+  <text x="60" y="442" font-size="13.5" fill="#991b1b" text-anchor="start">- OK only as a SECOND check (re-check)</text>
+  <rect x="630" y="178" width="170" height="54" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="715.0" y="200.3" font-size="14" font-weight="700" fill="#166534" text-anchor="middle">Filter first</text>
+  <text x="715.0" y="218.6" font-size="11.5" fill="#166534" text-anchor="middle">tenant=red AND groups</text>
+  <path d="M804 205 L836 205" fill="none" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+  <text x="842" y="168" font-size="13" font-weight="700" fill="#334155" text-anchor="start">top-k = 3 (all allowed)</text>
+  <rect x="842" y="178" width="150" height="30" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="917.0" y="196.9" font-size="13" fill="#166534" text-anchor="middle">red handbook</text>
+  <rect x="842" y="216" width="150" height="30" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="917.0" y="234.9" font-size="13" fill="#166534" text-anchor="middle">red deploy notes</text>
+  <rect x="842" y="254" width="150" height="30" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="917.0" y="272.9" font-size="13" fill="#166534" text-anchor="middle">red wiki page</text>
+  <text x="1000" y="214" font-size="12.5" font-weight="700" fill="#166534" text-anchor="start">then re-check</text>
+  <text x="1000" y="232" font-size="12.5" font-weight="700" fill="#166534" text-anchor="start">each chunk</text>
+  <text x="630" y="376" font-size="13.5" fill="#166534" text-anchor="start">+ every slot holds a document Alice may read</text>
+  <text x="630" y="398" font-size="13.5" fill="#166534" text-anchor="start">+ unauthorized text never leaves the store</text>
+  <text x="630" y="420" font-size="13.5" fill="#166534" text-anchor="start">+ still re-check per chunk (stale ACLs)</text>
+  <text x="630" y="442" font-size="13.5" fill="#92400e" text-anchor="start">- needs ACL metadata on every chunk, kept in sync</text>
+  <rect x="40" y="485" width="1120" height="52" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="60" y="517" font-size="14" font-weight="700" fill="#1e3a8a" text-anchor="start">Strongest isolation: a separate index (or namespace) per tenant, plus pre-filter by groups, plus per-chunk re-check.</text>
+</svg>

