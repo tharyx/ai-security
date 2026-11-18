@@ -1,0 +1,6 @@
+Risk ID,Domain,Threat,Asset,Impact,Likelihood,Inherent rating,Control,Residual rating,Owner,Due date,Status,Evidence
+AI-001,RAG,Cross-tenant retrieval,Confidential documents,Data disclosure,Medium,High,Server-side tenant ACL and isolation tests,Low,Platform Security,,Open,
+AI-002,LLM,Indirect prompt injection,Tool authority,Unauthorized action,High,Critical,Tool broker authorization and approval,Medium,AI Engineering,,Open,
+AI-003,MCP,Token exposure,Service credentials,Credential compromise,Medium,High,Short-lived scoped tokens and redaction,Low,Identity Team,,Open,
+AI-004,Agent,Excessive agency,Cloud resources,Service disruption,Medium,High,Read-only identity and human approval,Low,Cloud Security,,Open,
+AI-005,Supply chain,Compromised model/dependency,Runtime integrity,Code/data compromise,Medium,High,Provenance SBOM scanning and pinning,Low,Platform Engineering,,Open,
