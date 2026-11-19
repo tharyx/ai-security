@@ -1,0 +1,21 @@
+{
+  "_comment": "A DFD with the classic drawing mistakes, for the validator.",
+  "name": "Broken",
+  "zones": ["internet", "data"],
+  "elements": [
+    {"id": "user", "type": "external", "zone": "internet", "label": "User"},
+    {"id": "partner", "type": "external", "zone": "internet", "label": "Partner"},
+    {"id": "report_job", "type": "process", "zone": "data", "label": "Report job"},
+    {"id": "sink", "type": "process", "zone": "data", "label": "Sink"},
+    {"id": "db", "type": "datastore", "zone": "data", "label": "DB"},
+    {"id": "replica", "type": "datastore", "zone": "data", "label": "Replica"}
+  ],
+  "flows": [
+    {"id": "B1", "src": "user", "dst": "db", "label": "direct SQL"},
+    {"id": "B2", "src": "db", "dst": "replica", "label": "replication"},
+    {"id": "B3", "src": "report_job", "dst": "user", "label": "report"},
+    {"id": "B4", "src": "user", "dst": "partner", "label": "email"},
+    {"id": "B5", "src": "user", "dst": "sink", "label": "upload"},
+    {"id": "B6", "src": "user", "dst": "ghost", "label": "nowhere"}
+  ]
+}

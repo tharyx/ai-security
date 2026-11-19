@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>OAuth authorization code flow with PKCE</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="660" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">Authorization code + PKCE (the default flow in OAuth 2.1 and RFC 9700)</text>
+<text x="40" y="74" font-size="15" fill="#475569">Only the challenge travels through the browser. The verifier goes in the back channel, so a stolen code is useless.</text>
+<rect x="70" y="100" width="180" height="46" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="160" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">User + browser</text>
+<rect x="370" y="100" width="180" height="46" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="460" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Client app</text>
+<rect x="670" y="100" width="220" height="46" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="780" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#065f46">Authorization server</text>
+<rect x="990" y="100" width="170" height="46" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="1075" y="129" text-anchor="middle" font-size="15" font-weight="700" fill="#9a3412">API</text>
+<line x1="160" y1="146" x2="160" y2="620" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
+<line x1="460" y1="146" x2="460" y2="620" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
+<line x1="780" y1="146" x2="780" y2="620" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
+<line x1="1075" y1="146" x2="1075" y2="620" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
+<rect x="380" y="166" width="160" height="40" rx="6" fill="#eff6ff" stroke="#2563eb"/>
+<text x="460" y="184" text-anchor="middle" font-size="12" fill="#1e3a8a">1 make code_verifier</text>
+<text x="460" y="199" text-anchor="middle" font-size="12" fill="#1e3a8a">challenge = SHA256(verifier)</text>
+<line x1="460" y1="236" x2="170" y2="236" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="315" y="228" text-anchor="middle" font-size="12" fill="#334155">2 redirect to /authorize</text>
+<line x1="160" y1="270" x2="770" y2="270" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="465" y="262" text-anchor="middle" font-size="12" fill="#334155">3 /authorize?response_type=code, client_id, redirect_uri, scope, state, code_challenge (S256)</text>
+<rect x="690" y="286" width="180" height="40" rx="6" fill="#ecfdf5" stroke="#059669"/>
+<text x="780" y="304" text-anchor="middle" font-size="12" fill="#065f46">4 login + MFA + consent</text>
+<text x="780" y="319" text-anchor="middle" font-size="12" fill="#065f46">exact redirect_uri match</text>
+<line x1="780" y1="352" x2="170" y2="352" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="475" y="344" text-anchor="middle" font-size="12" fill="#334155">5 302 to redirect_uri?code=...&amp;state=...</text>
+<line x1="160" y1="384" x2="450" y2="384" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="305" y="376" text-anchor="middle" font-size="12" fill="#334155">6 code + state (client checks state)</text>
+<line x1="460" y1="424" x2="770" y2="424" stroke="#059669" stroke-width="3" marker-end="url(#a)"/>
+<text x="615" y="416" text-anchor="middle" font-size="12" fill="#065f46">7 POST /token: code + code_verifier (back channel)</text>
+<rect x="690" y="438" width="180" height="40" rx="6" fill="#ecfdf5" stroke="#059669"/>
+<text x="780" y="456" text-anchor="middle" font-size="12" fill="#065f46">8 code unused and bound?</text>
+<text x="780" y="471" text-anchor="middle" font-size="12" fill="#065f46">SHA256(verifier) = challenge?</text>
+<line x1="780" y1="502" x2="470" y2="502" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="625" y="494" text-anchor="middle" font-size="12" fill="#334155">9 access + refresh (+ ID) token</text>
+<line x1="460" y1="546" x2="1065" y2="546" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="765" y="538" text-anchor="middle" font-size="12" fill="#334155">10 Authorization: Bearer access_token (never in the URL)</text>
+<rect x="985" y="560" width="180" height="40" rx="6" fill="#fff7ed" stroke="#ea580c"/>
+<text x="1075" y="578" text-anchor="middle" font-size="12" fill="#9a3412">11 check sig, iss, aud, exp,</text>
+<text x="1075" y="593" text-anchor="middle" font-size="12" fill="#9a3412">scope + object ownership</text>
+<text x="40" y="644" font-size="13" fill="#b91c1c">Removed in OAuth 2.1: implicit grant (token in URL fragment) and password grant. ID token audience is the client, never the API.</text>
+</svg>

@@ -1,0 +1,5 @@
+{
+  "name": "Partner stock API (machine-to-machine, JWT access tokens, OAuth client)",
+  "level": 1,
+  "features": ["api", "tokens", "oauth"]
+}

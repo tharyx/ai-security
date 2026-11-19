@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Attack tree for account takeover</title>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="44" font-size="25" font-weight="700" fill="#0f172a">Attack tree: "Take over a customer account" (lab fixture)</text>
+<text x="40" y="70" font-size="15" fill="#475569">OR = any child is enough (cost = cheapest child). AND = all children needed (cost = sum). Red = cheapest path.</text>
+
+<rect x="420" y="95" width="360" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+<text x="600" y="120" text-anchor="middle" font-size="16" font-weight="700" fill="#7f1d1d">GOAL (OR): take over an account</text>
+<text x="600" y="141" text-anchor="middle" font-size="13" fill="#1e293b">cheapest cost 50</text>
+
+<line x1="600" y1="151" x2="140" y2="210" stroke="#64748b" stroke-width="2"/>
+<line x1="600" y1="151" x2="440" y2="210" stroke="#dc2626" stroke-width="3"/>
+<line x1="600" y1="151" x2="760" y2="210" stroke="#64748b" stroke-width="2"/>
+<line x1="600" y1="151" x2="1060" y2="210" stroke="#64748b" stroke-width="2"/>
+
+<rect x="40" y="210" width="200" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140" y="236" text-anchor="middle" font-size="14" fill="#0f172a">Phish the password</text>
+<text x="140" y="256" text-anchor="middle" font-size="12" fill="#475569">cost 300, p 0.30 | passkeys</text>
+
+<rect x="320" y="210" width="240" height="60" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+<text x="440" y="236" text-anchor="middle" font-size="14" font-weight="700" fill="#7f1d1d">Credential stuffing (AND)</text>
+<text x="440" y="256" text-anchor="middle" font-size="12" fill="#1e293b">cost 50, p 0.38</text>
+
+<rect x="650" y="210" width="220" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="760" y="236" text-anchor="middle" font-size="14" fill="#0f172a">Abuse password reset (OR)</text>
+<text x="760" y="256" text-anchor="middle" font-size="12" fill="#475569">cost 200, p 0.32</text>
+
+<rect x="950" y="210" width="220" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1060" y="236" text-anchor="middle" font-size="14" fill="#0f172a">Steal session cookie (AND)</text>
+<text x="1060" y="256" text-anchor="middle" font-size="12" fill="#475569">cost 2000, p 0.05</text>
+
+<line x1="440" y1="270" x2="230" y2="340" stroke="#dc2626" stroke-width="3"/>
+<line x1="440" y1="270" x2="440" y2="340" stroke="#dc2626" stroke-width="3"/>
+<line x1="440" y1="270" x2="650" y2="340" stroke="#dc2626" stroke-width="3"/>
+<rect x="130" y="340" width="200" height="60" rx="10" fill="#fff7ed" stroke="#dc2626" stroke-width="2"/>
+<text x="230" y="366" text-anchor="middle" font-size="13" fill="#0f172a">Buy leaked list</text>
+<text x="230" y="386" text-anchor="middle" font-size="12" fill="#475569">cost 50, p 0.90</text>
+<rect x="340" y="340" width="200" height="60" rx="10" fill="#fff7ed" stroke="#dc2626" stroke-width="2"/>
+<text x="440" y="366" text-anchor="middle" font-size="13" fill="#0f172a">No login rate limit</text>
+<text x="440" y="386" text-anchor="middle" font-size="12" fill="#475569">cost 0, p 0.60 | rate_limit</text>
+<rect x="550" y="340" width="200" height="60" rx="10" fill="#fff7ed" stroke="#dc2626" stroke-width="2"/>
+<text x="650" y="366" text-anchor="middle" font-size="13" fill="#0f172a">Account has no MFA</text>
+<text x="650" y="386" text-anchor="middle" font-size="12" fill="#475569">cost 0, p 0.70 | passkeys</text>
+
+<line x1="760" y1="270" x2="840" y2="430" stroke="#64748b" stroke-width="2"/>
+<line x1="760" y1="270" x2="1000" y2="430" stroke="#64748b" stroke-width="2"/>
+<rect x="760" y="430" width="160" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="840" y="456" text-anchor="middle" font-size="13" fill="#0f172a">Predict token</text>
+<text x="840" y="476" text-anchor="middle" font-size="12" fill="#475569">cost 500, p 0.20</text>
+<rect x="930" y="430" width="160" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1010" y="456" text-anchor="middle" font-size="13" fill="#0f172a">Host header link</text>
+<text x="1010" y="476" text-anchor="middle" font-size="12" fill="#475569">cost 200, p 0.15</text>
+
+<rect x="40" y="505" width="680" height="40" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="380" y="531" text-anchor="middle" font-size="14" fill="#14532d">Analysis: passkeys block two branches; attacker's cheapest cost rises from 50 to 200.</text>
+</svg>

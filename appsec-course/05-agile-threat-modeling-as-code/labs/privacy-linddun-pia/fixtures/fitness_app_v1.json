@@ -1,0 +1,26 @@
+{
+  "name": "FitTrack v1 (first design)",
+  "description": "Mobile fitness app: workouts, heart rate, weight. Free tier funded by ads.",
+  "data": [
+    {"name": "email", "category": "personal", "purpose": "login", "retention_days": 0},
+    {"name": "device_id", "category": "identifier", "purpose": "analytics", "retention_days": 0},
+    {"name": "heart_rate", "category": "sensitive", "purpose": "workout stats", "retention_days": 0},
+    {"name": "date_of_birth", "category": "personal", "purpose": "", "retention_days": 0},
+    {"name": "workout_summary", "category": "none", "purpose": "workout stats", "retention_days": 365}
+  ],
+  "flows": [
+    {"name": "app to API", "from": "mobile app", "to": "FitTrack API", "data": ["email", "heart_rate", "date_of_birth"], "encrypted": true},
+    {"name": "app to ad SDK", "from": "mobile app", "to": "AdNetwork", "data": ["device_id", "workout_summary"], "third_party": true, "encrypted": true, "purpose": "analytics"},
+    {"name": "app to analytics", "from": "mobile app", "to": "Analytics SaaS", "data": ["device_id", "email"], "third_party": true, "encrypted": true, "purpose": "analytics", "cross_border": true},
+    {"name": "API to logs", "from": "FitTrack API", "to": "log store", "data": ["email", "heart_rate"], "encrypted": false, "purpose": "logging"}
+  ],
+  "features": {
+    "reveals_account_existence": true,
+    "privacy_notice": true,
+    "consent_records": false,
+    "access_and_deletion_requests": false,
+    "record_of_processing": false,
+    "dpia_done": false
+  },
+  "processing": {"sensitive_data": true, "large_scale": true, "evaluation_or_scoring": true, "systematic_monitoring": true}
+}

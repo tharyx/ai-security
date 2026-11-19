@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Security in the Scrum events (2020 Scrum Guide)</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="500" fill="#ffffff"/>
+<text x="40" y="46" font-size="24" font-weight="700" fill="#0f172a">Security in the Scrum events (2020 Scrum Guide)</text>
+<text x="40" y="74" font-size="15" fill="#475569">The Sprint contains four events. Refinement is an ongoing activity. Security is part of the Definition of Done.</text>
+<rect x="30" y="95" width="1140" height="300" rx="12" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="42" y="115" text-anchor="start" font-size="13" font-weight="700" fill="#dc2626">Sprint (one month or less): Sprint Goal + Definition of Done include security</text>
+<rect x="55" y="150" width="195" height="150" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="152.5" y="200.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Refinement</text>
+<text x="152.5" y="219.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">(activity)</text>
+<text x="152.5" y="238.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">security stories,</text>
+<text x="152.5" y="257.83333333333337" text-anchor="middle" font-size="13" fill="#1e293b">abuse cases</text>
+<rect x="280" y="150" width="195" height="150" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="377.5" y="200.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">Sprint Planning</text>
+<text x="377.5" y="219.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">delta threat model,</text>
+<text x="377.5" y="238.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">SEC: criteria,</text>
+<text x="377.5" y="257.83333333333337" text-anchor="middle" font-size="13" fill="#1e293b">Definition of Ready</text>
+<line x1="250" y1="225" x2="276" y2="225" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="505" y="150" width="195" height="150" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="602.5" y="200.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">Daily Scrum</text>
+<text x="602.5" y="219.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">raise security</text>
+<text x="602.5" y="238.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">blockers early</text>
+<text x="602.5" y="257.83333333333337" text-anchor="middle" font-size="13" fill="#1e293b">(15 minutes)</text>
+<line x1="475" y1="225" x2="501" y2="225" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="730" y="150" width="195" height="150" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="827.5" y="200.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#6b21a8">Sprint Review</text>
+<text x="827.5" y="219.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">demo security</text>
+<text x="827.5" y="238.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">criteria and test</text>
+<text x="827.5" y="257.83333333333337" text-anchor="middle" font-size="13" fill="#1e293b">results</text>
+<line x1="700" y1="225" x2="726" y2="225" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="955" y="150" width="195" height="150" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1052.5" y="200.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Retrospective</text>
+<text x="1052.5" y="219.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">findings and escapes</text>
+<text x="1052.5" y="238.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">become process</text>
+<text x="1052.5" y="257.83333333333337" text-anchor="middle" font-size="13" fill="#1e293b">changes</text>
+<line x1="925" y1="225" x2="951" y2="225" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="600" y="350" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Increment: security tests pass, threat model delta merged, no new High finding without owner and date</text>
+<line x1="1120" y1="300" x2="1120" y2="420" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="1120" y1="420" x2="152" y2="420" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="152" y1="420" x2="152" y2="304" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="640" y="445" text-anchor="middle" font-size="13" fill="#475569">lessons learned feed the next refinement</text>
+<text x="40" y="485" text-anchor="start" font-size="13" fill="#475569">Timeboxes for a one-month Sprint: Planning 8 h, Daily Scrum 15 min, Review 4 h, Retrospective 3 h (shorter for shorter Sprints).</text>
+</svg>

@@ -1,0 +1,36 @@
+{
+  "stories": [
+    {"id": "US-1", "text": "As a customer, I want to reset my password by email so that I can get back into my account",
+     "tags": ["auth"],
+     "acceptance_criteria": ["A reset email is sent", "The link opens the reset form",
+                             "SEC: the token is single-use, random (128 bits or more) and expires in 15 minutes",
+                             "SEC: the response is the same whether or not the email exists"],
+     "status": "done", "security_tests_passed": true},
+    {"id": "US-2", "text": "As a customer, I want to download my order history as CSV so that I can do my taxes",
+     "tags": ["export", "pii"],
+     "acceptance_criteria": ["CSV has one row per order",
+                             "SEC: only the logged-in customer's orders are exported (owner check)",
+                             "SEC: cells starting with = + - @ are escaped (CSV injection)"],
+     "status": "todo"},
+    {"id": "US-3", "text": "As a customer, I want a dark theme so that the site is easier on my eyes",
+     "tags": ["ui"], "acceptance_criteria": ["Theme toggle in settings"], "status": "todo"},
+    {"id": "SEC-1", "text": "As a security champion, I want reset requests rate limited per IP and per account so that tokens cannot be brute forced",
+     "tags": ["auth"], "acceptance_criteria": ["SEC: the 6th request in 15 minutes gets HTTP 429"], "status": "todo"}
+  ],
+  "abuse_cases": [
+    {"id": "AB-1", "text": "As an attacker, I want to guess reset tokens so that I can take over accounts",
+     "threatens": "US-1", "stride": "Spoofing", "mitigated_by": "SEC-1",
+     "given": "a reset token was issued for \"alice\"", "when": "I try 1000 random tokens",
+     "then": "every attempt fails and further attempts get status 429"},
+    {"id": "AB-2", "text": "As an attacker, I want to change the customer id in the export URL so that I can download other customers' orders",
+     "threatens": "US-2", "stride": "Information Disclosure", "mitigated_by": "US-2",
+     "given": "I am logged in as \"mallory\"", "when": "I request the CSV export for customer \"alice\"",
+     "then": "the response status is 403"},
+    {"id": "AB-3", "text": "As an attacker, I want to flood the reset form so that the mail server blocks the shop",
+     "threatens": "SEC-1", "stride": "Denial of Service", "mitigated_by": "SEC-1",
+     "given": "the reset form is public", "when": "I send 100 reset requests for \"bob\"",
+     "then": "only 5 emails are sent"}
+  ],
+  "sprint": {"planned": ["US-1", "US-2", "SEC-1"], "threat_modeled_at_planning": ["US-1", "US-2", "SEC-1"],
+             "retro_actions": ["Add the CSV injection check to the secure code review checklist"]}
+}

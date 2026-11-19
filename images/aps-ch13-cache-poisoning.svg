@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Web cache poisoning and web cache deception</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="44" font-size="26" font-weight="700" fill="#0f172a">Two ways a shared cache turns one response into many victims</text>
+<text x="40" y="70" font-size="15" fill="#475569">The origin, the cache key and Cache-Control must agree.</text>
+<text x="40" y="112" font-size="17" font-weight="700" fill="#991b1b">Cache poisoning (unkeyed input)</text>
+<rect x="40" y="130" width="200" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="140" y="158" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">1 Attacker</text>
+<text x="140" y="180" text-anchor="middle" font-size="12" fill="#7f1d1d">GET / X-Forwarded-Host: evil</text>
+<line x1="240" y1="165" x2="418" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="420" y="130" width="260" height="70" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="550" y="158" text-anchor="middle" font-size="14" font-weight="700" fill="#9a3412">Cache, key = path only</text>
+<text x="550" y="180" text-anchor="middle" font-size="12" fill="#7c2d12">stores the poisoned page for "/"</text>
+<line x1="680" y1="165" x2="858" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="860" y="130" width="300" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1010" y="158" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Origin</text>
+<text x="1010" y="180" text-anchor="middle" font-size="12" fill="#334155">script src=https://evil/static/app.js</text>
+<rect x="420" y="220" width="260" height="56" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="550" y="244" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">2 Every visitor GET /</text>
+<text x="550" y="264" text-anchor="middle" font-size="12" fill="#b91c1c">HIT: loads the attacker's script</text>
+<line x1="550" y1="200" x2="550" y2="218" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="40" y="300" font-size="13" fill="#065f46">Fix: ignore or strip forwarding headers at the edge, add varying inputs to the key (Vary), cache only what must be cached.</text>
+<line x1="40" y1="322" x2="1160" y2="322" stroke="#cbd5e1" stroke-width="2"/>
+<text x="40" y="358" font-size="17" font-weight="700" fill="#991b1b">Cache deception (static-looking path)</text>
+<rect x="40" y="376" width="200" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140" y="404" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">1 Victim (logged in)</text>
+<text x="140" y="426" text-anchor="middle" font-size="12" fill="#334155">clicks /account/x.css</text>
+<line x1="240" y1="411" x2="418" y2="411" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="420" y="376" width="260" height="70" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="550" y="404" text-anchor="middle" font-size="14" font-weight="700" fill="#9a3412">Cache: ".css is static"</text>
+<text x="550" y="426" text-anchor="middle" font-size="12" fill="#7c2d12">ignores Cache-Control: private</text>
+<line x1="680" y1="411" x2="858" y2="411" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="860" y="376" width="300" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1010" y="404" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Origin ignores "/x.css"</text>
+<text x="1010" y="426" text-anchor="middle" font-size="12" fill="#334155">returns the private account page</text>
+<rect x="420" y="466" width="260" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="550" y="490" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">2 Attacker GET /account/x.css</text>
+<text x="550" y="510" text-anchor="middle" font-size="12" fill="#7f1d1d">HIT: reads the victim's page</text>
+<line x1="550" y1="446" x2="550" y2="464" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="720" y="490" font-size="13" fill="#065f46">Fix: respect no-store/private, cache by explicit</text>
+<text x="720" y="510" font-size="13" fill="#065f46">rules, origin returns 404 for unknown paths.</text>
+</svg>

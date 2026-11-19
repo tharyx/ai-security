@@ -1,0 +1,17 @@
+{
+  "name": "orders-rest (hardened)",
+  "transport": {"https_only": true},
+  "routes": [
+    {"path": "/health", "public": true},
+    {"path": "/v2/orders", "auth": "bearer"},
+    {"path": "/v2/orders/{id}", "auth": "bearer", "object_authz": true},
+    {"path": "/v2/admin/export", "auth": "bearer+admin-scope"}
+  ],
+  "validation": {"request_schema": true, "response_allowlist": true, "enforce_content_type": true},
+  "rate_limit": {"enabled": true, "per": "api_key", "limit_per_minute": 120},
+  "pagination": {"max_page_size": 50},
+  "cors": {"allowed_origins": ["https://shop.example"], "reflect_origin": false},
+  "allowed_methods": ["GET", "POST", "PUT", "DELETE"],
+  "errors": {"verbose": false},
+  "versions": [{"name": "v1", "deprecated": true, "live": false}, {"name": "v2", "deprecated": false, "live": true}]
+}

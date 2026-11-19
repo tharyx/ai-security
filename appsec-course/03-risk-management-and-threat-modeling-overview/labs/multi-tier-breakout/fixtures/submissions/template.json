@@ -1,0 +1,6 @@
+{
+  "team": "Your team",
+  "threats": [
+    {"element": "customer", "stride": "S", "text": "Describe the threat", "mitigation": "Describe the control"}
+  ]
+}

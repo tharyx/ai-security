@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>vsftpd privilege separation</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="500" fill="#ffffff"/>
+<text x="40" y="46" font-size="24" font-weight="700" fill="#0f172a">vsftpd privilege separation</text>
+<text x="40" y="74" font-size="15" fill="#475569">Parse untrusted input with no privileges; keep the privileged part tiny and talk to it through a narrow interface.</text>
+<rect x="40" y="170" width="200" height="110" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="210.33333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">FTP client</text>
+<text x="140.0" y="229.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">(untrusted,</text>
+<text x="140.0" y="248.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">Internet)</text>
+<rect x="300" y="110" width="420" height="250" rx="12" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="312" y="130" text-anchor="start" font-size="13" font-weight="700" fill="#d97706">chroot jail (empty secure_chroot_dir)</text>
+<rect x="330" y="160" width="360" height="170" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="510.0" y="201.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Unprivileged process</text>
+<text x="510.0" y="220.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">runs as nopriv_user</text>
+<text x="510.0" y="239.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">parses ALL FTP commands</text>
+<text x="510.0" y="258.83333333333337" text-anchor="middle" font-size="13" fill="#1e293b">no root, few capabilities</text>
+<text x="510.0" y="277.83333333333337" text-anchor="middle" font-size="13" fill="#1e293b">(seccomp sandbox in newer</text>
+<text x="510.0" y="296.83333333333337" text-anchor="middle" font-size="13" fill="#1e293b">versions; verify)</text>
+<rect x="800" y="160" width="360" height="170" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="980.0" y="211.33333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Small privileged helper</text>
+<text x="980.0" y="230.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">root, but only a few</text>
+<text x="980.0" y="249.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">operations: bind port 20,</text>
+<text x="980.0" y="268.33333333333337" text-anchor="middle" font-size="13" fill="#1e293b">chown upload, login check</text>
+<text x="980.0" y="287.33333333333337" text-anchor="middle" font-size="13" fill="#1e293b">never parses raw client input</text>
+<line x1="240" y1="225" x2="326" y2="225" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="690" y1="215" x2="796" y2="215" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="796" y1="275" x2="694" y2="275" stroke="#334155" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+<text x="745" y="205" text-anchor="middle" font-size="12" fill="#334155">tiny request set</text>
+<text x="745" y="300" text-anchor="middle" font-size="12" fill="#334155">validated replies</text>
+<text x="40" y="410" text-anchor="start" font-size="13" fill="#334155">A bug in command parsing gives the attacker an unprivileged, jailed process: least privilege + separation of privilege + economy of mechanism.</text>
+<text x="40" y="440" text-anchor="start" font-size="13" fill="#475569">Configuration can still undo the design: anonymous upload on, TLS off, nopriv_user=root. The lab checks vsftpd.conf for that.</text>
+<text x="40" y="470" text-anchor="start" font-size="13" fill="#475569">Supply chain is separate: the vsftpd 2.3.4 download was backdoored in 2011. Verify signatures and checksums.</text>
+</svg>

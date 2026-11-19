@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Security Champions program workflow</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="620" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">Security Champions program: a loop, not a one-off training</text>
+<text x="40" y="76" font-size="15" fill="#475569">About one champion per delivery team, with protected time (often 10 to 20 percent). The AppSec team supports every step.</text>
+
+<rect x="60" y="130" width="250" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="185" y="165" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">1. Define and sponsor</text>
+<text x="185" y="192" text-anchor="middle" font-size="14" fill="#1e293b">goals, scope, manager buy-in,</text>
+<text x="185" y="212" text-anchor="middle" font-size="14" fill="#1e293b">time allocation, success metrics</text>
+
+<rect x="475" y="130" width="250" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="600" y="165" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">2. Nominate</text>
+<text x="600" y="192" text-anchor="middle" font-size="14" fill="#1e293b">volunteers with interest:</text>
+<text x="600" y="212" text-anchor="middle" font-size="14" fill="#1e293b">devs, QA, ops, product people</text>
+
+<rect x="890" y="130" width="250" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1015" y="165" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">3. Train</text>
+<text x="1015" y="192" text-anchor="middle" font-size="14" fill="#1e293b">AppSec basics, OWASP Top 10,</text>
+<text x="1015" y="212" text-anchor="middle" font-size="14" fill="#1e293b">code review, threat modeling</text>
+
+<rect x="890" y="360" width="250" height="130" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="1015" y="395" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">4. Embed in the team</text>
+<text x="1015" y="422" text-anchor="middle" font-size="14" fill="#1e293b">threat model new features,</text>
+<text x="1015" y="442" text-anchor="middle" font-size="14" fill="#1e293b">review risky pull requests,</text>
+<text x="1015" y="462" text-anchor="middle" font-size="14" fill="#1e293b">triage scanner findings</text>
+
+<rect x="475" y="360" width="250" height="130" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="600" y="395" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">5. Community</text>
+<text x="600" y="422" text-anchor="middle" font-size="14" fill="#1e293b">regular champion meetups,</text>
+<text x="600" y="442" text-anchor="middle" font-size="14" fill="#1e293b">shared chat channel, CTFs,</text>
+<text x="600" y="462" text-anchor="middle" font-size="14" fill="#1e293b">escalation path to AppSec</text>
+
+<rect x="60" y="360" width="250" height="130" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="185" y="395" text-anchor="middle" font-size="18" font-weight="700" fill="#9a3412">6. Measure and reward</text>
+<text x="185" y="422" text-anchor="middle" font-size="14" fill="#1e293b">fewer repeat bugs, faster fixes,</text>
+<text x="185" y="442" text-anchor="middle" font-size="14" fill="#1e293b">coverage of threat models;</text>
+<text x="185" y="462" text-anchor="middle" font-size="14" fill="#1e293b">recognition, career credit</text>
+
+<line x1="310" y1="185" x2="470" y2="185" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="725" y1="185" x2="885" y2="185" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="1015" y1="240" x2="1015" y2="355" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="890" y1="425" x2="730" y2="425" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="475" y1="425" x2="315" y2="425" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="185" y1="360" x2="185" y2="245" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="198" y="310" font-size="13" fill="#475569">adjust and repeat</text>
+
+<rect x="60" y="530" width="1080" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+<text x="600" y="557" text-anchor="middle" font-size="15" fill="#1e293b">Champions are the security voice INSIDE the team. They are not the team's only tester and not a replacement for the AppSec team.</text>
+<text x="600" y="578" text-anchor="middle" font-size="13" fill="#475569">Based on common program guidance such as the OWASP Security Champions Guide (verify the current principles at owasp.org).</text>
+</svg>

@@ -1,0 +1,54 @@
+{
+  "version": "2.2.0",
+  "summary": {"title": "Shop (fictional sample, Threat Dragon 2.x shape - verify against your version)",
+              "owner": "appsec-course", "description": "Three-tier shop for the offline lab", "id": 0},
+  "detail": {
+    "contributors": [{"name": "student"}],
+    "reviewer": "",
+    "diagrams": [{
+      "id": 0, "title": "Shop DFD", "diagramType": "STRIDE", "version": "2.2.0",
+      "cells": [
+        {"id": "c-actor", "shape": "actor", "position": {"x": 40, "y": 120}, "size": {"width": 120, "height": 60},
+         "data": {"type": "tm.Actor", "name": "Customer", "outOfScope": false, "reasonOutOfScope": "",
+                  "hasOpenThreats": false, "threats": [
+                    {"title": "Customer denies placing an order", "type": "Repudiation", "status": "Mitigated",
+                     "severity": "Low", "mitigation": "signed order confirmation email and audit log"}]}},
+        {"id": "c-web", "shape": "process", "position": {"x": 260, "y": 110}, "size": {"width": 100, "height": 100},
+         "data": {"type": "tm.Process", "name": "Web App", "outOfScope": false, "reasonOutOfScope": "",
+                  "hasOpenThreats": true, "threats": [
+                    {"title": "Session hijack via stolen cookie", "type": "Spoofing", "status": "Mitigated",
+                     "severity": "High", "mitigation": "HttpOnly, Secure, SameSite cookies; short sessions"},
+                    {"title": "Stored XSS in product reviews", "type": "Tampering", "status": "Open",
+                     "severity": "High", "mitigation": ""}]}},
+        {"id": "c-api", "shape": "process", "position": {"x": 480, "y": 110}, "size": {"width": 100, "height": 100},
+         "data": {"type": "tm.Process", "name": "Orders API", "outOfScope": false, "reasonOutOfScope": "",
+                  "hasOpenThreats": false, "threats": [
+                    {"title": "BOLA on /orders/{id}", "type": "Elevation of privilege", "status": "Open",
+                     "severity": "High", "mitigation": ""},
+                    {"title": "Rate limit missing", "type": "Gremlins", "status": "Open", "severity": "Medium",
+                     "mitigation": ""}]}},
+        {"id": "c-db", "shape": "store", "position": {"x": 700, "y": 130}, "size": {"width": 140, "height": 60},
+         "data": {"type": "tm.Store", "name": "Orders DB", "outOfScope": false, "reasonOutOfScope": "",
+                  "hasOpenThreats": false, "threats": []}},
+        {"id": "c-cdn", "shape": "process", "position": {"x": 260, "y": 300}, "size": {"width": 100, "height": 100},
+         "data": {"type": "tm.Process", "name": "CDN", "outOfScope": true, "reasonOutOfScope": "",
+                  "hasOpenThreats": false, "threats": []}},
+        {"id": "f1", "shape": "flow", "source": {"cell": "c-actor"}, "target": {"cell": "c-web"},
+         "data": {"type": "tm.Flow", "name": "HTTPS browse", "protocol": "HTTPS", "isEncrypted": true,
+                  "isPublicNetwork": true, "outOfScope": false, "hasOpenThreats": false, "threats": [
+                    {"title": "TLS downgrade", "type": "Information disclosure", "status": "Mitigated",
+                     "severity": "Medium", "mitigation": "TLS 1.2+ only, HSTS"}]}},
+        {"id": "f2", "shape": "flow", "source": {"cell": "c-web"}, "target": {"cell": "c-api"},
+         "data": {"type": "tm.Flow", "name": "Order calls", "protocol": "HTTP", "isEncrypted": false,
+                  "isPublicNetwork": true, "outOfScope": false, "hasOpenThreats": true, "threats": [
+                    {"title": "Order data sniffed between data centres", "type": "Information disclosure",
+                     "status": "Open", "severity": "High", "mitigation": ""}]}},
+        {"id": "f3", "shape": "flow", "source": {"cell": "c-api"}, "target": {"cell": "c-db-old"},
+         "data": {"type": "tm.Flow", "name": "SQL", "protocol": "TLS", "isEncrypted": true,
+                  "isPublicNetwork": false, "outOfScope": true, "reasonOutOfScope": "covered by DB team model",
+                  "hasOpenThreats": false, "threats": []}},
+        {"id": "b1", "shape": "trust-boundary-box", "data": {"type": "tm.Boundary", "name": "Internal network"}}
+      ]
+    }]
+  }
+}

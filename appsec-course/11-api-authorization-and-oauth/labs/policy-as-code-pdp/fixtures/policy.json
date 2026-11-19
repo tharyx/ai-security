@@ -1,0 +1,15 @@
+{
+  "default": "deny",
+  "rules": [
+    {"id": "owner-reads-own-trip", "effect": "allow", "actions": ["trip:read"],
+     "when": [["resource.owner_id", "==", "subject.id"]]},
+    {"id": "support-reads-trips-in-own-region", "effect": "allow", "actions": ["trip:read"],
+     "when": [["support", "in", "subject.roles"], ["resource.region", "==", "subject.region"]]},
+    {"id": "admin-all", "effect": "allow", "actions": ["*"],
+     "when": [["admin", "in", "subject.roles"]]},
+    {"id": "deny-suspended", "effect": "deny", "actions": ["*"],
+     "when": [["subject.suspended", "==", true]]},
+    {"id": "deny-outside-maintenance-window-for-delete", "effect": "deny", "actions": ["trip:delete"],
+     "when": [["env.maintenance", "!=", true]]}
+  ]
+}

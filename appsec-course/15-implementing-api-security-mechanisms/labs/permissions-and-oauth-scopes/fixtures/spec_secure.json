@@ -1,0 +1,22 @@
+{
+  "name": "orders API (reviewed)",
+  "scopes": {
+    "orders:read": "read your own orders",
+    "orders:write": "create and change your own orders",
+    "orders:delete": "cancel your own orders",
+    "refunds:admin": "issue refunds (staff only)"
+  },
+  "endpoints": [
+    {"method": "GET", "path": "/health", "public": true},
+    {"method": "GET", "path": "/orders", "scopes": ["orders:read"]},
+    {"method": "GET", "path": "/orders/{id}", "scopes": ["orders:read"], "owner_check": true},
+    {"method": "DELETE", "path": "/orders/{id}", "scopes": ["orders:delete"], "owner_check": true},
+    {"method": "POST", "path": "/orders", "scopes": ["orders:write"]},
+    {"method": "POST", "path": "/admin/refunds", "scopes": ["refunds:admin"], "admin": true}
+  ],
+  "roles": {
+    "customer": ["orders:read", "orders:write", "orders:delete"],
+    "support": ["orders:read"],
+    "finance": ["orders:read", "refunds:admin"]
+  }
+}

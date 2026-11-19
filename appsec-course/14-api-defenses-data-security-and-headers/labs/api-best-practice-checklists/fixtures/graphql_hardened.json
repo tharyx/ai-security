@@ -1,0 +1,10 @@
+{
+  "name": "shop-graphql (hardened)",
+  "environment": "production",
+  "introspection": false,
+  "field_suggestions": false,
+  "limits": {"max_depth": 7, "max_cost": 2000, "max_aliases": 10, "max_batch": 1, "timeout_ms": 5000},
+  "authz": {"per_resolver": true},
+  "persisted_queries": true,
+  "mask_errors": true
+}

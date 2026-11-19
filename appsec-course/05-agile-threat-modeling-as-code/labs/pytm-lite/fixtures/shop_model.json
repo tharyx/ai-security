@@ -1,0 +1,33 @@
+{
+  "name": "Shop",
+  "description": "Declarative version of model_shop.build(secure=False): the same system, written as data.",
+  "boundaries": [
+    {"name": "Internet", "trusted": false},
+    {"name": "DMZ"},
+    {"name": "Internal"}
+  ],
+  "data": [
+    {"name": "login credentials", "classification": "SECRET", "isCredentials": true},
+    {"name": "customer profile", "classification": "RESTRICTED", "isPII": true},
+    {"name": "order", "classification": "RESTRICTED"}
+  ],
+  "elements": [
+    {"name": "Customer", "kind": "Actor", "boundary": "Internet"},
+    {"name": "Web App", "kind": "Server", "boundary": "DMZ", "rendersHTML": true},
+    {"name": "Orders API", "kind": "Server", "boundary": "Internal", "authenticatesSource": true,
+     "sanitizesInput": true, "handlesResourceConsumption": true},
+    {"name": "Orders DB", "kind": "Datastore", "boundary": "Internal", "storesPII": true, "hasAccessControl": true}
+  ],
+  "dataflows": [
+    {"name": "Login and browse", "from": "Customer", "to": "Web App", "protocol": "HTTP", "isEncrypted": false,
+     "data": ["login credentials", "customer profile"]},
+    {"name": "Place order", "from": "Web App", "to": "Orders API", "protocol": "HTTPS", "isEncrypted": true,
+     "data": ["order", "customer profile"]},
+    {"name": "SQL query", "from": "Orders API", "to": "Orders DB", "protocol": "TLS", "isEncrypted": true,
+     "data": ["order", "customer profile"]},
+    {"name": "Result rows", "from": "Orders DB", "to": "Orders API", "protocol": "TLS", "isEncrypted": true,
+     "data": ["order"]},
+    {"name": "HTML page", "from": "Web App", "to": "Customer", "protocol": "HTTP", "isEncrypted": false,
+     "data": ["customer profile"]}
+  ]
+}

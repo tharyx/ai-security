@@ -1,0 +1,6 @@
+<!-- Fixture for the code review lab (parsed only). -->
+<h2>{{ user.name }}</h2>
+<div class="bio">{{ user.bio|safe }}</div>
+<script>
+  document.getElementById("greeting").innerHTML = "Hello " + location.hash.slice(1);
+</script>

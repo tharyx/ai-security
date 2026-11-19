@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Anatomy of an API call over HTTP</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="600" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">Anatomy of an API call over HTTP</text>
+<text x="40" y="74" font-size="15" fill="#475569">One request line, headers, a blank line, an optional body. The response mirrors it with a status line.</text>
+<text x="40" y="118" text-anchor="start" font-size="16" font-weight="700" fill="#0f172a">REQUEST (client to API)</text>
+<rect x="40" y="132" width="540" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="310.0" y="151.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a" font-family="Consolas, Menlo, monospace">POST /api/v1/orders HTTP/1.1</text>
+<text x="310.0" y="171.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">method   target (path + query)   version</text>
+<rect x="40" y="192" width="540" height="120" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="310.0" y="226.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Headers (name: value)</text>
+<text x="310.0" y="246.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b" font-family="Consolas, Menlo, monospace">Host: shop.example</text>
+<text x="310.0" y="266.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b" font-family="Consolas, Menlo, monospace">Authorization: Bearer &lt;token&gt;</text>
+<text x="310.0" y="286.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b" font-family="Consolas, Menlo, monospace">Content-Type: application/json</text>
+<rect x="40" y="322" width="540" height="34" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="310.0" y="343.3" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">blank line (CRLF CRLF) ends the headers</text>
+<rect x="40" y="366" width="540" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="310.0" y="390.7" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">Body (optional)</text>
+<text x="310.0" y="410.7" text-anchor="middle" font-size="14" font-weight="400" fill="#78350f" font-family="Consolas, Menlo, monospace">{"item": 7, "qty": 2}</text>
+<text x="620" y="118" text-anchor="start" font-size="16" font-weight="700" fill="#0f172a">RESPONSE (API to client)</text>
+<rect x="620" y="132" width="540" height="50" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="890.0" y="151.7" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d" font-family="Consolas, Menlo, monospace">HTTP/1.1 201 Created</text>
+<text x="890.0" y="171.7" text-anchor="middle" font-size="14" font-weight="400" fill="#14532d">version   status code   reason phrase</text>
+<rect x="620" y="192" width="540" height="120" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="890.0" y="226.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Headers</text>
+<text x="890.0" y="246.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b" font-family="Consolas, Menlo, monospace">Location: /api/v1/orders/42</text>
+<text x="890.0" y="266.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b" font-family="Consolas, Menlo, monospace">Content-Type: application/json</text>
+<text x="890.0" y="286.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b" font-family="Consolas, Menlo, monospace">Cache-Control: no-store</text>
+<rect x="620" y="322" width="540" height="34" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="890.0" y="343.3" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">blank line</text>
+<rect x="620" y="366" width="540" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="890.0" y="390.7" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">Body</text>
+<text x="890.0" y="410.7" text-anchor="middle" font-size="14" font-weight="400" fill="#78350f" font-family="Consolas, Menlo, monospace">{"id": 42, "status": "new"}</text>
+<line x1="580" y1="157" x2="618" y2="157" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="40" y="470" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Status classes:</text>
+<rect x="40" y="484" width="210" height="56" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="145.0" y="506.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">1xx</text>
+<text x="145.0" y="526.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">informational</text>
+<rect x="266" y="484" width="210" height="56" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="371.0" y="506.7" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">2xx</text>
+<text x="371.0" y="526.7" text-anchor="middle" font-size="14" font-weight="400" fill="#14532d">success</text>
+<rect x="492" y="484" width="210" height="56" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="597.0" y="506.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">3xx</text>
+<text x="597.0" y="526.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">redirection</text>
+<rect x="718" y="484" width="210" height="56" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="823.0" y="506.7" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">4xx</text>
+<text x="823.0" y="526.7" text-anchor="middle" font-size="14" font-weight="400" fill="#78350f">client error</text>
+<rect x="944" y="484" width="210" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1049.0" y="506.7" text-anchor="middle" font-size="14" font-weight="700" fill="#7f1d1d">5xx</text>
+<text x="1049.0" y="526.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d">server error</text>
+<text x="40" y="572" text-anchor="start" font-size="13" font-weight="400" fill="#475569">Stateless API: the caller proves identity on every request (token). Stateful: the server keeps a session and the client sends a cookie.</text>
+</svg>

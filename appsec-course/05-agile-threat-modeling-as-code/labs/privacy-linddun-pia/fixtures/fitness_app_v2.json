@@ -1,0 +1,25 @@
+{
+  "name": "FitTrack v2 (privacy by design)",
+  "description": "Same app after the LINDDUN session and the DPIA.",
+  "data": [
+    {"name": "email", "category": "personal", "purpose": "login", "retention_days": 730},
+    {"name": "analytics_pseudonym", "category": "identifier", "purpose": "analytics", "retention_days": 90},
+    {"name": "heart_rate", "category": "sensitive", "purpose": "workout stats", "retention_days": 365},
+    {"name": "age_band", "category": "personal", "purpose": "workout stats", "retention_days": 730},
+    {"name": "workout_summary", "category": "none", "purpose": "workout stats", "retention_days": 365}
+  ],
+  "flows": [
+    {"name": "app to API", "from": "mobile app", "to": "FitTrack API", "data": ["email", "heart_rate", "age_band"], "encrypted": true},
+    {"name": "app to analytics", "from": "mobile app", "to": "Analytics SaaS", "data": ["analytics_pseudonym", "workout_summary"], "third_party": true, "encrypted": true, "purpose": "analytics", "pseudonymised": true, "cross_border": true, "transfer_safeguards": true},
+    {"name": "API to logs", "from": "FitTrack API", "to": "log store", "data": ["workout_summary"], "encrypted": true, "purpose": "logging"}
+  ],
+  "features": {
+    "reveals_account_existence": false,
+    "privacy_notice": true,
+    "consent_records": true,
+    "access_and_deletion_requests": true,
+    "record_of_processing": true,
+    "dpia_done": true
+  },
+  "processing": {"sensitive_data": true, "large_scale": true, "evaluation_or_scoring": false, "systematic_monitoring": false}
+}

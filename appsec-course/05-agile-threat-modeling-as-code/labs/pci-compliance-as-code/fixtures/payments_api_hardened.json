@@ -1,0 +1,15 @@
+{
+  "system": "payments-api (hardened)",
+  "network": {"default_inbound": "deny"},
+  "accounts": [
+    {"name": "admin", "default": true, "enabled": false},
+    {"name": "svc_payments", "default": false, "enabled": true}
+  ],
+  "storage": {"stores_cvv_after_auth": false, "pan_display_mask": "bin_and_last4", "pan_encrypted": true},
+  "tls": {"min_version": "1.2"},
+  "auth": {"session_idle_timeout_minutes": 15, "lockout_attempts": 10, "lockout_minutes": 30,
+           "password_min_length": 8, "mfa_for_cde_access": true},
+  "logging": {"audit_logs_enabled": true, "retention_days": 400, "time_sync": true},
+  "vuln_scans": {"internal_interval_days": 90},
+  "fim": {"enabled": true}
+}

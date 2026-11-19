@@ -1,0 +1,36 @@
+# Simulated cAdvisor scrape (Prometheus text exposition format). FAKE lab data.
+# TYPE container_cpu_usage_seconds_total counter
+container_cpu_usage_seconds_total{name="orders-api",image="shop/orders-api@sha256:FAKE1",container_label_egress="allowed",container_label_expected_cpu="1"} 1024
+container_cpu_usage_seconds_total{name="postgres",image="postgres:16",container_label_egress="none",container_label_expected_cpu="0.5"} 512
+container_cpu_usage_seconds_total{name="worker",image="shop/worker:2.3",container_label_egress="allowed",container_label_expected_cpu="0.2"} 350
+container_cpu_usage_seconds_total{name="cache",image="redis:7",container_label_egress="none",container_label_expected_cpu="0.3"} 53
+container_cpu_usage_seconds_total{name="payments",image="shop/payments:1.9",container_label_egress="allowed",container_label_expected_cpu="0.5"} 1
+container_cpu_usage_seconds_total{name="debug-shell",image="alpine:latest",container_label_egress="allowed",container_label_expected_cpu="0.1"} 2
+# TYPE container_memory_working_set_bytes gauge
+container_memory_working_set_bytes{name="orders-api",image="shop/orders-api@sha256:FAKE1",container_label_egress="allowed",container_label_expected_cpu="1"} 325058560
+container_memory_working_set_bytes{name="postgres",image="postgres:16",container_label_egress="none",container_label_expected_cpu="0.5"} 996147200
+container_memory_working_set_bytes{name="worker",image="shop/worker:2.3",container_label_egress="allowed",container_label_expected_cpu="0.2"} 125829120
+container_memory_working_set_bytes{name="cache",image="redis:7",container_label_egress="none",container_label_expected_cpu="0.3"} 220200960
+container_memory_working_set_bytes{name="payments",image="shop/payments:1.9",container_label_egress="allowed",container_label_expected_cpu="0.5"} 94371840
+container_memory_working_set_bytes{name="debug-shell",image="alpine:latest",container_label_egress="allowed",container_label_expected_cpu="0.1"} 5242880
+# TYPE container_spec_memory_limit_bytes gauge
+container_spec_memory_limit_bytes{name="orders-api",image="shop/orders-api@sha256:FAKE1",container_label_egress="allowed",container_label_expected_cpu="1"} 536870912
+container_spec_memory_limit_bytes{name="postgres",image="postgres:16",container_label_egress="none",container_label_expected_cpu="0.5"} 1073741824
+container_spec_memory_limit_bytes{name="worker",image="shop/worker:2.3",container_label_egress="allowed",container_label_expected_cpu="0.2"} 268435456
+container_spec_memory_limit_bytes{name="cache",image="redis:7",container_label_egress="none",container_label_expected_cpu="0.3"} 0
+container_spec_memory_limit_bytes{name="payments",image="shop/payments:1.9",container_label_egress="allowed",container_label_expected_cpu="0.5"} 536870912
+container_spec_memory_limit_bytes{name="debug-shell",image="alpine:latest",container_label_egress="allowed",container_label_expected_cpu="0.1"} 0
+# TYPE container_network_transmit_bytes_total counter
+container_network_transmit_bytes_total{name="orders-api",image="shop/orders-api@sha256:FAKE1",container_label_egress="allowed",container_label_expected_cpu="1"} 530000000
+container_network_transmit_bytes_total{name="postgres",image="postgres:16",container_label_egress="none",container_label_expected_cpu="0.5"} 130000000
+container_network_transmit_bytes_total{name="worker",image="shop/worker:2.3",container_label_egress="allowed",container_label_expected_cpu="0.2"} 1100000
+container_network_transmit_bytes_total{name="cache",image="redis:7",container_label_egress="none",container_label_expected_cpu="0.3"} 1050000
+container_network_transmit_bytes_total{name="payments",image="shop/payments:1.9",container_label_egress="allowed",container_label_expected_cpu="0.5"} 20000
+container_network_transmit_bytes_total{name="debug-shell",image="alpine:latest",container_label_egress="allowed",container_label_expected_cpu="0.1"} 40000
+# TYPE container_start_time_seconds gauge
+container_start_time_seconds{name="orders-api",image="shop/orders-api@sha256:FAKE1",container_label_egress="allowed",container_label_expected_cpu="1"} 1763540000
+container_start_time_seconds{name="postgres",image="postgres:16",container_label_egress="none",container_label_expected_cpu="0.5"} 1763000000
+container_start_time_seconds{name="worker",image="shop/worker:2.3",container_label_egress="allowed",container_label_expected_cpu="0.2"} 1763500000
+container_start_time_seconds{name="cache",image="redis:7",container_label_egress="none",container_label_expected_cpu="0.3"} 1763500000
+container_start_time_seconds{name="payments",image="shop/payments:1.9",container_label_egress="allowed",container_label_expected_cpu="0.5"} 1763546000
+container_start_time_seconds{name="debug-shell",image="alpine:latest",container_label_egress="allowed",container_label_expected_cpu="0.1"} 1763546010

@@ -1,0 +1,12 @@
+{
+  "client_id": "modern-spa",
+  "public_client": true,
+  "grant_types": ["authorization_code", "refresh_token"],
+  "require_pkce": true,
+  "redirect_uris": ["https://app.lab.example/callback", "http://127.0.0.1:8765/callback"],
+  "redirect_uri_matching": "exact",
+  "access_token_ttl_seconds": 300,
+  "refresh_token_rotation": true,
+  "allow_token_in_query": false,
+  "require_state": true
+}

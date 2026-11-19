@@ -1,0 +1,26 @@
+{
+  "_comment": "FICTIONAL ShopCo register after review: every decision has its evidence.",
+  "risks": [
+    {"id": "R-01", "title": "Card numbers written to debug logs (PCI DSS)", "source": "compliance",
+     "likelihood": 4, "impact": 5, "treatment": "mitigate", "owner": "payments-lead",
+     "controls": [{"name": "Log redaction filter + CI test", "reduces": "likelihood", "by": 3},
+                  {"name": "Tokenise PAN at the edge (no PAN in app)", "reduces": "impact", "by": 2}]},
+    {"id": "R-02", "title": "Password reset tokens are predictable", "source": "design",
+     "likelihood": 4, "impact": 4, "treatment": "mitigate", "owner": "auth-lead",
+     "controls": [{"name": "CSPRNG token, hashed at rest, 15-minute single use", "reduces": "likelihood", "by": 3}]},
+    {"id": "R-03", "title": "Outdated XML library with a known CVE in the orders API", "source": "vulnerability",
+     "likelihood": 3, "impact": 4, "treatment": "mitigate", "owner": "orders-lead",
+     "controls": [{"name": "Upgrade + SCA gate in CI", "reduces": "likelihood", "by": 2}]},
+    {"id": "R-04", "title": "Orders database lost to ransomware", "source": "vulnerability",
+     "likelihood": 2, "impact": 5, "treatment": "transfer", "owner": "ops-lead",
+     "transfer_to": "Cyber insurance policy (FICTIONAL) + immutable backups", "transfer_reduces": 1,
+     "business_service": "checkout", "critical_service": true, "bcp_ref": "BCP-07 restore drill, RTO 4h, RPO 15m"},
+    {"id": "R-05", "title": "Legacy CSV export of all customers", "source": "design",
+     "likelihood": 3, "impact": 4, "treatment": "avoid", "owner": "product-owner",
+     "change": "Export feature removed; reporting moved to aggregated dashboard"},
+    {"id": "R-06", "title": "Credential-stuffing wave against retail logins", "source": "threat-landscape",
+     "likelihood": 3, "impact": 3, "treatment": "accept", "owner": "auth-lead",
+     "accepted_by": "product-owner", "reason": "Rate limits + breached-password check already live; MFA rollout in Q1",
+     "review_date": "2027-03-31"}
+  ]
+}

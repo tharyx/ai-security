@@ -1,0 +1,25 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Shop API", "version": "1.0.0" },
+  "security": [ { "bearerAuth": [] } ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" },
+      "apiKey": { "type": "apiKey", "in": "header", "name": "X-API-Key" }
+    }
+  },
+  "paths": {
+    "/api/v1/login": {
+      "post": { "summary": "Log in", "security": [] }
+    },
+    "/api/v1/products": {
+      "get": { "summary": "Search products", "security": [] }
+    },
+    "/api/v1/orders/{orderId}": {
+      "get": { "summary": "Get an order" }
+    },
+    "/api/v1/admin/users": {
+      "get": { "summary": "List users", "security": [ { "bearerAuth": [] } ] }
+    }
+  }
+}

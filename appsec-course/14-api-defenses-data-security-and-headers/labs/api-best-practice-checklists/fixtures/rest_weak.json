@@ -1,0 +1,17 @@
+{
+  "name": "orders-rest (as found)",
+  "transport": {"https_only": false},
+  "routes": [
+    {"path": "/health", "public": true},
+    {"path": "/v2/orders", "auth": "bearer"},
+    {"path": "/v2/orders/{id}", "auth": "bearer", "object_authz": false},
+    {"path": "/v2/admin/export", "auth": null}
+  ],
+  "validation": {"request_schema": false, "response_allowlist": false, "enforce_content_type": false},
+  "rate_limit": {"enabled": false},
+  "pagination": {"max_page_size": null},
+  "cors": {"allowed_origins": ["*"], "reflect_origin": true},
+  "allowed_methods": ["GET", "POST", "PUT", "DELETE", "TRACE"],
+  "errors": {"verbose": true},
+  "versions": [{"name": "v1", "deprecated": true, "live": true}, {"name": "v2", "deprecated": false, "live": true}]
+}

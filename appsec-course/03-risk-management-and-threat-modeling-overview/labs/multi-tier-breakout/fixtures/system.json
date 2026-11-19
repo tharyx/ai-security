@@ -1,0 +1,28 @@
+{
+  "_comment": "FICTIONAL multi-tier shop: web tier, API tier, message queue, database. Used for the breakout exercise.",
+  "name": "ShopCo orders platform",
+  "zones": {"internet": 0, "third-party": 1, "corp": 2, "dmz": 2, "app": 3, "data": 4},
+  "elements": [
+    {"id": "customer", "type": "external", "zone": "internet", "label": "Customer browser / mobile app"},
+    {"id": "admin", "type": "external", "zone": "corp", "label": "Support admin (corp VPN)"},
+    {"id": "payment_provider", "type": "external", "zone": "third-party", "label": "Payment provider"},
+    {"id": "web", "type": "process", "zone": "dmz", "label": "Web tier / reverse proxy"},
+    {"id": "api", "type": "process", "zone": "app", "label": "Orders API"},
+    {"id": "worker", "type": "process", "zone": "app", "label": "Fulfilment worker"},
+    {"id": "queue", "type": "datastore", "zone": "app", "label": "Order events queue"},
+    {"id": "db", "type": "datastore", "zone": "data", "label": "Orders database"},
+    {"id": "audit_log", "type": "datastore", "zone": "data", "label": "Audit log", "holds_logs": true}
+  ],
+  "flows": [
+    {"id": "F1", "src": "customer", "dst": "web", "label": "HTTPS: login, browse, place order"},
+    {"id": "F2", "src": "web", "dst": "api", "label": "HTTP + JWT"},
+    {"id": "F3", "src": "api", "dst": "db", "label": "SQL"},
+    {"id": "F4", "src": "api", "dst": "queue", "label": "publish OrderPlaced"},
+    {"id": "F5", "src": "queue", "dst": "worker", "label": "consume OrderPlaced"},
+    {"id": "F6", "src": "worker", "dst": "db", "label": "update order status"},
+    {"id": "F7", "src": "payment_provider", "dst": "api", "label": "payment webhook"},
+    {"id": "F8", "src": "admin", "dst": "api", "label": "admin console: refunds"},
+    {"id": "F9", "src": "api", "dst": "audit_log", "label": "audit events"},
+    {"id": "F10", "src": "api", "dst": "payment_provider", "label": "create charge"}
+  ]
+}

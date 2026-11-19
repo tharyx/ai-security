@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Managing a threat model: five homes, one loop</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="500" fill="#ffffff"/>
+<text x="40" y="46" font-size="24" font-weight="700" fill="#0f172a">Managing a threat model: five homes, one loop</text>
+<text x="40" y="74" font-size="15" fill="#475569">The model in git is the source; everything else is generated or synced from it, and drift is reported back.</text>
+<rect x="470" y="100" width="260" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="600.0" y="140.33333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">Threat model (in git)</text>
+<text x="600.0" y="159.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">stable threat ids</text>
+<text x="600.0" y="178.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">decisions, owners, review date</text>
+<rect x="40" y="290" width="200" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="140.0" y="325.3333333333333" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Documentation</text>
+<text x="140.0" y="344.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">generated report</text>
+<text x="140.0" y="363.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">+ DFD, assumptions</text>
+<line x1="600" y1="210" x2="140" y2="286" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="270" y="290" width="200" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="370.0" y="325.3333333333333" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">Backlog</text>
+<text x="370.0" y="344.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">mitigations as stories</text>
+<text x="370.0" y="363.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">SEC: criteria</text>
+<line x1="600" y1="210" x2="370" y2="286" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="500" y="290" width="200" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="600.0" y="325.3333333333333" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Bugs and tickets</text>
+<text x="600.0" y="344.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">bugs, risk acceptances</text>
+<text x="600.0" y="363.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">(owner, expiry)</text>
+<line x1="600" y1="210" x2="600" y2="286" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="730" y="290" width="200" height="100" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="830.0" y="325.3333333333333" text-anchor="middle" font-size="14" font-weight="700" fill="#6b21a8">Code</text>
+<text x="830.0" y="344.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">annotations, model file,</text>
+<text x="830.0" y="363.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">tests per mitigation</text>
+<line x1="600" y1="210" x2="830" y2="286" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="960" y="290" width="200" height="100" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1060.0" y="325.3333333333333" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Automation</text>
+<text x="1060.0" y="344.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">CI: report, sync,</text>
+<text x="1060.0" y="363.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">validate, gate</text>
+<line x1="600" y1="210" x2="1060" y2="286" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="600" y="430" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Drift back to the model: ticket closed but threat open -&gt; reopen; deployed but not modeled -&gt; update; test fails -&gt; not proven</text>
+<text x="600" y="465" text-anchor="middle" font-size="13" fill="#475569">Fingerprint = component + STRIDE + normalised title, so re-running the sync never duplicates tickets.</text>
+</svg>

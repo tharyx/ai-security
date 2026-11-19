@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Secure logging pipeline</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="460" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">From API event to alert: make every step safe</text>
+<text x="40" y="76" font-size="15" fill="#475569">Redact at the source, escape user input, use a structured format, parse with a dead-letter queue, alert with an owner.</text>
+<rect x="40" y="120" width="190" height="170" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="135" y="150" text-anchor="middle" font-size="17" font-weight="700" fill="#065f46">API service</text>
+<text x="135" y="178" text-anchor="middle" font-size="13" fill="#1e293b">security events</text>
+<text x="135" y="200" text-anchor="middle" font-size="13" fill="#1e293b">request id, UTC time</text>
+<text x="135" y="232" text-anchor="middle" font-size="13" fill="#7f1d1d">redact secrets, mask PII</text>
+<text x="135" y="254" text-anchor="middle" font-size="13" fill="#7f1d1d">escape CR/LF, no ${...}</text>
+<rect x="270" y="120" width="190" height="170" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="365" y="150" text-anchor="middle" font-size="17" font-weight="700" fill="#1e293b">Syslog RFC 5424</text>
+<text x="365" y="178" text-anchor="middle" font-size="13" fill="#1e293b">PRI = facility x 8 + severity</text>
+<text x="365" y="200" text-anchor="middle" font-size="13" fill="#1e293b">STRUCTURED-DATA</text>
+<text x="365" y="232" text-anchor="middle" font-size="13" fill="#1e293b">TLS transport</text>
+<text x="365" y="254" text-anchor="middle" font-size="13" fill="#1e293b">(RFC 5425, port 6514)</text>
+<rect x="500" y="120" width="190" height="170" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="595" y="150" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">Logstash / Agent</text>
+<text x="595" y="178" text-anchor="middle" font-size="13" fill="#1e293b">parse, map to ECS</text>
+<text x="595" y="200" text-anchor="middle" font-size="13" fill="#1e293b">redact again</text>
+<text x="595" y="232" text-anchor="middle" font-size="13" fill="#1e293b">dead-letter queue</text>
+<text x="595" y="254" text-anchor="middle" font-size="13" fill="#1e293b">for bad lines</text>
+<rect x="730" y="120" width="190" height="170" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="825" y="150" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">Elasticsearch</text>
+<text x="825" y="178" text-anchor="middle" font-size="13" fill="#1e293b">index, retention (ILM)</text>
+<text x="825" y="200" text-anchor="middle" font-size="13" fill="#1e293b">auth + TLS on</text>
+<text x="825" y="232" text-anchor="middle" font-size="13" fill="#1e293b">never public :9200</text>
+<rect x="960" y="120" width="200" height="170" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1060" y="150" text-anchor="middle" font-size="17" font-weight="700" fill="#92400e">Kibana / SIEM</text>
+<text x="1060" y="178" text-anchor="middle" font-size="13" fill="#1e293b">KQL queries</text>
+<text x="1060" y="200" text-anchor="middle" font-size="13" fill="#1e293b">detection rules</text>
+<text x="1060" y="232" text-anchor="middle" font-size="13" fill="#1e293b">alert, owner, runbook</text>
+<line x1="230" y1="205" x2="266" y2="205" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="460" y1="205" x2="496" y2="205" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="690" y1="205" x2="726" y2="205" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="920" y1="205" x2="956" y2="205" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="320" width="1120" height="100" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="60" y="350" font-size="14" fill="#1e293b">Metrics path: cAdvisor (per-container counters) to Prometheus (rules, PromQL) to Grafana (dashboards, alerting); Loki for logs; Alloy as collector.</text>
+<text x="60" y="378" font-size="14" fill="#1e293b">Log: authn/authz results, validation failures, 429s, admin actions, token and secret access.</text>
+<text x="60" y="404" font-size="14" fill="#7f1d1d">Never log: passwords, tokens, API keys, session ids, full card numbers, private keys.</text>
+</svg>

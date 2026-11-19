@@ -1,0 +1,23 @@
+{
+ "_note": "Suppressions need owner, reason and a future expiry. The third entry is invalid on purpose.",
+ "suppressions": [
+  {
+   "fingerprint": "7c9d4b3cb5f2",
+   "owner": "team-orders",
+   "reason": "upgrade planned in sprint 41",
+   "expires": "2026-10-01"
+  },
+  {
+   "fingerprint": "1b061fc4d049",
+   "owner": "appsec-champion",
+   "reason": "false positive: decode() is only used in a test helper",
+   "expires": "2027-01-31"
+  },
+  {
+   "fingerprint": "225ac8b0e5af",
+   "owner": "",
+   "reason": "",
+   "expires": "2030-01-01"
+  }
+ ]
+}

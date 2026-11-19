@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Risk management workflow</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="600" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">Risk management workflow: identify, assess, treat, monitor</text>
+<text x="40" y="74" font-size="15" fill="#475569">Same loop as ISO 31000 / NIST SP 800-30. Threat modeling feeds the "identify" box with design risks.</text>
+
+<rect x="40" y="110" width="200" height="80" rx="12" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="140" y="145" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">1. Context</text>
+<text x="140" y="170" text-anchor="middle" font-size="13" fill="#334155">scope, assets, appetite</text>
+
+<rect x="290" y="110" width="260" height="210" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="420" y="145" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">2. Identify</text>
+<text x="310" y="180" font-size="14" fill="#1e293b">- compliance risks (PCI, DPDP, GDPR)</text>
+<text x="310" y="208" font-size="14" fill="#1e293b">- security design issues</text>
+<text x="310" y="236" font-size="14" fill="#1e293b">  (threat modeling)</text>
+<text x="310" y="264" font-size="14" fill="#1e293b">- vulnerabilities (scans, CVEs)</text>
+<text x="310" y="292" font-size="14" fill="#1e293b">- current threat landscape</text>
+
+<rect x="600" y="110" width="240" height="210" rx="12" fill="#fefce8" stroke="#ca8a04" stroke-width="2"/>
+<text x="720" y="145" text-anchor="middle" font-size="17" font-weight="700" fill="#713f12">3. Assess</text>
+<text x="620" y="180" font-size="14" fill="#1e293b">likelihood x impact</text>
+<text x="620" y="208" font-size="14" fill="#1e293b">qualitative 5x5 matrix,</text>
+<text x="620" y="236" font-size="14" fill="#1e293b">OWASP Risk Rating, CVSS,</text>
+<text x="620" y="264" font-size="14" fill="#1e293b">FAIR (quantitative)</text>
+<text x="620" y="292" font-size="14" fill="#1e293b">= inherent risk</text>
+
+<rect x="890" y="110" width="270" height="210" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1025" y="145" text-anchor="middle" font-size="17" font-weight="700" fill="#14532d">4. Treat</text>
+<text x="910" y="180" font-size="14" fill="#1e293b">mitigate: add controls</text>
+<text x="910" y="208" font-size="14" fill="#1e293b">avoid: remove the activity</text>
+<text x="910" y="236" font-size="14" fill="#1e293b">transfer: insurance, contract</text>
+<text x="910" y="264" font-size="14" fill="#1e293b">accept: owner + reason + date</text>
+<text x="910" y="292" font-size="14" fill="#1e293b">= residual risk</text>
+
+<line x1="240" y1="150" x2="286" y2="150" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="550" y1="215" x2="596" y2="215" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="840" y1="215" x2="886" y2="215" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+<rect x="600" y="370" width="560" height="80" rx="12" fill="#fdf2f8" stroke="#db2777" stroke-width="2"/>
+<text x="880" y="404" text-anchor="middle" font-size="17" font-weight="700" fill="#831843">5. Monitor and review</text>
+<text x="880" y="430" text-anchor="middle" font-size="14" fill="#1e293b">risk register, KRIs, review dates, re-assess on change</text>
+<line x1="1025" y1="320" x2="1025" y2="366" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<path d="M600,410 L420,410 L420,324" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="430" y="400" font-size="13" fill="#475569">loop: new features, new threats</text>
+
+<rect x="40" y="370" width="510" height="80" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="295" y="404" text-anchor="middle" font-size="17" font-weight="700" fill="#4c1d95">Business continuity (BIA, BCP, DR)</text>
+<text x="295" y="430" text-anchor="middle" font-size="14" fill="#1e293b">critical services keep running while risk is reduced: RTO, RPO</text>
+
+<rect x="40" y="490" width="1120" height="70" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="600" y="520" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Communicate and consult at every step</text>
+<text x="600" y="545" text-anchor="middle" font-size="14" fill="#334155">risk owners decide; security advises. Residual risk above appetite needs a higher authority to accept.</text>
+</svg>

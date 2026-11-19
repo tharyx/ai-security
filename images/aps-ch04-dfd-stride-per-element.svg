@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>DFD notation and STRIDE per element</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">DFD symbols and the STRIDE letters that usually apply</text>
+<text x="40" y="74" font-size="15" fill="#475569">Walk every element and every flow. Spend most time where a flow crosses a trust boundary (dashed line).</text>
+
+<rect x="60" y="120" width="200" height="70" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+<text x="160" y="160" text-anchor="middle" font-size="16" fill="#0f172a">External entity</text>
+<text x="160" y="225" text-anchor="middle" font-size="22" font-weight="700" fill="#2563eb">S  R</text>
+<text x="160" y="252" text-anchor="middle" font-size="13" fill="#475569">user, partner, other system</text>
+
+<circle cx="440" cy="155" r="50" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+<text x="440" y="160" text-anchor="middle" font-size="16" fill="#0f172a">Process</text>
+<text x="440" y="225" text-anchor="middle" font-size="22" font-weight="700" fill="#2563eb">S T R I D E</text>
+<text x="440" y="252" text-anchor="middle" font-size="13" fill="#475569">your code, a service</text>
+
+<line x1="620" y1="130" x2="800" y2="130" stroke="#334155" stroke-width="2"/>
+<line x1="620" y1="180" x2="800" y2="180" stroke="#334155" stroke-width="2"/>
+<text x="710" y="160" text-anchor="middle" font-size="16" fill="#0f172a">Data store</text>
+<text x="710" y="225" text-anchor="middle" font-size="22" font-weight="700" fill="#2563eb">T  I  D  (+R if logs)</text>
+<text x="710" y="252" text-anchor="middle" font-size="13" fill="#475569">DB, file, queue, cache, log</text>
+
+<line x1="900" y1="155" x2="1110" y2="155" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="1005" y="142" text-anchor="middle" font-size="16" fill="#0f172a">Data flow</text>
+<text x="1005" y="225" text-anchor="middle" font-size="22" font-weight="700" fill="#2563eb">T  I  D</text>
+<text x="1005" y="252" text-anchor="middle" font-size="13" fill="#475569">HTTPS call, SQL, message</text>
+
+<line x1="40" y1="290" x2="1160" y2="290" stroke="#dc2626" stroke-width="3" stroke-dasharray="10 8"/>
+<text x="600" y="282" text-anchor="middle" font-size="15" font-weight="700" fill="#dc2626">trust boundary: authenticate, validate, encrypt what crosses it</text>
+
+<rect x="40" y="320" width="1120" height="210" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="60" y="352" font-size="17" font-weight="700" fill="#0f172a">Letter = threat = broken property = defense family</text>
+<text x="60" y="384" font-size="15" fill="#1e293b">S Spoofing -> authentication (MFA, passkeys, mTLS, signed tokens)</text>
+<text x="60" y="412" font-size="15" fill="#1e293b">T Tampering -> integrity (validation, signatures, MACs, TLS)</text>
+<text x="60" y="440" font-size="15" fill="#1e293b">R Repudiation -> non-repudiation (audit logs, signed records, time sync)</text>
+<text x="620" y="384" font-size="15" fill="#1e293b">I Information disclosure -> confidentiality (encryption, access control)</text>
+<text x="620" y="412" font-size="15" fill="#1e293b">D Denial of service -> availability (limits, quotas, scaling)</text>
+<text x="620" y="440" font-size="15" fill="#1e293b">E Elevation of privilege -> authorization (deny by default)</text>
+<text x="60" y="486" font-size="14" fill="#475569">DFD rules: no store-to-store or external-to-store flows (a process moves data), no process with only inputs (black hole)</text>
+<text x="60" y="510" font-size="14" fill="#475569">or only outputs (miracle). Lab: dfd-stride validates these rules and generates the STRIDE candidates.</text>
+</svg>

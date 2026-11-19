@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>JWT anatomy and how verification goes wrong</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">JWT anatomy and how verification goes wrong</text>
+<text x="40" y="74" font-size="15" fill="#475569">header.payload.signature, each part base64url. Encoded, not encrypted: anyone can read the claims.</text>
+<rect x="40" y="110" width="360" height="150" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="220.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#7f1d1d">Header</text>
+<text x="220.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d" font-family="Consolas, Menlo, monospace">{"alg": "HS256",</text>
+<text x="220.0" y="199.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d" font-family="Consolas, Menlo, monospace"> "typ": "JWT",</text>
+<text x="220.0" y="219.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d" font-family="Consolas, Menlo, monospace"> "kid": "main"}</text>
+<rect x="420" y="110" width="360" height="150" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="600.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#4c1d95">Payload (claims)</text>
+<text x="600.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#4c1d95" font-family="Consolas, Menlo, monospace">{"sub": "alice", "aud": "shop-api",</text>
+<text x="600.0" y="199.7" text-anchor="middle" font-size="14" font-weight="400" fill="#4c1d95" font-family="Consolas, Menlo, monospace"> "iss": "https://login...",</text>
+<text x="600.0" y="219.7" text-anchor="middle" font-size="14" font-weight="400" fill="#4c1d95" font-family="Consolas, Menlo, monospace"> "exp": 1795093016, "role": "user"}</text>
+<rect x="800" y="110" width="360" height="150" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="980.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">Signature</text>
+<text x="980.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">HMAC-SHA256(</text>
+<text x="980.0" y="199.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">  base64url(header) + '.' +</text>
+<text x="980.0" y="219.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">  base64url(payload), secret)</text>
+<text x="400" y="190" text-anchor="middle" font-size="30" font-weight="700" fill="#0f172a">.</text>
+<text x="780" y="190" text-anchor="middle" font-size="30" font-weight="700" fill="#0f172a">.</text>
+<rect x="40" y="290" width="540" height="230" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="54" y="339.7" text-anchor="start" font-size="14" font-weight="700" fill="#7f1d1d">Attacks (this chapter's lab)</text>
+<text x="54" y="359.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">alg: none, signature removed</text>
+<text x="54" y="379.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">weak HMAC secret cracked from a wordlist</text>
+<text x="54" y="399.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">RS256 to HS256 key confusion</text>
+<text x="54" y="419.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">kid used as a file path (traversal)</text>
+<text x="54" y="439.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">jku / x5u point to attacker keys</text>
+<text x="54" y="459.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">no exp / aud / iss check</text>
+<text x="54" y="479.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">signature never verified at all</text>
+<rect x="620" y="290" width="540" height="230" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="634" y="349.7" text-anchor="start" font-size="14" font-weight="700" fill="#14532d">Hardened verifier</text>
+<text x="634" y="369.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">allowlist ONE algorithm per key</text>
+<text x="634" y="389.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">strong random key (256-bit) or asymmetric keys</text>
+<text x="634" y="409.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">kid only selects from known keys</text>
+<text x="634" y="429.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">ignore jku/x5u unless pinned</text>
+<text x="634" y="449.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">require exp, check aud and iss, small leeway</text>
+<text x="634" y="469.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">short lifetime; RFC 8725 + RFC 9068 (verify)</text>
+</svg>

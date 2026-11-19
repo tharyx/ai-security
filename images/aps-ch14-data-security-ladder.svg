@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Encoding, escaping, hashing and encryption</title>
+<rect width="1200" height="520" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">Four operations that are often confused</text>
+<text x="40" y="76" font-size="15" fill="#475569">Only encryption gives confidentiality. Only keyed hashing (HMAC) or AEAD gives tamper evidence.</text>
+<rect x="40" y="110" width="265" height="330" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="172" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">Encoding</text>
+<text x="60" y="180" font-size="14" fill="#1e293b">base64, hex, URL, UTF-8</text>
+<text x="60" y="210" font-size="14" fill="#1e293b">Key: none</text>
+<text x="60" y="235" font-size="14" fill="#1e293b">Reverse: anyone</text>
+<text x="60" y="260" font-size="14" fill="#1e293b">Purpose: transport format</text>
+<rect x="56" y="290" width="233" height="70" rx="8" fill="#fee2e2" stroke="#dc2626"/>
+<text x="172" y="318" text-anchor="middle" font-size="14" fill="#7f1d1d">NOT a security control</text>
+<text x="172" y="342" text-anchor="middle" font-size="13" fill="#7f1d1d">"cm9sZT1hZG1pbg==" = role=admin</text>
+<rect x="325" y="110" width="265" height="330" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="457" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#1e3a8a">Escaping</text>
+<text x="345" y="180" font-size="14" fill="#1e293b">HTML, attribute, JS, CSS, URL</text>
+<text x="345" y="210" font-size="14" fill="#1e293b">Key: none</text>
+<text x="345" y="235" font-size="14" fill="#1e293b">Reverse: yes</text>
+<text x="345" y="260" font-size="14" fill="#1e293b">Purpose: data stays data</text>
+<rect x="341" y="290" width="233" height="70" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+<text x="457" y="318" text-anchor="middle" font-size="14" fill="#1e3a8a">Right escape per context</text>
+<text x="457" y="342" text-anchor="middle" font-size="13" fill="#1e3a8a">SQL: bind variables instead</text>
+<rect x="610" y="110" width="265" height="330" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="742" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#92400e">Hashing</text>
+<text x="630" y="180" font-size="14" fill="#1e293b">SHA-256, HMAC, Argon2id</text>
+<text x="630" y="210" font-size="14" fill="#1e293b">Key: none (HMAC: secret)</text>
+<text x="630" y="235" font-size="14" fill="#1e293b">Reverse: no (guessing only)</text>
+<text x="630" y="260" font-size="14" fill="#1e293b">Purpose: integrity, passwords</text>
+<rect x="626" y="290" width="233" height="70" rx="8" fill="#fef3c7" stroke="#d97706"/>
+<text x="742" y="318" text-anchor="middle" font-size="14" fill="#92400e">Small inputs can be enumerated</text>
+<text x="742" y="342" text-anchor="middle" font-size="13" fill="#92400e">passwords: slow + salt (+ pepper)</text>
+<rect x="895" y="110" width="265" height="330" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="1027" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#065f46">Encryption</text>
+<text x="915" y="180" font-size="14" fill="#1e293b">AES-256-GCM, ChaCha20-Poly1305</text>
+<text x="915" y="210" font-size="14" fill="#1e293b">Key: yes (KMS / Vault)</text>
+<text x="915" y="235" font-size="14" fill="#1e293b">Reverse: with the key</text>
+<text x="915" y="260" font-size="14" fill="#1e293b">Purpose: confidentiality</text>
+<rect x="911" y="290" width="233" height="70" rx="8" fill="#d1fae5" stroke="#059669"/>
+<text x="1027" y="318" text-anchor="middle" font-size="14" fill="#065f46">AEAD: unique nonce + tag</text>
+<text x="1027" y="342" text-anchor="middle" font-size="13" fill="#065f46">bind row id as associated data</text>
+<text x="600" y="485" text-anchor="middle" font-size="15" fill="#475569">Lab: data-security-primitives (toy AEAD is NOT FOR PRODUCTION) and password-storage</text>
+</svg>

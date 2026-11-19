@@ -1,0 +1,53 @@
+{
+ "orders-api": {
+  "dast:http-methods": "pass",
+  "dast:headers": "pass",
+  "test:schema-validation": "pass",
+  "test:rate-limit": "pass",
+  "sast:sql-injection": "pass",
+  "test:authn-required": "pass",
+  "dast:unauth-access": "pass",
+  "test:bfla": "pass",
+  "dast:tls": "pass",
+  "sca:known-exploited": "pass",
+  "sast:secrets": "pass",
+  "test:bola": "fail",
+  "test:jwt-validation": "pass",
+  "sast:jwt-none": "pass",
+  "manual:V16.S1": "log review 2026-10 (ticket SEC-412)"
+ },
+ "payments-api": {
+  "dast:http-methods": "pass",
+  "dast:headers": "pass",
+  "test:schema-validation": "pass",
+  "test:rate-limit": "pass",
+  "sast:sql-injection": "pass",
+  "test:authn-required": "pass",
+  "dast:unauth-access": "pass",
+  "test:bfla": "pass",
+  "dast:tls": "pass",
+  "sca:known-exploited": "pass",
+  "sast:secrets": "pass",
+  "test:bola": "pass",
+  "test:jwt-validation": "pass",
+  "sast:jwt-none": "pass",
+  "test:oauth-pkce": "pass",
+  "test:token-audience": "pass",
+  "test:webhook-signature": "pass"
+ },
+ "catalog-graphql": {
+  "dast:http-methods": "pass",
+  "dast:headers": "pass",
+  "sast:sql-injection": "pass",
+  "test:authn-required": "pass",
+  "dast:unauth-access": "pass",
+  "test:bola": "pass",
+  "dast:tls": "pass",
+  "sca:known-exploited": "pass",
+  "test:schema-validation": "pass",
+  "dast:graphql-introspection": "fail"
+ },
+ "legacy-soap": {
+  "dast:tls": "fail"
+ }
+}

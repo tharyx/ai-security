@@ -1,0 +1,21 @@
+{
+  "name": "Multi-tier shop",
+  "components": [
+    {"name": "Storefront", "type": "web-app", "zone": "DMZ"},
+    {"name": "Orders API", "type": "rest-api", "zone": "Application"},
+    {"name": "Orders DB", "type": "sql-db", "zone": "Data"},
+    {"name": "Order events", "type": "queue", "zone": "Application"}
+  ],
+  "answers": {
+    "Storefront": {"renders_user_content": true},
+    "Orders API": {"internet_facing": true},
+    "Orders DB": {"stores_pii": true}
+  },
+  "states": {
+    "CM-ENC@Storefront": "Implemented", "CM-CSP@Storefront": "Recommended",
+    "CM-OWNER@Orders API": "Required", "CM-IDS@Orders API": "Implemented",
+    "CM-RATE@Orders API": "Implemented",
+    "CM-LEAST@Orders DB": "Implemented", "CM-TDE@Orders DB": "Implemented",
+    "CM-MQAUTH@Order events": "Rejected"
+  }
+}

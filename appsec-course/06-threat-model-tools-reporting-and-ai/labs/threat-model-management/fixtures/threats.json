@@ -1,0 +1,14 @@
+[
+  {"id": "T1", "component": "Orders API", "stride": "Elevation of Privilege", "title": "BOLA: order id not checked against the caller",
+   "severity": "High", "status": "open", "kind": "vulnerability", "owner": "orders-team"},
+  {"id": "T2", "component": "Orders API", "stride": "Elevation of Privilege", "title": "BOLA - order ID not checked against the caller!",
+   "severity": "Medium", "status": "open", "kind": "vulnerability", "owner": "orders-team"},
+  {"id": "T3", "component": "Web App", "stride": "Spoofing", "title": "No MFA for admin login",
+   "severity": "High", "status": "mitigated", "kind": "design", "code_refs": ["src/auth/mfa.py", "tests/test_mfa.py::test_admin_needs_mfa"]},
+  {"id": "T4", "component": "Web App", "stride": "Denial of Service", "title": "Reset form can be flooded",
+   "severity": "Medium", "status": "mitigated", "kind": "design", "code_refs": ["src/ratelimit.py"]},
+  {"id": "T5", "component": "Orders DB", "stride": "Information Disclosure", "title": "Backups not encrypted",
+   "severity": "Medium", "status": "accepted", "kind": "design", "owner": "dba-lead", "accept_expires": "2026-06-30"},
+  {"id": "T6", "component": "Mailer", "stride": "Repudiation", "title": "No record of who changed email templates",
+   "severity": "Low", "status": "mitigated", "kind": "design"}
+]

@@ -1,0 +1,13 @@
+{
+  "name": "orders API (first draft)",
+  "scopes": {"api": "everything", "orders:read": "read orders", "ordersWrite": "change orders"},
+  "endpoints": [
+    {"method": "GET", "path": "/health", "public": true},
+    {"method": "GET", "path": "/orders", "scopes": ["orders:read"]},
+    {"method": "GET", "path": "/orders/{id}", "scopes": ["orders:read"], "owner_check": false},
+    {"method": "DELETE", "path": "/orders/{id}", "scopes": ["orders:read"], "owner_check": false},
+    {"method": "POST", "path": "/orders", "scopes": []},
+    {"method": "POST", "path": "/admin/refunds", "scopes": ["ordersWrite"], "admin": true}
+  ],
+  "roles": {"customer": ["orders:read", "ordersWrite"], "support": ["orders:read"]}
+}

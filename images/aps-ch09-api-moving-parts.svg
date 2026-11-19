@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>The moving parts in an API and the toolchain around it</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">The moving parts in an API and the toolchain around it</text>
+<text x="40" y="74" font-size="15" fill="#475569">Runtime parts carry requests; the toolchain builds, ships and watches them. Both are attack surface.</text>
+<text x="40" y="116" text-anchor="start" font-size="16" font-weight="700" fill="#0f172a">RUNTIME</text>
+<rect x="40" y="130" width="170" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="125.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Client</text>
+<text x="125.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">curl, Postman, app</text>
+<rect x="250" y="130" width="210" height="70" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="355.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#4c1d95">Load balancer /</text>
+<text x="355.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#4c1d95">reverse proxy</text>
+<rect x="500" y="130" width="200" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="600.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">API gateway</text>
+<text x="600.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">auth, quotas, routing</text>
+<rect x="740" y="130" width="190" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="835.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">Services</text>
+<text x="835.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">business logic</text>
+<rect x="970" y="130" width="190" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1065.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">Message queue</text>
+<text x="1065.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#78350f">async jobs</text>
+<line x1="210" y1="165" x2="248" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="460" y1="165" x2="498" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="700" y1="165" x2="738" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="930" y1="165" x2="968" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="220" width="420" height="50" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="250.0" y="249.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d">MITM proxy (Burp / ZAP) sits here while testing</text>
+<text x="40" y="316" text-anchor="start" font-size="16" font-weight="700" fill="#0f172a">TOOLCHAIN (build, ship, run, watch)</text>
+<rect x="40" y="330" width="265" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="172.5" y="362.7" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">Source code mgmt</text>
+<text x="172.5" y="382.7" text-anchor="middle" font-size="14" font-weight="400" fill="#14532d">Git, GitHub, GitLab</text>
+<rect x="325" y="330" width="265" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="457.5" y="362.7" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">CI/CD</text>
+<text x="457.5" y="382.7" text-anchor="middle" font-size="14" font-weight="400" fill="#14532d">pipelines, gates</text>
+<rect x="610" y="330" width="265" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="742.5" y="362.7" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">Artifact mgmt</text>
+<text x="742.5" y="382.7" text-anchor="middle" font-size="14" font-weight="400" fill="#14532d">registries, SBOM</text>
+<rect x="895" y="330" width="265" height="76" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1027.5" y="362.7" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">Containers</text>
+<text x="1027.5" y="382.7" text-anchor="middle" font-size="14" font-weight="400" fill="#14532d">images, runtime</text>
+<rect x="40" y="422" width="265" height="76" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="172.5" y="454.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Infrastructure as Code</text>
+<text x="172.5" y="474.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Terraform/OpenTofu</text>
+<rect x="325" y="422" width="265" height="76" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="457.5" y="454.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Cloud platform</text>
+<text x="457.5" y="474.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">IAM, network</text>
+<rect x="610" y="422" width="265" height="76" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="742.5" y="454.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Monitoring + logging</text>
+<text x="742.5" y="474.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">metrics, logs, alerts</text>
+<rect x="895" y="422" width="265" height="76" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1027.5" y="454.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Collaboration</text>
+<text x="1027.5" y="474.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">issues, chat, wiki</text>
+<text x="40" y="530" text-anchor="start" font-size="13" font-weight="400" fill="#475569">Each tool holds secrets or can change what runs in production: protect access, log changes, scan what it produces.</text>
+</svg>

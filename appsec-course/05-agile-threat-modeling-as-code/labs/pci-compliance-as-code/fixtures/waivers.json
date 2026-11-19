@@ -1,0 +1,5 @@
+[
+  {"rule_id": "PCI-AUTH-04", "system": "payments-api (hardened)", "owner": "payments-team-lead",
+   "reason": "legacy HSM admin console supports only 8 characters; MFA and IP allowlist compensate (QSA-reviewed worksheet)",
+   "expires": "2027-03-31"}
+]

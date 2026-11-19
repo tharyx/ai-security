@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>One value, five output contexts, five encoders</title>
+<rect width="1200" height="520" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">One value, five output contexts, five encoders</text>
+<text x="40" y="74" font-size="15" fill="#475569">Encode when you output, for the exact context. The wrong encoder is almost as bad as none.</text>
+<rect x="40" y="96" width="1120" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="60" y="122" font-size="15" font-weight="700" fill="#0f172a">Context</text>
+<text x="300" y="122" font-size="15" font-weight="700" fill="#0f172a">Template</text>
+<text x="620" y="122" font-size="15" font-weight="700" fill="#0f172a">Dangerous characters</text>
+<text x="880" y="122" font-size="15" font-weight="700" fill="#0f172a">Encoder</text>
+<rect x="40" y="146" width="1120" height="52" rx="8" fill="#eff6ff" stroke="#2563eb"/>
+<text x="60" y="178" font-size="15" font-weight="700" fill="#1e3a8a">HTML body</text>
+<text x="300" y="178" font-size="14" fill="#1e293b">&lt;p&gt;DATA&lt;/p&gt;</text>
+<text x="620" y="178" font-size="14" fill="#1e293b">&lt; &gt; &amp; " '</text>
+<text x="880" y="178" font-size="14" fill="#1e293b">&amp;lt; &amp;gt; &amp;amp; &amp;quot; &amp;#x27;</text>
+<rect x="40" y="206" width="1120" height="52" rx="8" fill="#eff6ff" stroke="#2563eb"/>
+<text x="60" y="238" font-size="15" font-weight="700" fill="#1e3a8a">HTML attribute</text>
+<text x="300" y="238" font-size="14" fill="#1e293b">&lt;input value="DATA"&gt;</text>
+<text x="620" y="238" font-size="14" fill="#1e293b">quotes, space, = &gt;</text>
+<text x="880" y="238" font-size="14" fill="#1e293b">quote it + &amp;#xHH; for non-alnum</text>
+<rect x="40" y="266" width="1120" height="52" rx="8" fill="#fff7ed" stroke="#ea580c"/>
+<text x="60" y="298" font-size="15" font-weight="700" fill="#9a3412">JavaScript string</text>
+<text x="300" y="298" font-size="14" fill="#1e293b">var n = 'DATA';</text>
+<text x="620" y="298" font-size="14" fill="#1e293b">' " \ and &lt;/script&gt;</text>
+<text x="880" y="298" font-size="14" fill="#1e293b">\xHH or \uHHHH</text>
+<rect x="40" y="326" width="1120" height="52" rx="8" fill="#fff7ed" stroke="#ea580c"/>
+<text x="60" y="358" font-size="15" font-weight="700" fill="#9a3412">CSS value</text>
+<text x="300" y="358" font-size="14" fill="#1e293b">color: DATA</text>
+<text x="620" y="358" font-size="14" fill="#1e293b">; } url( expression(</text>
+<text x="880" y="358" font-size="14" fill="#1e293b">\HH + space, or allowlist values</text>
+<rect x="40" y="386" width="1120" height="52" rx="8" fill="#ecfdf5" stroke="#059669"/>
+<text x="60" y="418" font-size="15" font-weight="700" fill="#065f46">URL parameter</text>
+<text x="300" y="418" font-size="14" fill="#1e293b">/search?q=DATA</text>
+<text x="620" y="418" font-size="14" fill="#1e293b">&amp; = # ? space</text>
+<text x="880" y="418" font-size="14" fill="#1e293b">percent-encoding (and allow https: only)</text>
+<text x="40" y="472" font-size="13" fill="#b91c1c">Trap: onclick="go('DATA')" is HTML first, then JavaScript. The browser HTML-decodes before the script runs, so use JS encoding or avoid inline handlers.</text>
+<text x="40" y="496" font-size="13" fill="#475569">Defence in depth for misses: strict CSP with nonces, Trusted Types for DOM sinks, HttpOnly cookies.</text>
+</svg>

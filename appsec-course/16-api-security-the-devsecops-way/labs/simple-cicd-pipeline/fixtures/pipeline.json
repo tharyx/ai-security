@@ -1,0 +1,15 @@
+{
+  "_note": "A simplified .gitlab-ci.yml as JSON. Script steps are names of Python actions in pipeline.py; no shell runs. The token value is FAKE.",
+  "stages": ["build", "test", "package", "deploy"],
+  "variables": {
+    "DEPLOY_TOKEN": {"value": "FAKE-deploy-token-lab-only", "masked": true, "protected": true},
+    "APP_NAME": {"value": "orders-api"}
+  },
+  "jobs": {
+    "build": {"stage": "build", "script": ["compile"], "artifacts": ["dist/orders-api.tar"]},
+    "unit-tests": {"stage": "test", "script": ["unit-tests"], "needs": ["build"]},
+    "lint": {"stage": "test", "script": ["lint"], "allow_failure": true},
+    "package": {"stage": "package", "script": ["package-image"], "needs": ["build", "unit-tests"]},
+    "deploy-prod": {"stage": "deploy", "script": ["deploy"], "needs": ["package"], "when": "manual", "only_branches": ["main"]}
+  }
+}

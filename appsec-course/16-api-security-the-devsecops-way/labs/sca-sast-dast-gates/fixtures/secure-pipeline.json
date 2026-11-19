@@ -1,0 +1,83 @@
+{
+ "_note": "Security jobs embedded in the simple pipeline. Script steps are Python actions; no shell runs.",
+ "stages": [
+  "build",
+  "test",
+  "security",
+  "staging",
+  "dast",
+  "deploy"
+ ],
+ "jobs": {
+  "build": {
+   "stage": "build",
+   "script": [
+    "compile"
+   ],
+   "artifacts": [
+    "dist/orders-api.tar"
+   ]
+  },
+  "unit-tests": {
+   "stage": "test",
+   "script": [
+    "unit-tests"
+   ],
+   "needs": [
+    "build"
+   ]
+  },
+  "sca": {
+   "stage": "security",
+   "script": [
+    "sca-scan"
+   ],
+   "artifacts": [
+    "gl-sca-report.json"
+   ]
+  },
+  "sast": {
+   "stage": "security",
+   "script": [
+    "sast-scan"
+   ],
+   "artifacts": [
+    "gl-sast-report.json"
+   ]
+  },
+  "deploy-staging": {
+   "stage": "staging",
+   "script": [
+    "deploy-staging"
+   ],
+   "needs": [
+    "build"
+   ]
+  },
+  "dast": {
+   "stage": "dast",
+   "script": [
+    "dast-scan"
+   ],
+   "needs": [
+    "deploy-staging"
+   ],
+   "artifacts": [
+    "gl-dast-report.json"
+   ]
+  },
+  "deploy-prod": {
+   "stage": "deploy",
+   "script": [
+    "package-image"
+   ],
+   "needs": [
+    "build",
+    "dast"
+   ],
+   "only_branches": [
+    "main"
+   ]
+  }
+ }
+}

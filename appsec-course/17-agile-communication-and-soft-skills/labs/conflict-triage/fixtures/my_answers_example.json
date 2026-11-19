@@ -1,0 +1,15 @@
+{
+  "_note": "An example learner's answers with some typical mistakes. Copy this file to my_answers.json and replace it with your own answers.",
+  "S01": {"mode_used": "competing", "stage": 1, "recommended": "competing"},
+  "S02": {"mode_used": "avoiding", "stage": 1, "recommended": "collaborating"},
+  "S03": {"mode_used": "collaborating", "stage": 1, "recommended": "collaborating"},
+  "S04": {"mode_used": "compromising", "stage": 2, "recommended": "compromising"},
+  "S05": {"mode_used": "accommodating", "stage": 1, "recommended": "accommodating"},
+  "S06": {"mode_used": "competing", "stage": 5, "recommended": "collaborating"},
+  "S07": {"mode_used": "competing", "stage": 3, "recommended": "competing"},
+  "S08": {"mode_used": "competing", "stage": 8, "recommended": "accommodating"},
+  "S09": {"mode_used": "avoiding", "stage": 5, "recommended": "collaborating"},
+  "S10": {"mode_used": "accommodating", "stage": 1, "recommended": "accommodating"},
+  "S11": {"mode_used": "collaborating", "stage": 1, "recommended": "collaborating"},
+  "S12": {"mode_used": "compromising", "stage": 2, "recommended": "compromising"}
+}

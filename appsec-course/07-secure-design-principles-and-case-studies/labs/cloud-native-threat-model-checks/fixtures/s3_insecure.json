@@ -1,0 +1,23 @@
+{
+  "name": "shop-exports-insecure",
+  "sensitive": true,
+  "critical": true,
+  "public_access_block": {"BlockPublicAcls": false, "IgnorePublicAcls": false, "BlockPublicPolicy": false, "RestrictPublicBuckets": false},
+  "object_ownership": "ObjectWriter",
+  "encryption": {"sse": "AES256"},
+  "versioning": "Suspended",
+  "object_lock": false,
+  "access_logging": false,
+  "cloudtrail_data_events": false,
+  "policy": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {"Sid": "PublicRead", "Effect": "Allow", "Principal": "*", "Action": "s3:GetObject",
+       "Resource": "arn:aws:s3:::shop-exports-insecure/*"},
+      {"Sid": "LogDelivery", "Effect": "Allow", "Principal": {"Service": "logging.s3.amazonaws.com"},
+       "Action": "s3:PutObject", "Resource": "arn:aws:s3:::shop-exports-insecure/logs/*"},
+      {"Sid": "PartnerAll", "Effect": "Allow", "Principal": {"AWS": "arn:aws:iam::111122223333:role/partner"},
+       "Action": "s3:*", "Resource": ["arn:aws:s3:::shop-exports-insecure", "arn:aws:s3:::shop-exports-insecure/*"]}
+    ]
+  }
+}

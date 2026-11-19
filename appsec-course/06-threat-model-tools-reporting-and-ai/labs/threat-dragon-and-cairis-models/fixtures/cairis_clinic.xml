@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Simplified, CAIRIS-inspired model of a fictional clinic portal. Not the real CAIRIS export format. -->
+<cairis_model name="Clinic portal (fictional)">
+  <environment name="Day"/>
+  <environment name="Night"/>
+
+  <asset name="Patient records" type="Information"/>
+  <asset name="Appointment API" type="Software"/>
+  <asset name="Reception PC" type="Hardware"/>
+
+  <persona name="Priya (receptionist)"/>
+  <persona name="Dr Rao (doctor)"/>
+  <task name="Book appointment" persona="Priya (receptionist)"><uses asset="Appointment API"/><uses asset="Reception PC"/></task>
+  <task name="Read lab results" persona="Dr Rao (doctor)"><uses asset="Patient records"/></task>
+
+  <attacker name="Ransomware crew" capability="High" motive="Money"/>
+  <attacker name="Curious insider" capability="Low" motive="Curiosity"/>
+
+  <threat name="Phishing leads to ransomware" likelihood="Probable">
+    <target asset="Reception PC"/><attacker name="Ransomware crew"/>
+  </threat>
+  <threat name="Browsing records without a reason" likelihood="Occasional">
+    <target asset="Patient records"/><attacker name="Curious insider"/>
+  </threat>
+  <threat name="Appointment API scraped" likelihood="Remote">
+    <target asset="Appointment API"/><attacker name="Ransomware crew"/>
+  </threat>
+
+  <vulnerability name="Shared local admin password" severity="Catastrophic"/>
+  <vulnerability name="No break-glass audit" severity="Critical"/>
+  <vulnerability name="No rate limiting" severity="Marginal"/>
+
+  <risk name="R1 Ransomware via reception PC" threat="Phishing leads to ransomware" vulnerability="Shared local admin password" environment="Day"/>
+  <risk name="R2 Snooping on records" threat="Browsing records without a reason" vulnerability="No break-glass audit" environment="Night"/>
+  <risk name="R3 Scraping" threat="Appointment API scraped" vulnerability="No rate limiting" environment="Day"/>
+
+  <requirement name="Unique admin passwords via LAPS-like tool" asset="Reception PC"/>
+  <countermeasure name="Rate limit per client" asset="Appointment API"/>
+</cairis_model>

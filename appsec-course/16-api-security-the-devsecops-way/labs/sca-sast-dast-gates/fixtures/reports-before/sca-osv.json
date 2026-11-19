@@ -1,0 +1,146 @@
+{
+ "_note": "osv-scanner-like JSON (simplified). Package names and ids are FICTIONAL.",
+ "results": [
+  {
+   "source": {
+    "path": "requirements.txt",
+    "type": "lockfile"
+   },
+   "packages": [
+    {
+     "package": {
+      "name": "fastjsonx",
+      "version": "1.2.0",
+      "ecosystem": "PyPI"
+     },
+     "vulnerabilities": [
+      {
+       "id": "EXAMPLE-2026-0001",
+       "aliases": [],
+       "summary": "Unsafe deserialization in loads()",
+       "database_specific": {
+        "severity": "CRITICAL"
+       },
+       "affected": [
+        {
+         "ranges": [
+          {
+           "type": "ECOSYSTEM",
+           "events": [
+            {
+             "introduced": "0"
+            },
+            {
+             "fixed": "1.2.5"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "package": {
+      "name": "tinyjwt",
+      "version": "0.9.1",
+      "ecosystem": "PyPI"
+     },
+     "vulnerabilities": [
+      {
+       "id": "EXAMPLE-2026-0002",
+       "aliases": [],
+       "summary": "alg=none accepted",
+       "database_specific": {
+        "severity": "HIGH"
+       },
+       "affected": [
+        {
+         "ranges": [
+          {
+           "type": "ECOSYSTEM",
+           "events": [
+            {
+             "introduced": "0"
+            },
+            {
+             "fixed": "0.9.4"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "package": {
+      "name": "yamlish",
+      "version": "3.0.0",
+      "ecosystem": "PyPI"
+     },
+     "vulnerabilities": [
+      {
+       "id": "EXAMPLE-2026-0003",
+       "aliases": [],
+       "summary": "Billion laughs, no fix yet",
+       "database_specific": {
+        "severity": "HIGH"
+       },
+       "affected": [
+        {
+         "ranges": [
+          {
+           "type": "ECOSYSTEM",
+           "events": [
+            {
+             "introduced": "0"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "package": {
+      "name": "colorlog-lite",
+      "version": "2.1.0",
+      "ecosystem": "PyPI"
+     },
+     "vulnerabilities": [
+      {
+       "id": "EXAMPLE-2026-0004",
+       "aliases": [],
+       "summary": "ANSI injection in log output",
+       "database_specific": {
+        "severity": "LOW"
+       },
+       "affected": [
+        {
+         "ranges": [
+          {
+           "type": "ECOSYSTEM",
+           "events": [
+            {
+             "introduced": "0"
+            },
+            {
+             "fixed": "2.1.1"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

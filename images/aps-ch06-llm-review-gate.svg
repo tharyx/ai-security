@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>LLM-assisted threat modeling with a review gate</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="470" fill="#ffffff"/>
+<text x="40" y="46" font-size="24" font-weight="700" fill="#0f172a">LLM-assisted threat modeling with a review gate</text>
+<text x="40" y="74" font-size="15" fill="#475569">StrideGPT, ThreatCompass or any assistant: the AI drafts, a human decides.</text>
+<rect x="40" y="120" width="200" height="130" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="170.33333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Architecture</text>
+<text x="140.0" y="189.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">DFD + description</text>
+<text x="140.0" y="208.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">(synthetic or approved)</text>
+<rect x="270" y="120" width="200" height="130" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="370.0" y="170.33333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Redact</text>
+<text x="370.0" y="189.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">no IPs, hostnames,</text>
+<text x="370.0" y="208.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">secrets; or local model</text>
+<line x1="240" y1="185" x2="266" y2="185" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="500" y="120" width="200" height="130" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="600.0" y="170.33333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#6b21a8">LLM draft</text>
+<text x="600.0" y="189.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">JSON threats,</text>
+<text x="600.0" y="208.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">attack trees</text>
+<line x1="470" y1="185" x2="496" y2="185" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="730" y="120" width="200" height="130" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="830.0" y="160.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Review gate</text>
+<text x="830.0" y="179.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">schema, grounding,</text>
+<text x="830.0" y="198.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">STRIDE names, dupes,</text>
+<text x="830.0" y="217.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">coverage baseline</text>
+<line x1="700" y1="185" x2="726" y2="185" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="960" y="120" width="200" height="130" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1060.0" y="170.33333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">Human sign-off</text>
+<text x="1060.0" y="189.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">named reviewer adds</text>
+<text x="1060.0" y="208.33333333333334" text-anchor="middle" font-size="13" fill="#1e293b">missing threats</text>
+<line x1="930" y1="185" x2="956" y2="185" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="40" y="300" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">What the gate catches in the lab:</text>
+<text x="60" y="330" text-anchor="start" font-size="14" fill="#1e293b">- hallucinated component (a cache that does not exist)</text>
+<text x="60" y="354" text-anchor="start" font-size="14" fill="#1e293b">- non-STRIDE category ("Phishing")</text>
+<text x="60" y="378" text-anchor="start" font-size="14" fill="#1e293b">- duplicate threat with a different title case</text>
+<text x="60" y="402" text-anchor="start" font-size="14" fill="#1e293b">- gaps: no Repudiation at all, a boundary flow never analysed</text>
+<text x="60" y="426" text-anchor="start" font-size="14" fill="#1e293b">- prompt injection in the design doc: output is "APPROVED", not JSON -&gt; fails closed</text>
+<text x="40" y="455" text-anchor="start" font-size="13" fill="#475569">The reviewed model in git is the record, not the chat transcript. Note which tool and model drafted what.</text>
+</svg>

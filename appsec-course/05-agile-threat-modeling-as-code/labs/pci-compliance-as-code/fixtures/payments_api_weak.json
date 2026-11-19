@@ -1,0 +1,15 @@
+{
+  "system": "payments-api (first deploy)",
+  "network": {"default_inbound": "allow"},
+  "accounts": [
+    {"name": "admin", "default": true, "enabled": true},
+    {"name": "svc_payments", "default": false, "enabled": true}
+  ],
+  "storage": {"stores_cvv_after_auth": true, "pan_display_mask": "full", "pan_encrypted": false},
+  "tls": {"min_version": "1.0"},
+  "auth": {"session_idle_timeout_minutes": 60, "lockout_attempts": 0, "lockout_minutes": 0,
+           "password_min_length": 8, "mfa_for_cde_access": false},
+  "logging": {"audit_logs_enabled": false, "retention_days": 30, "time_sync": false},
+  "vuln_scans": {"internal_interval_days": 365},
+  "fim": {"enabled": false}
+}

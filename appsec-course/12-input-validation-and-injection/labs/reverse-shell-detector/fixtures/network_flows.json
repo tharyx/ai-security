@@ -1,0 +1,7 @@
+[
+  {"pid": 100, "host": "api-1", "direction": "outbound", "dst": "10.0.2.15", "dport": 5432},
+  {"pid": 600, "host": "api-1", "direction": "outbound", "dst": "10.0.3.20", "dport": 9000},
+  {"pid": 300, "host": "api-1", "direction": "outbound", "dst": "203.0.113.50", "dport": 4444},
+  {"pid": 401, "host": "api-2", "direction": "outbound", "dst": "203.0.113.77", "dport": 443},
+  {"pid": 500, "host": "worker-1", "direction": "outbound", "dst": "198.51.100.23", "dport": 8443}
+]

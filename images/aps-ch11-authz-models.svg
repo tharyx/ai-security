@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>API authorization: three levels, four models, one decision point</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="600" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">API authorization: three levels, four models, one decision point</text>
+<text x="40" y="74" font-size="15" fill="#475569">Every request needs a function check, an object check and a property check. A PDP keeps the rules in one tested place.</text>
+<rect x="40" y="110" width="170" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="125" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Client</text>
+<text x="125" y="162" text-anchor="middle" font-size="13" fill="#475569">token + request</text>
+<line x1="210" y1="145" x2="258" y2="145" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="260" y="110" width="250" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="385" y="138" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">1 Function level (BFLA)</text>
+<text x="385" y="160" text-anchor="middle" font-size="13" fill="#1e3a8a">router: may this role call the route?</text>
+<line x1="510" y1="145" x2="558" y2="145" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="560" y="110" width="250" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="685" y="138" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">2 Object level (BOLA)</text>
+<text x="685" y="160" text-anchor="middle" font-size="13" fill="#1e3a8a">handler: is trip 5002 yours?</text>
+<line x1="810" y1="145" x2="858" y2="145" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="860" y="110" width="300" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1010" y="138" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">3 Property level (BOPLA)</text>
+<text x="1010" y="160" text-anchor="middle" font-size="13" fill="#1e3a8a">serializer: may you read or write role?</text>
+<line x1="385" y1="180" x2="560" y2="262" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="685" y1="180" x2="660" y2="258" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="1010" y1="180" x2="770" y2="262" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="470" y="262" width="380" height="80" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="660" y="294" text-anchor="middle" font-size="17" font-weight="700" fill="#065f46">Policy decision point (PDP)</text>
+<text x="660" y="318" text-anchor="middle" font-size="13" fill="#065f46">decide(subject, action, resource, env), deny by default</text>
+<text x="660" y="336" text-anchor="middle" font-size="12" fill="#065f46">OPA/Rego, Cedar, OpenFGA, Casbin: policies tested in CI</text>
+<line x1="660" y1="342" x2="660" y2="388" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="680" y="372" font-size="13" fill="#475569">uses one or more models</text>
+<rect x="40" y="392" width="270" height="170" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="175" y="420" text-anchor="middle" font-size="16" font-weight="700" fill="#9a3412">RBAC</text>
+<text x="175" y="446" text-anchor="middle" font-size="13" fill="#7c2d12">user, roles, permissions</text>
+<text x="175" y="468" text-anchor="middle" font-size="13" fill="#7c2d12">admin &gt; editor &gt; viewer</text>
+<text x="175" y="498" text-anchor="middle" font-size="12" fill="#475569">Oracle: GRANT role TO user</text>
+<text x="175" y="530" text-anchor="middle" font-size="12" fill="#475569">best for: function level</text>
+<rect x="330" y="392" width="270" height="170" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="465" y="420" text-anchor="middle" font-size="16" font-weight="700" fill="#9a3412">DAC</text>
+<text x="465" y="446" text-anchor="middle" font-size="13" fill="#7c2d12">owner grants access</text>
+<text x="465" y="468" text-anchor="middle" font-size="13" fill="#7c2d12">rights can be re-granted</text>
+<text x="465" y="498" text-anchor="middle" font-size="12" fill="#475569">Oracle: GRANT SELECT ON t TO u</text>
+<text x="465" y="530" text-anchor="middle" font-size="12" fill="#475569">best for: user sharing</text>
+<rect x="620" y="392" width="270" height="170" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="755" y="420" text-anchor="middle" font-size="16" font-weight="700" fill="#9a3412">ABAC</text>
+<text x="755" y="446" text-anchor="middle" font-size="13" fill="#7c2d12">rules over attributes:</text>
+<text x="755" y="468" text-anchor="middle" font-size="13" fill="#7c2d12">subject, resource, action, env</text>
+<text x="755" y="498" text-anchor="middle" font-size="12" fill="#475569">Oracle: VPD predicate</text>
+<text x="755" y="530" text-anchor="middle" font-size="12" fill="#475569">best for: context, ownership</text>
+<rect x="910" y="392" width="250" height="170" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="1035" y="420" text-anchor="middle" font-size="16" font-weight="700" fill="#9a3412">ReBAC</text>
+<text x="1035" y="446" text-anchor="middle" font-size="13" fill="#7c2d12">tuples: doc, viewer, team#member</text>
+<text x="1035" y="468" text-anchor="middle" font-size="13" fill="#7c2d12">graph walk, bounded depth</text>
+<text x="1035" y="498" text-anchor="middle" font-size="12" fill="#475569">Zanzibar, OpenFGA, SpiceDB</text>
+<text x="1035" y="530" text-anchor="middle" font-size="12" fill="#475569">best for: orgs, folders, sharing</text>
+<text x="40" y="588" font-size="13" fill="#b91c1c">No authorization (logged in = allowed) is what you get when you forget. It causes most BOLA and BFLA bugs.</text>
+</svg>

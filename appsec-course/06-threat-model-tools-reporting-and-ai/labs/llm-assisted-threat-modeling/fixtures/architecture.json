@@ -1,0 +1,15 @@
+{
+  "name": "Shop",
+  "description": "Customers log in to the Web App over HTTPS. The Web App calls the Orders API, which reads and writes the Orders DB (db01.corp.internal at 10.20.30.40). Admins use the same login page. Backups go to a storage bucket every night.",
+  "elements": [
+    {"name": "Customer", "kind": "external"},
+    {"name": "Web App", "kind": "process"},
+    {"name": "Orders API", "kind": "process"},
+    {"name": "Orders DB", "kind": "datastore"}
+  ],
+  "flows": [
+    {"from": "Customer", "to": "Web App", "crosses_boundary": true},
+    {"from": "Web App", "to": "Orders API", "crosses_boundary": true},
+    {"from": "Orders API", "to": "Orders DB", "crosses_boundary": false}
+  ]
+}

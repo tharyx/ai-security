@@ -1,0 +1,13 @@
+{
+  "_comment": "FICTIONAL ShopCo threats tagged with ATT&CK technique IDs (verify IDs at attack.mitre.org).",
+  "threats": [
+    {"id": "TH1", "title": "Credential stuffing against customer login", "attack": ["T1110.004"], "min_skill": 1, "access": "external"},
+    {"id": "TH2", "title": "SQL injection in the orders API", "attack": ["T1190"], "min_skill": 2, "access": "external"},
+    {"id": "TH3", "title": "Refund fraud with a phished support account", "attack": ["T1566", "T1078", "T1565"], "min_skill": 3, "access": "external"},
+    {"id": "TH4", "title": "Bulk export of the customer table by staff", "attack": ["T1213", "T1567"], "min_skill": 2, "access": "internal"},
+    {"id": "TH5", "title": "Ransomware encrypts the orders database", "attack": ["T1486"], "min_skill": 4, "access": "external"},
+    {"id": "TH6", "title": "Layer-7 flood during a sale", "attack": ["T1499"], "min_skill": 1, "access": "external"},
+    {"id": "TH7", "title": "Forged payment webhook marks orders as paid", "attack": [], "min_skill": 2, "access": "external"},
+    {"id": "TH8", "title": "Malicious package injected into the web build", "attack": ["T1195"], "min_skill": 5, "access": "external"}
+  ]
+}

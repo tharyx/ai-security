@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Rate limiting at every stage</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="480" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">Each stage sees a different identity, so each stops a different attack</text>
+<text x="40" y="76" font-size="15" fill="#475569">Drop cheap junk early; apply business rules where the business context exists.</text>
+<rect x="40" y="120" width="190" height="200" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="135" y="152" text-anchor="middle" font-size="17" font-weight="700" fill="#1e293b">Reverse proxy</text>
+<text x="135" y="182" text-anchor="middle" font-size="13" fill="#475569">knows: client IP</text>
+<text x="135" y="210" text-anchor="middle" font-size="13" fill="#1e293b">per-IP limit_req</text>
+<text x="135" y="232" text-anchor="middle" font-size="13" fill="#1e293b">body size, timeouts</text>
+<text x="135" y="290" text-anchor="middle" font-size="13" fill="#065f46">stops: single-IP flood</text>
+<rect x="270" y="120" width="190" height="200" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="365" y="152" text-anchor="middle" font-size="17" font-weight="700" fill="#1e293b">Load balancer</text>
+<text x="365" y="182" text-anchor="middle" font-size="13" fill="#475569">knows: pool capacity</text>
+<text x="365" y="210" text-anchor="middle" font-size="13" fill="#1e293b">max connections</text>
+<text x="365" y="232" text-anchor="middle" font-size="13" fill="#1e293b">load shedding (503)</text>
+<text x="365" y="290" text-anchor="middle" font-size="13" fill="#065f46">stops: botnet overload</text>
+<rect x="500" y="120" width="210" height="200" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="605" y="152" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">API gateway + WAF</text>
+<text x="605" y="182" text-anchor="middle" font-size="13" fill="#475569">knows: API key, token</text>
+<text x="605" y="210" text-anchor="middle" font-size="13" fill="#1e293b">per-key quotas, plans</text>
+<text x="605" y="232" text-anchor="middle" font-size="13" fill="#1e293b">injection signatures</text>
+<text x="605" y="290" text-anchor="middle" font-size="13" fill="#065f46">stops: key abuse, SQLi probes</text>
+<rect x="750" y="120" width="210" height="200" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="855" y="152" text-anchor="middle" font-size="17" font-weight="700" fill="#065f46">Application</text>
+<text x="855" y="182" text-anchor="middle" font-size="13" fill="#475569">knows: user, account, object</text>
+<text x="855" y="210" text-anchor="middle" font-size="13" fill="#1e293b">per-account login limit</text>
+<text x="855" y="232" text-anchor="middle" font-size="13" fill="#1e293b">business-flow limits</text>
+<text x="855" y="290" text-anchor="middle" font-size="13" fill="#065f46">stops: distributed spraying</text>
+<rect x="1000" y="160" width="160" height="120" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1080" y="210" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Database /</text>
+<text x="1080" y="232" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">downstream</text>
+<line x1="230" y1="220" x2="266" y2="220" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="460" y1="220" x2="496" y2="220" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="710" y1="220" x2="746" y2="220" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="960" y1="220" x2="996" y2="220" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="360" width="1120" height="80" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="60" y="390" font-size="14" fill="#1e293b">Rate limiting rejects (429 + Retry-After). Throttling delays requests to a steady rate, then rejects when the wait is too long.</text>
+<text x="60" y="418" font-size="14" fill="#1e293b">Algorithms: fixed window (2x boundary burst), sliding log, sliding counter, token bucket, leaky bucket. Lab: request-throttling.</text>
+</svg>

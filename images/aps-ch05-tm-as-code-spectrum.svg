@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Threat models inside, alongside, with and as code</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="470" fill="#ffffff"/>
+<text x="40" y="46" font-size="24" font-weight="700" fill="#0f172a">Threat models inside, alongside, with and as code</text>
+<text x="40" y="74" font-size="15" fill="#475569">Four notations for the same idea: the model is text in git, reviewed in merge requests and checked in CI.</text>
+<rect x="40" y="110" width="255" height="130" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="167.5" y="150.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">Inside the code</text>
+<text x="167.5" y="169.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b"># @exposes Web to Tampering</text>
+<text x="167.5" y="188.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b"># @mitigates Web against ...</text>
+<text x="167.5" y="207.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">ThreatSpec idea (legacy)</text>
+<rect x="325" y="110" width="255" height="130" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="452.5" y="150.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Alongside the code</text>
+<text x="452.5" y="169.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">threatmodel/ next to src/</text>
+<text x="452.5" y="188.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">versioned with each change</text>
+<text x="452.5" y="207.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">Threat Dragon JSON, Markdown</text>
+<rect x="610" y="110" width="255" height="130" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="737.5" y="150.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">With code</text>
+<text x="737.5" y="169.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">model is a Python program</text>
+<text x="737.5" y="188.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">Server(), Dataflow(), Boundary()</text>
+<text x="737.5" y="207.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">OWASP pytm</text>
+<rect x="895" y="110" width="255" height="130" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="1022.5" y="150.83333333333334" text-anchor="middle" font-size="14" font-weight="700" fill="#6b21a8">As code</text>
+<text x="1022.5" y="169.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">declarative YAML or JSON</text>
+<text x="1022.5" y="188.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">tool applies risk rules</text>
+<text x="1022.5" y="207.83333333333334" text-anchor="middle" font-size="13" fill="#1e293b">Threagile</text>
+<text x="600" y="280" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">one CI job turns any of them into</text>
+<rect x="40" y="310" width="255" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="167.5" y="340.3333333333333" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Report</text>
+<text x="167.5" y="359.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">template per audience</text>
+<text x="167.5" y="378.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">(exec, developer, CSV)</text>
+<line x1="167" y1="240" x2="167" y2="306" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="325" y="310" width="255" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="452.5" y="340.3333333333333" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Diagrams</text>
+<text x="452.5" y="359.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">DFD (Graphviz), sequence</text>
+<text x="452.5" y="378.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">(PlantUML), Mermaid</text>
+<line x1="452" y1="240" x2="452" y2="306" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="610" y="310" width="255" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="737.5" y="340.3333333333333" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Requirements</text>
+<text x="737.5" y="359.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">threat -&gt; REQ id -&gt;</text>
+<text x="737.5" y="378.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">backlog item and test</text>
+<line x1="737" y1="240" x2="737" y2="306" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="895" y="310" width="255" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1022.5" y="340.3333333333333" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Gate</text>
+<text x="1022.5" y="359.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">High finding with no</text>
+<text x="1022.5" y="378.3333333333333" text-anchor="middle" font-size="13" fill="#1e293b">mitigation or acceptance = fail</text>
+<line x1="1022" y1="240" x2="1022" y2="306" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="40" y="445" text-anchor="start" font-size="13" fill="#475569">A pipeline proves the model is consistent, not complete: a data flow nobody wrote down produces no finding.</text>
+</svg>

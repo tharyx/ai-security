@@ -1,0 +1,17 @@
+{
+  "team": "Team B",
+  "threats": [
+    {"element": "customer", "stride": "S", "text": "Credential stuffing", "mitigation": "Rate limit + breached password check + MFA"},
+    {"element": "F1", "stride": "I", "text": "Traffic interception", "mitigation": "TLS + HSTS"},
+    {"element": "web", "stride": "D", "text": "Layer-7 flood", "mitigation": "WAF rate limiting"},
+    {"element": "api", "stride": "E", "text": "Order id enumeration (BOLA)", "mitigation": "WHERE owner_id = :me on every lookup"},
+    {"element": "api", "stride": "T", "text": "SQL injection", "mitigation": "Bind variables"},
+    {"element": "api", "stride": "R", "text": "Refund approvals not attributable", "mitigation": "Audit events to append-only log"},
+    {"element": "db", "stride": "I", "text": "Backup bucket exposure", "mitigation": "Encrypt + private bucket"},
+    {"element": "queue", "stride": "T", "text": "Fake OrderPlaced events", "mitigation": "Producer auth + signed messages"},
+    {"element": "queue", "stride": "D", "text": "Poison messages", "mitigation": "Dead-letter queue"},
+    {"element": "payment_provider", "stride": "S", "text": "Forged webhook", "mitigation": "Verify HMAC signature + timestamp"},
+    {"element": "admin", "stride": "S", "text": "Phished admin", "mitigation": "Phishing-resistant MFA"},
+    {"element": "worker", "stride": "E", "text": "Worker over-privileged in DB", "mitigation": "Least-privilege DB role"}
+  ]
+}

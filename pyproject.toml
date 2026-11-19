@@ -23,4 +23,4 @@ packages = ["aisec_lab"]
 
 [tool.pytest.ini_options]
 addopts = "--import-mode=importlib -q"
-testpaths = ["aisec_lab", "01-ai-security-fundamentals", "02-llm-security", "03-rag-security", "04-mcp-security", "05-agent-security", "06-ai-devsecops", "07-ai-governance", "08-ai-compliance", "09-enterprise-architecture", "10-capstone-project", "cybersecurity-track", "caisp-course", "cmcpse-course", "caase-course", "csse-course", "devsecops-course"]
+testpaths = ["aisec_lab", "01-ai-security-fundamentals", "02-llm-security", "03-rag-security", "04-mcp-security", "05-agent-security", "06-ai-devsecops", "07-ai-governance", "08-ai-compliance", "09-enterprise-architecture", "10-capstone-project", "cybersecurity-track", "caisp-course", "cmcpse-course", "caase-course", "csse-course", "devsecops-course", "appsec-course"]

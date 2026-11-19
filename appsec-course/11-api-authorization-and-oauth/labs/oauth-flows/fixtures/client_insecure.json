@@ -1,0 +1,12 @@
+{
+  "client_id": "legacy-spa",
+  "public_client": true,
+  "grant_types": ["implicit", "password", "authorization_code", "refresh_token"],
+  "require_pkce": false,
+  "redirect_uris": ["https://app.lab.example/*", "http://app.lab.example/callback"],
+  "redirect_uri_matching": "prefix",
+  "access_token_ttl_seconds": 86400,
+  "refresh_token_rotation": false,
+  "allow_token_in_query": true,
+  "require_state": false
+}

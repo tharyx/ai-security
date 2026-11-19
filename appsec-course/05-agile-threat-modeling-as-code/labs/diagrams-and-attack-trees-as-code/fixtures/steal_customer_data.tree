@@ -1,0 +1,10 @@
+# Attack tree as code. Two spaces per level. Costs are rough attacker effort in USD; p is a guess.
+OR: Read another customer's order history
+  AND: Take over a customer account
+    LEAF: Get the customer's password from a breach list [id=L1, cost=50, p=0.30]
+    LEAF: Log in without a second factor [id=L2, cost=0, p=0.90]
+  LEAF: Change order_id in the API call (BOLA) [id=L3, cost=10, p=0.60]
+  AND: Read the database directly
+    LEAF: Phish a support engineer [id=L4, cost=300, p=0.20]
+    LEAF: Use the shared read-only DB login [id=L5, cost=0, p=0.80]
+  LEAF: Restore a stolen unencrypted backup [id=L6, cost=2000, p=0.05]

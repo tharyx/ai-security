@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Thomas-Kilmann modes and Glasl escalation levels</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">Name the mode, name the stage, then choose your move</text>
+<text x="40" y="76" font-size="15" fill="#475569">Left: Thomas-Kilmann conflict modes. Right: Glasl's nine escalation stages in three levels (stage names vary by translation).</text>
+<line x1="90" y1="470" x2="560" y2="470" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="90" y1="470" x2="90" y2="110" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="325" y="500" text-anchor="middle" font-size="14" fill="#1e293b">Cooperativeness (their concerns)</text>
+<text x="60" y="290" text-anchor="middle" font-size="14" fill="#1e293b" transform="rotate(-90 60 290)">Assertiveness (my concerns)</text>
+<rect x="110" y="125" width="170" height="80" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+<text x="195" y="158" text-anchor="middle" font-size="16" font-weight="700" fill="#7f1d1d">Competing</text>
+<text x="195" y="182" text-anchor="middle" font-size="12" fill="#7f1d1d">active incident, critical risk</text>
+<rect x="380" y="125" width="170" height="80" rx="10" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+<text x="465" y="158" text-anchor="middle" font-size="16" font-weight="700" fill="#065f46">Collaborating</text>
+<text x="465" y="182" text-anchor="middle" font-size="12" fill="#065f46">high stakes, time available</text>
+<rect x="245" y="250" width="170" height="80" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+<text x="330" y="283" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Compromising</text>
+<text x="330" y="307" text-anchor="middle" font-size="12" fill="#92400e">time-boxed settlement</text>
+<rect x="110" y="375" width="170" height="80" rx="10" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="195" y="408" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Avoiding</text>
+<text x="195" y="432" text-anchor="middle" font-size="12" fill="#334155">trivial, or cool off briefly</text>
+<rect x="380" y="375" width="170" height="80" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="465" y="408" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Accommodating</text>
+<text x="465" y="432" text-anchor="middle" font-size="12" fill="#1e3a8a">low stakes, build goodwill</text>
+<rect x="640" y="110" width="520" height="120" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="660" y="138" font-size="16" font-weight="700" fill="#065f46">Level 1: win-win (parties solve it themselves)</text>
+<text x="660" y="164" font-size="13" fill="#1e293b">1 Hardening   2 Debate and polemics   3 Actions, not words</text>
+<text x="660" y="192" font-size="13" fill="#475569">Move: call instead of chat, restate the shared goal, agree criteria,</text>
+<text x="660" y="212" font-size="13" fill="#475569">restore the agreed process.</text>
+<rect x="640" y="245" width="520" height="120" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="660" y="273" font-size="16" font-weight="700" fill="#92400e">Level 2: win-lose (facilitator or manager needed)</text>
+<text x="660" y="299" font-size="13" fill="#1e293b">4 Images and coalitions   5 Loss of face   6 Strategies of threat</text>
+<text x="660" y="327" font-size="13" fill="#475569">Move: neutral facilitator, private talks first, help both save face,</text>
+<text x="660" y="347" font-size="13" fill="#475569">never decide under an ultimatum; route to the accountable owner.</text>
+<rect x="640" y="380" width="520" height="90" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+<text x="660" y="408" font-size="16" font-weight="700" fill="#7f1d1d">Level 3: lose-lose (formal intervention)</text>
+<text x="660" y="434" font-size="13" fill="#1e293b">7 Limited destructive blows   8 Fragmentation   9 Together into the abyss</text>
+<text x="660" y="456" font-size="13" fill="#475569">Move: escalate formally (management, HR); protect people and systems.</text>
+<text x="40" y="540" font-size="13" fill="#475569">Lab: conflict-triage scores your mode, stage and recommended response against an answer key. Models are maps, not labels for people.</text>
+</svg>

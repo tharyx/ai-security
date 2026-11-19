@@ -1,0 +1,25 @@
+{
+  "name": "Multi-cloud analytics pipeline",
+  "components": [
+    {"name": "Raw uploads (AWS)", "type": "aws-s3", "zone": "AWS"},
+    {"name": "Ingest function (AWS)", "type": "aws-lambda", "zone": "AWS"},
+    {"name": "Curated data (Azure)", "type": "azure-blob", "zone": "Azure"},
+    {"name": "Scoring function (Azure)", "type": "azure-function", "zone": "Azure"},
+    {"name": "Archive (Google Cloud)", "type": "gcp-gcs", "zone": "Google Cloud"},
+    {"name": "AWS to Azure copy job", "type": "cross-cloud-link", "zone": "Between clouds"}
+  ],
+  "answers": {
+    "Raw uploads (AWS)": {"stores_pii": true},
+    "Curated data (Azure)": {"stores_pii": true},
+    "Archive (Google Cloud)": {"stores_pii": true},
+    "AWS to Azure copy job": {"uses_static_keys": true}
+  },
+  "states": {
+    "CM-NOPUBLIC@Raw uploads (AWS)": "Implemented",
+    "CM-NOPUBLIC@Curated data (Azure)": "Required",
+    "CM-NOPUBLIC@Archive (Google Cloud)": "Implemented",
+    "CM-FNROLE@Ingest function (AWS)": "Implemented",
+    "CM-FNROLE@Scoring function (Azure)": "Implemented",
+    "CM-WIF@AWS to Azure copy job": "Required"
+  }
+}

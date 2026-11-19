@@ -1,0 +1,53 @@
+[
+ {
+  "name": "orders-api",
+  "level": 2,
+  "features": [
+   "jwt"
+  ],
+  "owner": "team-orders",
+  "spec": "openapi/orders.yaml",
+  "behind_gateway": true,
+  "live": true,
+  "last_deploy_year": 2026
+ },
+ {
+  "name": "payments-api",
+  "level": 3,
+  "features": [
+   "oauth",
+   "jwt",
+   "webhooks"
+  ],
+  "owner": "team-payments",
+  "spec": "openapi/payments.yaml",
+  "behind_gateway": true,
+  "live": true,
+  "last_deploy_year": 2026
+ },
+ {
+  "name": "catalog-graphql",
+  "level": 1,
+  "features": [
+   "graphql"
+  ],
+  "owner": "team-catalog",
+  "spec": "schema/catalog.graphql",
+  "behind_gateway": true,
+  "live": true,
+  "last_deploy_year": 2026
+ },
+ {
+  "name": "legacy-soap",
+  "level": 2,
+  "features": [
+   "soap"
+  ],
+  "owner": null,
+  "spec": null,
+  "behind_gateway": false,
+  "deprecated": true,
+  "live": true,
+  "last_deploy_year": 2021
+ }
+]

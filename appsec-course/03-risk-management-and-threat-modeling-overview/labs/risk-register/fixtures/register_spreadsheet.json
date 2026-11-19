@@ -1,0 +1,19 @@
+{
+  "_comment": "FICTIONAL ShopCo register, kept the 'spreadsheet' way: decisions with no evidence.",
+  "risks": [
+    {"id": "R-01", "title": "Card numbers written to debug logs (PCI DSS)", "source": "compliance",
+     "likelihood": 4, "impact": 5, "treatment": "accept", "owner": "dev-team",
+     "accepted_by": "team-lead", "reason": "", "review_date": ""},
+    {"id": "R-02", "title": "Password reset tokens are predictable", "source": "design",
+     "likelihood": 4, "impact": 4, "treatment": "mitigate", "owner": "auth-team", "controls": []},
+    {"id": "R-03", "title": "Outdated XML library with a known CVE in the orders API", "source": "vulnerability",
+     "likelihood": 3, "impact": 4, "treatment": "mitigate", "owner": "",
+     "controls": [{"name": "We will upgrade later", "reduces": "likelihood", "by": 0}]},
+    {"id": "R-04", "title": "Orders database lost to ransomware", "source": "vulnerability",
+     "likelihood": 2, "impact": 5, "treatment": "transfer", "owner": "ops",
+     "transfer_to": "", "transfer_reduces": 3,
+     "business_service": "checkout", "critical_service": true, "bcp_ref": ""},
+    {"id": "R-05", "title": "Legacy CSV export of all customers", "source": "design",
+     "likelihood": 3, "impact": 4, "treatment": "avoid", "owner": "product", "change": ""}
+  ]
+}

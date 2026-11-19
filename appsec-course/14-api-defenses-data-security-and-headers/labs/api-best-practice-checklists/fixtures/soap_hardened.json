@@ -1,0 +1,10 @@
+{
+  "name": "payments-soap (hardened)",
+  "environment": "production",
+  "wsdl_public": false,
+  "xml": {"dtd_processing": false, "external_entities": false, "schema_validation": true, "max_message_bytes": 262144},
+  "ws_security": {"require_signature": true, "require_timestamp": true, "process_signed_element_only": true},
+  "soapaction_must_match_body": true,
+  "transport": {"tls": true},
+  "faults": {"include_stacktrace": false}
+}

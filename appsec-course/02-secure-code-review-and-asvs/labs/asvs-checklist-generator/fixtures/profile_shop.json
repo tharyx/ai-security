@@ -1,0 +1,5 @@
+{
+  "name": "Toy shop (web + JSON API, cookie sessions, passwords)",
+  "level": 2,
+  "features": ["web", "api", "cookies", "passwords"]
+}

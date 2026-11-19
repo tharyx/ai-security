@@ -1,0 +1,18 @@
+{
+  "_comment": "Small hand-copied subset of MITRE ATT&CK Enterprise for teaching. Verify IDs, names and tactics at attack.mitre.org (ATT&CK is versioned).",
+  "T1566": {"name": "Phishing", "tactics": ["Initial Access"]},
+  "T1190": {"name": "Exploit Public-Facing Application", "tactics": ["Initial Access"]},
+  "T1195": {"name": "Supply Chain Compromise", "tactics": ["Initial Access"]},
+  "T1078": {"name": "Valid Accounts", "tactics": ["Initial Access", "Persistence", "Privilege Escalation", "Defense Evasion"]},
+  "T1110": {"name": "Brute Force", "tactics": ["Credential Access"]},
+  "T1110.004": {"name": "Brute Force: Credential Stuffing", "tactics": ["Credential Access"]},
+  "T1552": {"name": "Unsecured Credentials", "tactics": ["Credential Access"]},
+  "T1098": {"name": "Account Manipulation", "tactics": ["Persistence", "Privilege Escalation"]},
+  "T1213": {"name": "Data from Information Repositories", "tactics": ["Collection"]},
+  "T1530": {"name": "Data from Cloud Storage", "tactics": ["Collection"]},
+  "T1567": {"name": "Exfiltration Over Web Service", "tactics": ["Exfiltration"]},
+  "T1486": {"name": "Data Encrypted for Impact", "tactics": ["Impact"]},
+  "T1498": {"name": "Network Denial of Service", "tactics": ["Impact"]},
+  "T1499": {"name": "Endpoint Denial of Service", "tactics": ["Impact"]},
+  "T1565": {"name": "Data Manipulation", "tactics": ["Impact"]}
+}

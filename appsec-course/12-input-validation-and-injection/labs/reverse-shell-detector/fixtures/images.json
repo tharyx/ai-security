@@ -1,0 +1,4 @@
+[
+  {"image": "shop-api:1.4 (debian-based)", "user": "root", "files": ["/bin/sh", "/bin/bash", "/usr/bin/python3", "/usr/bin/ncat"]},
+  {"image": "shop-api:2.0 (distroless)", "user": "65532", "files": ["/usr/bin/python3", "/app/app.py"]}
+]

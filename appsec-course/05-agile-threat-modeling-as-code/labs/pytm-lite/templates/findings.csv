@@ -1,0 +1,3 @@
+sid,severity,stride,target,requirement
+{findings:repeat:{{item.sid}},{{item.severity}},{{item.stride}},{{item.target}},{{item.requirement}}
+}

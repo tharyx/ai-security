@@ -1,0 +1,4 @@
+chapter_id,chapter_name,req_id,req_description,level
+V1,Encoding and Sanitization,SAMPLE-1.2.1,Sample row standing in for an official requirement about output encoding.,1
+V8,Authorization,SAMPLE-8.2.1,Sample row standing in for an official requirement about object-level access checks.,1
+V16,Security Logging and Error Handling,SAMPLE-16.4.1,Sample row standing in for an official requirement about log protection.,3

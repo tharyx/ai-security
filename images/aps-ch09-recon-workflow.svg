@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>API reconnaissance workflow (authorized testing only)</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="420" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">API reconnaissance workflow (authorized testing only)</text>
+<text x="40" y="74" font-size="15" fill="#475569">Collect what is documented, discover what is not, then compare. Differences are where bugs hide.</text>
+<rect x="40" y="120" width="210" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="145.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">1. Docs and spec</text>
+<text x="145.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">OpenAPI, SDKs, JS</text>
+<rect x="270" y="120" width="210" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="375.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">2. Inventory</text>
+<text x="375.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">versions, hosts, auth</text>
+<line x1="250" y1="165" x2="268" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="500" y="120" width="210" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="605.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">3. Discovery</text>
+<text x="605.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">wordlists; 404 vs 401</text>
+<line x1="480" y1="165" x2="498" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="730" y="120" width="210" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="835.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">4. Compare</text>
+<text x="835.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e3a8a">shadow + zombie</text>
+<line x1="710" y1="165" x2="728" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="960" y="120" width="210" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1065.0" y="159.7" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">5. Behaviour</text>
+<text x="1065.0" y="179.7" text-anchor="middle" font-size="14" font-weight="400" fill="#78350f">enumeration, errors</text>
+<line x1="940" y1="165" x2="958" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="250" width="540" height="120" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="54" y="274.7" text-anchor="start" font-size="14" font-weight="700" fill="#7f1d1d">Signals that leak</text>
+<text x="54" y="294.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">status code differs (404 vs 401 vs 403)</text>
+<text x="54" y="314.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">body length or message differs</text>
+<text x="54" y="334.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">response time differs</text>
+<text x="54" y="354.7" text-anchor="start" font-size="14" font-weight="400" fill="#7f1d1d">old versions still answer (/v1 vs /v2)</text>
+<rect x="620" y="250" width="540" height="120" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="634" y="274.7" text-anchor="start" font-size="14" font-weight="700" fill="#14532d">Defenses</text>
+<text x="634" y="294.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">keep an API inventory, retire old versions</text>
+<text x="634" y="314.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">uniform errors and timing for auth flows</text>
+<text x="634" y="334.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">gateway rate limits + alerting on 404 bursts</text>
+<text x="634" y="354.7" text-anchor="start" font-size="14" font-weight="400" fill="#14532d">spec-first: undocumented routes fail CI</text>
+</svg>

@@ -1,0 +1,20 @@
+{
+  "_comment": "FICTIONAL Mozilla-style Rapid Risk Assessment (DRAFT with one rating mistake) for the password reset service.",
+  "service": "ShopCo password reset service",
+  "owner": "auth-lead",
+  "data_dictionary": [
+    {"data": "Customer email address", "classification": "CONFIDENTIAL"},
+    {"data": "Reset token (hash only at rest)", "classification": "RESTRICTED"},
+    {"data": "Reset event counts", "classification": "INTERNAL"}
+  ],
+  "scenarios": [
+    {"name": "Attacker resets a victim's password (account takeover)", "data_exposed": ["Customer email address", "Reset token (hash only at rest)"], "confidentiality": "MAXIMUM", "integrity": "HIGH", "availability": "LOW", "likelihood": "MEDIUM"},
+    {"name": "Reset endpoint used to enumerate customers", "data_exposed": ["Customer email address"], "confidentiality": "MEDIUM", "integrity": "LOW", "availability": "LOW", "likelihood": "HIGH"},
+    {"name": "Email provider outage blocks resets", "data_exposed": [], "confidentiality": "LOW", "integrity": "LOW", "availability": "MEDIUM", "likelihood": "LOW"}
+  ],
+  "recommendations": [
+    "CSPRNG single-use tokens, 15-minute expiry, hash at rest (SR-01, SR-04, SR-05, SR-06)",
+    "Uniform responses and per-account rate limit (SR-02, SR-10)",
+    "Secondary email provider or status-page message during outages"
+  ]
+}

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>OWASP API Security Top 10: 2019 to 2023</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="640" fill="#ffffff"/>
+<text x="40" y="44" font-size="26" font-weight="700" fill="#0f172a">OWASP API Security Top 10: 2019 to 2023</text>
+<text x="40" y="70" font-size="15" fill="#475569">2023 is the current edition. Two items merged, two were dropped, three are new.</text>
+<text x="40" y="104" font-size="16" font-weight="700" fill="#0f172a">2019</text>
+<text x="760" y="104" font-size="16" font-weight="700" fill="#0f172a">2023</text>
+<g font-size="13">
+<rect x="40" y="114" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="52" y="138" fill="#1e293b">API1 Broken Object Level Authorization</text>
+<rect x="40" y="160" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="52" y="184" fill="#1e293b">API2 Broken User Authentication</text>
+<rect x="40" y="206" width="400" height="38" rx="6" fill="#fff7ed" stroke="#ea580c"/><text x="52" y="230" fill="#9a3412">API3 Excessive Data Exposure</text>
+<rect x="40" y="252" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="52" y="276" fill="#1e293b">API4 Lack of Resources &amp; Rate Limiting</text>
+<rect x="40" y="298" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="52" y="322" fill="#1e293b">API5 Broken Function Level Authorization</text>
+<rect x="40" y="344" width="400" height="38" rx="6" fill="#fff7ed" stroke="#ea580c"/><text x="52" y="368" fill="#9a3412">API6 Mass Assignment</text>
+<rect x="40" y="390" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="52" y="414" fill="#1e293b">API7 Security Misconfiguration</text>
+<rect x="40" y="436" width="400" height="38" rx="6" fill="#fef2f2" stroke="#dc2626"/><text x="52" y="460" fill="#991b1b">API8 Injection (dropped as an API item)</text>
+<rect x="40" y="482" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="52" y="506" fill="#1e293b">API9 Improper Assets Management</text>
+<rect x="40" y="528" width="400" height="38" rx="6" fill="#fef2f2" stroke="#dc2626"/><text x="52" y="552" fill="#991b1b">API10 Insufficient Logging &amp; Monitoring (dropped)</text>
+<rect x="760" y="114" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="772" y="138" fill="#1e293b">API1 Broken Object Level Authorization</text>
+<rect x="760" y="160" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="772" y="184" fill="#1e293b">API2 Broken Authentication</text>
+<rect x="760" y="206" width="400" height="38" rx="6" fill="#fff7ed" stroke="#ea580c"/><text x="772" y="230" fill="#9a3412">API3 Broken Object Property Level Authz</text>
+<rect x="760" y="252" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="772" y="276" fill="#1e293b">API4 Unrestricted Resource Consumption</text>
+<rect x="760" y="298" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="772" y="322" fill="#1e293b">API5 Broken Function Level Authorization</text>
+<rect x="760" y="344" width="400" height="38" rx="6" fill="#ecfdf5" stroke="#059669"/><text x="772" y="368" fill="#065f46">API6 Unrestricted Access to Sensitive Business Flows (new)</text>
+<rect x="760" y="390" width="400" height="38" rx="6" fill="#ecfdf5" stroke="#059669"/><text x="772" y="414" fill="#065f46">API7 Server Side Request Forgery (new)</text>
+<rect x="760" y="436" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="772" y="460" fill="#1e293b">API8 Security Misconfiguration</text>
+<rect x="760" y="482" width="400" height="38" rx="6" fill="#f8fafc" stroke="#64748b"/><text x="772" y="506" fill="#1e293b">API9 Improper Inventory Management</text>
+<rect x="760" y="528" width="400" height="38" rx="6" fill="#ecfdf5" stroke="#059669"/><text x="772" y="552" fill="#065f46">API10 Unsafe Consumption of APIs (new)</text>
+</g>
+<line x1="440" y1="133" x2="758" y2="133" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="440" y1="179" x2="758" y2="179" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="440" y1="225" x2="758" y2="225" stroke="#ea580c" stroke-width="2" marker-end="url(#a)"/>
+<line x1="440" y1="271" x2="758" y2="271" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="440" y1="317" x2="758" y2="317" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="440" y1="363" x2="758" y2="230" stroke="#ea580c" stroke-width="2" marker-end="url(#a)"/>
+<line x1="440" y1="409" x2="758" y2="455" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="440" y1="501" x2="758" y2="501" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="40" y="600" font-size="13" fill="#9a3412">Orange: Excessive Data Exposure (read) + Mass Assignment (write) = property-level authorization (BOPLA).</text>
+<text x="40" y="622" font-size="13" fill="#475569">Dropped items are still real risks: see the web OWASP Top 10:2025 (A05 Injection, A09 Logging and Alerting Failures).</text>
+</svg>

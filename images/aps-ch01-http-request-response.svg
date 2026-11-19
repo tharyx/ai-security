@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Anatomy of an HTTP request and response</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="640" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">HTTP request and response: every part is attacker-controlled input or a security control</text>
+
+<text x="40" y="96" font-size="18" font-weight="700" fill="#1e3a8a">Request (browser or proxy to server)</text>
+<rect x="40" y="110" width="540" height="44" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="56" y="138" font-family="Consolas, monospace" font-size="15" fill="#0f172a">POST /account/email?lang=en HTTP/1.1</text>
+<rect x="40" y="160" width="540" height="120" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="56" y="186" font-family="Consolas, monospace" font-size="15" fill="#0f172a">Host: shop.example</text>
+<text x="56" y="208" font-family="Consolas, monospace" font-size="15" fill="#0f172a">Cookie: session=...</text>
+<text x="56" y="230" font-family="Consolas, monospace" font-size="15" fill="#0f172a">Origin: https://shop.example</text>
+<text x="56" y="252" font-family="Consolas, monospace" font-size="15" fill="#0f172a">Content-Type: application/x-www-form-urlencoded</text>
+<rect x="40" y="286" width="540" height="22" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="4 3"/>
+<text x="56" y="302" font-size="13" fill="#475569">blank line (CRLF) ends the headers</text>
+<rect x="40" y="314" width="540" height="44" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="56" y="342" font-family="Consolas, monospace" font-size="15" fill="#0f172a">email=a%40shop.example&amp;csrf_token=...</text>
+
+<text x="600" y="138" font-size="14" fill="#1e293b">request line: method, path + query, version</text>
+<text x="600" y="208" font-size="14" fill="#1e293b">headers: cookies, origin, content type</text>
+<text x="600" y="342" font-size="14" fill="#1e293b">body: form, JSON or XML data</text>
+
+<text x="40" y="404" font-size="18" font-weight="700" fill="#065f46">Response (server to browser)</text>
+<rect x="40" y="418" width="540" height="44" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="56" y="446" font-family="Consolas, monospace" font-size="15" fill="#0f172a">HTTP/1.1 200 OK</text>
+<rect x="40" y="468" width="540" height="100" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="56" y="494" font-family="Consolas, monospace" font-size="15" fill="#0f172a">Set-Cookie: session=...; HttpOnly; Secure; SameSite=Lax</text>
+<text x="56" y="516" font-family="Consolas, monospace" font-size="15" fill="#0f172a">Content-Security-Policy: default-src 'self'</text>
+<text x="56" y="538" font-family="Consolas, monospace" font-size="15" fill="#0f172a">Cache-Control: no-store</text>
+<rect x="40" y="574" width="540" height="40" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="56" y="600" font-family="Consolas, monospace" font-size="15" fill="#0f172a">&lt;p&gt;email changed&lt;/p&gt;</text>
+
+<text x="600" y="446" font-size="14" fill="#1e293b">status line: version, code, reason phrase</text>
+<text x="600" y="516" font-size="14" fill="#1e293b">security headers are your browser-side controls</text>
+
+<rect x="860" y="380" width="300" height="234" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="1010" y="408" text-anchor="middle" font-size="16" font-weight="700" fill="#9a3412">Status code classes</text>
+<text x="880" y="438" font-size="14" fill="#1e293b">1xx informational</text>
+<text x="880" y="464" font-size="14" fill="#1e293b">2xx success (200, 201, 204)</text>
+<text x="880" y="490" font-size="14" fill="#1e293b">3xx redirect (301, 302, 304)</text>
+<text x="880" y="516" font-size="14" fill="#1e293b">4xx client error (400, 401,</text>
+<text x="880" y="536" font-size="14" fill="#1e293b">   403, 404, 405, 429)</text>
+<text x="880" y="562" font-size="14" fill="#1e293b">5xx server error (500, 502, 503)</text>
+<text x="880" y="592" font-size="13" fill="#475569">401 = who are you? 403 = not allowed</text>
+
+<rect x="860" y="110" width="300" height="200" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1010" y="138" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Never trust from the client</text>
+<text x="880" y="166" font-size="14" fill="#1e293b">path, query, body, cookies,</text>
+<text x="880" y="188" font-size="14" fill="#1e293b">headers (Host, Origin, Referer,</text>
+<text x="880" y="210" font-size="14" fill="#1e293b">X-Forwarded-For), hidden fields.</text>
+<text x="880" y="240" font-size="14" fill="#1e293b">A proxy such as Burp edits any</text>
+<text x="880" y="262" font-size="14" fill="#1e293b">byte after the browser's checks.</text>
+<text x="880" y="292" font-size="13" fill="#475569">HTTP is stateless: sessions are added</text>
+</svg>

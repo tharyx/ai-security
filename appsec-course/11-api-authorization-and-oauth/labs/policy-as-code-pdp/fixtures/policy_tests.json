@@ -1,0 +1,16 @@
+[
+  {"name": "alice reads her trip", "subject": {"id": "u-alice", "roles": ["rider"]}, "action": "trip:read",
+   "resource": {"owner_id": "u-alice", "region": "south"}, "expect": true},
+  {"name": "alice cannot read bob's trip (BOLA)", "subject": {"id": "u-alice", "roles": ["rider"]}, "action": "trip:read",
+   "resource": {"owner_id": "u-bob", "region": "north"}, "expect": false},
+  {"name": "south support reads south trip", "subject": {"id": "u-sam", "roles": ["support"], "region": "south"},
+   "action": "trip:read", "resource": {"owner_id": "u-alice", "region": "south"}, "expect": true},
+  {"name": "south support cannot read north trip", "subject": {"id": "u-sam", "roles": ["support"], "region": "south"},
+   "action": "trip:read", "resource": {"owner_id": "u-bob", "region": "north"}, "expect": false},
+  {"name": "suspended admin is denied", "subject": {"id": "u-root", "roles": ["admin"], "suspended": true},
+   "action": "trip:read", "resource": {"owner_id": "u-bob"}, "expect": false},
+  {"name": "admin cannot delete outside maintenance", "subject": {"id": "u-root", "roles": ["admin"]},
+   "action": "trip:delete", "resource": {"owner_id": "u-bob"}, "env": {"maintenance": false}, "expect": false},
+  {"name": "admin deletes in maintenance", "subject": {"id": "u-root", "roles": ["admin"]},
+   "action": "trip:delete", "resource": {"owner_id": "u-bob"}, "env": {"maintenance": true}, "expect": true}
+]

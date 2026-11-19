@@ -1,0 +1,18 @@
+{
+  "stories": [
+    {"id": "US-1", "text": "As a customer, I want to reset my password by email so that I can get back into my account",
+     "tags": ["auth"], "acceptance_criteria": ["A reset email is sent", "The link opens the reset form"],
+     "status": "done"},
+    {"id": "US-2", "text": "As a customer, I want to download my order history as CSV so that I can do my taxes",
+     "tags": ["export", "pii"], "acceptance_criteria": ["CSV has one row per order"], "status": "todo"},
+    {"id": "US-3", "text": "As a customer, I want a dark theme so that the site is easier on my eyes",
+     "tags": ["ui"], "acceptance_criteria": ["Theme toggle in settings"], "status": "todo"},
+    {"id": "US-4", "text": "Make admin page faster", "tags": ["admin"], "acceptance_criteria": [], "status": "todo"}
+  ],
+  "abuse_cases": [
+    {"id": "AB-1", "text": "As a customer, I want to guess reset tokens so that I can take over accounts",
+     "threatens": "US-1", "stride": "Spoofing", "mitigated_by": null,
+     "given": "", "when": "", "then": ""}
+  ],
+  "sprint": {"planned": ["US-1", "US-2", "US-3"], "threat_modeled_at_planning": [], "retro_actions": []}
+}

@@ -1,0 +1,247 @@
+{
+ "_note": "ASVS-5-like SAMPLE for this lab: chapter names follow ASVS 5.0 (verify); refs are sample ids, texts are paraphrases.",
+ "requirements": [
+  {
+   "ref": "V4.S1",
+   "chapter": "V4 API and Web Service",
+   "level": 1,
+   "features": [
+    "all"
+   ],
+   "text": "HTTP methods are restricted to those each endpoint needs",
+   "verify_by": [
+    "dast:http-methods"
+   ]
+  },
+  {
+   "ref": "V4.S2",
+   "chapter": "V4 API and Web Service",
+   "level": 1,
+   "features": [
+    "all"
+   ],
+   "text": "Responses set a correct Content-Type and nosniff",
+   "verify_by": [
+    "dast:headers"
+   ]
+  },
+  {
+   "ref": "V4.S3",
+   "chapter": "V4 API and Web Service",
+   "level": 2,
+   "features": [
+    "graphql"
+   ],
+   "text": "GraphQL depth, cost and alias limits are enforced",
+   "verify_by": [
+    "test:graphql-limits"
+   ]
+  },
+  {
+   "ref": "V4.S4",
+   "chapter": "V4 API and Web Service",
+   "level": 1,
+   "features": [
+    "graphql"
+   ],
+   "text": "GraphQL introspection is disabled in production",
+   "verify_by": [
+    "dast:graphql-introspection"
+   ]
+  },
+  {
+   "ref": "V4.S5",
+   "chapter": "V4 API and Web Service",
+   "level": 2,
+   "features": [
+    "soap"
+   ],
+   "text": "XML parsers reject DTDs and external entities",
+   "verify_by": [
+    "sast:xxe"
+   ]
+  },
+  {
+   "ref": "V2.S1",
+   "chapter": "V2 Validation and Business Logic",
+   "level": 1,
+   "features": [
+    "all"
+   ],
+   "text": "Requests are validated against a schema; unknown fields rejected",
+   "verify_by": [
+    "test:schema-validation"
+   ]
+  },
+  {
+   "ref": "V2.S2",
+   "chapter": "V2 Validation and Business Logic",
+   "level": 2,
+   "features": [
+    "all"
+   ],
+   "text": "Business flows have anti-automation limits",
+   "verify_by": [
+    "test:rate-limit"
+   ]
+  },
+  {
+   "ref": "V1.S1",
+   "chapter": "V1 Encoding and Sanitization",
+   "level": 1,
+   "features": [
+    "all"
+   ],
+   "text": "Database access uses parameterized queries",
+   "verify_by": [
+    "sast:sql-injection"
+   ]
+  },
+  {
+   "ref": "V6.S1",
+   "chapter": "V6 Authentication",
+   "level": 1,
+   "features": [
+    "all"
+   ],
+   "text": "All non-public endpoints require authentication",
+   "verify_by": [
+    "test:authn-required",
+    "dast:unauth-access"
+   ]
+  },
+  {
+   "ref": "V8.S1",
+   "chapter": "V8 Authorization",
+   "level": 1,
+   "features": [
+    "all"
+   ],
+   "text": "Object-level access is checked on every id route (no BOLA)",
+   "verify_by": [
+    "test:bola"
+   ]
+  },
+  {
+   "ref": "V8.S2",
+   "chapter": "V8 Authorization",
+   "level": 2,
+   "features": [
+    "all"
+   ],
+   "text": "Admin functions require an admin permission (no BFLA)",
+   "verify_by": [
+    "test:bfla"
+   ]
+  },
+  {
+   "ref": "V9.S1",
+   "chapter": "V9 Self-contained Tokens",
+   "level": 1,
+   "features": [
+    "jwt"
+   ],
+   "text": "JWT signature, algorithm allowlist, iss, aud and exp are validated",
+   "verify_by": [
+    "test:jwt-validation",
+    "sast:jwt-none"
+   ]
+  },
+  {
+   "ref": "V10.S1",
+   "chapter": "V10 OAuth and OIDC",
+   "level": 1,
+   "features": [
+    "oauth"
+   ],
+   "text": "Authorization code flow uses PKCE and exact redirect URIs",
+   "verify_by": [
+    "test:oauth-pkce"
+   ]
+  },
+  {
+   "ref": "V10.S2",
+   "chapter": "V10 OAuth and OIDC",
+   "level": 2,
+   "features": [
+    "oauth"
+   ],
+   "text": "Access tokens are audience-restricted and short-lived",
+   "verify_by": [
+    "test:token-audience"
+   ]
+  },
+  {
+   "ref": "V12.S1",
+   "chapter": "V12 Secure Communication",
+   "level": 1,
+   "features": [
+    "all"
+   ],
+   "text": "TLS 1.2+ only, valid certificates, HSTS where browsers call",
+   "verify_by": [
+    "dast:tls"
+   ]
+  },
+  {
+   "ref": "V13.S1",
+   "chapter": "V13 Configuration",
+   "level": 1,
+   "features": [
+    "all"
+   ],
+   "text": "No vulnerable dependencies with known exploited CVEs",
+   "verify_by": [
+    "sca:known-exploited"
+   ]
+  },
+  {
+   "ref": "V13.S2",
+   "chapter": "V13 Configuration",
+   "level": 2,
+   "features": [
+    "all"
+   ],
+   "text": "No secrets in source code or images",
+   "verify_by": [
+    "sast:secrets"
+   ]
+  },
+  {
+   "ref": "V16.S1",
+   "chapter": "V16 Security Logging and Error Handling",
+   "level": 2,
+   "features": [
+    "all"
+   ],
+   "text": "Security events are logged without secrets or tokens",
+   "verify_by": [
+    "manual"
+   ]
+  },
+  {
+   "ref": "V5.S1",
+   "chapter": "V5 File Handling",
+   "level": 2,
+   "features": [
+    "file-upload"
+   ],
+   "text": "Uploaded files are size-limited, type-checked and stored outside the web root",
+   "verify_by": [
+    "test:upload-limits"
+   ]
+  },
+  {
+   "ref": "V4.S6",
+   "chapter": "V4 API and Web Service",
+   "level": 2,
+   "features": [
+    "webhooks"
+   ],
+   "text": "Incoming webhooks are verified with an HMAC signature and timestamp",
+   "verify_by": [
+    "test:webhook-signature"
+   ]
+  }
+ ]
+}

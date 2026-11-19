@@ -1,0 +1,45 @@
+{
+  "_format_note": "Shaped like a Kong decK file (services, routes, plugins, consumers), simplified to JSON. Keys are placeholders replaced at runtime by FAKE keys.",
+  "services": [
+    {
+      "name": "orders-api",
+      "url": "http://orders-api.internal:8080",
+      "routes": [
+        {
+          "name": "login",
+          "paths": ["/login"],
+          "methods": ["POST"],
+          "plugins": [
+            {"name": "rate-limiting", "config": {"limit_by": "ip", "capacity": 5, "refill_per_sec": 0.0833}}
+          ]
+        },
+        {
+          "name": "orders",
+          "paths": ["/orders"],
+          "methods": ["GET"],
+          "plugins": [
+            {"name": "key-auth", "config": {"key_names": ["apikey"]}},
+            {"name": "rate-limiting", "config": {"limit_by": "consumer", "capacity": 10, "refill_per_sec": 1}}
+          ]
+        }
+      ]
+    }
+  ],
+  "plugins": [
+    {"name": "response-transformer", "config": {
+      "remove": {"headers": ["Server", "X-Powered-By"]},
+      "add": {"headers": [
+        "Strict-Transport-Security:max-age=31536000; includeSubDomains",
+        "Content-Security-Policy:default-src 'none'; frame-ancestors 'none'",
+        "X-Content-Type-Options:nosniff",
+        "Cache-Control:no-store",
+        "X-XSS-Protection:0"
+      ]}
+    }},
+    {"name": "cors", "config": {"origins": ["https://shop.example"], "credentials": true}}
+  ],
+  "consumers": [
+    {"username": "mobile-app", "keyauth_credentials": [{"key": "${KEY_mobile-app}"}]},
+    {"username": "partner-acme", "keyauth_credentials": [{"key": "${KEY_partner-acme}"}]}
+  ]
+}

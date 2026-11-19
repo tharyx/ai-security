@@ -1,0 +1,10 @@
+{
+  "name": "payments-soap (as found)",
+  "environment": "production",
+  "wsdl_public": true,
+  "xml": {"dtd_processing": true, "external_entities": true, "schema_validation": false, "max_message_bytes": null},
+  "ws_security": {"require_signature": true, "require_timestamp": false, "process_signed_element_only": false},
+  "soapaction_must_match_body": false,
+  "transport": {"tls": true},
+  "faults": {"include_stacktrace": true}
+}

@@ -1,0 +1,45 @@
+{
+  "name": "Teaching library (fictional; real platforms ship far larger libraries)",
+  "rules": [
+    {"id": "WEB-XSS", "component_types": ["web-app"], "when": {"renders_user_content": true},
+     "title": "Cross-site scripting through user content", "stride": "Tampering", "inherent": 16,
+     "countermeasures": [{"id": "CM-ENC", "by_type": {}, "name": "Context-aware output encoding", "weight": 0.6},
+                         {"id": "CM-CSP", "by_type": {}, "name": "Strict CSP with nonces", "weight": 0.3}]},
+    {"id": "API-BOLA", "component_types": ["rest-api"], "when": {},
+     "title": "Broken object level authorization", "stride": "Elevation of Privilege", "inherent": 20,
+     "countermeasures": [{"id": "CM-OWNER", "by_type": {}, "name": "Owner check on every object access", "weight": 0.8},
+                         {"id": "CM-IDS", "by_type": {}, "name": "Unguessable ids (defense in depth)", "weight": 0.1}]},
+    {"id": "API-RATE", "component_types": ["rest-api"], "when": {"internet_facing": true},
+     "title": "Unrestricted resource consumption", "stride": "Denial of Service", "inherent": 12,
+     "countermeasures": [{"id": "CM-RATE", "by_type": {}, "name": "Rate limits at the gateway", "weight": 0.7}]},
+    {"id": "DB-PRIV", "component_types": ["sql-db"], "when": {},
+     "title": "Application account has more privileges than needed", "stride": "Elevation of Privilege", "inherent": 15,
+     "countermeasures": [{"id": "CM-LEAST", "by_type": {}, "name": "Least-privilege DB role (no DDL, no DBA)", "weight": 0.7}]},
+    {"id": "DB-REST", "component_types": ["sql-db"], "when": {"stores_pii": true},
+     "title": "Personal data readable from disks or backups", "stride": "Information Disclosure", "inherent": 15,
+     "countermeasures": [{"id": "CM-TDE", "by_type": {}, "name": "Encryption at rest (TDE) and encrypted backups", "weight": 0.8}]},
+    {"id": "MQ-AUTH", "component_types": ["queue"], "when": {},
+     "title": "Unauthenticated producers inject messages", "stride": "Spoofing", "inherent": 12,
+     "countermeasures": [{"id": "CM-MQAUTH", "by_type": {}, "name": "Per-service credentials and topic ACLs", "weight": 0.8}]},
+    {"id": "OBJ-PUBLIC", "component_types": ["aws-s3", "azure-blob", "gcp-gcs"], "when": {"stores_pii": true},
+     "title": "Object storage readable by anyone", "stride": "Information Disclosure", "inherent": 20,
+     "countermeasures": [{"id": "CM-NOPUBLIC", "weight": 0.8, "by_type": {
+                            "aws-s3": "S3 Block Public Access (account and bucket level)",
+                            "azure-blob": "Storage account allowBlobPublicAccess = false",
+                            "gcp-gcs": "Public access prevention enforced on the bucket"}},
+                         {"id": "CM-KMS", "weight": 0.1, "by_type": {
+                            "aws-s3": "SSE-KMS with a customer managed key",
+                            "azure-blob": "Customer-managed key in Key Vault",
+                            "gcp-gcs": "CMEK with Cloud KMS"}}]},
+    {"id": "FN-ROLE", "component_types": ["aws-lambda", "azure-function", "gcp-function"], "when": {},
+     "title": "Function identity can do far more than its job", "stride": "Elevation of Privilege", "inherent": 15,
+     "countermeasures": [{"id": "CM-FNROLE", "weight": 0.7, "by_type": {
+                            "aws-lambda": "Dedicated execution role with scoped IAM policy",
+                            "azure-function": "Managed identity with scoped RBAC role",
+                            "gcp-function": "Dedicated service account with minimal roles"}}]},
+    {"id": "XC-KEYS", "component_types": ["cross-cloud-link"], "when": {"uses_static_keys": true},
+     "title": "Long-lived cloud keys copied between providers", "stride": "Spoofing", "inherent": 20,
+     "countermeasures": [{"id": "CM-WIF", "by_type": {}, "name": "Workload identity federation (OIDC) instead of static keys", "weight": 0.8},
+                         {"id": "CM-ROTATE", "by_type": {}, "name": "Rotate and vault any key that must remain", "weight": 0.1}]}
+  ]
+}

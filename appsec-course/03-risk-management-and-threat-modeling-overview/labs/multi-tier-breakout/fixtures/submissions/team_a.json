@@ -1,0 +1,13 @@
+{
+  "_comment": "Team A spent the session on the web tier only (a common failure).",
+  "team": "Team A",
+  "threats": [
+    {"element": "customer", "stride": "S", "text": "Password guessing", "mitigation": "Account lockout"},
+    {"element": "web", "stride": "D", "text": "DDoS", "mitigation": "CDN"},
+    {"element": "F1", "stride": "I", "text": "Sniffing", "mitigation": "HTTPS"},
+    {"element": "api", "stride": "T", "text": "SQL injection", "mitigation": "Prepared statements"},
+    {"element": "web", "stride": "I", "text": "Verbose error pages", "mitigation": ""},
+    {"element": "cdn", "stride": "T", "text": "Cache poisoning", "mitigation": "Cache key review"},
+    {"element": "db", "stride": "X", "text": "Bad things", "mitigation": "Be careful"}
+  ]
+}

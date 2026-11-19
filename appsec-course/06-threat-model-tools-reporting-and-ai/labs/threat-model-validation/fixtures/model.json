@@ -1,0 +1,25 @@
+{
+  "name": "Shop",
+  "reviewed_version": "2.3.0",
+  "next_review": "",
+  "components": [
+    {"name": "Web App"}, {"name": "Orders API"}, {"name": "Orders DB"}, {"name": "Legacy FTP export"}
+  ],
+  "flows": [
+    {"from": "Customer", "to": "Web App", "crosses_boundary": true},
+    {"from": "Web App", "to": "Orders API", "crosses_boundary": true},
+    {"from": "Orders API", "to": "Orders DB", "crosses_boundary": false}
+  ],
+  "threats": [
+    {"id": "T1", "target": "Customer -> Web App", "stride": "Information Disclosure", "status": "mitigated",
+     "mitigation": "TLS 1.3 and HSTS", "tests": ["test_hsts_header", "test_http_redirects"]},
+    {"id": "T2", "target": "Orders API", "stride": "Elevation of Privilege", "status": "mitigated",
+     "mitigation": "owner check on every order query", "tests": ["test_bola_returns_403"]},
+    {"id": "T3", "target": "Web App", "stride": "Spoofing", "status": "mitigated", "mitigation": "MFA for admins",
+     "tests": []},
+    {"id": "T4", "target": "Orders DB", "stride": "Information Disclosure", "status": "accepted",
+     "acceptance": {"owner": "dba-lead", "approved_by": "", "expires": "2027-06-30"}},
+    {"id": "T5", "target": "Orders API", "stride": "Denial of Service", "status": "open"},
+    {"id": "T6", "target": "Legacy FTP export", "stride": "Tampering", "status": "mitigated", "mitigation": ""}
+  ]
+}

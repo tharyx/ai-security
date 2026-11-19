@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>API authentication types at a glance</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">API authentication types at a glance</text>
+<text x="40" y="74" font-size="15" fill="#475569">Who is calling, how they prove it, and the classic mistake for each.</text>
+<text x="40" y="112" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Type</text>
+<text x="330" y="112" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Proof sent by the client</text>
+<text x="720" y="112" text-anchor="start" font-size="15" font-weight="700" fill="#0f172a">Classic mistake</text>
+<rect x="40" y="124" width="270" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="175.0" y="154.0" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">None (public)</text>
+<rect x="330" y="124" width="370" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="515.0" y="153.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">nothing</text>
+<rect x="720" y="124" width="440" height="50" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="940.0" y="153.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d">sensitive data left public; no rate limit</text>
+<rect x="40" y="184" width="270" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="175.0" y="214.0" text-anchor="middle" font-size="15" font-weight="700" fill="#78350f">HTTP Basic</text>
+<rect x="330" y="184" width="370" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="515.0" y="213.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">base64(user:pass) every call</text>
+<rect x="720" y="184" width="440" height="50" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="940.0" y="213.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d">base64 is not encryption; needs TLS</text>
+<rect x="40" y="244" width="270" height="50" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="175.0" y="274.0" text-anchor="middle" font-size="15" font-weight="700" fill="#78350f">API key / token</text>
+<rect x="330" y="244" width="370" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="515.0" y="273.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">static secret in a header</text>
+<rect x="720" y="244" width="440" height="50" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="940.0" y="273.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d">keys in URLs, logs, repos; no expiry</text>
+<rect x="40" y="304" width="270" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="175.0" y="334.0" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">JWT bearer</text>
+<rect x="330" y="304" width="370" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="515.0" y="333.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">signed claims (iss, aud, exp)</text>
+<rect x="720" y="304" width="440" height="50" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="940.0" y="333.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d">alg none, weak HMAC secret, no exp/aud check</text>
+<rect x="40" y="364" width="270" height="50" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="175.0" y="394.0" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">OAuth 2.0 / OIDC</text>
+<rect x="330" y="364" width="370" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="515.0" y="393.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">tokens from an authorization server</text>
+<rect x="720" y="364" width="440" height="50" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="940.0" y="393.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d">implicit grant, no PKCE, ID token used as access token</text>
+<rect x="40" y="424" width="270" height="50" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="175.0" y="454.0" text-anchor="middle" font-size="15" font-weight="700" fill="#4c1d95">SAML</text>
+<rect x="330" y="424" width="370" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="515.0" y="453.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">signed XML assertion (SSO)</text>
+<rect x="720" y="424" width="440" height="50" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="940.0" y="453.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d">signature wrapping, XXE, no audience check</text>
+<rect x="40" y="484" width="270" height="50" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="175.0" y="514.0" text-anchor="middle" font-size="15" font-weight="700" fill="#14532d">Mutual TLS</text>
+<rect x="330" y="484" width="370" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="515.0" y="513.7" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">client certificate in the TLS handshake</text>
+<rect x="720" y="484" width="440" height="50" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="940.0" y="513.7" text-anchor="middle" font-size="14" font-weight="400" fill="#7f1d1d">trusting a client-sent cert header</text>
+</svg>

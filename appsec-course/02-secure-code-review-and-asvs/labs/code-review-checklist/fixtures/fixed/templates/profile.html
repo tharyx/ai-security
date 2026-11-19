@@ -1,0 +1,6 @@
+<!-- Fixture for the code review lab (parsed only). Autoescaping is on; no |safe. -->
+<h2>{{ user.name }}</h2>
+<div class="bio">{{ user.bio }}</div>
+<script nonce="{{ csp_nonce }}">
+  document.getElementById("greeting").textContent = "Hello " + location.hash.slice(1);
+</script>

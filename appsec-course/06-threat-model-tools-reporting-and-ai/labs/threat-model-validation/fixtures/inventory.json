@@ -1,0 +1,17 @@
+{
+  "version": "2.4.0",
+  "source": "cloud inventory export + Kubernetes services + API gateway routes (fictional)",
+  "deployed": [
+    {"name": "Web App", "type": "k8s-service"},
+    {"name": "Orders API", "type": "k8s-service"},
+    {"name": "Orders DB", "type": "managed-postgres"},
+    {"name": "Reports Worker", "type": "k8s-cronjob"}
+  ],
+  "observed_flows": [
+    {"from": "Customer", "to": "Web App", "source": "load balancer logs"},
+    {"from": "Web App", "to": "Orders API", "source": "service mesh telemetry"},
+    {"from": "Orders API", "to": "Orders DB", "source": "VPC flow logs"},
+    {"from": "Reports Worker", "to": "Orders DB", "source": "VPC flow logs"},
+    {"from": "Reports Worker", "to": "partner-sftp.example.net", "source": "egress proxy logs"}
+  ]
+}

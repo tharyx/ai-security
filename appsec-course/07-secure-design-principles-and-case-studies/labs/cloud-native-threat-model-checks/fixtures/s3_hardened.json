@@ -1,0 +1,25 @@
+{
+  "name": "shop-exports-hardened",
+  "sensitive": true,
+  "critical": true,
+  "public_access_block": {"BlockPublicAcls": true, "IgnorePublicAcls": true, "BlockPublicPolicy": true, "RestrictPublicBuckets": true},
+  "object_ownership": "BucketOwnerEnforced",
+  "encryption": {"sse": "aws:kms"},
+  "versioning": "Enabled",
+  "object_lock": true,
+  "access_logging": true,
+  "cloudtrail_data_events": true,
+  "policy": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {"Sid": "DenyInsecureTransport", "Effect": "Deny", "Principal": "*", "Action": "s3:*",
+       "Resource": ["arn:aws:s3:::shop-exports-hardened", "arn:aws:s3:::shop-exports-hardened/*"],
+       "Condition": {"Bool": {"aws:SecureTransport": "false"}}},
+      {"Sid": "LogDelivery", "Effect": "Allow", "Principal": {"Service": "logging.s3.amazonaws.com"},
+       "Action": "s3:PutObject", "Resource": "arn:aws:s3:::shop-exports-hardened/logs/*",
+       "Condition": {"StringEquals": {"aws:SourceAccount": "111122223333"}}},
+      {"Sid": "PartnerReadExports", "Effect": "Allow", "Principal": {"AWS": "arn:aws:iam::111122223333:role/partner"},
+       "Action": "s3:GetObject", "Resource": "arn:aws:s3:::shop-exports-hardened/exports/*"}
+    ]
+  }
+}

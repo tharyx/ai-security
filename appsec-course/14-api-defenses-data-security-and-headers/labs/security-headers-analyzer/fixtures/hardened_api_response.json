@@ -1,0 +1,11 @@
+{
+  "X-XSS-Protection": "0",
+  "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+  "Cache-Control": "no-store",
+  "Content-Security-Policy": "script-src 'nonce-R4nd0mPerResp0nse' 'strict-dynamic'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; report-to csp",
+  "X-Content-Type-Options": "nosniff",
+  "Access-Control-Allow-Origin": "https://shop.example",
+  "Access-Control-Allow-Credentials": "true",
+  "Vary": "Origin",
+  "Set-Cookie": "__Host-session=FAKE-abc123; Path=/; Secure; HttpOnly; SameSite=Lax"
+}

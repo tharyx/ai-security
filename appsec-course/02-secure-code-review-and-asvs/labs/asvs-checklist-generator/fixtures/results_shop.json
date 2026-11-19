@@ -1,0 +1,23 @@
+{
+  "_note": "Review results for the toy shop after the chapter 01 fixes. Status: pass, fail, na or untested. Evidence points at a test, a review note or a scan report.",
+  "APS-V1-S1": {"status": "pass", "evidence": "test_aps_ch02_sqli_review_and_fix.py"},
+  "APS-V1-S2": {"status": "pass", "evidence": "test_aps_ch02_xss_review_and_fix.py"},
+  "APS-V1-S3": {"status": "pass", "evidence": "ch01 vulnerable-shop: argv mode test"},
+  "APS-V2-S1": {"status": "pass", "evidence": "test_aps_ch02_input_validation_regex.py"},
+  "APS-V2-S2": {"status": "pass", "evidence": "ch01 intercepting-proxy: server-side price"},
+  "APS-V3-S1": {"status": "pass", "evidence": "ch01 cookie flags test"},
+  "APS-V3-S2": {"status": "pass", "evidence": "ch01 misconfig scan"},
+  "APS-V3-S3": {"status": "pass", "evidence": "CSP frame-ancestors 'none'"},
+  "APS-V4-S1": {"status": "fail", "evidence": "review note: CORS not configured yet for the JSON API"},
+  "APS-V6-S1": {"status": "pass", "evidence": "password policy review"},
+  "APS-V6-S2": {"status": "fail", "evidence": "no breached-password check"},
+  "APS-V6-S3": {"status": "pass", "evidence": "ch01 coupon 429 test (pattern reused for login)"},
+  "APS-V8-S1": {"status": "pass", "evidence": "ch01 IDOR test"},
+  "APS-V8-S2": {"status": "pass", "evidence": "code review AUTHZ001 clean"},
+  "APS-V11-S1": {"status": "fail", "evidence": "toy SHA-256 hash in the lab app"},
+  "APS-V12-S1": {"status": "pass", "evidence": "code review CONF004 clean"},
+  "APS-V13-S1": {"status": "pass", "evidence": "ch01 misconfig scan"},
+  "APS-V13-S2": {"status": "pass", "evidence": "code review AUTH003 clean"},
+  "APS-V14-S1": {"status": "pass", "evidence": "Cache-Control: no-store header"},
+  "APS-V16-S1": {"status": "pass", "evidence": "ch01 secure error page test"}
+}

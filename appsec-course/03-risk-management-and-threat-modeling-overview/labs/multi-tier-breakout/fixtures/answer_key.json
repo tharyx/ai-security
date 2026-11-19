@@ -1,0 +1,20 @@
+{
+  "_comment": "Facilitator answer key. 'must' threats are the ones a passing team cannot miss.",
+  "threats": [
+    {"id": "K1", "element": "customer", "stride": "S", "must": true, "text": "Credential stuffing takes over customer accounts", "mitigation": "Rate limits, breached-password check, MFA/passkeys"},
+    {"id": "K2", "element": "F1", "stride": "I", "must": true, "text": "Session or card data read in transit", "mitigation": "TLS 1.2+ only, HSTS"},
+    {"id": "K3", "element": "web", "stride": "D", "must": true, "text": "HTTP flood exhausts the web tier", "mitigation": "CDN/WAF rate limits, autoscaling, request size limits"},
+    {"id": "K4", "element": "api", "stride": "E", "must": true, "text": "BOLA: user reads another user's order by changing the id", "mitigation": "Object-level ownership check on every query"},
+    {"id": "K5", "element": "api", "stride": "T", "must": true, "text": "SQL injection through order fields", "mitigation": "Bind variables / parameterised queries, input validation"},
+    {"id": "K6", "element": "db", "stride": "I", "must": true, "text": "Database or backup copy exposed", "mitigation": "Encryption at rest, private network, backup access control"},
+    {"id": "K7", "element": "queue", "stride": "T", "must": true, "text": "Forged OrderPlaced messages injected into the queue", "mitigation": "Queue authN/authZ per producer, signed messages, schema validation in worker"},
+    {"id": "K8", "element": "worker", "stride": "E", "must": false, "text": "Worker trusts message content and runs with DBA-level grants", "mitigation": "Least-privilege DB account, validate message"},
+    {"id": "K9", "element": "payment_provider", "stride": "S", "must": true, "text": "Forged payment webhook marks unpaid orders as paid", "mitigation": "Verify webhook signature and timestamp, re-query provider"},
+    {"id": "K10", "element": "admin", "stride": "S", "must": true, "text": "Phished admin credentials used for refunds", "mitigation": "Phishing-resistant MFA, device posture, step-up for refunds"},
+    {"id": "K11", "element": "api", "stride": "R", "must": true, "text": "No record of who approved a refund", "mitigation": "Audit event with actor, time, request id, written to append-only log"},
+    {"id": "K12", "element": "audit_log", "stride": "T", "must": false, "text": "Admin edits or deletes audit records", "mitigation": "Append-only/WORM storage, separate admin"},
+    {"id": "K13", "element": "web", "stride": "S", "must": false, "text": "Something other than the web tier calls the API directly", "mitigation": "mTLS or network policy between web and API"},
+    {"id": "K14", "element": "queue", "stride": "D", "must": false, "text": "Poison or flood messages stall fulfilment", "mitigation": "Dead-letter queue, max size, consumer limits"},
+    {"id": "K15", "element": "F3", "stride": "T", "must": false, "text": "Unencrypted SQL traffic altered inside the network", "mitigation": "TLS to the database, network segmentation"}
+  ]
+}

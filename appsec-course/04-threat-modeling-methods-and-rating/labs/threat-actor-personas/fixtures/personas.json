@@ -1,0 +1,21 @@
+{
+  "_comment": "FICTIONAL personas for the ShopCo threat model. Archetypes, not real groups.",
+  "personas": [
+    {"name": "Opportunist with off-the-shelf tools", "motivation": "Curiosity, bragging, small resale of accounts",
+     "skill": 1, "resources": "Free tools, rented botnet minutes", "access": ["external"],
+     "goals": ["Any account that works", "Disruption for fun"],
+     "techniques": ["T1110", "T1110.004", "T1499"]},
+    {"name": "Organised fraud crew", "motivation": "Money: refunds, gift cards, resold accounts",
+     "skill": 3, "resources": "Leaked credential lists, phishing kits, mule accounts", "access": ["external"],
+     "goals": ["Take over customer accounts", "Abuse refunds through support staff"],
+     "techniques": ["T1110.004", "T1566", "T1078", "T1565", "T1190"]},
+    {"name": "Disgruntled support insider", "motivation": "Revenge or side income",
+     "skill": 2, "resources": "Legitimate admin console access", "access": ["internal"],
+     "goals": ["Export customer data", "Issue fraudulent refunds"],
+     "techniques": ["T1078", "T1213", "T1567", "T1565"]},
+    {"name": "Ransomware affiliate", "motivation": "Extortion",
+     "skill": 4, "resources": "Initial-access brokers, commodity ransomware", "access": ["external"],
+     "goals": ["Encrypt the orders database", "Steal data for double extortion"],
+     "techniques": ["T1190", "T1566", "T1078", "T1486", "T1567", "T1530"]}
+  ]
+}

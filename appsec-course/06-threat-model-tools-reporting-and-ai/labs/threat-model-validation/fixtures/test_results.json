@@ -1,0 +1,5 @@
+{
+  "test_hsts_header": "pass",
+  "test_http_redirects": "pass",
+  "test_bola_returns_403": "fail"
+}
