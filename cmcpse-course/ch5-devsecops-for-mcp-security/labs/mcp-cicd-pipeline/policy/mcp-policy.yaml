@@ -1,0 +1,23 @@
+# Policy as code for MCP deployments. Reviewed like code: changes need a CODEOWNERS approval.
+version: 1
+
+# Findings at or above this severity break the build.
+block_on_severity: high
+
+# The gate fails if one of these stages did not run (nobody can "skip" a check by deleting a job).
+required_stages: [sast, secrets, deps, tool-descriptions, manifest-pin]
+
+approvals:
+  # Findings with these codes can be waived by a human approval (a reviewed tool change).
+  required_for: [PIN-CHANGED, PIN-ADDED]
+  approvers: [secops-lead, mcp-platform-owner]
+  forbid_self_approval: true
+
+# These can never be waived by an approval. Fix them or remove the change.
+never_waivable: [DESC-POISON, SECRET, SAST-MCP001]
+
+# Documentation of intent (the runner does not read these keys yet; the lesson shows how to extend it).
+deployment:
+  allowed_registries: ["registry.example.internal"]
+  require_signed_manifest: true
+  bind_address: "127.0.0.1"

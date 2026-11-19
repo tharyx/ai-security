@@ -1,0 +1,37 @@
+# AI firewall policy for the notes MCP server. Reviewed and deployed like any other config:
+# a pull request, a code owner approval, a staged rollout (monitor first, then enforce).
+version: 1
+mode: enforce            # enforce | monitor (monitor logs "would block" and changes nothing)
+server: notes-mcp
+
+methods:
+  allow: [initialize, tools/list, tools/call, ping]
+
+tools:
+  allow: [read_note, search_notes]     # default deny: delete_note and export_all are not reachable
+  max_string_length: 200               # per string argument
+
+rate_limits:
+  per_client: {requests: 5, window_seconds: 10}
+  per_tool:
+    search_notes: {requests: 2, window_seconds: 10}
+
+injection:
+  enabled: true
+  action: block          # block | sanitize | flag
+  threshold: 0.6         # 0..1; the score is the sum of matched signal weights, capped at 1
+  signals:
+    - {name: override-instruction, pattern: 'ignore (all )?(previous|prior) instructions', weight: 0.7}
+    - {name: concealment, pattern: 'do not tell (the )?user', weight: 0.4}
+    - {name: exfil-url, pattern: 'send .{0,60}https?://', weight: 0.5}
+    - {name: role-tag, pattern: '<\s*/?\s*(system|important)\s*>', weight: 0.6}
+
+output:
+  max_bytes: 2000
+  on_secret: redact      # redact | block
+  redact:
+    - {name: aws-key, pattern: 'AKIA[0-9A-Z]{16}'}
+    - {name: email, pattern: '[\w.+-]+@[\w-]+\.[\w.]+'}
+
+audit:
+  log_arguments: false   # log a hash of the arguments, never the values

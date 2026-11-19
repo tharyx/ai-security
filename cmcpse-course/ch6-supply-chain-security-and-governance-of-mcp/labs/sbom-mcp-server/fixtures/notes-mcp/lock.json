@@ -1,0 +1,25 @@
+{
+  "project": {
+    "name": "notes-mcp", "version": "1.2.0", "license": "MIT",
+    "transport": "streamable-http",
+    "tools": ["read_note", "list_notes", "send_report"]
+  },
+  "packages": [
+    {"name": "mcp-sdk-lite", "version": "1.4.0", "license": "MIT", "direct": true, "registry": "pypi.org",
+     "hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "requires": ["httpx-lite", "pydantic-lite"]},
+    {"name": "yamlish", "version": "2.3.0", "license": "MIT", "direct": true, "registry": "pypi.org",
+     "hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222", "requires": []},
+    {"name": "notesdb-client", "version": "1.9.0", "license": "AGPL-3.0-only", "direct": true, "registry": "pypi.org",
+     "hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333", "requires": ["tinycrypto"]},
+    {"name": "internal-metrics", "version": "0.3.1", "license": "MIT", "direct": true, "registry": "pypi.attacker-mirror.example",
+     "hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444", "requires": []},
+    {"name": "httpx-lite", "version": "0.27.0", "license": "BSD-3-Clause", "direct": false, "registry": "pypi.org",
+     "hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555", "requires": ["h11-lite"]},
+    {"name": "h11-lite", "version": "0.14.0", "license": "MIT", "direct": false, "registry": "pypi.org",
+     "hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666", "requires": []},
+    {"name": "pydantic-lite", "version": "2.7.0", "license": "UNKNOWN", "direct": false, "registry": "pypi.org",
+     "hash": "sha256:7777777777777777777777777777777777777777777777777777777777777777", "requires": []},
+    {"name": "tinycrypto", "version": null, "constraint": ">=0.5", "license": "Apache-2.0", "direct": false, "registry": "pypi.org",
+     "hash": null, "requires": []}
+  ]
+}

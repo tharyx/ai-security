@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <title id="t">Attack chaining and multi-agent propagation</title>
+  <desc id="d">Top: a chain from a web page through a ticket server and a vault server to an exfiltration sink, escalating trust at each hop. Bottom: a worm spreading between agents through messages and a shared memory.</desc>
+  <defs>
+    <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#b91c1c"/></marker>
+    <marker id="ag" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="960" height="560" fill="#ffffff"/>
+  <text x="480" y="26" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">Chaining across servers, then spreading across agents</text>
+
+  <text x="30" y="56" font-weight="600" fill="#0f172a">A. Lateral movement through chained tool calls (lab 05)</text>
+  <g>
+    <rect x="30" y="72" width="170" height="86" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+    <text x="115" y="98" text-anchor="middle" font-weight="600" fill="#7f1d1d">web-reader</text>
+    <text x="115" y="118" text-anchor="middle" fill="#7f1d1d" font-size="12">trust 1 (low)</text>
+    <text x="115" y="138" text-anchor="middle" fill="#7f1d1d" font-size="12">page hides a directive</text>
+
+    <rect x="260" y="72" width="170" height="86" rx="8" fill="#fef3c7" stroke="#b45309"/>
+    <text x="345" y="98" text-anchor="middle" font-weight="600" fill="#78350f">tickets</text>
+    <text x="345" y="118" text-anchor="middle" fill="#78350f" font-size="12">trust 2 (medium)</text>
+    <text x="345" y="138" text-anchor="middle" fill="#78350f" font-size="12">planted ticket relays it</text>
+
+    <rect x="490" y="72" width="170" height="86" rx="8" fill="#dcfce7" stroke="#15803d"/>
+    <text x="575" y="98" text-anchor="middle" font-weight="600" fill="#14532d">vault</text>
+    <text x="575" y="118" text-anchor="middle" fill="#14532d" font-size="12">trust 3 (high)</text>
+    <text x="575" y="138" text-anchor="middle" fill="#14532d" font-size="12">returns the secret</text>
+
+    <rect x="720" y="72" width="210" height="86" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+    <text x="825" y="98" text-anchor="middle" font-weight="600" fill="#7f1d1d">public ticket thread</text>
+    <text x="825" y="118" text-anchor="middle" fill="#7f1d1d" font-size="12">exfiltration sink</text>
+    <text x="825" y="138" text-anchor="middle" fill="#7f1d1d" font-size="12">attacker reads it</text>
+  </g>
+  <g stroke="#b91c1c" stroke-width="2.5" fill="none">
+    <path d="M200,115 L258,115" marker-end="url(#ar)"/>
+    <path d="M430,115 L488,115" marker-end="url(#ar)"/>
+    <path d="M660,115 L718,115" marker-end="url(#ar)"/>
+  </g>
+  <g fill="#7f1d1d" font-size="11" text-anchor="middle">
+    <text x="229" y="106">hop 1</text><text x="459" y="106">hop 2</text><text x="689" y="106">hop 3</text>
+  </g>
+  <rect x="30" y="170" width="900" height="54" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="480" y="192" text-anchor="middle" fill="#0f172a">The attacker never talks to the vault. One agent context joins the servers, so each hop borrows the trust of the next server.</text>
+  <text x="480" y="212" text-anchor="middle" fill="#0f172a">Break it with: trust labels (no read-up, no write-down), approval for side effects, context isolation, per-call audit of "who drove this call".</text>
+
+  <text x="30" y="258" font-weight="600" fill="#0f172a">B. Multi-agent propagation (lab 07)</text>
+  <g>
+    <rect x="360" y="440" width="240" height="70" rx="8" fill="#ede9fe" stroke="#6d28d9"/>
+    <text x="480" y="470" text-anchor="middle" font-weight="600" fill="#4c1d95">Shared memory server</text>
+    <text x="480" y="490" text-anchor="middle" fill="#4c1d95" font-size="12">every agent reads it each step</text>
+  </g>
+  <g fill="#ffffff" stroke="#0369a1">
+    <rect x="60" y="290" width="150" height="62" rx="8" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/>
+    <rect x="270" y="290" width="150" height="62" rx="8" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/>
+    <rect x="480" y="290" width="150" height="62" rx="8" fill="#e0f2fe"/>
+    <rect x="690" y="290" width="150" height="62" rx="8" fill="#e0f2fe"/>
+  </g>
+  <g text-anchor="middle" font-size="12">
+    <text x="135" y="318" fill="#7f1d1d" font-weight="600">agent a0</text><text x="135" y="338" fill="#7f1d1d">patient zero</text>
+    <text x="345" y="318" fill="#7f1d1d" font-weight="600">agent a1</text><text x="345" y="338" fill="#7f1d1d">infected, round 2</text>
+    <text x="555" y="318" fill="#0c4a6e" font-weight="600">agent a2</text><text x="555" y="338" fill="#0c4a6e">next in line</text>
+    <text x="765" y="318" fill="#0c4a6e" font-weight="600">agent a3</text><text x="765" y="338" fill="#0c4a6e">next in line</text>
+  </g>
+  <g stroke="#b91c1c" stroke-width="2.5" fill="none">
+    <path d="M210,321 L268,321" marker-end="url(#ar)"/>
+    <path d="M420,321 L478,321" marker-end="url(#ar)" stroke-dasharray="6 4"/>
+    <path d="M630,321 L688,321" marker-end="url(#ar)" stroke-dasharray="6 4"/>
+  </g>
+  <g stroke="#475569" stroke-width="1.8" fill="none">
+    <path d="M135,352 L420,438" marker-end="url(#ag)"/>
+    <path d="M345,352 L440,438" marker-end="url(#ag)"/>
+    <path d="M520,438 L555,354" marker-end="url(#ag)"/>
+    <path d="M590,440 L765,354" marker-end="url(#ag)"/>
+  </g>
+  <g font-size="12" fill="#0f172a">
+    <text x="60" y="392">writes copy</text>
+    <text x="520" y="400">reads copy</text>
+    <text x="238" y="282" fill="#7f1d1d">message with payload</text>
+  </g>
+  <rect x="30" y="380" width="1" height="1" fill="none"/>
+  <text x="30" y="535" fill="#0f172a">Two channels: messages (spread follows the topology) and shared memory (spread reaches every reader at once). Breaks: output guard, fan-out cap, quarantine, memory purge.</text>
+</svg>

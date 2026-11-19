@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">DFD of a multi-server agentic MCP pipeline</title><desc id="d">Host with three local servers, a remote OAuth server, an identity provider, a registry and an LLM, across five trust zones.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="760" fill="#ffffff"/>
+<text x="30" y="40" font-size="24" font-weight="bold" fill="#0f172a" text-anchor="start">Multi-server MCP pipeline (DFD, trust boundaries)</text>
+<text x="30" y="64" font-size="14" font-weight="normal" fill="#475569" text-anchor="start">Same system as mcp_architecture.yaml. Dashed arrows cross a trust boundary; each one is a STRIDE crossing to review.</text>
+<rect x="20" y="90" width="250" height="330" rx="14" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="32" y="110" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="start">Internet (untrusted)</text>
+<rect x="20" y="440" width="250" height="260" rx="14" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="32" y="460" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="start">LLM provider (third party)</text>
+<rect x="290" y="90" width="330" height="610" rx="14" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="302" y="110" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="start">Developer workstation: host</text>
+<rect x="640" y="90" width="270" height="610" rx="14" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="652" y="110" font-size="13" font-weight="bold" fill="#d97706" text-anchor="start">Local server processes (semi)</text>
+<rect x="930" y="90" width="250" height="610" rx="14" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="942" y="110" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="start">CRM vendor + IdP (third party)</text>
+<rect x="45" y="150" width="200" height="64" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+<text x="145.0" y="178.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Public MCP</text>
+<text x="145.0" y="194.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">registry</text>
+<rect x="320" y="130" width="150" height="56" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+<text x="395.0" y="162.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Developer</text>
+<circle cx="455" cy="330" r="74" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+<text x="455" y="326" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">AI host +</text>
+<text x="455" y="342" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">MCP client</text>
+<line x1="320" y1="500" x2="460" y2="500" stroke="#334155" stroke-width="2.5"/><line x1="320" y1="540" x2="460" y2="540" stroke="#334155" stroke-width="2.5"/>
+<rect x="320" y="500" width="140" height="40" fill="#eff6ff" opacity="0.6"/>
+<text x="390.0" y="524.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Host config</text>
+<line x1="480" y1="590" x2="620" y2="590" stroke="#334155" stroke-width="2.5"/><line x1="480" y1="630" x2="620" y2="630" stroke="#334155" stroke-width="2.5"/>
+<rect x="480" y="590" width="140" height="40" fill="#eff6ff" opacity="0.6"/>
+<text x="550.0" y="614.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Token cache</text>
+<circle cx="775" cy="135" r="42" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+<text x="775" y="131" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">files</text>
+<text x="775" y="147" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">stdio</text>
+<circle cx="775" cy="290" r="42" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+<text x="775" y="286" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">git</text>
+<text x="775" y="302" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">stdio</text>
+<circle cx="775" cy="430" r="42" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+<text x="775" y="426" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">db</text>
+<text x="775" y="442" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">HTTP</text>
+<circle cx="1055" cy="150" r="58" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+<text x="1055" y="146" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">crm server</text>
+<text x="1055" y="162" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">OAuth</text>
+<rect x="945" y="317" width="100" height="56" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+<text x="995.0" y="341.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Identity</text>
+<text x="995.0" y="357.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">provider</text>
+<line x1="960" y1="520" x2="1150" y2="520" stroke="#334155" stroke-width="2.5"/><line x1="960" y1="560" x2="1150" y2="560" stroke="#334155" stroke-width="2.5"/>
+<rect x="960" y="520" width="190" height="40" fill="#eff6ff" opacity="0.6"/>
+<text x="1055.0" y="544.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">CRM database</text>
+<rect x="45" y="520" width="200" height="70" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+<text x="145.0" y="559.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Hosted LLM</text>
+<line x1="404.8" y1="186.0" x2="430.6" y2="260.1" stroke="#334155" stroke-width="1.8" marker-end="url(#ah)"/>
+<rect x="404.7" y="213.1" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="417.7" y="225.1" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F1</text>
+<line x1="403.6" y1="385.0" x2="203.6" y2="529.7" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="290.6" y="447.4" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="303.6" y="459.4" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F2</text>
+<line x1="183.1" y1="510.3" x2="386.7" y2="361.9" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="271.9" y="426.1" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="284.9" y="438.1" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F3</text>
+<line x1="510.7" y1="279.2" x2="732.2" y2="145.4" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="608.4" y="202.3" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="621.4" y="214.3" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F4</text>
+<line x1="746.1" y1="168.2" x2="525.6" y2="303.8" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="622.9" y="226.0" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="635.9" y="238.0" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F5</text>
+<line x1="528.4" y1="320.8" x2="733.3" y2="295.2" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="617.9" y="298.0" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="630.9" y="310.0" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F6</text>
+<line x1="525.6" y1="352.1" x2="734.9" y2="417.5" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="617.3" y="374.8" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="630.3" y="386.8" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F8</text>
+<line x1="525.9" y1="308.7" x2="999.4" y2="166.7" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="749.7" y="227.7" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="762.7" y="239.7" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F10</text>
+<line x1="529.0" y1="332.1" x2="945.0" y2="343.6" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="724.0" y="327.8" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="737.0" y="339.8" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F12</text>
+<line x1="382.0" y1="311.3" x2="201.2" y2="224.8" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="278.6" y="258.1" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="291.6" y="270.1" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F13</text>
+<line x1="223.7" y1="203.2" x2="394.5" y2="285.0" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="296.1" y="234.1" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="309.1" y="246.1" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F14</text>
+<line x1="396.8" y1="500.0" x2="431.0" y2="400.0" stroke="#334155" stroke-width="1.8" marker-end="url(#ah)"/>
+<rect x="400.9" y="440.0" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="413.9" y="452.0" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F15</text>
+<line x1="478.8" y1="400.1" x2="543.2" y2="590.0" stroke="#334155" stroke-width="1.8" marker-end="url(#ah)"/>
+<rect x="498.0" y="485.0" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="511.0" y="497.0" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F16</text>
+<line x1="1055.0" y1="208.0" x2="1055.0" y2="520.0" stroke="#334155" stroke-width="1.8" marker-end="url(#ah)"/>
+<rect x="1042.0" y="354.0" width="26" height="16" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+<text x="1055.0" y="366.0" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">F18</text>
+<text x="30" y="735" font-size="12" font-weight="normal" fill="#475569" text-anchor="start">Return flows F7 (git) and F9 (db), F11 (crm) carry tools/list and results like F5. F17 (files server to project files) is omitted to keep the picture readable.</text>
+</svg>

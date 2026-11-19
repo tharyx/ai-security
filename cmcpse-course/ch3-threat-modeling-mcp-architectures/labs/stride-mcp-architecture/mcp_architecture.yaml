@@ -1,0 +1,102 @@
+# A synthetic MCP deployment: one host, three servers, one remote OAuth server, one registry.
+# Edit it (remove a control, add a flow) and re-run stride_mcp.py. Everything here is fictional.
+system: Acme developer workstation with an AI coding host and four MCP servers
+description: >
+  A developer uses an AI host (an IDE agent) that embeds an MCP client. The host talks to a hosted LLM.
+  It starts two local servers over stdio (files, git), uses one local server over Streamable HTTP on
+  127.0.0.1 (db), and connects to one remote SaaS server (crm) that uses OAuth. Server metadata comes
+  from a public registry. All names are fictional.
+
+assets:
+  - {id: A1, name: OAuth tokens and API keys, value: 9}
+  - {id: A2, name: Tool definitions (names, descriptions, schemas), value: 6}
+  - {id: A3, name: Conversation context (prompts and tool results), value: 7}
+  - {id: A4, name: Host configuration (mcp.json, launch commands), value: 7}
+  - {id: A5, name: Project source code and files, value: 7}
+  - {id: A6, name: Customer CRM data, value: 8}
+  - {id: A7, name: Database credentials, value: 8}
+  - {id: A8, name: Audit trail of tool calls, value: 5}
+
+zones:
+  - {id: internet, trust: untrusted, name: Internet}
+  - {id: provider, trust: third_party, name: LLM provider}
+  - {id: saas, trust: third_party, name: CRM vendor and identity provider}
+  - {id: desktop, trust: trusted, name: Developer workstation (host process)}
+  - {id: local_servers, trust: semi, name: Local server processes (third-party code, user privileges)}
+
+elements:
+  - {id: user, type: external_entity, zone: desktop, name: Developer, tags: [user]}
+  - {id: llm, type: external_entity, zone: provider, name: Hosted LLM, tags: [llm]}
+  - {id: registry, type: external_entity, zone: internet, name: Public MCP registry, tags: [registry]}
+  - {id: idp, type: external_entity, zone: saas, name: Identity provider (authorization server), tags: [idp]}
+  - id: host
+    type: process
+    zone: desktop
+    name: AI host with MCP client
+    tags: [host, llm_context, tool_consumer]
+    assets: [A2, A3]
+    controls: [tls_cert_validation]
+  - id: host_config
+    type: data_store
+    zone: desktop
+    name: Host config (mcp.json)
+    tags: [config]
+    assets: [A4]
+    controls: [file_permissions]
+  - id: token_cache
+    type: data_store
+    zone: desktop
+    name: OAuth token cache
+    tags: [token_store]
+    assets: [A1]
+    controls: []
+  - id: files_server
+    type: process
+    zone: local_servers
+    name: files server (stdio)
+    tags: [stdio, local_exec, filesystem, tool_defs, third_party_code]
+    assets: [A5]
+    controls: [input_validation]
+  - id: git_server
+    type: process
+    zone: local_servers
+    name: git server (stdio)
+    tags: [stdio, local_exec, tool_defs, third_party_code, has_credentials, network_egress]
+    assets: [A1]
+    controls: []
+  - id: db_server
+    type: process
+    zone: local_servers
+    name: db server (HTTP on 127.0.0.1)
+    tags: [local_http, tool_defs, has_credentials]
+    assets: [A7]
+    controls: [bearer_auth]
+  - id: crm_server
+    type: process
+    zone: saas
+    name: crm server (remote, OAuth)
+    tags: [remote, oauth, tool_defs, tenant_data]
+    assets: [A6]
+    controls: [audience_binding, scope_checks, audit_log]
+  - {id: project_files, type: data_store, zone: local_servers, name: Project files, tags: [filesystem], assets: [A5]}
+  - {id: crm_data, type: data_store, zone: saas, name: CRM database, tags: [tenant_data], assets: [A6]}
+
+flows:
+  - {id: F1, source: user, target: host, data: prompts and approvals, tags: [user_input]}
+  - {id: F2, source: host, target: llm, data: "context = prompts + tool definitions + tool results", tags: [llm_context, tool_definitions, tool_results], controls: [tls]}
+  - {id: F3, source: llm, target: host, data: model output and tool-call requests, tags: [tool_call], controls: [tls]}
+  - {id: F4, source: host, target: files_server, data: tools/call (JSON-RPC over stdio), tags: [stdio]}
+  - {id: F5, source: files_server, target: host, data: tools/list and tool results, tags: [stdio, tool_definitions, tool_results]}
+  - {id: F6, source: host, target: git_server, data: tools/call (JSON-RPC over stdio), tags: [stdio]}
+  - {id: F7, source: git_server, target: host, data: tools/list and tool results, tags: [stdio, tool_definitions, tool_results]}
+  - {id: F8, source: host, target: db_server, data: tools/call over HTTP, tags: [http, local_http], controls: [bearer_auth]}
+  - {id: F9, source: db_server, target: host, data: tools/list and tool results, tags: [http, local_http, tool_definitions, tool_results], controls: [bearer_auth]}
+  - {id: F10, source: host, target: crm_server, data: tools/call with OAuth access token, tags: [http, remote, oauth, token], controls: [tls, tls_cert_validation]}
+  - {id: F11, source: crm_server, target: host, data: tools/list and tool results, tags: [http, remote, tool_definitions, tool_results], controls: [tls, tls_cert_validation]}
+  - {id: F12, source: host, target: idp, data: OAuth authorization and token requests, tags: [oauth, token, http], controls: [tls, pkce]}
+  - {id: F13, source: host, target: registry, data: server discovery query, tags: [registry_fetch, http], controls: []}
+  - {id: F14, source: registry, target: host, data: server metadata and package pointers, tags: [registry_fetch, supply_chain, http], controls: []}
+  - {id: F15, source: host_config, target: host, data: launch commands and env, tags: [config], controls: []}
+  - {id: F16, source: host, target: token_cache, data: access and refresh tokens, tags: [token], controls: []}
+  - {id: F17, source: files_server, target: project_files, data: file reads and writes, tags: [filesystem], controls: [input_validation]}
+  - {id: F18, source: crm_server, target: crm_data, data: tenant-scoped queries, tags: [tenant_data], controls: [audience_binding]}

@@ -1,0 +1,29 @@
+{
+  "server": "notes-mcp",
+  "version": "1.2.0",
+  "tools": [
+    {
+      "name": "read_note",
+      "description": "Read a note by name from the notes folder.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "list_notes",
+      "description": "List the names of all notes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ]
+}

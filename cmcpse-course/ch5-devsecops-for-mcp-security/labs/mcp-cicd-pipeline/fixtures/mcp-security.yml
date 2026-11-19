@@ -1,0 +1,76 @@
+# FIXTURE, not a live workflow (it is not under .github/). Copy to .github/workflows/ in a real repo.
+# Action SHAs below are PLACEHOLDERS: replace each with the real commit SHA of the release you trust.
+name: mcp-security
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: mcp-security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@0000000000000000000000000000000000000001   # v4, PLACEHOLDER SHA
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@0000000000000000000000000000000000000002 # v5, PLACEHOLDER SHA
+        with: {python-version: "3.11"}
+      - run: pip install pyyaml
+      - run: python tools/pipeline_runner.py --project . --stage sast
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@0000000000000000000000000000000000000001
+        with: {persist-credentials: false, fetch-depth: 0}
+      - uses: actions/setup-python@0000000000000000000000000000000000000002
+        with: {python-version: "3.11"}
+      - run: pip install pyyaml
+      - run: python tools/pipeline_runner.py --project . --stage secrets
+      # In a real pipeline also run gitleaks or trufflehog over the full git history.
+
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@0000000000000000000000000000000000000001
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@0000000000000000000000000000000000000002
+        with: {python-version: "3.11"}
+      - run: pip install pyyaml pip-audit
+      - run: python tools/pipeline_runner.py --project . --stage deps
+      - run: pip-audit -r requirements.lock --require-hashes   # real advisories (needs network)
+
+  tool-description-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@0000000000000000000000000000000000000001
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@0000000000000000000000000000000000000002
+        with: {python-version: "3.11"}
+      - run: pip install pyyaml
+      - run: python tools/pipeline_runner.py --project . --stage tool-descriptions
+
+  manifest-pin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@0000000000000000000000000000000000000001
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@0000000000000000000000000000000000000002
+        with: {python-version: "3.11"}
+      - run: pip install pyyaml
+      - run: python tools/pipeline_runner.py --project . --stage manifest-pin
+
+  policy-gate:
+    # Needs every other job. Mark this job as a required status check in branch protection.
+    needs: [sast, secrets, dependency-audit, tool-description-scan, manifest-pin]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@0000000000000000000000000000000000000001
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@0000000000000000000000000000000000000002
+        with: {python-version: "3.11"}
+      - run: pip install pyyaml
+      - run: python tools/pipeline_runner.py --project . --pr pr.json

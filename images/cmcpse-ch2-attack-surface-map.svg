@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <title id="t">MCP attack surface map</title>
+  <desc id="d">A host with an LLM connects to local and remote MCP servers, a registry, downstream APIs and untrusted content. Ten numbered attack points are marked.</desc>
+  <defs>
+    <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="960" height="600" fill="#ffffff"/>
+  <text x="480" y="28" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">Where attackers look in an MCP deployment</text>
+
+  <!-- registry / supply chain -->
+  <rect x="330" y="48" width="300" height="62" rx="8" fill="#fef3c7" stroke="#b45309"/>
+  <text x="480" y="72" text-anchor="middle" font-weight="600" fill="#78350f">Registries, package managers, repos</text>
+  <text x="480" y="92" text-anchor="middle" fill="#78350f">npm / PyPI / aggregators / config snippets</text>
+
+  <!-- untrusted content -->
+  <rect x="30" y="150" width="210" height="150" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+  <text x="135" y="174" text-anchor="middle" font-weight="600" fill="#7f1d1d">Untrusted content</text>
+  <text x="135" y="198" text-anchor="middle" fill="#7f1d1d">web pages, issues, tickets</text>
+  <text x="135" y="218" text-anchor="middle" fill="#7f1d1d">emails, chat messages, files</text>
+  <text x="135" y="238" text-anchor="middle" fill="#7f1d1d">tool outputs from other servers</text>
+  <text x="135" y="270" text-anchor="middle" fill="#7f1d1d">(attacker-writable)</text>
+
+  <!-- host -->
+  <rect x="320" y="170" width="320" height="230" rx="10" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/>
+  <text x="480" y="194" text-anchor="middle" font-weight="600" fill="#0c4a6e">MCP host / agent</text>
+  <rect x="345" y="210" width="130" height="60" rx="6" fill="#ffffff" stroke="#0369a1"/>
+  <text x="410" y="236" text-anchor="middle" fill="#0c4a6e">LLM</text>
+  <text x="410" y="254" text-anchor="middle" fill="#0c4a6e" font-size="11">reads descriptions</text>
+  <rect x="490" y="210" width="130" height="60" rx="6" fill="#ffffff" stroke="#0369a1"/>
+  <text x="555" y="236" text-anchor="middle" fill="#0c4a6e">MCP clients</text>
+  <text x="555" y="254" text-anchor="middle" fill="#0c4a6e" font-size="11">approval, config, tokens</text>
+  <rect x="345" y="290" width="275" height="90" rx="6" fill="#ffffff" stroke="#0369a1"/>
+  <text x="482" y="314" text-anchor="middle" fill="#0c4a6e">Config and secrets on disk</text>
+  <text x="482" y="334" text-anchor="middle" fill="#0c4a6e" font-size="11">mcp.json, env vars, OAuth tokens</text>
+  <text x="482" y="354" text-anchor="middle" fill="#0c4a6e" font-size="11">shared memory / context</text>
+
+  <!-- servers -->
+  <rect x="720" y="130" width="210" height="100" rx="8" fill="#ede9fe" stroke="#6d28d9"/>
+  <text x="825" y="154" text-anchor="middle" font-weight="600" fill="#4c1d95">Local server (stdio)</text>
+  <text x="825" y="176" text-anchor="middle" fill="#4c1d95" font-size="12">runs with the user's rights</text>
+  <text x="825" y="196" text-anchor="middle" fill="#4c1d95" font-size="12">files, shell, dev proxies</text>
+  <rect x="720" y="260" width="210" height="100" rx="8" fill="#ede9fe" stroke="#6d28d9"/>
+  <text x="825" y="284" text-anchor="middle" font-weight="600" fill="#4c1d95">Remote server (HTTP)</text>
+  <text x="825" y="306" text-anchor="middle" fill="#4c1d95" font-size="12">endpoint, auth, TLS</text>
+  <text x="825" y="326" text-anchor="middle" fill="#4c1d95" font-size="12">OAuth metadata, redirects</text>
+
+  <!-- downstream -->
+  <rect x="720" y="430" width="210" height="100" rx="8" fill="#dcfce7" stroke="#15803d"/>
+  <text x="825" y="454" text-anchor="middle" font-weight="600" fill="#14532d">Downstream systems</text>
+  <text x="825" y="476" text-anchor="middle" fill="#14532d" font-size="12">cloud APIs, databases, SaaS</text>
+  <text x="825" y="496" text-anchor="middle" fill="#14532d" font-size="12">service accounts, broad scopes</text>
+
+  <!-- output sinks -->
+  <rect x="320" y="450" width="320" height="80" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+  <text x="480" y="476" text-anchor="middle" font-weight="600" fill="#7f1d1d">Exfiltration sinks</text>
+  <text x="480" y="498" text-anchor="middle" fill="#7f1d1d" font-size="12">email, issue or PR comments, URLs, tool arguments</text>
+
+  <!-- arrows -->
+  <path d="M240,225 L318,225" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+  <path d="M640,230 L718,185" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+  <path d="M640,300 L718,310" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+  <path d="M825,360 L825,428" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+  <path d="M480,112 L480,168" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+  <path d="M480,402 L480,448" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+
+  <!-- numbered attack points -->
+  <g font-weight="700" font-size="12" fill="#ffffff" text-anchor="middle">
+    <circle cx="480" cy="140" r="13" fill="#b45309"/><text x="480" y="145">1</text>
+    <circle cx="280" cy="208" r="13" fill="#b91c1c"/><text x="280" y="213">2</text>
+    <circle cx="430" cy="196" r="0" fill="none"/>
+    <circle cx="410" cy="283" r="0" fill="none"/>
+    <circle cx="680" cy="196" r="13" fill="#6d28d9"/><text x="680" y="201">3</text>
+    <circle cx="680" cy="320" r="13" fill="#6d28d9"/><text x="680" y="325">4</text>
+    <circle cx="825" cy="396" r="13" fill="#15803d"/><text x="825" y="401">5</text>
+    <circle cx="345" cy="375" r="13" fill="#0369a1"/><text x="345" y="380">6</text>
+    <circle cx="480" cy="425" r="13" fill="#b91c1c"/><text x="480" y="430">7</text>
+    <circle cx="640" cy="196" r="0" fill="none"/>
+  </g>
+
+  <!-- legend -->
+  <g fill="#0f172a" font-size="12">
+    <text x="30" y="335" font-weight="600">Attack points</text>
+    <text x="30" y="355">1 poisoned or typosquatted package</text>
+    <text x="30" y="373">2 injection via tool results, content</text>
+    <text x="30" y="391">3 poisoned descriptions, local RCE</text>
+    <text x="30" y="409">4 unauthenticated or weak endpoint</text>
+    <text x="30" y="427">5 over-privileged tokens, deputies</text>
+    <text x="30" y="445">6 tokens in configs, secrets in context</text>
+    <text x="30" y="463">7 data leaves via legitimate tools</text>
+  </g>
+</svg>

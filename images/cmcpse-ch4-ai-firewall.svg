@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="420" viewBox="0 0 1100 420" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">AI firewall in front of an MCP server</title><desc id="d">Requests are checked for allowlist, size, rate, patterns and secrets; results are checked for injection, secrets, PII, links and size.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1100" height="420" fill="#ffffff"/>
+<text x="30" y="40" font-size="24" font-weight="bold" fill="#0f172a" text-anchor="start">AI firewall for MCP: inspect both directions</text>
+<rect x="30" y="160" width="150" height="80" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+<text x="105.0" y="196.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Host +</text>
+<text x="105.0" y="212.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">MCP client</text>
+<rect x="900" y="160" width="170" height="80" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+<text x="985.0" y="204.0" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">MCP server</text>
+<rect x="300" y="90" width="500" height="240" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+<text x="550" y="118" font-size="16" font-weight="bold" fill="#d97706" text-anchor="middle">Firewall / gateway (policy.yaml)</text>
+<rect x="320" y="135" width="460" height="80" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+<text x="550" y="158" font-size="13" font-weight="bold" fill="#334155" text-anchor="middle">REQUEST  tools/call</text>
+<text x="550" y="180" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">tool allowlist · size cap · rate limit · forbidden patterns</text>
+<text x="550" y="198" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">secrets in arguments: block or redact</text>
+<rect x="320" y="228" width="460" height="86" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+<text x="550" y="250" font-size="13" font-weight="bold" fill="#334155" text-anchor="middle">RESULT  tool output</text>
+<text x="550" y="272" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">injection heuristics + hidden text: quarantine or strip</text>
+<text x="550" y="290" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">secret and PII redaction · link and image control · truncation</text>
+<line x1="180" y1="190" x2="298" y2="190" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="802" y1="190" x2="898" y2="190" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="898" y1="215" x2="802" y2="215" stroke="#334155" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<line x1="298" y1="215" x2="182" y2="215" stroke="#334155" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<text x="550" y="360" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">Every decision is logged. Any internal error fails closed. Heuristics miss paraphrases: keep least privilege and approvals.</text>
+<text x="550" y="392" font-size="13" font-weight="bold" fill="#d97706" text-anchor="middle">Lab: labs/mcp-ai-firewall (tests prove each rule)</text>
+</svg>

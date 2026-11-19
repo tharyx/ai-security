@@ -1,0 +1,332 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:89154635-2e6d-5496-b05d-a7a3deb85f64",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-01-01T00:00:00Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "cmcpse-lab-sbom",
+          "version": "0.1"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "notes-mcp@1.2.0",
+      "name": "notes-mcp",
+      "version": "1.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "lab:mcp:transport",
+          "value": "streamable-http"
+        },
+        {
+          "name": "lab:mcp:tool",
+          "value": "read_note"
+        },
+        {
+          "name": "lab:mcp:tool",
+          "value": "list_notes"
+        },
+        {
+          "name": "lab:mcp:tool",
+          "value": "send_report"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mcp-sdk-lite@1.4.0",
+      "name": "mcp-sdk-lite",
+      "purl": "pkg:pypi/mcp-sdk-lite@1.4.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "lab:direct",
+          "value": "true"
+        },
+        {
+          "name": "lab:registry",
+          "value": "pypi.org"
+        }
+      ],
+      "version": "1.4.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/yamlish@2.3.0",
+      "name": "yamlish",
+      "purl": "pkg:pypi/yamlish@2.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "lab:direct",
+          "value": "true"
+        },
+        {
+          "name": "lab:registry",
+          "value": "pypi.org"
+        }
+      ],
+      "version": "2.3.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/notesdb-client@1.9.0",
+      "name": "notesdb-client",
+      "purl": "pkg:pypi/notesdb-client@1.9.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-only"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "lab:direct",
+          "value": "true"
+        },
+        {
+          "name": "lab:registry",
+          "value": "pypi.org"
+        }
+      ],
+      "version": "1.9.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3333333333333333333333333333333333333333333333333333333333333333"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/internal-metrics@0.3.1",
+      "name": "internal-metrics",
+      "purl": "pkg:pypi/internal-metrics@0.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "lab:direct",
+          "value": "true"
+        },
+        {
+          "name": "lab:registry",
+          "value": "pypi.attacker-mirror.example"
+        }
+      ],
+      "version": "0.3.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4444444444444444444444444444444444444444444444444444444444444444"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpx-lite@0.27.0",
+      "name": "httpx-lite",
+      "purl": "pkg:pypi/httpx-lite@0.27.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "lab:direct",
+          "value": "false"
+        },
+        {
+          "name": "lab:registry",
+          "value": "pypi.org"
+        }
+      ],
+      "version": "0.27.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5555555555555555555555555555555555555555555555555555555555555555"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/h11-lite@0.14.0",
+      "name": "h11-lite",
+      "purl": "pkg:pypi/h11-lite@0.14.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "lab:direct",
+          "value": "false"
+        },
+        {
+          "name": "lab:registry",
+          "value": "pypi.org"
+        }
+      ],
+      "version": "0.14.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6666666666666666666666666666666666666666666666666666666666666666"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-lite@2.7.0",
+      "name": "pydantic-lite",
+      "purl": "pkg:pypi/pydantic-lite@2.7.0",
+      "licenses": [],
+      "properties": [
+        {
+          "name": "lab:direct",
+          "value": "false"
+        },
+        {
+          "name": "lab:registry",
+          "value": "pypi.org"
+        }
+      ],
+      "version": "2.7.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7777777777777777777777777777777777777777777777777777777777777777"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/tinycrypto",
+      "name": "tinycrypto",
+      "purl": "pkg:pypi/tinycrypto",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "lab:direct",
+          "value": "false"
+        },
+        {
+          "name": "lab:registry",
+          "value": "pypi.org"
+        },
+        {
+          "name": "lab:constraint",
+          "value": ">=0.5"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "notes-mcp@1.2.0",
+      "dependsOn": [
+        "pkg:pypi/mcp-sdk-lite@1.4.0",
+        "pkg:pypi/yamlish@2.3.0",
+        "pkg:pypi/notesdb-client@1.9.0",
+        "pkg:pypi/internal-metrics@0.3.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/mcp-sdk-lite@1.4.0",
+      "dependsOn": [
+        "pkg:pypi/httpx-lite@0.27.0",
+        "pkg:pypi/pydantic-lite@2.7.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/yamlish@2.3.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/notesdb-client@1.9.0",
+      "dependsOn": [
+        "pkg:pypi/tinycrypto"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/internal-metrics@0.3.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/httpx-lite@0.27.0",
+      "dependsOn": [
+        "pkg:pypi/h11-lite@0.14.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/h11-lite@0.14.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pydantic-lite@2.7.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tinycrypto",
+      "dependsOn": []
+    }
+  ]
+}

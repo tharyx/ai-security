@@ -16,10 +16,11 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "pip-audit>=2.7"]
+mcp = ["mcp"]  # optional: official MCP Python SDK for cmcpse-course real-sdk labs
 
 [tool.setuptools]
 packages = ["aisec_lab"]
 
 [tool.pytest.ini_options]
 addopts = "--import-mode=importlib -q"
-testpaths = ["aisec_lab", "01-ai-security-fundamentals", "02-llm-security", "03-rag-security", "04-mcp-security", "05-agent-security", "06-ai-devsecops", "07-ai-governance", "08-ai-compliance", "09-enterprise-architecture", "10-capstone-project", "cybersecurity-track", "caisp-course"]
+testpaths = ["aisec_lab", "01-ai-security-fundamentals", "02-llm-security", "03-rag-security", "04-mcp-security", "05-agent-security", "06-ai-devsecops", "07-ai-governance", "08-ai-compliance", "09-enterprise-architecture", "10-capstone-project", "cybersecurity-track", "caisp-course", "cmcpse-course"]

@@ -1,0 +1,13 @@
+# The VULNERABLE pipeline (a fixture for ci_sim.py, not a real workflow).
+name: mcp-ci
+env_secrets: [DEPLOY_TOKEN]        # every step of every run, including PR runs, can read the token
+stages:
+  - name: test
+    run: ["make test"]
+  - name: build
+    run: ["mcp-build"]              # runs the postinstall hook from mcp-server.config.json
+  - name: publish-docs
+    # the tool description is pasted into the command line BEFORE the shell parses it
+    run: ['publish --description "${{ tool_description }}"']
+  - name: deploy                    # "preview deploy" on every PR
+    run: ["sh scripts/deploy.sh"]

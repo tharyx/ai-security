@@ -1,0 +1,14 @@
+# Role -> what a session may see and do. Roles come from the authenticated session, never from the model.
+roles:
+  viewer:
+    tools: [notes_search, notes_read]
+    resources: ["notes://public/*"]
+  analyst:
+    tools: [notes_search, notes_read, notes_write]
+    resources: ["notes://public/*", "notes://team/*"]
+    limits: {notes_search: {max_results: 20}}
+  admin:
+    tools: [notes_search, notes_read, notes_write, notes_delete, notes_export]
+    resources: ["notes://*"]
+    limits: {notes_search: {max_results: 100}}
+default_role: null        # a session with an unknown role gets nothing (deny by default)

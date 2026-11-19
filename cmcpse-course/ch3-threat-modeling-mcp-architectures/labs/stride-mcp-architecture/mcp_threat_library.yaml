@@ -1,0 +1,89 @@
+# A small MCP-specific threat library used by stride_mcp.py. Each entry is one reusable threat.
+#   applies_to    : element kinds (external_entity, process, data_store, data_flow)
+#   when_tags     : the element must have at least one of these tags (empty = any element of that kind)
+#   boundary_only : only for data flows that cross a trust boundary
+#   mitigated_by  : controls that, if present on the element, mark the finding "mitigated"
+#   factors       : OWASP-style 0-9 factors: agent, vuln (likelihood) and tech, business (impact)
+# owasp_mcp = OWASP MCP Top 10 (2025, beta); asi = OWASP Agentic Top 10 2026. Verify both at source.
+entries:
+  - {id: MT-S01, stride: S, applies_to: [process], when_tags: [remote], title: "Impostor or typosquatted remote server is accepted as the real one",
+     owasp_mcp: [MCP09, MCP04], asi: [ASI04], mitigated_by: [tls_cert_validation, registry_allowlist],
+     factors: {agent: 5, vuln: 5, tech: 5, business: 5}, mitigation: "Validate TLS certificates and pin the server identity; connect only to allowlisted endpoints."}
+  - {id: MT-S02, stride: S, applies_to: [external_entity], when_tags: [registry], title: "Registry listing that impersonates a trusted publisher",
+     owasp_mcp: [MCP04, MCP09], asi: [ASI04], mitigated_by: [registry_allowlist, signed_packages],
+     factors: {agent: 5, vuln: 5, tech: 5, business: 5}, mitigation: "Prefer namespace-verified publishers, keep an internal allowlist, verify signatures or digests."}
+  - {id: MT-S03, stride: S, applies_to: [process], when_tags: [local_http], title: "Local HTTP server called by a malicious web page (DNS rebinding or no auth)",
+     owasp_mcp: [MCP07], asi: [], mitigated_by: [origin_check],
+     factors: {agent: 5, vuln: 4, tech: 7, business: 5}, mitigation: "Bind to 127.0.0.1, check Host and Origin headers, and require a token on every request."}
+  - {id: MT-S04, stride: S, applies_to: [data_flow], when_tags: [oauth, token], title: "Stolen or replayed access token accepted by another server",
+     owasp_mcp: [MCP01, MCP07], asi: [ASI03], mitigated_by: [audience_binding, pkce],
+     factors: {agent: 4, vuln: 4, tech: 6, business: 6}, mitigation: "Short-lived tokens, PKCE, audience binding (RFC 8707) and no token passthrough."}
+  - {id: MT-S05, stride: S, applies_to: [external_entity], when_tags: [user], title: "Agent action attributed to the user although the user never approved it",
+     owasp_mcp: [MCP08], asi: [ASI09], mitigated_by: [human_approval, signed_audit],
+     factors: {agent: 3, vuln: 4, tech: 3, business: 4}, mitigation: "Record approvals with the exact action shown and sign the audit trail."}
+  - {id: MT-T01, stride: T, applies_to: [process], when_tags: [tool_defs, tool_consumer], title: "Poisoned tool description or schema steers the model",
+     owasp_mcp: [MCP03], asi: [ASI01, ASI02], mitigated_by: [description_scanning, tool_pinning],
+     factors: {agent: 5, vuln: 6, tech: 6, business: 6}, mitigation: "Scan descriptions and schemas, review them, pin hashes and show full definitions to the user."}
+  - {id: MT-T02, stride: T, applies_to: [process], when_tags: [tool_defs], title: "Rug pull - the tool definition changes after approval",
+     owasp_mcp: [MCP03, MCP04], asi: [ASI04], mitigated_by: [tool_pinning],
+     factors: {agent: 4, vuln: 6, tech: 6, business: 6}, mitigation: "Pin definition hashes, re-prompt on change and handle tools/list_changed safely."}
+  - {id: MT-T03, stride: T, applies_to: [data_flow], when_tags: [tool_results], boundary_only: true, title: "Indirect prompt injection inside a tool result",
+     owasp_mcp: [MCP06, MCP10], asi: [ASI01], mitigated_by: [output_sanitization, ai_firewall],
+     factors: {agent: 6, vuln: 7, tech: 6, business: 6}, mitigation: "Treat results as data, scan and sanitize them, and gate side effects after untrusted content."}
+  - {id: MT-T04, stride: T, applies_to: [process], when_tags: [local_exec, filesystem], title: "Command injection or path traversal through a tool argument",
+     owasp_mcp: [MCP05], asi: [ASI05], mitigated_by: [input_validation, sandbox],
+     factors: {agent: 5, vuln: 5, tech: 7, business: 6}, mitigation: "Validate arguments against a strict schema, avoid shells, resolve paths against a root and sandbox the process."}
+  - {id: MT-T05, stride: T, applies_to: [data_store], when_tags: [config], title: "Host config edited to launch a malicious command (command-line risk)",
+     owasp_mcp: [MCP05, MCP04], asi: [ASI05], mitigated_by: [config_integrity],
+     factors: {agent: 4, vuln: 4, tech: 7, business: 7}, mitigation: "Protect the config file, review launch commands in code review and alert on change."}
+  - {id: MT-T06, stride: T, applies_to: [data_flow], when_tags: [http, registry_fetch], title: "Data altered in transit on an unprotected HTTP path (no TLS or no verification)",
+     owasp_mcp: [MCP07], asi: [], mitigated_by: [tls, tls_cert_validation],
+     factors: {agent: 3, vuln: 4, tech: 5, business: 5}, mitigation: "Use TLS with certificate validation on every non-local HTTP flow."}
+  - {id: MT-T07, stride: T, applies_to: [data_flow], when_tags: [supply_chain], title: "Package or metadata updated to a backdoored version (supply chain)",
+     owasp_mcp: [MCP04], asi: [ASI04], mitigated_by: [signed_packages, tool_pinning],
+     factors: {agent: 5, vuln: 5, tech: 7, business: 7}, mitigation: "Pin versions and digests, review updates and use an internal mirror."}
+  - {id: MT-R01, stride: R, applies_to: [process], when_tags: [host], title: "Tool calls are not logged with user, client and arguments",
+     owasp_mcp: [MCP08], asi: [ASI10], mitigated_by: [audit_log],
+     factors: {agent: 2, vuln: 6, tech: 2, business: 4}, mitigation: "Log every tools/call with full context in a structured schema."}
+  - {id: MT-R02, stride: R, applies_to: [data_store], when_tags: [token_store, config], title: "Changes to security-relevant stores leave no trace",
+     owasp_mcp: [MCP08], asi: [], mitigated_by: [audit_log, config_integrity],
+     factors: {agent: 2, vuln: 5, tech: 2, business: 3}, mitigation: "Log writes and verify integrity with hashes."}
+  - {id: MT-I01, stride: I, applies_to: [process], when_tags: [has_credentials], title: "Secrets in the environment, schemas or logs of the server",
+     owasp_mcp: [MCP01], asi: [ASI03], mitigated_by: [vault, log_redaction],
+     factors: {agent: 5, vuln: 5, tech: 6, business: 7}, mitigation: "Fetch secrets at call time from a vault and redact logs."}
+  - {id: MT-I02, stride: I, applies_to: [data_store], when_tags: [token_store], title: "Tokens stored in plaintext on disk",
+     owasp_mcp: [MCP01], asi: [ASI03], mitigated_by: [os_keychain],
+     factors: {agent: 4, vuln: 6, tech: 6, business: 7}, mitigation: "Use the OS credential store, or encrypt at rest with strict file permissions."}
+  - {id: MT-I03, stride: I, applies_to: [data_flow], when_tags: [tool_results], title: "Over-sharing - a tool result carries more data than the task needs",
+     owasp_mcp: [MCP10], asi: [ASI03], mitigated_by: [data_minimization, output_sanitization, ai_firewall],
+     factors: {agent: 4, vuln: 6, tech: 5, business: 6}, mitigation: "Return minimal fields, filter by the caller's rights and redact before data reaches the model."}
+  - {id: MT-I04, stride: I, applies_to: [process], when_tags: [llm_context], title: "Cross-server leakage - data from one server leaves through another",
+     owasp_mcp: [MCP10, MCP06], asi: [ASI01, ASI03], mitigated_by: [cross_server_policy, human_approval],
+     factors: {agent: 5, vuln: 6, tech: 6, business: 7}, mitigation: "Apply a taint policy across servers and require approval for egress after sensitive reads."}
+  - {id: MT-I05, stride: I, applies_to: [process], when_tags: [tool_consumer], title: "Tool descriptions disclose internal paths, hosts or credentials",
+     owasp_mcp: [MCP01], asi: [], mitigated_by: [description_scanning],
+     factors: {agent: 3, vuln: 4, tech: 3, business: 3}, mitigation: "Review descriptions for internal details and keep them short and generic."}
+  - {id: MT-D01, stride: D, applies_to: [process], when_tags: [host, remote, local_http, stdio], title: "Runaway or abusive tool-call loop exhausts quota or budget",
+     owasp_mcp: [MCP08], asi: [ASI08], mitigated_by: [rate_limit],
+     factors: {agent: 4, vuln: 5, tech: 3, business: 4}, mitigation: "Apply per-client rate limits, call budgets and circuit breakers."}
+  - {id: MT-D02, stride: D, applies_to: [data_flow], when_tags: [stdio, tool_results], title: "Oversized or endless output floods the context window or the pipe",
+     owasp_mcp: [], asi: [ASI08], mitigated_by: [size_limits, ai_firewall],
+     factors: {agent: 4, vuln: 5, tech: 3, business: 3}, mitigation: "Limit result size and time, and truncate safely."}
+  - {id: MT-D03, stride: D, applies_to: [data_flow], when_tags: [registry_fetch], title: "Registry outage or poisoned listing blocks or misleads server discovery",
+     owasp_mcp: [MCP04], asi: [], mitigated_by: [registry_allowlist],
+     factors: {agent: 2, vuln: 4, tech: 2, business: 3}, mitigation: "Keep a cached internal allowlist so discovery is not on the critical path."}
+  - {id: MT-E01, stride: E, applies_to: [process], when_tags: [local_exec, stdio], title: "Local server runs with the full privileges of the user",
+     owasp_mcp: [MCP02, MCP05], asi: [ASI05, ASI03], mitigated_by: [sandbox, least_privilege],
+     factors: {agent: 5, vuln: 6, tech: 7, business: 7}, mitigation: "Run servers in a sandbox or container with the minimum filesystem, network and env."}
+  - {id: MT-E02, stride: E, applies_to: [process], when_tags: [oauth], title: "Scope creep - the token or tool holds more scopes than the task needs",
+     owasp_mcp: [MCP02, MCP07], asi: [ASI03], mitigated_by: [scope_checks],
+     factors: {agent: 4, vuln: 5, tech: 6, business: 6}, mitigation: "Enforce scopes per tool, reject over-scoped tokens and review scope usage."}
+  - {id: MT-E03, stride: E, applies_to: [process], when_tags: [tenant_data], title: "Token passthrough or confused deputy gives access to another tenant or API",
+     owasp_mcp: [MCP07, MCP02], asi: [ASI03], mitigated_by: [audience_binding],
+     factors: {agent: 4, vuln: 5, tech: 7, business: 7}, mitigation: "Validate the audience, use token exchange downstream and enforce tenant isolation."}
+  - {id: MT-E04, stride: E, applies_to: [process], when_tags: [llm_context], title: "Excessive agency - tools run without a human check after untrusted input",
+     owasp_mcp: [MCP06, MCP02], asi: [ASI02, ASI09], mitigated_by: [human_approval],
+     factors: {agent: 5, vuln: 6, tech: 6, business: 6}, mitigation: "Require approval for side effects, show the exact action, and use a least-privilege tool list per task."}
+  - {id: MT-E05, stride: E, applies_to: [process], when_tags: [tool_consumer], title: "Tool name collision or shadowing lets a malicious tool win",
+     owasp_mcp: [MCP03, MCP09], asi: [ASI02, ASI04], mitigated_by: [namespacing],
+     factors: {agent: 4, vuln: 5, tech: 5, business: 5}, mitigation: "Namespace tools as server.tool, allowlist them and pin descriptions."}

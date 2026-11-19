@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The MCP security development lifecycle: seven phases, each with its security controls, in a loop</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker>
+    <marker id="b" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b45309"/></marker>
+  </defs>
+  <rect width="1100" height="560" fill="#ffffff"/>
+  <text x="40" y="44" font-size="26" font-weight="700" fill="#0f172a">The MCP security development lifecycle</text>
+  <text x="40" y="70" font-size="14" fill="#475569">Shift left: the earlier a control runs, the cheaper the fix. Every phase feeds findings back to the next sprint.</text>
+
+  <!-- phase boxes -->
+  <g font-size="14" font-weight="700" text-anchor="middle" fill="#1e3a8a">
+    <rect x="30" y="100" width="135" height="56" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="97" y="124">1 Plan</text><text x="97" y="144" font-size="12" font-weight="400">threat model</text>
+    <rect x="178" y="100" width="135" height="56" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="245" y="124">2 Design</text><text x="245" y="144" font-size="12" font-weight="400">tool contracts</text>
+    <rect x="326" y="100" width="135" height="56" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="393" y="124">3 Code</text><text x="393" y="144" font-size="12" font-weight="400">IDE and commit</text>
+    <rect x="474" y="100" width="135" height="56" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="541" y="124">4 Build</text><text x="541" y="144" font-size="12" font-weight="400">pull request, CI</text>
+    <rect x="622" y="100" width="135" height="56" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="689" y="124">5 Test</text><text x="689" y="144" font-size="12" font-weight="400">staging</text>
+    <rect x="770" y="100" width="135" height="56" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="837" y="124">6 Release</text><text x="837" y="144" font-size="12" font-weight="400">gate, sign, deploy</text>
+    <rect x="918" y="100" width="135" height="56" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="985" y="124">7 Operate</text><text x="985" y="144" font-size="12" font-weight="400">run and watch</text>
+  </g>
+  <g stroke="#1d4ed8" stroke-width="2" marker-end="url(#a)">
+    <line x1="165" y1="128" x2="176" y2="128"/><line x1="313" y1="128" x2="324" y2="128"/><line x1="461" y1="128" x2="472" y2="128"/>
+    <line x1="609" y1="128" x2="620" y2="128"/><line x1="757" y1="128" x2="768" y2="128"/><line x1="905" y1="128" x2="916" y2="128"/>
+  </g>
+
+  <!-- control columns -->
+  <g font-size="12" fill="#0f172a">
+    <rect x="30" y="176" width="135" height="250" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="40" y="198" font-weight="700">Controls</text>
+    <text x="40" y="220">STRIDE per server</text><text x="40" y="238">trust boundaries</text><text x="40" y="256">data flow diagram</text><text x="40" y="274">abuse cases</text><text x="40" y="292">who may add a tool?</text>
+
+    <rect x="178" y="176" width="135" height="250" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="188" y="198" font-weight="700">Controls</text>
+    <text x="188" y="220">least-privilege tools</text><text x="188" y="238">strict inputSchema</text><text x="188" y="256">no secrets in text</text><text x="188" y="274">bind 127.0.0.1</text><text x="188" y="292">safe error model</text>
+
+    <rect x="326" y="176" width="135" height="250" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="336" y="198" font-weight="700">Controls</text>
+    <text x="336" y="220">pre-commit secrets</text><text x="336" y="238">IDE SAST hints</text><text x="336" y="256">MCP review checklist</text><text x="336" y="274">signed commits</text><text x="336" y="292">AI-code review</text>
+
+    <rect x="474" y="176" width="135" height="250" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="484" y="198" font-weight="700">Controls</text>
+    <text x="484" y="220">SAST + secret scan</text><text x="484" y="238">dependency audit</text><text x="484" y="256">tool-description scan</text><text x="484" y="274">manifest pin check</text><text x="484" y="292">SBOM + provenance</text>
+
+    <rect x="622" y="176" width="135" height="250" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="632" y="198" font-weight="700">Controls</text>
+    <text x="632" y="220">DAST over HTTP</text><text x="632" y="238">fuzz tool inputs</text><text x="632" y="256">runtime pipeline tests</text><text x="632" y="274">pentest (scoped)</text><text x="632" y="292">injection test suite</text>
+
+    <rect x="770" y="176" width="135" height="250" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="780" y="198" font-weight="700">Controls</text>
+    <text x="780" y="220">policy-as-code gate</text><text x="780" y="238">approval workflow</text><text x="780" y="256">sign the build</text><text x="780" y="274">verify at deploy</text><text x="780" y="292">pinned host config</text>
+
+    <rect x="918" y="176" width="135" height="250" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="928" y="198" font-weight="700">Controls</text>
+    <text x="928" y="220">AI firewall / gateway</text><text x="928" y="238">rate limits</text><text x="928" y="256">audit and telemetry</text><text x="928" y="274">shadow MCP inventory</text><text x="928" y="292">rug-pull monitoring</text>
+  </g>
+
+  <!-- shift-left arrow -->
+  <line x1="1050" y1="452" x2="40" y2="452" stroke="#b45309" stroke-width="3" marker-end="url(#b)"/>
+  <text x="545" y="446" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309">Shift left: move every check toward the developer</text>
+
+  <!-- feedback loop -->
+  <path d="M985 430 L985 520 L97 520 L97 164" fill="none" stroke="#15803d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a)"/>
+  <text x="545" y="512" text-anchor="middle" font-size="13" fill="#166534">Feedback: incidents, findings and new MCP attacks update the threat model and the rules</text>
+</svg>

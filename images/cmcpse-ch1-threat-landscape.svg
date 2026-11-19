@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>MCP threat landscape: where attacks land</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="720" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">MCP threat landscape: where attacks land</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Each red tag is a threat family. OWASP MCP Top 10 ids in brackets. Chapters 2 to 6 of the course take them in turn.</text>
+
+  <rect x="40" y="110" width="250" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="165" y="145" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">User</text>
+  <text x="165" y="170" text-anchor="middle" font-size="12" fill="#1e3a8a">approval fatigue, consent</text>
+  <text x="165" y="190" text-anchor="middle" font-size="12" fill="#1e3a8a">phishing into installs</text>
+
+  <rect x="340" y="110" width="330" height="250" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="505" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Host + client + LLM</text>
+  <text x="505" y="170" text-anchor="middle" font-size="12" fill="#92400e">model reads all tool text and results</text>
+  <text x="505" y="195" text-anchor="middle" font-size="12" fill="#92400e">confused deputy, over-broad scopes</text>
+  <text x="505" y="220" text-anchor="middle" font-size="12" fill="#92400e">sampling and elicitation abuse</text>
+  <text x="505" y="245" text-anchor="middle" font-size="12" fill="#92400e">weak logging, no policy gateway</text>
+  <text x="505" y="270" text-anchor="middle" font-size="12" fill="#92400e">shadow servers nobody approved</text>
+  <text x="505" y="295" text-anchor="middle" font-size="12" fill="#92400e">over-sharing context between servers</text>
+
+  <rect x="740" y="110" width="420" height="250" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="950" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">MCP server and what it touches</text>
+  <text x="950" y="170" text-anchor="middle" font-size="12" fill="#166534">command injection, path traversal, SSRF in handlers</text>
+  <text x="950" y="195" text-anchor="middle" font-size="12" fill="#166534">weak or missing authentication on HTTP</text>
+  <text x="950" y="220" text-anchor="middle" font-size="12" fill="#166534">tokens in logs, env vars, config files</text>
+  <text x="950" y="245" text-anchor="middle" font-size="12" fill="#166534">tenant isolation flaws</text>
+  <text x="950" y="270" text-anchor="middle" font-size="12" fill="#166534">tool description changes after approval (rug pull)</text>
+
+  <line x1="290" y1="165" x2="340" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="670" y1="235" x2="740" y2="235" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="705" y="226" text-anchor="middle" font-size="11" fill="#334155">JSON-RPC</text>
+
+  <rect x="40" y="400" width="1120" height="290" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="430" font-size="16" font-weight="700" fill="#334155">Threat families (red) and the chapter that covers them</text>
+  <g font-size="13" fill="#7f1d1d">
+    <rect x="60" y="450" width="340" height="52" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="72" y="472" font-weight="700">Tool poisoning, prompt injection [MCP03, MCP06]</text>
+    <text x="72" y="491">Ch2 attack, Ch4 defend</text>
+    <rect x="420" y="450" width="340" height="52" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="432" y="472" font-weight="700">Command injection, traversal, SSRF [MCP05]</text>
+    <text x="432" y="491">Ch2 attack, Ch4 defend, Ch5 test in CI</text>
+    <rect x="780" y="450" width="360" height="52" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="792" y="472" font-weight="700">Token and secret exposure [MCP01]</text>
+    <text x="792" y="491">Ch2, Ch4 (vault, short-lived tokens)</text>
+    <rect x="60" y="520" width="340" height="52" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="72" y="542" font-weight="700">Weak authN/authZ, scope creep [MCP07, MCP02]</text>
+    <text x="72" y="561">Ch3 model, Ch4 OAuth 2.1 and least privilege</text>
+    <rect x="420" y="520" width="340" height="52" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="432" y="542" font-weight="700">Supply chain, rug pull [MCP04]</text>
+    <text x="432" y="561">Ch5 pipeline, Ch6 registries, signing, SBOM</text>
+    <rect x="780" y="520" width="360" height="52" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="792" y="542" font-weight="700">Shadow servers, no audit [MCP09, MCP08]</text>
+    <text x="792" y="561">Ch6 governance, Ch4 logging and gateway</text>
+    <rect x="60" y="590" width="340" height="52" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="72" y="612" font-weight="700">Context over-sharing [MCP10]</text>
+    <text x="72" y="631">Ch3 data flows, Ch4 isolation per server</text>
+  </g>
+  <text x="60" y="672" font-size="12" fill="#475569">OWASP MCP Top 10 is a beta list: verify the current ids and names at owasp.org before quoting them in an exam or report.</text>
+</svg>

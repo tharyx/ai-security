@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="560" viewBox="0 0 1240 560" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">Defense in depth for an MCP server</title><desc id="d">A request travels through transport, identity, gateway, policy, server logic and backend, with supply chain controls above and logging below.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1240" height="560" fill="#ffffff"/>
+<text x="30" y="40" font-size="24" font-weight="bold" fill="#0f172a" text-anchor="start">Defense in depth for an MCP server</text>
+<text x="30" y="64" font-size="14" font-weight="normal" fill="#475569" text-anchor="start">Each layer stops a different attack. Assume any single layer can fail. Lab names are in chapter 4.</text>
+<rect x="30" y="90" width="1180" height="62" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="620" y="116" font-size="15" font-weight="bold" fill="#2563eb" text-anchor="middle">Supply chain: registry allowlist, version and digest pinning, description pinning, SBOM, signed packages</text>
+<text x="620" y="138" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">Stops: typosquats, rug pulls, backdoored updates (defend-rug-pull, defend-tool-confusion)</text>
+<rect x="30" y="190" width="215" height="130" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="2.5"/>
+<text x="137.5" y="216" font-size="15" font-weight="bold" fill="#16a34a" text-anchor="middle">1 Transport</text>
+<text x="137.5" y="240" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">TLS + cert validation</text>
+<text x="137.5" y="258" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">SPKI pin, localhost bind</text>
+<text x="137.5" y="276" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">Host / Origin checks</text>
+<text x="137.5" y="294" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">stdio: clean env</text>
+<text x="137" y="345" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">transport-security</text>
+<line x1="245" y1="255" x2="263" y2="255" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="271" y="190" width="215" height="130" rx="10" fill="#ffffff" stroke="#0d9488" stroke-width="2.5"/>
+<text x="378.5" y="216" font-size="15" font-weight="bold" fill="#0d9488" text-anchor="middle">2 Identity</text>
+<text x="378.5" y="240" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">OAuth 2.1 + PKCE</text>
+<text x="378.5" y="258" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">audience binding</text>
+<text x="378.5" y="276" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">client identity</text>
+<text x="378.5" y="294" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">no token passthrough</text>
+<text x="378" y="345" font-size="12" font-weight="bold" fill="#0d9488" text-anchor="middle">defend-oauth-scopes</text>
+<line x1="486" y1="255" x2="504" y2="255" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="512" y="190" width="215" height="130" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2.5"/>
+<text x="619.5" y="216" font-size="15" font-weight="bold" fill="#d97706" text-anchor="middle">3 Gateway</text>
+<text x="619.5" y="240" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">allowlist, size, rate</text>
+<text x="619.5" y="258" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">injection heuristics</text>
+<text x="619.5" y="276" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">secret + PII redaction</text>
+<text x="619.5" y="294" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">link/image control</text>
+<text x="619" y="345" font-size="12" font-weight="bold" fill="#d97706" text-anchor="middle">mcp-ai-firewall</text>
+<line x1="727" y1="255" x2="745" y2="255" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="753" y="190" width="215" height="130" rx="10" fill="#ffffff" stroke="#9333ea" stroke-width="2.5"/>
+<text x="860.5" y="216" font-size="15" font-weight="bold" fill="#9333ea" text-anchor="middle">4 Tool policy</text>
+<text x="860.5" y="240" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">RBAC at list AND call</text>
+<text x="860.5" y="258" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">scopes per tool</text>
+<text x="860.5" y="276" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">schema validation</text>
+<text x="860.5" y="294" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">resource scoping</text>
+<text x="860" y="345" font-size="12" font-weight="bold" fill="#9333ea" text-anchor="middle">least-privilege-tools</text>
+<line x1="968" y1="255" x2="986" y2="255" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="994" y="190" width="215" height="130" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
+<text x="1101.5" y="216" font-size="15" font-weight="bold" fill="#dc2626" text-anchor="middle">5 Server logic</text>
+<text x="1101.5" y="240" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">no shell, safe paths</text>
+<text x="1101.5" y="258" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">safe errors</text>
+<text x="1101.5" y="276" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">secrets from a vault</text>
+<text x="1101.5" y="294" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">dependency hygiene</text>
+<text x="1101" y="345" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">secrets-vault</text>
+<rect x="30" y="215" width="0" height="0"/>
+<text x="30" y="182" font-size="12" font-weight="bold" fill="#475569" text-anchor="start">request path:  client / host  →</text>
+<text x="1210" y="182" font-size="12" font-weight="bold" fill="#475569" text-anchor="end">→  backend data and APIs</text>
+<rect x="30" y="390" width="1180" height="96" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="620" y="416" font-size="15" font-weight="bold" fill="#dc2626" text-anchor="middle">Logging, detection and audit (every layer reports here)</text>
+<text x="620" y="440" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">structured tool-call log: user, client, server, tool, args hash + redacted args, result size, latency, decision</text>
+<text x="620" y="460" font-size="12" font-weight="normal" fill="#334155" text-anchor="middle">detections: bursts, repeated denials, read-then-egress  ·  hash-chained signed audit  ·  alerts and human review</text>
+<text x="620" y="478" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">(tool-invocation-logging)</text>
+<text x="30" y="520" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Human approval for side effects sits across layers 3 to 5. Tests prove each control; a layer without a test is a wish.</text>
+</svg>

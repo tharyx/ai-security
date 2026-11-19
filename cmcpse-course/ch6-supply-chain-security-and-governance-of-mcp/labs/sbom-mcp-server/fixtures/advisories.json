@@ -1,0 +1,5 @@
+[
+  {"id": "LAB-ADV-0001", "package": "yamlish", "fixed": "2.4.1", "severity": "high", "summary": "unsafe load allows code execution (fictional lab advisory)"},
+  {"id": "LAB-ADV-0003", "package": "h11-lite", "fixed": "0.14.1", "severity": "medium", "summary": "request smuggling in a rare parser mode (fictional lab advisory)"},
+  {"id": "LAB-ADV-0004", "package": "pydantic-lite", "fixed": "2.5.0", "severity": "low", "summary": "already fixed in the version used (fictional; must NOT match)"}
+]

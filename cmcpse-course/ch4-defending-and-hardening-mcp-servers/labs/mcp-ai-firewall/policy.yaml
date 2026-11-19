@@ -1,0 +1,20 @@
+# Policy for the MCP AI firewall (a gateway in front of one MCP server). Edit, then re-run the tests.
+tools:
+  allow: [notes_search, notes_read, fetch_page]      # anything else is denied (deny by default)
+limits:
+  max_request_bytes: 2000
+  max_result_bytes: 1500
+  rate:                                              # per client id, token bucket
+    capacity: 5
+    refill_per_second: 1
+arguments:
+  forbid_patterns:                                   # checked on every string value, including nested ones
+    - '\.\./'                                        # path traversal
+    - '(?i)\b(rm|curl|wget|nc)\s+-?\w'               # shell-looking text
+    - '169\.254\.169\.254'                           # cloud metadata address
+  secret_action: block                               # block | redact
+results:
+  injection_action: quarantine                       # quarantine | strip | allow
+  redact: [email, phone, api_key, ssn, card]
+  allowed_link_domains: [docs.acme.example]
+  strip_markdown_images: true

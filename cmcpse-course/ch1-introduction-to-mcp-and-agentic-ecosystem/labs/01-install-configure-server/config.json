@@ -1,0 +1,6 @@
+{
+  "name": "lab-files-server",
+  "version": "0.1.0",
+  "tools_enabled": ["echo", "add", "list_files", "read_file"],
+  "root_dir": "./sandbox"
+}

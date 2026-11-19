@@ -1,0 +1,5 @@
+{
+  "denied_licenses": ["AGPL-3.0-only", "AGPL-3.0-or-later", "SSPL-1.0"],
+  "allowed_registries": ["pypi.org"],
+  "max_acceptable_score": 4
+}

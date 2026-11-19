@@ -1,0 +1,17 @@
+# The FIXED pipeline (a fixture for ci_sim.py, not a real workflow).
+name: mcp-ci
+stages:
+  - name: scan                      # fail early on poisoned descriptions or shell syntax in them
+    run: ["scan-descriptions"]
+  - name: test                      # no secrets here
+    run: ["make test"]
+  - name: build                     # no secrets here; hooks are disabled by the platform
+    run: ["mcp-build"]
+  - name: publish-docs
+    env: {TOOL_DESC: "${{ tool_description }}"}    # data goes through an env variable ...
+    run: ['publish --description "$TOOL_DESC"']    # ... and is quoted, never re-parsed
+  - name: deploy
+    only_event: push                # never on pull requests
+    environment: production         # needs a human approval
+    secrets: [DEPLOY_TOKEN]         # only this stage gets the token
+    run: ["sh scripts/deploy.sh"]

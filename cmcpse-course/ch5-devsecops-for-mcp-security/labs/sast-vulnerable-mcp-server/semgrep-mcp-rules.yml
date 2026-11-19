@@ -1,0 +1,33 @@
+# Optional: the same ideas as Semgrep rules. NOT executed by the repo author.
+# Try:  semgrep --config semgrep-mcp-rules.yml vulnerable_server/
+# Semgrep syntax changes over time: check the current docs (semgrep.dev/docs) if a rule errors.
+rules:
+  - id: mcp-subprocess-shell-true
+    languages: [python]
+    severity: ERROR
+    message: shell=True lets tool input become a command (MCP05). Use an argument list.
+    pattern: subprocess.$FUNC(..., shell=True, ...)
+  - id: mcp-os-system
+    languages: [python]
+    severity: ERROR
+    message: os.system runs a shell. Use subprocess with an argument list.
+    pattern: os.system(...)
+  - id: mcp-bind-all-interfaces
+    languages: [python]
+    severity: WARNING
+    message: Binding to 0.0.0.0 exposes the server to the whole network. Bind 127.0.0.1 or put a gateway in front.
+    pattern-either:
+      - pattern: $X = "0.0.0.0"
+      - pattern: $F(..., host="0.0.0.0", ...)
+  - id: mcp-traceback-returned
+    languages: [python]
+    severity: WARNING
+    message: Returning a traceback leaks paths and internals. Log it, return an error id.
+    pattern: traceback.format_exc()
+  - id: mcp-urlopen-variable
+    languages: [python]
+    severity: WARNING
+    message: Fetching a variable URL needs an allowlist (SSRF).
+    patterns:
+      - pattern: urllib.request.urlopen($URL, ...)
+      - pattern-not: urllib.request.urlopen("...", ...)

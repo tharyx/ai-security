@@ -1,0 +1,4 @@
+[
+  {"id": "LAB-ADV-0001", "package": "yamlish", "fixed": "2.4.1", "severity": "high", "summary": "unsafe load allows code execution (fictional lab advisory)"},
+  {"id": "LAB-ADV-0002", "package": "notesdb-client", "fixed": "1.9.0", "severity": "medium", "summary": "credentials written to debug log (fictional lab advisory)"}
+]

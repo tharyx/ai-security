@@ -1,0 +1,2 @@
+Hello from the sandbox directory.
+This file is the only kind of thing read_file may reach.
