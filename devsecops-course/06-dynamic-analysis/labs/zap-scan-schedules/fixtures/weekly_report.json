@@ -1,0 +1,120 @@
+{
+  "@programName": "ZAP",
+  "@version": "2.x (fixture)",
+  "site": [
+    {
+      "@name": "http://staging.example.test",
+      "alerts": [
+        {
+          "pluginid": "10038",
+          "alertRef": "10038",
+          "alert": "Content Security Policy (CSP) Header Not Set",
+          "name": "Content Security Policy (CSP) Header Not Set",
+          "riskcode": "2",
+          "riskdesc": "Medium (Medium)",
+          "count": "1",
+          "instances": [
+            {
+              "uri": "http://staging.example.test/",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "pluginid": "10021",
+          "alertRef": "10021",
+          "alert": "X-Content-Type-Options Header Missing",
+          "name": "X-Content-Type-Options Header Missing",
+          "riskcode": "1",
+          "riskdesc": "Low (Medium)",
+          "count": "2",
+          "instances": [
+            {
+              "uri": "http://staging.example.test/",
+              "method": "GET"
+            },
+            {
+              "uri": "http://staging.example.test/about",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "pluginid": "10037",
+          "alertRef": "10037",
+          "alert": "Server Leaks Information via X-Powered-By",
+          "name": "Server Leaks Information via X-Powered-By",
+          "riskcode": "1",
+          "riskdesc": "Low (Medium)",
+          "count": "1",
+          "instances": [
+            {
+              "uri": "http://staging.example.test/",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "pluginid": "40012",
+          "alertRef": "40012",
+          "alert": "Cross Site Scripting (Reflected)",
+          "name": "Cross Site Scripting (Reflected)",
+          "riskcode": "3",
+          "riskdesc": "High (Medium)",
+          "count": "1",
+          "instances": [
+            {
+              "uri": "http://staging.example.test/search?q=x",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "pluginid": "40018",
+          "alertRef": "40018",
+          "alert": "SQL Injection",
+          "name": "SQL Injection",
+          "riskcode": "3",
+          "riskdesc": "High (Medium)",
+          "count": "1",
+          "instances": [
+            {
+              "uri": "http://staging.example.test/user?id=1",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "pluginid": "10202",
+          "alertRef": "10202",
+          "alert": "Absence of Anti-CSRF Tokens",
+          "name": "Absence of Anti-CSRF Tokens",
+          "riskcode": "2",
+          "riskdesc": "Medium (Medium)",
+          "count": "1",
+          "instances": [
+            {
+              "uri": "http://staging.example.test/login",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "pluginid": "90033",
+          "alertRef": "90033",
+          "alert": "Loosely Scoped Cookie",
+          "name": "Loosely Scoped Cookie",
+          "riskcode": "1",
+          "riskdesc": "Low (Medium)",
+          "count": "1",
+          "instances": [
+            {
+              "uri": "http://staging.example.test/",
+              "method": "GET"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>IAST observes during tests; RASP blocks in production</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <text x="40" y="44" font-size="26" font-weight="700" fill="#0f172a">Same agent idea, two jobs</text>
+  <text x="40" y="70" font-size="15" fill="#475569">Both put sensors inside the running application. IAST reports vulnerabilities while tests run. RASP stops attacks while users run.</text>
+
+  <rect x="40" y="100" width="540" height="390" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="310" y="134" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">IAST in CI/CD (test environment)</text>
+  <rect x="64" y="160" width="130" height="70" rx="8" fill="#ffffff" stroke="#2563eb"/>
+  <text x="129" y="190" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">QA / functional</text>
+  <text x="129" y="210" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">tests, DAST</text>
+  <rect x="250" y="150" width="300" height="190" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <text x="400" y="176" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Application process</text>
+  <rect x="268" y="190" width="264" height="36" rx="6" fill="#fffbeb" stroke="#d97706"/>
+  <text x="400" y="213" text-anchor="middle" font-size="13" fill="#0f172a">source: request parameter (tainted)</text>
+  <rect x="268" y="236" width="264" height="36" rx="6" fill="#fef9c3" stroke="#ca8a04"/>
+  <text x="400" y="259" text-anchor="middle" font-size="13" fill="#0f172a">agent tracks the taint through code</text>
+  <rect x="268" y="282" width="264" height="36" rx="6" fill="#fef2f2" stroke="#dc2626"/>
+  <text x="400" y="305" text-anchor="middle" font-size="13" fill="#0f172a">sink: db.execute(sql) -> REPORT</text>
+  <line x1="194" y1="195" x2="248" y2="195" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="64" y="370" width="486" height="94" rx="8" fill="#ffffff" stroke="#2563eb"/>
+  <text x="307" y="396" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Output: exact source to sink trace, with file and line</text>
+  <text x="307" y="418" text-anchor="middle" font-size="13" fill="#475569">Finds flaws even with harmless test data. Needs tests that reach the code.</text>
+  <text x="307" y="438" text-anchor="middle" font-size="13" fill="#475569">Result goes to the pipeline gate and the findings tracker.</text>
+  <line x1="400" y1="340" x2="400" y2="368" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="620" y="100" width="540" height="390" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="890" y="134" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">RASP in production</text>
+  <rect x="644" y="160" width="130" height="70" rx="8" fill="#ffffff" stroke="#dc2626"/>
+  <text x="709" y="190" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Real users and</text>
+  <text x="709" y="210" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">attackers</text>
+  <rect x="830" y="150" width="300" height="190" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+  <text x="980" y="176" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Application process</text>
+  <rect x="848" y="190" width="264" height="36" rx="6" fill="#fffbeb" stroke="#d97706"/>
+  <text x="980" y="213" text-anchor="middle" font-size="13" fill="#0f172a">source: request data (tainted)</text>
+  <rect x="848" y="236" width="264" height="36" rx="6" fill="#fef9c3" stroke="#ca8a04"/>
+  <text x="980" y="259" text-anchor="middle" font-size="13" fill="#0f172a">hostile payload changes the query?</text>
+  <rect x="848" y="282" width="264" height="36" rx="6" fill="#dc2626" stroke="#991b1b"/>
+  <text x="980" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">sink: db.execute(sql) -> BLOCK (403)</text>
+  <line x1="774" y1="195" x2="828" y2="195" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+  <rect x="644" y="370" width="486" height="94" rx="8" fill="#ffffff" stroke="#dc2626"/>
+  <text x="887" y="396" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Output: blocked request + alert to the SOC / SIEM</text>
+  <text x="887" y="418" text-anchor="middle" font-size="13" fill="#475569">Adds a little latency to every request. A wrong block hurts real users,</text>
+  <text x="887" y="438" text-anchor="middle" font-size="13" fill="#475569">so start in monitor mode, then enforce.</text>
+  <line x1="980" y1="340" x2="980" y2="368" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+  <text x="40" y="520" font-size="14" fill="#475569">DBA analogy: IAST is like an audit trail you read after QA runs; RASP is like a database firewall that rejects the statement before it executes.</text>
+</svg>

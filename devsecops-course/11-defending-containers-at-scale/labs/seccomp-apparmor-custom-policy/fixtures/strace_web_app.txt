@@ -1,0 +1,13 @@
+execve("/usr/bin/python3", ["python3", "main.py"], 0x7ffc) = 0
+brk(NULL)                               = 0x55d0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f1
+openat(AT_FDCWD, "/app/main.py", O_RDONLY) = 3
+read(3, "import socket\n", 4096)        = 14
+socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = 4
+bind(4, {sa_family=AF_INET, sin_port=htons(8080)}, 16) = 0
+listen(4, 128)                          = 0
+accept4(4, NULL, NULL, SOCK_CLOEXEC)    = 5
+[pid 211] futex(0x7f2, FUTEX_WAIT, 0, NULL) = 0
+[pid 211] write(5, "HTTP/1.1 200 OK", 15) = 15
+212 epoll_wait(6, [], 128, 1000)        = 0
++++ exited with 0 +++

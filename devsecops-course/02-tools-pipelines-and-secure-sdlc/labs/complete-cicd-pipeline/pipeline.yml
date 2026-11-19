@@ -1,0 +1,26 @@
+# Pipeline for the simulated runner. Tools are FAKE (Python functions that read the fixture app).
+stages: [build, sca, sast, dast, deploy]
+
+variables:
+  APP_NAME: webshop
+
+jobs:
+  build:
+    stage: build
+    tool: npm-build
+  dependency-scan:
+    stage: sca
+    tool: npm-audit
+    fail_on: high
+  code-scan:
+    stage: sast
+    tool: semgrep
+    fail_on: high
+  baseline-scan:
+    stage: dast
+    tool: zap-baseline
+    fail_on: high
+  deploy-staging:
+    stage: deploy
+    tool: deploy
+    only: main

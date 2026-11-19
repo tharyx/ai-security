@@ -1,0 +1,12 @@
+{
+  "name": "QA smoke test: browse, log in, search, look up a user",
+  "steps": [
+    {"action": "goto", "path": "/"},
+    {"action": "goto", "path": "/login"},
+    {"action": "submit_form", "path": "/login", "data": {"username": "alice", "password": "alice-demo-pass"}},
+    {"action": "goto", "path": "/account"},
+    {"action": "goto", "path": "/account/notes?q=meeting"},
+    {"action": "xhr", "path": "/search?q=laptop"},
+    {"action": "xhr", "path": "/user?id=1"}
+  ]
+}

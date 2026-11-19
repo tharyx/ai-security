@@ -1,0 +1,55 @@
+<!-- Wazuh-style local rules for Docker events (simplified). Real file: /var/ossec/etc/rules/local_rules.xml
+     Rule ids 100000-119999 are reserved for custom rules. Verify syntax in the Wazuh docs for your version. -->
+<group name="docker,">
+  <rule id="100200" level="0">
+    <field name="integration">^docker$</field>
+    <description>Docker integration event</description>
+  </rule>
+
+  <rule id="100201" level="3">
+    <if_sid>100200</if_sid>
+    <field name="docker.Type">^container$</field>
+    <field name="docker.Action">^start$</field>
+    <description>Docker: container started</description>
+  </rule>
+
+  <rule id="100202" level="8">
+    <if_sid>100200</if_sid>
+    <field name="docker.Action">^exec_create: (sh|bash|ash)</field>
+    <description>Docker: interactive shell started in a container</description>
+    <group>container_shell,</group>
+  </rule>
+
+  <rule id="100203" level="7">
+    <if_sid>100200</if_sid>
+    <field name="docker.Action">^die$</field>
+    <field name="docker.Actor.Attributes.exitCode">^137$</field>
+    <description>Docker: container killed (exit 137: OOM or SIGKILL)</description>
+  </rule>
+
+  <rule id="100204" level="8">
+    <if_sid>100200</if_sid>
+    <field name="docker.Action">^oom$</field>
+    <description>Docker: container hit its memory limit (OOM)</description>
+  </rule>
+
+  <rule id="100205" level="6">
+    <if_sid>100200</if_sid>
+    <field name="docker.Type">^image$</field>
+    <field name="docker.Action">^pull$</field>
+    <field name="docker.Actor.ID" negate="yes">^registry\.example\.invalid/</field>
+    <description>Docker: image pulled from a registry that is not the approved one</description>
+  </rule>
+
+  <rule id="100206" level="10" frequency="5" timeframe="60">
+    <if_matched_sid>100207</if_matched_sid>
+    <same_field>docker.Actor.ID</same_field>
+    <description>Docker: container restart loop (5 deaths in 60 s)</description>
+  </rule>
+
+  <rule id="100207" level="3">
+    <if_sid>100200</if_sid>
+    <field name="docker.Action">^die$</field>
+    <description>Docker: container died</description>
+  </rule>
+</group>

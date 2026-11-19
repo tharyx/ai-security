@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fixture pom.xml. All coordinates are FICTIONAL. It is parsed, never built. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.acme.shop</groupId>
+  <artifactId>shop-service</artifactId>
+  <version>1.0.0</version>
+
+  <properties>
+    <widgetlib.version>2.4.1</widgetlib.version>
+    <jsonmark.version>1.2.0</jsonmark.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.acme.web</groupId>
+        <artifactId>acme-web</artifactId>
+        <version>3.1.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.example.widget</groupId>
+      <artifactId>widgetlib-core</artifactId>
+      <version>${widgetlib.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.example.widget</groupId>
+      <artifactId>widgetlib-docs</artifactId>
+      <version>${widgetlib.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.example.widget</groupId>
+      <artifactId>widgetlib-test-utils</artifactId>
+      <version>${widgetlib.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sample</groupId>
+      <artifactId>jsonmark</artifactId>
+      <version>${jsonmark.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.acme.web</groupId>
+      <artifactId>acme-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.sample</groupId>
+      <artifactId>mystery-lib</artifactId>
+      <version>${mystery.version}</version>
+    </dependency>
+  </dependencies>
+</project>

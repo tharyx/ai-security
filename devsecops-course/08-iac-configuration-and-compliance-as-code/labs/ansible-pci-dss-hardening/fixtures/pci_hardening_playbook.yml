@@ -1,0 +1,62 @@
+---
+# Hardening tasks tagged with stable keys. The mapping to PCI DSS lives in pci_mapping.yml,
+# so compliance people can edit the mapping without touching the automation.
+- name: PCI-oriented host hardening (fixture)
+  hosts: cde_hosts
+  become: true
+  tasks:
+    - name: Disable direct root login over SSH
+      ansible.builtin.lineinfile: {path: /etc/ssh/sshd_config, regexp: "^#?PermitRootLogin", line: "PermitRootLogin no"}
+      tags: [ssh_root_login]
+
+    - name: Allow only strong SSH ciphers and key exchange
+      ansible.builtin.lineinfile: {path: /etc/ssh/sshd_config, regexp: "^#?Ciphers", line: "Ciphers aes256-gcm@openssh.com,chacha20-poly1305@openssh.com"}
+      tags: [ssh_strong_crypto]
+
+    - name: Limit SSH authentication attempts
+      ansible.builtin.lineinfile: {path: /etc/ssh/sshd_config, regexp: "^#?MaxAuthTries", line: "MaxAuthTries 4"}
+      tags: [ssh_max_auth_tries]
+
+    - name: Lock accounts after repeated failures (pam_faillock)
+      ansible.builtin.lineinfile: {path: /etc/security/faillock.conf, regexp: "^#?deny", line: "deny = 6"}
+      tags: [pam_lockout]
+
+    - name: Enforce password length of at least 12 (pwquality)
+      ansible.builtin.lineinfile: {path: /etc/security/pwquality.conf, regexp: "^#?minlen", line: "minlen = 12"}
+      tags: [pam_pwquality_minlen]
+
+    - name: Remove insecure legacy packages
+      ansible.builtin.package: {name: [telnet, rsh-server, talk], state: absent}
+      tags: [remove_insecure_pkgs]
+
+    - name: Kernel network hardening
+      ansible.builtin.sysctl: {name: net.ipv4.conf.all.accept_redirects, value: "0"}
+      tags: [sysctl_network]
+
+    - name: Install and enable auditd
+      ansible.builtin.service: {name: auditd, state: started, enabled: true}
+      tags: [auditd_enable]
+
+    - name: Audit privileged command execution
+      ansible.builtin.copy: {dest: /etc/audit/rules.d/priv.rules, content: "-a always,exit -F path=/usr/bin/sudo -F perm=x -k priv"}
+      tags: [audit_admin_actions]
+
+    - name: Synchronise time with chrony
+      ansible.builtin.service: {name: chronyd, state: started, enabled: true}
+      tags: [time_sync]
+
+    - name: Remove vendor default accounts
+      ansible.builtin.user: {name: guest, state: absent}
+      tags: [remove_default_accounts]
+
+    - name: Disable accounts after 90 days of inactivity
+      ansible.builtin.command: {cmd: useradd -D -f 90, creates: /etc/.inactive-set}
+      tags: [inactive_lock]
+
+    - name: Enable unattended security updates
+      ansible.builtin.package: {name: unattended-upgrades, state: present}
+      tags: [auto_security_updates]
+
+    - name: Install a text editor for the admins
+      ansible.builtin.package: {name: vim, state: present}
+      tags: [convenience]

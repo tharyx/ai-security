@@ -1,0 +1,22 @@
+# Self-assessment for a fictional team. Allowed values: implemented | partial | not-started
+# (anything you leave out counts as not-started)
+team: webshop-team
+activities:
+  bd-pipeline-as-code: implemented
+  bd-versioned-artifacts: implemented
+  bd-secrets-not-in-code: partial
+  bd-signed-artifacts: not-started
+  co-security-champions: implemented
+  co-training: implemented
+  co-threat-model-workshops: partial
+  im-dependency-inventory: implemented
+  im-sca-in-ci: implemented
+  im-hardened-base-images: implemented
+  im-iac-reviewed: not-started
+  ig-central-logging: implemented
+  ig-asset-inventory: partial
+  tv-manual-pentest: implemented
+  tv-sast-in-ci: implemented
+  tv-secret-scan: implemented
+  tv-dast-in-ci: partial
+  tv-break-build: not-started

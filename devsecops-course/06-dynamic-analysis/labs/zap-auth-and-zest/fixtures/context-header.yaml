@@ -1,0 +1,26 @@
+# Header/token based: JSON login returns a bearer token that is sent in an Authorization header.
+# In real ZAP you would use a "json" authentication method or a script, plus a replacer or
+# HTTP Sender script to add the header. Here the token field name is explicit.
+env:
+  contexts:
+    - name: app-token
+      urls: ["{{base}}"]
+      authentication:
+        method: json
+        parameters:
+          loginRequestUrl: "{{base}}/api/login"
+          loginRequestBody: '{"username":"{%username%}","password":"{%password%}"}'
+          tokenField: token
+          headerName: Authorization
+          headerValuePrefix: "Bearer "
+        verification:
+          method: response
+          loggedInRegex: 'Welcome'
+          verifyUrl: "{{base}}/account"
+      sessionManagement:
+        method: headers
+      users:
+        - name: alice
+          credentials:
+            username: alice
+            password: "${APP_PASSWORD}"

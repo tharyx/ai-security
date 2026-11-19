@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>STRIDE versus DREAD</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">STRIDE finds threats, DREAD tried to rank them</text>
+<text x="40" y="76" font-size="15" fill="#475569">Use STRIDE (or another method) to FIND threats. Rate them with a scheme that your team scores the same way every time.</text>
+<text x="40" y="118" text-anchor="start" font-size="16" font-weight="700" fill="#0f172a">STRIDE: what can go wrong, one letter per violated property</text>
+<rect x="40" y="135" width="300" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="190.0" y="163.5" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">S  Spoofing</text>
+<rect x="350" y="135" width="190" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="445.0" y="163.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">authentication</text>
+<rect x="40" y="193" width="300" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="190.0" y="221.5" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">T  Tampering</text>
+<rect x="350" y="193" width="190" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="445.0" y="221.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">integrity</text>
+<rect x="40" y="251" width="300" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="190.0" y="279.5" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">R  Repudiation</text>
+<rect x="350" y="251" width="190" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="445.0" y="279.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">non-repudiation</text>
+<rect x="40" y="309" width="300" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="190.0" y="337.5" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">I  Information disclosure</text>
+<rect x="350" y="309" width="190" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="445.0" y="337.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">confidentiality</text>
+<rect x="40" y="367" width="300" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="190.0" y="395.5" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">D  Denial of service</text>
+<rect x="350" y="367" width="190" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="445.0" y="395.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">availability</text>
+<rect x="40" y="425" width="300" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="190.0" y="453.5" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">E  Elevation of privilege</text>
+<rect x="350" y="425" width="190" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="445.0" y="453.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">authorization</text>
+<text x="660" y="118" text-anchor="start" font-size="16" font-weight="700" fill="#0f172a">DREAD: five 1-10 scores added up (legacy)</text>
+<rect x="660" y="135" width="190" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="755.0" y="163.5" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Damage</text>
+<rect x="660" y="193" width="190" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="755.0" y="221.5" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Reproducibility</text>
+<rect x="660" y="251" width="190" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="755.0" y="279.5" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Exploitability</text>
+<rect x="660" y="309" width="190" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="755.0" y="337.5" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Affected users</text>
+<rect x="660" y="367" width="190" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="755.0" y="395.5" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Discoverability</text>
+<rect x="860" y="135" width="310" height="48" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1015.0" y="153.0" text-anchor="middle" font-size="12" font-weight="400" fill="#1e293b">Scores are subjective: two people rate the</text>
+<text x="1015.0" y="171.0" text-anchor="middle" font-size="12" font-weight="400" fill="#1e293b">same bug 4 and 9</text>
+<rect x="860" y="193" width="310" height="48" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1015.0" y="220.0" text-anchor="middle" font-size="12" font-weight="400" fill="#1e293b">Hard to repeat the number next quarter</text>
+<rect x="860" y="251" width="310" height="48" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1015.0" y="278.0" text-anchor="middle" font-size="12" font-weight="400" fill="#1e293b">Mixes likelihood and impact in one sum</text>
+<rect x="860" y="309" width="310" height="48" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1015.0" y="327.0" text-anchor="middle" font-size="12" font-weight="400" fill="#1e293b">Discoverability rewards security by</text>
+<text x="1015.0" y="345.0" text-anchor="middle" font-size="12" font-weight="400" fill="#1e293b">obscurity</text>
+<rect x="860" y="367" width="310" height="48" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1015.0" y="385.0" text-anchor="middle" font-size="12" font-weight="400" fill="#1e293b">Rarely used now; CVSS or likelihood x</text>
+<text x="1015.0" y="403.0" text-anchor="middle" font-size="12" font-weight="400" fill="#1e293b">impact is common</text>
+<rect x="40" y="495" width="1130" height="44" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="605.0" y="521.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Exam answer: STRIDE is a checklist for finding threats; DREAD is a (weak) rating scheme. They answer different questions.</text>
+</svg>

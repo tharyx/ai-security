@@ -1,0 +1,33 @@
+stages: [build, scan, release]
+
+variables:
+  TRIVY_IMAGE: "aquasec/trivy:0.58.0"   # pin a tag (or digest); verify the current release
+  TRIVY_CACHE_DIR: ".trivycache/"
+
+build:
+  stage: build
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+
+trivy-scan:
+  stage: scan
+  image:
+    name: $TRIVY_IMAGE
+    entrypoint: [""]
+  cache:
+    paths: [.trivycache/]
+  script:
+    - trivy image --format json --output trivy-report.json --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+  artifacts:
+    when: always
+    expire_in: 30 days
+    paths: [trivy-report.json]
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+release:
+  stage: release
+  needs: [trivy-scan]
+  script:
+    - echo "promote the scanned digest"

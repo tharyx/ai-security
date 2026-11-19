@@ -1,0 +1,30 @@
+{
+  "about": "Zest-like script (simplified subset of the real Zest format): log in, keep the token, prove we are logged in.",
+  "zestVersion": "0.3-simplified",
+  "title": "Login and fetch the account page",
+  "variables": {"user": "alice", "pass": "alice-demo-pass"},
+  "statements": [
+    {
+      "index": 1,
+      "elementType": "ZestRequest",
+      "method": "POST",
+      "url": "{{base}}/api/login",
+      "headers": {"Content-Type": "application/json"},
+      "data": "{\"username\":\"{{user}}\",\"password\":\"{{pass}}\"}",
+      "assertions": [{"elementType": "ZestAssertStatusCode", "code": 200}]
+    },
+    {"index": 2, "elementType": "ZestAssignFromJson", "variable": "token", "path": "token"},
+    {
+      "index": 3,
+      "elementType": "ZestRequest",
+      "method": "GET",
+      "url": "{{base}}/account",
+      "headers": {"Authorization": "Bearer {{token}}"},
+      "assertions": [
+        {"elementType": "ZestAssertStatusCode", "code": 200},
+        {"elementType": "ZestAssertBodyContains", "text": "Welcome {{user}}"}
+      ]
+    },
+    {"index": 4, "elementType": "ZestAssignRegex", "variable": "notes_link", "regex": "href='([^']+)'"}
+  ]
+}

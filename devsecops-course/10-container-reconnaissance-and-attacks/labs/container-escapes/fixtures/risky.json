@@ -1,0 +1,4 @@
+{"Name": "/ci-runner", "Config": {"Image": "ci/runner:3", "User": ""},
+ "HostConfig": {"Privileged": true, "CapAdd": ["SYS_ADMIN", "SYS_PTRACE", "DAC_READ_SEARCH"], "PidMode": "host", "NetworkMode": "host", "IpcMode": "host",
+                "Binds": ["/var/run/docker.sock:/var/run/docker.sock", "/:/host", "/etc:/host-etc:ro"], "SecurityOpt": ["seccomp=unconfined"]},
+ "_setuid_files": ["/usr/bin/su", "/usr/bin/passwd"]}

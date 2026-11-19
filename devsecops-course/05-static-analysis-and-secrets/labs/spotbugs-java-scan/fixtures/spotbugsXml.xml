@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fixture in the shape of a SpotBugs XML report (with find-sec-bugs patterns). FICTIONAL app and findings.
+     Real reports contain more elements; verify the exact format of your SpotBugs version. -->
+<BugCollection version="4.8.x" sequence="0" timestamp="1760000000000" analysisTimestamp="1760000000000" release="">
+  <Project projectName="shop-service"/>
+
+  <BugInstance type="SQL_INJECTION_JDBC" priority="1" rank="3" abbrev="SQL" category="SECURITY">
+    <ShortMessage>Nonconstant string passed to execute or addBatch method on an SQL statement</ShortMessage>
+    <Class classname="com.acme.shop.dao.UserDao" primary="true"/>
+    <Method classname="com.acme.shop.dao.UserDao" name="findByName" signature="(Ljava/lang/String;)Ljava/util/List;" primary="true"/>
+    <SourceLine classname="com.acme.shop.dao.UserDao" start="42" end="42" sourcefile="UserDao.java" sourcepath="com/acme/shop/dao/UserDao.java" primary="true"/>
+  </BugInstance>
+
+  <BugInstance type="XSS_SERVLET" priority="1" rank="4" abbrev="XSS" category="SECURITY">
+    <ShortMessage>Potential XSS in Servlet</ShortMessage>
+    <Class classname="com.acme.shop.web.ProfileServlet" primary="true"/>
+    <Method classname="com.acme.shop.web.ProfileServlet" name="doGet" signature="(Ljavax/servlet/http/HttpServletRequest;Ljavax/servlet/http/HttpServletResponse;)V" primary="true"/>
+    <SourceLine classname="com.acme.shop.web.ProfileServlet" start="31" end="31" sourcefile="ProfileServlet.java" sourcepath="com/acme/shop/web/ProfileServlet.java" primary="true"/>
+  </BugInstance>
+
+  <BugInstance type="PATH_TRAVERSAL_IN" priority="2" rank="7" abbrev="SECPTI" category="SECURITY">
+    <ShortMessage>Potential Path Traversal (file read)</ShortMessage>
+    <Class classname="com.acme.shop.web.FileController" primary="true"/>
+    <Method classname="com.acme.shop.web.FileController" name="download" signature="(Ljava/lang/String;)[B" primary="true"/>
+    <SourceLine classname="com.acme.shop.web.FileController" start="55" end="55" sourcefile="FileController.java" sourcepath="com/acme/shop/web/FileController.java" primary="true"/>
+  </BugInstance>
+
+  <BugInstance type="COMMAND_INJECTION" priority="1" rank="2" abbrev="SECCI" category="SECURITY">
+    <ShortMessage>Potential Command Injection</ShortMessage>
+    <Class classname="com.acme.shop.job.Exporter" primary="true"/>
+    <Method classname="com.acme.shop.job.Exporter" name="run" signature="(Ljava/lang/String;)V" primary="true"/>
+    <SourceLine classname="com.acme.shop.job.Exporter" start="61" end="61" sourcefile="Exporter.java" sourcepath="com/acme/shop/job/Exporter.java" primary="true"/>
+  </BugInstance>
+
+  <BugInstance type="HARD_CODE_PASSWORD" priority="2" rank="8" abbrev="SECHCP" category="SECURITY">
+    <ShortMessage>Hard coded password</ShortMessage>
+    <Class classname="com.acme.shop.config.DbConfig" primary="true"/>
+    <Method classname="com.acme.shop.config.DbConfig" name="&lt;clinit&gt;" signature="()V" primary="true"/>
+    <SourceLine classname="com.acme.shop.config.DbConfig" start="12" end="12" sourcefile="DbConfig.java" sourcepath="com/acme/shop/config/DbConfig.java" primary="true"/>
+  </BugInstance>
+
+  <BugInstance type="WEAK_MESSAGE_DIGEST_MD5" priority="2" rank="9" abbrev="SECWMD" category="SECURITY">
+    <ShortMessage>MD5 is a weak hash function</ShortMessage>
+    <Class classname="com.acme.shop.util.Hashing" primary="true"/>
+    <Method classname="com.acme.shop.util.Hashing" name="legacyHash" signature="([B)Ljava/lang/String;" primary="true"/>
+    <SourceLine classname="com.acme.shop.util.Hashing" start="20" end="20" sourcefile="Hashing.java" sourcepath="com/acme/shop/util/Hashing.java" primary="true"/>
+  </BugInstance>
+
+  <BugInstance type="PREDICTABLE_RANDOM" priority="3" rank="12" abbrev="SECPR" category="SECURITY">
+    <ShortMessage>Predictable pseudorandom number generator</ShortMessage>
+    <Class classname="com.acme.shop.auth.TokenFactory" primary="true"/>
+    <Method classname="com.acme.shop.auth.TokenFactory" name="next" signature="()Ljava/lang/String;" primary="true"/>
+    <SourceLine classname="com.acme.shop.auth.TokenFactory" start="18" end="18" sourcefile="TokenFactory.java" sourcepath="com/acme/shop/auth/TokenFactory.java" primary="true"/>
+  </BugInstance>
+
+  <!-- the same SQL pattern, but in test code: excluded by the filter -->
+  <BugInstance type="SQL_INJECTION_JDBC" priority="1" rank="3" abbrev="SQL" category="SECURITY">
+    <ShortMessage>Nonconstant string passed to execute or addBatch method on an SQL statement</ShortMessage>
+    <Class classname="com.acme.shop.test.FixtureLoader" primary="true"/>
+    <Method classname="com.acme.shop.test.FixtureLoader" name="load" signature="(Ljava/lang/String;)V" primary="true"/>
+    <SourceLine classname="com.acme.shop.test.FixtureLoader" start="27" end="27" sourcefile="FixtureLoader.java" sourcepath="src/test/java/com/acme/shop/test/FixtureLoader.java" primary="true"/>
+  </BugInstance>
+
+  <!-- non-security categories that SpotBugs also reports -->
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="2" rank="18" abbrev="Dm" category="I18N">
+    <ShortMessage>Reliance on default encoding</ShortMessage>
+    <Class classname="com.acme.shop.report.Reports" primary="true"/>
+    <Method classname="com.acme.shop.report.Reports" name="write" signature="(Ljava/lang/String;)V" primary="true"/>
+    <SourceLine classname="com.acme.shop.report.Reports" start="70" end="70" sourcefile="Reports.java" sourcepath="com/acme/shop/report/Reports.java" primary="true"/>
+  </BugInstance>
+
+  <BugInstance type="NP_NULL_ON_SOME_PATH" priority="2" rank="14" abbrev="NP" category="CORRECTNESS">
+    <ShortMessage>Possible null pointer dereference</ShortMessage>
+    <Class classname="com.acme.shop.web.CartController" primary="true"/>
+    <Method classname="com.acme.shop.web.CartController" name="total" signature="()I" primary="true"/>
+    <SourceLine classname="com.acme.shop.web.CartController" start="88" end="88" sourcefile="CartController.java" sourcepath="com/acme/shop/web/CartController.java" primary="true"/>
+  </BugInstance>
+
+  <BugPattern type="SQL_INJECTION_JDBC" abbrev="SQL" category="SECURITY"><ShortDescription>SQL injection</ShortDescription></BugPattern>
+</BugCollection>

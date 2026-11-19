@@ -1,0 +1,2 @@
+# Accepted risk: reviewed 2026-11-01, owner: platform team, expires 2027-02-01
+CVE-2099-0100

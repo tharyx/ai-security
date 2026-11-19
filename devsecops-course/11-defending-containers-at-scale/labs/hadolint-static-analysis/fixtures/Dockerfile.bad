@@ -1,0 +1,8 @@
+FROM ubuntu
+ENV DB_PASSWORD=canary-not-a-real-password
+RUN apt-get update && apt-get install -y curl python3
+RUN cd /app && pip install flask
+ADD main.py /app/main.py
+RUN curl -s https://example.invalid/install.sh | sh
+COPY . /app
+CMD python3 /app/main.py

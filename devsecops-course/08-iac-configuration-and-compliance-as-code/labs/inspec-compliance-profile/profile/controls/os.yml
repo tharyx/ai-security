@@ -1,0 +1,63 @@
+controls:
+  - id: os-01
+    impact: 0.9
+    title: Insecure legacy packages are not installed
+    describe:
+      - resource: package
+        arg: telnet
+        its: installed
+        should: {eq: false}
+      - resource: package
+        arg: rsh-server
+        its: installed
+        should: {eq: false}
+
+  - id: os-02
+    impact: 0.5
+    title: IP forwarding is disabled
+    only_if: {os_family: [debian, redhat]}
+    describe:
+      - resource: kernel_parameter
+        arg: net.ipv4.ip_forward
+        its: value
+        should: {cmp: 0}
+
+  - id: os-03
+    impact: 0.5
+    title: ASLR is fully enabled
+    describe:
+      - resource: kernel_parameter
+        arg: kernel.randomize_va_space
+        its: value
+        should: {cmp: 2}
+
+  - id: os-04
+    impact: 0.9
+    title: /etc/shadow is not readable by group or others beyond 0640
+    describe:
+      - resource: file
+        arg: /etc/shadow
+        its: mode
+        should: {be_in: ["0640", "0600", "0400", "0000"]}
+
+  - id: os-05
+    impact: 0.5
+    title: No guest account
+    describe:
+      - resource: user
+        arg: guest
+        its: exists
+        should: {eq: false}
+
+  - id: os-06
+    impact: 0.7
+    title: auditd is enabled and running
+    describe:
+      - resource: service
+        arg: auditd
+        its: enabled
+        should: {eq: true}
+      - resource: service
+        arg: auditd
+        its: running
+        should: {eq: true}

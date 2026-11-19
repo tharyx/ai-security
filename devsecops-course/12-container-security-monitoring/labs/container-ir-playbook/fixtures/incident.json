@@ -1,0 +1,15 @@
+{
+  "case": "IR-2026-0142",
+  "cid": "c1a2b3c4d5e6",
+  "name": "web",
+  "image": "registry.example.invalid/shop/web:2.0",
+  "image_digest": "sha256:aaaa0000000000000000000000000000000000000000000000000000000000aa",
+  "networks": ["app_net", "bridge"],
+  "inspect": {"Id": "c1a2b3c4d5e6", "Config": {"Image": "registry.example.invalid/shop/web:2.0", "User": ""}},
+  "top": "UID PID CMD\nroot 1 python3 main.py\nroot 988 /tmp/.cache/kworker --pool 203.0.113.50:3333\n",
+  "logs": "2026-11-18T22:01:07Z GET /upload 200\n2026-11-18T22:03:41Z spawned sh\n",
+  "diff": "C /tmp\nA /tmp/.cache\nA /tmp/.cache/kworker\n",
+  "host_connections": "ESTAB 10.0.0.9:51544 203.0.113.50:3333 users:((\"kworker\",pid=988))\n",
+  "clean_image": "registry.example.invalid/shop/web:2.1",
+  "clean_image_digest": "sha256:bbbb0000000000000000000000000000000000000000000000000000000000bb"
+}

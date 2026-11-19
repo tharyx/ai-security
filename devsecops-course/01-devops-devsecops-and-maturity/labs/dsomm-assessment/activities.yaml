@@ -1,0 +1,51 @@
+# A SIMPLIFIED, DSOMM-like activity list for teaching. It is NOT the official model.
+# The official OWASP DSOMM (dsomm.owasp.org) changes between versions: check it for the real list.
+# effort: 1 = days, 2 = weeks, 3 = months (a rough guess used only to order the roadmap).
+version: 1
+levels: 4
+dimensions:
+  build-and-deployment:
+    title: Build and Deployment
+    activities:
+      - {id: bd-pipeline-as-code, level: 1, effort: 1, title: "Build and deploy defined as code in the repository"}
+      - {id: bd-versioned-artifacts, level: 1, effort: 1, title: "Every build produces a versioned, stored artifact"}
+      - {id: bd-secrets-not-in-code, level: 2, effort: 2, title: "Secrets injected at run time, secret scanning on commits"}
+      - {id: bd-signed-artifacts, level: 3, effort: 2, title: "Artifacts and images are signed and verified before deploy"}
+      - {id: bd-auto-rollback, level: 3, effort: 2, title: "Automatic rollback on failed health check"}
+      - {id: bd-slsa-provenance, level: 4, effort: 3, title: "Build provenance generated and checked at deploy"}
+  culture-and-organization:
+    title: Culture and Organization
+    activities:
+      - {id: co-security-champions, level: 1, effort: 1, title: "A named security contact in each team"}
+      - {id: co-training, level: 2, effort: 2, title: "Yearly secure coding training for developers"}
+      - {id: co-threat-model-workshops, level: 2, effort: 2, title: "Threat modeling for new features"}
+      - {id: co-blameless-postmortems, level: 3, effort: 1, title: "Blameless post-mortems include security incidents"}
+      - {id: co-security-metrics, level: 3, effort: 2, title: "Security metrics shared with devs and management"}
+      - {id: co-security-by-default-culture, level: 4, effort: 3, title: "Teams own and fix security findings without escalation"}
+  implementation:
+    title: Implementation
+    activities:
+      - {id: im-dependency-inventory, level: 1, effort: 1, title: "List of used third-party components (SBOM or lock files)"}
+      - {id: im-sca-in-ci, level: 2, effort: 1, title: "Dependency scanning runs in the pipeline"}
+      - {id: im-hardened-base-images, level: 2, effort: 2, title: "Approved, minimal base images"}
+      - {id: im-iac-reviewed, level: 3, effort: 2, title: "IaC scanned and peer reviewed before apply"}
+      - {id: im-policy-as-code, level: 3, effort: 3, title: "Admission and compliance rules enforced as code"}
+      - {id: im-auto-patching, level: 4, effort: 3, title: "Automated dependency updates with test gates"}
+  information-gathering:
+    title: Information Gathering
+    activities:
+      - {id: ig-central-logging, level: 1, effort: 2, title: "Application and pipeline logs collected centrally"}
+      - {id: ig-asset-inventory, level: 2, effort: 2, title: "Inventory of apps, owners and data classes"}
+      - {id: ig-threat-intel, level: 3, effort: 2, title: "Advisories and threat intel feed into backlog"}
+      - {id: ig-runtime-monitoring, level: 3, effort: 3, title: "Runtime alerting tied to the security team"}
+      - {id: ig-risk-based-metrics, level: 4, effort: 3, title: "Risk scored per application, trends reported"}
+  test-and-verification:
+    title: Test and Verification
+    activities:
+      - {id: tv-manual-pentest, level: 1, effort: 2, title: "Manual pentest before major releases"}
+      - {id: tv-sast-in-ci, level: 2, effort: 1, title: "SAST runs on every merge request"}
+      - {id: tv-secret-scan, level: 2, effort: 1, title: "Secret scanning in the pipeline"}
+      - {id: tv-dast-in-ci, level: 3, effort: 2, title: "Baseline DAST against a test environment"}
+      - {id: tv-break-build, level: 3, effort: 2, title: "Findings above a threshold fail the build"}
+      - {id: tv-security-regression-tests, level: 4, effort: 3, title: "Past vulnerabilities become automated regression tests"}
+      - {id: tv-central-findings, level: 4, effort: 2, title: "All findings deduplicated in one vulnerability manager"}

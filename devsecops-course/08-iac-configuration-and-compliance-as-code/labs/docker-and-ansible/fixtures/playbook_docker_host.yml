@@ -1,0 +1,72 @@
+---
+# GOOD fixture: a Docker host playbook that passes the linter.
+- name: Configure and harden a Docker host
+  hosts: docker_hosts
+  become: true
+  remote_user: ansible
+  vars:
+    app_image: "registry.example/shop/api@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+    docker_daemon_config:
+      icc: false
+      userland-proxy: false
+      no-new-privileges: true
+      live-restore: true
+      log-driver: json-file
+      log-opts:
+        max-size: "10m"
+        max-file: "3"
+    registry_password: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      30313233343536373839616263646566303132333435363738396162636465663031
+      32333435363738396162636465663031323334353637383961626364656630313233
+
+  tasks:
+    - name: Install Docker engine packages
+      ansible.builtin.package:
+        name:
+          - docker-ce
+          - containerd.io
+        state: present
+
+    - name: Write hardened daemon.json
+      ansible.builtin.copy:
+        dest: /etc/docker/daemon.json
+        content: "{{ docker_daemon_config | to_nice_json }}"
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Restart docker
+
+    - name: Ensure Docker is enabled and running
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Log in to the private registry
+      community.docker.docker_login:
+        registry_url: registry.example
+        username: deploy
+        password: "{{ registry_password }}"
+      no_log: true
+
+    - name: Run the API container from a digest-pinned image
+      community.docker.docker_container:
+        name: api
+        image: "{{ app_image }}"
+        read_only: true
+        cap_drop: [ALL]
+        security_opts:
+          - no-new-privileges:true
+        restart_policy: unless-stopped
+
+    - name: One-time init script (guarded, so re-runs do nothing)
+      ansible.builtin.command: /usr/local/bin/init-app.sh
+      args:
+        creates: /var/lib/app/.initialised
+
+  handlers:
+    - name: Restart docker
+      ansible.builtin.service:
+        name: docker
+        state: restarted

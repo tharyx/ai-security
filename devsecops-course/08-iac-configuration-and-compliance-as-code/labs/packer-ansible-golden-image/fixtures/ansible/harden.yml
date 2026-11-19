@@ -1,0 +1,11 @@
+---
+- name: Harden the golden image
+  hosts: default
+  become: true
+  tasks:
+    - name: Remove insecure packages
+      ansible.builtin.package: {name: [telnet, rsh-server], state: absent}
+    - name: Harden sshd
+      ansible.builtin.lineinfile: {path: /etc/ssh/sshd_config, regexp: "^#?PermitRootLogin", line: "PermitRootLogin no"}
+    - name: Enable auditd
+      ansible.builtin.service: {name: auditd, state: started, enabled: true}

@@ -1,0 +1,8 @@
+[
+  {"id": "ADV-DEMO-001", "package": "lodash", "fixed_in": "4.17.21", "severity": "high",
+   "title": "Prototype pollution in merge helpers (demo advisory)"},
+  {"id": "ADV-DEMO-002", "package": "express", "fixed_in": "4.17.0", "severity": "critical",
+   "title": "Request parsing flaw in an old release (demo advisory)"},
+  {"id": "ADV-DEMO-003", "package": "jsonwebtoken", "fixed_in": "9.0.0", "severity": "high",
+   "title": "Weak signature verification defaults (demo advisory)"}
+]

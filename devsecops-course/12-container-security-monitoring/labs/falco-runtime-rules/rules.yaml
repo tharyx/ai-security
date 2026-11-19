@@ -1,0 +1,47 @@
+- list: shell_binaries
+  items: [sh, bash, zsh, dash, ash]
+- list: package_mgrs
+  items: [apt, apt-get, dpkg, apk, yum, rpm]
+- list: miner_ports
+  items: [3333, 4444, 5555, 14444]
+- list: sensitive_files
+  items: [/etc/shadow, /etc/sudoers, /etc/pam.conf]
+- list: trusted_readers
+  items: [sshd, sudo, login]
+
+- macro: container
+  condition: container.id != host
+- macro: spawned_process
+  condition: evt.type = execve and evt.dir = "<"
+- macro: open_write
+  condition: evt.type in (open, openat, openat2) and evt.is_open_write = true
+- macro: open_read
+  condition: evt.type in (open, openat, openat2) and evt.is_open_read = true
+
+- rule: Terminal shell in container
+  desc: A shell was started with an attached terminal inside a container
+  condition: spawned_process and container and proc.name in (shell_binaries) and proc.tty != 0
+  output: "Shell in container (user=%user.name container=%container.name shell=%proc.name cmd=%proc.cmdline)"
+  priority: NOTICE
+  tags: [container, shell, mitre_execution]
+
+- rule: Write below etc in container
+  desc: A file under /etc was opened for writing in a container
+  condition: open_write and container and fd.name startswith /etc/ and not proc.name in (package_mgrs)
+  output: "File below /etc opened for writing (user=%user.name proc=%proc.name file=%fd.name container=%container.name)"
+  priority: ERROR
+  tags: [container, filesystem]
+
+- rule: Read sensitive file in container
+  desc: A sensitive file was read by a process that normally does not
+  condition: open_read and container and fd.name in (sensitive_files) and not proc.name in (trusted_readers)
+  output: "Sensitive file read (file=%fd.name proc=%proc.name container=%container.name)"
+  priority: WARNING
+  tags: [container, credentials]
+
+- rule: Outbound connection to a miner port
+  desc: A container connected to a port commonly used by cryptominer pools
+  condition: evt.type = connect and evt.dir = "<" and container and fd.sport in (miner_ports)
+  output: "Possible miner traffic (proc=%proc.name dest=%fd.sip:%fd.sport container=%container.name)"
+  priority: CRITICAL
+  tags: [container, network, mitre_impact]

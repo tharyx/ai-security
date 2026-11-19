@@ -1,0 +1,63 @@
+---
+# Hardening role fixture: sshd, auditd, sysctl, users, packages, file modes.
+- name: Install security packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ hardening_packages_present }}"
+
+- name: Remove insecure packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ hardening_packages_absent }}"
+
+- name: Harden sshd_config
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?{{ item.key }}\\b"
+    line: "{{ item.key }} {{ item.value }}"
+  loop: "{{ sshd_settings }}"
+
+- name: Kernel parameters
+  ansible.builtin.sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ sysctl_settings }}"
+
+- name: Audit rules for identity files
+  ansible.builtin.copy:
+    dest: /etc/audit/rules.d/hardening.rules
+    content: "{{ audit_rules | join('\n') }}"
+    owner: root
+    mode: "0640"
+
+- name: Enable auditd
+  ansible.builtin.service:
+    name: auditd
+    state: started
+    enabled: true
+
+- name: Remove unneeded and duplicate-root accounts
+  ansible.builtin.user:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ users_to_remove }}"
+
+- name: Service accounts cannot log in
+  ansible.builtin.user:
+    name: "{{ item }}"
+    shell: /usr/sbin/nologin
+  loop: "{{ service_accounts }}"
+
+- name: Fix permissions on /etc/shadow
+  ansible.builtin.file:
+    path: /etc/shadow
+    owner: root
+    mode: "0640"
+
+- name: Fix permissions on /etc/passwd
+  ansible.builtin.file:
+    path: /etc/passwd
+    owner: root
+    mode: "0644"

@@ -1,0 +1,4 @@
+{"Name": "/web", "Config": {"Image": "shop/web@sha256:0000", "User": "10001"},
+ "HostConfig": {"Privileged": false, "CapAdd": null, "CapDrop": ["ALL"], "PidMode": "", "NetworkMode": "frontend", "IpcMode": "private",
+                "Binds": ["/srv/site:/usr/share/nginx/html:ro"], "SecurityOpt": ["no-new-privileges"]},
+ "_setuid_files": []}

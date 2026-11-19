@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Vault architecture: clients authenticate, policies decide, engines serve, the barrier encrypts before storage (Consul or Raft)</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="44" font-size="26" font-weight="700" fill="#0f172a">Vault (or OpenBao): how a request flows</text>
+  <text x="40" y="70" font-size="15" fill="#475569">Storage only ever holds ciphertext. Without the unseal key, a stolen Consul or Raft copy is noise.</text>
+
+  <rect x="40" y="110" width="190" height="300" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="135" y="138" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Clients</text>
+  <text x="135" y="170" text-anchor="middle" font-size="13" fill="#0f172a">app (AppRole)</text>
+  <text x="135" y="192" text-anchor="middle" font-size="13" fill="#0f172a">Kubernetes pod (JWT)</text>
+  <text x="135" y="214" text-anchor="middle" font-size="13" fill="#0f172a">CI job (OIDC)</text>
+  <text x="135" y="236" text-anchor="middle" font-size="13" fill="#0f172a">cloud VM (IAM)</text>
+  <text x="135" y="258" text-anchor="middle" font-size="13" fill="#0f172a">human (SSO)</text>
+  <text x="135" y="300" text-anchor="middle" font-size="12" fill="#475569">hold a short-lived TOKEN,</text>
+  <text x="135" y="318" text-anchor="middle" font-size="12" fill="#475569">never an encryption key</text>
+
+  <rect x="290" y="110" width="200" height="300" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="390" y="138" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">1. Auth methods</text>
+  <text x="390" y="166" text-anchor="middle" font-size="13" fill="#0f172a">prove identity</text>
+  <text x="390" y="188" text-anchor="middle" font-size="13" fill="#0f172a">get a token with a TTL</text>
+  <text x="390" y="230" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">2. Policies</text>
+  <text x="390" y="258" text-anchor="middle" font-size="13" fill="#0f172a">path ACLs: read, create,</text>
+  <text x="390" y="278" text-anchor="middle" font-size="13" fill="#0f172a">update, delete, list, deny</text>
+  <text x="390" y="320" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">3. Audit</text>
+  <text x="390" y="348" text-anchor="middle" font-size="13" fill="#0f172a">every request logged,</text>
+  <text x="390" y="368" text-anchor="middle" font-size="13" fill="#0f172a">values HMAC'd, not stored</text>
+
+  <rect x="550" y="110" width="250" height="300" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="675" y="138" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">4. Secrets engines</text>
+  <text x="675" y="170" text-anchor="middle" font-size="13" fill="#0f172a">KV v2: versioned static secrets</text>
+  <text x="675" y="198" text-anchor="middle" font-size="13" fill="#0f172a">Transit: encrypt/decrypt as a</text>
+  <text x="675" y="216" text-anchor="middle" font-size="13" fill="#0f172a">service, key stays inside</text>
+  <text x="675" y="244" text-anchor="middle" font-size="13" fill="#0f172a">Database / cloud: DYNAMIC</text>
+  <text x="675" y="262" text-anchor="middle" font-size="13" fill="#0f172a">credentials with a lease</text>
+  <text x="675" y="290" text-anchor="middle" font-size="13" fill="#0f172a">PKI: short-lived certificates</text>
+  <text x="675" y="340" text-anchor="middle" font-size="12" fill="#475569">leases: renew until max TTL,</text>
+  <text x="675" y="358" text-anchor="middle" font-size="12" fill="#475569">revoke now, expire on time</text>
+
+  <rect x="860" y="110" width="300" height="140" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1010" y="138" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">5. Barrier (encrypts everything)</text>
+  <text x="1010" y="166" text-anchor="middle" font-size="13" fill="#0f172a">barrier key lives only in memory</text>
+  <text x="1010" y="188" text-anchor="middle" font-size="13" fill="#0f172a">unsealed with unseal key shares</text>
+  <text x="1010" y="210" text-anchor="middle" font-size="13" fill="#0f172a">or auto-unseal from a KMS/HSM</text>
+  <text x="1010" y="232" text-anchor="middle" font-size="12" fill="#475569">seal = wipe the key from memory</text>
+
+  <rect x="860" y="290" width="140" height="120" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="930" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Consul KV</text>
+  <text x="930" y="342" text-anchor="middle" font-size="12" fill="#0f172a">external cluster,</text>
+  <text x="930" y="360" text-anchor="middle" font-size="12" fill="#0f172a">older pattern</text>
+  <text x="930" y="388" text-anchor="middle" font-size="12" fill="#475569">ciphertext only</text>
+
+  <rect x="1020" y="290" width="140" height="120" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1090" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Raft storage</text>
+  <text x="1090" y="342" text-anchor="middle" font-size="12" fill="#0f172a">integrated, on the</text>
+  <text x="1090" y="360" text-anchor="middle" font-size="12" fill="#0f172a">Vault nodes, common now</text>
+  <text x="1090" y="388" text-anchor="middle" font-size="12" fill="#475569">ciphertext only</text>
+
+  <path d="M230 260 H288" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M490 260 H548" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M800 180 H858" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M1010 250 V288" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+
+  <text x="40" y="455" font-size="14" fill="#0f172a">Licence note: HashiCorp Vault is under the BSL (since Aug 2023). OpenBao is the Linux Foundation fork with the same API shape. Verify both at the source.</text>
+  <text x="40" y="477" font-size="14" fill="#475569">DBA analogy: the barrier is like Transparent Data Encryption: the datafiles on disk (storage) are encrypted, the master key is held elsewhere.</text>
+</svg>

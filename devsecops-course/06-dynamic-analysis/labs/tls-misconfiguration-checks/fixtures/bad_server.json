@@ -1,0 +1,30 @@
+{
+  "host": "shop.example.test",
+  "port": 443,
+  "protocols": [
+    "SSLv3",
+    "TLSv1.0",
+    "TLSv1.1",
+    "TLSv1.2"
+  ],
+  "ciphers": [
+    "TLS_RSA_WITH_RC4_128_SHA",
+    "TLS_RSA_WITH_3DES_EDE_CBC_SHA",
+    "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+    "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+    "TLS_DH_anon_WITH_AES_128_CBC_SHA"
+  ],
+  "cert": {
+    "subject_cn": "www.old-shop.example.test",
+    "san": [
+      "www.old-shop.example.test"
+    ],
+    "issuer": "CN=www.old-shop.example.test",
+    "not_before": "2022-01-01",
+    "not_after": "2024-01-01",
+    "key_type": "RSA",
+    "key_bits": 1024,
+    "sig_alg": "sha1WithRSAEncryption"
+  },
+  "http_headers": {}
+}

@@ -1,0 +1,17 @@
+{
+  "name": "registry.example.invalid/shop/web:2.0",
+  "config": {"User": "", "Env": ["PATH=/usr/bin", "API_TOKEN=canary-not-a-real-token"], "Healthcheck": null},
+  "layers": [
+    {"id": "L1", "created_by": "FROM debian:12-slim", "files": [
+      {"path": "bin/sh", "size": 120000, "mode": "0755"},
+      {"path": "usr/bin/sudo", "size": 230000, "mode": "4755"},
+      {"path": "var/lib/apt/lists/main_Packages", "size": 900000, "mode": "0644"}]},
+    {"id": "L2", "created_by": "ADD secrets.env /app/.env", "files": [
+      {"path": "app/.env", "size": 60, "mode": "0644", "content": "DB_PASSWORD=canary-hunter2-not-real\n"},
+      {"path": "app/main.py", "size": 4000, "mode": "0644", "content": "print('hello')\n"}]},
+    {"id": "L3", "created_by": "RUN rm /app/.env", "files": [
+      {"path": "app/.wh..env", "size": 0, "whiteout": true}]},
+    {"id": "L4", "created_by": "COPY main.py /app/main.py", "files": [
+      {"path": "app/main.py", "size": 4100, "mode": "0644", "content": "print('hello v2')\n"}]}
+  ]
+}

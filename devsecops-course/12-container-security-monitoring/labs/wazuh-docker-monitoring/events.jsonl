@@ -1,0 +1,12 @@
+{"ts": 1000, "integration": "docker", "docker": {"Type": "container", "Action": "start", "Actor": {"ID": "c-web", "Attributes": {"image": "registry.example.invalid/shop/web:2.1", "name": "web"}}}}
+{"ts": 1010, "integration": "docker", "docker": {"Type": "container", "Action": "exec_create: bash", "Actor": {"ID": "c-web", "Attributes": {"name": "web"}}}}
+{"ts": 1020, "integration": "docker", "docker": {"Type": "image", "Action": "pull", "Actor": {"ID": "docker.io/evil/miner:latest", "Attributes": {}}}}
+{"ts": 1021, "integration": "docker", "docker": {"Type": "image", "Action": "pull", "Actor": {"ID": "registry.example.invalid/shop/api:1.4", "Attributes": {}}}}
+{"ts": 1030, "integration": "docker", "docker": {"Type": "container", "Action": "oom", "Actor": {"ID": "c-api", "Attributes": {"name": "api"}}}}
+{"ts": 1031, "integration": "docker", "docker": {"Type": "container", "Action": "die", "Actor": {"ID": "c-api", "Attributes": {"name": "api", "exitCode": "137"}}}}
+{"ts": 1040, "integration": "docker", "docker": {"Type": "container", "Action": "die", "Actor": {"ID": "c-loop", "Attributes": {"exitCode": "1"}}}}
+{"ts": 1045, "integration": "docker", "docker": {"Type": "container", "Action": "die", "Actor": {"ID": "c-loop", "Attributes": {"exitCode": "1"}}}}
+{"ts": 1050, "integration": "docker", "docker": {"Type": "container", "Action": "die", "Actor": {"ID": "c-loop", "Attributes": {"exitCode": "1"}}}}
+{"ts": 1055, "integration": "docker", "docker": {"Type": "container", "Action": "die", "Actor": {"ID": "c-loop", "Attributes": {"exitCode": "1"}}}}
+{"ts": 1058, "integration": "docker", "docker": {"Type": "container", "Action": "die", "Actor": {"ID": "c-loop", "Attributes": {"exitCode": "1"}}}}
+{"ts": 1500, "integration": "syslog", "message": "not a docker event"}

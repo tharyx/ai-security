@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ARF-like fixture (simplified). Real files come from the oscap xccdf eval command with its results-arf option. -->
+<arf:asset-report-collection xmlns:arf="http://scap.nist.gov/schema/asset-reporting-format/1.1">
+  <arf:assets>
+    <arf:asset id="asset0"><fqdn>app-01.example</fqdn></arf:asset>
+  </arf:assets>
+  <arf:reports>
+    <arf:report id="xccdf1">
+      <arf:content>
+    <Benchmark xmlns="http://checklists.nist.gov/xccdf/1.2" id="xccdf_org.ssgproject.content_benchmark_EXAMPLE-LINUX" resolved="true">
+      <title>Example Linux Security Guide (fixture)</title>
+      <Profile id="xccdf_org.ssgproject.content_profile_standard"><title>Standard System Security Profile</title></Profile>
+      <Rule id="xccdf_org.ssgproject.content_rule_sshd_disable_root_login" severity="high" selected="true" weight="1.0"><title>Disable SSH Root Login</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_sshd_disable_empty_passwords" severity="high" selected="true" weight="1.0"><title>Disable SSH Access via Empty Passwords</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout" severity="medium" selected="true" weight="1.0"><title>Set SSH Idle Timeout Interval</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_package_telnet-server_removed" severity="high" selected="true" weight="1.0"><title>Uninstall the telnet server</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_package_rsh-server_removed" severity="high" selected="true" weight="1.0"><title>Uninstall rsh-server Package</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_service_auditd_enabled" severity="medium" selected="true" weight="1.0"><title>Enable auditd Service</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_ip_forward" severity="medium" selected="true" weight="1.0"><title>Disable Kernel Parameter for IP Forwarding</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_sysctl_kernel_randomize_va_space" severity="medium" selected="true" weight="1.0"><title>Enable Randomized Layout of Virtual Address Space</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_file_permissions_etc_shadow" severity="high" selected="true" weight="1.0"><title>Verify Permissions on /etc/shadow</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_accounts_password_minlen_login_defs" severity="medium" selected="true" weight="1.0"><title>Set Password Minimum Length in login.defs</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_accounts_umask_etc_login_defs" severity="low" selected="true" weight="1.0"><title>Ensure the Default Umask is Set Correctly in login.defs</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_banner_etc_issue" severity="low" selected="true" weight="1.0"><title>Modify the System Login Banner</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_service_chronyd_enabled" severity="medium" selected="true" weight="1.0"><title>Enable the chrony Service</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_mount_option_tmp_nodev" severity="low" selected="true" weight="1.0"><title>Add nodev Option to /tmp</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_selinux_state" severity="high" selected="true" weight="1.0"><title>Ensure SELinux State is Enforcing</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_rpm_verify_permissions" severity="low" selected="true" weight="1.0"><title>Verify and Correct File Permissions with RPM</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_package_aide_installed" severity="medium" selected="true" weight="1.0"><title>Install AIDE</title></Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_kernel_module_usb-storage_disabled" severity="low" selected="true" weight="1.0"><title>Disable Modprobe Loading of USB Storage Driver</title></Rule>
+      <TestResult id="xccdf_org.open-scap_testresult_standard" start-time="2026-11-08T09:00:00" end-time="2026-11-08T09:00:00" version="1.0">
+        <benchmark href="#scap_org.open-scap_comp_ssg-example-xccdf.xml"/>
+        <title>OSCAP Scan Result</title>
+        <target>app-01.example</target>
+        <profile idref="xccdf_org.ssgproject.content_profile_standard"/>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_sshd_disable_root_login" time="2026-11-08T09:00:00" severity="high" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_sshd_disable_empty_passwords" time="2026-11-08T09:00:00" severity="high" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout" time="2026-11-08T09:00:00" severity="medium" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_package_telnet-server_removed" time="2026-11-08T09:00:00" severity="high" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_package_rsh-server_removed" time="2026-11-08T09:00:00" severity="high" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_service_auditd_enabled" time="2026-11-08T09:00:00" severity="medium" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_ip_forward" time="2026-11-08T09:00:00" severity="medium" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_sysctl_kernel_randomize_va_space" time="2026-11-08T09:00:00" severity="medium" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_file_permissions_etc_shadow" time="2026-11-08T09:00:00" severity="high" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_accounts_password_minlen_login_defs" time="2026-11-08T09:00:00" severity="medium" weight="1.0"><result>fixed</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_accounts_umask_etc_login_defs" time="2026-11-08T09:00:00" severity="low" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_banner_etc_issue" time="2026-11-08T09:00:00" severity="low" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_service_chronyd_enabled" time="2026-11-08T09:00:00" severity="medium" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_mount_option_tmp_nodev" time="2026-11-08T09:00:00" severity="low" weight="1.0"><result>fail</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_selinux_state" time="2026-11-08T09:00:00" severity="high" weight="1.0"><result>notapplicable</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_rpm_verify_permissions" time="2026-11-08T09:00:00" severity="low" weight="1.0"><result>notchecked</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_package_aide_installed" time="2026-11-08T09:00:00" severity="medium" weight="1.0"><result>pass</result></rule-result>
+        <rule-result idref="xccdf_org.ssgproject.content_rule_kernel_module_usb-storage_disabled" time="2026-11-08T09:00:00" severity="low" weight="1.0"><result>informational</result></rule-result>
+        <score system="urn:xccdf:scoring:default" maximum="100">93.33</score>
+      </TestResult>
+    </Benchmark>
+      </arf:content>
+    </arf:report>
+  </arf:reports>
+</arf:asset-report-collection>

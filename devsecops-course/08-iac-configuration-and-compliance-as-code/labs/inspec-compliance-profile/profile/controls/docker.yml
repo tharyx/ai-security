@@ -1,0 +1,31 @@
+# Docker daemon controls only run where the daemon.json file exists (InSpec: only_if { file(...).exist? }).
+controls:
+  - id: docker-01
+    impact: 0.7
+    title: Inter-container communication is off by default
+    only_if: {has_file: /etc/docker/daemon.json}
+    describe:
+      - resource: json
+        arg: /etc/docker/daemon.json
+        its: icc
+        should: {eq: false}
+
+  - id: docker-02
+    impact: 0.5
+    title: no-new-privileges is the daemon default
+    only_if: {has_file: /etc/docker/daemon.json}
+    describe:
+      - resource: json
+        arg: /etc/docker/daemon.json
+        its: no-new-privileges
+        should: {eq: true}
+
+  - id: docker-03
+    impact: 1.0
+    title: The Docker API is not exposed on plain TCP
+    only_if: {has_file: /etc/docker/daemon.json}
+    describe:
+      - resource: json
+        arg: /etc/docker/daemon.json
+        its: hosts
+        should_not: {include: "tcp://0.0.0.0:2375"}

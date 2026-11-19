@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Secure SDLC activities and security gates</title>
+<desc>Six SDLC phases, the security activity in each, the pipeline gate, and the tool.</desc>
+<defs><marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker></defs>
+<rect width="1200" height="540" fill="#ffffff"/>
+<text x="40" y="44" font-size="22" font-weight="700" fill="#0f172a" text-anchor="start">Secure SDLC: one security activity and one gate per phase</text>
+<text x="40" y="70" font-size="14" font-weight="400" fill="#475569" text-anchor="start">Shift left (early and cheap) AND keep checking on the right (after release).</text>
+<rect x="40" y="100" width="178" height="50" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="129.0" y="130.25" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Requirements</text>
+<rect x="40" y="170" width="178" height="70" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="129.0" y="201.55" font-size="13" font-weight="400" fill="#1e3a8a" text-anchor="middle">Security</text>
+<text x="129.0" y="217.55" font-size="13" font-weight="400" fill="#1e3a8a" text-anchor="middle">requirements</text>
+<rect x="40" y="260" width="178" height="70" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="129.0" y="291.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">gate: ASVS / abuse</text>
+<text x="129.0" y="306.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">cases accepted</text>
+<rect x="40" y="350" width="178" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="129.0" y="378.85" font-size="11" font-weight="400" fill="#475569" text-anchor="middle">BDD specs, ASVS</text>
+<line x1="129.0" y1="150" x2="129.0" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="129.0" y1="240" x2="129.0" y2="260" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="129.0" y1="330" x2="129.0" y2="350" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="228" y="100" width="178" height="50" rx="8" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="317.0" y="130.25" font-size="15" font-weight="700" fill="#581c87" text-anchor="middle">Design</text>
+<rect x="228" y="170" width="178" height="70" rx="8" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="317.0" y="201.55" font-size="13" font-weight="400" fill="#581c87" text-anchor="middle">Threat</text>
+<text x="317.0" y="217.55" font-size="13" font-weight="400" fill="#581c87" text-anchor="middle">modelling</text>
+<rect x="228" y="260" width="178" height="70" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="317.0" y="291.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">gate: threats</text>
+<text x="317.0" y="306.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">have mitigations</text>
+<rect x="228" y="350" width="178" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="317.0" y="378.85" font-size="11" font-weight="400" fill="#475569" text-anchor="middle">pytm, Threat Dragon</text>
+<line x1="317.0" y1="150" x2="317.0" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="317.0" y1="240" x2="317.0" y2="260" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="317.0" y1="330" x2="317.0" y2="350" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="218" y1="125" x2="228" y2="125" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="416" y="100" width="178" height="50" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="505.0" y="130.25" font-size="15" font-weight="700" fill="#7f1d1d" text-anchor="middle">Implementation</text>
+<rect x="416" y="170" width="178" height="70" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="505.0" y="201.55" font-size="13" font-weight="400" fill="#7f1d1d" text-anchor="middle">Static analysis,</text>
+<text x="505.0" y="217.55" font-size="13" font-weight="400" fill="#7f1d1d" text-anchor="middle">secure by default</text>
+<rect x="416" y="260" width="178" height="70" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="505.0" y="291.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">gate: SAST +</text>
+<text x="505.0" y="306.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">secrets + SCA</text>
+<rect x="416" y="350" width="178" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="505.0" y="378.85" font-size="11" font-weight="400" fill="#475569" text-anchor="middle">Semgrep, gitleaks</text>
+<line x1="505.0" y1="150" x2="505.0" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="505.0" y1="240" x2="505.0" y2="260" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="505.0" y1="330" x2="505.0" y2="350" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="406" y1="125" x2="416" y2="125" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="604" y="100" width="178" height="50" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="693.0" y="130.25" font-size="15" font-weight="700" fill="#7f1d1d" text-anchor="middle">Testing</text>
+<rect x="604" y="170" width="178" height="70" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="693.0" y="201.55" font-size="13" font-weight="400" fill="#7f1d1d" text-anchor="middle">Dynamic</text>
+<text x="693.0" y="217.55" font-size="13" font-weight="400" fill="#7f1d1d" text-anchor="middle">analysis</text>
+<rect x="604" y="260" width="178" height="70" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="693.0" y="291.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">gate: DAST</text>
+<text x="693.0" y="306.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">baseline clean</text>
+<rect x="604" y="350" width="178" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="693.0" y="378.85" font-size="11" font-weight="400" fill="#475569" text-anchor="middle">ZAP, security tests</text>
+<line x1="693.0" y1="150" x2="693.0" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="693.0" y1="240" x2="693.0" y2="260" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="693.0" y1="330" x2="693.0" y2="350" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="594" y1="125" x2="604" y2="125" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="792" y="100" width="178" height="50" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="881.0" y="130.25" font-size="15" font-weight="700" fill="#064e3b" text-anchor="middle">Deploy</text>
+<rect x="792" y="170" width="178" height="70" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="881.0" y="201.55" font-size="13" font-weight="400" fill="#064e3b" text-anchor="middle">OS + app</text>
+<text x="881.0" y="217.55" font-size="13" font-weight="400" fill="#064e3b" text-anchor="middle">hardening</text>
+<rect x="792" y="260" width="178" height="70" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="881.0" y="291.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">gate: image scan,</text>
+<text x="881.0" y="306.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">signature, IaC</text>
+<rect x="792" y="350" width="178" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="881.0" y="378.85" font-size="11" font-weight="400" fill="#475569" text-anchor="middle">Ansible, Trivy, cosign</text>
+<line x1="881.0" y1="150" x2="881.0" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="881.0" y1="240" x2="881.0" y2="260" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="881.0" y1="330" x2="881.0" y2="350" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="782" y1="125" x2="792" y2="125" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="980" y="100" width="178" height="50" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="1069.0" y="130.25" font-size="15" font-weight="700" fill="#134e4a" text-anchor="middle">Maintain</text>
+<rect x="980" y="170" width="178" height="70" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="1069.0" y="201.55" font-size="13" font-weight="400" fill="#134e4a" text-anchor="middle">Monitoring,</text>
+<text x="1069.0" y="217.55" font-size="13" font-weight="400" fill="#134e4a" text-anchor="middle">compliance</text>
+<rect x="980" y="260" width="178" height="70" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1069.0" y="291.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">gate: SLA on</text>
+<text x="1069.0" y="306.7" font-size="12" font-weight="400" fill="#78350f" text-anchor="middle">open findings</text>
+<rect x="980" y="350" width="178" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="1069.0" y="378.85" font-size="11" font-weight="400" fill="#475569" text-anchor="middle">InSpec, Falco, DefectDojo</text>
+<line x1="1069.0" y1="150" x2="1069.0" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="1069.0" y1="240" x2="1069.0" y2="260" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="1069.0" y1="330" x2="1069.0" y2="350" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="970" y1="125" x2="980" y2="125" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<text x="40" y="428" font-size="12" font-weight="400" fill="#475569" text-anchor="start">Row labels (top to bottom): phase, security activity, gate, example tools.</text>
+<line x1="1160" y1="470" x2="60" y2="470" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<text x="600" y="462" font-size="13" font-weight="700" fill="#1e3a8a" text-anchor="middle">feedback loop: incidents and findings become new requirements and tests</text>
+<text x="40" y="510" font-size="13" font-weight="400" fill="#475569" text-anchor="start">A gate = a rule that can stop the pipeline. If nothing can stop it, it is a report, not a gate.</text>
+</svg>

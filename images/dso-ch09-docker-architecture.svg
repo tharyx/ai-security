@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Docker architecture: CLI, Engine (daemon and API), and the runtime (containerd, shim, runc)</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="44" font-size="26" font-weight="700" fill="#0f172a">What happens when you type "docker run nginx"</text>
+  <text x="40" y="70" font-size="15" fill="#475569">Each box is a separate program. The security point: the daemon runs as root, so whoever can call its API is root.</text>
+
+  <rect x="40" y="110" width="170" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="125" y="146" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">Docker CLI</text>
+  <text x="125" y="170" text-anchor="middle" font-size="13" fill="#1e3a8a">docker run, ps, build</text>
+  <text x="125" y="190" text-anchor="middle" font-size="13" fill="#1e3a8a">(also SDKs, Compose)</text>
+
+  <rect x="270" y="110" width="250" height="110" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+  <text x="395" y="140" text-anchor="middle" font-size="18" font-weight="700" fill="#92400e">Docker Engine</text>
+  <text x="395" y="164" text-anchor="middle" font-size="13" fill="#92400e">dockerd (daemon, runs as root)</text>
+  <text x="395" y="184" text-anchor="middle" font-size="13" fill="#92400e">REST API on /var/run/docker.sock</text>
+  <text x="395" y="204" text-anchor="middle" font-size="13" fill="#92400e">images, networks, volumes, build</text>
+
+  <rect x="580" y="110" width="170" height="110" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2.5"/>
+  <text x="665" y="146" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">containerd</text>
+  <text x="665" y="170" text-anchor="middle" font-size="13" fill="#065f46">image pull and storage</text>
+  <text x="665" y="190" text-anchor="middle" font-size="13" fill="#065f46">container lifecycle (CRI too)</text>
+
+  <rect x="810" y="110" width="150" height="110" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.5"/>
+  <text x="885" y="146" text-anchor="middle" font-size="18" font-weight="700" fill="#4c1d95">shim</text>
+  <text x="885" y="170" text-anchor="middle" font-size="13" fill="#4c1d95">one per container</text>
+  <text x="885" y="190" text-anchor="middle" font-size="13" fill="#4c1d95">keeps it alive if</text>
+  <text x="885" y="208" text-anchor="middle" font-size="13" fill="#4c1d95">the daemon restarts</text>
+
+  <rect x="1010" y="110" width="150" height="110" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="1085" y="146" text-anchor="middle" font-size="18" font-weight="700" fill="#991b1b">runc</text>
+  <text x="1085" y="170" text-anchor="middle" font-size="13" fill="#991b1b">OCI runtime: sets up</text>
+  <text x="1085" y="190" text-anchor="middle" font-size="13" fill="#991b1b">namespaces, cgroups,</text>
+  <text x="1085" y="208" text-anchor="middle" font-size="13" fill="#991b1b">caps, then exits</text>
+
+  <g stroke="#334155" stroke-width="2.5" marker-end="url(#a)" fill="none">
+    <path d="M210,165 L268,165"/><path d="M520,165 L578,165"/><path d="M750,165 L808,165"/><path d="M960,165 L1008,165"/>
+  </g>
+  <text x="239" y="152" text-anchor="middle" font-size="12" fill="#334155">HTTP</text>
+  <text x="549" y="152" text-anchor="middle" font-size="12" fill="#334155">gRPC</text>
+
+  <rect x="810" y="300" width="350" height="90" rx="12" fill="#f1f5f9" stroke="#475569" stroke-width="2.5"/>
+  <text x="985" y="334" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">Your container process</text>
+  <text x="985" y="358" text-anchor="middle" font-size="13" fill="#334155">a normal Linux process on the shared host kernel</text>
+  <text x="985" y="376" text-anchor="middle" font-size="13" fill="#334155">(nginx PID 1 inside its namespaces)</text>
+  <path d="M1085,222 L1085,298" stroke="#334155" stroke-width="2.5" marker-end="url(#a)" fill="none"/>
+  <path d="M885,222 L885,298" stroke="#334155" stroke-width="2.5" marker-end="url(#a)" fill="none"/>
+
+  <rect x="270" y="300" width="250" height="90" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="395" y="334" text-anchor="middle" font-size="18" font-weight="700" fill="#9a3412">Registry</text>
+  <text x="395" y="358" text-anchor="middle" font-size="13" fill="#9a3412">Docker Hub, GHCR, Harbor, private</text>
+  <text x="395" y="376" text-anchor="middle" font-size="13" fill="#9a3412">pull by tag or digest</text>
+  <path d="M395,300 L395,222" stroke="#334155" stroke-width="2.5" marker-end="url(#a)" fill="none" stroke-dasharray="6 4"/>
+
+  <rect x="40" y="430" width="1120" height="64" rx="10" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+  <text x="60" y="456" font-size="15" font-weight="700" fill="#713f12">Alternatives and neighbours</text>
+  <text x="60" y="478" font-size="14" fill="#713f12">Podman: no daemon, CLI forks the container itself, rootless-friendly.  CRI-O: a Kubernetes-only runtime (CRI to runc/crun).  Kubernetes: kubelet talks CRI to containerd or CRI-O (dockershim removed in 1.24).</text>
+</svg>

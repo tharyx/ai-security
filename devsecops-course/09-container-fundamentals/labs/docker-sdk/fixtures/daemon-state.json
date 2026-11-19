@@ -1,0 +1,27 @@
+{
+  "version": {"Version": "27.3.1-fixture", "ApiVersion": "1.47", "Os": "linux", "KernelVersion": "6.8.0-fixture"},
+  "info": {"ServerVersion": "27.3.1-fixture", "Containers": 2, "Images": 2, "Driver": "overlay2",
+           "SecurityOptions": ["name=seccomp,profile=builtin", "name=cgroupns"], "CgroupVersion": "2"},
+  "registry": {
+    "alpine:3.20": "sha256:aaaa000000000000000000000000000000000000000000000000000000000001",
+    "nginx:1.27": "sha256:bbbb000000000000000000000000000000000000000000000000000000000002",
+    "redis:latest": "sha256:cccc000000000000000000000000000000000000000000000000000000000003"
+  },
+  "local_images": {
+    "alpine:3.20": "sha256:aaaa000000000000000000000000000000000000000000000000000000000001"
+  },
+  "containers": [
+    {"Id": "1111111111111111111111111111111111111111111111111111111111111111", "Name": "/web",
+     "State": {"Status": "running"},
+     "Config": {"Image": "nginx:1.27", "User": "101", "Env": ["MODE=prod"]},
+     "HostConfig": {"Privileged": false, "Binds": []}, "Logs": ["nginx ready"]},
+    {"Id": "2222222222222222222222222222222222222222222222222222222222222222", "Name": "/agent",
+     "State": {"Status": "running"},
+     "Config": {"Image": "tools/agent:latest", "User": "", "Env": []},
+     "HostConfig": {"Privileged": true, "Binds": ["/var/run/docker.sock:/var/run/docker.sock:rw"]}, "Logs": ["agent up"]},
+    {"Id": "3333333333333333333333333333333333333333333333333333333333333333", "Name": "/old-job",
+     "State": {"Status": "exited"},
+     "Config": {"Image": "alpine:3.20", "User": "1000", "Env": []},
+     "HostConfig": {"Privileged": false, "Binds": []}, "Logs": ["done"]}
+  ]
+}

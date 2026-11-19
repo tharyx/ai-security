@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Pre-commit hook versus CI</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="470" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">Why a pre-commit hook is not your security gate</text>
+<text x="40" y="76" font-size="15" fill="#475569">Hooks are a convenience on the developer's machine. The enforcement point is the server.</text>
+<text x="40" y="112" text-anchor="start" font-size="17" font-weight="700" fill="#0f172a">Client side: pre-commit hook</text>
+<rect x="40" y="128" width="500" height="52" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="290.0" y="158.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Skippable: git commit --no-verify</text>
+<rect x="40" y="190" width="500" height="52" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="290.0" y="220.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Optional: needs install on every clone</text>
+<rect x="40" y="252" width="500" height="52" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="290.0" y="282.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Slow hooks annoy people, so they get disabled</text>
+<rect x="40" y="314" width="500" height="52" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="290.0" y="344.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Versions and rules drift per laptop</text>
+<text x="660" y="112" text-anchor="start" font-size="17" font-weight="700" fill="#0f172a">Server side: CI job on the merge request</text>
+<rect x="660" y="128" width="500" height="52" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="910.0" y="158.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Cannot be skipped: branch protection requires it</text>
+<rect x="660" y="190" width="500" height="52" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="910.0" y="220.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">One pinned toolchain for everyone</text>
+<rect x="660" y="252" width="500" height="52" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="910.0" y="282.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Scans the whole commit range and the history</text>
+<rect x="660" y="314" width="500" height="52" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="910.0" y="344.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Results are logged as evidence</text>
+<rect x="40" y="395" width="1120" height="52" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="600.0" y="425.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Use both: a fast hook (secrets, formatting) for quick feedback, and the same checks in CI as the gate.</text>
+</svg>

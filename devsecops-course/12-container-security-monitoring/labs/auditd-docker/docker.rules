@@ -1,0 +1,16 @@
+## Docker auditing rules (CIS Docker Benchmark style). Install as /etc/audit/rules.d/docker.rules
+## then: augenrules --load . Verify paths on YOUR distro (usr-merge, snap, rootless differ).
+-w /usr/bin/docker -k docker-bin
+-w /usr/bin/dockerd -k docker-bin
+-w /usr/bin/docker-proxy -k docker-bin
+-w /usr/bin/containerd -k docker-bin
+-w /usr/bin/runc -k docker-bin
+-w /var/lib/docker -k docker-data
+-w /etc/docker -p wa -k docker-config
+-w /usr/lib/systemd/system/docker.service -p wa -k docker-config
+-w /usr/lib/systemd/system/docker.socket -p wa -k docker-config
+-w /etc/default/docker -p wa -k docker-config
+-w /run/docker.sock -k docker-sock
+-w /var/run/docker.sock -k docker-sock
+## syscall-style rule: log every exec of the docker CLI by anyone
+-a always,exit -F arch=b64 -S execve -F exe=/usr/bin/docker -k docker-exec

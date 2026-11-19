@@ -1,0 +1,13 @@
+Client: Docker Engine - Community
+Server:
+ Containers: 1
+ Server Version: 27.x (fixture)
+ Storage Driver: overlay2
+ Logging Driver: syslog
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  userns
+ Live Restore Enabled: true
+ Cgroup Driver: systemd

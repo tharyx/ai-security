@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Regex, AST and graph rules</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="520" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">Three ways to write the same custom rule</text>
+<text x="40" y="76" font-size="15" fill="#475569">Each step sees more of the program and costs more to write. Numbers are from the lab fixture of 15 cases.</text>
+<rect x="40" y="110" width="340" height="60" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="134.0" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Regex</text>
+<text x="210.0" y="155.0" text-anchor="middle" font-size="15" font-weight="400" fill="#1e293b">sees: text of one line</text>
+<rect x="40" y="185" width="340" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="210.0" y="213.5" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">.execute(f"...{x}")</text>
+<rect x="40" y="250" width="340" height="130" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="289.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Fast, easy to write</text>
+<text x="210.0" y="309.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Blind to variables</text>
+<text x="210.0" y="329.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">and helpers</text>
+<text x="210.0" y="349.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">precision 0.43</text>
+<rect x="420" y="110" width="340" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="590.0" y="134.0" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">AST</text>
+<text x="590.0" y="155.0" text-anchor="middle" font-size="15" font-weight="400" fill="#1e293b">sees: shape of the code</text>
+<rect x="420" y="185" width="340" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="590.0" y="213.5" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">Call(execute, JoinedStr(Name))</text>
+<rect x="420" y="250" width="340" height="130" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="590.0" y="289.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Knows constants,</text>
+<text x="590.0" y="309.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">calls, operators</text>
+<text x="590.0" y="329.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">No data flow</text>
+<text x="590.0" y="349.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">precision 0.56</text>
+<line x1="380" y1="140" x2="420" y2="140" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="800" y="110" width="340" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="970.0" y="134.0" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Graph (taint)</text>
+<text x="970.0" y="155.0" text-anchor="middle" font-size="15" font-weight="400" fill="#1e293b">sees: flow of data</text>
+<rect x="800" y="185" width="340" height="50" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="970.0" y="213.5" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">source -&gt; sanitizer? -&gt; sink</text>
+<rect x="800" y="250" width="340" height="130" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="970.0" y="289.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Follows variables,</text>
+<text x="970.0" y="309.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">branches, helpers</text>
+<text x="970.0" y="329.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">Needs sources/sinks</text>
+<text x="970.0" y="349.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">precision 0.88</text>
+<line x1="760" y1="140" x2="800" y2="140" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="410" width="1120" height="80" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="600.0" y="444.0" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">Tools: Bandit and Semgrep (AST and patterns, taint mode in Semgrep), CodeQL (data and control flow graphs).</text>
+<text x="600.0" y="463.0" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">Real engines are far more complete than this teaching model. No rule set is perfect: the guard case still fools the graph rule.</text>
+</svg>

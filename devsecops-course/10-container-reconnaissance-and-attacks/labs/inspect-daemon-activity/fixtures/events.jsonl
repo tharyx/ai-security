@@ -1,0 +1,12 @@
+{"Type":"image","Action":"pull","time":1700000000,"Actor":{"Attributes":{"name":"registry.example/shop/web:1.0"}}}
+{"Type":"container","Action":"create","time":1700000010,"id":"aaa111","Actor":{"Attributes":{"name":"shop-web","image":"registry.example/shop/web:1.0","mounts":"/srv/site:/html:ro"}}}
+{"Type":"container","Action":"start","time":1700000011,"id":"aaa111","Actor":{"Attributes":{"name":"shop-web","image":"registry.example/shop/web:1.0"}}}
+{"Type":"image","Action":"pull","time":1700000100,"Actor":{"Attributes":{"name":"evil.example.invalid/tools/miner:latest"}}}
+{"Type":"container","Action":"create","time":1700000110,"id":"bbb222","Actor":{"Attributes":{"name":"helper","image":"evil.example.invalid/tools/miner:latest","privileged":"true","mounts":"/var/run/docker.sock:/var/run/docker.sock,/:/host"}}}
+{"Type":"container","Action":"exec_create: sh -c id","time":1700000120,"id":"aaa111","Actor":{"Attributes":{"name":"shop-web","execID":"e7f3a91c22","cmd":"sh -c id"}}}
+{"Type":"container","Action":"die","time":1700000200,"id":"ccc333","Actor":{"Attributes":{"name":"worker","exitCode":"1"}}}
+{"Type":"container","Action":"die","time":1700000230,"id":"ccc333","Actor":{"Attributes":{"name":"worker","exitCode":"1"}}}
+{"Type":"container","Action":"die","time":1700000260,"id":"ccc333","Actor":{"Attributes":{"name":"worker","exitCode":"137"}}}
+{"Type":"container","Action":"oom","time":1700000259,"id":"ccc333","Actor":{"Attributes":{"name":"worker"}}}
+{"Type":"image","Action":"tag","time":1700000300,"Actor":{"Attributes":{"name":"registry.example/shop/web:1.0"}}}
+{"Type":"daemon","Action":"reload","time":1700000320,"Actor":{"Attributes":{}}}

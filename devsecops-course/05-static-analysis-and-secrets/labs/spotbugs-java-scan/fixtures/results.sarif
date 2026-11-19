@@ -1,0 +1,49 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [{
+    "tool": {"driver": {"name": "SpotBugs", "version": "4.8.x", "rules": [
+      {"id": "SQL_INJECTION_JDBC", "properties": {"category": "SECURITY", "tags": ["security", "external/cwe/cwe-89"]}},
+      {"id": "XSS_SERVLET", "properties": {"category": "SECURITY", "tags": ["security", "external/cwe/cwe-79"]}},
+      {"id": "PATH_TRAVERSAL_IN", "properties": {"category": "SECURITY", "tags": ["security", "external/cwe/cwe-22"]}},
+      {"id": "COMMAND_INJECTION", "properties": {"category": "SECURITY", "tags": ["security", "external/cwe/cwe-78"]}},
+      {"id": "HARD_CODE_PASSWORD", "properties": {"category": "SECURITY", "tags": ["security", "external/cwe/cwe-259"]}},
+      {"id": "WEAK_MESSAGE_DIGEST_MD5", "properties": {"category": "SECURITY", "tags": ["security", "external/cwe/cwe-327"]}},
+      {"id": "PREDICTABLE_RANDOM", "properties": {"category": "SECURITY", "tags": ["security", "external/cwe/cwe-330"]}},
+      {"id": "DM_DEFAULT_ENCODING", "properties": {"category": "I18N", "tags": []}},
+      {"id": "NP_NULL_ON_SOME_PATH", "properties": {"category": "CORRECTNESS", "tags": []}}
+    ]}},
+    "results": [
+      {"ruleId": "SQL_INJECTION_JDBC", "level": "error", "message": {"text": "Nonconstant string passed to execute"},
+       "properties": {"rank": 3, "class": "com.acme.shop.dao.UserDao", "method": "findByName"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "com/acme/shop/dao/UserDao.java"}, "region": {"startLine": 42}}}]},
+      {"ruleId": "XSS_SERVLET", "level": "error", "message": {"text": "Potential XSS in Servlet"},
+       "properties": {"rank": 4, "class": "com.acme.shop.web.ProfileServlet", "method": "doGet"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "com/acme/shop/web/ProfileServlet.java"}, "region": {"startLine": 31}}}]},
+      {"ruleId": "PATH_TRAVERSAL_IN", "level": "warning", "message": {"text": "Potential Path Traversal (file read)"},
+       "properties": {"rank": 7, "class": "com.acme.shop.web.FileController", "method": "download"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "com/acme/shop/web/FileController.java"}, "region": {"startLine": 55}}}]},
+      {"ruleId": "COMMAND_INJECTION", "level": "error", "message": {"text": "Potential Command Injection"},
+       "properties": {"rank": 2, "class": "com.acme.shop.job.Exporter", "method": "run"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "com/acme/shop/job/Exporter.java"}, "region": {"startLine": 61}}}]},
+      {"ruleId": "HARD_CODE_PASSWORD", "level": "warning", "message": {"text": "Hard coded password"},
+       "properties": {"rank": 8, "class": "com.acme.shop.config.DbConfig", "method": "<clinit>"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "com/acme/shop/config/DbConfig.java"}, "region": {"startLine": 12}}}]},
+      {"ruleId": "WEAK_MESSAGE_DIGEST_MD5", "level": "warning", "message": {"text": "MD5 is a weak hash function"},
+       "properties": {"rank": 9, "class": "com.acme.shop.util.Hashing", "method": "legacyHash"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "com/acme/shop/util/Hashing.java"}, "region": {"startLine": 20}}}]},
+      {"ruleId": "PREDICTABLE_RANDOM", "level": "note", "message": {"text": "Predictable pseudorandom number generator"},
+       "properties": {"rank": 12, "class": "com.acme.shop.auth.TokenFactory", "method": "next"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "com/acme/shop/auth/TokenFactory.java"}, "region": {"startLine": 18}}}]},
+      {"ruleId": "SQL_INJECTION_JDBC", "level": "error", "message": {"text": "Nonconstant string passed to execute"},
+       "properties": {"rank": 3, "class": "com.acme.shop.test.FixtureLoader", "method": "load"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "src/test/java/com/acme/shop/test/FixtureLoader.java"}, "region": {"startLine": 27}}}]},
+      {"ruleId": "DM_DEFAULT_ENCODING", "level": "note", "message": {"text": "Reliance on default encoding"},
+       "properties": {"rank": 18, "class": "com.acme.shop.report.Reports", "method": "write"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "com/acme/shop/report/Reports.java"}, "region": {"startLine": 70}}}]},
+      {"ruleId": "NP_NULL_ON_SOME_PATH", "level": "warning", "message": {"text": "Possible null pointer dereference"},
+       "properties": {"rank": 14, "class": "com.acme.shop.web.CartController", "method": "total"},
+       "locations": [{"physicalLocation": {"artifactLocation": {"uri": "com/acme/shop/web/CartController.java"}, "region": {"startLine": 88}}}]}
+    ]
+  }]
+}

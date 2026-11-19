@@ -1,0 +1,22 @@
+{
+  "host": {"name": "dockerhost1", "services_on_localhost": [5432, 2375]},
+  "networks": [
+    {"name": "bridge",   "driver": "bridge",  "user_defined": false},
+    {"name": "frontend", "driver": "bridge",  "user_defined": true},
+    {"name": "backend",  "driver": "bridge",  "user_defined": true},
+    {"name": "mesh",     "driver": "overlay", "user_defined": true},
+    {"name": "host",     "driver": "host",    "user_defined": false},
+    {"name": "none",     "driver": "null",    "user_defined": false}
+  ],
+  "containers": [
+    {"name": "web",    "networks": ["frontend"], "listens": [80],   "publish": ["0.0.0.0:8080:80"]},
+    {"name": "api",    "networks": ["frontend", "backend"], "listens": [3000], "publish": ["127.0.0.1:3000:3000"]},
+    {"name": "db",     "networks": ["backend"],  "listens": [5432], "publish": []},
+    {"name": "legacy1","networks": ["bridge"],   "listens": [8000], "publish": []},
+    {"name": "legacy2","networks": ["bridge"],   "listens": [9000], "publish": []},
+    {"name": "monitor","networks": ["host"],     "listens": [9100], "publish": []},
+    {"name": "batch",  "networks": ["none"],     "listens": [],     "publish": []},
+    {"name": "worker-a","networks": ["mesh"],    "listens": [7000], "publish": [], "node": "n1"},
+    {"name": "worker-b","networks": ["mesh"],    "listens": [7001], "publish": [], "node": "n2"}
+  ]
+}

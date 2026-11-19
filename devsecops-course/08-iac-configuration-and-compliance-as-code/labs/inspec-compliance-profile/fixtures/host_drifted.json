@@ -1,0 +1,14 @@
+{
+  "hostname": "web-099",
+  "os": {"family": "debian", "name": "debian", "release": "12"},
+  "sshd_config": {"PermitRootLogin": "yes", "PasswordAuthentication": "no", "MaxAuthTries": "6", "Ciphers": "aes128-cbc,aes256-gcm@openssh.com"},
+  "packages": {"openssh-server": "9.2", "telnet": "0.17", "docker-ce": "27.0"},
+  "services": {"auditd": {"enabled": true, "running": false}, "docker": {"enabled": true, "running": true}},
+  "files": {
+    "/etc/shadow": {"exist": true, "mode": "0644", "owner": "root"},
+    "/etc/docker/daemon.json": {"exist": true, "mode": "0644", "owner": "root"}
+  },
+  "kernel_parameters": {"net.ipv4.ip_forward": 1, "kernel.randomize_va_space": 2},
+  "users": {"root": {"uid": 0, "shell": "/bin/bash"}, "guest": {"uid": 1001, "shell": "/bin/bash"}},
+  "json_files": {"/etc/docker/daemon.json": {"icc": true, "hosts": ["fd://", "tcp://0.0.0.0:2375"]}}
+}

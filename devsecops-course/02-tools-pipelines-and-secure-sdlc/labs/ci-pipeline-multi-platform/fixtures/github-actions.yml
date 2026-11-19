@@ -1,0 +1,80 @@
+# .github/workflows/secure-pipeline.yml (fixture). The SAME secure pipeline, GitHub Actions syntax.
+# The 40-character values are FAKE commit SHAs. In a real repo, pin each action to the SHA of a
+# release you reviewed and keep the version as a trailing comment (Dependabot can update both).
+name: secure-pipeline
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  secrets-scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@0123456789abcdef0123456789abcdef01234567 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: gitleaks/gitleaks-action@1111111111111111111111111111111111111111 # v2
+
+  sca:
+    needs: secrets-scan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@0123456789abcdef0123456789abcdef01234567 # v4
+        with:
+          persist-credentials: false
+      - run: npm ci --ignore-scripts
+      - run: npm audit --audit-level=high
+
+  sast:
+    needs: sca
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@0123456789abcdef0123456789abcdef01234567 # v4
+        with:
+          persist-credentials: false
+      - run: pipx run semgrep==1.56.0 scan --config p/owasp-top-ten --error
+
+  build:
+    needs: sast
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@0123456789abcdef0123456789abcdef01234567 # v4
+        with:
+          persist-credentials: false
+      - run: docker build -t webshop:${{ github.sha }} .
+
+  image-scan:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: aquasecurity/trivy-action@2222222222222222222222222222222222222222 # v0.x
+        with:
+          image-ref: webshop:${{ github.sha }}
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+
+  dast:
+    needs: image-scan
+    runs-on: ubuntu-24.04
+    steps:
+      - run: docker run -d --name app -p 3000:3000 webshop:${{ github.sha }}
+      - run: docker run --rm --network host ghcr.io/zaproxy/zaproxy:2.14.0 zap-baseline.py -t http://127.0.0.1:3000 -I
+
+  deploy:
+    needs: dast
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: staging
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@0123456789abcdef0123456789abcdef01234567 # v4
+        with:
+          persist-credentials: false
+      - run: ./deploy.sh staging

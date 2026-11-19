@@ -1,0 +1,13 @@
+{
+  "daemon": {"rootless": false, "userns_remap": false, "tls_on_tcp": true, "log_driver": "json-file", "content_trust_alternative": false},
+  "socket": {"path": "/var/run/docker.sock", "owner": "root", "group": "docker", "mode": "660"},
+  "users": [
+    {"name": "alice", "groups": ["alice", "docker"]},
+    {"name": "bob", "groups": ["bob"]},
+    {"name": "deploy", "groups": ["deploy", "docker"], "sudo_nopasswd": true, "sudo_commands": ["ALL"]}
+  ],
+  "containers": [
+    {"name": "uploader", "user": "root", "writable_host_mounts": ["/srv/uploads"], "setuid_in_image": true, "no_new_privileges": false, "env_secrets": ["DB_PASSWORD"]},
+    {"name": "static-web", "user": "10001", "writable_host_mounts": [], "setuid_in_image": false, "no_new_privileges": true, "env_secrets": []}
+  ]
+}

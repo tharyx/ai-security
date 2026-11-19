@@ -1,0 +1,2 @@
+{"defaultAction": "SCMP_ACT_ALLOW",
+ "syscalls": [{"names": ["ptrace", "mount", "read"], "action": "SCMP_ACT_ALLOW"}]}

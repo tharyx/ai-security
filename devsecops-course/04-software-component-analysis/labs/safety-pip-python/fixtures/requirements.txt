@@ -1,0 +1,8 @@
+# production dependencies (all names are FICTIONAL)
+reqwise==2.18.0
+yamlish==5.3.0
+pdfmake-py==1.3.0
+imgbox>=1.1                 # NOT pinned: the scanner can only guess the version
+flask-ish==3.0.1            # no advisories in the lab database
+fastclean[extra]==0.4.2 ; python_version >= "3.9"
+-r dev-requirements.txt

@@ -1,0 +1,30 @@
+{
+  "host": {
+    "docker_partition_separate": false,
+    "auditd_watches": ["/usr/bin/dockerd"],
+    "docker_group_members": ["alice", "bob", "svc-ci", "contractor1"],
+    "approved_docker_users": ["alice", "svc-ci"]
+  },
+  "files": {
+    "/usr/lib/systemd/system/docker.service": {"owner": "root:root", "mode": "0664"},
+    "/var/run/docker.sock": {"owner": "root:root", "mode": "0666"},
+    "/etc/docker/daemon.json": {"owner": "bob:bob", "mode": "0644"}
+  },
+  "daemon": {
+    "hosts": ["unix:///var/run/docker.sock", "tcp://0.0.0.0:2375"],
+    "insecure-registries": ["registry.example.invalid:5000"],
+    "log-driver": "json-file",
+    "userland-proxy": true
+  },
+  "containers": [
+    {"Name": "/web", "Config": {"User": "", "Healthcheck": null},
+     "HostConfig": {"Privileged": false, "CapAdd": null, "Memory": 0, "CpuShares": 0, "PidsLimit": 0,
+                    "ReadonlyRootfs": false, "SecurityOpt": null, "PidMode": "", "NetworkMode": "bridge",
+                    "Binds": null, "RestartPolicy": {"Name": "always"}, "Devices": []}},
+    {"Name": "/ci-agent", "Config": {"User": "root", "Healthcheck": null},
+     "HostConfig": {"Privileged": true, "CapAdd": ["SYS_ADMIN"], "Memory": 0, "CpuShares": 0, "PidsLimit": 0,
+                    "ReadonlyRootfs": false, "SecurityOpt": ["seccomp=unconfined"], "PidMode": "host",
+                    "NetworkMode": "host", "Binds": ["/var/run/docker.sock:/var/run/docker.sock", "/etc:/host-etc"],
+                    "RestartPolicy": {"Name": "always"}, "Devices": [{"PathOnHost": "/dev/sda"}]}}
+  ]
+}

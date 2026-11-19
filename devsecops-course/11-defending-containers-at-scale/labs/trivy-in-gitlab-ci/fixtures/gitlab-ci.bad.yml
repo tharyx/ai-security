@@ -1,0 +1,13 @@
+stages: [build, test]
+
+build:
+  stage: build
+  script:
+    - docker build -t app .
+
+trivy-scan:
+  stage: scan
+  image: aquasec/trivy:latest
+  allow_failure: true
+  script:
+    - trivy image app || true

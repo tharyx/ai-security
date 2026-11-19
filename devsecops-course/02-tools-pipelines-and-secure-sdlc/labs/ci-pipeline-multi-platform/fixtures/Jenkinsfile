@@ -1,0 +1,48 @@
+// Jenkinsfile (fixture). The SAME secure pipeline, Jenkins declarative syntax.
+// Credentials live in the Jenkins credential store and are bound only inside the Deploy stage.
+pipeline {
+  agent none
+  options {
+    timestamps()
+    disableConcurrentBuilds()
+    timeout(time: 30, unit: 'MINUTES')
+  }
+  stages {
+    stage('Secrets scan') {
+      agent { docker { image 'zricethezav/gitleaks:v8.18.2' } }
+      steps { sh 'gitleaks detect --source . --no-banner --redact' }
+    }
+    stage('SCA') {
+      agent { docker { image 'node:20.11.1-alpine3.19' } }
+      steps {
+        sh 'npm ci --ignore-scripts'
+        sh 'npm audit --audit-level=high'
+      }
+    }
+    stage('SAST') {
+      agent { docker { image 'semgrep/semgrep:1.56.0' } }
+      steps { sh 'semgrep scan --config p/owasp-top-ten --error' }
+    }
+    stage('Build') {
+      agent { docker { image 'gcr.io/kaniko-project/executor:v1.19.2-debug' } }
+      steps { sh '/kaniko/executor --context . --destination registry.example/webshop:${GIT_COMMIT}' }
+    }
+    stage('Image scan') {
+      agent { docker { image 'aquasec/trivy:0.49.1' } }
+      steps { sh 'trivy image --exit-code 1 --severity HIGH,CRITICAL registry.example/webshop:${GIT_COMMIT}' }
+    }
+    stage('DAST') {
+      agent { docker { image 'ghcr.io/zaproxy/zaproxy:2.14.0' } }
+      steps { sh 'zap-baseline.py -t http://webshop-test.example:3000 -I' }
+    }
+    stage('Deploy') {
+      when { branch 'main' }
+      agent { docker { image 'bitnami/kubectl:1.29.1' } }
+      steps {
+        withCredentials([file(credentialsId: 'staging-kubeconfig', variable: 'KUBECONFIG')]) {
+          sh './deploy.sh staging'
+        }
+      }
+    }
+  }
+}

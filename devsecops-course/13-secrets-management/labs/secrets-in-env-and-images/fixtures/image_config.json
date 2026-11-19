@@ -1,0 +1,20 @@
+{
+  "architecture": "amd64",
+  "os": "linux",
+  "config": {
+    "User": "",
+    "ExposedPorts": {"8080/tcp": {}},
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "APP_ENV=production",
+      "LOG_LEVEL=info",
+      "DB_PASSWORD=CANARY-db-pass-7f3a",
+      "API_TOKEN=CANARY-token-9c1e",
+      "DATABASE_URL=postgres://orders:CANARY-pg-pass@db.example:5432/orders",
+      "SIGNING_KEY_FILE=/run/secrets/signing_key"
+    ],
+    "Entrypoint": ["/app/server"],
+    "WorkingDir": "/app"
+  },
+  "rootfs": {"type": "layers", "diff_ids": ["sha256:0000000000000000000000000000000000000000000000000000000000000001"]}
+}

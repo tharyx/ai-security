@@ -1,0 +1,44 @@
+# YAML DSL that mirrors InSpec concepts. Compare with the Ruby you would write:
+#
+#   control 'ssh-01' do
+#     impact 1.0
+#     title 'SSH root login is disabled'
+#     describe sshd_config do
+#       its('PermitRootLogin') { should cmp 'no' }
+#     end
+#   end
+controls:
+  - id: ssh-01
+    impact: 1.0
+    title: SSH root login is disabled
+    desc: Direct root login removes accountability and is the first target of brute force.
+    tags: {cis: "ssh permit root login", pci: "2.2.6"}
+    describe:
+      - resource: sshd_config
+        its: PermitRootLogin
+        should: {cmp: "no"}
+
+  - id: ssh-02
+    impact: 0.7
+    title: SSH password authentication is disabled
+    tags: {pci: "2.2.7"}
+    describe:
+      - resource: sshd_config
+        its: PasswordAuthentication
+        should: {cmp: "no"}
+
+  - id: ssh-03
+    impact: 0.5
+    title: SSH allows at most 4 authentication attempts
+    describe:
+      - resource: sshd_config
+        its: MaxAuthTries
+        should: {be_lte: 4}
+
+  - id: ssh-04
+    impact: 0.5
+    title: SSH does not offer CBC ciphers
+    describe:
+      - resource: sshd_config
+        its: Ciphers
+        should_not: {match: "cbc"}

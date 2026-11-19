@@ -1,0 +1,9 @@
+{"evt.type": "execve", "evt.dir": "<", "container.id": "c1a2b3", "container.name": "web", "proc.name": "bash", "proc.tty": 34816, "proc.cmdline": "bash", "user.name": "root"}
+{"evt.type": "execve", "evt.dir": "<", "container.id": "host", "container.name": "host", "proc.name": "bash", "proc.tty": 34816, "proc.cmdline": "bash", "user.name": "admin"}
+{"evt.type": "execve", "evt.dir": "<", "container.id": "c1a2b3", "container.name": "web", "proc.name": "sh", "proc.tty": 0, "proc.cmdline": "sh -c healthcheck", "user.name": "app"}
+{"evt.type": "openat", "evt.dir": "<", "evt.is_open_write": true, "evt.is_open_read": false, "container.id": "c1a2b3", "container.name": "web", "proc.name": "vi", "fd.name": "/etc/passwd", "user.name": "root"}
+{"evt.type": "openat", "evt.dir": "<", "evt.is_open_write": true, "evt.is_open_read": false, "container.id": "c1a2b3", "container.name": "web", "proc.name": "apt-get", "fd.name": "/etc/apt/sources.list", "user.name": "root"}
+{"evt.type": "openat", "evt.dir": "<", "evt.is_open_write": false, "evt.is_open_read": true, "container.id": "c1a2b3", "container.name": "web", "proc.name": "cat", "fd.name": "/etc/shadow", "user.name": "root"}
+{"evt.type": "openat", "evt.dir": "<", "evt.is_open_write": false, "evt.is_open_read": true, "container.id": "c9z9z9", "container.name": "bastion", "proc.name": "sshd", "fd.name": "/etc/shadow", "user.name": "root"}
+{"evt.type": "connect", "evt.dir": "<", "container.id": "c1a2b3", "container.name": "web", "proc.name": "xmrig-fake", "fd.sip": "203.0.113.50", "fd.sport": 3333, "user.name": "app"}
+{"evt.type": "connect", "evt.dir": "<", "container.id": "c1a2b3", "container.name": "web", "proc.name": "curl", "fd.sip": "198.51.100.7", "fd.sport": 443, "user.name": "app"}

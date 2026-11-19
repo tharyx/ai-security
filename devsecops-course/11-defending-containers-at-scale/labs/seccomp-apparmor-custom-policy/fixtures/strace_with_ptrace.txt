@@ -1,0 +1,5 @@
+execve("/usr/bin/tool", ["tool"], 0x7ffc) = 0
+openat(AT_FDCWD, "/etc/hosts", O_RDONLY) = 3
+ptrace(PTRACE_TRACEME, 0, NULL, NULL) = -1 EPERM
+mount("/dev/sda1", "/mnt", "ext4", 0, NULL) = -1 EPERM
+write(1, "hi", 2) = 2

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Golden image pipeline: Packer template and Ansible role in git, validate, build, scan, gate, approved image</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="1200" height="470" fill="#ffffff"/>
+  <text x="40" y="44" font-size="26" font-weight="700" fill="#0f172a">Golden image pipeline: Packer + Ansible + Docker</text>
+  <text x="40" y="70" font-size="15" fill="#475569">Build once from reviewed code, prove it, promote it. Servers are replaced, not patched by hand.</text>
+
+  <!-- row 1 -->
+  <rect x="40" y="100" width="210" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="145" y="128" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">1. Git (reviewed)</text>
+  <text x="145" y="152" text-anchor="middle" font-size="13" fill="#0f172a">golden.pkr.hcl</text>
+  <text x="145" y="172" text-anchor="middle" font-size="13" fill="#0f172a">Ansible hardening role</text>
+  <text x="145" y="192" text-anchor="middle" font-size="13" fill="#0f172a">base image pinned by digest</text>
+
+  <rect x="300" y="100" width="210" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="405" y="128" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">2. Static checks</text>
+  <text x="405" y="152" text-anchor="middle" font-size="13" fill="#0f172a">packer validate, template rules</text>
+  <text x="405" y="172" text-anchor="middle" font-size="13" fill="#0f172a">ansible-lint, secrets scan</text>
+  <text x="405" y="192" text-anchor="middle" font-size="13" fill="#0f172a">no secrets in variables</text>
+
+  <rect x="560" y="100" width="250" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="685" y="128" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">3. Packer build</text>
+  <text x="685" y="152" text-anchor="middle" font-size="13" fill="#0f172a">temp builder starts from the base</text>
+  <text x="685" y="172" text-anchor="middle" font-size="13" fill="#0f172a">provisioner "ansible" hardens it</text>
+  <text x="685" y="192" text-anchor="middle" font-size="13" fill="#0f172a">temp builder is destroyed</text>
+
+  <rect x="860" y="100" width="300" height="110" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1010" y="128" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">4. manifest.json</text>
+  <text x="1010" y="152" text-anchor="middle" font-size="13" fill="#0f172a">image id / hash, base ref, playbook hashes</text>
+  <text x="1010" y="172" text-anchor="middle" font-size="13" fill="#0f172a">signed attestation (cosign, in-toto)</text>
+  <text x="1010" y="192" text-anchor="middle" font-size="13" fill="#0f172a">traceable back to the commit</text>
+
+  <path d="M250 155 H298" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M510 155 H558" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M810 155 H858" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- row 2 -->
+  <rect x="860" y="270" width="300" height="110" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1010" y="298" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">5. Prove it</text>
+  <text x="1010" y="322" text-anchor="middle" font-size="13" fill="#0f172a">InSpec / CINC Auditor or OpenSCAP score</text>
+  <text x="1010" y="342" text-anchor="middle" font-size="13" fill="#0f172a">image vulnerability scan</text>
+  <text x="1010" y="362" text-anchor="middle" font-size="13" fill="#0f172a">evidence stored with the build</text>
+
+  <rect x="560" y="270" width="250" height="110" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="685" y="298" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">6. Promotion gate</text>
+  <text x="685" y="322" text-anchor="middle" font-size="13" fill="#0f172a">score at or above threshold</text>
+  <text x="685" y="342" text-anchor="middle" font-size="13" fill="#0f172a">no critical or high vulnerabilities</text>
+  <text x="685" y="362" text-anchor="middle" font-size="13" fill="#0f172a">attestation matches manifest</text>
+
+  <rect x="300" y="270" width="210" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="405" y="298" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">7. Approved image</text>
+  <text x="405" y="322" text-anchor="middle" font-size="13" fill="#0f172a">registry or AMI tagged approved</text>
+  <text x="405" y="342" text-anchor="middle" font-size="13" fill="#0f172a">teams may only deploy these</text>
+
+  <rect x="40" y="270" width="210" height="110" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="145" y="298" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">8. Rebuild on a cadence</text>
+  <text x="145" y="322" text-anchor="middle" font-size="13" fill="#0f172a">new base digest, new CVEs,</text>
+  <text x="145" y="342" text-anchor="middle" font-size="13" fill="#0f172a">monthly or on advisory</text>
+
+  <path d="M1010 210 V268" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M860 325 H812" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M560 325 H512" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M300 325 H252" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M145 268 V212" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+
+  <text x="40" y="425" font-size="14" fill="#0f172a">BLOCK path: any failed check stops promotion and the finding goes back to the owner of the template or the role.</text>
+  <text x="40" y="447" font-size="14" fill="#475569">DBA analogy: this is a gold master database template that is cloned, never edited in place.</text>
+</svg>

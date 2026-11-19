@@ -1,0 +1,7 @@
+# path  mode   (r read, w write, ix execute inheriting profile)
+/app/**               r
+/usr/bin/python3.12   ix
+/usr/lib/python3/**   r
+/etc/ssl/certs/**     r
+/tmp/**               rw
+/var/log/app/*.log    w

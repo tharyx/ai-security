@@ -1,0 +1,20 @@
+{
+  "host": {
+    "docker_partition_separate": true,
+    "auditd_watches": [],
+    "docker_group_members": ["alice", "jenkins", "intern"],
+    "approved_docker_users": ["alice", "jenkins"]
+  },
+  "files": {
+    "/usr/lib/systemd/system/docker.service": {"owner": "root:root", "mode": "0644"},
+    "/var/run/docker.sock": {"owner": "root:docker", "mode": "0666"},
+    "/etc/docker/daemon.json": {"owner": "root:root", "mode": "0644"}
+  },
+  "daemon": {"hosts": ["fd://", "tcp://0.0.0.0:2375"], "log-driver": "json-file"},
+  "containers": [
+    {"Name": "/jenkins-agent", "Config": {"User": "root", "Healthcheck": null},
+     "HostConfig": {"Privileged": true, "CapAdd": ["ALL"], "Memory": 0, "CpuShares": 0, "PidsLimit": 0,
+                    "ReadonlyRootfs": false, "SecurityOpt": null, "PidMode": "", "NetworkMode": "bridge",
+                    "Binds": ["/var/run/docker.sock:/var/run/docker.sock"], "RestartPolicy": {"Name": "always"}, "Devices": []}}
+  ]
+}

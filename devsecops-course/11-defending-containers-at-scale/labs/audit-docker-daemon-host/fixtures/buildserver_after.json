@@ -1,0 +1,21 @@
+{
+  "host": {
+    "docker_partition_separate": true,
+    "auditd_watches": ["/usr/bin/dockerd", "/var/lib/docker", "/etc/docker"],
+    "docker_group_members": ["alice", "jenkins"],
+    "approved_docker_users": ["alice", "jenkins"]
+  },
+  "files": {
+    "/usr/lib/systemd/system/docker.service": {"owner": "root:root", "mode": "0644"},
+    "/var/run/docker.sock": {"owner": "root:docker", "mode": "0660"},
+    "/etc/docker/daemon.json": {"owner": "root:root", "mode": "0644"}
+  },
+  "daemon": {"hosts": ["fd://"], "icc": false, "userns-remap": "default", "log-driver": "syslog",
+             "live-restore": true, "userland-proxy": false, "no-new-privileges": true},
+  "containers": [
+    {"Name": "/builder", "Config": {"User": "10001", "Healthcheck": {"Test": ["CMD", "true"]}},
+     "HostConfig": {"Privileged": false, "CapAdd": null, "Memory": 1073741824, "CpuShares": 1024, "PidsLimit": 512,
+                    "ReadonlyRootfs": true, "SecurityOpt": ["no-new-privileges", "apparmor=docker-default"], "PidMode": "",
+                    "NetworkMode": "bridge", "Binds": null, "RestartPolicy": {"Name": "on-failure"}, "Devices": []}}
+  ]
+}

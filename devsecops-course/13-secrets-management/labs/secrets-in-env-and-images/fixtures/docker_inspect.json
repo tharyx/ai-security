@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "3f2a9c0d41b7e8a65d0c1f2e3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+    "Name": "/api",
+    "Config": {
+      "Image": "registry.example/shop/api:1.4.2",
+      "Env": [
+        "PATH=/usr/local/bin:/usr/bin:/bin",
+        "APP_ENV=production",
+        "REDIS_PASSWORD=CANARY-redis-4d2b",
+        "STRIPE_SECRET=CANARY-pay-secret-81aa",
+        "FEATURE_FLAGS=beta"
+      ],
+      "Cmd": ["/app/server"],
+      "Labels": {"com.example.team": "payments"}
+    },
+    "HostConfig": {
+      "Binds": ["/srv/shop/.env:/app/.env:ro", "/srv/shop/tls/server.pem:/etc/tls/server.pem:ro"],
+      "Privileged": false
+    },
+    "Mounts": [
+      {"Type": "bind", "Source": "/srv/shop/.env", "Destination": "/app/.env", "Mode": "ro", "RW": false},
+      {"Type": "bind", "Source": "/srv/shop/tls/server.pem", "Destination": "/etc/tls/server.pem", "Mode": "ro", "RW": false}
+    ]
+  }
+]

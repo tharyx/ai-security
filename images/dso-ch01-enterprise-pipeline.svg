@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="560" viewBox="0 0 1240 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Enterprise DevSecOps pipeline with security gates</title>
+<desc>Ten stages from secrets scanning to monitoring, each with a tool and a gate decision.</desc>
+<defs><marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker></defs>
+<rect width="1240" height="560" fill="#ffffff"/>
+<text x="40" y="44" font-size="22" font-weight="700" fill="#0f172a" text-anchor="start">Enterprise DevSecOps pipeline: ten stages, each one a gate or a feedback loop</text>
+<text x="40" y="70" font-size="14" font-weight="400" fill="#475569" text-anchor="start">Left to right = time. Cheap, fast checks first; slow, deep checks later. Findings flow to one vulnerability manager.</text>
+<rect x="40" y="120" width="108" height="130" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="94.0" y="174.2" font-size="12" font-weight="700" fill="#7f1d1d" text-anchor="middle">1 Secrets</text>
+<text x="94.0" y="189.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">gitleaks /</text>
+<text x="94.0" y="204.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">TruffleHog</text>
+<text x="94.0" y="270" font-size="11" font-weight="700" fill="#7f1d1d" text-anchor="middle">any = fail</text>
+<rect x="160" y="120" width="108" height="130" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="214.0" y="174.2" font-size="12" font-weight="700" fill="#7f1d1d" text-anchor="middle">2 SCA</text>
+<text x="214.0" y="189.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">npm audit /</text>
+<text x="214.0" y="204.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">osv-scanner</text>
+<text x="214.0" y="270" font-size="11" font-weight="700" fill="#7f1d1d" text-anchor="middle">high = fail</text>
+<line x1="148" y1="185" x2="160" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="280" y="120" width="108" height="130" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="334.0" y="174.2" font-size="12" font-weight="700" fill="#7f1d1d" text-anchor="middle">3 SAST</text>
+<text x="334.0" y="189.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">Semgrep /</text>
+<text x="334.0" y="204.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">CodeQL</text>
+<text x="334.0" y="270" font-size="11" font-weight="700" fill="#7f1d1d" text-anchor="middle">high = fail</text>
+<line x1="268" y1="185" x2="280" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="400" y="120" width="108" height="130" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="454.0" y="174.2" font-size="12" font-weight="700" fill="#1e3a8a" text-anchor="middle">4 Build</text>
+<text x="454.0" y="189.2" font-size="12" font-weight="400" fill="#1e3a8a" text-anchor="middle">reproducible,</text>
+<text x="454.0" y="204.2" font-size="12" font-weight="400" fill="#1e3a8a" text-anchor="middle">locked deps</text>
+<text x="454.0" y="270" font-size="11" font-weight="700" fill="#1e3a8a" text-anchor="middle">artifact + SBOM</text>
+<line x1="388" y1="185" x2="400" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="520" y="120" width="108" height="130" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="574.0" y="174.2" font-size="12" font-weight="700" fill="#7f1d1d" text-anchor="middle">5 Image scan</text>
+<text x="574.0" y="189.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">Trivy /</text>
+<text x="574.0" y="204.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">Grype</text>
+<text x="574.0" y="270" font-size="11" font-weight="700" fill="#7f1d1d" text-anchor="middle">crit = fail</text>
+<line x1="508" y1="185" x2="520" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="640" y="120" width="108" height="130" rx="8" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="694.0" y="174.2" font-size="12" font-weight="700" fill="#581c87" text-anchor="middle">6 Sign</text>
+<text x="694.0" y="189.2" font-size="12" font-weight="400" fill="#581c87" text-anchor="middle">cosign /</text>
+<text x="694.0" y="204.2" font-size="12" font-weight="400" fill="#581c87" text-anchor="middle">Notation</text>
+<text x="694.0" y="270" font-size="11" font-weight="700" fill="#581c87" text-anchor="middle">no sig = no deploy</text>
+<line x1="628" y1="185" x2="640" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="760" y="120" width="108" height="130" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="814.0" y="174.2" font-size="12" font-weight="700" fill="#7f1d1d" text-anchor="middle">7 DAST</text>
+<text x="814.0" y="189.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">ZAP baseline</text>
+<text x="814.0" y="204.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">on staging</text>
+<text x="814.0" y="270" font-size="11" font-weight="700" fill="#7f1d1d" text-anchor="middle">high = fail</text>
+<line x1="748" y1="185" x2="760" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="880" y="120" width="108" height="130" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="934.0" y="174.2" font-size="12" font-weight="700" fill="#7f1d1d" text-anchor="middle">8 IaC +</text>
+<text x="934.0" y="189.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">compliance</text>
+<text x="934.0" y="204.2" font-size="12" font-weight="400" fill="#7f1d1d" text-anchor="middle">Checkov, InSpec</text>
+<text x="934.0" y="270" font-size="11" font-weight="700" fill="#7f1d1d" text-anchor="middle">policy = fail</text>
+<line x1="868" y1="185" x2="880" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="1000" y="120" width="108" height="130" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+<text x="1054.0" y="174.2" font-size="12" font-weight="700" fill="#064e3b" text-anchor="middle">9 Deploy</text>
+<text x="1054.0" y="189.2" font-size="12" font-weight="400" fill="#064e3b" text-anchor="middle">blue/green,</text>
+<text x="1054.0" y="204.2" font-size="12" font-weight="400" fill="#064e3b" text-anchor="middle">approval</text>
+<text x="1054.0" y="270" font-size="11" font-weight="700" fill="#064e3b" text-anchor="middle">auto rollback</text>
+<line x1="988" y1="185" x2="1000" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="1120" y="120" width="108" height="130" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="1174.0" y="174.2" font-size="12" font-weight="700" fill="#134e4a" text-anchor="middle">10 Monitor</text>
+<text x="1174.0" y="189.2" font-size="12" font-weight="400" fill="#134e4a" text-anchor="middle">Falco, logs,</text>
+<text x="1174.0" y="204.2" font-size="12" font-weight="400" fill="#134e4a" text-anchor="middle">alerts</text>
+<text x="1174.0" y="270" font-size="11" font-weight="700" fill="#134e4a" text-anchor="middle">feeds backlog</text>
+<line x1="1108" y1="185" x2="1120" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="40" y="320" width="1160" height="56" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="620.0" y="352.9" font-size="14" font-weight="700" fill="#475569" text-anchor="middle">Developer feedback: results appear in the merge request, not in a PDF a month later</text>
+<rect x="40" y="395" width="560" height="70" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="320.0" y="426.55" font-size="13" font-weight="700" fill="#78350f" text-anchor="middle">Vulnerability manager (e.g. DefectDojo)</text>
+<text x="320.0" y="442.55" font-size="13" font-weight="400" fill="#78350f" text-anchor="middle">dedup, SLA, waivers with expiry, tickets</text>
+<rect x="640" y="395" width="560" height="70" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="920.0" y="426.55" font-size="13" font-weight="700" fill="#134e4a" text-anchor="middle">Security as Code repo</text>
+<text x="920.0" y="442.55" font-size="13" font-weight="400" fill="#134e4a" text-anchor="middle">policies, rules, thresholds: reviewed like code</text>
+<line x1="94.0" y1="280" x2="320" y2="395" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<line x1="214.0" y1="280" x2="332" y2="395" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<line x1="334.0" y1="280" x2="344" y2="395" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<line x1="574.0" y1="280" x2="368" y2="395" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<line x1="814.0" y1="280" x2="392" y2="395" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<line x1="934.0" y1="280" x2="404" y2="395" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<text x="40" y="505" font-size="12" font-weight="400" fill="#475569" text-anchor="start">Legend: red = blocking security gate, blue = build, purple = trust, green = release, teal = feedback.</text>
+<text x="40" y="525" font-size="12" font-weight="400" fill="#475569" text-anchor="start">Tool names are examples. Pick maintained tools and pin their versions.</text>
+</svg>

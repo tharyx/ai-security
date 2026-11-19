@@ -1,0 +1,13 @@
+{
+  "note": "What the running app answers on its test environment (input for the fake DAST tool).",
+  "tls": "1.3",
+  "headers": {
+    "X-Content-Type-Options": "nosniff",
+    "Strict-Transport-Security": "max-age=31536000",
+    "Server": "Express"
+  },
+  "cookies": [
+    {"name": "sid", "httponly": true, "secure": true, "samesite": "Lax"}
+  ],
+  "paths_exposed": ["/", "/login", "/healthz"]
+}

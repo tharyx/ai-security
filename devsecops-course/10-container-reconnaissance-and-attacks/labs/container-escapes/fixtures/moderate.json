@@ -1,0 +1,4 @@
+{"Name": "/metrics", "Config": {"Image": "metrics/agent:1", "User": "1000"},
+ "HostConfig": {"Privileged": false, "CapAdd": ["NET_ADMIN"], "PidMode": "host", "NetworkMode": "bridge", "IpcMode": "",
+                "Binds": ["/proc:/host/proc:ro"], "SecurityOpt": null},
+ "_setuid_files": ["/usr/bin/sudo"]}

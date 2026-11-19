@@ -1,0 +1,21 @@
+{
+  "hostname": "base-image-build-01",
+  "packages": {"openssh-server": "9.2", "telnet": "0.17", "rsh-server": "0.17", "bash": "5.2"},
+  "files": {
+    "/etc/ssh/sshd_config": {
+      "content": "#PermitRootLogin prohibit-password\nPermitRootLogin yes\nPasswordAuthentication yes\nMaxAuthTries 6\nX11Forwarding yes\nSubsystem sftp /usr/lib/openssh/sftp-server",
+      "mode": "0644", "owner": "root"
+    },
+    "/etc/shadow": {"content": "", "mode": "0644", "owner": "root"},
+    "/etc/passwd": {"content": "", "mode": "0644", "owner": "root"}
+  },
+  "sysctl": {"net.ipv4.ip_forward": "1", "net.ipv4.conf.all.accept_redirects": "1", "kernel.randomize_va_space": "1"},
+  "users": {
+    "root": {"uid": 0, "shell": "/bin/bash"},
+    "guest": {"uid": 1001, "shell": "/bin/bash"},
+    "toor": {"uid": 0, "shell": "/bin/bash"},
+    "appsvc": {"uid": 998, "shell": "/bin/bash"},
+    "backup": {"uid": 997, "shell": "/bin/sh"}
+  },
+  "services": {"sshd": {"enabled": true, "running": true}}
+}

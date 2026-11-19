@@ -1,0 +1,2 @@
+{"hosts": ["fd://", "tcp://10.0.0.5:2376"], "userns-remap": "default",
+ "tlsverify": true, "tlscacert": "/etc/docker/ca.pem", "tlscert": "/etc/docker/server.pem", "tlskey": "/etc/docker/server-key.pem"}

@@ -1,0 +1,42 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "lodash": {
+      "name": "lodash",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        {"source": 1000001, "name": "lodash", "dependency": "lodash", "title": "Prototype pollution in merge helpers",
+         "url": "https://advisories.example/1000001", "severity": "high", "cwe": ["CWE-1321"], "range": "<4.17.21"}
+      ],
+      "effects": [],
+      "range": "<4.17.21",
+      "nodes": ["node_modules/lodash"],
+      "fixAvailable": {"name": "lodash", "version": "4.17.21", "isSemVerMajor": false}
+    },
+    "mkdirp": {
+      "name": "mkdirp",
+      "severity": "medium",
+      "isDirect": false,
+      "via": ["minimist"],
+      "effects": [],
+      "range": "0.4.1 - 0.5.1",
+      "nodes": ["node_modules/mkdirp"],
+      "fixAvailable": true
+    },
+    "minimist": {
+      "name": "minimist",
+      "severity": "medium",
+      "isDirect": false,
+      "via": [
+        {"source": 1000002, "name": "minimist", "dependency": "minimist", "title": "Prototype pollution in argument parsing",
+         "url": "https://advisories.example/1000002", "severity": "medium", "cwe": ["CWE-1321"], "range": "<1.2.6"}
+      ],
+      "effects": ["mkdirp"],
+      "range": "<1.2.6",
+      "nodes": ["node_modules/minimist"],
+      "fixAvailable": true
+    }
+  },
+  "metadata": {"vulnerabilities": {"info": 0, "low": 0, "moderate": 2, "high": 1, "critical": 0, "total": 3}}
+}

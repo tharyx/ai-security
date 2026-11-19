@@ -1,0 +1,38 @@
+---
+# HEDGED mapping from task tags to PCI DSS v4.0.1 requirement numbers.
+# direct     = the task implements the technical part of that requirement for a Linux host
+# supporting = it helps or provides evidence, but the requirement also needs policy, process or other controls
+# Always confirm the numbering and wording in the PCI SSC document library and with your QSA.
+version: "PCI DSS v4.0.1 (verify at source)"
+catalogue:
+  "2.2.1": "Configuration standards are defined and applied to system components"
+  "2.2.2": "Vendor default accounts are managed (changed, removed or disabled)"
+  "2.2.4": "Only necessary services, protocols, daemons and functions are enabled"
+  "2.2.5": "Insecure services, protocols or daemons are justified and mitigated"
+  "2.2.6": "System security parameters are configured to prevent misuse"
+  "2.2.7": "Non-console administrative access is encrypted with strong cryptography"
+  "5.2.1": "Anti-malware solution deployed on system components at risk"
+  "6.3.3": "Security patches installed within the defined time frames"
+  "7.2.1": "Access control model defined (need to know, least privilege)"
+  "8.2.6": "Inactive user accounts removed or disabled within 90 days"
+  "8.3.4": "Account lockout after a limited number of invalid attempts"
+  "8.3.6": "Password minimum length and complexity (length 12 where supported)"
+  "10.2.1": "Audit logs are enabled and active for all system components"
+  "10.2.1.2": "Audit logs capture all actions taken by administrative access"
+  "10.6.1": "System clocks and time are synchronised using time-synchronisation technology"
+  "11.5.2": "A change-detection mechanism (for example file integrity monitoring) is deployed"
+mappings:
+  ssh_root_login:        [{req: "2.2.6", strength: direct}, {req: "8.2.6", strength: supporting}]
+  ssh_strong_crypto:     [{req: "2.2.7", strength: direct}]
+  ssh_max_auth_tries:    [{req: "8.3.4", strength: supporting}]
+  pam_lockout:           [{req: "8.3.4", strength: direct}]
+  pam_pwquality_minlen:  [{req: "8.3.6", strength: direct}]
+  remove_insecure_pkgs:  [{req: "2.2.4", strength: direct}, {req: "2.2.5", strength: direct}]
+  sysctl_network:        [{req: "2.2.6", strength: direct}]
+  auditd_enable:         [{req: "10.2.1", strength: direct}]
+  audit_admin_actions:   [{req: "10.2.1.2", strength: direct}, {req: "10.2.1", strength: supporting}]
+  time_sync:             [{req: "10.6.1", strength: direct}]
+  remove_default_accounts: [{req: "2.2.2", strength: direct}]
+  inactive_lock:         [{req: "8.2.6", strength: direct}]
+  auto_security_updates: [{req: "6.3.3", strength: supporting}]
+  # 'convenience' is deliberately unmapped

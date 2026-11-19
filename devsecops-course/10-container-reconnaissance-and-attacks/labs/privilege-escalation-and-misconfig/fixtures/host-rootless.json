@@ -1,0 +1,6 @@
+{
+  "daemon": {"rootless": true, "userns_remap": false, "tls_on_tcp": true, "log_driver": "json-file", "content_trust_alternative": true},
+  "socket": {"path": "/run/user/1000/docker.sock", "owner": "alice", "group": "docker", "mode": "660"},
+  "users": [{"name": "alice", "groups": ["alice", "docker"]}],
+  "containers": []
+}

@@ -1,0 +1,43 @@
+openapi: 3.0.3
+info:
+  title: Demo Orders API
+  version: "1.0"
+servers:
+  - url: http://127.0.0.1:8080   # replaced at run time by the local mock port
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /api/v1/login:
+    post:
+      summary: Get a bearer token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: {type: string}
+                password: {type: string}
+      responses:
+        "200": {description: token}
+  /api/v1/products:
+    get:
+      summary: Search products
+      security: [{bearerAuth: []}]
+      parameters:
+        - {name: search, in: query, required: false, schema: {type: string}}
+      responses:
+        "200": {description: list}
+  /api/v1/orders/{orderId}:
+    get:
+      summary: Read one order
+      security: [{bearerAuth: []}]
+      parameters:
+        - {name: orderId, in: path, required: true, schema: {type: integer}}
+      responses:
+        "200": {description: order}
+        "403": {description: not yours}

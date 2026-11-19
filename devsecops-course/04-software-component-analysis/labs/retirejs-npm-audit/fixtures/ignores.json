@@ -1,0 +1,5 @@
+[
+  {"id": "DSO-OSV-0003", "package": "tinyparse", "reason": "dev-only tool, never processes user input", "expires": "2027-06-30"},
+  {"id": "DSO-OSV-0004", "package": "chartlet", "reason": "tooltips disabled in our build", "expires": "2026-01-31"},
+  {"id": "DSO-OSV-0001", "package": "fakequery", "reason": "", "expires": "2027-06-30"}
+]

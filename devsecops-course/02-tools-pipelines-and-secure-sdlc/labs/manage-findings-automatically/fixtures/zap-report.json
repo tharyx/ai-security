@@ -1,0 +1,60 @@
+{
+  "@programName": "ZAP",
+  "@version": "2.14.0",
+  "site": [
+    {
+      "@name": "http://test.example:3000",
+      "alerts": [
+        {
+          "pluginid": "40018",
+          "alertRef": "40018",
+          "name": "SQL Injection",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "cweid": "89",
+          "solution": "Use parameterised queries.",
+          "instances": [
+            {"uri": "http://test.example:3000/api/orders?id=1", "method": "GET", "param": "id"},
+            {"uri": "http://test.example:3000/api/orders?id=2", "method": "GET", "param": "id"}
+          ]
+        },
+        {
+          "pluginid": "10038",
+          "alertRef": "10038-1",
+          "name": "Content Security Policy (CSP) Header Not Set",
+          "riskcode": "2",
+          "confidence": "3",
+          "riskdesc": "Medium (High)",
+          "cweid": "693",
+          "solution": "Set a Content-Security-Policy header.",
+          "instances": [
+            {"uri": "http://test.example:3000/", "method": "GET"},
+            {"uri": "http://test.example:3000/login", "method": "GET"}
+          ]
+        },
+        {
+          "pluginid": "10036",
+          "alertRef": "10036",
+          "name": "Server Leaks Version Information via Server HTTP Response Header",
+          "riskcode": "1",
+          "confidence": "3",
+          "riskdesc": "Low (High)",
+          "cweid": "200",
+          "solution": "Remove or genericise the Server header.",
+          "instances": [{"uri": "http://test.example:3000/", "method": "GET"}]
+        },
+        {
+          "pluginid": "10109",
+          "alertRef": "10109",
+          "name": "Modern Web Application",
+          "riskcode": "0",
+          "confidence": "2",
+          "riskdesc": "Informational (Medium)",
+          "cweid": "-1",
+          "instances": [{"uri": "http://test.example:3000/", "method": "GET"}]
+        }
+      ]
+    }
+  ]
+}

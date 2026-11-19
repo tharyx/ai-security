@@ -1,0 +1,50 @@
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    networks: [frontend]
+  api:
+    build: ./api
+    environment:
+      DB_PASSWORD: canary-not-a-real-password
+      DB_HOST: db
+    depends_on:
+      - db
+      - cache
+    ports:
+      - "127.0.0.1:3000:3000"
+    healthcheck:
+      test: ["CMD", "true"]
+    networks: [frontend, backend]
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.5"
+  db:
+    image: postgres:16.4@sha256:1111111111111111111111111111111111111111111111111111111111111111
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks: [backend]
+    user: "999"
+    read_only: true
+    cap_drop: [ALL]
+  cache:
+    image: redis:7
+    network_mode: host
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  debug:
+    image: busybox:1.36
+    cap_add: [SYS_ADMIN]
+
+volumes:
+  dbdata: {}
+networks:
+  frontend: {}
+  backend: {}

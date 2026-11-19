@@ -1,0 +1,37 @@
+# .travis.yml (fixture). The SAME secure pipeline, Travis CI syntax.
+# Travis is LEGACY for most open-source teams (see the lesson). Kept here because the syllabus lists it.
+language: minimal
+os: linux
+dist: jammy
+services: [docker]
+
+env:
+  global:
+    # encrypted with `travis encrypt` (ciphertext placeholder, not a real value)
+    - secure: "ENCRYPTED-PLACEHOLDER-do-not-use"
+
+stages: [secrets, sca, sast, build, image-scan, dast, deploy]
+
+jobs:
+  include:
+    - stage: secrets
+      script: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.18.2 detect --source /repo --no-banner
+    - stage: sca
+      language: node_js
+      node_js: "20"
+      script:
+        - npm ci --ignore-scripts
+        - npm audit --audit-level=high
+    - stage: sast
+      script: docker run --rm -v "$PWD:/src" semgrep/semgrep:1.56.0 semgrep scan --config p/owasp-top-ten --error /src
+    - stage: build
+      script: docker build -t webshop:$TRAVIS_COMMIT .
+    - stage: image-scan
+      script: docker run --rm aquasec/trivy:0.49.1 trivy image --exit-code 1 --severity HIGH,CRITICAL webshop:$TRAVIS_COMMIT
+    - stage: dast
+      script:
+        - docker run -d --name app -p 3000:3000 webshop:$TRAVIS_COMMIT
+        - docker run --rm --network host ghcr.io/zaproxy/zaproxy:2.14.0 zap-baseline.py -t http://127.0.0.1:3000 -I
+    - stage: deploy
+      if: branch = main
+      script: ./deploy.sh staging

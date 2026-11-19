@@ -1,0 +1,30 @@
+---
+hardening_packages_present:
+  - auditd
+  - chrony
+hardening_packages_absent:
+  - telnet
+  - rsh-server
+  - talk
+sshd_settings:
+  - {key: PermitRootLogin, value: "no"}
+  - {key: PasswordAuthentication, value: "no"}
+  - {key: MaxAuthTries, value: "4"}
+  - {key: X11Forwarding, value: "no"}
+  - {key: ClientAliveInterval, value: "300"}
+sysctl_settings:
+  - {key: net.ipv4.ip_forward, value: "0"}
+  - {key: net.ipv4.conf.all.accept_redirects, value: "0"}
+  - {key: net.ipv4.tcp_syncookies, value: "1"}
+  - {key: kernel.randomize_va_space, value: "2"}
+  - {key: kernel.dmesg_restrict, value: "1"}
+audit_rules:
+  - "-w /etc/passwd -p wa -k identity"
+  - "-w /etc/shadow -p wa -k identity"
+  - "-w /etc/sudoers -p wa -k scope"
+users_to_remove:
+  - guest
+  - toor
+service_accounts:
+  - appsvc
+  - backup

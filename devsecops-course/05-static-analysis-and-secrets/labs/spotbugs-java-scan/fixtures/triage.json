@@ -1,0 +1,18 @@
+{
+  "exclude_paths": ["src/test/", "generated/"],
+  "include_categories": ["SECURITY"],
+  "decisions": {
+    "HARD_CODE_PASSWORD|com.acme.shop.config.DbConfig|<clinit>": {
+      "status": "false_positive",
+      "reason": "value is the literal 'changeme-at-deploy' placeholder; the real secret is injected at runtime",
+      "owner": "platform-team",
+      "expires": "2027-06-30"
+    },
+    "PREDICTABLE_RANDOM|com.acme.shop.auth.TokenFactory|next": {
+      "status": "accepted",
+      "reason": "used for UI request ids only, never for authentication tokens (ticket SEC-142)",
+      "owner": "appsec",
+      "expires": "2026-03-31"
+    }
+  }
+}

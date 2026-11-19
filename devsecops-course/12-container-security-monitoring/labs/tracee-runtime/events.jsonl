@@ -1,0 +1,10 @@
+{"timestamp": 1000, "eventName": "sched_process_exec", "processName": "bash", "containerId": "c1", "args": [{"name": "pathname", "value": "/bin/bash"}]}
+{"timestamp": 1001, "eventName": "security_file_open", "processName": "curl", "containerId": "c1", "args": [{"name": "pathname", "value": "/tmp/.cache/kworker"}, {"name": "flags", "value": "O_CREAT|O_WRONLY"}]}
+{"timestamp": 1002, "eventName": "sched_process_exec", "processName": "bash", "containerId": "c1", "args": [{"name": "pathname", "value": "/tmp/.cache/kworker"}]}
+{"timestamp": 1003, "eventName": "ptrace", "processName": "kworker", "containerId": "c1", "args": [{"name": "request", "value": "PTRACE_TRACEME"}]}
+{"timestamp": 1004, "eventName": "security_file_open", "processName": "sh", "containerId": "c1", "args": [{"name": "pathname", "value": "/sys/fs/cgroup/rdma/x/release_agent"}, {"name": "flags", "value": "O_WRONLY"}]}
+{"timestamp": 1005, "eventName": "mount", "processName": "mount", "containerId": "c1", "args": [{"name": "dev_name", "value": "/dev/sda1"}, {"name": "path", "value": "/mnt/host"}]}
+{"timestamp": 1006, "eventName": "sched_process_exec", "processName": "nsenter", "containerId": "c1", "args": [{"name": "pathname", "value": "/usr/bin/nsenter"}, {"name": "argv", "value": ["nsenter", "--target", "1", "--mount", "sh"]}]}
+{"timestamp": 1007, "eventName": "security_file_open", "processName": "vim", "args": [{"name": "pathname", "value": "/tmp/notes.sh"}, {"name": "flags", "value": "O_WRONLY"}]}
+{"timestamp": 1008, "eventName": "sched_process_exec", "processName": "bash", "args": [{"name": "pathname", "value": "/tmp/notes.sh"}]}
+{"timestamp": 1009, "eventName": "sched_process_exec", "processName": "python3", "containerId": "c2", "args": [{"name": "pathname", "value": "/usr/bin/python3"}]}

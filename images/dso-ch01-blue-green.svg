@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Blue/green deployment with rollback</title>
+<desc>A router sends users to the live environment. The new version is deployed to the idle environment, health checked, then the router flips. Rollback flips back.</desc>
+<defs><marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker></defs>
+<rect width="1100" height="520" fill="#ffffff"/>
+<text x="40" y="44" font-size="24" font-weight="700" fill="#0f172a" text-anchor="start">Blue/green deployment</text>
+<text x="40" y="70" font-size="14" font-weight="400" fill="#475569" text-anchor="start">Two identical environments. Users stay on the live one while the idle one is prepared and tested.</text>
+<text x="40" y="118" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="start">1. Before: users on blue, green is idle</text>
+<rect x="60" y="135" width="150" height="54" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="135.0" y="166.55" font-size="13" font-weight="700" fill="#475569" text-anchor="middle">Users</text>
+<rect x="300" y="135" width="160" height="54" rx="8" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="380.0" y="166.55" font-size="13" font-weight="700" fill="#581c87" text-anchor="middle">Router / LB</text>
+<rect x="580" y="135" width="200" height="54" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="680.0" y="158.55" font-size="13" font-weight="700" fill="#1e3a8a" text-anchor="middle">BLUE (live)</text>
+<text x="680.0" y="174.55" font-size="13" font-weight="400" fill="#1e3a8a" text-anchor="middle">v1.4</text>
+<rect x="580" y="205" width="200" height="54" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="680.0" y="228.55" font-size="13" font-weight="700" fill="#475569" text-anchor="middle">GREEN (idle)</text>
+<text x="680.0" y="244.55" font-size="13" font-weight="400" fill="#475569" text-anchor="middle">empty or old</text>
+<line x1="210" y1="162" x2="300" y2="162" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="460" y1="162" x2="580" y2="162" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<text x="820" y="150" font-size="12" font-weight="400" fill="#475569" text-anchor="start">database: shared, so schema</text>
+<text x="820" y="168" font-size="12" font-weight="400" fill="#475569" text-anchor="start">changes must work for BOTH</text>
+<text x="820" y="186" font-size="12" font-weight="400" fill="#475569" text-anchor="start">versions (expand, then contract)</text>
+<text x="40" y="300" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="start">2. Deploy v1.5 to green, run health checks and smoke tests (no user traffic yet)</text>
+<rect x="580" y="315" width="200" height="54" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="680.0" y="338.55" font-size="13" font-weight="700" fill="#1e3a8a" text-anchor="middle">BLUE (live)</text>
+<text x="680.0" y="354.55" font-size="13" font-weight="400" fill="#1e3a8a" text-anchor="middle">v1.4</text>
+<rect x="580" y="385" width="200" height="54" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="680.0" y="408.55" font-size="13" font-weight="700" fill="#78350f" text-anchor="middle">GREEN (testing)</text>
+<text x="680.0" y="424.55" font-size="13" font-weight="400" fill="#78350f" text-anchor="middle">v1.5 + health checks</text>
+<rect x="300" y="315" width="160" height="54" rx="8" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="380.0" y="346.55" font-size="13" font-weight="700" fill="#581c87" text-anchor="middle">Router / LB</text>
+<line x1="460" y1="342" x2="580" y2="342" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="460" y1="360" x2="580" y2="412" stroke="#475569" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<text x="300" y="405" font-size="12" font-weight="400" fill="#78350f" text-anchor="start">test traffic only</text>
+<text x="40" y="480" font-size="15" font-weight="700" fill="#064e3b" text-anchor="start">3. Flip the router: green is live. Keep blue warm. If errors rise, flip back (rollback in seconds).</text>
+<text x="40" y="505" font-size="12" font-weight="400" fill="#475569" text-anchor="start">Variants: canary = send 5% then 25% then 100% to the new version; rolling = replace instances in small batches.</text>
+</svg>

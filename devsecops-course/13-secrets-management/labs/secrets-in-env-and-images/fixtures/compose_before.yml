@@ -1,0 +1,13 @@
+services:
+  api:
+    image: registry.example/shop/api@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+    environment:
+      DB_PASSWORD: CANARY-db-pass-7f3a
+      API_TOKEN: CANARY-token-9c1e
+      LOG_LEVEL: info
+  worker:
+    image: registry.example/shop/worker@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+    environment:
+      - SMTP_PASSWORD=CANARY-smtp-55aa
+      - QUEUE_URL=amqp://worker:CANARY-mq-pass@mq.example:5672/
+      - CONCURRENCY=4

@@ -1,0 +1,17 @@
+[
+  {"Id": "a1b2c3d4e5f6", "Name": "/shop-web", "Config": {"Image": "nginx:1.27", "User": "101", "Env": ["NGINX_HOST=shop.example"], "ExposedPorts": {"80/tcp": {}}},
+   "HostConfig": {"Privileged": false, "CapAdd": null, "CapDrop": ["ALL"], "Binds": ["/srv/site:/usr/share/nginx/html:ro"], "NetworkMode": "frontend", "ReadonlyRootfs": true, "Memory": 268435456, "PidsLimit": 200, "SecurityOpt": null, "PidMode": "", "IpcMode": "private"},
+   "Mounts": [{"Type": "bind", "Source": "/srv/site", "Destination": "/usr/share/nginx/html", "RW": false}]},
+  {"Id": "b2c3d4e5f6a1", "Name": "/shop-api", "Config": {"Image": "shop/api:latest", "User": "", "Env": ["DB_HOST=shop-db", "DB_PASSWORD=canary-not-real-pw", "API_TOKEN=canary-not-real-token", "LOG_LEVEL=info"], "ExposedPorts": {"3000/tcp": {}}},
+   "HostConfig": {"Privileged": false, "CapAdd": ["NET_ADMIN"], "CapDrop": null, "Binds": ["/var/run/docker.sock:/var/run/docker.sock"], "NetworkMode": "frontend", "ReadonlyRootfs": false, "Memory": 0, "PidsLimit": null, "SecurityOpt": ["seccomp=unconfined"], "PidMode": "", "IpcMode": "private"},
+   "Mounts": [{"Type": "bind", "Source": "/var/run/docker.sock", "Destination": "/var/run/docker.sock", "RW": true}]},
+  {"Id": "c3d4e5f6a1b2", "Name": "/shop-db", "Config": {"Image": "postgres:16.4", "User": "999", "Env": ["POSTGRES_PASSWORD_FILE=/run/secrets/pg"], "ExposedPorts": {"5432/tcp": {}}},
+   "HostConfig": {"Privileged": false, "CapAdd": null, "CapDrop": ["ALL"], "Binds": null, "NetworkMode": "backend", "ReadonlyRootfs": false, "Memory": 536870912, "PidsLimit": 300, "SecurityOpt": null, "PidMode": "", "IpcMode": "private"},
+   "Mounts": [{"Type": "volume", "Name": "pgdata", "Source": "/var/lib/docker/volumes/pgdata/_data", "Destination": "/var/lib/postgresql/data", "RW": true}]},
+  {"Id": "d4e5f6a1b2c3", "Name": "/ops-agent", "Config": {"Image": "ops/agent:2.0", "User": "root", "Env": ["MODE=collect"], "ExposedPorts": {"9100/tcp": {}}},
+   "HostConfig": {"Privileged": true, "CapAdd": null, "CapDrop": null, "Binds": ["/:/host"], "NetworkMode": "host", "ReadonlyRootfs": false, "Memory": 0, "PidsLimit": null, "SecurityOpt": null, "PidMode": "host", "IpcMode": "private"},
+   "Mounts": [{"Type": "bind", "Source": "/", "Destination": "/host", "RW": true}]},
+  {"Id": "e5f6a1b2c3d4", "Name": "/old-batch", "Config": {"Image": "alpine:3.20", "User": "1000", "Env": [], "ExposedPorts": {}},
+   "HostConfig": {"Privileged": false, "CapAdd": null, "CapDrop": null, "Binds": null, "NetworkMode": "bridge", "ReadonlyRootfs": false, "Memory": 0, "PidsLimit": null, "SecurityOpt": null, "PidMode": "", "IpcMode": "private"},
+   "Mounts": []}
+]

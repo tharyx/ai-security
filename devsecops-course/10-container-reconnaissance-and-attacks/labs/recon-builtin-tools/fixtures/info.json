@@ -1,0 +1,5 @@
+{"ServerVersion": "27.3.1-fixture", "Driver": "overlay2", "CgroupVersion": "2", "KernelVersion": "5.15.0-fixture",
+ "SecurityOptions": ["name=apparmor", "name=seccomp,profile=builtin"], "Containers": 5, "ContainersRunning": 4,
+ "LiveRestoreEnabled": false, "Swarm": {"LocalNodeState": "inactive"}, "Runtimes": {"runc": {}}, "DefaultRuntime": "runc",
+ "InsecureRegistryCIDRs": ["127.0.0.0/8", "10.20.0.0/16"], "RegistryConfig": {"IndexConfigs": {"docker.io": {"Secure": true}, "registry.internal:5000": {"Secure": false}}},
+ "ExperimentalBuild": false}

@@ -1,0 +1,10 @@
+{
+  "name": "registry.example.invalid/shop/web:2.1",
+  "config": {"User": "10001", "Env": ["PATH=/usr/bin", "DOCKER_CONTENT_TRUST=1"], "Healthcheck": {"Test": ["CMD", "true"]}},
+  "layers": [
+    {"id": "L1", "created_by": "FROM gcr.io/distroless/python3 (fictional)", "files": [
+      {"path": "usr/bin/python3", "size": 5000000, "mode": "0755"}]},
+    {"id": "L2", "created_by": "COPY app /app", "files": [
+      {"path": "app/main.py", "size": 4100, "mode": "0644", "content": "print('hello v2')\n"}]}
+  ]
+}

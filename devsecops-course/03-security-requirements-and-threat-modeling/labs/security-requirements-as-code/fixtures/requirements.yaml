@@ -1,0 +1,71 @@
+# ASVS-style requirement catalog (FICTIONAL ids; chapter names follow the ASVS 5.0 chapter list,
+# verify exact requirement numbers at owasp.org before citing them in an audit).
+catalog: shop-api
+target_level: 2
+requirements:
+  - id: REQ-AUTH-01
+    title: Passwords are at least 12 characters long
+    asvs_chapter: "V6 Authentication"
+    level: 1
+    threat: "T-01 credential guessing"
+    check: password_min_length
+  - id: REQ-AUTH-02
+    title: New passwords are checked against a breached-password list
+    asvs_chapter: "V6 Authentication"
+    level: 2
+    threat: "T-01 credential guessing"
+    check: breached_password_check
+  - id: REQ-SESS-01
+    title: Session cookies are Secure and HttpOnly
+    asvs_chapter: "V7 Session Management"
+    level: 1
+    threat: "T-02 session theft"
+    check: cookie_flags
+  - id: REQ-SESS-02
+    title: Sessions expire after at most 30 idle minutes
+    asvs_chapter: "V7 Session Management"
+    level: 2
+    threat: "T-02 session theft"
+    check: idle_timeout
+  - id: REQ-COMM-01
+    title: TLS 1.2 or newer only
+    asvs_chapter: "V12 Secure Communication"
+    level: 1
+    threat: "T-03 traffic interception"
+    check: tls_min_version
+  - id: REQ-CFG-01
+    title: Security response headers are set
+    asvs_chapter: "V3 Web Frontend Security"
+    level: 1
+    threat: "T-04 content sniffing and script injection"
+    check: security_headers
+  - id: REQ-LOG-01
+    title: Authentication events are logged and passwords are never logged
+    asvs_chapter: "V16 Security Logging and Error Handling"
+    level: 2
+    threat: "T-05 repudiation"
+    check: auth_logging
+  - id: REQ-AUTHZ-01
+    title: Access is denied by default
+    asvs_chapter: "V8 Authorization"
+    level: 1
+    threat: "T-06 broken access control"
+    check: deny_by_default
+  - id: REQ-CRYPTO-01
+    title: Passwords are stored with a slow password hash
+    asvs_chapter: "V11 Cryptography"
+    level: 1
+    threat: "T-07 offline cracking"
+    check: password_hash
+  - id: REQ-FILE-01
+    title: Uploads have a size limit and a type allow-list
+    asvs_chapter: "V5 File Handling"
+    level: 1
+    threat: "T-08 malicious upload"
+    check: upload_limits        # nobody wrote this check yet: the gate must catch that
+  - id: REQ-MFA-01
+    title: Administrators use multi-factor authentication
+    asvs_chapter: "V6 Authentication"
+    level: 3
+    threat: "T-01 credential guessing"
+    check: admin_mfa            # level 3: out of scope for target_level 2

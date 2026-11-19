@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Transitive dependencies and reachability</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="470" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">Where the vulnerable code is matters</text>
+<text x="40" y="76" font-size="15" fill="#475569">A finding is urgent when attacker data can reach the vulnerable function in YOUR application.</text>
+<rect x="40" y="190" width="170" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="125.0" y="229.5" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Your app</text>
+<rect x="300" y="110" width="200" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="400.0" y="139.0" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">webkit-lite 4.5</text>
+<text x="400.0" y="159.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">direct</text>
+<rect x="300" y="270" width="200" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="400.0" y="299.0" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">tinyutil 1.0</text>
+<text x="400.0" y="319.0" text-anchor="middle" font-size="14" font-weight="400" fill="#1e293b">direct</text>
+<rect x="590" y="110" width="220" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="700.0" y="139.0" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">acme-templ 2.1.0</text>
+<text x="700.0" y="158.0" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">transitive, CVE-style hit</text>
+<line x1="210" y1="215" x2="300" y2="150" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="210" y1="235" x2="300" y2="305" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<line x1="500" y1="145" x2="590" y2="145" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+<text x="545.0" y="137.0" text-anchor="middle" font-size="12" font-weight="400" fill="#475569">pulls in</text>
+<text x="40" y="130" text-anchor="start" font-size="12" font-weight="400" fill="#475569">npm audit and Dependency-Check</text>
+<text x="40" y="148" text-anchor="start" font-size="12" font-weight="400" fill="#475569">show the PATH so you know</text>
+<text x="40" y="166" text-anchor="start" font-size="12" font-weight="400" fill="#475569">which direct dependency to bump</text>
+<rect x="40" y="390" width="540" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="310.0" y="414.0" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">Not reachable: you call yamlish.safe_load(); the flaw is in</text>
+<text x="310.0" y="433.0" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">unsafe_load()</text>
+<rect x="620" y="390" width="550" height="60" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="895.0" y="423.5" text-anchor="middle" font-size="13" font-weight="400" fill="#1e293b">Reachable: you call pdfmake.extract() and the flaw is in extract()</text>
+<text x="880" y="250" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Fix reachable and critical first.</text>
+<text x="880" y="274" text-anchor="middle" font-size="14" font-weight="400" fill="#334155">Still upgrade the rest, on a schedule.</text>
+</svg>

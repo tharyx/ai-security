@@ -1,0 +1,4 @@
+[
+  {"id": "DSO-OSV-0201", "package": "com.example.widget:widgetlib-docs",
+   "reason": "false positive: widgetlib-docs only ships HTML help pages, not the vulnerable class", "expires": "2027-09-30"}
+]

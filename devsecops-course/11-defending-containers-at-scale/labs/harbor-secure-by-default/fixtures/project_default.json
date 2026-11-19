@@ -1,0 +1,3 @@
+{"name": "shop", "public": true, "auto_scan": false, "prevent_vulnerable_severity": "none", "require_signature": false,
+ "members": [{"name": "dev1", "role": "project_admin", "approved": false}],
+ "robots": [{"name": "robot$ci", "permissions": ["push", "pull", "delete"], "expires_days": 0}]}

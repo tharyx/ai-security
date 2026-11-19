@@ -1,0 +1,9 @@
+{
+  "password": {"min_length": 12, "breached_check": true, "hash": "argon2id"},
+  "session": {"cookie_secure": true, "cookie_httponly": true, "idle_timeout_min": 30},
+  "tls": {"min_version": "1.2"},
+  "headers": {"Content-Security-Policy": "default-src 'self'", "X-Content-Type-Options": "nosniff"},
+  "logging": {"log_auth_events": true, "log_passwords": false},
+  "authz": {"deny_by_default": true},
+  "upload": {"max_bytes": 5242880, "allowed_types": ["image/png", "image/jpeg"]}
+}

@@ -1,0 +1,8 @@
+{
+  "password": {"min_length": 8, "breached_check": false, "hash": "md5"},
+  "session": {"cookie_secure": true, "cookie_httponly": false, "idle_timeout_min": 240},
+  "tls": {"min_version": "1.0"},
+  "headers": {"X-Content-Type-Options": "nosniff"},
+  "logging": {"log_auth_events": true, "log_passwords": true},
+  "authz": {"deny_by_default": false}
+}

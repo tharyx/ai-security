@@ -1,0 +1,20 @@
+# A web-app pipeline design (webshop). Types are the security gates the validator knows.
+# This is a design document in YAML, not a runnable GitLab/GitHub file (see ch02 for those).
+name: webshop
+mode: delivery            # delivery = a human approves prod; deployment = fully automatic
+branch: main
+stages:
+  - {id: secrets, type: secrets-scan, blocking: true, fail_on: any}
+  - {id: sca, type: sca, blocking: true, fail_on: high}
+  - {id: sast, type: sast, blocking: true, fail_on: high}
+  - {id: build, type: build}
+  - {id: image-scan, type: image-scan, blocking: true, fail_on: critical}
+  - {id: sign, type: sign, blocking: true}
+  - {id: deploy-staging, type: deploy-staging, strategy: blue-green}
+  - {id: dast, type: dast, blocking: true, fail_on: high}
+  - id: deploy-prod
+    type: deploy-prod
+    strategy: blue-green
+    approval: manual
+    health_check: {path: /healthz, retries: 3}
+    rollback: automatic

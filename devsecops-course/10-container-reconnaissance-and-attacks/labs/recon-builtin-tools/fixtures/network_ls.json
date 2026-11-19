@@ -1,0 +1,7 @@
+[
+  {"ID": "n1", "Name": "bridge", "Driver": "bridge", "Scope": "local", "Containers": ["e5f6a1b2c3d4"], "Options": {"com.docker.network.bridge.enable_icc": "true"}},
+  {"ID": "n2", "Name": "frontend", "Driver": "bridge", "Scope": "local", "Containers": ["a1b2c3d4e5f6", "b2c3d4e5f6a1"], "Options": {}},
+  {"ID": "n3", "Name": "backend", "Driver": "bridge", "Scope": "local", "Containers": ["b2c3d4e5f6a1", "c3d4e5f6a1b2"], "Options": {"com.docker.network.bridge.enable_icc": "true"}},
+  {"ID": "n4", "Name": "host", "Driver": "host", "Scope": "local", "Containers": ["d4e5f6a1b2c3"], "Options": {}},
+  {"ID": "n5", "Name": "none", "Driver": "null", "Scope": "local", "Containers": [], "Options": {}}
+]

@@ -1,0 +1,45 @@
+---
+# BAD fixture: every rule of the linter should fire at least once. Secrets are fake canaries.
+- name: Quick and dirty Docker host
+  hosts: docker_hosts
+  remote_user: root
+  vars:
+    registry_password: SuperSecret-CANARY-1234
+
+  tasks:
+    - name: Install docker
+      apt: name=docker.io state=latest
+
+    - name: Write daemon.json (exposes the API, weak settings)
+      copy:
+        dest: /etc/docker/daemon.json
+        content: '{"hosts": ["tcp://0.0.0.0:2375"], "insecure-registries": ["reg.example:5000"]}'
+        mode: "0777"
+
+    - name: Log in to the registry
+      community.docker.docker_login:
+        registry_url: registry.example
+        username: deploy
+        password: "{{ registry_password }}"
+
+    - name: Run nginx
+      community.docker.docker_container:
+        name: web
+        image: nginx:latest
+
+    - name: Run the API with a mutable tag
+      community.docker.docker_container:
+        name: api
+        image: registry.example/shop/api:1.4.2
+
+    - name: Tune the kernel
+      shell: echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf
+
+    - name: Fetch a tool
+      get_url:
+        url: http://dl.example/tool.tgz
+        dest: /opt/tool.tgz
+        validate_certs: false
+
+    - name: Install curl the hard way
+      shell: apt-get install -y curl

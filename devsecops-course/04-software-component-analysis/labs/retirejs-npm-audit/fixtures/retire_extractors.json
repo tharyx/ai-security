@@ -1,0 +1,13 @@
+{
+  "_comment": "RetireJS-style repository: how to recognise a library from a file name or its content. The version placeholder is replaced by a dotted-number pattern. Names are FICTIONAL.",
+  "fakequery": {
+    "npm": "fakequery",
+    "filename": ["fakequery[-.](§§version§§)(?:\\.min)?\\.js"],
+    "filecontent": ["/\\*[!*]?[\\s*]*FakeQuery v(§§version§§)"]
+  },
+  "chartlet": {
+    "npm": "chartlet",
+    "filename": ["chartlet[-.](§§version§§)(?:\\.min)?\\.js"],
+    "filecontent": ["/\\*[!*]?[\\s*]*Chartlet v(§§version§§)"]
+  }
+}

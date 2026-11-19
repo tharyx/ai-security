@@ -1,0 +1,25 @@
+# ZAP Automation Framework context: FORM-based authentication (cookie session)
+env:
+  contexts:
+    - name: app-form
+      urls: ["{{base}}"]
+      includePaths: ["{{base}}/.*"]
+      excludePaths: ["{{base}}/logout.*"]
+      authentication:
+        method: form
+        parameters:
+          loginPageUrl: "{{base}}/login"
+          loginRequestUrl: "{{base}}/login"
+          loginRequestBody: "username={%username%}&password={%password%}"
+        verification:
+          method: response
+          loggedInRegex: 'Welcome'
+          loggedOutRegex: 'Login required'
+          verifyUrl: "{{base}}/account"
+      sessionManagement:
+        method: cookie
+      users:
+        - name: alice
+          credentials:
+            username: alice
+            password: "${APP_PASSWORD}"

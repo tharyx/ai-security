@@ -1,0 +1,12 @@
+[
+  {"created_by": "/bin/sh -c #(nop) ADD file:0123abcd in / ", "empty_layer": false},
+  {"created_by": "/bin/sh -c apt-get update && apt-get install -y --no-install-recommends ca-certificates git", "empty_layer": false},
+  {"created_by": "/bin/sh -c #(nop)  ENV APP_ENV=production", "empty_layer": true},
+  {"created_by": "/bin/sh -c #(nop)  ENV DB_PASSWORD=CANARY-db-pass-7f3a", "empty_layer": true},
+  {"created_by": "|1 NPM_TOKEN=CANARY-npm-1a2b /bin/sh -c npm ci --omit=dev", "empty_layer": false},
+  {"created_by": "/bin/sh -c #(nop) COPY file:aa11bb22 in /app/.env ", "empty_layer": false},
+  {"created_by": "/bin/sh -c git clone https://ci-bot:CANARY-git-pass@git.example/org/shop-config.git /app/config", "empty_layer": false},
+  {"created_by": "/bin/sh -c echo 'smtp_password=CANARY-smtp-55aa' > /app/config.ini", "empty_layer": false},
+  {"created_by": "/bin/sh -c rm /app/.env", "empty_layer": false},
+  {"created_by": "/bin/sh -c #(nop)  ENTRYPOINT [\"/app/server\"]", "empty_layer": true}
+]

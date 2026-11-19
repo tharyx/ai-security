@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Virtual machines versus containers: where the kernel is</title>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="44" font-size="26" font-weight="700" fill="#0f172a">VM or container: who owns the kernel?</text>
+  <text x="40" y="70" font-size="15" fill="#475569">DBA view: a VM is a separate server, a container is a separate OS user session with strong fences.</text>
+
+  <text x="300" y="118" text-anchor="middle" font-size="20" font-weight="700" fill="#1e3a8a">Virtual machines</text>
+  <g font-size="14">
+    <rect x="60" y="136" width="150" height="150" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="135" y="162" text-anchor="middle" fill="#1e3a8a" font-weight="700">VM 1</text>
+    <rect x="72" y="172" width="126" height="34" rx="5" fill="#dbeafe" stroke="#2563eb"/><text x="135" y="194" text-anchor="middle" fill="#1e3a8a">App</text>
+    <rect x="72" y="212" width="126" height="34" rx="5" fill="#bfdbfe" stroke="#2563eb"/><text x="135" y="234" text-anchor="middle" fill="#1e3a8a">Guest OS + kernel</text>
+    <rect x="72" y="252" width="126" height="24" rx="5" fill="#93c5fd" stroke="#2563eb"/><text x="135" y="269" text-anchor="middle" fill="#1e3a8a" font-size="12">virtual hardware</text>
+    <rect x="250" y="136" width="150" height="150" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="325" y="162" text-anchor="middle" fill="#1e3a8a" font-weight="700">VM 2</text>
+    <rect x="262" y="172" width="126" height="34" rx="5" fill="#dbeafe" stroke="#2563eb"/><text x="325" y="194" text-anchor="middle" fill="#1e3a8a">App</text>
+    <rect x="262" y="212" width="126" height="34" rx="5" fill="#bfdbfe" stroke="#2563eb"/><text x="325" y="234" text-anchor="middle" fill="#1e3a8a">Guest OS + kernel</text>
+    <rect x="262" y="252" width="126" height="24" rx="5" fill="#93c5fd" stroke="#2563eb"/><text x="325" y="269" text-anchor="middle" fill="#1e3a8a" font-size="12">virtual hardware</text>
+    <rect x="440" y="136" width="130" height="150" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="5 4"/>
+    <text x="505" y="216" text-anchor="middle" fill="#64748b">more VMs</text>
+    <rect x="60" y="300" width="510" height="44" rx="8" fill="#c7d2fe" stroke="#4338ca" stroke-width="2"/><text x="315" y="328" text-anchor="middle" fill="#312e81" font-weight="700">Hypervisor (KVM, Hyper-V, ESXi)</text>
+    <rect x="60" y="352" width="510" height="44" rx="8" fill="#e2e8f0" stroke="#475569" stroke-width="2"/><text x="315" y="380" text-anchor="middle" fill="#0f172a" font-weight="700">Host hardware</text>
+  </g>
+
+  <text x="900" y="118" text-anchor="middle" font-size="20" font-weight="700" fill="#065f46">Containers</text>
+  <g font-size="14">
+    <rect x="640" y="136" width="130" height="110" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <text x="705" y="162" text-anchor="middle" fill="#065f46" font-weight="700">Container 1</text>
+    <rect x="652" y="174" width="106" height="30" rx="5" fill="#d1fae5" stroke="#059669"/><text x="705" y="194" text-anchor="middle" fill="#065f46">App</text>
+    <rect x="652" y="210" width="106" height="28" rx="5" fill="#a7f3d0" stroke="#059669"/><text x="705" y="229" text-anchor="middle" fill="#065f46" font-size="12">libs only</text>
+    <rect x="790" y="136" width="130" height="110" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <text x="855" y="162" text-anchor="middle" fill="#065f46" font-weight="700">Container 2</text>
+    <rect x="802" y="174" width="106" height="30" rx="5" fill="#d1fae5" stroke="#059669"/><text x="855" y="194" text-anchor="middle" fill="#065f46">App</text>
+    <rect x="802" y="210" width="106" height="28" rx="5" fill="#a7f3d0" stroke="#059669"/><text x="855" y="229" text-anchor="middle" fill="#065f46" font-size="12">libs only</text>
+    <rect x="940" y="136" width="130" height="110" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="5 4"/>
+    <text x="1005" y="196" text-anchor="middle" fill="#64748b">more containers</text>
+    <rect x="640" y="256" width="430" height="44" rx="8" fill="#fde68a" stroke="#b45309" stroke-width="2"/><text x="855" y="284" text-anchor="middle" fill="#78350f" font-weight="700">Container runtime (containerd + runc)</text>
+    <rect x="640" y="308" width="430" height="44" rx="8" fill="#fecaca" stroke="#b91c1c" stroke-width="3"/><text x="855" y="336" text-anchor="middle" fill="#7f1d1d" font-weight="700">ONE shared host kernel</text>
+    <rect x="640" y="360" width="430" height="36" rx="8" fill="#e2e8f0" stroke="#475569" stroke-width="2"/><text x="855" y="384" text-anchor="middle" fill="#0f172a" font-weight="700">Host hardware</text>
+  </g>
+
+  <rect x="40" y="424" width="1120" height="70" rx="10" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+  <text x="60" y="450" font-size="15" font-weight="700" fill="#713f12">Security meaning</text>
+  <text x="60" y="474" font-size="14" fill="#713f12">VM escape needs a hypervisor bug (rare). Container escape needs a kernel bug OR a bad run option (common: --privileged, docker.sock). Shared kernel = fast start, small size, weaker wall.</text>
+</svg>

@@ -1,0 +1,14 @@
+{
+  "hostname": "web-001",
+  "os": {"family": "debian", "name": "debian", "release": "12"},
+  "sshd_config": {"PermitRootLogin": "no", "PasswordAuthentication": "no", "MaxAuthTries": "4", "Ciphers": "aes256-gcm@openssh.com,chacha20-poly1305@openssh.com"},
+  "packages": {"openssh-server": "9.2", "auditd": "3.0", "docker-ce": "27.0"},
+  "services": {"auditd": {"enabled": true, "running": true}, "docker": {"enabled": true, "running": true}},
+  "files": {
+    "/etc/shadow": {"exist": true, "mode": "0640", "owner": "root"},
+    "/etc/docker/daemon.json": {"exist": true, "mode": "0644", "owner": "root"}
+  },
+  "kernel_parameters": {"net.ipv4.ip_forward": 0, "kernel.randomize_va_space": 2},
+  "users": {"root": {"uid": 0, "shell": "/bin/bash"}, "deploy": {"uid": 1000, "shell": "/bin/bash"}},
+  "json_files": {"/etc/docker/daemon.json": {"icc": false, "no-new-privileges": true, "hosts": ["fd://"]}}
+}

@@ -1,0 +1,30 @@
+{
+  "host": "api.example.test",
+  "port": 443,
+  "protocols": [
+    "TLSv1.2",
+    "TLSv1.3"
+  ],
+  "ciphers": [
+    "TLS_AES_256_GCM_SHA384",
+    "TLS_CHACHA20_POLY1305_SHA256",
+    "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+    "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+  ],
+  "cert": {
+    "subject_cn": "*.example.test",
+    "san": [
+      "*.example.test",
+      "example.test"
+    ],
+    "issuer": "CN=Example Test Issuing CA",
+    "not_before": "2026-09-01",
+    "not_after": "2027-03-01",
+    "key_type": "RSA",
+    "key_bits": 3072,
+    "sig_alg": "sha256WithRSAEncryption"
+  },
+  "http_headers": {
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+  }
+}

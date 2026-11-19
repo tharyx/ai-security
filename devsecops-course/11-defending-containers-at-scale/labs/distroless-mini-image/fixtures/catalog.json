@@ -1,0 +1,7 @@
+[
+  {"name": "ubuntu:latest (example)", "size_mb": 78, "packages": 100, "binaries": ["sh", "bash", "apt", "curl", "perl"], "cves": 20},
+  {"name": "debian:12-slim (example)", "size_mb": 75, "packages": 90, "binaries": ["sh", "bash", "apt"], "cves": 12},
+  {"name": "alpine (example)", "size_mb": 8, "packages": 15, "binaries": ["sh", "apk"], "cves": 2},
+  {"name": "distroless/static (example)", "size_mb": 2, "packages": 3, "binaries": [], "cves": 0},
+  {"name": "scratch + static binary", "size_mb": 6, "packages": 0, "binaries": [], "cves": 0}
+]

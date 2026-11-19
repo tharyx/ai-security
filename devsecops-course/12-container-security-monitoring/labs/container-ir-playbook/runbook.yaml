@@ -1,0 +1,31 @@
+# Container incident response runbook (preserve -> snapshot -> isolate -> collect -> redeploy)
+# Order matters: volatile evidence first, nothing destructive before the snapshot.
+name: compromised-container
+phases:
+  - phase: preserve
+    why: Volatile state disappears when the container stops. Capture it first.
+    steps:
+      - {id: inspect, cmd: "docker inspect {cid}", evidence: inspect.json}
+      - {id: top, cmd: "docker top {cid}", evidence: processes.txt}
+      - {id: logs, cmd: "docker logs --timestamps {cid}", evidence: container.log}
+      - {id: diff, cmd: "docker diff {cid}", evidence: filesystem.diff}
+  - phase: snapshot
+    why: A forensic copy of the filesystem for analysis in a lab, not on the production host.
+    steps:
+      - {id: commit, cmd: "docker commit --pause {cid} ir/{name}:{case}", evidence: commit.id}
+      - {id: export, cmd: "docker export {cid}", evidence: rootfs.tar}
+  - phase: isolate
+    why: Cut the attacker off from the network but keep the container alive for collection.
+    steps:
+      - {id: pause, cmd: "docker pause {cid}"}
+      - {id: disconnect, cmd: "docker network disconnect {network} {cid}", per_network: true}
+  - phase: collect
+    why: Gather the rest once the container cannot talk out. Hash everything.
+    steps:
+      - {id: host-conns, cmd: "ss -tnp", evidence: host-connections.txt}
+  - phase: redeploy
+    why: Never reuse the compromised image. Rebuild from clean source, new digest, rotated secrets.
+    steps:
+      - {id: stop, cmd: "docker stop {cid}", destructive: true}
+      - {id: rm, cmd: "docker rm {cid}", destructive: true}
+      - {id: run-clean, cmd: "docker run -d --name {name} {clean_image}", requires_clean_image: true}

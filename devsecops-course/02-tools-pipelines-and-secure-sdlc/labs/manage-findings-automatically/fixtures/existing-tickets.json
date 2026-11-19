@@ -1,0 +1,4 @@
+[
+  {"key": "SEC-7", "fingerprint": "3bfe748df836", "title": "[HIGH] SQL built by string concatenation (src/orders.js)", "status": "open"},
+  {"key": "SEC-8", "fingerprint": "ffffffffffff", "title": "[MEDIUM] a finding that has since been fixed", "status": "open"}
+]

@@ -1,0 +1,70 @@
+# .circleci/config.yml (fixture). The SAME secure pipeline, CircleCI syntax.
+version: 2.1
+
+jobs:
+  secrets-scan:
+    docker:
+      - image: zricethezav/gitleaks:v8.18.2
+    steps:
+      - checkout
+      - run:
+          name: gitleaks
+          command: gitleaks detect --source . --no-banner --redact
+  sca:
+    docker:
+      - image: cimg/node:20.11.1
+    steps:
+      - checkout
+      - run: npm ci --ignore-scripts
+      - run: npm audit --audit-level=high
+  sast:
+    docker:
+      - image: semgrep/semgrep:1.56.0
+    steps:
+      - checkout
+      - run: semgrep scan --config p/owasp-top-ten --error
+  build:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker build -t registry.example/webshop:<< pipeline.git.revision >> .
+  image-scan:
+    docker:
+      - image: aquasec/trivy:0.49.1
+    steps:
+      - run: trivy image --exit-code 1 --severity HIGH,CRITICAL registry.example/webshop:<< pipeline.git.revision >>
+  dast:
+    docker:
+      - image: ghcr.io/zaproxy/zaproxy:2.14.0
+      - image: registry.example/webshop:<< pipeline.git.revision >>
+    steps:
+      - run: zap-baseline.py -t http://localhost:3000 -I
+  deploy:
+    docker:
+      - image: bitnami/kubectl:1.29.1
+    steps:
+      - checkout
+      - run: ./deploy.sh staging
+
+workflows:
+  secure-pipeline:
+    jobs:
+      - secrets-scan
+      - sca:
+          requires: [secrets-scan]
+      - sast:
+          requires: [sca]
+      - build:
+          requires: [sast]
+      - image-scan:
+          requires: [build]
+      - dast:
+          requires: [image-scan]
+      - deploy:
+          requires: [dast]
+          context: staging-deploy
+          filters:
+            branches:
+              only: main
