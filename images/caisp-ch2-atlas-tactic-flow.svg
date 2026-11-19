@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The 14 ATLAS tactics in the course order, applied to an LLM application</title>
+  <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">14 tactics: the attacker's "why", in a typical order</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Real attacks skip, repeat and loop. Blue boxes are the AI-specific tactics (renamed "AI ..." in newer ATLAS data).</text>
+  <!-- row 1 -->
+  <g font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">
+    <rect x="40" y="110" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="120" y="136">1 Reconnaissance</text><text x="120" y="158" font-size="12" font-weight="400">find the target</text>
+    <rect x="230" y="110" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="310" y="136">2 Resource Dev.</text><text x="310" y="158" font-size="12" font-weight="400">build tools, accounts</text>
+    <rect x="420" y="110" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="500" y="136">3 Initial Access</text><text x="500" y="158" font-size="12" font-weight="400">get a first foothold</text>
+    <rect x="610" y="110" width="160" height="64" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="690" y="136">4 ML Model Access</text><text x="690" y="158" font-size="12" font-weight="400">reach the model</text>
+    <rect x="800" y="110" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="880" y="136">5 Execution</text><text x="880" y="158" font-size="12" font-weight="400">run attacker content</text>
+    <rect x="990" y="110" width="170" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="1075" y="136">6 Persistence</text><text x="1075" y="158" font-size="12" font-weight="400">stay in the system</text>
+  </g>
+  <path d="M200,142 L228,142" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M390,142 L418,142" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M580,142 L608,142" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M770,142 L798,142" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M960,142 L988,142" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M1075,174 L1075,210 L120,210 L120,236" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- row 2 -->
+  <g font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">
+    <rect x="40" y="240" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="120" y="266">7 Priv. Escalation</text><text x="120" y="288" font-size="12" font-weight="400">gain more rights</text>
+    <rect x="230" y="240" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="310" y="266">8 Defense Evasion</text><text x="310" y="288" font-size="12" font-weight="400">avoid detection</text>
+    <rect x="420" y="240" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="500" y="266">9 Credential Access</text><text x="500" y="288" font-size="12" font-weight="400">steal keys, tokens</text>
+    <rect x="610" y="240" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="690" y="266">10 Discovery</text><text x="690" y="288" font-size="12" font-weight="400">map the environment</text>
+    <rect x="800" y="240" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="880" y="266">11 Collection</text><text x="880" y="288" font-size="12" font-weight="400">gather target data</text>
+    <rect x="990" y="240" width="170" height="64" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="1075" y="266">12 ML Attack Staging</text><text x="1075" y="288" font-size="12" font-weight="400">prepare the attack</text>
+  </g>
+  <path d="M200,272 L228,272" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M390,272 L418,272" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M580,272 L608,272" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M770,272 L798,272" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M960,272 L988,272" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M1075,304 L1075,340 L310,340 L310,366" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- row 3 -->
+  <g font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">
+    <rect x="230" y="370" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="310" y="396">13 Exfiltration</text><text x="310" y="418" font-size="12" font-weight="400">steal data out</text>
+    <rect x="420" y="370" width="160" height="64" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="500" y="396">14 Impact</text><text x="500" y="418" font-size="12" font-weight="400">cause harm, cost</text>
+  </g>
+  <path d="M390,402 L418,402" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- defense lane -->
+  <rect x="640" y="370" width="520" height="150" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="660" y="398" font-size="16" font-weight="700" fill="#14532d">Defender lens: break the chain early</text>
+  <text x="660" y="424" font-size="13" fill="#0f172a">Early (1-4): limit public info, authenticate and rate-limit the API.</text>
+  <text x="660" y="448" font-size="13" fill="#0f172a">Middle (5-12): least privilege for tools, memory hygiene, secret hygiene,</text>
+  <text x="660" y="468" font-size="13" fill="#0f172a">runtime monitoring, scan models, log prompts and tool calls.</text>
+  <text x="660" y="492" font-size="13" fill="#0f172a">Late (13-14): egress filtering, DLP, budgets and kill switches.</text>
+  <text x="40" y="480" font-size="14" fill="#475569">Order is typical, not strict: attackers loop (for example Discovery, then Collection,</text>
+  <text x="40" y="502" font-size="14" fill="#475569">then more Discovery) and some tactics appear several times in one incident.</text>
+  <text x="40" y="560" font-size="14" fill="#475569">Newer ATLAS data renames 4 to "AI Model Access" and 12 to "AI Attack Staging" (a later rename was reported). Verify at atlas.mitre.org.</text>
+</svg>

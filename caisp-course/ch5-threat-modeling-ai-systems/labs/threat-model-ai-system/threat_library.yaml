@@ -1,0 +1,256 @@
+# A small LOCAL threat library written for this lab. Every entry is a paraphrase.
+# It is NOT the official text of OWASP, MITRE ATLAS or BIML. Copy real IDs from the
+# live sources (genai.owasp.org, atlas.mitre.org, berryvilleiml.com) before you cite them.
+#
+# Fields
+#   stride       S T R I D or E
+#   applies_to   DFD element kinds: external_entity, process, data_store, data_flow
+#   when_tags    the entry is used only if the element/flow has one of these tags
+#                (empty list = any element of that kind)
+#   owasp_llm    OWASP Top 10 for LLM Applications, 2023 v1.1 names (the course edition)
+#   atlas        MITRE ATLAS technique NAME (IDs change; check the live matrix)
+#   biml         BIML-style component and theme (paraphrased, not official risk numbers)
+#   factors      OWASP Risk Rating group scores, 0-9:
+#                agent = threat agent, vuln = vulnerability, tech = technical impact,
+#                business = business impact
+#   mitigated_by control names; each one present on the element lowers "vuln" by 3
+entries:
+  - id: TL-01
+    title: Attacker poses as a legitimate user or tenant
+    stride: S
+    applies_to: [external_entity]
+    when_tags: [untrusted_input]
+    owasp_llm: [LLM08 Excessive Agency]
+    atlas: [Valid Accounts]
+    biml: {component: inference algorithm, theme: weak identity around the model API}
+    factors: {agent: 6, vuln: 5, tech: 5, business: 5}
+    mitigated_by: [authn]
+    mitigation: Strong authentication; bind the user identity to every tool call.
+
+  - id: TL-02
+    title: Fake or look-alike component impersonates a trusted service
+    stride: S
+    applies_to: [process]
+    when_tags: [llm, tool, orchestrator]
+    owasp_llm: [LLM05 Supply Chain Vulnerabilities]
+    atlas: [ML Supply Chain Compromise]
+    biml: {component: model, theme: a copy of the model or tool is not the real one}
+    factors: {agent: 5, vuln: 5, tech: 6, business: 6}
+    mitigated_by: [tls, integrity_check, authn]
+    mitigation: Pin endpoints and certificates; verify signatures of models and tools.
+
+  - id: TL-03
+    title: Direct prompt injection or jailbreak overrides instructions
+    stride: T
+    applies_to: [process]
+    when_tags: [orchestrator, llm]
+    owasp_llm: [LLM01 Prompt Injection]
+    atlas: [LLM Prompt Injection, LLM Jailbreak]
+    biml: {component: inference algorithm, theme: prompt manipulation}
+    factors: {agent: 8, vuln: 8, tech: 6, business: 6}
+    mitigated_by: [schema_validation, tool_authz, human_approval]
+    mitigation: Treat model output as untrusted; enforce rules in code, not in the prompt.
+
+  - id: TL-04
+    title: Indirect prompt injection through retrieved or ingested content
+    stride: T
+    applies_to: [data_flow, process]
+    when_tags: [untrusted_content]
+    owasp_llm: [LLM01 Prompt Injection]
+    atlas: [LLM Prompt Injection]
+    biml: {component: raw data in the world, theme: attacker-controlled text reaches the prompt}
+    factors: {agent: 7, vuln: 8, tech: 7, business: 7}
+    mitigated_by: [schema_validation, tool_authz, human_approval, integrity_check]
+    mitigation: Mark content as untrusted; gate every side effect outside the model.
+
+  - id: TL-05
+    title: Training, fine-tuning or knowledge-base data is poisoned
+    stride: T
+    applies_to: [data_store, process]
+    when_tags: [vector_store, rag]
+    owasp_llm: [LLM03 Training Data Poisoning]
+    atlas: [Poison Training Data]
+    biml: {component: dataset assembly, theme: poisoned or low-quality data in the pipeline}
+    factors: {agent: 6, vuln: 7, tech: 6, business: 6}
+    mitigated_by: [integrity_check, authn, audit_log]
+    mitigation: Record data provenance; review sources; write access only for the pipeline.
+
+  - id: TL-06
+    title: Model output is passed to a downstream interpreter without checks
+    stride: T
+    applies_to: [data_flow]
+    when_tags: [model_output]
+    owasp_llm: [LLM02 Insecure Output Handling]
+    atlas: [LLM Prompt Injection]
+    biml: {component: inference algorithm, theme: model output trusted by the next component}
+    factors: {agent: 7, vuln: 7, tech: 7, business: 6}
+    mitigated_by: [schema_validation, output_encoding, tool_authz]
+    mitigation: Validate against a schema; encode for the sink; allowlist tool arguments.
+
+  - id: TL-07
+    title: Data in transit is read or modified on the network
+    stride: T
+    applies_to: [data_flow]
+    when_tags: []
+    owasp_llm: [LLM06 Sensitive Information Disclosure]
+    atlas: [Exfiltration via Cyber Means]
+    biml: {component: inference algorithm, theme: data exposed between components}
+    factors: {agent: 4, vuln: 5, tech: 6, business: 5}
+    mitigated_by: [tls]
+    mitigation: TLS everywhere, including internal hops.
+
+  - id: TL-08
+    title: No record of which prompt, context and model caused an action
+    stride: R
+    applies_to: [process]
+    when_tags: [orchestrator, tool]
+    owasp_llm: [LLM08 Excessive Agency]
+    atlas: [Impair Defenses]
+    biml: {component: evaluation, theme: weak traceability of model decisions}
+    factors: {agent: 5, vuln: 6, tech: 4, business: 5}
+    mitigated_by: [audit_log]
+    mitigation: Log prompt id, retrieved document ids, model version and tool calls.
+
+  - id: TL-09
+    title: Logs or tickets can be edited so that actions cannot be proven
+    stride: R
+    applies_to: [data_store]
+    when_tags: [log, pii]
+    owasp_llm: [LLM06 Sensitive Information Disclosure]
+    atlas: [Impair Defenses]
+    biml: {component: datasets, theme: records without integrity protection}
+    factors: {agent: 4, vuln: 6, tech: 4, business: 5}
+    mitigated_by: [audit_log, integrity_check]
+    mitigation: Append-only storage; separate duties for writers and readers.
+
+  - id: TL-10
+    title: Another tenant or user's data is retrieved or revealed
+    stride: I
+    applies_to: [process, data_store]
+    when_tags: [rag, vector_store]
+    owasp_llm: [LLM06 Sensitive Information Disclosure]
+    atlas: [Exfiltration via ML Inference API]
+    biml: {component: datasets, theme: sensitive data mixed into one store}
+    factors: {agent: 6, vuln: 7, tech: 7, business: 8}
+    mitigated_by: [acl_filter, tenant_filter, redaction]
+    mitigation: Filter by user permission before the similarity search, not after.
+
+  - id: TL-11
+    title: System prompt, tool schema or secret is extracted
+    stride: I
+    applies_to: [process]
+    when_tags: [llm, orchestrator]
+    owasp_llm: [LLM06 Sensitive Information Disclosure]
+    atlas: [LLM Meta Prompt Extraction]
+    biml: {component: inference algorithm, theme: hidden instructions can be recovered}
+    factors: {agent: 7, vuln: 7, tech: 4, business: 4}
+    mitigated_by: [redaction]
+    mitigation: Keep secrets and access rules out of the prompt.
+
+  - id: TL-12
+    title: Personal data leaves to a third-party model provider
+    stride: I
+    applies_to: [data_flow]
+    when_tags: []
+    owasp_llm: [LLM06 Sensitive Information Disclosure]
+    atlas: [Exfiltration via ML Inference API]
+    biml: {component: inference algorithm, theme: data shared outside our boundary}
+    factors: {agent: 5, vuln: 5, tech: 6, business: 7}
+    mitigated_by: [redaction, tls]
+    mitigation: Redact or minimize before sending; contract (DPA) and retention limits.
+
+  - id: TL-13
+    title: Training data or the model is extracted from query responses
+    stride: I
+    applies_to: [process]
+    when_tags: [llm]
+    owasp_llm: [LLM10 Model Theft]
+    atlas: [Exfiltration via ML Inference API]
+    biml: {component: model, theme: the model leaks what it learned}
+    factors: {agent: 5, vuln: 5, tech: 5, business: 6}
+    mitigated_by: [rate_limit, authn]
+    mitigation: Rate limits and query monitoring; avoid training on secrets.
+
+  - id: TL-14
+    title: Prompts or answers can be read from logs and stored chat history
+    stride: I
+    applies_to: [data_store]
+    when_tags: [log, pii]
+    owasp_llm: [LLM06 Sensitive Information Disclosure]
+    atlas: [Exfiltration via Cyber Means]
+    biml: {component: datasets, theme: sensitive data kept without need}
+    factors: {agent: 5, vuln: 6, tech: 6, business: 7}
+    mitigated_by: [redaction, authn]
+    mitigation: Minimize, redact and expire logs; restrict who can read them.
+
+  - id: TL-15
+    title: Very large or looping requests exhaust compute, quota or budget
+    stride: D
+    applies_to: [process]
+    when_tags: [orchestrator, llm]
+    owasp_llm: [LLM04 Model Denial of Service]
+    atlas: [Denial of ML Service]
+    biml: {component: inference algorithm, theme: resource use is easy to inflate}
+    factors: {agent: 7, vuln: 7, tech: 4, business: 6}
+    mitigated_by: [rate_limit, token_budget]
+    mitigation: Per-user rate limits, token and cost budgets, loop limits.
+
+  - id: TL-16
+    title: Flooding a data flow or the vector database slows the system
+    stride: D
+    applies_to: [data_flow, data_store]
+    when_tags: []
+    owasp_llm: [LLM04 Model Denial of Service]
+    atlas: [Denial of ML Service]
+    biml: {component: inference algorithm, theme: shared components are single points of failure}
+    factors: {agent: 5, vuln: 5, tech: 4, business: 4}
+    mitigated_by: [rate_limit]
+    mitigation: Timeouts, quotas, caching, capacity tests.
+
+  - id: TL-17
+    title: Tool runs with more rights than the user who asked
+    stride: E
+    applies_to: [process]
+    when_tags: [tool, orchestrator]
+    owasp_llm: [LLM07 Insecure Plugin Design, LLM08 Excessive Agency]
+    atlas: [LLM Plugin Compromise]
+    biml: {component: inference algorithm, theme: model decisions turn into privileged actions}
+    factors: {agent: 7, vuln: 8, tech: 8, business: 7}
+    mitigated_by: [tool_authz, human_approval, authn]
+    mitigation: Least-privilege tools, user-scoped credentials, approval for side effects.
+
+  - id: TL-18
+    title: Output is trusted blindly, so wrong answers drive decisions
+    stride: T
+    applies_to: [process]
+    when_tags: [llm]
+    owasp_llm: [LLM09 Overreliance]
+    atlas: [Erode ML Model Integrity]
+    biml: {component: evaluation, theme: nobody checks model output quality}
+    factors: {agent: 4, vuln: 6, tech: 5, business: 6}
+    mitigated_by: [human_approval, schema_validation]
+    mitigation: Grounding and citations; human review for high-impact answers.
+
+  - id: TL-19
+    title: Third-party model, library or dataset is malicious or tampered
+    stride: T
+    applies_to: [process, external_entity]
+    when_tags: [llm, rag]
+    owasp_llm: [LLM05 Supply Chain Vulnerabilities]
+    atlas: [ML Supply Chain Compromise]
+    biml: {component: model, theme: trust in a model you did not build}
+    factors: {agent: 5, vuln: 6, tech: 8, business: 7}
+    mitigated_by: [integrity_check]
+    mitigation: Pin versions and hashes, scan, sign, and keep an inventory (ML-BOM).
+
+  - id: TL-20
+    title: Public content source is edited to attack the pipeline
+    stride: S
+    applies_to: [external_entity]
+    when_tags: [untrusted_content]
+    owasp_llm: [LLM03 Training Data Poisoning, LLM01 Prompt Injection]
+    atlas: [Poison Training Data]
+    biml: {component: raw data in the world, theme: the world is not a trusted data source}
+    factors: {agent: 6, vuln: 7, tech: 6, business: 6}
+    mitigated_by: [integrity_check]
+    mitigation: Source allowlist; content review; keep provenance for every chunk.

@@ -1,0 +1,13 @@
+# VULNERABLE ("pwn request"): pull_request_target gives secrets, and the job checks out the PR's own code.
+name: pr-eval
+on: [pull_request_target]
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}   # VULN: untrusted code is checked out
+      - run: bash scripts/test.sh

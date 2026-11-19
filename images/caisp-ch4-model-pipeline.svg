@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Model creation to deployment pipeline, with attack points and controls</title>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="36" y="44" font-size="28" font-weight="bold" fill="#0f172a">From data to a running model: where pipelines get attacked</text>
+  <text x="36" y="72" font-size="16" fill="#475569">Every arrow is a place where code, data or a file changes hands. Red numbers are attack points. Green boxes are controls.</text>
+
+  <!-- pipeline stages -->
+  <g font-size="15" font-weight="bold" text-anchor="middle" fill="#0f172a">
+    <rect x="36" y="130" width="120" height="80" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="96" y="165">Collect</text><text x="96" y="186" font-size="13" font-weight="normal" fill="#475569">data sources</text>
+    <rect x="180" y="130" width="120" height="80" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="240" y="165">Prepare</text><text x="240" y="186" font-size="13" font-weight="normal" fill="#475569">clean, label</text>
+    <rect x="324" y="130" width="120" height="80" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="384" y="165">Train / tune</text><text x="384" y="186" font-size="13" font-weight="normal" fill="#475569">GPU jobs</text>
+    <rect x="468" y="130" width="120" height="80" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="528" y="165">Evaluate</text><text x="528" y="186" font-size="13" font-weight="normal" fill="#475569">quality, safety</text>
+    <rect x="612" y="130" width="120" height="80" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="672" y="165">Registry</text><text x="672" y="186" font-size="13" font-weight="normal" fill="#475569">model artifact</text>
+    <rect x="756" y="130" width="120" height="80" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="816" y="165">Package</text><text x="816" y="186" font-size="13" font-weight="normal" fill="#475569">container image</text>
+    <rect x="900" y="130" width="120" height="80" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="960" y="165">Deploy</text><text x="960" y="186" font-size="13" font-weight="normal" fill="#475569">serving, K8s</text>
+    <rect x="1044" y="130" width="120" height="80" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+    <text x="1104" y="165">Run + monitor</text><text x="1104" y="186" font-size="13" font-weight="normal" fill="#475569">inference</text>
+  </g>
+  <g stroke="#475569" stroke-width="2" fill="none">
+    <path d="M156 170 H180"/><path d="M300 170 H324"/><path d="M444 170 H468"/><path d="M588 170 H612"/>
+    <path d="M732 170 H756"/><path d="M876 170 H900"/><path d="M1020 170 H1044"/>
+  </g>
+
+  <!-- CI/CD band -->
+  <rect x="36" y="236" width="1128" height="56" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="52" y="260" font-size="15" font-weight="bold" fill="#0f172a">CI/CD and orchestration (runners, workflows, tokens, secrets, registry credentials)</text>
+  <text x="52" y="281" font-size="13" fill="#475569">This layer builds, tests, signs and ships every stage above. Whoever controls it controls the model.</text>
+
+  <!-- attack markers -->
+  <g font-size="14" font-weight="bold" text-anchor="middle" fill="#dc2626">
+    <circle cx="96" cy="118" r="13" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="96" y="123">1</text>
+    <circle cx="384" cy="118" r="13" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="384" y="123">2</text>
+    <circle cx="672" cy="118" r="13" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="672" y="123">3</text>
+    <circle cx="816" cy="118" r="13" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="816" y="123">4</text>
+    <circle cx="1104" cy="118" r="13" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="1104" y="123">5</text>
+    <circle cx="1130" cy="264" r="13" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="1130" y="269">6</text>
+    <circle cx="960" cy="118" r="13" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="960" y="123">7</text>
+  </g>
+
+  <!-- attack legend -->
+  <rect x="36" y="318" width="552" height="290" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="52" y="346" font-size="17" font-weight="bold" fill="#0f172a">Attack points</text>
+  <g font-size="14" fill="#0f172a">
+    <text x="52" y="376"><tspan font-weight="bold" fill="#dc2626">1</tspan> Poisoned or swapped data, lookalike dataset</text>
+    <text x="52" y="404"><tspan font-weight="bold" fill="#dc2626">2</tspan> Malicious training code, notebook or dependency</text>
+    <text x="52" y="432"><tspan font-weight="bold" fill="#dc2626">3</tspan> Tampered or trojaned model file (pickle)</text>
+    <text x="52" y="460"><tspan font-weight="bold" fill="#dc2626">4</tspan> Vulnerable base image, dependency confusion</text>
+    <text x="52" y="488"><tspan font-weight="bold" fill="#dc2626">5</tspan> Prompt injection, extraction, abuse at run time</text>
+    <text x="52" y="516"><tspan font-weight="bold" fill="#dc2626">6</tspan> Poisoned pipeline: a pull request makes CI run attacker code</text>
+    <text x="52" y="544"><tspan font-weight="bold" fill="#dc2626">7</tspan> Over-privileged deploy role, exposed cluster or tenant</text>
+    <text x="52" y="580" font-size="13" fill="#475569">Case studies: Hugging Face (3, 6), SAP AI Core (7), NotPetya (4, 6 as an update attack).</text>
+  </g>
+
+  <!-- controls legend -->
+  <rect x="612" y="318" width="552" height="290" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="628" y="346" font-size="17" font-weight="bold" fill="#0f172a">Controls (DevSecOps for AI)</text>
+  <g font-size="14" fill="#0f172a">
+    <text x="628" y="376"><tspan font-weight="bold" fill="#16a34a">1</tspan> Data provenance, hashes, review of new sources</text>
+    <text x="628" y="404"><tspan font-weight="bold" fill="#16a34a">2</tspan> SAST on code, SCA on dependencies, isolated training</text>
+    <text x="628" y="432"><tspan font-weight="bold" fill="#16a34a">3</tspan> safetensors, model scanning, signing and verification</text>
+    <text x="628" y="460"><tspan font-weight="bold" fill="#16a34a">4</tspan> Pinned digests, image scanning, private mirrors</text>
+    <text x="628" y="488"><tspan font-weight="bold" fill="#16a34a">5</tspan> AI firewall, rate limits, DAST and red teaming</text>
+    <text x="628" y="516"><tspan font-weight="bold" fill="#16a34a">6</tspan> No PR code with secrets, protected pipeline files, approvals</text>
+    <text x="628" y="544"><tspan font-weight="bold" fill="#16a34a">7</tspan> Least-privilege roles, network policy, tenant isolation</text>
+    <text x="628" y="580" font-size="13" fill="#475569">Hard controls (isolation, signing, least privilege) beat soft ones (scanners).</text>
+  </g>
+</svg>

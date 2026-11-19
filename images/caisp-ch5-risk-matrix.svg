@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">Likelihood by impact risk matrix</title>
+<desc id="d">OWASP Risk Rating style matrix: likelihood level against impact level gives Note, Low, Medium, High or Critical.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="520" fill="#ffffff"/>
+<text x="40" y="46" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Risk = likelihood x impact</text>
+<text x="40" y="72" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">OWASP-style: score each factor 0-9, average, convert to LOW (0-&lt;3), MEDIUM (3-&lt;6), HIGH (6-9), then read the matrix.</text>
+<text x="335.0" y="118" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">Likelihood LOW</text>
+<text x="505.0" y="118" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">Likelihood MEDIUM</text>
+<text x="675.0" y="118" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">Likelihood HIGH</text>
+<text x="238" y="180.0" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="end">Impact HIGH</text>
+<rect x="250" y="130" width="170" height="90" fill="#fde68a" stroke="#ffffff" stroke-width="3"/>
+<text x="335.0" y="181.0" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">MEDIUM</text>
+<rect x="420" y="130" width="170" height="90" fill="#fdba74" stroke="#ffffff" stroke-width="3"/>
+<text x="505.0" y="181.0" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">HIGH</text>
+<rect x="590" y="130" width="170" height="90" fill="#fca5a5" stroke="#ffffff" stroke-width="3"/>
+<text x="675.0" y="181.0" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">CRITICAL</text>
+<text x="238" y="270.0" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="end">Impact MEDIUM</text>
+<rect x="250" y="220" width="170" height="90" fill="#d9f99d" stroke="#ffffff" stroke-width="3"/>
+<text x="335.0" y="271.0" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">LOW</text>
+<rect x="420" y="220" width="170" height="90" fill="#fde68a" stroke="#ffffff" stroke-width="3"/>
+<text x="505.0" y="271.0" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">MEDIUM</text>
+<rect x="590" y="220" width="170" height="90" fill="#fdba74" stroke="#ffffff" stroke-width="3"/>
+<text x="675.0" y="271.0" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">HIGH</text>
+<text x="238" y="360.0" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="end">Impact LOW</text>
+<rect x="250" y="310" width="170" height="90" fill="#e2e8f0" stroke="#ffffff" stroke-width="3"/>
+<text x="335.0" y="361.0" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">NOTE</text>
+<rect x="420" y="310" width="170" height="90" fill="#d9f99d" stroke="#ffffff" stroke-width="3"/>
+<text x="505.0" y="361.0" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">LOW</text>
+<rect x="590" y="310" width="170" height="90" fill="#fde68a" stroke="#ffffff" stroke-width="3"/>
+<text x="675.0" y="361.0" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">MEDIUM</text>
+<text x="790" y="150" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Likelihood = average of</text>
+<text x="790" y="168" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">  threat agent factors (skill, motive,</text>
+<text x="790" y="186" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">  opportunity, size) and</text>
+<text x="790" y="204" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">  vulnerability factors (discovery,</text>
+<text x="790" y="222" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">  exploit, awareness, detection)</text>
+<text x="790" y="240" font-size="13" font-weight="normal" fill="#475569" text-anchor="start"></text>
+<text x="790" y="258" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Impact = average of</text>
+<text x="790" y="276" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">  technical (C, I, A, accountability)</text>
+<text x="790" y="294" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">  and business (money, reputation,</text>
+<text x="790" y="312" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">  non-compliance, privacy)</text>
+<text x="40" y="440" font-size="14" font-weight="normal" fill="#0f172a" text-anchor="start">Then choose a treatment: avoid, mitigate, transfer or accept. Re-rate after the control is in place (residual risk).</text>
+</svg>

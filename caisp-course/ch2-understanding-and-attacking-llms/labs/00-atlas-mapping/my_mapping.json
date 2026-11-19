@@ -1,0 +1,6 @@
+{
+  "_instructions": "Map each step id to ONE tactic name from the list in atlas_mapper.TACTICS (course names or the newer AI names are both accepted). Fill in the rest of INC-1 first, then INC-2..INC-4. Then run: python -m pytest caisp-course/ch2-understanding-and-attacking-llms/labs/00-atlas-mapping",
+  "INC-1-1": "Reconnaissance",
+  "INC-1-2": "Resource Development",
+  "INC-1-3": "Initial Access"
+}

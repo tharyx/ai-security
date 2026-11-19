@@ -1,0 +1,11 @@
+# VULNERABLE: runs on every PR, PR code runs with a repository secret in the environment.
+name: ci
+on: [pull_request, push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}   # VULN: a deploy secret in a job that runs PR code
+    steps:
+      - uses: actions/checkout@v4
+      - run: make test

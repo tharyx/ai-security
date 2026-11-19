@@ -1,0 +1,26 @@
+{
+  "application": {"name": "support-chatbot", "version": "1.4.0", "description": "RAG chatbot (synthetic fixture)"},
+  "packages": [
+    {"name": "requests", "version": "2.32.3", "license": "Apache-2.0", "sha256": "1111111111111111111111111111111111111111111111111111111111111111", "requires": ["urllib3", "certifi"]},
+    {"name": "urllib3", "version": "2.2.2", "license": "MIT", "sha256": "2222222222222222222222222222222222222222222222222222222222222222", "requires": []},
+    {"name": "certifi", "version": "2024.7.4", "license": "MPL-2.0", "sha256": "3333333333333333333333333333333333333333333333333333333333333333", "requires": []},
+    {"name": "pydantic", "version": "2.8.2", "license": "MIT", "sha256": "4444444444444444444444444444444444444444444444444444444444444444", "requires": []},
+    {"name": "numpy", "version": "2.1.0", "license": "BSD-3-Clause", "sha256": "5555555555555555555555555555555555555555555555555555555555555555", "requires": []}
+  ],
+  "app_requires": ["requests", "pydantic", "numpy"],
+  "model": {
+    "name": "tiny-support-classifier",
+    "version": "0.3.0",
+    "task": "text-classification",
+    "architecture": "small transformer (synthetic example)",
+    "license": "Apache-2.0",
+    "sha256": "aaaa1111aaaa1111aaaa1111aaaa1111aaaa1111aaaa1111aaaa1111aaaa1111",
+    "base_model": {"name": "example-base-encoder", "version": "1.0", "sha256": "bbbb2222bbbb2222bbbb2222bbbb2222bbbb2222bbbb2222bbbb2222bbbb2222"},
+    "datasets": [
+      {"name": "support-tickets-2024-redacted", "version": "2024-12", "license": "proprietary", "sha256": "cccc3333cccc3333cccc3333cccc3333cccc3333cccc3333cccc3333cccc3333", "contains_pii": false},
+      {"name": "public-faq-crawl", "version": "2024-10", "license": "CC-BY-4.0", "sha256": "dddd4444dddd4444dddd4444dddd4444dddd4444dddd4444dddd4444dddd4444", "contains_pii": false}
+    ],
+    "intended_use": "Route support tickets to a queue. Not for legal or medical decisions.",
+    "limitations": "English only. Accuracy drops on very short messages."
+  }
+}

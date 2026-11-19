@@ -1,0 +1,1 @@
+["flask", "requests", "pydantic", "pyyaml", "httpx", "numpy", "flask-jwt-extended"]

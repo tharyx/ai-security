@@ -1,0 +1,21 @@
+# SECURE: PR code runs with NO secrets and a read-only token. Deploying is a separate job.
+name: ci
+on: [pull_request, push]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make test
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+    environment: production          # secrets live in the protected environment, not the repository
+    env:
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: make deploy

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">A simple LLM application architecture</title>
+<desc id="d">A user talks to a chat API and orchestrator, which calls an LLM, a retriever with a vector database, and a tool that writes tickets.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<text x="40" y="46" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">A simple LLM application</text>
+<text x="40" y="72" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Chatbot + retrieval (RAG) + one tool. This is the system the chapter threat-models.</text>
+<rect x="40" y="200" width="150" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="115.0" y="224" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">User</text>
+<text x="115.0" y="246" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">browser or app</text>
+<rect x="250" y="190" width="210" height="110" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="355.0" y="214" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Chat API</text>
+<text x="355.0" y="236" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">authentication</text>
+<text x="355.0" y="253" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">orchestrator: builds the</text>
+<text x="355.0" y="270" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">prompt, calls the model</text>
+<rect x="540" y="100" width="190" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="635.0" y="124" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">LLM</text>
+<text x="635.0" y="146" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">hosted by a provider</text>
+<text x="635.0" y="163" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">answers or asks for a tool</text>
+<rect x="540" y="235" width="190" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="635.0" y="259" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Retriever</text>
+<text x="635.0" y="281" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">embeds the question,</text>
+<text x="635.0" y="298" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">searches the knowledge base</text>
+<rect x="540" y="370" width="190" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="635.0" y="394" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Ticket tool</text>
+<text x="635.0" y="416" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">creates a support ticket</text>
+<text x="635.0" y="433" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">(a real side effect)</text>
+<rect x="810" y="235" width="190" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="905.0" y="259" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Vector DB</text>
+<text x="905.0" y="281" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">knowledge base chunks</text>
+<rect x="810" y="370" width="190" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="905.0" y="394" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Ticket system</text>
+<text x="905.0" y="416" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">customer records</text>
+<rect x="810" y="100" width="190" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="905.0" y="124" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Content sources</text>
+<text x="905.0" y="146" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">web pages, uploads</text>
+<text x="905.0" y="163" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">(ingested into the DB)</text>
+<rect x="250" y="370" width="210" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="355.0" y="394" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Chat logs</text>
+<text x="355.0" y="416" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">prompts and answers</text>
+<line x1="190" y1="245" x2="250" y2="245" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212.4" y="234.0" width="15.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="220.0" y="246.0" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">1</text>
+<line x1="460" y1="215" x2="540" y2="150" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="492.4" y="171.5" width="15.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="500.0" y="183.5" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">2</text>
+<line x1="460" y1="255" x2="540" y2="275" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="492.4" y="254.0" width="15.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="500.0" y="266.0" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">3</text>
+<line x1="460" y1="285" x2="540" y2="405" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="492.4" y="334.0" width="15.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="500.0" y="346.0" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">4</text>
+<line x1="730" y1="280" x2="810" y2="280" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="762.4" y="269.0" width="15.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="770.0" y="281.0" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">5</text>
+<line x1="730" y1="415" x2="810" y2="415" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="762.4" y="404.0" width="15.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="770.0" y="416.0" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">6</text>
+<line x1="905" y1="190" x2="905" y2="235" stroke="#334155" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="897.4" y="201.5" width="15.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="905.0" y="213.5" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">7</text>
+<line x1="355" y1="300" x2="355" y2="370" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="347.4" y="324.0" width="15.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="355.0" y="336.0" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">8</text>
+<text x="40" y="505" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">1 user prompt   2 prompt + context to the LLM   3 search query   4 tool call from model output</text>
+<text x="40" y="523" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">5 vector search   6 new ticket   7 documents ingested into the knowledge base   8 conversation record</text>
+</svg>

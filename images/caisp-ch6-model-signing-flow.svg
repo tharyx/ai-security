@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">Model signing and verification flow</title>
+<desc id="d">Publisher hashes model files into a manifest, signs it, publishes; consumer verifies signature, identity and file hashes before loading.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="520" fill="#ffffff"/>
+<text x="40" y="46" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Model signing: publish and verify</text>
+<text x="40" y="72" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Same flow for Cosign (any file) and the OpenSSF model-signing project (a whole model directory).</text>
+<text x="40" y="112" font-size="18" font-weight="bold" fill="#2563eb" text-anchor="start">Publisher (CI)</text>
+<rect x="40" y="130" width="200" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="154" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Model files</text>
+<text x="140.0" y="176" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">weights, config,</text>
+<text x="140.0" y="193" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">tokenizer</text>
+<rect x="290" y="130" width="200" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="390.0" y="154" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Hash + manifest</text>
+<text x="390.0" y="176" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">SHA-256 of every file</text>
+<rect x="540" y="130" width="200" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="640.0" y="154" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Sign</text>
+<text x="640.0" y="176" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">key, or keyless:</text>
+<text x="640.0" y="193" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">short-lived certificate</text>
+<rect x="790" y="130" width="200" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="890.0" y="154" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Bundle</text>
+<text x="890.0" y="176" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">signature + manifest</text>
+<text x="890.0" y="193" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">(+ log entry)</text>
+<line x1="240" y1="175" x2="290" y2="175" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="490" y1="175" x2="540" y2="175" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="740" y1="175" x2="790" y2="175" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<text x="40" y="290" font-size="18" font-weight="bold" fill="#d97706" text-anchor="start">Consumer (download, deploy)</text>
+<rect x="40" y="310" width="200" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="140.0" y="334" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Download</text>
+<text x="140.0" y="356" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">from a registry or</text>
+<text x="140.0" y="373" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">hub (untrusted path)</text>
+<rect x="290" y="310" width="200" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="390.0" y="334" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Verify signature</text>
+<text x="390.0" y="356" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">and the expected signer</text>
+<text x="390.0" y="373" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">identity and issuer</text>
+<rect x="540" y="310" width="200" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="640.0" y="334" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Re-hash files</text>
+<text x="640.0" y="356" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">same files as the</text>
+<text x="640.0" y="373" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">manifest? none extra?</text>
+<rect x="790" y="310" width="200" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="890.0" y="334" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Load</text>
+<text x="890.0" y="356" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">data format only</text>
+<text x="890.0" y="373" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">(safetensors)</text>
+<line x1="240" y1="355" x2="290" y2="355" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="490" y1="355" x2="540" y2="355" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="740" y1="355" x2="790" y2="355" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="890" y1="220" x2="890" y2="300" stroke="#334155" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<rect x="864.4" y="249.0" width="51.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="890.0" y="261.0" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">bundle</text>
+<text x="40" y="450" font-size="14" font-weight="normal" fill="#0f172a" text-anchor="start">A signature proves who published the bytes and that they did not change. It does NOT prove the model is safe or unbiased.</text>
+<text x="40" y="478" font-size="14" font-weight="normal" fill="#475569" text-anchor="start">Fail closed: if verification fails or no signature exists, do not load the model.</text>
+</svg>

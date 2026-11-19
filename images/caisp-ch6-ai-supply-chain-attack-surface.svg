@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">AI supply chain attack surface</title>
+<desc id="d">Five stages from data to deployment, with typical attacks under each and the matching control.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="600" fill="#ffffff"/>
+<text x="40" y="46" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Where the AI supply chain can be attacked</text>
+<text x="40" y="72" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">Data, model and infrastructure sit on top of ordinary software dependencies. Each stage has its own attacks.</text>
+<rect x="40" y="110" width="206" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="143.0" y="134" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Data</text>
+<rect x="40" y="190" width="206" height="170" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="143.0" y="214" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Attacks</text>
+<text x="143.0" y="236" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">poisoned web data</text>
+<text x="143.0" y="253" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">tampered labels</text>
+<text x="143.0" y="270" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">backdoor trigger</text>
+<text x="143.0" y="287" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">samples</text>
+<rect x="40" y="385" width="206" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="143.0" y="409" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Control</text>
+<text x="143.0" y="431" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">data provenance, review, hashes</text>
+<line x1="246" y1="138" x2="266" y2="138" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="266" y="110" width="206" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="369.0" y="134" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Code and packages</text>
+<rect x="266" y="190" width="206" height="170" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="369.0" y="214" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Attacks</text>
+<text x="369.0" y="236" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">typosquatting</text>
+<text x="369.0" y="253" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">slopsquatting</text>
+<text x="369.0" y="270" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">dependency confusion</text>
+<text x="369.0" y="287" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">malicious install script</text>
+<rect x="266" y="385" width="206" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="369.0" y="409" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Control</text>
+<text x="369.0" y="431" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">vetting, pinning, hashes, SCA</text>
+<line x1="472" y1="138" x2="492" y2="138" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="492" y="110" width="206" height="56" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="595.0" y="134" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Training and CI</text>
+<rect x="492" y="190" width="206" height="170" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="595.0" y="214" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Attacks</text>
+<text x="595.0" y="236" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">poisoned pipeline (PPE)</text>
+<text x="595.0" y="253" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">stolen build token</text>
+<text x="595.0" y="270" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">unpinned actions</text>
+<text x="595.0" y="287" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">compromised runner</text>
+<rect x="492" y="385" width="206" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="595.0" y="409" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Control</text>
+<text x="595.0" y="431" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">SLSA build track, least privilege</text>
+<line x1="698" y1="138" x2="718" y2="138" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="718" y="110" width="206" height="56" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="821.0" y="134" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Model artifact</text>
+<rect x="718" y="190" width="206" height="170" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="821.0" y="214" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Attacks</text>
+<text x="821.0" y="236" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">pickle code execution</text>
+<text x="821.0" y="253" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">ROME-style edit</text>
+<text x="821.0" y="270" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">trojaned weights</text>
+<text x="821.0" y="287" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">fake model on a hub</text>
+<rect x="718" y="385" width="206" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="821.0" y="409" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Control</text>
+<text x="821.0" y="431" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">safetensors, scan, sign, verify</text>
+<line x1="924" y1="138" x2="944" y2="138" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="944" y="110" width="206" height="56" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1047.0" y="134" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">Deploy and runtime</text>
+<rect x="944" y="190" width="206" height="170" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1047.0" y="214" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Attacks</text>
+<text x="1047.0" y="236" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">tampered container</text>
+<text x="1047.0" y="253" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">shared tenant risk</text>
+<text x="1047.0" y="270" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">stale model version</text>
+<text x="1047.0" y="287" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle">no rollback proof</text>
+<rect x="944" y="385" width="206" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1047.0" y="409" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Control</text>
+<text x="1047.0" y="431" font-size="12" font-weight="normal" fill="#475569" text-anchor="middle">admission checks, attestation</text>
+<text x="40" y="520" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">Real examples to remember (details in the lessons): NotPetya spread through a poisoned software update (2017);</text>
+<text x="40" y="538" font-size="13" font-weight="normal" fill="#475569" text-anchor="start">researchers showed malicious pickle models on a public hub and a cross-tenant risk in a hosted inference service (2024).</text>
+<text x="40" y="565" font-size="14" font-weight="normal" fill="#0f172a" text-anchor="start">Rule: every artifact you did not build is untrusted until you verify where it came from and that it did not change.</text>
+</svg>

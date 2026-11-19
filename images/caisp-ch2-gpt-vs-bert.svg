@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>GPT (decoder-only, left to right) versus BERT (encoder, both directions)</title>
+  <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">GPT versus BERT: two ways to use the transformer</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Both read tokens. They differ in what each token may look at and in what they are trained to predict.</text>
+  <!-- GPT -->
+  <rect x="40" y="110" width="540" height="360" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="60" y="142" font-size="20" font-weight="700" fill="#1e3a8a">GPT: decoder-only, autoregressive</text>
+  <text x="60" y="166" font-size="14" fill="#1e3a8a">Trained to predict the NEXT token. Each token sees only tokens to its left.</text>
+  <g font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">
+    <rect x="70" y="200" width="80" height="40" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="110" y="226">The</text>
+    <rect x="170" y="200" width="80" height="40" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="210" y="226">cat</text>
+    <rect x="270" y="200" width="80" height="40" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="310" y="226">sat</text>
+    <rect x="370" y="200" width="80" height="40" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="410" y="226">on</text>
+    <rect x="470" y="200" width="80" height="40" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" stroke-dasharray="5 3"/><text x="510" y="226">?</text>
+  </g>
+  <path d="M110,200 C110,170 410,170 410,200" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M210,200 C210,176 410,176 410,200" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="60" y="280" font-size="14" fill="#0f172a">Output: one new token at a time, appended and fed back in.</text>
+  <text x="60" y="305" font-size="14" fill="#0f172a">Good at: writing, chat, code, summarising, instruction following.</text>
+  <text x="60" y="330" font-size="14" fill="#0f172a">Examples: GPT family, Llama, Claude, Gemini (decoder-style).</text>
+  <rect x="60" y="360" width="500" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="76" y="386" font-size="14" font-weight="700" fill="#dc2626">Security angle</text>
+  <text x="76" y="408" font-size="13" fill="#0f172a">Text in = text out, so instructions and data share one channel:</text>
+  <text x="76" y="428" font-size="13" fill="#0f172a">prompt injection, jailbreaks, data leakage, runaway cost (long output).</text>
+  <!-- BERT -->
+  <rect x="620" y="110" width="540" height="360" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="640" y="142" font-size="20" font-weight="700" fill="#14532d">BERT: encoder, masked language model</text>
+  <text x="640" y="166" font-size="14" fill="#14532d">Trained to fill in a hidden word. Each token sees left AND right context.</text>
+  <g font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">
+    <rect x="650" y="200" width="80" height="40" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="2"/><text x="690" y="226">The</text>
+    <rect x="750" y="200" width="80" height="40" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="2"/><text x="790" y="226">cat</text>
+    <rect x="850" y="200" width="80" height="40" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" stroke-dasharray="5 3"/><text x="890" y="226">[MASK]</text>
+    <rect x="950" y="200" width="80" height="40" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="2"/><text x="990" y="226">on</text>
+    <rect x="1050" y="200" width="80" height="40" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="2"/><text x="1090" y="226">mat</text>
+  </g>
+  <path d="M690,200 C690,170 890,170 890,200" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M1090,200 C1090,170 890,170 890,200" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="640" y="280" font-size="14" fill="#0f172a">Output: a vector per token (an embedding), used for a task head.</text>
+  <text x="640" y="305" font-size="14" fill="#0f172a">Good at: classification, search/ranking, entity tagging, sentiment.</text>
+  <text x="640" y="330" font-size="14" fill="#0f172a">Examples: BERT, RoBERTa, many embedding models.</text>
+  <rect x="640" y="360" width="500" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="656" y="386" font-size="14" font-weight="700" fill="#dc2626">Security angle</text>
+  <text x="656" y="408" font-size="13" fill="#0f172a">Classifiers face evasion (small word changes flip the label),</text>
+  <text x="656" y="428" font-size="13" fill="#0f172a">backdoor triggers, and embedding leakage in RAG indexes.</text>
+  <text x="40" y="510" font-size="14" fill="#475569">Original transformer (2017) had both an encoder and a decoder; GPT keeps the decoder side, BERT keeps the encoder side.</text>
+  <text x="40" y="534" font-size="14" fill="#475569">Today most chat LLMs are decoder-style; encoders remain common for classifiers and retrieval.</text>
+</svg>

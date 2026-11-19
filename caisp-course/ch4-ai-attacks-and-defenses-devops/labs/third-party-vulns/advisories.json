@@ -1,0 +1,25 @@
+{
+  "_note": "FICTIONAL advisories for FICTIONAL packages. Format is simplified from OSV/GHSA. Verify real advisories with pip-audit or osv.dev.",
+  "advisories": [
+    {"id": "LAB-2026-0001", "package": "modelhub-client", "affected": ">=1.0.0,<1.4.2", "fixed": "1.4.2", "severity": "CRITICAL",
+     "type": "unsafe deserialization", "summary": "Loads downloaded model files with pickle without checks."},
+    {"id": "LAB-2026-0002", "package": "prompt-kit", "affected": ">=0.5.0,<0.9.4", "fixed": "0.9.4", "severity": "HIGH",
+     "type": "template injection", "summary": "Prompt templates evaluate user-supplied expressions."},
+    {"id": "LAB-2026-0003", "package": "vecdb-lite", "affected": ">=2.0.0,<2.1.0", "fixed": "2.1.0", "severity": "MEDIUM",
+     "type": "missing access control", "summary": "Collection filters are optional, so tenants can read each other's vectors."},
+    {"id": "LAB-2026-0004", "package": "vecdb-lite", "affected": ">=1.0.0,<2.0.0", "fixed": "2.0.0", "severity": "LOW",
+     "type": "information disclosure", "summary": "Debug endpoint lists collection names."},
+    {"id": "LAB-2026-0005", "package": "fastinfer", "affected": ">=3.0.0,<3.0.2", "fixed": "3.0.2", "severity": "HIGH",
+     "type": "SSRF", "summary": "Model URL fetcher follows redirects to internal addresses."},
+    {"id": "LAB-2026-0006", "package": "wire-codec", "affected": "<1.5.0", "fixed": "1.5.0", "severity": "HIGH",
+     "type": "denial of service", "summary": "Crafted frame makes the decoder allocate without limit."}
+  ],
+  "dependencies": {
+    "modelhub-client": ["wire-codec>=1.2.0"],
+    "fastinfer": ["wire-codec>=1.4.0", "tokenizer-lite>=0.4.0"],
+    "prompt-kit": [],
+    "vecdb-lite": [],
+    "tokenizer-lite": [],
+    "safe-utils": []
+  }
+}

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Timeline of AI: from the 1950s to LLM applications, with the security issue each era added</title>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="50" font-size="28" font-weight="700" fill="#0f172a">AI timeline: ideas, winters, deep learning, LLMs</text>
+  <text x="40" y="80" font-size="16" fill="#475569">Each era added a new way to attack AI systems (red text under the line).</text>
+  <!-- era bands -->
+  <rect x="40" y="110" width="330" height="40" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="56" y="136" font-size="16" font-weight="700" fill="#0f172a">Rules and symbols (1950s-1980s)</text>
+  <rect x="380" y="110" width="250" height="40" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="396" y="136" font-size="16" font-weight="700" fill="#0f172a">Statistical ML (1990s-2000s)</text>
+  <rect x="640" y="110" width="250" height="40" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="656" y="136" font-size="16" font-weight="700" fill="#0f172a">Deep learning (2012-2016)</text>
+  <rect x="900" y="110" width="260" height="40" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="916" y="136" font-size="16" font-weight="700" fill="#0f172a">Transformers and LLMs (2017-)</text>
+  <!-- axis -->
+  <line x1="40" y1="290" x2="1160" y2="290" stroke="#0f172a" stroke-width="3"/>
+  <!-- events above -->
+  <g font-size="13" fill="#0f172a">
+    <circle cx="70" cy="290" r="7" fill="#64748b"/><line x1="70" y1="290" x2="70" y2="210" stroke="#64748b"/>
+    <text x="40" y="190" font-weight="700">1950</text><text x="40" y="206" font-size="12">Turing asks</text><text x="40" y="221" font-size="12">"can machines think?"</text>
+    <circle cx="190" cy="290" r="7" fill="#64748b"/><line x1="190" y1="290" x2="190" y2="250" stroke="#64748b"/>
+    <text x="150" y="190" font-weight="700">1956</text><text x="150" y="206" font-size="12">Dartmouth workshop:</text><text x="150" y="221" font-size="12">the term "AI"</text>
+    <circle cx="310" cy="290" r="7" fill="#64748b"/><line x1="310" y1="290" x2="310" y2="210" stroke="#64748b"/>
+    <text x="270" y="190" font-weight="700">1958 / 1966</text><text x="270" y="206" font-size="12">Perceptron; ELIZA</text><text x="270" y="221" font-size="12">chatbot</text>
+    <circle cx="440" cy="290" r="7" fill="#d97706"/><line x1="440" y1="290" x2="440" y2="250" stroke="#d97706"/>
+    <text x="400" y="190" font-weight="700">1970s-90s</text><text x="400" y="206" font-size="12">"AI winters": hype,</text><text x="400" y="221" font-size="12">then funding cuts</text>
+    <circle cx="560" cy="290" r="7" fill="#d97706"/><line x1="560" y1="290" x2="560" y2="210" stroke="#d97706"/>
+    <text x="520" y="190" font-weight="700">1997</text><text x="520" y="206" font-size="12">Deep Blue beats</text><text x="520" y="221" font-size="12">the chess champion</text>
+    <circle cx="700" cy="290" r="7" fill="#2563eb"/><line x1="700" y1="290" x2="700" y2="250" stroke="#2563eb"/>
+    <text x="660" y="190" font-weight="700">2012</text><text x="660" y="206" font-size="12">AlexNet wins image</text><text x="660" y="221" font-size="12">contest (CNN + GPU)</text>
+    <circle cx="820" cy="290" r="7" fill="#2563eb"/><line x1="820" y1="290" x2="820" y2="210" stroke="#2563eb"/>
+    <text x="780" y="190" font-weight="700">2014 / 2016</text><text x="780" y="206" font-size="12">GANs; AlphaGo beats</text><text x="780" y="221" font-size="12">a Go champion</text>
+    <circle cx="930" cy="290" r="7" fill="#16a34a"/><line x1="930" y1="290" x2="930" y2="250" stroke="#16a34a"/>
+    <text x="900" y="190" font-weight="700">2017</text><text x="900" y="206" font-size="12">Transformer paper</text><text x="900" y="221" font-size="12">"Attention Is All You Need"</text>
+    <circle cx="1030" cy="290" r="7" fill="#16a34a"/><line x1="1030" y1="290" x2="1030" y2="210" stroke="#16a34a"/>
+    <text x="1000" y="190" font-weight="700">2018-2020</text><text x="1000" y="206" font-size="12">BERT, GPT-2, GPT-3:</text><text x="1000" y="221" font-size="12">scale works</text>
+    <circle cx="1130" cy="290" r="7" fill="#16a34a"/><line x1="1130" y1="290" x2="1130" y2="250" stroke="#16a34a"/>
+    <text x="1085" y="190" font-weight="700">Nov 2022</text><text x="1085" y="206" font-size="12">ChatGPT launch;</text><text x="1085" y="221" font-size="12">then RAG, agents</text>
+  </g>
+  <!-- security row -->
+  <g font-size="13" fill="#dc2626">
+    <rect x="40" y="340" width="330" height="86" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="56" y="366" font-weight="700">Attack surface: the rules</text>
+    <text x="56" y="388" font-size="12">Bugs in hand-written rules; people</text><text x="56" y="406" font-size="12">trick the program with odd inputs.</text>
+    <rect x="380" y="340" width="250" height="86" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="396" y="366" font-weight="700">Attack surface: the data</text>
+    <text x="396" y="388" font-size="12">Spam-filter evasion, data</text><text x="396" y="406" font-size="12">poisoning, model theft.</text>
+    <rect x="640" y="340" width="250" height="86" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="656" y="366" font-weight="700">Attack surface: the pixels</text>
+    <text x="656" y="388" font-size="12">Adversarial examples, backdoors,</text><text x="656" y="406" font-size="12">GPU and cost abuse.</text>
+    <rect x="900" y="340" width="260" height="86" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="916" y="366" font-weight="700">Attack surface: the prompt</text>
+    <text x="916" y="388" font-size="12">Prompt injection, leakage, RAG</text><text x="916" y="406" font-size="12">poisoning, agent abuse.</text>
+  </g>
+  <text x="40" y="470" font-size="14" fill="#475569">Dates are the widely cited milestone years; check a history source for exact details before quoting them in an exam answer.</text>
+  <text x="40" y="496" font-size="14" fill="#475569">Lesson: the technology got more capable and the trust boundary moved from "the code" to "the data" to "the text the model reads".</text>
+</svg>

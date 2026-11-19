@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">Dependency confusion and its fixes</title>
+<desc id="d">An installer that searches a private and a public index picks the higher version; the attacker's public package 99.0.0 beats the private 1.2.0.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="600" fill="#ffffff"/>
+<text x="40" y="46" font-size="28" font-weight="bold" fill="#0f172a" text-anchor="start">Dependency confusion</text>
+<text x="40" y="72" font-size="16" font-weight="normal" fill="#475569" text-anchor="start">How a public package with a higher version beats your private one, and how to stop it.</text>
+<text x="40" y="112" font-size="18" font-weight="bold" fill="#dc2626" text-anchor="start">The attack (vulnerable setup)</text>
+<rect x="40" y="135" width="250" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="165.0" y="159" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Private index</text>
+<text x="165.0" y="181" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">acme-ml-utils 1.2.0</text>
+<text x="165.0" y="198" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">(your real package)</text>
+<rect x="40" y="275" width="250" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="165.0" y="299" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Public index</text>
+<text x="165.0" y="321" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">acme-ml-utils 99.0.0</text>
+<text x="165.0" y="338" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">(registered by an attacker)</text>
+<rect x="410" y="205" width="250" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="535.0" y="229" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Installer</text>
+<text x="535.0" y="251" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">pip --extra-index-url</text>
+<text x="535.0" y="268" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">looks at BOTH indexes</text>
+<text x="535.0" y="285" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">picks the highest version</text>
+<line x1="290" y1="185" x2="410" y2="235" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="310.0" y="199.0" width="80.0" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="350.0" y="211.0" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">sees 1.2.0</text>
+<line x1="290" y1="325" x2="410" y2="275" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="306.4" y="289.0" width="87.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.92"/>
+<text x="350.0" y="301.0" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">sees 99.0.0</text>
+<rect x="740" y="205" width="220" height="100" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="850.0" y="229" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Result</text>
+<text x="850.0" y="251" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">99.0.0 installed</text>
+<text x="850.0" y="268" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">install script runs in CI</text>
+<text x="850.0" y="285" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">(a harmless canary in our lab)</text>
+<line x1="660" y1="255" x2="740" y2="255" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<text x="40" y="430" font-size="18" font-weight="bold" fill="#16a34a" text-anchor="start">The fixes (layers)</text>
+<rect x="40" y="450" width="268" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="174.0" y="474" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">One index only</text>
+<text x="174.0" y="496" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">--index-url to a proxy that</text>
+<text x="174.0" y="513" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">serves internal names itself</text>
+<text x="174.0" y="530" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">(not --extra-index-url)</text>
+<rect x="328" y="450" width="268" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="462.0" y="474" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Scope internal names</text>
+<text x="462.0" y="496" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">reserve the name on the</text>
+<text x="462.0" y="513" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">public index, or block it in</text>
+<text x="462.0" y="530" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">the proxy; npm: scoped registry</text>
+<rect x="616" y="450" width="268" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="750.0" y="474" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Pin and hash</text>
+<text x="750.0" y="496" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">name==1.2.0 --hash=sha256:...</text>
+<text x="750.0" y="513" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">pip --require-hashes</text>
+<text x="750.0" y="530" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">a new 99.0.0 cannot match</text>
+<rect x="904" y="450" width="268" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1038.0" y="474" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Detect</text>
+<text x="1038.0" y="496" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">alert when an internal name</text>
+<text x="1038.0" y="513" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">appears on a public index</text>
+<text x="1038.0" y="530" font-size="12.5" font-weight="normal" fill="#475569" text-anchor="middle">(see vetting lab)</text>
+</svg>

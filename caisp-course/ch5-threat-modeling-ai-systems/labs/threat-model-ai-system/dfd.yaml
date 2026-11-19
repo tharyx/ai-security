@@ -1,0 +1,94 @@
+# A data flow diagram (DFD) of a support chatbot: LLM + RAG + one tool.
+# Everything here is synthetic. Edit it, remove a control, and re-run tm_tool.py.
+system: Support chatbot with RAG and a ticket tool
+description: >
+  A customer chats with a bot. The bot searches a knowledge base (RAG) and can
+  create a support ticket through a tool. The LLM is a hosted third-party API.
+
+assets:
+  - {id: A1, name: Customer personal data (PII), value: 8}
+  - {id: A2, name: Knowledge base integrity, value: 6}
+  - {id: A3, name: System prompt and tool schemas, value: 4}
+  - {id: A4, name: Ticket system, value: 6}
+  - {id: A5, name: LLM API budget, value: 5}
+
+zones:
+  - {id: internet, trust: untrusted, name: Internet}
+  - {id: app, trust: semi, name: Our application network}
+  - {id: provider, trust: third_party, name: LLM provider}
+  - {id: data, trust: trusted, name: Data tier}
+
+elements:
+  - {id: user, type: external_entity, zone: internet, name: Customer, tags: [untrusted_input]}
+  - {id: kb_source, type: external_entity, zone: internet, name: Public web pages and uploaded files, tags: [untrusted_content]}
+  - id: orchestrator
+    type: process
+    zone: app
+    name: Chat API and orchestrator
+    tags: [orchestrator, untrusted_input]
+    assets: [A3, A5]
+    controls: [authn, tls]
+  - id: retriever
+    type: process
+    zone: app
+    name: Retriever
+    tags: [rag]
+    assets: [A1]
+    controls: []
+  - id: ingest
+    type: process
+    zone: app
+    name: Ingestion pipeline
+    tags: [rag, untrusted_content]
+    assets: [A2]
+    controls: []
+  - id: llm
+    type: process
+    zone: provider
+    name: Hosted LLM
+    tags: [llm]
+    assets: [A3]
+    controls: [tls]
+  - id: ticket_tool
+    type: process
+    zone: app
+    name: Ticket tool
+    tags: [tool, side_effect]
+    assets: [A4]
+    controls: []
+  - id: vdb
+    type: data_store
+    zone: data
+    name: Vector database
+    tags: [vector_store]
+    assets: [A1, A2]
+    controls: [authn]
+  - id: tickets
+    type: data_store
+    zone: data
+    name: Ticket database
+    tags: [pii]
+    assets: [A1, A4]
+    controls: [authn, audit_log]
+  - id: logs
+    type: data_store
+    zone: data
+    name: Chat logs
+    tags: [pii, log]
+    assets: [A1]
+    controls: []
+
+flows:
+  - {id: F1,  source: user,         target: orchestrator, data: user prompt,           controls: [tls]}
+  - {id: F2,  source: orchestrator, target: user,         data: model answer,          controls: [tls], tags: [model_output]}
+  - {id: F3,  source: orchestrator, target: retriever,    data: search query}
+  - {id: F4,  source: retriever,    target: vdb,          data: embedding query,       controls: [tls]}
+  - {id: F5,  source: vdb,          target: retriever,    data: retrieved chunks,      controls: [tls]}
+  - {id: F6,  source: retriever,    target: orchestrator, data: context chunks,        tags: [untrusted_content]}
+  - {id: F7,  source: orchestrator, target: llm,          data: prompt plus context,   controls: [tls]}
+  - {id: F8,  source: llm,          target: orchestrator, data: completion or tool call, controls: [tls], tags: [model_output]}
+  - {id: F9,  source: orchestrator, target: ticket_tool,  data: tool arguments,        tags: [model_output]}
+  - {id: F10, source: ticket_tool,  target: tickets,      data: new ticket,            controls: [tls]}
+  - {id: F11, source: kb_source,    target: ingest,       data: raw documents,         tags: [untrusted_content]}
+  - {id: F12, source: ingest,       target: vdb,          data: chunks and embeddings}
+  - {id: F13, source: orchestrator, target: logs,         data: conversation record}

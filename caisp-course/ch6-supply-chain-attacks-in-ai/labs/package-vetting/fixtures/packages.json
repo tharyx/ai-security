@@ -1,0 +1,14 @@
+{
+  "popular_names": ["requests", "numpy", "pandas", "torch", "transformers", "langchain", "openai", "flask", "django", "scikit-learn", "pydantic", "huggingface-hub"],
+  "hallucinated_names": ["fastjson-llm-utils", "langchain-secure-agents", "openai-helpers-pro", "torch-quantize-lite"],
+  "registry": [
+    {"name": "requests", "version": "2.32.3", "age_days": 5000, "maintainers": 4, "weekly_downloads": 90000000, "has_install_script": false, "has_repo_url": true},
+    {"name": "numpy", "version": "2.1.0", "age_days": 6000, "maintainers": 8, "weekly_downloads": 70000000, "has_install_script": false, "has_repo_url": true},
+    {"name": "reqeusts", "version": "1.0.0", "age_days": 6, "maintainers": 1, "weekly_downloads": 40, "has_install_script": true, "has_repo_url": false},
+    {"name": "langchian", "version": "0.0.1", "age_days": 20, "maintainers": 1, "weekly_downloads": 130, "has_install_script": true, "has_repo_url": false},
+    {"name": "fastjson-llm-utils", "version": "0.1.0", "age_days": 12, "maintainers": 1, "weekly_downloads": 900, "has_install_script": false, "has_repo_url": false},
+    {"name": "acme-ml-utils", "version": "99.0.0", "age_days": 3, "maintainers": 1, "weekly_downloads": 5, "has_install_script": true, "has_repo_url": false},
+    {"name": "small-but-honest-lib", "version": "0.4.2", "age_days": 900, "maintainers": 1, "weekly_downloads": 650, "has_install_script": false, "has_repo_url": true},
+    {"name": "brand-new-helper", "version": "0.1.0", "age_days": 25, "maintainers": 2, "weekly_downloads": 800, "has_install_script": false, "has_repo_url": true}
+  ]
+}

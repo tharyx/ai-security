@@ -1,0 +1,57 @@
+{
+  "note": "Synthetic incident narratives for training only. All names are fictional (example.test). Each step is one attacker action.",
+  "incidents": [
+    {
+      "id": "INC-1",
+      "title": "Support copilot leaks customer records",
+      "steps": [
+        {"id": "INC-1-1", "text": "The attacker reads public blog posts, job adverts and conference slides of Example Corp to learn which LLM vendor and vector database the support copilot uses."},
+        {"id": "INC-1-2", "text": "The attacker registers a look-alike domain and sets up a web page to host a poisoned document, and buys cloud credits to run their own tooling."},
+        {"id": "INC-1-3", "text": "The attacker sends a support email that contains hidden instructions; the copilot ingests it when it summarises the shared inbox."},
+        {"id": "INC-1-4", "text": "The attacker queries the public chat endpoint of the copilot with many test prompts through the product API to see how it behaves."},
+        {"id": "INC-1-5", "text": "The hidden instructions make the copilot run a tool call to the ticket-search function with attacker-chosen arguments."},
+        {"id": "INC-1-6", "text": "The injected text is written into the copilot's long-term memory, so it stays active in every future session."},
+        {"id": "INC-1-7", "text": "The copilot gathers customer records from the CRM tool that match the attacker's request."},
+        {"id": "INC-1-8", "text": "The copilot renders a markdown image whose URL carries the stolen records out to a server the attacker controls."}
+      ]
+    },
+    {
+      "id": "INC-2",
+      "title": "Look-alike model on a public hub",
+      "steps": [
+        {"id": "INC-2-1", "text": "The attacker trains a backdoored classifier and uploads it to a public model hub under a name similar to a popular model, preparing the malicious artifact in advance."},
+        {"id": "INC-2-2", "text": "A developer downloads the look-alike model into the CI pipeline: a supply chain compromise through a trusted-looking source."},
+        {"id": "INC-2-3", "text": "Loading the unsafe pickle file executes the embedded code (a harmless canary in this exercise) on the build agent."},
+        {"id": "INC-2-4", "text": "The embedded code steals the cloud access keys and tokens stored in environment variables of the build agent."},
+        {"id": "INC-2-5", "text": "The attacker lists the storage buckets, registry entries and service accounts that the stolen keys can reach."},
+        {"id": "INC-2-6", "text": "Using an over-permissive role, the attacker escalates to admin rights on the ML platform."},
+        {"id": "INC-2-7", "text": "The attacker renames files, splits the payload and obfuscates it so the model scanner does not detect it."},
+        {"id": "INC-2-8", "text": "The poisoned model is deployed and starts approving fraudulent loans, causing financial loss and harm to customers."}
+      ]
+    },
+    {
+      "id": "INC-3",
+      "title": "Fraud detector evasion and model theft",
+      "steps": [
+        {"id": "INC-3-1", "text": "Researchers read the vendor's published papers and model cards to identify the architecture of the fraud-detection model."},
+        {"id": "INC-3-2", "text": "They obtain a paid API key and send thousands of queries to the scoring endpoint to get access to the model's outputs."},
+        {"id": "INC-3-3", "text": "They train a proxy model on the collected responses and craft adversarial examples offline against that proxy."},
+        {"id": "INC-3-4", "text": "They apply the crafted perturbations so that fraudulent transactions look legitimate and evade the detector."},
+        {"id": "INC-3-5", "text": "They gather training datasets and prompt logs from an exposed data lake."},
+        {"id": "INC-3-6", "text": "They copy the model weights from an unprotected storage bucket to a server they own, an exfiltration of the model."},
+        {"id": "INC-3-7", "text": "Fraudulent transactions pass unnoticed and the bank suffers financial loss and reputational damage."}
+      ]
+    },
+    {
+      "id": "INC-4",
+      "title": "Denial of wallet through a leaked key",
+      "steps": [
+        {"id": "INC-4-1", "text": "The attacker scans public code repositories and search engines for information about which company runs an LLM gateway."},
+        {"id": "INC-4-2", "text": "The attacker uses a stolen API key to sign in to the gateway as a valid account."},
+        {"id": "INC-4-3", "text": "The attacker finds an API key for the gateway in a configuration file and extracts the credentials from it."},
+        {"id": "INC-4-4", "text": "The attacker asks the model which tools, plugins and data sources it has access to, discovering its capabilities."},
+        {"id": "INC-4-5", "text": "The attacker sends long prompts in a loop, causing a flood of expensive requests that exhaust the monthly budget and make the service unavailable."}
+      ]
+    }
+  ]
+}

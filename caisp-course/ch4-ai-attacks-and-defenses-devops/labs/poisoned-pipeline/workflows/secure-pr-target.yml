@@ -1,0 +1,12 @@
+# SECURE: pull_request_target only labels/comments. It never checks out or runs PR code.
+name: pr-label
+on: [pull_request_target]
+permissions:
+  pull-requests: write
+  contents: read
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4      # default ref = the BASE branch: trusted code
+      - run: echo labeling

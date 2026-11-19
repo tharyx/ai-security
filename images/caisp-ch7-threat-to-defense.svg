@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Chapter 7: emerging AI threats mapped to their main defenses</title>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">Emerging AI threats and the controls that answer them</text>
+  <text x="40" y="74" font-size="15" fill="#475569">Left: threat (red). Middle: why it works (amber). Right: hard controls first (green). Firmware item is forward-looking.</text>
+
+  <rect x="40" y="100" width="300" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="190" y="128" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Model-mediated supply chain</text>
+  <text x="190" y="150" text-anchor="middle" font-size="12" fill="#991b1b">assistant suggests bad code or packages</text>
+  <rect x="440" y="100" width="300" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="590" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">Output is trusted and shipped</text>
+  <text x="590" y="150" text-anchor="middle" font-size="12" fill="#92400e">hallucinated names get registered (slopsquatting)</text>
+  <rect x="840" y="100" width="320" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1000" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">Dependency allowlist, lockfile, SCA, review</text>
+  <text x="1000" y="150" text-anchor="middle" font-size="12" fill="#166534">CI gate on AI-generated code</text>
+
+  <rect x="40" y="195" width="300" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="190" y="223" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Self-propagating AI worm</text>
+  <text x="190" y="245" text-anchor="middle" font-size="12" fill="#991b1b">prompt copies itself via RAG and email</text>
+  <rect x="440" y="195" width="300" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="590" y="223" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">Data is read as instructions</text>
+  <text x="590" y="245" text-anchor="middle" font-size="12" fill="#92400e">auto-send tool closes the loop</text>
+  <rect x="840" y="195" width="320" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1000" y="223" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">Taint, no auto-send, replication check</text>
+  <text x="1000" y="245" text-anchor="middle" font-size="12" fill="#166534">rate limits only slow it down</text>
+
+  <rect x="40" y="290" width="300" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="190" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Backdoor in fine-tuning</text>
+  <text x="190" y="340" text-anchor="middle" font-size="12" fill="#991b1b">sleeper trigger, poisoned LoRA adapter</text>
+  <rect x="440" y="290" width="300" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="590" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">Normal tests look perfect</text>
+  <text x="590" y="340" text-anchor="middle" font-size="12" fill="#92400e">safety training may not touch the trigger</text>
+  <rect x="840" y="290" width="320" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1000" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">Trusted sources, provenance, trigger scans</text>
+  <text x="1000" y="340" text-anchor="middle" font-size="12" fill="#166534">adapter diff audit, least-privilege model output</text>
+
+  <rect x="40" y="385" width="300" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="190" y="413" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">AI-assisted evolving firmware</text>
+  <text x="190" y="435" text-anchor="middle" font-size="12" fill="#991b1b">forward-looking, hypothetical</text>
+  <rect x="440" y="385" width="300" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="590" y="413" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">Signature matching is brittle</text>
+  <text x="590" y="435" text-anchor="middle" font-size="12" fill="#92400e">easy to vary code, hard to vary behavior</text>
+  <rect x="840" y="385" width="320" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1000" y="413" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">Secure boot, signed firmware, SBOM</text>
+  <text x="1000" y="435" text-anchor="middle" font-size="12" fill="#166534">behavior and network monitoring</text>
+
+  <rect x="40" y="480" width="300" height="60" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="190" y="507" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Models without provenance</text>
+  <text x="190" y="527" text-anchor="middle" font-size="12" fill="#991b1b">unsigned, unknown author</text>
+  <rect x="440" y="480" width="300" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="590" y="507" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">Nothing proves who built it</text>
+  <text x="590" y="527" text-anchor="middle" font-size="12" fill="#92400e">pickle code, tampered weights</text>
+  <rect x="840" y="480" width="320" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1000" y="507" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">Sign and verify, safetensors, internal registry</text>
+  <text x="1000" y="527" text-anchor="middle" font-size="12" fill="#166534">scan before load, hash pinning</text>
+
+  <line x1="340" y1="135" x2="438" y2="135" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="740" y1="135" x2="838" y2="135" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="340" y1="230" x2="438" y2="230" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="740" y1="230" x2="838" y2="230" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="340" y1="325" x2="438" y2="325" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="740" y1="325" x2="838" y2="325" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="340" y1="420" x2="438" y2="420" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="740" y1="420" x2="838" y2="420" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="340" y1="510" x2="438" y2="510" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="740" y1="510" x2="838" y2="510" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+</svg>
