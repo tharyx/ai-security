@@ -1,0 +1,10 @@
+[
+  {"id": 1, "title": "CVE-2021-44906 in minimist", "severity": "Critical", "found": "2026-10-01", "component": "minimist@1.2.5", "kev": false, "epss": 0.04},
+  {"id": 2, "title": "CVE-2021-23337 in lodash", "severity": "High", "found": "2026-10-10", "component": "lodash@4.17.20", "kev": false, "epss": 0.01},
+  {"id": 3, "title": "Outdated TLS config", "severity": "Medium", "found": "2026-08-01", "component": "nginx", "kev": false, "epss": 0.0},
+  {"id": 4, "title": "Verbose error pages", "severity": "Low", "found": "2026-07-01", "component": "app", "kev": false, "epss": 0.0},
+  {"id": 5, "title": "Weak password hash", "severity": "Medium", "found": "2026-09-15", "component": "auth", "kev": false, "epss": 0.0},
+  {"id": 6, "title": "Exploited library flaw (fixture)", "severity": "High", "found": "2026-11-10", "component": "exploited-lib@4.0.0", "kev": true, "epss": 0.9},
+  {"id": 7, "title": "Old fixed finding", "severity": "High", "found": "2026-09-01", "component": "yamlish", "kev": false, "epss": 0.0, "status": "mitigated", "mitigated": "2026-09-20"},
+  {"id": 8, "title": "Slow fix", "severity": "High", "found": "2026-08-01", "component": "parsekit", "kev": false, "epss": 0.0, "status": "mitigated", "mitigated": "2026-09-20"}
+]

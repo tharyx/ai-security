@@ -1,0 +1,21 @@
+{{- if .Values.hooks.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-migrate
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      hostNetwork: true
+      containers:
+        - name: migrate
+          image: {{ .Values.hooks.image }}
+          command: ["sh", "-c", "echo SIMULATED migration step; true"]
+          securityContext:
+            privileged: true
+{{- end }}

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Namespaces, cgroups and capabilities: what a container really is</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">A container is a normal Linux process with three kernel features applied</text>
+  <text x="40" y="74" font-size="16" fill="#475569">There is no "container" object in the kernel. All containers on a host share ONE kernel.</text>
+
+  <rect x="40" y="100" width="350" height="290" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="60" y="132" font-size="19" font-weight="700" fill="#1e3a8a">Namespaces: what it can SEE</text>
+  <g font-size="15" fill="#1e3a8a">
+    <text x="60" y="164">pid     own process tree (PID 1 inside)</text>
+    <text x="60" y="190">net     own interfaces, routes, ports</text>
+    <text x="60" y="216">mnt     own mount table / root file system</text>
+    <text x="60" y="242">uts     own hostname</text>
+    <text x="60" y="268">ipc     own shared memory and queues</text>
+    <text x="60" y="294">user    UID 0 inside maps to a normal UID outside</text>
+    <text x="60" y="320">cgroup  own view of the cgroup tree</text>
+    <text x="60" y="360" font-weight="700">Break it: --pid host, --network host,</text>
+    <text x="60" y="380" font-weight="700">hostPath mounts, no user namespace</text>
+  </g>
+
+  <rect x="425" y="100" width="350" height="290" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+  <text x="445" y="132" font-size="19" font-weight="700" fill="#92400e">Cgroups: what it can USE</text>
+  <g font-size="15" fill="#92400e">
+    <text x="445" y="164">memory.max    RAM limit (OOM kill above it)</text>
+    <text x="445" y="190">cpu.max       CPU share / quota</text>
+    <text x="445" y="216">pids.max      maximum processes</text>
+    <text x="445" y="242">io.max        disk throughput</text>
+    <text x="445" y="268">devices       which device nodes are allowed</text>
+    <text x="445" y="320">Docker flags: --memory --cpus --pids-limit</text>
+    <text x="445" y="360" font-weight="700">Break it: no limits = fork bomb or</text>
+    <text x="445" y="380" font-weight="700">memory hog starves the whole host</text>
+  </g>
+
+  <rect x="810" y="100" width="350" height="290" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="830" y="132" font-size="19" font-weight="700" fill="#14532d">Capabilities: what root can DO</text>
+  <g font-size="15" fill="#14532d">
+    <text x="830" y="164">Root's powers split into about 40 pieces</text>
+    <text x="830" y="190">NET_BIND_SERVICE  bind ports below 1024</text>
+    <text x="830" y="216">CHOWN, SETUID     change owners / IDs</text>
+    <text x="830" y="242">NET_RAW           raw sockets (sniffing)</text>
+    <text x="830" y="268">SYS_PTRACE        trace other processes</text>
+    <text x="830" y="294">SYS_ADMIN         "the new root": mount etc.</text>
+    <text x="830" y="320">Docker keeps a default set; --privileged: all</text>
+    <text x="830" y="360" font-weight="700">Defend: --cap-drop ALL, add one back,</text>
+    <text x="830" y="380" font-weight="700">no-new-privileges, seccomp, AppArmor</text>
+  </g>
+
+  <rect x="40" y="430" width="1120" height="90" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="462" font-size="17" font-weight="700" fill="#0f172a">Shared host kernel</text>
+  <text x="60" y="490" font-size="15" fill="#334155">seccomp filters system calls and AppArmor/SELinux limit file and network access. They are extra walls around the same kernel. A kernel bug can still cross them.</text>
+  <path d="M215 390 L215 428" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M600 390 L600 428" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M985 390 L985 428" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+</svg>

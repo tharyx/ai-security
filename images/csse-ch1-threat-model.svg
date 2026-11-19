@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Software supply chain threat model: source, dependency, build and distribution threats per block</title>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">Threat model of the software supply chain</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Four SLSA-style threat families (source, dependency, build, distribution) across the building blocks. Names are examples; see lesson 02.</text>
+
+  <!-- column heads -->
+  <rect x="40" y="96" width="150" height="40" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+  <text x="115" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Block</text>
+  <rect x="190" y="96" width="245" height="40" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="312" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Source threats</text>
+  <rect x="435" y="96" width="245" height="40" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="557" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Dependency threats</text>
+  <rect x="680" y="96" width="245" height="40" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="802" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Build threats</text>
+  <rect x="925" y="96" width="245" height="40" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="1047" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Distribution threats</text>
+
+  <g font-size="13" fill="#0f172a">
+    <!-- row code/SCM/CI/app -->
+    <rect x="40" y="136" width="150" height="110" fill="#ffffff" stroke="#64748b"/>
+    <text x="115" y="170" text-anchor="middle" font-size="15" font-weight="700">Code, SCM,</text>
+    <text x="115" y="190" text-anchor="middle" font-size="15" font-weight="700">CI/CD, app</text>
+    <rect x="190" y="136" width="245" height="110" fill="#ffffff" stroke="#64748b"/>
+    <text x="202" y="162">Stolen account, unsigned or</text><text x="202" y="180">forged commits, no review,</text><text x="202" y="198">secrets in the repo, malicious</text><text x="202" y="216">maintainer handover</text>
+    <rect x="435" y="136" width="245" height="110" fill="#ffffff" stroke="#64748b"/>
+    <text x="447" y="162">Typosquat, dependency</text><text x="447" y="180">confusion, hijacked package,</text><text x="447" y="198">slopsquatting, mutable</text><text x="447" y="216">tags on third-party actions</text>
+    <rect x="680" y="136" width="245" height="110" fill="#ffffff" stroke="#64748b"/>
+    <text x="692" y="162">Poisoned pipeline execution,</text><text x="692" y="180">leaked CI secrets, shared</text><text x="692" y="198">runners, build-system</text><text x="692" y="216">compromise (SUNBURST)</text>
+    <rect x="925" y="136" width="245" height="110" fill="#ffffff" stroke="#64748b"/>
+    <text x="937" y="162">Artifact swapped after the</text><text x="937" y="180">build, registry takeover,</text><text x="937" y="198">stolen signing key, update</text><text x="937" y="216">channel hijack</text>
+
+    <!-- containers -->
+    <rect x="40" y="246" width="150" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="115" y="296" text-anchor="middle" font-size="15" font-weight="700">Containers</text>
+    <rect x="190" y="246" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="202" y="272">Dockerfile pulled from an</text><text x="202" y="290">untrusted repo, secrets baked</text><text x="202" y="308">into a layer</text>
+    <rect x="435" y="246" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="447" y="272">Vulnerable or backdoored</text><text x="447" y="290">base image, unpinned :latest,</text><text x="447" y="308">malicious public image</text>
+    <rect x="680" y="246" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="692" y="272">Build cache poisoning, privileged</text><text x="692" y="290">build with Docker socket,</text><text x="692" y="308">tampered build step</text>
+    <rect x="925" y="246" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="937" y="272">Registry compromise, unsigned</text><text x="937" y="290">images, tag overwrite</text>
+
+    <!-- clusters -->
+    <rect x="40" y="336" width="150" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="115" y="386" text-anchor="middle" font-size="15" font-weight="700">Clusters</text>
+    <rect x="190" y="336" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="202" y="362">Manifests or Helm charts from</text><text x="202" y="380">unreviewed repos, GitOps repo</text><text x="202" y="398">write access</text>
+    <rect x="435" y="336" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="447" y="362">Third-party charts, operators</text><text x="447" y="380">and admission webhooks with</text><text x="447" y="398">too many rights</text>
+    <rect x="680" y="336" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="692" y="362">CI service account with</text><text x="692" y="380">cluster-admin, kubeconfig</text><text x="692" y="398">in pipeline variables</text>
+    <rect x="925" y="336" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="937" y="362">Cluster runs unverified</text><text x="937" y="380">images, no admission policy</text>
+
+    <!-- cloud -->
+    <rect x="40" y="426" width="150" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="115" y="476" text-anchor="middle" font-size="15" font-weight="700">Cloud</text>
+    <rect x="190" y="426" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="202" y="452">IaC modules taken from the</text><text x="202" y="470">web, state files with secrets</text>
+    <rect x="435" y="426" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="447" y="452">Unpinned Terraform providers</text><text x="447" y="470">and modules, vendor SaaS with</text><text x="447" y="488">broad access</text>
+    <rect x="680" y="426" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="692" y="452">Pipeline role can do anything,</text><text x="692" y="470">long-lived cloud keys in CI</text>
+    <rect x="925" y="426" width="245" height="90" fill="#ffffff" stroke="#64748b"/>
+    <text x="937" y="452">Public buckets or CDNs hosting</text><text x="937" y="470">scripts, domain takeover</text>
+  </g>
+
+  <rect x="40" y="540" width="1130" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="60" y="568" font-size="15" font-weight="700" fill="#166534">Reading the grid</text>
+  <text x="60" y="592" font-size="14" fill="#0f172a">Ask the same four questions of every block: Who can change the source? What do I pull in? Who or what builds it? How does it reach users?</text>
+</svg>

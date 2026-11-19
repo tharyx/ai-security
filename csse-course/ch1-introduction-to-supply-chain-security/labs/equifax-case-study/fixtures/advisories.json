@@ -1,0 +1,27 @@
+{
+  "advisories": [
+    {
+      "id": "CVE-2017-5638",
+      "component": "struts2-core",
+      "severity": "critical",
+      "published": "2017-03-07",
+      "exploited_in_wild_from": "2017-03-10",
+      "affected": [
+        {"from": "2.3.5", "to": "2.3.31"},
+        {"from": "2.5", "to": "2.5.10"}
+      ],
+      "fixed_in": ["2.3.32", "2.5.10.1"],
+      "summary": "Remote code execution through a crafted Content-Type header (public advisory; do not test on systems you do not own)."
+    },
+    {
+      "id": "CVE-0000-0001",
+      "component": "log-helper",
+      "severity": "low",
+      "published": "2017-02-01",
+      "affected": [{"from": "1.0.0", "to": "1.1.9"}],
+      "fixed_in": ["1.1.10"],
+      "summary": "Invented advisory to show that a non-matching version is not flagged."
+    }
+  ],
+  "timeline_note": "Dates follow public reporting on the 2017 Equifax breach (patch available in early March, intrusion from mid-May, discovery late July). Verify the exact dates at the source before quoting them."
+}

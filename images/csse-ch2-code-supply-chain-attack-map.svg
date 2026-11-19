@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Code supply chain attack map: where attackers strike from commit to production</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">The code supply chain and where it is attacked</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Top row: the flow from a developer's commit to production. Red: attacks. Green: controls.</text>
+
+  <!-- flow boxes -->
+  <rect x="30" y="100" width="165" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="112" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Developer</text>
+  <text x="112" y="152" text-anchor="middle" font-size="13" fill="#1e3a8a">laptop, IDE, hooks</text>
+  <rect x="235" y="100" width="165" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="317" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">SCM</text>
+  <text x="317" y="152" text-anchor="middle" font-size="13" fill="#1e3a8a">git server, repos, PRs</text>
+  <rect x="440" y="100" width="165" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="522" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Dependencies</text>
+  <text x="522" y="152" text-anchor="middle" font-size="13" fill="#92400e">package managers, CDNs</text>
+  <rect x="645" y="100" width="165" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="727" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Build / CI</text>
+  <text x="727" y="152" text-anchor="middle" font-size="13" fill="#1e3a8a">runners, actions, secrets</text>
+  <rect x="850" y="100" width="165" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="932" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Artifacts</text>
+  <text x="932" y="152" text-anchor="middle" font-size="13" fill="#475569">registry, signing</text>
+  <rect x="1055" y="100" width="125" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="1117" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">App</text>
+  <text x="1117" y="152" text-anchor="middle" font-size="13" fill="#92400e">runtime, users</text>
+  <line x1="195" y1="135" x2="233" y2="135" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="400" y1="135" x2="438" y2="135" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="605" y1="135" x2="643" y2="135" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="810" y1="135" x2="848" y2="135" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="1015" y1="135" x2="1053" y2="135" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- attack columns -->
+  <g font-size="13" fill="#991b1b">
+    <rect x="30" y="200" width="165" height="190" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="42" y="224" font-weight="700">Attacks</text>
+    <text x="42" y="248">Malicious pre-commit</text><text x="42" y="266">hook or git config</text>
+    <text x="42" y="290">Spoofed commit author</text>
+    <text x="42" y="314">Malicious IDE extension</text>
+    <text x="42" y="338">Stolen developer token</text>
+    <rect x="235" y="200" width="165" height="190" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="247" y="224" font-weight="700">Attacks</text>
+    <text x="247" y="248">Git shell breakout</text>
+    <text x="247" y="272">Secrets in history</text>
+    <text x="247" y="296">Repo jacking</text>
+    <text x="247" y="320">Weak auth, git:// traffic</text>
+    <text x="247" y="344">Sneaky pull request</text>
+    <rect x="440" y="200" width="165" height="190" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="452" y="224" font-weight="700">Attacks</text>
+    <text x="452" y="248">Typo / combo / brand squat</text>
+    <text x="452" y="272">Dependency confusion</text>
+    <text x="452" y="296">Slopsquatting</text>
+    <text x="452" y="320">Hijacked CDN (polyfill.io)</text>
+    <text x="452" y="344">Magecart on 3rd-party JS</text>
+    <rect x="645" y="200" width="165" height="190" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="657" y="224" font-weight="700">Attacks</text>
+    <text x="657" y="248">Poisoned pipeline (PPE)</text>
+    <text x="657" y="272">Actions script injection</text>
+    <text x="657" y="296">pull_request_target abuse</text>
+    <text x="657" y="320">Webhook abuse, XBI</text>
+    <text x="657" y="344">Env var theft (Codecov)</text>
+    <rect x="850" y="200" width="165" height="190" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="862" y="224" font-weight="700">Attacks</text>
+    <text x="862" y="248">Tampered release</text>
+    <text x="862" y="272">Stolen signing cert</text>
+    <text x="862" y="296">Mutable tag repointed</text>
+    <text x="862" y="320">Unsigned artifacts</text>
+    <rect x="1055" y="200" width="125" height="190" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="1067" y="224" font-weight="700">Attacks</text>
+    <text x="1067" y="248">Injection</text>
+    <text x="1067" y="272">XSS</text>
+    <text x="1067" y="296">SSRF</text>
+    <text x="1067" y="320">Vulnerable libs</text>
+  </g>
+
+  <!-- controls -->
+  <g font-size="13" fill="#166534">
+    <rect x="30" y="420" width="165" height="170" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="42" y="444" font-weight="700">Controls</text>
+    <text x="42" y="468">Review hook config</text><text x="42" y="490">Signed commits</text>
+    <text x="42" y="512">Trusted extensions only</text><text x="42" y="534">Short-lived tokens</text>
+    <rect x="235" y="420" width="165" height="170" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="247" y="444" font-weight="700">Controls</text>
+    <text x="247" y="468">SSO, MFA, branch rules</text><text x="247" y="490">Secret scanning</text>
+    <text x="247" y="512">Claim renamed names</text><text x="247" y="534">TLS/SSH only, CODEOWNERS</text>
+    <rect x="440" y="420" width="165" height="170" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="452" y="444" font-weight="700">Controls</text>
+    <text x="452" y="468">Lock files and hashes</text><text x="452" y="490">Private index routing</text>
+    <text x="452" y="512">SRI, self-host scripts</text><text x="452" y="534">SCA, SBOM, vetting</text>
+    <rect x="645" y="420" width="165" height="170" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="657" y="444" font-weight="700">Controls</text>
+    <text x="657" y="468">Pin actions to SHA</text><text x="657" y="490">Least-privilege tokens</text>
+    <text x="657" y="512">Ephemeral runners, OIDC</text><text x="657" y="534">Verify before run</text>
+    <rect x="850" y="420" width="165" height="170" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="862" y="444" font-weight="700">Controls</text>
+    <text x="862" y="468">Sign and verify</text><text x="862" y="490">Provenance (SLSA)</text>
+    <text x="862" y="512">Protect signing keys</text><text x="862" y="534">Immutable releases</text>
+    <rect x="1055" y="420" width="125" height="170" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="1067" y="444" font-weight="700">Controls</text>
+    <text x="1067" y="468">SAST, DAST</text><text x="1067" y="490">Fuzzing</text>
+    <text x="1067" y="512">Safe defaults, CSP</text>
+  </g>
+  <text x="600" y="412" text-anchor="middle" font-size="13" fill="#475569">Every arrow is a trust decision. Verify what crosses it.</text>
+</svg>

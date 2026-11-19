@@ -1,0 +1,35 @@
+{
+  "trusted_layer_accounts": ["111122223333"],
+  "advisories": {
+    "left-padz": {"vulnerable_below": "2.0.0", "id": "FAKE-ADV-001"},
+    "requests-lite": {"vulnerable_below": "1.4.2", "id": "FAKE-ADV-002"}
+  },
+  "known_malicious": ["colourz-utils"],
+  "functions": [
+    {"name": "orders-api", "platform": "aws-lambda", "runtime": "python3.x",
+     "env": {"DB_PASSWORD": "FAKE-hunter2-not-real", "STAGE": "prod", "API_KEY": "AKIAFAKEFAKEFAKE0002"},
+     "layers": [{"name": "shared-utils", "account": "111122223333", "version": 7},
+                {"name": "fast-json-layer", "account": "999900001111", "version": "latest"}],
+     "deps": [{"name": "requests-lite", "version": "1.3.0", "hash": null}, {"name": "colourz-utils", "version": "0.0.1", "hash": null}],
+     "role": {"policies": [{"Action": ["s3:*"], "Resource": "*"}, {"Action": ["iam:PassRole"], "Resource": "*"}]},
+     "url_auth": "NONE"},
+    {"name": "thumbnailer", "platform": "azure-functions", "runtime": "node",
+     "env": {"STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=fake;AccountKey=FAKEKEYFAKEKEYFAKEKEY==", "LOG_LEVEL": "info"},
+     "layers": [],
+     "deps": [{"name": "left-padz", "version": "1.2.0", "hash": "sha512-abc"}],
+     "role": {"policies": [{"Action": ["Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read"], "Resource": "/subscriptions/FAKE/resourceGroups/rg-img"}]},
+     "url_auth": "function-key"},
+    {"name": "export-job", "platform": "gcp-cloud-functions", "runtime": "python",
+     "env": {"SERVICE_TOKEN": "FAKE-ghp_0123456789abcdef0123456789abcdef0123", "REGION": "region-x"},
+     "layers": [],
+     "deps": [{"name": "requests-lite", "version": "1.5.0", "hash": "sha256-def"}],
+     "role": {"policies": [{"Action": ["roles/editor"], "Resource": "project"}]},
+     "url_auth": "allUsers"},
+    {"name": "clean-fn", "platform": "aws-lambda", "runtime": "python3.x",
+     "env": {"SECRET_ARN": "arn:aws:secretsmanager:region-x:111122223333:secret:app", "STAGE": "prod"},
+     "layers": [{"name": "shared-utils", "account": "111122223333", "version": 7}],
+     "deps": [{"name": "requests-lite", "version": "1.5.0", "hash": "sha256-123"}],
+     "role": {"policies": [{"Action": ["dynamodb:GetItem", "dynamodb:PutItem"], "Resource": "arn:aws:dynamodb:region-x:111122223333:table/orders"}]},
+     "url_auth": "AWS_IAM"}
+  ]
+}

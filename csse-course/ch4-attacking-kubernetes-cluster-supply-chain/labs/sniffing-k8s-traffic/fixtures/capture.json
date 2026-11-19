@@ -1,0 +1,15 @@
+{
+  "note": "Simulated capture. Every credential is FAKE. Hosts are cluster-internal names.",
+  "flows": [
+    {"src": "web", "dst": "api", "port": 8080, "proto": "http", "tls": false,
+     "payload": "POST /login HTTP/1.1\nHost: api\nContent-Type: application/x-www-form-urlencoded\n\nuser=alice&password=FAKE-hunter2"},
+    {"src": "api", "dst": "payments", "port": 8080, "proto": "http", "tls": false,
+     "payload": "GET /charges HTTP/1.1\nHost: payments\nAuthorization: Bearer FAKE-eyJhbGciOiJub25lIn0.service-token"},
+    {"src": "api", "dst": "db", "port": 5432, "proto": "postgres", "tls": false,
+     "payload": "startup user=shop_app database=shop password=FAKE-dbpass"},
+    {"src": "web", "dst": "cache", "port": 6379, "proto": "redis", "tls": false,
+     "payload": "AUTH FAKE-redis-pass\r\nSET session:42 alice"},
+    {"src": "api", "dst": "vault", "port": 8200, "proto": "https", "tls": true,
+     "payload": "<ciphertext: not readable>"}
+  ]
+}

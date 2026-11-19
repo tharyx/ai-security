@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Kubernetes architecture: control plane, nodes and the ports attackers look for</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="580" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">Kubernetes architecture and its security-relevant ports</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Control plane decides. Nodes run pods. Everything talks through the API server.</text>
+
+  <rect x="40" y="100" width="560" height="320" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="60" y="132" font-size="19" font-weight="700" fill="#1e3a8a">Control plane</text>
+  <rect x="60" y="150" width="250" height="90" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <text x="75" y="178" font-size="16" font-weight="700" fill="#1e3a8a">kube-apiserver  (6443)</text>
+  <text x="75" y="202" font-size="14" fill="#1e3a8a">front door: authn, authz,</text>
+  <text x="75" y="222" font-size="14" fill="#1e3a8a">admission, audit log</text>
+  <rect x="330" y="150" width="250" height="90" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <text x="345" y="178" font-size="16" font-weight="700" fill="#1e3a8a">etcd  (2379 / 2380)</text>
+  <text x="345" y="202" font-size="14" fill="#1e3a8a">all cluster state incl. Secrets</text>
+  <text x="345" y="222" font-size="14" fill="#1e3a8a">client certs, encrypt at rest</text>
+  <rect x="60" y="260" width="250" height="70" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <text x="75" y="288" font-size="16" font-weight="700" fill="#1e3a8a">scheduler (10259)</text>
+  <text x="75" y="312" font-size="14" fill="#1e3a8a">picks a node for each pod</text>
+  <rect x="330" y="260" width="250" height="70" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <text x="345" y="288" font-size="16" font-weight="700" fill="#1e3a8a">controller-manager (10257)</text>
+  <text x="345" y="312" font-size="14" fill="#1e3a8a">reconciles desired state</text>
+  <text x="60" y="372" font-size="14" fill="#1e3a8a">Admission webhooks and policy engines (Kyverno, Gatekeeper) are called by the API server.</text>
+  <text x="60" y="396" font-size="14" fill="#1e3a8a">Managed services (EKS, AKS, GKE) run the control plane for you.</text>
+
+  <rect x="640" y="100" width="520" height="320" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="660" y="132" font-size="19" font-weight="700" fill="#14532d">Worker node (many)</text>
+  <rect x="660" y="150" width="230" height="90" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text x="675" y="178" font-size="16" font-weight="700" fill="#14532d">kubelet  (10250)</text>
+  <text x="675" y="202" font-size="14" fill="#14532d">runs pods; its API must need</text>
+  <text x="675" y="222" font-size="14" fill="#14532d">auth (no anonymous, no 10255)</text>
+  <rect x="910" y="150" width="230" height="90" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text x="925" y="178" font-size="16" font-weight="700" fill="#14532d">containerd / CRI-O</text>
+  <text x="925" y="202" font-size="14" fill="#14532d">container runtime (runc)</text>
+  <text x="925" y="222" font-size="14" fill="#14532d">shared kernel with pods</text>
+  <rect x="660" y="260" width="480" height="70" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text x="675" y="288" font-size="16" font-weight="700" fill="#14532d">Pods: containers + service account token + network</text>
+  <text x="675" y="312" font-size="14" fill="#14532d">kube-proxy / CNI (Calico, Cilium) enforce Services and NetworkPolicy</text>
+  <text x="660" y="372" font-size="14" fill="#14532d">Node compromise exposes pods, mounted secrets and the kubelet credentials.</text>
+  <text x="660" y="396" font-size="14" fill="#14532d">NodePort range 30000-32767 opens services on every node.</text>
+
+  <path d="M310 195 L326 195" stroke="#334155" stroke-width="3" marker-end="url(#a)"/>
+  <path d="M600 195 L656 195" stroke="#334155" stroke-width="3" marker-end="url(#a)"/>
+
+  <rect x="40" y="450" width="1120" height="100" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="482" font-size="17" font-weight="700" fill="#0f172a">Microservices on top</text>
+  <text x="60" y="510" font-size="15" fill="#334155">Each service is a Deployment + Service (+ Ingress). Many small services mean many identities, many network paths and many images.</text>
+  <text x="60" y="534" font-size="15" fill="#334155">Default pod networking is flat: without NetworkPolicy every pod can reach every pod.</text>
+</svg>

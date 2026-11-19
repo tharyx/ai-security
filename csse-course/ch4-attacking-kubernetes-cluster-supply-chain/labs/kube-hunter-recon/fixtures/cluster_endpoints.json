@@ -1,0 +1,12 @@
+{
+  "note": "Simulated inventory for a lab cluster. Addresses are RFC 5737 documentation ranges. Nothing here was scanned.",
+  "endpoints": [
+    {"host": "203.0.113.10", "port": 6443, "service": "kube-apiserver", "public": true, "anonymous": {"/version": 200, "/api/v1/namespaces": 403}},
+    {"host": "203.0.113.11", "port": 6443, "service": "kube-apiserver", "public": true, "anonymous": {"/version": 200, "/api/v1/namespaces": 200}},
+    {"host": "203.0.113.21", "port": 10250, "service": "kubelet", "public": true, "anonymous": {"/pods": 200, "/run": 405}},
+    {"host": "203.0.113.22", "port": 10255, "service": "kubelet", "public": false, "anonymous": {"/pods": 200}},
+    {"host": "203.0.113.30", "port": 2379, "service": "etcd", "public": false, "anonymous": {"/version": 200}},
+    {"host": "203.0.113.40", "port": 8443, "service": "dashboard", "public": true, "exposed_externally": true, "auth_required": false, "anonymous": {"/": 200}},
+    {"host": "203.0.113.23", "port": 10250, "service": "kubelet", "public": false, "anonymous": {"/pods": 401}}
+  ]
+}

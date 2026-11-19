@@ -1,0 +1,13 @@
+image:
+  repository: registry.corp.example/shop/web
+  tag: "1.4"
+  digest: sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+securityContext:
+  privileged: false
+  runAsNonRoot: true
+service:
+  type: ClusterIP
+rbac:
+  clusterAdmin: false
+hooks:
+  enabled: false

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The software supply chain from developer to cloud</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">The software supply chain: developer to cloud</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Every box is something you did not fully write yourself or can change without a code review. Each one is an attack point.</text>
+
+  <!-- row 1 : code side -->
+  <rect x="40" y="110" width="170" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="125" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">1 Code creation</text>
+  <text x="125" y="162" text-anchor="middle" font-size="13" fill="#475569">developer, IDE,</text>
+  <text x="125" y="180" text-anchor="middle" font-size="13" fill="#475569">AI assistant</text>
+
+  <rect x="250" y="110" width="170" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="335" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">2 Source (SCM)</text>
+  <text x="335" y="162" text-anchor="middle" font-size="13" fill="#475569">Git repo, branches,</text>
+  <text x="335" y="180" text-anchor="middle" font-size="13" fill="#475569">reviews, secrets</text>
+
+  <rect x="460" y="110" width="170" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="545" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">3 Inventory</text>
+  <text x="545" y="162" text-anchor="middle" font-size="13" fill="#475569">own + third-party</text>
+  <text x="545" y="180" text-anchor="middle" font-size="13" fill="#475569">packages, registries</text>
+
+  <rect x="670" y="110" width="170" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="755" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">4 Build (CI/CD)</text>
+  <text x="755" y="162" text-anchor="middle" font-size="13" fill="#475569">runners, secrets,</text>
+  <text x="755" y="180" text-anchor="middle" font-size="13" fill="#475569">pipeline config</text>
+
+  <rect x="880" y="110" width="170" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="965" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">5 Application</text>
+  <text x="965" y="162" text-anchor="middle" font-size="13" fill="#475569">the built artifact:</text>
+  <text x="965" y="180" text-anchor="middle" font-size="13" fill="#475569">binary, package, SBOM</text>
+
+  <path d="M210,155 L250,155" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M420,155 L460,155" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M630,155 L670,155" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M840,155 L880,155" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M965,200 L965,270 L965,290" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <!-- row 2 : runtime side -->
+  <rect x="880" y="290" width="170" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="965" y="320" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">6 Containers</text>
+  <text x="965" y="342" text-anchor="middle" font-size="13" fill="#475569">base image, registry,</text>
+  <text x="965" y="360" text-anchor="middle" font-size="13" fill="#475569">image tags, signatures</text>
+
+  <rect x="670" y="290" width="170" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="755" y="320" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">7 Clusters</text>
+  <text x="755" y="342" text-anchor="middle" font-size="13" fill="#475569">Kubernetes, Helm,</text>
+  <text x="755" y="360" text-anchor="middle" font-size="13" fill="#475569">RBAC, admission</text>
+
+  <rect x="460" y="290" width="170" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="545" y="320" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">8 Cloud</text>
+  <text x="545" y="342" text-anchor="middle" font-size="13" fill="#475569">IAM, IaC, managed</text>
+  <text x="545" y="360" text-anchor="middle" font-size="13" fill="#475569">services, pipelines' roles</text>
+
+  <path d="M880,335 L840,335" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M670,335 L630,335" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- left: external supply -->
+  <rect x="40" y="290" width="360" height="90" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="220" y="320" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Outside your control</text>
+  <text x="220" y="342" text-anchor="middle" font-size="13" fill="#991b1b">npm / PyPI / Maven / Docker Hub, GitHub Actions,</text>
+  <text x="220" y="360" text-anchor="middle" font-size="13" fill="#991b1b">vendor updates, CDNs, base images</text>
+  <path d="M220,290 L220,230 L545,230 L545,200" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#a)"/>
+  <path d="M400,335 L460,335" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
+  <text x="300" y="224" font-size="12" fill="#991b1b">pulled in as dependencies</text>
+
+  <!-- legend / controls -->
+  <rect x="40" y="420" width="1010" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="60" y="448" font-size="15" font-weight="700" fill="#166534">The controls that run along the whole chain (chapter 6)</text>
+  <text x="60" y="474" font-size="14" fill="#0f172a">Inventory and SBOM  |  signed commits and protected branches  |  pinned, verified dependencies</text>
+  <text x="60" y="496" font-size="14" fill="#0f172a">Hardened, ephemeral builders and SLSA provenance  |  image signing and admission policy</text>
+  <text x="60" y="518" font-size="14" fill="#0f172a">Least-privilege identities (OIDC, no long-lived keys)  |  detection and incident response</text>
+</svg>

@@ -1,0 +1,96 @@
+# Lab fixture: namespaces, roles and pods with deliberately risky RBAC. Names are made up.
+apiVersion: v1
+kind: Namespace
+metadata: {name: shop}
+---
+apiVersion: v1
+kind: Namespace
+metadata: {name: payments}
+---
+# Risky 1: a "monitoring" ClusterRole that can list secrets everywhere
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata: {name: metrics-reader}
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "nodes", "secrets"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata: {name: metrics-reader-binding}
+subjects:
+  - {kind: ServiceAccount, name: metrics, namespace: shop}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: ClusterRole, name: metrics-reader}
+---
+# Risky 2: a developer can exec into pods and create pods in shop
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: {name: developer, namespace: shop}
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/log"]
+    verbs: ["get", "list", "create", "delete"]
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: {name: dev-alice, namespace: shop}
+subjects:
+  - {kind: User, name: alice@example.org}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: developer}
+---
+# Risky 3: CI deployer can bind roles and impersonate
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata: {name: ci-deployer}
+rules:
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["rolebindings", "roles"]
+    verbs: ["create", "bind", "escalate"]
+  - apiGroups: [""]
+    resources: ["serviceaccounts"]
+    verbs: ["impersonate"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata: {name: ci-deployer-binding}
+subjects:
+  - {kind: ServiceAccount, name: ci, namespace: payments}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: ClusterRole, name: ci-deployer}
+---
+# Good: a workload that reads exactly one named secret
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: {name: read-own-secret, namespace: shop}
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: ["web-config"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: {name: web-own-secret, namespace: shop}
+subjects:
+  - {kind: ServiceAccount, name: web, namespace: shop}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: read-own-secret}
+---
+apiVersion: v1
+kind: Pod
+metadata: {name: metrics-agent, namespace: shop}
+spec:
+  serviceAccountName: metrics
+  containers:
+    - {name: agent, image: "registry.corp.example/ops/metrics:2.1"}
+---
+apiVersion: v1
+kind: Pod
+metadata: {name: web-1, namespace: shop}
+spec:
+  serviceAccountName: web
+  automountServiceAccountToken: false
+  containers:
+    - {name: web, image: "registry.corp.example/shop/web:1.4"}

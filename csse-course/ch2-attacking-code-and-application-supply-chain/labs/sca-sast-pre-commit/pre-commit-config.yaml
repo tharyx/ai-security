@@ -1,0 +1,17 @@
+# Fixture in the real pre-commit format. `repo: local` hooks run commands from THIS repo, so a reviewer
+# must read them (see the exploiting-pre-commit-hooks lab). The simulated runner maps `entry` to built-in scanners.
+# With the real tool you would use the tools' own hook repos (for example Bandit, Semgrep, osv-scanner):
+# see ../../real-tools/pre-commit.md. Check each project's docs for the current hook ids and revs.
+repos:
+  - repo: local
+    hooks:
+      - id: sca-check
+        name: SCA on lock files
+        entry: csse-sca-check
+        language: system
+        files: (\.lock|requirements\.txt)$
+      - id: sast-check
+        name: SAST on python
+        entry: csse-sast-check
+        language: system
+        files: \.py$

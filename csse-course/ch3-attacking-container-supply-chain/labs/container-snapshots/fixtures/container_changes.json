@@ -1,0 +1,10 @@
+{
+  "note": "What `docker diff shop-container` would show after someone logged in and 'fixed' something. All strings are harmless.",
+  "files": {
+    "/srv/app/config.yaml": "debug: true",
+    "/usr/local/bin/healthcheck.sh": "#!/bin/sh\n# CANARY-SNAPSHOT-MARKER (harmless)\necho ok",
+    "/etc/cron.d/refresh": "*/5 * * * * root /usr/local/bin/healthcheck.sh",
+    "/srv/app/notes.txt": "temporary debugging notes",
+    "/etc/passwd": null
+  }
+}

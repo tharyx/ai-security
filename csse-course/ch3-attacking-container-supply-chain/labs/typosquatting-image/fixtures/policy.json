@@ -1,0 +1,5 @@
+{
+  "allowed_registries": ["registry.corp.example", "docker.io", "gcr.io"],
+  "popular": ["library/nginx", "library/redis", "library/postgres", "library/python", "library/alpine", "library/node", "library/ubuntu", "library/busybox"],
+  "require_digest": true
+}

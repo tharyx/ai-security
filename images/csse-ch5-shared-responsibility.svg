@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="470" viewBox="0 0 1100 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Shared responsibility model: who secures what across on-premises, IaaS, PaaS, serverless and SaaS</title>
+  <rect width="1100" height="470" fill="#ffffff"/>
+  <text x="30" y="40" font-size="26" font-weight="700" fill="#0f172a">Shared security model of the cloud</text>
+  <text x="30" y="66" font-size="14" fill="#475569">Orange = you. Blue = the provider. The line moves up as the service becomes more managed (details vary by service: verify in provider docs).</text>
+  <g font-size="14" fill="#0f172a" text-anchor="middle" font-weight="600">
+    <text x="300" y="104">On-premises</text><text x="470" y="104">IaaS (VM)</text><text x="640" y="104">PaaS / containers</text><text x="810" y="104">Serverless</text><text x="980" y="104">SaaS</text>
+  </g>
+  <g font-size="13" fill="#0f172a">
+    <text x="30" y="145">Data, identities, access policy</text>
+    <text x="30" y="195">Application code and dependencies</text>
+    <text x="30" y="245">Runtime, OS patching, containers</text>
+    <text x="30" y="295">Network controls, virtualization</text>
+    <text x="30" y="345">Physical hosts, data centre</text>
+  </g>
+  <!-- rows: y=120,170,220,270,320 height 36 -->
+  <g stroke="#ffffff" stroke-width="3">
+    <!-- on-prem -->
+    <rect x="230" y="120" width="140" height="36" fill="#fed7aa"/><rect x="230" y="170" width="140" height="36" fill="#fed7aa"/><rect x="230" y="220" width="140" height="36" fill="#fed7aa"/><rect x="230" y="270" width="140" height="36" fill="#fed7aa"/><rect x="230" y="320" width="140" height="36" fill="#fed7aa"/>
+    <!-- iaas -->
+    <rect x="400" y="120" width="140" height="36" fill="#fed7aa"/><rect x="400" y="170" width="140" height="36" fill="#fed7aa"/><rect x="400" y="220" width="140" height="36" fill="#fed7aa"/><rect x="400" y="270" width="140" height="36" fill="#bfdbfe"/><rect x="400" y="320" width="140" height="36" fill="#bfdbfe"/>
+    <!-- paas -->
+    <rect x="570" y="120" width="140" height="36" fill="#fed7aa"/><rect x="570" y="170" width="140" height="36" fill="#fed7aa"/><rect x="570" y="220" width="140" height="36" fill="#bfdbfe"/><rect x="570" y="270" width="140" height="36" fill="#bfdbfe"/><rect x="570" y="320" width="140" height="36" fill="#bfdbfe"/>
+    <!-- serverless -->
+    <rect x="740" y="120" width="140" height="36" fill="#fed7aa"/><rect x="740" y="170" width="140" height="36" fill="#fed7aa"/><rect x="740" y="220" width="140" height="36" fill="#bfdbfe"/><rect x="740" y="270" width="140" height="36" fill="#bfdbfe"/><rect x="740" y="320" width="140" height="36" fill="#bfdbfe"/>
+    <!-- saas -->
+    <rect x="910" y="120" width="140" height="36" fill="#fed7aa"/><rect x="910" y="170" width="140" height="36" fill="#bfdbfe"/><rect x="910" y="220" width="140" height="36" fill="#bfdbfe"/><rect x="910" y="270" width="140" height="36" fill="#bfdbfe"/><rect x="910" y="320" width="140" height="36" fill="#bfdbfe"/>
+  </g>
+  <text x="30" y="395" font-size="14" fill="#7c2d12" font-weight="600">Always yours: data, identities and access policy. Misconfiguration lives on your side of the line.</text>
+  <text x="30" y="420" font-size="14" fill="#334155">Supply-chain angle: in serverless and PaaS you still own your code, your dependencies, your layers and your deployment pipeline.</text>
+  <text x="30" y="445" font-size="12" fill="#64748b">Simplified teaching diagram. Provider documents publish the exact split per service.</text>
+</svg>

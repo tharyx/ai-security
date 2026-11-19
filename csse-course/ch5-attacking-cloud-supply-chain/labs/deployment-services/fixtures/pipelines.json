@@ -1,0 +1,26 @@
+{
+  "pipelines": [
+    {"name": "web-release", "service": "codepipeline",
+     "service_role": {"name": "pipeline-role-shared", "policies": [{"Action": ["*"], "Resource": "*"}]},
+     "artifact_store": {"name": "acme-pipeline-artifacts", "writers": ["pipeline-role-shared", "dev-team-role", "contractor-role"], "versioning": false, "digest_verification": false},
+     "stages": ["source", "build", "approval", "deploy"], "approval_before_prod": true, "plain_variables": {"DEPLOY_TOKEN": "FAKE-token-not-real"}},
+    {"name": "api-release", "service": "codepipeline",
+     "service_role": {"name": "pipeline-role-shared", "policies": [{"Action": ["*"], "Resource": "*"}]},
+     "artifact_store": {"name": "acme-pipeline-artifacts", "writers": ["pipeline-role-shared", "dev-team-role", "contractor-role"], "versioning": false, "digest_verification": false},
+     "stages": ["source", "build", "deploy"], "approval_before_prod": false, "plain_variables": {}},
+    {"name": "mobile-backend", "service": "azure-devops",
+     "service_role": {"name": "sc-subscription-owner", "policies": [{"Action": ["Owner"], "Resource": "subscription"}]},
+     "service_connection_authorized_for_all_pipelines": true,
+     "artifact_store": {"name": "feeds/internal", "writers": ["Project Contributors"], "versioning": true, "digest_verification": false},
+     "stages": ["build", "deploy"], "approval_before_prod": false, "plain_variables": {"SP_SECRET": "FAKE-sp-secret"}},
+    {"name": "data-jobs", "service": "cloud-build",
+     "service_role": {"name": "default-cloudbuild-sa", "policies": [{"Action": ["roles/editor"], "Resource": "project"}]},
+     "artifact_store": {"name": "gs://acme_cloudbuild", "writers": ["default-cloudbuild-sa", "allAuthenticatedUsers"], "versioning": true, "digest_verification": true},
+     "stages": ["build", "deploy"], "approval_before_prod": true, "plain_variables": {}},
+    {"name": "hardened", "service": "codepipeline",
+     "service_role": {"name": "hardened-role", "policies": [{"Action": ["s3:GetObject", "s3:PutObject", "codedeploy:CreateDeployment"], "Resource": "arn:aws:s3:::acme-hardened/*"}]},
+     "artifact_store": {"name": "acme-hardened", "writers": ["hardened-role"], "versioning": true, "digest_verification": true},
+     "stages": ["source", "build", "approval", "deploy"], "approval_before_prod": true, "plain_variables": {}}
+  ],
+  "pipeline_principals": ["pipeline-role-shared", "default-cloudbuild-sa", "hardened-role", "Build Service"]
+}

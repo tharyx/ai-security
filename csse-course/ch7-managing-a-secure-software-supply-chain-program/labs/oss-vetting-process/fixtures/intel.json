@@ -1,0 +1,94 @@
+{
+  "acme-http": {
+    "license": "Apache-2.0",
+    "scorecard": {"Maintained": 10, "Code-Review": 9, "Branch-Protection": 8, "Vulnerabilities": 10,
+                  "Dangerous-Workflow": 10, "Pinned-Dependencies": 7, "Signed-Releases": 8,
+                  "Security-Policy": 10, "Token-Permissions": 10, "License": 10},
+    "vulnerabilities": [],
+    "maintainers": {"last_release": "2026-09-20", "active_maintainers": 5, "owner_changed_days_ago": null},
+    "package_meta": {"age_days": 2400, "has_install_script": false, "network_at_install": false, "obfuscated_code": false}
+  },
+  "yamlish": {
+    "license": "GPL-3.0",
+    "scorecard": {"Maintained": 8, "Code-Review": 6, "Branch-Protection": 6, "Vulnerabilities": 10,
+                  "Dangerous-Workflow": 10, "Pinned-Dependencies": 5, "Signed-Releases": 0,
+                  "Security-Policy": 10, "Token-Permissions": 8, "License": 10},
+    "vulnerabilities": [],
+    "maintainers": {"last_release": "2026-06-01", "active_maintainers": 3, "owner_changed_days_ago": null},
+    "package_meta": {"age_days": 1800, "has_install_script": false, "network_at_install": false, "obfuscated_code": false}
+  },
+  "reqeusts": {
+    "license": "MIT",
+    "scorecard": {"Maintained": 3, "Code-Review": 0, "Branch-Protection": 0, "Vulnerabilities": 10,
+                  "Dangerous-Workflow": 10, "Pinned-Dependencies": 0, "Signed-Releases": 0,
+                  "Security-Policy": 0, "Token-Permissions": 0, "License": 10},
+    "vulnerabilities": [],
+    "maintainers": {"last_release": "2026-10-30", "active_maintainers": 1, "owner_changed_days_ago": 12},
+    "package_meta": {"age_days": 6, "has_install_script": true, "network_at_install": true, "obfuscated_code": true}
+  },
+  "oldcrypto": {
+    "license": "BSD-3-Clause",
+    "scorecard": {"Maintained": 0, "Code-Review": 2, "Branch-Protection": 0, "Vulnerabilities": 2,
+                  "Dangerous-Workflow": 10, "Pinned-Dependencies": 3, "Signed-Releases": 0,
+                  "Security-Policy": 0, "Token-Permissions": 5, "License": 10},
+    "vulnerabilities": [
+      {"id": "ADV-FIXTURE-0001", "severity": "critical", "affected_versions": ["1.0.0", "1.1.0"], "fixed_in": null, "kev": false}
+    ],
+    "maintainers": {"last_release": "2023-02-01", "active_maintainers": 0, "owner_changed_days_ago": null},
+    "package_meta": {"age_days": 3000, "has_install_script": false, "network_at_install": false, "obfuscated_code": false}
+  },
+  "parsekit": {
+    "license": "MIT",
+    "scorecard": {"Maintained": 10, "Code-Review": 8, "Branch-Protection": 7, "Vulnerabilities": 8,
+                  "Dangerous-Workflow": 10, "Pinned-Dependencies": 6, "Signed-Releases": 5,
+                  "Security-Policy": 10, "Token-Permissions": 9, "License": 10},
+    "vulnerabilities": [
+      {"id": "ADV-FIXTURE-0002", "severity": "high", "affected_versions": ["2.3.0", "2.3.1"], "fixed_in": "2.3.2", "kev": false}
+    ],
+    "maintainers": {"last_release": "2026-08-15", "active_maintainers": 4, "owner_changed_days_ago": null},
+    "package_meta": {"age_days": 900, "has_install_script": false, "network_at_install": false, "obfuscated_code": false}
+  },
+  "tiny-utils": {
+    "license": "MIT",
+    "scorecard": {"Maintained": 6, "Code-Review": 3, "Branch-Protection": 4, "Vulnerabilities": 10,
+                  "Dangerous-Workflow": 10, "Pinned-Dependencies": 5, "Signed-Releases": 0,
+                  "Security-Policy": 0, "Token-Permissions": 6, "License": 10},
+    "vulnerabilities": [],
+    "maintainers": {"last_release": "2026-07-01", "active_maintainers": 1, "owner_changed_days_ago": null},
+    "package_meta": {"age_days": 700, "has_install_script": false, "network_at_install": false, "obfuscated_code": false}
+  },
+  "agpl-chart": {
+    "license": "AGPL-3.0",
+    "scorecard": {"Maintained": 10, "Code-Review": 9, "Branch-Protection": 9, "Vulnerabilities": 10,
+                  "Dangerous-Workflow": 10, "Pinned-Dependencies": 8, "Signed-Releases": 8,
+                  "Security-Policy": 10, "Token-Permissions": 10, "License": 10},
+    "vulnerabilities": [],
+    "maintainers": {"last_release": "2026-10-01", "active_maintainers": 6, "owner_changed_days_ago": null},
+    "package_meta": {"age_days": 2000, "has_install_script": false, "network_at_install": false, "obfuscated_code": false}
+  },
+  "exploited-lib": {
+    "license": "Apache-2.0",
+    "scorecard": {"Maintained": 9, "Code-Review": 9, "Branch-Protection": 9, "Vulnerabilities": 3,
+                  "Dangerous-Workflow": 10, "Pinned-Dependencies": 8, "Signed-Releases": 8,
+                  "Security-Policy": 10, "Token-Permissions": 10, "License": 10},
+    "vulnerabilities": [
+      {"id": "ADV-FIXTURE-0003", "severity": "critical", "affected_versions": ["4.0.0"], "fixed_in": "4.0.1", "kev": true}
+    ],
+    "maintainers": {"last_release": "2026-10-10", "active_maintainers": 5, "owner_changed_days_ago": null},
+    "package_meta": {"age_days": 2200, "has_install_script": false, "network_at_install": false, "obfuscated_code": false}
+  },
+  "vendorsdk": {
+    "license": "Apache-2.0",
+    "evidence": {"vendor_sbom": false, "psirt_contact": true, "security_attestation": true},
+    "vulnerabilities": [],
+    "maintainers": {"last_release": "2026-09-01", "active_maintainers": 10, "owner_changed_days_ago": null},
+    "package_meta": {"age_days": 3000, "has_install_script": false, "network_at_install": false, "obfuscated_code": false}
+  },
+  "internal-billing": {
+    "license": "Apache-2.0",
+    "evidence": {"code_review_enforced": true, "sast_clean": true, "signed_builds": true},
+    "vulnerabilities": [],
+    "maintainers": {"last_release": "2026-10-20", "active_maintainers": 4, "owner_changed_days_ago": null},
+    "package_meta": {"age_days": 1200, "has_install_script": false, "network_at_install": false, "obfuscated_code": false}
+  }
+}

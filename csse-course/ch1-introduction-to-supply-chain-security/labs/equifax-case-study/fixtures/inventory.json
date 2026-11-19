@@ -1,0 +1,44 @@
+{
+  "as_of_note": "Synthetic data. Hostnames are *.example. This models a Struts-like situation; it is not Equifax data.",
+  "assets": [
+    {
+      "id": "dispute-portal",
+      "host": "disputes.corp.example",
+      "owner": "team-consumer-web",
+      "internet_facing": true,
+      "criticality": "critical",
+      "components": [
+        {"name": "struts2-core", "version": "2.3.31", "kind": "java-lib"},
+        {"name": "log-helper", "version": "1.2.0", "kind": "java-lib"}
+      ]
+    },
+    {
+      "id": "marketing-site",
+      "host": "www.corp.example",
+      "owner": "team-marketing",
+      "internet_facing": true,
+      "criticality": "medium",
+      "components": [
+        {"name": "struts2-core", "version": "2.5.12", "kind": "java-lib"}
+      ]
+    },
+    {
+      "id": "batch-reports",
+      "host": "batch01.internal.example",
+      "owner": "team-data",
+      "internet_facing": false,
+      "criticality": "high",
+      "components": [
+        {"name": "struts2-core", "version": "2.3.32", "kind": "java-lib"}
+      ]
+    },
+    {
+      "id": "legacy-intake",
+      "host": "intake.corp.example",
+      "owner": null,
+      "internet_facing": true,
+      "criticality": "critical",
+      "components": []
+    }
+  ]
+}

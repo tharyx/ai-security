@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Known versus unknown supply chain threats: which control sees which</title>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">Known versus unknown: what each control can see</text>
+  <text x="40" y="74" font-size="16" fill="#475569">A vulnerability database only knows what someone already reported. Malicious updates and backdoors are new by definition.</text>
+
+  <rect x="40" y="110" width="540" height="400" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="310" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#1e3a8a">KNOWN problems</text>
+  <text x="310" y="170" text-anchor="middle" font-size="13" fill="#1e3a8a">A CVE, advisory or malware report already exists</text>
+  <text x="70" y="215" font-size="15" font-weight="700" fill="#1e3a8a">Detected by</text>
+  <text x="70" y="243" font-size="14" fill="#1e3a8a">- SCA and SBOM matching (OSV, NVD, GHSA)</text>
+  <text x="70" y="267" font-size="14" fill="#1e3a8a">- container image scanners (Trivy, Grype)</text>
+  <text x="70" y="291" font-size="14" fill="#1e3a8a">- KEV and EPSS to rank what to fix first</text>
+  <text x="70" y="315" font-size="14" fill="#1e3a8a">- malware feeds of already-reported packages</text>
+  <text x="70" y="360" font-size="15" font-weight="700" fill="#1e3a8a">Examples</text>
+  <text x="70" y="388" font-size="14" fill="#1e3a8a">- Struts CVE-2017-5638 (Equifax): patch existed</text>
+  <text x="70" y="412" font-size="14" fill="#1e3a8a">- an old lodash or minimist with a published CVE</text>
+  <text x="70" y="456" font-size="13" fill="#1e3a8a">Weakness: lag between the attack and the report;</text>
+  <text x="70" y="476" font-size="13" fill="#1e3a8a">a clean scan says "no known issue", not "safe".</text>
+
+  <rect x="620" y="110" width="540" height="400" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="890" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#991b1b">UNKNOWN problems</text>
+  <text x="890" y="170" text-anchor="middle" font-size="13" fill="#991b1b">Nobody has reported it yet (zero-day or fresh malice)</text>
+  <text x="650" y="215" font-size="15" font-weight="700" fill="#991b1b">Detected (sometimes) by</text>
+  <text x="650" y="243" font-size="14" fill="#991b1b">- behaviour: install-time network, new processes</text>
+  <text x="650" y="267" font-size="14" fill="#991b1b">- malicious-package heuristics (GuardDog-style)</text>
+  <text x="650" y="291" font-size="14" fill="#991b1b">- provenance and reproducible-build comparison</text>
+  <text x="650" y="315" font-size="14" fill="#991b1b">- diffing releases, maintainer and ownership changes</text>
+  <text x="650" y="360" font-size="15" font-weight="700" fill="#991b1b">Examples</text>
+  <text x="650" y="388" font-size="14" fill="#991b1b">- xz-utils backdoor: release tarball differed</text>
+  <text x="650" y="410" font-size="14" fill="#991b1b">  from the git source; found by a performance anomaly</text>
+  <text x="650" y="434" font-size="14" fill="#991b1b">- Shai-Hulud worm: new versions of trusted packages</text>
+  <text x="650" y="476" font-size="13" fill="#991b1b">Defence: shrink exposure (cooldown on new versions,</text>
+  <text x="650" y="496" font-size="13" fill="#991b1b">pinning, least privilege) and detect early.</text>
+</svg>

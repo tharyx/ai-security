@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata: {name: legacy-sa, namespace: shop}
+secrets:
+  - name: legacy-sa-token-abcde
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: {name: web, namespace: shop}
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: {name: operator, namespace: shop}
+---
+apiVersion: v1
+kind: Pod
+metadata: {name: sloppy, namespace: shop}
+spec:
+  containers:
+    - {name: app, image: "registry.corp.example/shop/app:1.0"}
+---
+apiVersion: v1
+kind: Pod
+metadata: {name: web-1, namespace: shop}
+spec:
+  serviceAccountName: web
+  containers:
+    - {name: app, image: "registry.corp.example/shop/web:1.4"}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: operator-1
+  namespace: shop
+  annotations: {needs-kubernetes-api: "true"}
+spec:
+  serviceAccountName: operator
+  automountServiceAccountToken: false
+  containers:
+    - {name: op, image: "registry.corp.example/shop/operator:0.3", volumeMounts: [{name: api-token, mountPath: /var/run/secrets/tokens, readOnly: true}]}
+  volumes:
+    - name: api-token
+      projected:
+        sources:
+          - serviceAccountToken: {path: token, audience: "https://vault.example", expirationSeconds: 600}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: long-lived
+  namespace: shop
+  annotations: {needs-kubernetes-api: "true"}
+spec:
+  serviceAccountName: legacy-sa
+  automountServiceAccountToken: false
+  containers:
+    - {name: app, image: "registry.corp.example/shop/app:1.0"}
+  volumes:
+    - name: t
+      projected:
+        sources:
+          - serviceAccountToken: {path: token, expirationSeconds: 86400}

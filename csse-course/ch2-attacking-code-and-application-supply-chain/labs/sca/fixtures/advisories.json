@@ -1,0 +1,12 @@
+[
+  {"id": "EXAMPLE-2026-0001", "package": "examplelib", "severity": "high",
+   "ranges": [{"introduced": "1.0.0", "fixed": "1.4.2"}], "summary": "path traversal in archive extraction (fictional)"},
+  {"id": "EXAMPLE-2026-0002", "package": "yaml-lite", "severity": "critical",
+   "ranges": [{"introduced": "0.1.0", "fixed": "0.6.0"}], "summary": "unsafe object construction when loading documents (fictional)"},
+  {"id": "EXAMPLE-2026-0003", "package": "tinyhttp-core", "severity": "medium",
+   "ranges": [{"introduced": "0.9.0", "fixed": "0.9.2"}], "summary": "header injection (fictional)"},
+  {"id": "EXAMPLE-2026-0004", "package": "pdf-render-kit", "severity": "low",
+   "ranges": [{"introduced": "1.0.0", "fixed": "2.1.0"}], "summary": "excessive memory use on crafted input (fictional)"},
+  {"id": "EXAMPLE-2026-0005", "package": "safe-utils", "severity": "high",
+   "ranges": [{"introduced": "2.0.0", "fixed": "3.0.0"}], "summary": "already fixed in the version we use (fictional)"}
+]

@@ -1,0 +1,12 @@
+# Multi-stage: build the virtualenv in a full image, copy it to a distroless runtime.
+FROM python:3.12-slim@sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb AS build
+RUN python -m venv /venv
+COPY requirements.lock ./
+RUN /venv/bin/pip install --require-hashes -r requirements.lock
+
+FROM gcr.io/distroless/python3-debian12:nonroot@sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+COPY --from=build /venv /venv
+COPY src/ /app/
+USER 65532:65532
+EXPOSE 8080
+ENTRYPOINT ["/venv/bin/python", "/app/main.py"]

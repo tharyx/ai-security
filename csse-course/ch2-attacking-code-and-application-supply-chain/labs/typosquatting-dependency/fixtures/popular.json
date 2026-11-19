@@ -1,0 +1,1 @@
+["requests", "flask", "numpy", "pandas", "django", "matplotlib", "colorama", "boto3", "urllib3", "cryptography", "pyyaml", "jinja2"]

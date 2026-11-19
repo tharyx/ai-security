@@ -1,0 +1,13 @@
+# A requirements file with a few suspicious lines (all names are fixtures; nothing is installed)
+requests==2.31.0
+flask==3.0.0
+numpy==1.26.4
+reqeusts==1.0.0          # swapped letters
+numpyy==1.0.0            # extra letter
+colourama==0.4.6         # one extra letter
+djang0==4.2              # zero instead of o
+rnatplotlib==3.8.0       # rn looks like m
+pandas-utils==0.1        # combosquat
+python-requests==2.0     # combosquat
+aws-cli-helper==0.0.1    # brandjack
+-r other.txt

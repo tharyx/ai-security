@@ -1,0 +1,7 @@
+{
+  "repo_tag": "shop-api:1.0",
+  "layers": [
+    {"created_by": "ADD rootfs.tar /", "files": {"/etc/os-release": "NAME=Debian", "/bin/sh": "SHELL-BINARY", "/etc/passwd": "root:x:0:0:root:/root:/bin/sh"}},
+    {"created_by": "COPY app/ /srv/app/", "files": {"/srv/app/main.py": "print('shop api')", "/srv/app/config.yaml": "debug: false"}}
+  ]
+}

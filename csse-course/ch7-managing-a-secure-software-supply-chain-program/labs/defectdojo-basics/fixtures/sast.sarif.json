@@ -1,0 +1,27 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "fixture-sast",
+          "rules": [
+            {"id": "FX-SQLI-1", "name": "SQL built from user input",
+             "properties": {"security-severity": "8.8", "tags": ["security", "CWE-89"]}},
+            {"id": "FX-HASH-2", "name": "Weak password hash",
+             "properties": {"security-severity": "5.3", "tags": ["security", "CWE-328"]}},
+            {"id": "FX-LOG-3", "name": "Verbose logging", "properties": {"tags": ["style"]}}
+          ]
+        }
+      },
+      "results": [
+        {"ruleId": "FX-SQLI-1", "level": "error", "message": {"text": "query concatenates request parameter"},
+         "locations": [{"physicalLocation": {"artifactLocation": {"uri": "app/db.py"}, "region": {"startLine": 42}}}]},
+        {"ruleId": "FX-HASH-2", "level": "warning", "message": {"text": "md5 used for passwords"},
+         "locations": [{"physicalLocation": {"artifactLocation": {"uri": "app/auth.py"}, "region": {"startLine": 17}}}]},
+        {"ruleId": "FX-LOG-3", "level": "note", "message": {"text": "debug logging enabled"},
+         "locations": [{"physicalLocation": {"artifactLocation": {"uri": "app/main.py"}, "region": {"startLine": 5}}}]}
+      ]
+    }
+  ]
+}

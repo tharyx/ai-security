@@ -1,0 +1,29 @@
+# Example AppArmor profile for a container running a small web service.
+# Teaching sample: start in complain mode while you learn what the app needs, then enforce.
+# Load on the host:   sudo apparmor_parser -r -W /etc/apparmor.d/containers/web-app
+# Run a container:    docker run --security-opt apparmor=web-app ...
+#include <tunables/global>
+
+profile web-app flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  network inet tcp,
+  network inet6 tcp,
+  deny network raw,
+  deny network packet,
+
+  # application files: read-only code, a small writable area
+  /app/** r,
+  /app/server ix,
+  /tmp/** rw,
+
+  # things containers must never touch
+  deny mount,
+  deny umount,
+  deny ptrace,
+  deny /proc/sys/** wklx,
+  deny /proc/sysrq-trigger rwklx,
+  deny /proc/kcore rwklx,
+  deny /sys/** wklx,
+  deny /var/run/docker.sock rwklx,
+}

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Helm chart workflow and its supply chain risks</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">Helm: package, render, install. Each step is trusted code.</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Helm 4 (released 12 Nov 2025) keeps this model. Helm 2's Tiller is long gone. Verify details at helm.sh.</text>
+
+  <rect x="40" y="100" width="230" height="140" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+  <text x="60" y="132" font-size="17" font-weight="700" fill="#92400e">1 Author a chart</text>
+  <text x="60" y="158" font-size="14" fill="#92400e">Chart.yaml, values.yaml,</text>
+  <text x="60" y="178" font-size="14" fill="#92400e">templates/, hooks,</text>
+  <text x="60" y="198" font-size="14" fill="#92400e">dependencies</text>
+  <text x="60" y="224" font-size="14" fill="#92400e">helm create / helm lint</text>
+
+  <rect x="310" y="100" width="230" height="140" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2.5"/>
+  <text x="330" y="132" font-size="17" font-weight="700" fill="#0f172a">2 Publish</text>
+  <text x="330" y="158" font-size="14" fill="#334155">helm package, helm push</text>
+  <text x="330" y="178" font-size="14" fill="#334155">OCI registry or HTTP repo</text>
+  <text x="330" y="198" font-size="14" fill="#334155">sign: .prov (helm package</text>
+  <text x="330" y="218" font-size="14" fill="#334155">--sign) or cosign on OCI</text>
+
+  <rect x="580" y="100" width="280" height="140" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="600" y="132" font-size="17" font-weight="700" fill="#1e3a8a">3 Consume</text>
+  <text x="600" y="158" font-size="14" fill="#1e3a8a">helm repo add / pull / show values</text>
+  <text x="600" y="178" font-size="14" fill="#1e3a8a">helm verify (provenance)</text>
+  <text x="600" y="198" font-size="14" fill="#1e3a8a">helm template | scan the output</text>
+  <text x="600" y="218" font-size="14" fill="#1e3a8a">pin version + digest, commit lock</text>
+
+  <rect x="900" y="100" width="260" height="140" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="920" y="132" font-size="17" font-weight="700" fill="#14532d">4 Install / upgrade</text>
+  <text x="920" y="158" font-size="14" fill="#14532d">helm install / upgrade</text>
+  <text x="920" y="178" font-size="14" fill="#14532d">API calls use YOUR identity</text>
+  <text x="920" y="198" font-size="14" fill="#14532d">Release state stored as a</text>
+  <text x="920" y="218" font-size="14" fill="#14532d">Secret in the namespace</text>
+
+  <path d="M270 170 L306 170" stroke="#334155" stroke-width="3" marker-end="url(#a)"/>
+  <path d="M540 170 L576 170" stroke="#334155" stroke-width="3" marker-end="url(#a)"/>
+  <path d="M860 170 L896 170" stroke="#334155" stroke-width="3" marker-end="url(#a)"/>
+
+  <rect x="40" y="280" width="1120" height="230" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="60" y="312" font-size="18" font-weight="700" fill="#991b1b">Helm chart risks</text>
+  <g font-size="15" fill="#7f1d1d">
+    <text x="60" y="344">Templates: render to any Kubernetes object (a ClusterRoleBinding to cluster-admin, a privileged pod). Scan the RENDERED output.</text>
+    <text x="60" y="370">Values: insecure defaults (privileged, latest tag, LoadBalancer, hostNetwork) ship to everyone who does not override them.</text>
+    <text x="60" y="396">Hooks: pre/post install and upgrade Jobs run code during install, often with broad rights and unpinned images.</text>
+    <text x="60" y="422">Third-party repos: a repo URL can serve different content tomorrow; HTTP repos can be altered in transit; typosquatted chart names.</text>
+    <text x="60" y="448">Dependencies: sub-charts pull more code; version ranges and a missing lock file make builds unrepeatable.</text>
+    <text x="60" y="474">Provenance: without a signature or digest you cannot prove the chart is the one the author published.</text>
+    <text x="60" y="500">Defend: verify, pin, render and scan, restrict who can install, limit the installing identity, review hooks.</text>
+  </g>
+</svg>

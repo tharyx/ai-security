@@ -1,0 +1,17 @@
+# FIXTURE. Conceptual .gitlab-ci.yml. Hedged: GitLab Runner can emit build metadata
+# (a provenance-style statement) next to artifacts when this variable is set; the
+# predicate version and signing options depend on the runner/GitLab version.
+# Verify in the GitLab docs ("SLSA provenance" / "artifacts attestation").
+stages: [build]
+variables:
+  RUNNER_GENERATE_ARTIFACTS_METADATA: "true"
+build:
+  stage: build
+  image: python:3.12
+  script:
+    - python -m build
+  artifacts:
+    paths:
+      - dist/
+  rules:
+    - if: $CI_COMMIT_TAG

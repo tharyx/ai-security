@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>DefectDojo data model: product, engagement, test, finding, with import and deduplication</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">DefectDojo model: where scan results live</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Scanners feed tests. Findings are deduplicated by a hash and then triaged against SLAs. Names as the author recalls them: verify in the docs.</text>
+
+  <rect x="40" y="120" width="200" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="140" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Product</text>
+  <text x="140" y="176" text-anchor="middle" font-size="12" fill="#1e3a8a">an application or service</text>
+  <rect x="300" y="120" width="200" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="400" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Engagement</text>
+  <text x="400" y="176" text-anchor="middle" font-size="12" fill="#1e3a8a">a release, sprint, or CI run</text>
+  <rect x="560" y="120" width="200" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="660" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Test</text>
+  <text x="660" y="176" text-anchor="middle" font-size="12" fill="#1e3a8a">one scanner run (SARIF, Trivy)</text>
+  <rect x="820" y="120" width="200" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="920" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Finding</text>
+  <text x="920" y="176" text-anchor="middle" font-size="12" fill="#92400e">severity, status, hash code</text>
+  <line x1="240" y1="165" x2="298" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="500" y1="165" x2="558" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="760" y1="165" x2="818" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="40" y="270" width="320" height="200" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="200" y="300" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Import and reimport</text>
+  <text x="60" y="330" font-size="13" fill="#334155">import-scan: add results, never close.</text>
+  <text x="60" y="352" font-size="13" fill="#334155">reimport-scan: new = create,</text>
+  <text x="60" y="372" font-size="13" fill="#334155">still present = keep, gone = mitigated,</text>
+  <text x="60" y="392" font-size="13" fill="#334155">back again = reopen.</text>
+  <text x="60" y="430" font-size="12" fill="#475569">Lab: labs/defectdojo-basics</text>
+
+  <rect x="400" y="270" width="340" height="200" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="570" y="300" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Deduplication</text>
+  <text x="420" y="330" font-size="13" fill="#334155">hash of chosen fields per scanner</text>
+  <text x="420" y="352" font-size="13" fill="#334155">(title, component, cwe, file...) or the</text>
+  <text x="420" y="372" font-size="13" fill="#334155">scanner's own unique id. Scope: one</text>
+  <text x="420" y="392" font-size="13" fill="#334155">engagement or the whole product.</text>
+  <text x="420" y="430" font-size="12" fill="#475569">Duplicates are inactive and point to the original.</text>
+
+  <rect x="780" y="270" width="380" height="200" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="970" y="300" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Triage and metrics</text>
+  <text x="800" y="330" font-size="13" fill="#166534">SLA by severity, risk acceptance with</text>
+  <text x="800" y="352" font-size="13" fill="#166534">expiry, false-positive review,</text>
+  <text x="800" y="372" font-size="13" fill="#166534">MTTR, open by severity, SLA compliance.</text>
+  <text x="800" y="430" font-size="12" fill="#166534">Lab: labs/vuln-management-defectdojo</text>
+  <path d="M920 210 L920 240 L970 240 L970 268" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+</svg>

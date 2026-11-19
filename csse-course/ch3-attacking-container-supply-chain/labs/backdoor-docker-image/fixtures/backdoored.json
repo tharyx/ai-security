@@ -1,0 +1,13 @@
+{
+  "name": "shop-api",
+  "tag": "1.0",
+  "config": {"Entrypoint": ["/usr/local/bin/server"], "User": "10001"},
+  "layers": [
+    {"created_by": "base", "files": {"/etc/os-release": "NAME=Debian", "/bin/sh": "SHELL-BINARY"}},
+    {"created_by": "COPY server", "files": {"/usr/local/bin/server": "SERVER-BINARY-v1.0", "/etc/profile.d/lang.sh": "export LANG=C.UTF-8"}},
+    {"created_by": "RUN sh -c 'update-helper' (attacker layer)", "files": {
+      "/etc/profile.d/zz-update.sh": "# CANARY-BACKDOOR-HARMLESS-MARKER: a real backdoor would phone home here\necho canary",
+      "/docker-entrypoint.d/10-warmup.sh": "# CANARY-BACKDOOR-HARMLESS-MARKER\ntrue"
+    }}
+  ]
+}

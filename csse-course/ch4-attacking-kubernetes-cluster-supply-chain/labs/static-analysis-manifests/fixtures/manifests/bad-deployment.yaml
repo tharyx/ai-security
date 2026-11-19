@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Namespace
+metadata: {name: shop}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: web, namespace: shop}
+spec:
+  selector: {matchLabels: {app: web}}
+  template:
+    metadata: {labels: {app: web}}
+    spec:
+      hostPID: true
+      containers:
+        - name: web
+          image: nginx:latest
+          securityContext: {privileged: true}
+          env:
+            - {name: DB_PASSWORD, value: "FAKE-plaintext"}

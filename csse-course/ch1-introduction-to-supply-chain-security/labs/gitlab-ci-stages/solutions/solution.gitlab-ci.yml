@@ -1,0 +1,36 @@
+stages:
+  - build
+  - test
+  - security
+  - deploy
+
+build-app:
+  stage: build
+  script:
+    - echo building
+  artifacts:
+    paths: [dist/app.bin]
+
+unit-tests:
+  stage: test
+  script:
+    - echo running unit tests
+
+secret-scan:
+  stage: security
+  script:
+    - echo scanning the repository for secrets
+
+sast:
+  stage: security
+  script:
+    - echo static analysis
+
+deploy-prod:
+  stage: deploy
+  script:
+    - echo deploying to prod
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+  environment: production

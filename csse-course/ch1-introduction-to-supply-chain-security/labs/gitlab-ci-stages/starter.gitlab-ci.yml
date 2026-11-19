@@ -1,0 +1,23 @@
+# EXERCISE FILE: edit me until `python stage_checker.py starter.gitlab-ci.yml` shows all PASS.
+# Exercise 1: add a "test" stage between build and deploy, with a unit-tests job.
+# Exercise 2: add a "security" stage (before deploy) with a secret-scan job and a sast job.
+# Exercise 3: make deploy-prod manual and only on the main branch.
+# Exercise 4: remove the hard-coded token below (use a masked, protected CI/CD variable instead).
+stages:
+  - build
+  - deploy
+
+variables:
+  DEPLOY_TOKEN: "FAKE-glpat-0000000000000000"
+
+build-app:
+  stage: build
+  script:
+    - echo building
+  artifacts:
+    paths: [dist/app.bin]
+
+deploy-prod:
+  stage: deploy
+  script:
+    - echo deploying to prod

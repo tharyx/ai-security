@@ -1,0 +1,17 @@
+{
+  "architecture": "amd64",
+  "os": "linux",
+  "author": "example-team",
+  "config": {
+    "User": "10001:10001",
+    "Env": ["PATH=/usr/local/bin:/usr/bin:/bin", "APP_ENV=prod"],
+    "Entrypoint": ["/usr/local/bin/server"],
+    "Cmd": ["--port", "8080"],
+    "ExposedPorts": {"8080/tcp": {}}
+  },
+  "history": [
+    {"created_by": "COPY /out/server /usr/local/bin/server # buildkit"},
+    {"created_by": "USER 10001:10001"}
+  ],
+  "rootfs": {"type": "layers", "diff_ids": ["sha256:3333333333333333333333333333333333333333333333333333333333333333"]}
+}

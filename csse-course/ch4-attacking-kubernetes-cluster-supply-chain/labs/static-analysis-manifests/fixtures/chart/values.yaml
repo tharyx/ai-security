@@ -1,0 +1,15 @@
+replicas: 2
+image:
+  repository: nginx
+  tag: latest
+securityContext:
+  privileged: true
+  runAsNonRoot: false
+service:
+  type: LoadBalancer
+  port: 80
+rbac:
+  clusterAdmin: true
+hooks:
+  enabled: true
+  image: "ghcr.io/someone/db-migrate:latest"

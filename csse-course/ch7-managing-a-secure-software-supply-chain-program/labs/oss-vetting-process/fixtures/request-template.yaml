@@ -1,0 +1,10 @@
+# Component intake request form (fixture). One file per request.
+name: acme-http                 # package or product name
+version: "3.2.1"
+ecosystem: pypi                 # pypi | npm | maven | go | commercial | internal
+component_type: open_source     # open_source | commercial | third_party | proprietary
+use: runtime                    # runtime | build | dev-only | test-only
+requester: dev-team-payments
+justification: "Need an HTTP client with HTTP/2 support; the standard library one is not enough."
+alternatives_considered: ["urllib3", "write our own"]
+data_exposure: internal         # public | internal | confidential | regulated

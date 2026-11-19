@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Pod
+metadata: {name: debug-priv, namespace: tools}
+spec:
+  hostPID: true
+  containers:
+    - name: shell
+      image: "registry.corp.example/tools/debug:1.0"
+      securityContext: {privileged: true}
+      volumeMounts: [{name: host, mountPath: /host}]
+  volumes:
+    - name: host
+      hostPath: {path: /}
+---
+apiVersion: v1
+kind: Pod
+metadata: {name: log-collector, namespace: tools}
+spec:
+  containers:
+    - name: agent
+      image: "registry.corp.example/ops/logs:3.1"
+      securityContext: {capabilities: {add: [NET_BIND_SERVICE]}}
+      volumeMounts: [{name: logs, mountPath: /var/log/host, readOnly: true}]
+  volumes:
+    - name: logs
+      hostPath: {path: /var/log}
+---
+apiVersion: v1
+kind: Pod
+metadata: {name: web-baseline, namespace: shop}
+spec:
+  containers:
+    - name: web
+      image: "registry.corp.example/shop/web:1.4"
+---
+apiVersion: v1
+kind: Pod
+metadata: {name: web-restricted, namespace: shop}
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 10001
+    seccompProfile: {type: RuntimeDefault}
+  containers:
+    - name: web
+      image: "registry.corp.example/shop/web@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities: {drop: [ALL]}

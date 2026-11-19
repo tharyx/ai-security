@@ -1,0 +1,23 @@
+{
+  "note": "Synthetic database for the lab. IDs like CVE-2099-0001 are NOT real vulnerabilities.",
+  "by_tag": {
+    "registry.corp.example/shop/web:1.4": [
+      {"id": "CVE-2099-0001", "severity": "HIGH", "package": "libexample", "fixed": "2.4.1"},
+      {"id": "CVE-2099-0002", "severity": "MEDIUM", "package": "zlib-example", "fixed": "1.3.2"}
+    ],
+    "registry.corp.example/shop/api:1.4": [
+      {"id": "CVE-2099-0010", "severity": "CRITICAL", "package": "web-framework-example", "fixed": "5.0.3"},
+      {"id": "CVE-2099-0011", "severity": "HIGH", "package": "libexample", "fixed": "2.4.1"},
+      {"id": "CVE-2099-0012", "severity": "HIGH", "package": "parser-example", "fixed": null},
+      {"id": "CVE-2099-0013", "severity": "HIGH", "package": "yaml-example", "fixed": "0.9"}
+    ],
+    "docker.io/library/nginx:1.27": [
+      {"id": "CVE-2099-0020", "severity": "LOW", "package": "libc-example", "fixed": null}
+    ]
+  },
+  "by_digest": {
+    "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa": [
+      {"id": "CVE-2099-0002", "severity": "MEDIUM", "package": "zlib-example", "fixed": "1.3.2"}
+    ]
+  }
+}

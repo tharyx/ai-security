@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: web, namespace: shop}
+spec:
+  selector: {matchLabels: {app: web}}
+  template:
+    metadata: {labels: {app: web}}
+    spec:
+      initContainers:
+        - name: migrate
+          image: registry.corp.example/shop/api:1.4
+      containers:
+        - name: web
+          image: registry.corp.example/shop/web@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        - name: proxy
+          image: nginx:1.27
+        - name: tools
+          image: ghcr.io/someone/tools:latest
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata: {name: report, namespace: shop}
+spec:
+  schedule: "0 3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: report
+              image: registry.corp.example/shop/web:1.4

@@ -1,0 +1,30 @@
+# FIXTURE. Conceptual shape of a GitHub Actions workflow that produces SLSA provenance.
+# Hedged: check https://github.com/slsa-framework/slsa-github-generator for the current
+# inputs and the current tag. The generator's reusable workflows are referenced by a
+# release tag (not a commit SHA); that is a documented exception to SHA pinning.
+name: release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      hashes: ${{ steps.hash.outputs.hashes }}
+    steps:
+      - uses: actions/checkout@0000000000000000000000000000000000000000  # pin to a real full SHA
+      - run: make dist
+      - id: hash
+        run: |
+          cd dist && echo "hashes=$(sha256sum * | base64 -w0)" >> "$GITHUB_OUTPUT"
+  provenance:
+    needs: [build]
+    permissions:
+      actions: read
+      id-token: write   # lets the builder obtain an OIDC identity (used for signing at L2/L3)
+      contents: write
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.0.0
+    with:
+      base64-subjects: "${{ needs.build.outputs.hashes }}"

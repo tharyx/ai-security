@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>SLSA v1.0 Build track levels L0 to L3 and what each one adds</title>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">SLSA v1.0 Build track: L0 to L3</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Each level adds a guarantee about how the artifact was built. Verify the exact wording at slsa.dev (v1.1 status: check).</text>
+
+  <rect x="40" y="400" width="255" height="110" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+  <text x="167" y="430" text-anchor="middle" font-size="18" font-weight="700" fill="#334155">L0</text>
+  <text x="167" y="454" text-anchor="middle" font-size="13" fill="#475569">No guarantees.</text>
+  <text x="167" y="474" text-anchor="middle" font-size="13" fill="#475569">Build on a laptop, no record.</text>
+
+  <rect x="320" y="320" width="255" height="190" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="447" y="350" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">L1: provenance exists</text>
+  <text x="447" y="378" text-anchor="middle" font-size="13" fill="#1e3a8a">Build is scripted. Provenance says</text>
+  <text x="447" y="398" text-anchor="middle" font-size="13" fill="#1e3a8a">what was built, from where, how.</text>
+  <text x="447" y="426" text-anchor="middle" font-size="13" fill="#1e3a8a">Can still be forged or edited.</text>
+  <text x="447" y="470" text-anchor="middle" font-size="12" fill="#1e3a8a">Stops: honest mistakes</text>
+
+  <rect x="600" y="240" width="255" height="270" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="727" y="270" text-anchor="middle" font-size="18" font-weight="700" fill="#92400e">L2: hosted and signed</text>
+  <text x="727" y="298" text-anchor="middle" font-size="13" fill="#92400e">Build runs on a hosted platform.</text>
+  <text x="727" y="318" text-anchor="middle" font-size="13" fill="#92400e">The platform signs the provenance.</text>
+  <text x="727" y="346" text-anchor="middle" font-size="13" fill="#92400e">Consumers check the signature</text>
+  <text x="727" y="366" text-anchor="middle" font-size="13" fill="#92400e">and the builder identity.</text>
+  <text x="727" y="394" text-anchor="middle" font-size="13" fill="#92400e">A tampered or hand-written</text>
+  <text x="727" y="414" text-anchor="middle" font-size="13" fill="#92400e">file no longer verifies.</text>
+  <text x="727" y="470" text-anchor="middle" font-size="12" fill="#92400e">Stops: forged provenance</text>
+
+  <rect x="880" y="160" width="280" height="350" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="1020" y="190" text-anchor="middle" font-size="18" font-weight="700" fill="#166534">L3: hardened builds</text>
+  <text x="1020" y="218" text-anchor="middle" font-size="13" fill="#166534">Build runs are isolated from each</text>
+  <text x="1020" y="238" text-anchor="middle" font-size="13" fill="#166534">other. Signing secrets are not</text>
+  <text x="1020" y="258" text-anchor="middle" font-size="13" fill="#166534">reachable by the build steps.</text>
+  <text x="1020" y="286" text-anchor="middle" font-size="13" fill="#166534">A compromised build job cannot</text>
+  <text x="1020" y="306" text-anchor="middle" font-size="13" fill="#166534">forge provenance or poison</text>
+  <text x="1020" y="326" text-anchor="middle" font-size="13" fill="#166534">another build (for example a cache).</text>
+  <text x="1020" y="470" text-anchor="middle" font-size="12" fill="#166534">Stops: tenants and jobs attacking</text>
+  <text x="1020" y="488" text-anchor="middle" font-size="12" fill="#166534">each other or the signer</text>
+
+  <text x="40" y="540" font-size="13" fill="#475569">Course labs: slsa-level-1 (generate and check) and slsa-level-2 (signed, allowlist, digest, repo). A source track is not part of v1.0 (verify at source).</text>
+</svg>

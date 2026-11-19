@@ -1,0 +1,49 @@
+{
+  "s3": [
+    {"name": "acme-public-assets", "block_public_access": false,
+     "policy": {"Statement": [{"Effect": "Allow", "Principal": "*", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::acme-public-assets/*"}]},
+     "acl": [], "website": false, "encryption": true, "versioning": true},
+    {"name": "acme-uploads", "block_public_access": false,
+     "policy": {"Statement": [{"Effect": "Allow", "Principal": "*", "Action": ["s3:PutObject", "s3:GetObject"], "Resource": "arn:aws:s3:::acme-uploads/*"}]},
+     "acl": [], "website": false, "encryption": false, "versioning": false},
+    {"name": "acme-marketing-site", "block_public_access": false,
+     "policy": {"Statement": [{"Effect": "Allow", "Principal": {"AWS": "*"}, "Action": "s3:GetObject", "Resource": "arn:aws:s3:::acme-marketing-site/*"}]},
+     "acl": ["AllUsers:READ"], "website": true, "encryption": true, "versioning": true},
+    {"name": "acme-build-artifacts", "block_public_access": true,
+     "policy": {"Statement": [{"Effect": "Allow", "Principal": {"Service": "cloudfront.amazonaws.com"}, "Action": "s3:GetObject",
+                "Resource": "arn:aws:s3:::acme-build-artifacts/*", "Condition": {"StringEquals": {"AWS:SourceArn": "arn:aws:cloudfront::111122223333:distribution/EXAMPLE"}}}]},
+     "acl": [], "website": false, "encryption": true, "versioning": true}
+  ],
+  "azure_blob": [
+    {"account": "acmestorage1", "allow_blob_public_access": true, "https_only": false, "shared_key_enabled": true,
+     "containers": [{"name": "backups", "public_access": "container"}, {"name": "private", "public_access": "none"}],
+     "sas": [{"name": "partner-feed", "expiry_days": 730, "permissions": "rwdl"}]},
+    {"account": "acmestorage2", "allow_blob_public_access": false, "https_only": true, "shared_key_enabled": false,
+     "containers": [{"name": "app", "public_access": "none"}], "sas": []}
+  ],
+  "gcs": [
+    {"name": "acme-ml-exports", "uniform_access": false, "public_access_prevention": "inherited",
+     "iam": [{"role": "roles/storage.objectViewer", "members": ["allUsers"]}]},
+    {"name": "acme-logs", "uniform_access": true, "public_access_prevention": "enforced",
+     "iam": [{"role": "roles/storage.objectAdmin", "members": ["serviceAccount:logger@acme.example"]}]},
+    {"name": "acme-shared-writes", "uniform_access": true, "public_access_prevention": "inherited",
+     "iam": [{"role": "roles/storage.objectCreator", "members": ["allAuthenticatedUsers"]}]}
+  ],
+  "cdn": [
+    {"name": "d111-assets", "provider": "aws", "origin": "acme-public-assets", "origin_type": "s3", "origin_access_control": false, "aliases": ["assets.acme.example"]},
+    {"name": "d222-site", "provider": "aws", "origin": "acme-marketing-site", "origin_type": "s3_website", "origin_access_control": false, "aliases": ["www.acme.example"]},
+    {"name": "d333-builds", "provider": "aws", "origin": "acme-build-artifacts", "origin_type": "s3", "origin_access_control": true, "aliases": ["builds.acme.example"]},
+    {"name": "d444-old", "provider": "aws", "origin": "acme-retired-bucket", "origin_type": "s3", "origin_access_control": false, "aliases": ["old.acme.example"]}
+  ],
+  "dns": [
+    {"name": "assets.acme.example", "type": "CNAME", "target": "d111-assets.cdn.example"},
+    {"name": "www.acme.example", "type": "CNAME", "target": "d222-site.cdn.example"},
+    {"name": "docs.acme.example", "type": "CNAME", "target": "acme-docs-site.s3-website.example"},
+    {"name": "files.acme.example", "type": "CNAME", "target": "acmeoldfiles.blob.storage.example"},
+    {"name": "builds.acme.example", "type": "CNAME", "target": "d333-builds.cdn.example"}
+  ],
+  "existing_targets": [
+    "d111-assets.cdn.example", "d222-site.cdn.example", "d333-builds.cdn.example"
+  ],
+  "existing_buckets": ["acme-public-assets", "acme-uploads", "acme-marketing-site", "acme-build-artifacts"]
+}

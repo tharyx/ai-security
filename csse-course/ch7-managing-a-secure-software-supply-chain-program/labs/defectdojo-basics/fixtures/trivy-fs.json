@@ -1,0 +1,26 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "example-app",
+  "Results": [
+    {
+      "Target": "package-lock.json",
+      "Class": "lang-pkgs",
+      "Type": "npm",
+      "Vulnerabilities": [
+        {"VulnerabilityID": "CVE-2021-23337", "PkgName": "lodash", "InstalledVersion": "4.17.20",
+         "FixedVersion": "4.17.21", "Severity": "HIGH", "Title": "lodash: command injection via template"},
+        {"VulnerabilityID": "CVE-2021-44906", "PkgName": "minimist", "InstalledVersion": "1.2.5",
+         "FixedVersion": "1.2.6", "Severity": "CRITICAL", "Title": "minimist: prototype pollution"}
+      ]
+    },
+    {
+      "Target": "requirements.txt",
+      "Class": "lang-pkgs",
+      "Type": "pip",
+      "Vulnerabilities": [
+        {"VulnerabilityID": "CVE-2021-23337", "PkgName": "lodash", "InstalledVersion": "4.17.20",
+         "FixedVersion": "4.17.21", "Severity": "HIGH", "Title": "lodash: command injection via template"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# The "before" picture: everything in one stage, root, latest, compiler shipped.
+FROM python:latest
+RUN apt-get update && apt-get install -y build-essential git curl
+COPY . /app
+RUN pip install flask requests
+CMD ["python", "/app/main.py"]

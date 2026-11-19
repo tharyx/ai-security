@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Cloud threat matrix: tactics in order with example supply-chain-relevant techniques</title>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="30" y="40" font-size="26" font-weight="700" fill="#0f172a">Cloud threat matrix (ATT&amp;CK-style tactics)</text>
+  <text x="30" y="66" font-size="14" fill="#475569">Columns follow the MITRE ATT&amp;CK Cloud matrix and the Microsoft Threat Matrix for Azure idea. Techniques shown are examples; check the live matrices.</text>
+  <g font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">
+    <rect x="30" y="90" width="124" height="36" fill="#334155"/><text x="92" y="113">Initial access</text>
+    <rect x="160" y="90" width="124" height="36" fill="#334155"/><text x="222" y="113">Execution</text>
+    <rect x="290" y="90" width="124" height="36" fill="#334155"/><text x="352" y="113">Persistence</text>
+    <rect x="420" y="90" width="124" height="36" fill="#334155"/><text x="482" y="113">Priv. escalation</text>
+    <rect x="550" y="90" width="124" height="36" fill="#334155"/><text x="612" y="113">Defense evasion</text>
+    <rect x="680" y="90" width="124" height="36" fill="#334155"/><text x="742" y="113">Credential access</text>
+    <rect x="810" y="90" width="124" height="36" fill="#334155"/><text x="872" y="113">Discovery</text>
+    <rect x="940" y="90" width="124" height="36" fill="#334155"/><text x="1002" y="113">Collection / Exfil</text>
+    <rect x="1070" y="90" width="100" height="36" fill="#334155"/><text x="1120" y="113">Impact</text>
+  </g>
+  <g font-size="12" fill="#0f172a">
+    <rect x="30" y="134" width="124" height="120" fill="#e0f2fe"/><text x="36" y="154">Stolen keys</text><text x="36" y="172">Public bucket or</text><text x="36" y="188">exposed app</text><text x="36" y="206">Trusted relationship</text><text x="36" y="222">(CI/CD, 3rd party)</text><text x="36" y="240">Poisoned dependency</text>
+    <rect x="160" y="134" width="124" height="120" fill="#e0f2fe"/><text x="166" y="154">Serverless function</text><text x="166" y="172">code change</text><text x="166" y="190">Run command via</text><text x="166" y="206">VM agent</text><text x="166" y="224">Pipeline job script</text>
+    <rect x="290" y="134" width="124" height="120" fill="#e0f2fe"/><text x="296" y="154">New access key</text><text x="296" y="172">Backdoor role trust</text><text x="296" y="190">Malicious layer</text><text x="296" y="208">Rogue pipeline step</text>
+    <rect x="420" y="134" width="124" height="120" fill="#e0f2fe"/><text x="426" y="154">PassRole abuse</text><text x="426" y="172">Over-privileged</text><text x="426" y="188">service role</text><text x="426" y="208">Node SA from pod</text>
+    <rect x="550" y="134" width="124" height="120" fill="#e0f2fe"/><text x="556" y="154">Disable logging</text><text x="556" y="172">Delete trails</text><text x="556" y="190">Tamper artifacts</text><text x="556" y="208">Impersonate trusted</text><text x="556" y="224">publisher</text>
+    <rect x="680" y="134" width="124" height="120" fill="#e0f2fe"/><text x="686" y="154">Metadata service</text><text x="686" y="172">(IMDS) tokens</text><text x="686" y="190">Secrets in env vars</text><text x="686" y="208">Secrets in repos</text>
+    <rect x="810" y="134" width="124" height="120" fill="#e0f2fe"/><text x="816" y="154">List buckets,</text><text x="816" y="172">roles, functions</text><text x="816" y="190">Cloud service</text><text x="816" y="208">discovery</text>
+    <rect x="940" y="134" width="124" height="120" fill="#e0f2fe"/><text x="946" y="154">Read object storage</text><text x="946" y="172">Transfer data to</text><text x="946" y="190">another account</text>
+    <rect x="1070" y="134" width="100" height="120" fill="#e0f2fe"/><text x="1076" y="154">Resource</text><text x="1076" y="172">hijacking</text><text x="1076" y="190">(mining)</text><text x="1076" y="208">Data destruction</text>
+  </g>
+  <rect x="30" y="280" width="1140" height="210" rx="10" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="50" y="310" font-size="16" font-weight="700" fill="#9a3412">How to use a matrix</text>
+  <text x="50" y="338" font-size="14" fill="#0f172a">1. Read left to right as the attacker's story; one real incident usually touches 4 to 6 columns.</text>
+  <text x="50" y="364" font-size="14" fill="#0f172a">2. For each technique you rely on defending, name the log source that would show it (audit logs, flow logs, storage logs).</text>
+  <text x="50" y="390" font-size="14" fill="#0f172a">3. Mark the cells you cannot see. Those are your detection gaps.</text>
+  <text x="50" y="416" font-size="14" fill="#0f172a">4. The supply-chain columns to emphasize: Initial access (trusted relationship, poisoned dependency), Persistence, Defense evasion.</text>
+  <text x="50" y="460" font-size="12" fill="#64748b">Simplified and abbreviated; the official matrices have more techniques and sub-techniques and change over time.</text>
+</svg>

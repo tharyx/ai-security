@@ -1,0 +1,50 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata: {name: policy-enforcer}
+webhooks:
+  - name: pods.policy.example
+    failurePolicy: Ignore
+    timeoutSeconds: 30
+    sideEffects: Unknown
+    namespaceSelector:
+      matchExpressions:
+        - {key: policy-exempt, operator: DoesNotExist}
+    rules:
+      - {apiGroups: [""], apiVersions: ["v1"], operations: ["CREATE"], resources: ["pods"]}
+    clientConfig:
+      url: "http://policy.internal.example/validate"
+    admissionReviewVersions: ["v1"]
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata: {name: sidecar-injector}
+webhooks:
+  - name: inject.sidecar.example
+    failurePolicy: Fail
+    timeoutSeconds: 5
+    sideEffects: None
+    reinvocationPolicy: IfNeeded
+    rules:
+      - {apiGroups: ["*"], apiVersions: ["*"], operations: ["*"], resources: ["*"]}
+    clientConfig:
+      service: {namespace: tools, name: injector, path: /mutate}
+      caBundle: "RkFLRS1DQS1CVU5ETEU="
+    admissionReviewVersions: ["v1"]
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata: {name: good-policy}
+webhooks:
+  - name: pods.good.example
+    failurePolicy: Fail
+    timeoutSeconds: 5
+    sideEffects: None
+    namespaceSelector:
+      matchExpressions:
+        - {key: kubernetes.io/metadata.name, operator: NotIn, values: [kube-system, policy-system]}
+    rules:
+      - {apiGroups: [""], apiVersions: ["v1"], operations: ["CREATE", "UPDATE"], resources: ["pods"]}
+    clientConfig:
+      service: {namespace: policy-system, name: enforcer, path: /validate}
+      caBundle: "RkFLRS1DQS1CVU5ETEU="
+    admissionReviewVersions: ["v1"]

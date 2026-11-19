@@ -1,0 +1,21 @@
+{
+  "clusters": [
+    {"name": "prod-legacy", "legacy_abac": true, "legacy_metadata_endpoints": true,
+     "workload_identity": false, "private_nodes": false, "master_authorized_networks": [],
+     "network_policy": false, "shielded_nodes": false, "binary_authorization": false,
+     "release_channel": "UNSPECIFIED", "client_certificate_auth": true,
+     "node_pools": [{"name": "default-pool", "service_account": "default-compute", "oauth_scopes": ["cloud-platform"], "metadata_mode": "GCE_METADATA"}],
+     "default_compute_sa_roles": ["roles/editor"]},
+    {"name": "prod-hardened", "legacy_abac": false, "legacy_metadata_endpoints": false,
+     "workload_identity": true, "private_nodes": true, "master_authorized_networks": ["203.0.113.0/24"],
+     "network_policy": true, "shielded_nodes": true, "binary_authorization": true,
+     "release_channel": "REGULAR", "client_certificate_auth": false,
+     "node_pools": [{"name": "app-pool", "service_account": "gke-nodes@acme.example", "oauth_scopes": ["logging.write", "monitoring"], "metadata_mode": "GKE_METADATA"}],
+     "default_compute_sa_roles": []}
+  ],
+  "pods": [
+    {"cluster": "prod-legacy", "name": "web-1", "ksa": "web", "gsa_binding": null},
+    {"cluster": "prod-hardened", "name": "web-1", "ksa": "web", "gsa_binding": "web-gsa@acme.example"},
+    {"cluster": "prod-hardened", "name": "batch-1", "ksa": "batch", "gsa_binding": null}
+  ]
+}

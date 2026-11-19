@@ -1,0 +1,20 @@
+{
+  "_comment": "Example allowlist seccomp profile for a small network service. Teaching sample: build your real one by recording syscalls (for example with strace or OCI seccomp-recording tools) and testing. Not a drop-in profile.",
+  "defaultAction": "SCMP_ACT_ERRNO",
+  "architectures": ["SCMP_ARCH_X86_64", "SCMP_ARCH_AARCH64"],
+  "syscalls": [
+    {
+      "names": [
+        "accept", "accept4", "access", "arch_prctl", "bind", "brk", "clock_gettime", "clone", "clone3", "close",
+        "connect", "dup", "dup2", "dup3", "epoll_create1", "epoll_ctl", "epoll_pwait", "epoll_wait", "eventfd2",
+        "execve", "exit", "exit_group", "fcntl", "fstat", "futex", "getcwd", "getdents64", "getegid", "geteuid",
+        "getgid", "getpid", "getppid", "getrandom", "getsockname", "getsockopt", "gettid", "getuid", "ioctl",
+        "listen", "lseek", "madvise", "mmap", "mprotect", "munmap", "newfstatat", "nanosleep", "openat", "pipe2",
+        "poll", "prctl", "pread64", "prlimit64", "read", "readlink", "recvfrom", "recvmsg", "rt_sigaction",
+        "rt_sigprocmask", "rt_sigreturn", "sched_getaffinity", "sched_yield", "sendmsg", "sendto", "set_robust_list",
+        "set_tid_address", "setsockopt", "sigaltstack", "socket", "stat", "statx", "tgkill", "uname", "write", "writev"
+      ],
+      "action": "SCMP_ACT_ALLOW"
+    }
+  ]
+}

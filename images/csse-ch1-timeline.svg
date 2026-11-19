@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Timeline of software supply chain attacks, 2017 to 2026</title>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">Evolution of software supply chain attacks</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Hedged summary. Details and counts change as reports are updated: verify at source (lesson 03).</text>
+
+  <line x1="60" y1="300" x2="1150" y2="300" stroke="#334155" stroke-width="3"/>
+
+  <g font-size="13" fill="#0f172a">
+    <!-- 2017 -->
+    <circle cx="100" cy="300" r="9" fill="#dc2626"/>
+    <text x="100" y="282" text-anchor="middle" font-size="16" font-weight="700">2017</text>
+    <rect x="45" y="320" width="110" height="80" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="100" y="344" text-anchor="middle">NotPetya via</text><text x="100" y="362" text-anchor="middle">M.E.Doc update;</text><text x="100" y="380" text-anchor="middle">Equifax (Struts)</text>
+    <!-- 2018 -->
+    <circle cx="225" cy="300" r="9" fill="#dc2626"/>
+    <text x="225" y="282" text-anchor="middle" font-size="16" font-weight="700">2018</text>
+    <rect x="170" y="130" width="110" height="100" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="225" y="154" text-anchor="middle">event-stream;</text><text x="225" y="172" text-anchor="middle">British Airways</text><text x="225" y="190" text-anchor="middle">Magecart</text><text x="225" y="208" text-anchor="middle">(Modernizr JS)</text>
+    <!-- 2020 -->
+    <circle cx="350" cy="300" r="9" fill="#dc2626"/>
+    <text x="350" y="282" text-anchor="middle" font-size="16" font-weight="700">2020</text>
+    <rect x="295" y="320" width="110" height="80" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="350" y="344" text-anchor="middle">SolarWinds</text><text x="350" y="362" text-anchor="middle">SUNBURST:</text><text x="350" y="380" text-anchor="middle">build compromised</text>
+    <!-- 2021 -->
+    <circle cx="475" cy="300" r="9" fill="#dc2626"/>
+    <text x="475" y="282" text-anchor="middle" font-size="16" font-weight="700">2021</text>
+    <rect x="410" y="110" width="130" height="120" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="475" y="134" text-anchor="middle">Codecov uploader;</text><text x="475" y="152" text-anchor="middle">dependency confusion;</text><text x="475" y="170" text-anchor="middle">ua-parser-js;</text><text x="475" y="188" text-anchor="middle">US EO 14028</text><text x="475" y="206" text-anchor="middle">(policy response)</text>
+    <!-- 2023 -->
+    <circle cx="610" cy="300" r="9" fill="#dc2626"/>
+    <text x="610" y="282" text-anchor="middle" font-size="16" font-weight="700">2023</text>
+    <rect x="555" y="320" width="110" height="80" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="610" y="344" text-anchor="middle">3CX: a supply</text><text x="610" y="362" text-anchor="middle">chain attack that</text><text x="610" y="380" text-anchor="middle">hit another one</text>
+    <!-- 2024 -->
+    <circle cx="745" cy="300" r="9" fill="#dc2626"/>
+    <text x="745" y="282" text-anchor="middle" font-size="16" font-weight="700">2024</text>
+    <rect x="680" y="110" width="130" height="120" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="745" y="134" text-anchor="middle">xz-utils backdoor</text><text x="745" y="152" text-anchor="middle">(CVE-2024-3094);</text><text x="745" y="170" text-anchor="middle">polyfill.io domain</text><text x="745" y="188" text-anchor="middle">sold, JS changed;</text><text x="745" y="206" text-anchor="middle">Ultralytics (PyPI)</text>
+    <!-- 2025 -->
+    <circle cx="890" cy="300" r="9" fill="#dc2626"/>
+    <text x="890" y="282" text-anchor="middle" font-size="16" font-weight="700">2025</text>
+    <rect x="825" y="320" width="130" height="100" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="890" y="344" text-anchor="middle">tj-actions (tags</text><text x="890" y="362" text-anchor="middle">repointed, CI secrets</text><text x="890" y="380" text-anchor="middle">leaked); Shai-Hulud</text><text x="890" y="398" text-anchor="middle">npm worm</text>
+    <!-- 2026 -->
+    <circle cx="1035" cy="300" r="9" fill="#dc2626"/>
+    <text x="1035" y="282" text-anchor="middle" font-size="16" font-weight="700">2026</text>
+    <rect x="970" y="110" width="150" height="120" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="1045" y="134" text-anchor="middle">Mini Shai-Hulud</text><text x="1045" y="152" text-anchor="middle">(npm and PyPI, May);</text><text x="1045" y="170" text-anchor="middle">EU CRA reporting</text><text x="1045" y="188" text-anchor="middle">duties start</text><text x="1045" y="206" text-anchor="middle">11 Sept 2026</text>
+  </g>
+
+  <rect x="40" y="450" width="1130" height="140" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="478" font-size="15" font-weight="700" fill="#0f172a">The trend in one line per era</text>
+  <text x="60" y="504" font-size="14" fill="#0f172a">2017-2018: attackers learn that updates and packages are trusted delivery routes.</text>
+  <text x="60" y="526" font-size="14" fill="#0f172a">2020-2021: the build system and the CI secrets become the target; governments respond with rules.</text>
+  <text x="60" y="548" font-size="14" fill="#0f172a">2023-2024: attacks chain (3CX) or play the long game with a human (xz-utils); domains and tags are abused.</text>
+  <text x="60" y="570" font-size="14" fill="#0f172a">2025-2026: self-spreading worms steal publisher tokens; regulation (EU CRA) makes reporting a legal duty.</text>
+</svg>

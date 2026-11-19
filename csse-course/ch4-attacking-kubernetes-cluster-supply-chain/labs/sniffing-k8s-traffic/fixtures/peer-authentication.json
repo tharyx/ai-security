@@ -1,0 +1,8 @@
+{
+  "apiVersion": "security.istio.io/v1",
+  "kind": "PeerAuthentication",
+  "metadata": {"name": "default", "namespace": "shop"},
+  "spec": {"mtls": {"mode": "STRICT"}},
+  "meshed_workloads": ["web", "api", "payments", "db"],
+  "note": "Istio-style concept. 'meshed_workloads' is lab-only: which workloads have a sidecar or ambient proxy. The cache is not meshed, so its flow stays plain."
+}

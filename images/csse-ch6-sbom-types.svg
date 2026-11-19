@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="440" viewBox="0 0 1100 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Three kinds of SBOM: application, container and host, and how they relate to the asset inventory</title>
+  <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+  <rect width="1100" height="440" fill="#ffffff"/>
+  <text x="30" y="40" font-size="26" font-weight="700" fill="#0f172a">Application, container and host SBOMs</text>
+  <rect x="40" y="70" width="320" height="230" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="200" y="98" font-size="17" font-weight="700" text-anchor="middle" fill="#075985">Application SBOM</text>
+  <text x="60" y="128" font-size="13" fill="#0f172a">Source: lockfiles, manifests, build</text>
+  <text x="60" y="150" font-size="13" fill="#0f172a">Packages: npm, PyPI, Maven, Go modules</text>
+  <text x="60" y="172" font-size="13" fill="#0f172a">Best made at build time (knows the</text>
+  <text x="60" y="190" font-size="13" fill="#0f172a">real dependency graph)</text>
+  <text x="60" y="220" font-size="13" fill="#0f172a">Tools: Syft, cdxgen, language plugins</text>
+  <text x="60" y="260" font-size="13" fill="#334155">Question it answers: which libraries</text>
+  <text x="60" y="278" font-size="13" fill="#334155">did we write against?</text>
+  <rect x="390" y="70" width="320" height="230" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="550" y="98" font-size="17" font-weight="700" text-anchor="middle" fill="#166534">Container SBOM</text>
+  <text x="410" y="128" font-size="13" fill="#0f172a">Source: image layers, dpkg/apk/rpm db</text>
+  <text x="410" y="150" font-size="13" fill="#0f172a">OS packages plus app libraries in image</text>
+  <text x="410" y="172" font-size="13" fill="#0f172a">Per-layer attribution (base vs yours)</text>
+  <text x="410" y="220" font-size="13" fill="#0f172a">Tools: Syft, Trivy (Tern: check status)</text>
+  <text x="410" y="260" font-size="13" fill="#334155">Question: what is really inside the</text>
+  <text x="410" y="278" font-size="13" fill="#334155">image we deploy?</text>
+  <rect x="740" y="70" width="320" height="230" rx="10" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+  <text x="900" y="98" font-size="17" font-weight="700" text-anchor="middle" fill="#854d0e">Host SBOM</text>
+  <text x="760" y="128" font-size="13" fill="#0f172a">Source: package databases on VMs and</text>
+  <text x="760" y="146" font-size="13" fill="#0f172a">nodes, plus binaries outside packages</text>
+  <text x="760" y="172" font-size="13" fill="#0f172a">Covers kernel, agents, runtime, tools</text>
+  <text x="760" y="220" font-size="13" fill="#0f172a">Tools: Syft on a root filesystem, Trivy rootfs,</text>
+  <text x="760" y="238" font-size="13" fill="#0f172a">OS package manager, OSQuery</text>
+  <text x="760" y="268" font-size="13" fill="#334155">Question: what runs on our servers?</text>
+  <line x1="200" y1="300" x2="200" y2="340" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="550" y1="300" x2="550" y2="340" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="900" y1="300" x2="900" y2="340" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="40" y="340" width="1020" height="70" rx="10" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+  <text x="550" y="368" font-size="16" font-weight="700" text-anchor="middle" fill="#0f172a">Asset inventory + SBOM store (searchable by purl, CVE, owner, environment)</text>
+  <text x="550" y="392" font-size="13" text-anchor="middle" fill="#334155">When a new CVE is announced you ask one question: where is this component running, and who owns it?</text>
+</svg>

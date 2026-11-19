@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Component intake and vetting workflow: request, triage by type, automated checks, decision, audit</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="46" font-size="28" font-weight="700" fill="#0f172a">Component intake and vetting workflow</text>
+  <text x="40" y="74" font-size="16" fill="#475569">Every new component, whatever its source, passes the same gate. Automation does the checks; people decide the gray cases.</text>
+
+  <rect x="40" y="120" width="190" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="135" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">1. Request form</text>
+  <text x="135" y="174" text-anchor="middle" font-size="12" fill="#475569">name, version, use,</text>
+  <text x="135" y="190" text-anchor="middle" font-size="12" fill="#475569">justification, owner</text>
+
+  <rect x="290" y="120" width="190" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="385" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">2. Triage by type</text>
+  <text x="385" y="174" text-anchor="middle" font-size="12" fill="#1e3a8a">open source, commercial,</text>
+  <text x="385" y="190" text-anchor="middle" font-size="12" fill="#1e3a8a">third party, proprietary</text>
+
+  <rect x="540" y="100" width="330" height="130" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="705" y="126" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">3. Automated checks (in CI)</text>
+  <text x="560" y="152" font-size="13" fill="#92400e">Scorecard score  |  license policy</text>
+  <text x="560" y="174" font-size="13" fill="#92400e">known vulns, KEV, EPSS  |  maintainer health</text>
+  <text x="560" y="196" font-size="13" fill="#92400e">malicious heuristics (typosquat, install scripts)</text>
+  <text x="560" y="216" font-size="13" fill="#92400e">type checks: vendor SBOM, contract, provenance</text>
+
+  <rect x="930" y="120" width="230" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="1045" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">4. Decision</text>
+  <text x="1045" y="174" text-anchor="middle" font-size="12" fill="#475569">approve / conditional /</text>
+  <text x="1045" y="190" text-anchor="middle" font-size="12" fill="#475569">reject (hard fail wins)</text>
+
+  <line x1="230" y1="165" x2="288" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="480" y1="165" x2="538" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="870" y1="165" x2="928" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="800" y="300" width="360" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="980" y="330" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Approve: add to allowlist / registry mirror</text>
+  <text x="980" y="352" text-anchor="middle" font-size="12" fill="#166534">pin version and hash, generate SBOM entry</text>
+
+  <rect x="800" y="395" width="360" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="980" y="425" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Conditional: named owner, deadline, controls</text>
+  <text x="980" y="447" text-anchor="middle" font-size="12" fill="#92400e">e.g. upgrade to fixed version, legal review, sandbox</text>
+
+  <rect x="800" y="490" width="360" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="980" y="520" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">Reject: reason recorded, alternative suggested</text>
+  <text x="980" y="542" text-anchor="middle" font-size="12" fill="#991b1b">requester may appeal to the exception board</text>
+
+  <path d="M1045 210 L1045 255 L980 255 L980 298" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M1045 255 L1190 255 L1190 430 L1162 430" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M1190 430 L1190 525 L1162 525" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="40" y="300" width="700" height="260" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="60" y="330" font-size="16" font-weight="700" fill="#0f172a">5. Audit record and continuous re-vetting</text>
+  <text x="60" y="360" font-size="14" fill="#334155">Append-only, hash-chained log: who asked, which data, every check result, outcome, reviewer, date.</text>
+  <text x="60" y="390" font-size="14" fill="#334155">Approval is not forever. Re-run the checks when:</text>
+  <text x="80" y="418" font-size="14" fill="#334155">- a new advisory, KEV entry or malware report names the component</text>
+  <text x="80" y="442" font-size="14" fill="#334155">- the maintainer, owner, or repository location changes</text>
+  <text x="80" y="466" font-size="14" fill="#334155">- a new version is requested (the checks apply to a version, not a name)</text>
+  <text x="80" y="490" font-size="14" fill="#334155">- the yearly review comes due; unused components are removed</text>
+  <text x="60" y="530" font-size="13" fill="#475569">Lab: csse-course/ch7 .../labs/oss-vetting-process</text>
+  <line x1="800" y1="335" x2="742" y2="335" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+</svg>

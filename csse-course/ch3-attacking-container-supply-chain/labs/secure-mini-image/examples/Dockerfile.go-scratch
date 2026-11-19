@@ -1,0 +1,13 @@
+# Multi-stage: build with the full toolchain, ship only a static binary on scratch.
+FROM golang:1.23@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa AS build
+WORKDIR /src
+COPY go.mod go.sum ./
+COPY main.go ./
+RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/server .
+
+FROM scratch
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=build /out/server /server
+USER 65532:65532
+EXPOSE 8080
+ENTRYPOINT ["/server"]

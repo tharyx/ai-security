@@ -1,0 +1,33 @@
+stages: [build, test, deploy]
+
+variables:
+  APP_VERSION: "1.4.2"
+
+compile:
+  stage: build
+  script:
+    - echo Building $APP_VERSION
+    - write dist/app.bin APP-BINARY-$APP_VERSION
+  artifacts:
+    paths: [dist/app.bin]
+
+unit-tests:
+  stage: test
+  script:
+    - require dist/app.bin
+    - echo unit tests pass
+
+lint:
+  stage: test
+  allow_failure: true
+  script:
+    - echo style warnings
+    - exit 1
+
+deploy-prod:
+  stage: deploy
+  script:
+    - require dist/app.bin
+    - echo deploying $APP_VERSION to prod
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'

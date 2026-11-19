@@ -48,6 +48,7 @@ ai-security/
 ├── 08-ai-compliance/
 ├── 09-enterprise-architecture/
 ├── 10-capstone-project/
+├── csse-course/                  companion for the Software Supply Chain Security course (7 chapters, every syllabus line mapped)
 ├── caase-course/                 companion for the CAASE AI agent security course (7 chapters, every syllabus line mapped)
 ├── cmcpse-course/                companion for the Certified MCP Security Expert course (6 chapters, every syllabus line mapped)
 ├── caisp-course/                 companion for the Certified AI Security Professional course (7 chapters, every syllabus line mapped)
@@ -82,6 +83,7 @@ ai-security/
 | **[CAISP course companion](caisp-course/)** | The Certified AI Security Professional course I'm taking: all 7 chapters, every syllabus line mapped to a lesson + lab ([syllabus map](caisp-course/SYLLABUS-MAP.md)) | Alongside the course |
 | **[CMCPSE course companion](cmcpse-course/)** | The Certified MCP Security Expert course: all 6 chapters, every syllabus line mapped to a lesson + lab ([syllabus map](cmcpse-course/SYLLABUS-MAP.md)) | Alongside the course |
 | **[CAASE course companion](caase-course/)** | The AI agent security course: all 7 chapters, every syllabus line mapped, with outdated syllabus items corrected ([syllabus map](caase-course/SYLLABUS-MAP.md)) | Alongside the course |
+| **[CSSE course companion](csse-course/)** | The Software Supply Chain Security course: all 7 chapters, every syllabus line mapped, with outdated tools and standards corrected ([syllabus map](csse-course/SYLLABUS-MAP.md)) | Alongside the course |
 | **AI security roadmap** (modules 01–10) | AI Security Engineer / Architect specialization | After the cybersecurity track's foundations (modules 01–06), or in parallel |
 
 ## Get started (10 minutes)

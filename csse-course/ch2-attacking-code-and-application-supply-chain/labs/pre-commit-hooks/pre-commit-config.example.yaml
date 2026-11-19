@@ -1,0 +1,12 @@
+# Example config in the real pre-commit format. The mini runner supports the hook ids listed below.
+# With the REAL tool, each remote repo is cloned at the pinned rev (use a version tag or a full commit SHA).
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0          # example; check the latest tag at the source
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: detect-private-key
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-yaml
