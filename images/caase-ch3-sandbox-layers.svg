@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <title id="t">Layers around a sandboxed agent tool</title>
+  <desc id="d">A tool runs inside a hardened container: no network, read-only root, non-root user, all capabilities dropped, resource limits and a noexec scratch space. Around it are an allowed-folder read-only mount, an egress proxy if the network is needed, and a host kernel that is patched. Beyond that, a microVM is the stronger boundary.</desc>
+  <rect width="960" height="400" fill="#ffffff"/>
+  <text x="480" y="26" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">Sandbox the tool, not the hope</text>
+
+  <rect x="30" y="50" width="610" height="320" rx="14" fill="#f1f5f9" stroke="#64748b"/>
+  <text x="50" y="76" font-weight="600" fill="#334155">Host (patched kernel, Docker or a stronger runtime)</text>
+  <rect x="60" y="92" width="550" height="250" rx="12" fill="#fef3c7" stroke="#b45309"/>
+  <text x="80" y="118" font-weight="600" fill="#78350f">Container (generated from a validated policy)</text>
+  <rect x="90" y="134" width="490" height="190" rx="10" fill="#dcfce7" stroke="#15803d"/>
+  <text x="110" y="160" font-weight="600" fill="#14532d">Tool process: non-root user, no capabilities</text>
+  <text x="110" y="190" fill="#14532d" font-size="12">no network   (--network none)</text>
+  <text x="110" y="210" fill="#14532d" font-size="12">read-only root   (--read-only)</text>
+  <text x="110" y="230" fill="#14532d" font-size="12">no privilege gain   (no-new-privileges)</text>
+  <text x="110" y="250" fill="#14532d" font-size="12">memory, CPU, PID limits</text>
+  <text x="110" y="270" fill="#14532d" font-size="12">scratch: small tmpfs, noexec</text>
+  <text x="110" y="290" fill="#14532d" font-size="12">input: one read-only folder, never the Docker socket</text>
+  <text x="110" y="310" fill="#14532d" font-size="12">secrets: none in the environment</text>
+
+  <rect x="680" y="50" width="250" height="150" rx="10" fill="#e0e7ff" stroke="#4338ca"/>
+  <text x="805" y="76" text-anchor="middle" font-weight="600" fill="#312e81">If the tool needs the web</text>
+  <text x="805" y="102" text-anchor="middle" fill="#312e81" font-size="12">egress proxy with a domain allowlist,</text>
+  <text x="805" y="120" text-anchor="middle" fill="#312e81" font-size="12">logging, size limits.</text>
+  <text x="805" y="146" text-anchor="middle" fill="#312e81" font-size="12">Credentials stay in a broker,</text>
+  <text x="805" y="164" text-anchor="middle" fill="#312e81" font-size="12">not in the tool.</text>
+  <rect x="680" y="220" width="250" height="150" rx="10" fill="#fee2e2" stroke="#b91c1c"/>
+  <text x="805" y="246" text-anchor="middle" font-weight="600" fill="#7f1d1d">Not isolation on its own</text>
+  <text x="805" y="272" text-anchor="middle" fill="#7f1d1d" font-size="12">a subprocess with a clean env</text>
+  <text x="805" y="290" text-anchor="middle" fill="#7f1d1d" font-size="12">can still read files and use the network.</text>
+  <text x="805" y="316" text-anchor="middle" fill="#7f1d1d" font-size="12">Untrusted code or computer use:</text>
+  <text x="805" y="334" text-anchor="middle" fill="#7f1d1d" font-size="12">prefer gVisor-style or a microVM.</text>
+</svg>

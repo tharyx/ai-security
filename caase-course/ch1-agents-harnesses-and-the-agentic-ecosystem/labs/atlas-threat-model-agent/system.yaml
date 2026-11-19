@@ -1,0 +1,68 @@
+# A made-up agentic system for the threat-modeling lab. Nothing here is real.
+# Autonomy: 1 = suggests only, 2 = acts after human approval, 3 = acts then notifies, 4 = fully autonomous.
+name: Inbox Assistant (example, weak design)
+autonomy: 3
+components:
+  - id: chat_ui
+    type: user_interface
+    untrusted_input: true
+    privileges: 1
+    data_sensitivity: 3
+    controls: []
+
+  - id: model_router
+    type: model_endpoint
+    exposed_to_internet: true      # prompts leave the boundary to a hosted, routed model
+    cloud_routed: true
+    privileges: 1
+    data_sensitivity: 4
+    controls: [logging]
+
+  - id: mail_reader
+    type: retriever
+    untrusted_input: true          # reads email written by strangers
+    privileges: 2
+    data_sensitivity: 4
+    controls: []
+
+  - id: send_mail_tool
+    type: tool
+    side_effect: external
+    reversible: false              # an email cannot be unsent
+    privileges: 4
+    data_sensitivity: 4
+    shared_credential: true        # uses one mailbox owner's token for everyone
+    controls: [logging]
+
+  - id: crm_mcp
+    type: mcp_server
+    third_party: true
+    privileges: 3
+    data_sensitivity: 4
+    controls: []
+
+  - id: skill_hub
+    type: skill_marketplace
+    third_party: true
+    privileges: 3
+    data_sensitivity: 2
+    controls: []
+
+  - id: notes_memory
+    type: memory
+    untrusted_input: true          # the agent writes what it read into long-term notes
+    privileges: 2
+    data_sensitivity: 3
+    controls: []
+
+  - id: code_runner
+    type: code_executor
+    privileges: 4
+    data_sensitivity: 3
+    controls: []
+
+  - id: helper_agent
+    type: peer_agent
+    privileges: 3
+    data_sensitivity: 3
+    controls: []

@@ -1,0 +1,1806 @@
+{
+ "traces": [
+  {
+   "trace_id": "base-0",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.4,
+     "end": 0.41000000000000003,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-1",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-2",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "l2",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.7,
+     "end": 0.8999999999999999,
+     "attrs": {}
+    },
+    {
+     "id": "c2",
+     "parent": "l2",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.8999999999999999,
+     "end": 1.0,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 1.0,
+     "end": 1.01,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-3",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-4",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.4,
+     "end": 0.41000000000000003,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-5",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-6",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "l2",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.7,
+     "end": 0.8999999999999999,
+     "attrs": {}
+    },
+    {
+     "id": "c2",
+     "parent": "l2",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.8999999999999999,
+     "end": 1.0,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 1.0,
+     "end": 1.01,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-7",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-8",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.4,
+     "end": 0.41000000000000003,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-9",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-10",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "l2",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.7,
+     "end": 0.8999999999999999,
+     "attrs": {}
+    },
+    {
+     "id": "c2",
+     "parent": "l2",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.8999999999999999,
+     "end": 1.0,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 1.0,
+     "end": 1.01,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-11",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-12",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.4,
+     "end": 0.41000000000000003,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-13",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-14",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "l2",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.7,
+     "end": 0.8999999999999999,
+     "attrs": {}
+    },
+    {
+     "id": "c2",
+     "parent": "l2",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.8999999999999999,
+     "end": 1.0,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 1.0,
+     "end": 1.01,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-15",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-16",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.4,
+     "end": 0.41000000000000003,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-17",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-18",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "l2",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.7,
+     "end": 0.8999999999999999,
+     "attrs": {}
+    },
+    {
+     "id": "c2",
+     "parent": "l2",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.8999999999999999,
+     "end": 1.0,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 1.0,
+     "end": 1.01,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-19",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-20",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.4,
+     "end": 0.41000000000000003,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-21",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-22",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "read_ticket",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "l2",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.7,
+     "end": 0.8999999999999999,
+     "attrs": {}
+    },
+    {
+     "id": "c2",
+     "parent": "l2",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.8999999999999999,
+     "end": 1.0,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 1.0,
+     "end": 1.01,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "base-23",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "draft_reply",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "odd-1",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "search_kb",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "run_shell",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "l2",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.7,
+     "end": 0.8999999999999999,
+     "attrs": {}
+    },
+    {
+     "id": "c2",
+     "parent": "l2",
+     "kind": "tool",
+     "name": "http_post",
+     "start": 0.8999999999999999,
+     "end": 1.0,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "override_policy",
+     "start": 1.0,
+     "end": 1.01,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "odd-2",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "run_shell",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "run_shell",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "l2",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.7,
+     "end": 0.8999999999999999,
+     "attrs": {}
+    },
+    {
+     "id": "c2",
+     "parent": "l2",
+     "kind": "tool",
+     "name": "run_shell",
+     "start": 0.8999999999999999,
+     "end": 1.0,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "l3",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 1.0,
+     "end": 1.2,
+     "attrs": {}
+    },
+    {
+     "id": "c3",
+     "parent": "l3",
+     "kind": "tool",
+     "name": "run_shell",
+     "start": 1.2,
+     "end": 1.3,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "l4",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 1.3,
+     "end": 1.5,
+     "attrs": {}
+    },
+    {
+     "id": "c4",
+     "parent": "l4",
+     "kind": "tool",
+     "name": "run_shell",
+     "start": 1.5,
+     "end": 1.6,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "l5",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 1.6,
+     "end": 1.8,
+     "attrs": {}
+    },
+    {
+     "id": "c5",
+     "parent": "l5",
+     "kind": "tool",
+     "name": "run_shell",
+     "start": 1.8,
+     "end": 1.9000000000000001,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "l6",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 1.9000000000000001,
+     "end": 2.1,
+     "attrs": {}
+    },
+    {
+     "id": "c6",
+     "parent": "l6",
+     "kind": "tool",
+     "name": "http_post",
+     "start": 2.1,
+     "end": 2.2,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "l7",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 2.2,
+     "end": 2.4000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c7",
+     "parent": "l7",
+     "kind": "tool",
+     "name": "http_post",
+     "start": 2.4000000000000004,
+     "end": 2.5,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "l8",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 2.5,
+     "end": 2.7,
+     "attrs": {}
+    },
+    {
+     "id": "c8",
+     "parent": "l8",
+     "kind": "tool",
+     "name": "http_post",
+     "start": 2.7,
+     "end": 2.8,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "l9",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 2.8,
+     "end": 3.0,
+     "attrs": {}
+    },
+    {
+     "id": "c9",
+     "parent": "l9",
+     "kind": "tool",
+     "name": "http_post",
+     "start": 3.0,
+     "end": 3.0999999999999996,
+     "attrs": {
+      "note": "<script>alert('FAKE-XSS')</script>"
+     }
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 3.0999999999999996,
+     "end": 3.1099999999999994,
+     "attrs": {}
+    }
+   ]
+  },
+  {
+   "trace_id": "odd-3",
+   "agent": "support-agent",
+   "spans": [
+    {
+     "id": "p",
+     "parent": null,
+     "kind": "plan",
+     "name": "plan: handle ticket",
+     "start": 0.0,
+     "end": 0.1,
+     "attrs": {}
+    },
+    {
+     "id": "l0",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.1,
+     "end": 0.30000000000000004,
+     "attrs": {}
+    },
+    {
+     "id": "c0",
+     "parent": "l0",
+     "kind": "tool",
+     "name": "http_post",
+     "start": 0.30000000000000004,
+     "end": 0.4,
+     "attrs": {}
+    },
+    {
+     "id": "l1",
+     "parent": "p",
+     "kind": "llm",
+     "name": "model",
+     "start": 0.4,
+     "end": 0.6000000000000001,
+     "attrs": {}
+    },
+    {
+     "id": "c1",
+     "parent": "l1",
+     "kind": "tool",
+     "name": "run_shell",
+     "start": 0.6000000000000001,
+     "end": 0.7,
+     "attrs": {}
+    },
+    {
+     "id": "d",
+     "parent": "p",
+     "kind": "decision",
+     "name": "answer",
+     "start": 0.7,
+     "end": 0.71,
+     "attrs": {}
+    }
+   ]
+  }
+ ]
+}

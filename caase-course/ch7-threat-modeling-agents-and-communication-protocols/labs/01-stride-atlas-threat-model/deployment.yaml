@@ -1,0 +1,29 @@
+# Multi-agent deployment for the lab: a customer-support platform. All names are fictional.
+zones:
+  internet:   {trust: 0, label: "Internet and partner organization"}
+  user:       {trust: 1, label: "End user device"}
+  tools:      {trust: 2, label: "Tool servers (MCP)"}
+  platform:   {trust: 3, label: "Our agent platform (orchestrator zone)"}
+  backend:    {trust: 4, label: "Core backend and secrets"}
+elements:
+  - {id: user,        type: external_entity, zone: user,     name: "Customer"}
+  - {id: partner,     type: external_entity, zone: internet, name: "Partner shipping agent (other org, A2A)"}
+  - {id: orch,        type: process,         zone: platform, name: "Orchestrator agent", autonomy: high}
+  - {id: support,     type: process,         zone: platform, name: "Support agent (reads tickets)", autonomy: medium}
+  - {id: refunds,     type: process,         zone: platform, name: "Refund agent (can move money)", autonomy: high}
+  - {id: mcp_crm,     type: process,         zone: tools,    name: "CRM MCP server", autonomy: low}
+  - {id: ctx,         type: data_store,      zone: platform, name: "UCP-style shared context store (course term)"}
+  - {id: sessions,    type: data_store,      zone: platform, name: "Agent session store"}
+  - {id: payments,    type: data_store,      zone: backend,  name: "Payments ledger"}
+  - {id: idp,         type: process,         zone: backend,  name: "Identity provider", autonomy: low}
+flows:
+  - {id: F1,  source: user,    target: orch,     protocol: https,     data: "user request"}
+  - {id: F2,  source: orch,    target: support,  protocol: a2a,       data: "delegated task"}
+  - {id: F3,  source: orch,    target: refunds,  protocol: a2a,       data: "delegated task"}
+  - {id: F4,  source: support, target: mcp_crm,  protocol: mcp,       data: "tool calls"}
+  - {id: F5,  source: partner, target: orch,     protocol: a2a,       data: "task status, artifacts"}
+  - {id: F6,  source: support, target: ctx,      protocol: ucp_style, data: "context writes"}
+  - {id: F7,  source: ctx,     target: refunds,  protocol: ucp_style, data: "context reads"}
+  - {id: F8,  source: orch,    target: sessions, protocol: acp_style, data: "session state"}
+  - {id: F9,  source: refunds, target: payments, protocol: internal,  data: "refund ledger writes"}
+  - {id: F10, source: orch,    target: idp,      protocol: oidc,      data: "token exchange"}

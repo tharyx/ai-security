@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>HITL vs HOTL vs autonomous</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker></defs>
+<rect width="1200" height="470" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">HITL vs HOTL vs autonomous</text>
+<text x="40" y="76" font-size="16" fill="#475569">Match the oversight style to consequence and reversibility</text>
+<rect x="40" y="130" width="340" height="120" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="210.0" y="171.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Autonomous + logs</text>
+<text x="210.0" y="189.0" text-anchor="middle" font-size="12" fill="#475569">low risk, easy undo</text>
+<text x="210.0" y="205.0" text-anchor="middle" font-size="12" fill="#475569">read, draft, search</text>
+<text x="210.0" y="221.0" text-anchor="middle" font-size="12" fill="#475569">human reviews logs later</text>
+<rect x="420" y="130" width="340" height="120" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="590.0" y="171.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">HOTL: human ON the loop</text>
+<text x="590.0" y="189.0" text-anchor="middle" font-size="12" fill="#475569">medium risk, reliable undo</text>
+<text x="590.0" y="205.0" text-anchor="middle" font-size="12" fill="#475569">runs now, veto window</text>
+<text x="590.0" y="221.0" text-anchor="middle" font-size="12" fill="#475569">human can stop or revert</text>
+<rect x="800" y="130" width="340" height="120" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="970.0" y="171.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">HITL: human IN the loop</text>
+<text x="970.0" y="189.0" text-anchor="middle" font-size="12" fill="#475569">high or irreversible</text>
+<text x="970.0" y="205.0" text-anchor="middle" font-size="12" fill="#475569">blocks until approved</text>
+<text x="970.0" y="221.0" text-anchor="middle" font-size="12" fill="#475569">bound to exact action hash</text>
+<text x="40" y="290" text-anchor="start" font-size="16" fill="#0f172a" font-weight="bold">Approval design rules</text>
+<text x="60" y="320" text-anchor="start" font-size="14" fill="#0f172a">- Approve the exact action hash shown on the card (no swap after approval)</text>
+<text x="60" y="348" text-anchor="start" font-size="14" fill="#0f172a">- Approver is independent of requester and agents; irreversible actions need two people</text>
+<text x="60" y="376" text-anchor="start" font-size="14" fill="#0f172a">- Approvals expire and are single-use; cap pending cards to stop approval fatigue</text>
+<text x="60" y="404" text-anchor="start" font-size="14" fill="#0f172a">- Tainted (content-driven) actions are raised one risk level</text>
+<text x="40" y="450" text-anchor="start" font-size="13" fill="#475569">See labs/hitl-approval-gate.</text>
+</svg>

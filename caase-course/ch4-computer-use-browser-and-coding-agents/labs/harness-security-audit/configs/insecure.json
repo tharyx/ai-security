@@ -1,0 +1,11 @@
+{
+  "name": "insecure-demo-harness",
+  "gateway": {"bind": "0.0.0.0", "auth_token": null},
+  "sandbox": {"enabled": false, "run_as_root": true, "workspace_only": false},
+  "network": {"egress_mode": "allow_all", "egress_allowlist": []},
+  "approvals": {"destructive_actions": "never", "timeout_action": "allow"},
+  "skills": {"verify_signatures": false, "allow_unsigned": true, "auto_update": true, "pinned": false},
+  "env": {"OPENAI_API_KEY": "FAKE-KEY-DO-NOT-USE", "HOME": "/home/demo", "AWS_SECRET_ACCESS_KEY": "FAKE-SECRET"},
+  "logging": {"enabled": false, "tamper_evident": false},
+  "models": {"provider_allowlist": [], "providers_in_use": ["openrouter", "unknown-proxy.example"]}
+}

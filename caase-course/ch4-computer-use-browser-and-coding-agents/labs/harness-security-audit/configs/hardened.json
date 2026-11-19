@@ -1,0 +1,11 @@
+{
+  "name": "hardened-demo-harness",
+  "gateway": {"bind": "127.0.0.1", "auth_token": "FAKE-LONG-RANDOM-TOKEN"},
+  "sandbox": {"enabled": true, "run_as_root": false, "workspace_only": true},
+  "network": {"egress_mode": "allowlist", "egress_allowlist": ["api.provider.example", "pypi.org"]},
+  "approvals": {"destructive_actions": "always", "timeout_action": "deny"},
+  "skills": {"verify_signatures": true, "allow_unsigned": false, "auto_update": false, "pinned": true},
+  "env": {"HOME": "/home/agent", "LANG": "C.UTF-8"},
+  "logging": {"enabled": true, "tamper_evident": true},
+  "models": {"provider_allowlist": ["api.provider.example"], "providers_in_use": ["api.provider.example"]}
+}

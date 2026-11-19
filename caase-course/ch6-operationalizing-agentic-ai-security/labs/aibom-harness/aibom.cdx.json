@@ -1,0 +1,181 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:e0b238d5-f505-532c-a0e8-90a45b0b4936",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-01-01T00:00:00Z",
+    "component": {
+      "bom-ref": "harness:support-harness@1.4.0",
+      "type": "application",
+      "name": "support-harness",
+      "version": "1.4.0"
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "model:qwen3-4b-instruct@2025-07-01",
+      "type": "machine-learning-model",
+      "name": "qwen3-4b-instruct",
+      "version": "2025-07-01",
+      "properties": [
+        {
+          "name": "caase:kind",
+          "value": "model"
+        }
+      ],
+      "supplier": {
+        "name": "openrouter"
+      },
+      "licenses": [
+        {
+          "license": {
+            "id": "apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    {
+      "bom-ref": "tool:search_kb@1.0.0",
+      "type": "library",
+      "name": "search_kb",
+      "version": "1.0.0",
+      "properties": [
+        {
+          "name": "caase:kind",
+          "value": "tool"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1a2b938d64d744518acd550a494a2e7ef1f5138b227105f8b3854f844be2915f"
+        }
+      ]
+    },
+    {
+      "bom-ref": "tool:draft_reply@1.0.0",
+      "type": "library",
+      "name": "draft_reply",
+      "version": "1.0.0",
+      "properties": [
+        {
+          "name": "caase:kind",
+          "value": "tool"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3404a469d3edb17bf11ba55ea837b9c313d908e771c0f14316cae52510851572"
+        }
+      ]
+    },
+    {
+      "bom-ref": "mcp:tickets-mcp@0.3.2",
+      "type": "application",
+      "name": "tickets-mcp",
+      "version": "0.3.2",
+      "properties": [
+        {
+          "name": "caase:kind",
+          "value": "mcp-server"
+        },
+        {
+          "name": "caase:transport",
+          "value": "stdio"
+        }
+      ],
+      "purl": "pkg:npm/tickets-mcp@0.3.2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ]
+    },
+    {
+      "bom-ref": "skill:triage@1.0.0",
+      "type": "file",
+      "name": "triage",
+      "version": "1.0.0",
+      "properties": [
+        {
+          "name": "caase:kind",
+          "value": "skill"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f5ea2be313dedf3376faa71d77b72ebd7b3730b123994273a7cd0e1b800b80c2"
+        }
+      ]
+    },
+    {
+      "bom-ref": "prompt:system@7",
+      "type": "data",
+      "name": "system",
+      "version": "7",
+      "properties": [
+        {
+          "name": "caase:kind",
+          "value": "prompt"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fb3317215884cfd2ab9f867bd546c4462a617467399d9e7d1e9968b1ce26fa02"
+        }
+      ]
+    },
+    {
+      "bom-ref": "lib:pydantic@2.9.2",
+      "type": "library",
+      "name": "pydantic",
+      "version": "2.9.2",
+      "properties": [
+        {
+          "name": "caase:kind",
+          "value": "library"
+        }
+      ],
+      "purl": "pkg:pypi/pydantic@2.9.2"
+    },
+    {
+      "bom-ref": "lib:httpx@0.27.2",
+      "type": "library",
+      "name": "httpx",
+      "version": "0.27.2",
+      "properties": [
+        {
+          "name": "caase:kind",
+          "value": "library"
+        }
+      ],
+      "purl": "pkg:pypi/httpx@0.27.2"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "harness:support-harness@1.4.0",
+      "dependsOn": [
+        "model:qwen3-4b-instruct@2025-07-01",
+        "tool:search_kb@1.0.0",
+        "tool:draft_reply@1.0.0",
+        "mcp:tickets-mcp@0.3.2",
+        "skill:triage@1.0.0",
+        "prompt:system@7",
+        "lib:pydantic@2.9.2",
+        "lib:httpx@0.27.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <title id="t">The agent loop and its four checkpoints</title>
+  <desc id="d">Untrusted inputs enter on the left through an input checkpoint. The model proposes a plan. A plan and tool-call checkpoint decides whether each action runs. Results come back through a tool-output checkpoint. The final answer passes an output checkpoint.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#475569"/></marker>
+    <marker id="r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#b91c1c"/></marker>
+  </defs>
+  <rect width="960" height="460" fill="#ffffff"/>
+  <text x="480" y="26" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">Where untrusted text enters, and where code must decide</text>
+
+  <g>
+    <rect x="20" y="60" width="170" height="260" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+    <text x="105" y="84" text-anchor="middle" font-weight="600" fill="#7f1d1d">Untrusted inputs</text>
+    <text x="105" y="112" text-anchor="middle" fill="#7f1d1d" font-size="12">user turn</text>
+    <text x="105" y="136" text-anchor="middle" fill="#7f1d1d" font-size="12">tool results (web, mail, tickets)</text>
+    <text x="105" y="160" text-anchor="middle" fill="#7f1d1d" font-size="12">retrieved documents</text>
+    <text x="105" y="184" text-anchor="middle" fill="#7f1d1d" font-size="12">long-term memory</text>
+    <text x="105" y="208" text-anchor="middle" fill="#7f1d1d" font-size="12">other agents</text>
+    <text x="105" y="232" text-anchor="middle" fill="#7f1d1d" font-size="12">tool descriptions</text>
+    <text x="105" y="256" text-anchor="middle" fill="#7f1d1d" font-size="12">images, files, environment</text>
+  </g>
+
+  <rect x="225" y="130" width="130" height="120" rx="8" fill="#fef3c7" stroke="#b45309"/>
+  <text x="290" y="156" text-anchor="middle" font-weight="600" fill="#78350f">1. Input</text>
+  <text x="290" y="176" text-anchor="middle" fill="#78350f" font-size="12">label source and trust</text>
+  <text x="290" y="194" text-anchor="middle" fill="#78350f" font-size="12">normalize encodings</text>
+  <text x="290" y="212" text-anchor="middle" fill="#78350f" font-size="12">spotlight, scan</text>
+  <text x="290" y="230" text-anchor="middle" fill="#78350f" font-size="12">guard model</text>
+
+  <rect x="395" y="110" width="150" height="160" rx="10" fill="#e0e7ff" stroke="#4338ca"/>
+  <text x="470" y="140" text-anchor="middle" font-weight="600" fill="#312e81">Model (planner)</text>
+  <text x="470" y="164" text-anchor="middle" fill="#312e81" font-size="12">cannot tell data from</text>
+  <text x="470" y="182" text-anchor="middle" fill="#312e81" font-size="12">instructions</text>
+  <text x="470" y="214" text-anchor="middle" fill="#312e81" font-size="12">proposes: plan, tool call,</text>
+  <text x="470" y="232" text-anchor="middle" fill="#312e81" font-size="12">answer, memory write</text>
+
+  <rect x="585" y="130" width="150" height="120" rx="8" fill="#fef3c7" stroke="#b45309"/>
+  <text x="660" y="156" text-anchor="middle" font-weight="600" fill="#78350f">2. Plan and call</text>
+  <text x="660" y="176" text-anchor="middle" fill="#78350f" font-size="12">tool allowed for this task?</text>
+  <text x="660" y="194" text-anchor="middle" fill="#78350f" font-size="12">arguments valid?</text>
+  <text x="660" y="212" text-anchor="middle" fill="#78350f" font-size="12">taint, egress, budget</text>
+  <text x="660" y="230" text-anchor="middle" fill="#78350f" font-size="12">human approval</text>
+
+  <rect x="775" y="130" width="165" height="120" rx="8" fill="#dcfce7" stroke="#15803d"/>
+  <text x="857" y="156" text-anchor="middle" font-weight="600" fill="#14532d">Tools (sandboxed)</text>
+  <text x="857" y="176" text-anchor="middle" fill="#14532d" font-size="12">least-privilege identity</text>
+  <text x="857" y="194" text-anchor="middle" fill="#14532d" font-size="12">no network by default</text>
+  <text x="857" y="212" text-anchor="middle" fill="#14532d" font-size="12">logged, tamper-evident</text>
+
+  <path d="M190,190 L225,190" stroke="#b91c1c" stroke-width="2" fill="none" marker-end="url(#r)"/>
+  <path d="M355,190 L395,190" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M545,190 L585,190" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M735,190 L775,190" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <path d="M857,250 L857,330 L290,330 L290,250" stroke="#b91c1c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#r)"/>
+  <text x="575" y="322" text-anchor="middle" fill="#7f1d1d" font-size="12">tool results come back as untrusted text, through checkpoint 1 again</text>
+
+  <rect x="395" y="360" width="340" height="70" rx="8" fill="#fef3c7" stroke="#b45309"/>
+  <text x="565" y="386" text-anchor="middle" font-weight="600" fill="#78350f">3. Output (to the user and to other systems)</text>
+  <text x="565" y="408" text-anchor="middle" fill="#78350f" font-size="12">secrets and canaries, links and images, encoding for the next system</text>
+  <path d="M470,270 L470,360" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text x="30" y="420" fill="#334155" font-size="12">The model proposes. Deterministic code at checkpoints 1, 2 and 3 disposes.</text>
+</svg>

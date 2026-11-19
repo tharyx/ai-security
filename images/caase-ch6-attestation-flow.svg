@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Remote attestation flow for agent execution (conceptual)</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker></defs>
+<rect width="1200" height="520" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Remote attestation flow for agent execution (conceptual)</text>
+<text x="40" y="76" font-size="16" fill="#475569">Prove WHAT is running and WHERE before releasing secrets to it. Hedged: details differ by vendor.</text>
+<rect x="40" y="140" width="260" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="170.0" y="174.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Agent workload in a TEE</text>
+<text x="170.0" y="192.0" text-anchor="middle" font-size="12" fill="#475569">confidential VM or enclave</text>
+<text x="170.0" y="208.0" text-anchor="middle" font-size="12" fill="#475569">(e.g. Intel TDX, AMD SEV-SNP)</text>
+<rect x="470" y="140" width="240" height="90" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="590.0" y="174.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Attestation service</text>
+<text x="590.0" y="192.0" text-anchor="middle" font-size="12" fill="#475569">verifies hardware-signed</text>
+<text x="590.0" y="208.0" text-anchor="middle" font-size="12" fill="#475569">evidence against policy</text>
+<rect x="880" y="140" width="260" height="90" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1010.0" y="174.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Key / secret broker</text>
+<text x="1010.0" y="192.0" text-anchor="middle" font-size="12" fill="#475569">releases keys only to</text>
+<text x="1010.0" y="208.0" text-anchor="middle" font-size="12" fill="#475569">verified workloads</text>
+<line x1="300" y1="165" x2="470" y2="165" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="385.0" y="155" text-anchor="middle" font-size="12" fill="#475569">1 evidence + nonce</text>
+<line x1="470" y1="210" x2="300" y2="210" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="385.0" y="228" text-anchor="middle" font-size="12" fill="#475569">2 signed result</text>
+<line x1="170" y1="230" x2="170" y2="300" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="170" y1="300" x2="1010" y2="300" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="1010" y1="300" x2="1010" y2="232" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="640" y="292" text-anchor="middle" font-size="12" fill="#475569">3 present token, request key</text>
+<rect x="470" y="340" width="240" height="70" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="590.0" y="364.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Policy</text>
+<text x="590.0" y="382.0" text-anchor="middle" font-size="12" fill="#475569">expected image hash,</text>
+<text x="590.0" y="398.0" text-anchor="middle" font-size="12" fill="#475569">firmware, debug off</text>
+<line x1="590" y1="340" x2="590" y2="232" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="660" y="290" text-anchor="middle" font-size="12" fill="#475569">reference values</text>
+<text x="40" y="450" text-anchor="start" font-size="14" fill="#0f172a">Gives: integrity and confidentiality of the running code and memory against the host operator.</text>
+<text x="40" y="478" text-anchor="start" font-size="14" fill="#dc2626">Does NOT fix: prompt injection, over-privileged tools, or a malicious agent that is correctly attested.</text>
+<text x="40" y="506" text-anchor="start" font-size="13" fill="#475569">Verify current TEE and GPU attestation support in vendor docs.</text>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Trust and authentication models: A2A, ACP, UCP and MCP</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="640" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Trust and authentication models: A2A, ACP, UCP and MCP</text>
+<text x="40" y="76" font-size="16" fill="#475569">Hedged: check each current specification. ACP (IBM) merged into A2A; UCP here means the real commerce protocol.</text>
+<rect x="170" y="100" width="255" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="297.5" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">A2A v1.0</text>
+<rect x="435" y="100" width="255" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="562.5" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">ACP (IBM, now in A2A)</text>
+<rect x="700" y="100" width="255" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="827.5" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">UCP (Google commerce)</text>
+<rect x="965" y="100" width="225" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1077.5" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">MCP (tool layer)</text>
+<rect x="40" y="150" width="120" height="102" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="100.0" y="176" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Identity</text>
+<rect x="170" y="150" width="255" height="102" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="297.5" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a"></text>
+<text x="297.5" y="184" text-anchor="middle" font-size="13" fill="#334155">Agent Card: name, endpoint,</text>
+<text x="297.5" y="202" text-anchor="middle" font-size="13" fill="#334155">skills; may be signed (check spec)</text>
+<rect x="435" y="150" width="255" height="102" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="562.5" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e"></text>
+<text x="562.5" y="184" text-anchor="middle" font-size="13" fill="#334155">Platform-level identity;</text>
+<text x="562.5" y="202" text-anchor="middle" font-size="13" fill="#334155">no strong cross-org model (hedged)</text>
+<rect x="700" y="150" width="255" height="102" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="827.5" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#166534"></text>
+<text x="827.5" y="184" text-anchor="middle" font-size="13" fill="#334155">Business and platform identities;</text>
+<text x="827.5" y="202" text-anchor="middle" font-size="13" fill="#334155">merchant profiles (hedged)</text>
+<rect x="965" y="150" width="225" height="102" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1077.5" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#334155"></text>
+<text x="1077.5" y="184" text-anchor="middle" font-size="13" fill="#334155">Server identity via TLS/OAuth;</text>
+<text x="1077.5" y="202" text-anchor="middle" font-size="13" fill="#334155">client = the host app</text>
+<rect x="40" y="262" width="120" height="102" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="100.0" y="288" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Auth scheme</text>
+<rect x="170" y="262" width="255" height="102" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="297.5" y="288" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a"></text>
+<text x="297.5" y="296" text-anchor="middle" font-size="13" fill="#334155">Declared in the card: OAuth/OIDC,</text>
+<text x="297.5" y="314" text-anchor="middle" font-size="13" fill="#334155">API keys, mTLS are typical</text>
+<rect x="435" y="262" width="255" height="102" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="562.5" y="288" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e"></text>
+<text x="562.5" y="296" text-anchor="middle" font-size="13" fill="#334155">Bearer or API keys over HTTP</text>
+<text x="562.5" y="314" text-anchor="middle" font-size="13" fill="#334155">in the original design (hedged)</text>
+<rect x="700" y="262" width="255" height="102" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="827.5" y="288" text-anchor="middle" font-size="16" font-weight="700" fill="#166534"></text>
+<text x="827.5" y="296" text-anchor="middle" font-size="13" fill="#334155">OAuth-style identity linking;</text>
+<text x="827.5" y="314" text-anchor="middle" font-size="13" fill="#334155">AP2 mandates for payment</text>
+<rect x="965" y="262" width="225" height="102" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1077.5" y="288" text-anchor="middle" font-size="16" font-weight="700" fill="#334155"></text>
+<text x="1077.5" y="296" text-anchor="middle" font-size="13" fill="#334155">OAuth 2.1 for remote servers;</text>
+<text x="1077.5" y="314" text-anchor="middle" font-size="13" fill="#334155">stdio = process trust</text>
+<rect x="40" y="374" width="120" height="102" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="100.0" y="400" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Authorization</text>
+<rect x="170" y="374" width="255" height="102" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="297.5" y="400" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a"></text>
+<text x="297.5" y="408" text-anchor="middle" font-size="13" fill="#334155">Per skill and task, by the server;</text>
+<text x="297.5" y="426" text-anchor="middle" font-size="13" fill="#334155">task ownership checks</text>
+<rect x="435" y="374" width="255" height="102" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="562.5" y="400" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e"></text>
+<text x="562.5" y="408" text-anchor="middle" font-size="13" fill="#334155">Per run and session, server-side</text>
+<text x="562.5" y="426" text-anchor="middle" font-size="13" fill="#334155">(hedged)</text>
+<rect x="700" y="374" width="255" height="102" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="827.5" y="400" text-anchor="middle" font-size="16" font-weight="700" fill="#166534"></text>
+<text x="827.5" y="408" text-anchor="middle" font-size="13" fill="#334155">Signed mandates: amount,</text>
+<text x="827.5" y="426" text-anchor="middle" font-size="13" fill="#334155">merchant, expiry (AP2, hedged)</text>
+<rect x="965" y="374" width="225" height="102" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1077.5" y="400" text-anchor="middle" font-size="16" font-weight="700" fill="#334155"></text>
+<text x="1077.5" y="408" text-anchor="middle" font-size="13" fill="#334155">Scopes + tool allow-lists</text>
+<text x="1077.5" y="426" text-anchor="middle" font-size="13" fill="#334155">by host and server</text>
+<rect x="40" y="486" width="120" height="102" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="100.0" y="512" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Weakest default</text>
+<rect x="170" y="486" width="255" height="102" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="297.5" y="512" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a"></text>
+<text x="297.5" y="520" text-anchor="middle" font-size="13" fill="#334155">Trusting card claims</text>
+<text x="297.5" y="538" text-anchor="middle" font-size="13" fill="#334155">and the sender field</text>
+<rect x="435" y="486" width="255" height="102" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="562.5" y="512" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e"></text>
+<text x="562.5" y="520" text-anchor="middle" font-size="13" fill="#334155">Session state held by client</text>
+<text x="562.5" y="538" text-anchor="middle" font-size="13" fill="#334155">or reused ids</text>
+<rect x="700" y="486" width="255" height="102" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="827.5" y="512" text-anchor="middle" font-size="16" font-weight="700" fill="#166534"></text>
+<text x="827.5" y="520" text-anchor="middle" font-size="13" fill="#334155">Merchant impersonation;</text>
+<text x="827.5" y="538" text-anchor="middle" font-size="13" fill="#334155">mandate replay or widening</text>
+<rect x="965" y="486" width="225" height="102" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="1077.5" y="512" text-anchor="middle" font-size="16" font-weight="700" fill="#334155"></text>
+<text x="1077.5" y="520" text-anchor="middle" font-size="13" fill="#334155">Tool descriptions and results</text>
+<text x="1077.5" y="538" text-anchor="middle" font-size="13" fill="#334155">are untrusted text</text>
+<text x="40" y="625" text-anchor="start" font-size="14" fill="#0f172a" font-weight="700">Pattern: the protocol DECLARES a scheme; the deployment must ENFORCE it. Declared auth is not enforced auth.</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Agent protocol stack: tool layer, agent layer, commerce and context layer</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="700" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Agent protocol stack: tool layer, agent layer, commerce and context layer</text>
+<text x="40" y="76" font-size="16" fill="#475569">Different protocols answer different trust questions. Course terms in italics-free plain text; real names where they exist.</text>
+<rect x="40" y="85" width="1120" height="160" rx="14" fill="#fffbeb" fill-opacity="0.5" stroke="#d97706" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="54" y="109" font-size="14" font-weight="700" fill="#92400e">Commerce and shared-context layer</text>
+<rect x="70" y="115" width="340" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="240.0" y="141" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">UCP (real): Universal Commerce Protocol</text>
+<text x="240.0" y="163" text-anchor="middle" font-size="13" fill="#334155">Google, Jan 2026: agentic commerce,</text>
+<text x="240.0" y="181" text-anchor="middle" font-size="13" fill="#334155">discovery, cart, checkout. Works with AP2.</text>
+<rect x="435" y="115" width="340" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="605.0" y="141" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">AP2: Agent Payments Protocol</text>
+<text x="605.0" y="163" text-anchor="middle" font-size="13" fill="#334155">Payment mandates: who authorized</text>
+<text x="605.0" y="181" text-anchor="middle" font-size="13" fill="#334155">what spend, signed evidence</text>
+<rect x="800" y="115" width="340" height="100" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="970.0" y="141" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">UCP-style shared context store</text>
+<text x="970.0" y="163" text-anchor="middle" font-size="13" fill="#334155">COURSE TERM: no standard found.</text>
+<text x="970.0" y="181" text-anchor="middle" font-size="13" fill="#334155">Shared context across agents</text>
+<rect x="40" y="265" width="1120" height="160" rx="14" fill="#eff6ff" fill-opacity="0.5" stroke="#2563eb" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="54" y="289" font-size="14" font-weight="700" fill="#1e3a8a">Agent-to-agent layer (peers, tasks, delegation)</text>
+<rect x="70" y="295" width="340" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="240.0" y="321" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">A2A v1.0 (AAIF)</text>
+<text x="240.0" y="343" text-anchor="middle" font-size="13" fill="#334155">Agent Card discovery, tasks, messages,</text>
+<text x="240.0" y="361" text-anchor="middle" font-size="13" fill="#334155">artifacts, declared auth schemes</text>
+<rect x="435" y="295" width="340" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="605.0" y="321" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">ACP (IBM BeeAI)</text>
+<text x="605.0" y="343" text-anchor="middle" font-size="13" fill="#334155">Merged into A2A, Aug 2025.</text>
+<text x="605.0" y="361" text-anchor="middle" font-size="13" fill="#334155">Sessions and state concepts live on</text>
+<rect x="800" y="295" width="340" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="970.0" y="321" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">ACP (Zed): Agent Client Protocol</text>
+<text x="970.0" y="343" text-anchor="middle" font-size="13" fill="#334155">Editor to coding agent.</text>
+<text x="970.0" y="361" text-anchor="middle" font-size="13" fill="#334155">Same acronym, different protocol</text>
+<rect x="40" y="445" width="1120" height="160" rx="14" fill="#f0fdf4" fill-opacity="0.5" stroke="#16a34a" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="54" y="469" font-size="14" font-weight="700" fill="#166534">Tool and data layer (agent to tool)</text>
+<rect x="70" y="475" width="340" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="240.0" y="501" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">MCP (AAIF since Dec 2025)</text>
+<text x="240.0" y="523" text-anchor="middle" font-size="13" fill="#334155">stdio and Streamable HTTP, tools, resources,</text>
+<text x="240.0" y="541" text-anchor="middle" font-size="13" fill="#334155">prompts; OAuth for remote servers</text>
+<rect x="435" y="475" width="340" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="605.0" y="501" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Function calling / APIs</text>
+<text x="605.0" y="523" text-anchor="middle" font-size="13" fill="#334155">Vendor tool-call formats,</text>
+<text x="605.0" y="541" text-anchor="middle" font-size="13" fill="#334155">REST and gRPC backends</text>
+<rect x="800" y="475" width="340" height="100" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="970.0" y="501" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Tool servers and backends</text>
+<text x="970.0" y="523" text-anchor="middle" font-size="13" fill="#334155">Files, databases, SaaS, payment rails</text>
+<rect x="40" y="650" width="1120" height="36" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="600.0" y="676" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">Trust question per layer:  commerce = who authorized this spend?   agent = who is this peer and may it ask?   tool = may this caller run this tool?</text>
+</svg>

@@ -1,0 +1,32 @@
+# ILLUSTRATIVE Hermes-style MCP server list used by the lab. This is NOT the real Hermes config schema.
+# Check the real format at hermes-agent.nousresearch.com before editing a real config.
+mcp_servers:
+  - name: tickets
+    transport: stdio
+    command: npx
+    args: ["-y", "@example/tickets-mcp@1.4.2"]
+    version: "1.4.2"
+    integrity: "sha512-FAKE-INTEGRITY-HASH"
+    tools_allow: [list_tickets, get_ticket]
+    tool_hashes:
+      list_tickets: "sha256:FAKE-PIN-1"
+      get_ticket: "sha256:FAKE-PIN-2"
+    env:
+      TICKETS_TOKEN: "${TICKETS_TOKEN}"
+
+  - name: shady-search
+    transport: http
+    url: http://0.0.0.0:8080/mcp
+    command: npx
+    args: ["-y", "shady-search-mcp"]
+    version: latest
+    env:
+      SEARCH_API_KEY: "FAKE-sk-literal-0000"
+
+  - name: legacy-notes
+    transport: sse
+    url: https://notes.example/sse
+    auth: {type: bearer, token_ref: "${NOTES_TOKEN}"}
+    version: "0.9.1"
+    integrity: "sha512-FAKE-INTEGRITY-HASH-2"
+    tools_allow: ["*"]

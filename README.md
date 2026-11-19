@@ -48,6 +48,7 @@ ai-security/
 ├── 08-ai-compliance/
 ├── 09-enterprise-architecture/
 ├── 10-capstone-project/
+├── caase-course/                 companion for the CAASE AI agent security course (7 chapters, every syllabus line mapped)
 ├── cmcpse-course/                companion for the Certified MCP Security Expert course (6 chapters, every syllabus line mapped)
 ├── caisp-course/                 companion for the Certified AI Security Professional course (7 chapters, every syllabus line mapped)
 ├── cybersecurity-track/          foundations for my Cloud Security + SOC job (A+ → Security+, SIEM, EDR, cloud)
@@ -80,6 +81,7 @@ ai-security/
 | **[Cybersecurity track](cybersecurity-track/)** | My current Cloud Security + SOC job: IT/networking/security foundations, SOC, SIEM (Sentinel, Splunk), EDR/MDR, vulnerability management, cloud security, ISO 27001, certifications (A+ → Network+ → ISC2 CC → Security+ → SC-200), TryHackMe/HTB profile | **Start here first** |
 | **[CAISP course companion](caisp-course/)** | The Certified AI Security Professional course I'm taking: all 7 chapters, every syllabus line mapped to a lesson + lab ([syllabus map](caisp-course/SYLLABUS-MAP.md)) | Alongside the course |
 | **[CMCPSE course companion](cmcpse-course/)** | The Certified MCP Security Expert course: all 6 chapters, every syllabus line mapped to a lesson + lab ([syllabus map](cmcpse-course/SYLLABUS-MAP.md)) | Alongside the course |
+| **[CAASE course companion](caase-course/)** | The AI agent security course: all 7 chapters, every syllabus line mapped, with outdated syllabus items corrected ([syllabus map](caase-course/SYLLABUS-MAP.md)) | Alongside the course |
 | **AI security roadmap** (modules 01–10) | AI Security Engineer / Architect specialization | After the cybersecurity track's foundations (modules 01–06), or in parallel |
 
 ## Get started (10 minutes)

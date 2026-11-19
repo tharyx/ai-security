@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Delegated token chain with down-scoping</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker></defs>
+<rect width="1200" height="470" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Delegated token chain with down-scoping</text>
+<text x="40" y="76" font-size="16" fill="#475569">RFC 8693-style exchange: every hop narrows scope, rebinds audience, shortens expiry, extends the act chain</text>
+<rect x="40" y="140" width="320" height="130" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="200.0" y="178.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Root token</text>
+<text x="200.0" y="196.0" text-anchor="middle" font-size="12" fill="#475569">sub orchestrator</text>
+<text x="200.0" y="212.0" text-anchor="middle" font-size="12" fill="#475569">aud agent-b</text>
+<text x="200.0" y="228.0" text-anchor="middle" font-size="12" fill="#475569">scope: cal.read mail.send files.read</text>
+<text x="200.0" y="244.0" text-anchor="middle" font-size="12" fill="#475569">exp +600s</text>
+<line x1="360" y1="205" x2="430" y2="205" stroke="#16a34a" stroke-width="2" marker-end="url(#a)"/>
+<text x="395.0" y="195" text-anchor="middle" font-size="12" fill="#16a34a">exchange</text>
+<rect x="430" y="140" width="320" height="130" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="590.0" y="178.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Hop 2 token</text>
+<text x="590.0" y="196.0" text-anchor="middle" font-size="12" fill="#475569">sub agent-b</text>
+<text x="590.0" y="212.0" text-anchor="middle" font-size="12" fill="#475569">aud calendar-api</text>
+<text x="590.0" y="228.0" text-anchor="middle" font-size="12" fill="#475569">scope: cal.read mail.send</text>
+<text x="590.0" y="244.0" text-anchor="middle" font-size="12" fill="#475569">exp +300s</text>
+<line x1="750" y1="205" x2="820" y2="205" stroke="#16a34a" stroke-width="2" marker-end="url(#a)"/>
+<text x="785.0" y="195" text-anchor="middle" font-size="12" fill="#16a34a">exchange</text>
+<rect x="820" y="140" width="320" height="130" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="980.0" y="178.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Hop 3 token</text>
+<text x="980.0" y="196.0" text-anchor="middle" font-size="12" fill="#475569">sub agent-c</text>
+<text x="980.0" y="212.0" text-anchor="middle" font-size="12" fill="#475569">aud calendar-api</text>
+<text x="980.0" y="228.0" text-anchor="middle" font-size="12" fill="#475569">scope: cal.read</text>
+<text x="980.0" y="244.0" text-anchor="middle" font-size="12" fill="#475569">exp not after parent</text>
+<text x="40" y="320" text-anchor="start" font-size="14" fill="#0f172a">act chain grows:  orchestrator  -&gt;  agent-b  -&gt;  agent-c    (the original user stays in the 'user' claim)</text>
+<rect x="40" y="350" width="1100" height="70" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="590.0" y="382.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Rejected by the token service or the resource</text>
+<text x="590.0" y="400.0" text-anchor="middle" font-size="12" fill="#475569">widen scope  |  wrong audience (passthrough)  |  expired  |  chain too deep  |  bad signature  |  revoked</text>
+</svg>

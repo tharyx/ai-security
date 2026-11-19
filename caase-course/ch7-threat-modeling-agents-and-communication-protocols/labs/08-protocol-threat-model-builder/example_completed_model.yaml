@@ -1,0 +1,276 @@
+# A completed protocol-level threat model + control set. Use it as the answer key for the template.
+meta:
+  system: Customer-support multi-agent platform (A2A between agents, ACP-style sessions, UCP-style shared context, MCP tools)
+  owner: platform-security
+  version: '1.0'
+protocol_models:
+  a2a:
+    assets:
+    - delegated tasks and artifacts
+    - Agent Cards and the card registry
+    - agent signing keys
+    trust_boundaries:
+    - partner org to our orchestrator
+    - orchestrator to worker agents
+    threats:
+    - id: TH-01
+      attack_class: spoofing_identity_forgery
+      stride: S
+      title: Sender field forged on a task result
+      atlas: Initial Access
+      asi: ASI07
+      inherent:
+        likelihood: 4
+        impact: 4
+      controls:
+      - C-01
+      residual:
+        likelihood: 2
+        impact: 4
+    - id: TH-02
+      attack_class: capability_discovery_abuse
+      stride: S
+      title: Rogue Agent Card advertises a skill to win delegation
+      atlas: Resource Development
+      asi: ASI04
+      inherent:
+        likelihood: 3
+        impact: 4
+      controls:
+      - C-02
+      residual:
+        likelihood: 1
+        impact: 4
+    - id: TH-03
+      attack_class: capability_discovery_abuse
+      stride: D
+      title: Over-broad skill advertisement triggers a delegation loop or fan-out
+      atlas: Impact
+      asi: ASI08
+      inherent:
+        likelihood: 3
+        impact: 3
+      controls:
+      - C-10
+      residual:
+        likelihood: 2
+        impact: 2
+  acp_style:
+    assets:
+    - session store
+    - resume tokens
+    trust_boundaries:
+    - agent to session service
+    - agent to agent state hand-off
+    threats:
+    - id: TH-04
+      attack_class: context_state_injection
+      stride: T
+      title: Client-held session state edited to raise the role
+      atlas: Privilege Escalation
+      asi: ASI03
+      inherent:
+        likelihood: 3
+        impact: 4
+      controls:
+      - C-03
+      residual:
+        likelihood: 1
+        impact: 4
+    - id: TH-05
+      attack_class: replay_downgrade_mitm
+      stride: T
+      title: Captured session message replayed or handshake downgraded
+      atlas: Defense Evasion
+      asi: ASI07
+      inherent:
+        likelihood: 3
+        impact: 4
+      controls:
+      - C-04
+      - C-08
+      residual:
+        likelihood: 1
+        impact: 4
+    - id: TH-06
+      attack_class: spoofing_identity_forgery
+      stride: R
+      title: No record of which agent acted in a session
+      atlas: Defense Evasion
+      asi: ASI10
+      inherent:
+        likelihood: 3
+        impact: 3
+      controls:
+      - C-09
+      residual:
+        likelihood: 2
+        impact: 2
+  ucp_style:
+    assets:
+    - shared context entries
+    - namespace ACLs
+    trust_boundaries:
+    - support agent (low trust) to context store
+    - context store to pricing agent
+    threats:
+    - id: TH-07
+      attack_class: context_state_injection
+      stride: T
+      title: Low-trust writer poisons a shared context entry
+      atlas: Persistence
+      asi: ASI06
+      inherent:
+        likelihood: 4
+        impact: 5
+      controls:
+      - C-05
+      - C-06
+      residual:
+        likelihood: 1
+        impact: 5
+    - id: TH-08
+      attack_class: spoofing_identity_forgery
+      stride: S
+      title: Entry relabelled to look like a trusted writer
+      atlas: Initial Access
+      asi: ASI06
+      inherent:
+        likelihood: 3
+        impact: 4
+      controls:
+      - C-06
+      residual:
+        likelihood: 1
+        impact: 4
+    - id: TH-09
+      attack_class: context_state_injection
+      stride: I
+      title: Context leaks to agents without need to know
+      atlas: Exfiltration
+      asi: ASI06
+      inherent:
+        likelihood: 3
+        impact: 4
+      controls:
+      - C-11
+      residual:
+        likelihood: 2
+        impact: 3
+  mcp:
+    assets:
+    - tool backends
+    - bridge identity map
+    trust_boundaries:
+    - orchestrator bridge between A2A, UCP-style and MCP
+    - MCP client to tool server
+    threats:
+    - id: TH-10
+      attack_class: cross_protocol_confusion
+      stride: E
+      title: External A2A trust level not carried into the MCP call
+      atlas: Privilege Escalation
+      asi: ASI03
+      inherent:
+        likelihood: 4
+        impact: 5
+      controls:
+      - C-12
+      - C-13
+      residual:
+        likelihood: 1
+        impact: 4
+    - id: TH-11
+      attack_class: cross_protocol_confusion
+      stride: T
+      title: Schema mismatch lets extra fields reach the tool
+      atlas: Execution
+      asi: ASI02
+      inherent:
+        likelihood: 3
+        impact: 4
+      controls:
+      - C-07
+      residual:
+        likelihood: 1
+        impact: 3
+    - id: TH-12
+      attack_class: replay_downgrade_mitm
+      stride: T
+      title: Same message replayed through another protocol
+      atlas: Initial Access
+      asi: ASI07
+      inherent:
+        likelihood: 3
+        impact: 4
+      controls:
+      - C-04
+      residual:
+        likelihood: 1
+        impact: 4
+controls:
+- id: C-01
+  title: Per-agent message signatures, recipient and task binding
+  type: hard
+  layer: protocol boundary
+  test: 03-a2a-spoofing-hijack/test_caase_ch7_a2a_hijack.py::test_secure_forged_sender_is_refused
+- id: C-02
+  title: Signed Agent Cards plus skill allow-list
+  type: hard
+  layer: discovery
+  test: 03-a2a-spoofing-hijack/test_caase_ch7_a2a_hijack.py::test_secure_rogue_card_is_never_discovered
+- id: C-03
+  title: Server-side session state, role never read from the client
+  type: hard
+  layer: session
+  test: 04-acp-session-abuse/test_caase_ch7_acp_session.py::test_secure_role_is_never_taken_from_the_client
+- id: C-04
+  title: Timestamp window and single-use nonce
+  type: hard
+  layer: protocol boundary
+  test: 07-mutual-auth-signing/test_caase_ch7_mutual_auth.py::test_replay_and_staleness_are_refused
+- id: C-05
+  title: Namespace write ACL (default deny)
+  type: hard
+  layer: context store
+  test: 05-ucp-context-poisoning/test_caase_ch7_context_poisoning.py::test_acl_blocks_low_trust_write_to_pricing_namespace
+- id: C-06
+  title: HMAC or signature on every context entry, verified on read
+  type: hard
+  layer: context store
+  test: 05-ucp-context-poisoning/test_caase_ch7_context_poisoning.py::test_signed_entries_detect_direct_tampering_of_the_backing_store
+- id: C-07
+  title: Per-tool schema validation with no extra keys
+  type: hard
+  layer: bridge
+  test: 06-cross-protocol-audit/test_caase_ch7_cross_protocol.py::test_schema_attack_moves_money_over_the_limit_only_on_the_vulnerable_bridge
+- id: C-08
+  title: Minimum suite and transcript-bound handshake
+  type: hard
+  layer: handshake
+  test: 07-mutual-auth-signing/test_caase_ch7_mutual_auth.py::test_policy_floor_refuses_a_downgrade_to_none
+- id: C-09
+  title: Agent identity in every log line, central retention
+  type: process
+  layer: audit
+  test: 'manual: monthly sample of 20 log lines must name the acting agent'
+- id: C-10
+  title: Delegation depth limit, budgets and circuit breaker
+  type: hard
+  layer: orchestrator
+  test: 05-agent-security/multi-agent-trust/lab/test_multi_agent.py::test_breaker_caps_the_blast_radius_of_a_runaway_plan
+- id: C-11
+  title: 'Trust tier on read: low-trust text is data, never instructions'
+  type: hard
+  layer: context store
+  test: 05-ucp-context-poisoning/test_caase_ch7_context_poisoning.py::test_trust_tag_stops_low_trust_instructions_even_when_acl_allows_the_note
+- id: C-12
+  title: Carry org and trust level through the bridge
+  type: hard
+  layer: bridge
+  test: 06-cross-protocol-audit/test_caase_ch7_cross_protocol.py::test_vulnerable_external_agent_runs_a_tool_but_hardened_refuses
+- id: C-13
+  title: Human approval for money movement
+  type: process
+  layer: workflow
+  test: 'manual: quarterly approval-queue review'

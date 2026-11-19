@@ -1,0 +1,97 @@
+# Protocol-level threat model template. Replace every TODO.
+# attack_class must be one of: spoofing_identity_forgery, capability_discovery_abuse, context_state_injection,
+#                              replay_downgrade_mitm, cross_protocol_confusion
+# stride: S T R I D E. atlas: a MITRE ATLAS tactic name. asi: ASI01..ASI10. likelihood/impact: 1-5.
+# control type: hard | soft | process. hard controls need a test reference "path::test_name"; others may say "manual: ...".
+# Cover all four protocol areas (a2a, acp_style, ucp_style, mcp), all five attack classes and all six STRIDE letters.
+meta:
+  system: 'TODO: name the system'
+  owner: TODO
+  version: TODO
+protocol_models:
+  a2a:
+    assets:
+    - TODO
+    trust_boundaries:
+    - TODO
+    threats:
+    - id: TH-TODO
+      attack_class: TODO
+      stride: TODO
+      title: 'TODO: one sentence attack'
+      atlas: TODO
+      asi: TODO
+      inherent:
+        likelihood: 0
+        impact: 0
+      controls:
+      - TODO
+      residual:
+        likelihood: 0
+        impact: 0
+  acp_style:
+    assets:
+    - TODO
+    trust_boundaries:
+    - TODO
+    threats:
+    - id: TH-TODO
+      attack_class: TODO
+      stride: TODO
+      title: 'TODO: one sentence attack'
+      atlas: TODO
+      asi: TODO
+      inherent:
+        likelihood: 0
+        impact: 0
+      controls:
+      - TODO
+      residual:
+        likelihood: 0
+        impact: 0
+  ucp_style:
+    assets:
+    - TODO
+    trust_boundaries:
+    - TODO
+    threats:
+    - id: TH-TODO
+      attack_class: TODO
+      stride: TODO
+      title: 'TODO: one sentence attack'
+      atlas: TODO
+      asi: TODO
+      inherent:
+        likelihood: 0
+        impact: 0
+      controls:
+      - TODO
+      residual:
+        likelihood: 0
+        impact: 0
+  mcp:
+    assets:
+    - TODO
+    trust_boundaries:
+    - TODO
+    threats:
+    - id: TH-TODO
+      attack_class: TODO
+      stride: TODO
+      title: 'TODO: one sentence attack'
+      atlas: TODO
+      asi: TODO
+      inherent:
+        likelihood: 0
+        impact: 0
+      controls:
+      - TODO
+      residual:
+        likelihood: 0
+        impact: 0
+controls:
+- id: C-TODO
+  title: TODO
+  type: TODO
+  layer: TODO
+  test: TODO

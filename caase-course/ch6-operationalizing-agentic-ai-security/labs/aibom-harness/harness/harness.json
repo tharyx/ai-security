@@ -1,0 +1,58 @@
+{
+  "name": "support-harness",
+  "version": "1.4.0",
+  "model": {
+    "name": "qwen3-4b-instruct",
+    "provider": "openrouter",
+    "version": "2025-07-01",
+    "license": "apache-2.0",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "tools": [
+    {
+      "name": "search_kb",
+      "version": "1.0.0",
+      "description": "Search the knowledge base (read only)."
+    },
+    {
+      "name": "draft_reply",
+      "version": "1.0.0",
+      "description": "Draft a reply for human review."
+    }
+  ],
+  "mcp_servers": [
+    {
+      "name": "tickets-mcp",
+      "version": "0.3.2",
+      "transport": "stdio",
+      "purl": "pkg:npm/tickets-mcp@0.3.2",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "skills": [
+    {
+      "name": "triage",
+      "version": "1.0.0",
+      "path": "skills/triage/SKILL.md"
+    }
+  ],
+  "prompts": [
+    {
+      "name": "system",
+      "version": "7",
+      "path": "prompts/system.md"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "pydantic",
+      "version": "2.9.2",
+      "purl": "pkg:pypi/pydantic@2.9.2"
+    },
+    {
+      "name": "httpx",
+      "version": "0.27.2",
+      "purl": "pkg:pypi/httpx@0.27.2"
+    }
+  ]
+}

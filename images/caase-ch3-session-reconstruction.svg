@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <title id="t">Reconstructing a compromised agent session</title>
+  <desc id="d">Three artifacts, the transcript, the hash-chained tool log and the memory file, are merged into one timeline. The analysis finds the injection point, the first anomaly and the blast radius, then recommends containment actions.</desc>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#475569"/></marker></defs>
+  <rect width="960" height="440" fill="#ffffff"/>
+  <text x="480" y="26" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">The transcript says "nothing unusual". The tool log and memory do not.</text>
+
+  <rect x="20" y="60" width="200" height="60" rx="8" fill="#e0e7ff" stroke="#4338ca"/>
+  <text x="120" y="86" text-anchor="middle" font-weight="600" fill="#312e81">transcript</text>
+  <text x="120" y="106" text-anchor="middle" fill="#312e81" font-size="12">turns, final answer</text>
+  <rect x="20" y="140" width="200" height="60" rx="8" fill="#e0e7ff" stroke="#4338ca"/>
+  <text x="120" y="166" text-anchor="middle" font-weight="600" fill="#312e81">tool log (hash chain)</text>
+  <text x="120" y="186" text-anchor="middle" fill="#312e81" font-size="12">tool, args, trust, digest</text>
+  <rect x="20" y="220" width="200" height="60" rx="8" fill="#e0e7ff" stroke="#4338ca"/>
+  <text x="120" y="246" text-anchor="middle" font-weight="600" fill="#312e81">memory file</text>
+  <text x="120" y="266" text-anchor="middle" fill="#312e81" font-size="12">entries with provenance</text>
+
+  <rect x="290" y="100" width="180" height="140" rx="10" fill="#fef3c7" stroke="#b45309"/>
+  <text x="380" y="128" text-anchor="middle" font-weight="600" fill="#78350f">1. Verify integrity</text>
+  <text x="380" y="152" text-anchor="middle" fill="#78350f" font-size="12">walk the chain, find the</text>
+  <text x="380" y="170" text-anchor="middle" fill="#78350f" font-size="12">first altered or missing entry</text>
+  <text x="380" y="200" text-anchor="middle" font-weight="600" fill="#78350f">2. One timeline</text>
+  <text x="380" y="220" text-anchor="middle" fill="#78350f" font-size="12">merge by time</text>
+
+  <rect x="520" y="60" width="200" height="230" rx="10" fill="#fee2e2" stroke="#b91c1c"/>
+  <text x="620" y="88" text-anchor="middle" font-weight="600" fill="#7f1d1d">3. Find</text>
+  <text x="620" y="116" text-anchor="middle" fill="#7f1d1d" font-size="12">injection point: first untrusted</text>
+  <text x="620" y="134" text-anchor="middle" fill="#7f1d1d" font-size="12">result with instruction-like text</text>
+  <text x="620" y="164" text-anchor="middle" fill="#7f1d1d" font-size="12">first anomaly: off-policy call</text>
+  <text x="620" y="182" text-anchor="middle" fill="#7f1d1d" font-size="12">after it (new recipient, tool)</text>
+  <text x="620" y="212" text-anchor="middle" font-weight="600" fill="#7f1d1d">4. Score blast radius</text>
+  <text x="620" y="234" text-anchor="middle" fill="#7f1d1d" font-size="12">secrets exposed and sent out,</text>
+  <text x="620" y="252" text-anchor="middle" fill="#7f1d1d" font-size="12">tainted memory, off-policy calls</text>
+
+  <rect x="770" y="100" width="170" height="140" rx="10" fill="#dcfce7" stroke="#15803d"/>
+  <text x="855" y="128" text-anchor="middle" font-weight="600" fill="#14532d">5. Contain, learn</text>
+  <text x="855" y="152" text-anchor="middle" fill="#14532d" font-size="12">kill switch, rotate secrets,</text>
+  <text x="855" y="170" text-anchor="middle" fill="#14532d" font-size="12">purge memory and source,</text>
+  <text x="855" y="188" text-anchor="middle" fill="#14532d" font-size="12">regression test, new rule</text>
+
+  <path d="M220,90 L290,150" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M220,170 L290,170" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M220,250 L290,200" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M470,170 L520,170" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M720,170 L770,170" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <text x="30" y="340" fill="#334155" font-size="12">You cannot reconstruct what you did not record. Log from day one, append-only, off the agent's host,</text>
+  <text x="30" y="360" fill="#334155" font-size="12">with provenance on memory writes, the trust level of every tool result, approvals and canary events.</text>
+</svg>

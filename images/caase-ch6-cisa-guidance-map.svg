@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>CISA Five Eyes agentic AI guidance mapped to this repo</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker></defs>
+<rect width="1200" height="540" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">CISA Five Eyes agentic AI guidance mapped to this repo</text>
+<text x="40" y="76" font-size="16" fill="#475569">Hedged mapping: risk categories as reported by secondary sources; verify names in the publication</text>
+<text x="60" y="120" text-anchor="start" font-size="14" fill="#0f172a" font-weight="bold">Risk category</text>
+<text x="420" y="120" text-anchor="start" font-size="14" fill="#0f172a" font-weight="bold">Practice</text>
+<text x="760" y="120" text-anchor="start" font-size="14" fill="#0f172a" font-weight="bold">Lab in this repo</text>
+<rect x="40" y="135" width="340" height="46" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="163.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Privilege risk</text>
+<rect x="400" y="135" width="320" height="46" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="560.0" y="163.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">least agency, scoped tokens</text>
+<rect x="740" y="135" width="400" height="46" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="940.0" y="163.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">ch5 delegated-token-scoping</text>
+<rect x="40" y="193" width="340" height="46" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="221.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Design / configuration risk</text>
+<rect x="400" y="193" width="320" height="46" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="560.0" y="221.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">harness audit, signed config</text>
+<rect x="740" y="193" width="400" height="46" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="940.0" y="221.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">ch6 sign-verify-harness, ch4 harness audit</text>
+<rect x="40" y="251" width="340" height="46" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="279.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Behavioral risk</text>
+<rect x="400" y="251" width="320" height="46" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="560.0" y="279.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">goal hijack tests, drift</text>
+<rect x="740" y="251" width="400" height="46" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="940.0" y="279.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">ch6 redteam-release-gate, observability</text>
+<rect x="40" y="309" width="340" height="46" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="337.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Structural risk</text>
+<rect x="400" y="309" width="320" height="46" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="560.0" y="337.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">multi-agent trust, cascades</text>
+<rect x="740" y="309" width="400" height="46" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="940.0" y="337.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">ch5 a2a-spoofing, rogue-agent-containment</text>
+<rect x="40" y="367" width="340" height="46" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="395.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Accountability risk</text>
+<rect x="400" y="367" width="320" height="46" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="560.0" y="395.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">audit trails, HITL, identity</text>
+<rect x="740" y="367" width="400" height="46" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="940.0" y="395.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">ch5 hitl-approval-gate, ch6 secops agent</text>
+<rect x="40" y="425" width="340" height="46" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="210.0" y="453.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Supply chain (some sources)</text>
+<rect x="400" y="425" width="320" height="46" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="560.0" y="453.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">AIBOM, model + skill vetting</text>
+<rect x="740" y="425" width="400" height="46" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="940.0" y="453.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">ch6 aibom, provenance, batch scan</text>
+<text x="40" y="515" text-anchor="start" font-size="13" fill="#475569">Published 1 May 2026 by CISA, NSA and partner agencies. Verify the exact categories at source.</text>
+</svg>

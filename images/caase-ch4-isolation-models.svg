@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Three security models for agent harnesses: application-level permissions, container isolation, hardened fork with out-of-process enforcement</title>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Where is the enforcement?</text>
+  <text x="40" y="76" font-size="16" fill="#475569">The closer enforcement is to the agent process, the easier it is to bypass.</text>
+  <rect x="40" y="100" width="350" height="330" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="58" y="130" font-size="18" font-weight="700" fill="#0f172a">App-level permissions</text>
+  <text x="58" y="160" font-size="14" fill="#0f172a">Checks live inside the agent app</text>
+  <text x="58" y="180" font-size="14" fill="#0f172a">("is this path inside the workspace?").</text>
+  <rect x="58" y="204" width="314" height="100" rx="8" fill="#ffffff" stroke="#dc2626"/>
+  <text x="70" y="228" font-size="14" fill="#0f172a">[ agent process + its own rules ]</text>
+  <text x="70" y="250" font-size="14" fill="#0f172a">same user, same files, same network</text>
+  <text x="70" y="272" font-size="14" fill="#991b1b">A bug or a spawned shell skips the rules</text>
+  <text x="58" y="334" font-size="14" fill="#0f172a">Good for: usability, prompts, UX.</text>
+  <text x="58" y="354" font-size="14" fill="#0f172a">Weak as a security boundary.</text>
+  <text x="58" y="392" font-size="13" fill="#475569">Path-prefix checks: see the lab.</text>
+  <rect x="425" y="100" width="350" height="330" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="443" y="130" font-size="18" font-weight="700" fill="#0f172a">Container isolation</text>
+  <text x="443" y="160" font-size="14" fill="#0f172a">The OS limits what the process can</text>
+  <text x="443" y="180" font-size="14" fill="#0f172a">see: mounts, users, network.</text>
+  <rect x="443" y="204" width="314" height="100" rx="8" fill="#ffffff" stroke="#2563eb"/>
+  <text x="455" y="228" font-size="14" fill="#0f172a">[ container: agent + project mount ]</text>
+  <text x="455" y="250" font-size="14" fill="#0f172a">no home dir, no keys, non-root,</text>
+  <text x="455" y="272" font-size="14" fill="#1e40af">network: allowlist or none</text>
+  <text x="443" y="334" font-size="14" fill="#0f172a">Good: strong default. Escapes need a</text>
+  <text x="443" y="354" font-size="14" fill="#0f172a">kernel or runtime bug. Share the host</text>
+  <text x="443" y="374" font-size="14" fill="#0f172a">kernel; never mount the Docker socket.</text>
+  <rect x="810" y="100" width="350" height="330" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="828" y="130" font-size="18" font-weight="700" fill="#0f172a">Hardened fork / policy layer</text>
+  <text x="828" y="160" font-size="14" fill="#0f172a">Kernel sandbox plus a policy engine</text>
+  <text x="828" y="180" font-size="14" fill="#0f172a">in a SEPARATE process (NemoClaw-style,</text>
+  <text x="828" y="200" font-size="14" fill="#0f172a">as reported; verify).</text>
+  <rect x="828" y="214" width="314" height="90" rx="8" fill="#ffffff" stroke="#16a34a"/>
+  <text x="840" y="238" font-size="14" fill="#0f172a">[ agent ] request to [ policy daemon ]</text>
+  <text x="840" y="260" font-size="14" fill="#0f172a">the agent cannot edit the policy</text>
+  <text x="840" y="282" font-size="14" fill="#166534">deny by default, audited</text>
+  <text x="828" y="334" font-size="14" fill="#0f172a">Does not review skill code: still vet</text>
+  <text x="828" y="354" font-size="14" fill="#0f172a">skills. Combine with an audit plugin.</text>
+  <rect x="40" y="456" width="1120" height="60" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="60" y="482" font-size="15" font-weight="700" fill="#0f172a">Rule of thumb</text>
+  <text x="60" y="504" font-size="14" fill="#0f172a">App-level permissions for convenience, a container or kernel sandbox for containment, an out-of-process policy for decisions, a person for the irreversible.</text>
+</svg>

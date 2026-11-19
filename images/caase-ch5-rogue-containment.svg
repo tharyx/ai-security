@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Safe termination of a rogue agent</title>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#475569"/></marker></defs>
+<rect width="1200" height="420" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="bold" fill="#0f172a">Safe termination of a rogue agent</text>
+<text x="40" y="76" font-size="16" fill="#475569">Order matters: preserve evidence before destroying anything</text>
+<rect x="40" y="140" width="160" height="80" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="120.0" y="177.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">1 Quarantine</text>
+<text x="120.0" y="195.0" text-anchor="middle" font-size="12" fill="#475569">stop new work</text>
+<line x1="200" y1="180" x2="230" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="230" y="140" width="160" height="80" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="310.0" y="177.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">2 Drain</text>
+<text x="310.0" y="195.0" text-anchor="middle" font-size="12" fill="#475569">dead-letter queue</text>
+<line x1="390" y1="180" x2="420" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="420" y="140" width="160" height="80" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="500.0" y="177.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">3 Preserve</text>
+<text x="500.0" y="195.0" text-anchor="middle" font-size="12" fill="#475569">evidence + SHA-256</text>
+<line x1="580" y1="180" x2="610" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="610" y="140" width="160" height="80" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="690.0" y="177.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">4 Revoke</text>
+<text x="690.0" y="195.0" text-anchor="middle" font-size="12" fill="#475569">credentials at issuer</text>
+<line x1="770" y1="180" x2="800" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="800" y="140" width="160" height="80" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="880.0" y="177.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">5 Roll back</text>
+<text x="880.0" y="195.0" text-anchor="middle" font-size="12" fill="#475569">journaled effects</text>
+<line x1="960" y1="180" x2="990" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="990" y="140" width="160" height="80" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1070.0" y="177.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">6 Destroy, verify</text>
+<text x="1070.0" y="195.0" text-anchor="middle" font-size="12" fill="#475569">token must fail</text>
+<text x="40" y="270" text-anchor="start" font-size="14" fill="#0f172a">Detect first: unknown tool, denied-call bursts, rate, loops, drift from baseline.</text>
+<text x="40" y="300" text-anchor="start" font-size="14" fill="#0f172a">Physical-world agents: the agent only PROPOSES; a separate safety controller disposes.</text>
+<text x="40" y="330" text-anchor="start" font-size="14" fill="#0f172a">Watchdog heartbeat loss, hardware e-stop or comms loss -&gt; SAFE STATE; leaving it needs a named human.</text>
+<text x="40" y="380" text-anchor="start" font-size="13" fill="#475569">See labs/rogue-agent-containment (rogue_agent.py and failsafe.py).</text>
+</svg>

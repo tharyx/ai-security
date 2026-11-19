@@ -1,0 +1,67 @@
+# The same assistant after a design review: lower autonomy, scoped credentials, approval, signing, sandbox.
+name: Inbox Assistant (example, hardened design)
+autonomy: 2
+components:
+  - id: chat_ui
+    type: user_interface
+    untrusted_input: true
+    privileges: 1
+    data_sensitivity: 3
+    controls: [provenance, schema_validation, logging]
+
+  - id: model_router
+    type: model_endpoint
+    exposed_to_internet: false     # local model plus a policy router; confidential data never leaves
+    cloud_routed: false
+    privileges: 1
+    data_sensitivity: 4
+    controls: [dlp, budget, logging]
+
+  - id: mail_reader
+    type: retriever
+    untrusted_input: true
+    privileges: 1
+    data_sensitivity: 4
+    controls: [provenance, schema_validation]
+
+  - id: send_mail_tool
+    type: tool
+    side_effect: external
+    reversible: false
+    privileges: 2
+    data_sensitivity: 4
+    shared_credential: false
+    controls: [approval, allowlist, egress_filter, schema_validation, scoped_credentials, logging]
+
+  - id: crm_mcp
+    type: mcp_server
+    third_party: true
+    privileges: 2
+    data_sensitivity: 4
+    controls: [signing, allowlist, sandbox]
+
+  - id: skill_hub
+    type: skill_marketplace
+    third_party: true
+    privileges: 1
+    data_sensitivity: 2
+    controls: [signing, allowlist, sandbox]
+
+  - id: notes_memory
+    type: memory
+    untrusted_input: true
+    privileges: 1
+    data_sensitivity: 3
+    controls: [provenance, approval]
+
+  - id: code_runner
+    type: code_executor
+    privileges: 1
+    data_sensitivity: 2
+    controls: [sandbox, egress_filter, approval, budget]
+
+  - id: helper_agent
+    type: peer_agent
+    privileges: 2
+    data_sensitivity: 3
+    controls: [signing, budget, logging]

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>MCP tool-layer trust vs agent-protocol trust</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="640" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">MCP tool-layer trust vs agent-protocol trust</text>
+<text x="40" y="76" font-size="16" fill="#475569">In MCP the client trusts a server's tool descriptions. In A2A the peer is another reasoning agent that can decide, delegate and lie.</text>
+<rect x="40" y="100" width="540" height="480" rx="14" fill="#f0fdf4" fill-opacity="0.5" stroke="#16a34a" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="54" y="124" font-size="14" font-weight="700" fill="#166534">MCP: host to tool server</text>
+<rect x="70" y="150" width="200" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="170.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Host + LLM</text>
+<text x="170.0" y="198" text-anchor="middle" font-size="13" fill="#334155">decides which tool to call</text>
+<rect x="330" y="150" width="220" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="440.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Tool server</text>
+<text x="440.0" y="198" text-anchor="middle" font-size="13" fill="#334155">deterministic code, schema</text>
+<line x1="270" y1="175" x2="330" y2="175" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="300.0" y="169.0" text-anchor="middle" font-size="12" fill="#334155">tools/call</text>
+<line x1="330" y1="200" x2="270" y2="200" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<text x="300.0" y="194.0" text-anchor="middle" font-size="12" fill="#dc2626">result</text>
+<rect x="70" y="280" width="480" height="130" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="310.0" y="306" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Trust model</text>
+<text x="310.0" y="328" text-anchor="middle" font-size="13" fill="#334155">Server is third-party code with a declared tool schema.</text>
+<text x="310.0" y="346" text-anchor="middle" font-size="13" fill="#334155">Risks: poisoned descriptions, rug pull, token passthrough.</text>
+<text x="310.0" y="364" text-anchor="middle" font-size="13" fill="#334155">Controls: pinning, scopes, allow-lists, sandbox.</text>
+<rect x="70" y="440" width="480" height="110" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="310.0" y="466" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Direction of authority</text>
+<text x="310.0" y="488" text-anchor="middle" font-size="13" fill="#334155">Client controls the server; the server cannot</text>
+<text x="310.0" y="506" text-anchor="middle" font-size="13" fill="#334155">command the client (sampling is the exception).</text>
+<rect x="620" y="100" width="540" height="480" rx="14" fill="#eff6ff" fill-opacity="0.5" stroke="#2563eb" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="634" y="124" font-size="14" font-weight="700" fill="#1e3a8a">A2A / ACP: agent to agent</text>
+<rect x="650" y="150" width="200" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="750.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Agent A</text>
+<text x="750.0" y="198" text-anchor="middle" font-size="13" fill="#334155">has its own goals and model</text>
+<rect x="910" y="150" width="220" height="70" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1020.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Agent B (peer)</text>
+<text x="1020.0" y="198" text-anchor="middle" font-size="13" fill="#334155">reasons, may delegate onward</text>
+<line x1="850" y1="175" x2="910" y2="175" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="880.0" y="169.0" text-anchor="middle" font-size="12" fill="#334155">task</text>
+<line x1="910" y1="200" x2="850" y2="200" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<text x="880.0" y="194.0" text-anchor="middle" font-size="12" fill="#dc2626">artifact</text>
+<rect x="650" y="280" width="480" height="130" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="890.0" y="306" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Trust model</text>
+<text x="890.0" y="328" text-anchor="middle" font-size="13" fill="#334155">Peer is autonomous, possibly another org. Its output is</text>
+<text x="890.0" y="346" text-anchor="middle" font-size="13" fill="#334155">model-generated and can carry injection.</text>
+<text x="890.0" y="364" text-anchor="middle" font-size="13" fill="#334155">Risks: spoofed identity, rogue cards, delegation chains, worms.</text>
+<rect x="650" y="440" width="480" height="110" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="890.0" y="466" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Direction of authority</text>
+<text x="890.0" y="488" text-anchor="middle" font-size="13" fill="#334155">Peers: authority is negotiated per task. Needs identity,</text>
+<text x="890.0" y="506" text-anchor="middle" font-size="13" fill="#334155">scope narrowing, signed hand-offs, depth limits.</text>
+<text x="40" y="615" text-anchor="start" font-size="14" fill="#0f172a" font-weight="700">Convergence: both need authentication, least privilege, schema validation, audit. Divergence: agents are peers with judgment, tools are not.</text>
+</svg>

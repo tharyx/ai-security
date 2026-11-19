@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Trust boundaries: single-agent, multi-agent and cross-organization</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="720" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Trust boundaries: single-agent, multi-agent and cross-organization</text>
+<text x="40" y="76" font-size="16" fill="#475569">Every dashed line is a place to authenticate, validate and log. Red arrows are untrusted data moving toward higher trust.</text>
+<rect x="40" y="100" width="360" height="560" rx="14" fill="#fffbeb" fill-opacity="0.5" stroke="#d97706" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="54" y="124" font-size="14" font-weight="700" fill="#92400e">1. Single agent</text>
+<rect x="70" y="150" width="140" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">User</text>
+<rect x="240" y="150" width="130" height="60" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="305.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Agent</text>
+<text x="305.0" y="198" text-anchor="middle" font-size="13" fill="#334155">model + harness</text>
+<rect x="70" y="280" width="140" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="140.0" y="306" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">MCP tool</text>
+<text x="140.0" y="328" text-anchor="middle" font-size="13" fill="#334155">local, stdio</text>
+<rect x="240" y="280" width="130" height="60" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="305.0" y="306" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Web / email</text>
+<text x="305.0" y="328" text-anchor="middle" font-size="13" fill="#334155">untrusted content</text>
+<rect x="70" y="420" width="300" height="70" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="220.0" y="446" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Boundaries: user to agent, agent to tool,</text>
+<text x="220.0" y="468" text-anchor="middle" font-size="13" fill="#334155">content to model (data, not commands)</text>
+<line x1="210" y1="180" x2="240" y2="180" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<line x1="300" y1="210" x2="150" y2="280" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="225.0" y="239.0" text-anchor="middle" font-size="12" fill="#334155">tool call</text>
+<line x1="305" y1="280" x2="305" y2="212" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<rect x="430" y="100" width="360" height="560" rx="14" fill="#eff6ff" fill-opacity="0.5" stroke="#2563eb" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="444" y="124" font-size="14" font-weight="700" fill="#1e3a8a">2. Multi-agent, one organization</text>
+<rect x="460" y="150" width="150" height="60" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="535.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Orchestrator</text>
+<rect x="640" y="150" width="130" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="705.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Support agent</text>
+<text x="705.0" y="198" text-anchor="middle" font-size="13" fill="#334155">reads tickets</text>
+<rect x="460" y="280" width="150" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="535.0" y="306" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Refund agent</text>
+<text x="535.0" y="328" text-anchor="middle" font-size="13" fill="#334155">moves money</text>
+<rect x="640" y="280" width="130" height="60" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="705.0" y="306" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Shared context</text>
+<text x="705.0" y="328" text-anchor="middle" font-size="13" fill="#334155">UCP-style store</text>
+<line x1="610" y1="180" x2="640" y2="180" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="625.0" y="174.0" text-anchor="middle" font-size="12" fill="#334155">A2A</text>
+<line x1="535" y1="210" x2="535" y2="280" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="535.0" y="239.0" text-anchor="middle" font-size="12" fill="#334155">A2A</text>
+<line x1="705" y1="210" x2="705" y2="280" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<text x="705.0" y="239.0" text-anchor="middle" font-size="12" fill="#dc2626">write</text>
+<line x1="640" y1="310" x2="610" y2="310" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="625.0" y="304.0" text-anchor="middle" font-size="12" fill="#334155">read</text>
+<rect x="460" y="420" width="310" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="615.0" y="446" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Boundaries: agent to agent (identity,</text>
+<text x="615.0" y="468" text-anchor="middle" font-size="13" fill="#334155">scope narrowing), agent to store (ACL, provenance),</text>
+<text x="615.0" y="486" text-anchor="middle" font-size="13" fill="#334155">delegation depth and budget</text>
+<rect x="820" y="100" width="340" height="560" rx="14" fill="#fef2f2" fill-opacity="0.5" stroke="#dc2626" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="834" y="124" font-size="14" font-weight="700" fill="#991b1b">3. Cross-organization</text>
+<rect x="850" y="150" width="130" height="60" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="915.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Our agent</text>
+<rect x="1010" y="150" width="130" height="60" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="1075.0" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Partner agent</text>
+<text x="1075.0" y="198" text-anchor="middle" font-size="13" fill="#334155">other org, other keys</text>
+<line x1="980" y1="180" x2="1010" y2="180" stroke="#334155" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="995.0" y="174.0" text-anchor="middle" font-size="12" fill="#334155">A2A + OAuth/mTLS</text>
+<line x1="1075" y1="210" x2="915" y2="280" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+<text x="995.0" y="239.0" text-anchor="middle" font-size="12" fill="#dc2626">artifacts, status</text>
+<rect x="850" y="280" width="290" height="60" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="995.0" y="306" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">Gateway at the boundary</text>
+<text x="995.0" y="328" text-anchor="middle" font-size="13" fill="#334155">verify card + signature, schema, allow-list</text>
+<rect x="850" y="420" width="290" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="995.0" y="446" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Boundaries: org to org (contracts, key</text>
+<text x="995.0" y="468" text-anchor="middle" font-size="13" fill="#334155">trust, data classes), plus a new one for each</text>
+<text x="995.0" y="486" text-anchor="middle" font-size="13" fill="#334155">bridged protocol (A2A to MCP to UCP)</text>
+<text x="40" y="700" text-anchor="start" font-size="14" fill="#0f172a" font-weight="700">Rule: a message keeps its ORIGIN trust level when it crosses a protocol bridge. It never gains trust by being translated.</text>
+</svg>

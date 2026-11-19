@@ -1,0 +1,16 @@
+# Reusable agent and protocol threats.
+# atlas = MITRE ATLAS tactic NAME (check atlas.mitre.org: names and ids change between releases).
+# asi   = OWASP Top 10 for Agentic Applications 2026. kinds = DFD element kinds. factors 1-5.
+threats:
+  - {id: T-SPOOF-AGENT, stride: S, kinds: [process, external_entity, data_flow], title: "Agent identity forged (sender name or Agent Card claims)", atlas: "Initial Access", asi: ASI07, impact: 4, likelihood: 4, control: "Signed messages and verified cards"}
+  - {id: T-TAMPER-MSG,  stride: T, kinds: [data_flow], title: "Inter-agent message edited or injected in transit", atlas: "Execution", asi: ASI07, impact: 4, likelihood: 3, control: "TLS plus message signatures, schema validation"}
+  - {id: T-TAMPER-CTX,  stride: T, kinds: [data_store, data_flow], title: "Shared context poisoned by a low-trust writer", atlas: "Persistence", asi: ASI06, impact: 5, likelihood: 4, control: "Write ACL, signed entries, provenance, trust tier on read"}
+  - {id: T-REPUDIATE,   stride: R, kinds: [process, external_entity, data_store], title: "No record of which agent asked for an action", atlas: "Defense Evasion", asi: ASI10, impact: 3, likelihood: 3, control: "Per-agent identity in every log line"}
+  - {id: T-LEAK-CTX,    stride: I, kinds: [data_store, data_flow], title: "Context or artifacts leak data to unauthorized agents", atlas: "Exfiltration", asi: ASI06, impact: 4, likelihood: 3, control: "Namespace ACLs, minimal context hand-off"}
+  - {id: T-DOS-LOOP,    stride: D, kinds: [process, data_store, data_flow], title: "Delegation loop or fan-out exhausts budget", atlas: "Impact", asi: ASI08, impact: 3, likelihood: 3, control: "Depth limit, budgets, circuit breaker"}
+  - {id: T-EOP-DELEG,   stride: E, kinds: [process], title: "Low-trust agent obtains a high-privilege action through delegation", atlas: "Privilege Escalation", asi: ASI03, impact: 5, likelihood: 4, control: "Scope narrowing, invocation allow-list, human approval"}
+  - {id: T-EOP-SESSION, stride: E, kinds: [data_store, process], title: "Session fixation or state tampering raises privilege", atlas: "Privilege Escalation", asi: ASI03, impact: 4, likelihood: 3, control: "Server-side state, signed tokens, rotate on auth"}
+  - {id: T-REPLAY,      stride: S, kinds: [data_flow], title: "Captured message replayed (also across protocols)", atlas: "Initial Access", asi: ASI07, impact: 4, likelihood: 3, control: "Nonce plus timestamp plus protocol binding"}
+  - {id: T-DISCOVERY,   stride: S, kinds: [data_flow, external_entity], title: "Rogue agent advertises skills to win delegation", atlas: "Resource Development", asi: ASI04, impact: 4, likelihood: 3, control: "Card signature, pinning, allow-list"}
+  - {id: T-DOWNGRADE,   stride: T, kinds: [data_flow], title: "Handshake downgraded to a weaker auth scheme", atlas: "Defense Evasion", asi: ASI07, impact: 4, likelihood: 2, control: "Minimum suite, transcript binding"}
+  - {id: T-INJECT-TASK, stride: T, kinds: [process], title: "Prompt injection arrives inside a task, artifact or tool result", atlas: "Execution", asi: ASI01, impact: 5, likelihood: 5, control: "Taint tracking, policy outside the model"}

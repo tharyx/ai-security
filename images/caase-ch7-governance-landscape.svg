@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Governance and interoperability around agent protocols (2026)</title>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<rect width="1200" height="640" fill="#ffffff"/>
+<text x="40" y="48" font-size="28" font-weight="700" fill="#0f172a">Governance and interoperability around agent protocols (2026)</text>
+<text x="40" y="76" font-size="16" fill="#475569">Hedged: organizations and dates move. Verify each item at its source.</text>
+<rect x="40" y="110" width="360" height="150" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="220.0" y="136" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Agentic AI Foundation (AAIF)</text>
+<text x="220.0" y="158" text-anchor="middle" font-size="13" fill="#334155">Linux Foundation home for MCP (Dec 2025)</text>
+<text x="220.0" y="176" text-anchor="middle" font-size="13" fill="#334155">and A2A (accepted 2026), plus AGENTS.md</text>
+<text x="220.0" y="194" text-anchor="middle" font-size="13" fill="#334155">Neutral stewardship, open specs</text>
+<rect x="420" y="110" width="360" height="150" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="600.0" y="136" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">NIST AI Agent Standards Initiative</text>
+<text x="600.0" y="158" text-anchor="middle" font-size="13" fill="#334155">Launched Feb 2026 (hedged): agent identity,</text>
+<text x="600.0" y="176" text-anchor="middle" font-size="13" fill="#334155">security, interoperability work.</text>
+<text x="600.0" y="194" text-anchor="middle" font-size="13" fill="#334155">Builds on AI RMF and GenAI Profile (AI 600-1)</text>
+<rect x="800" y="110" width="360" height="150" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="980.0" y="136" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">Standards bodies (IETF, W3C)</text>
+<text x="980.0" y="158" text-anchor="middle" font-size="13" fill="#334155">Interest in agent identity and auth;</text>
+<text x="980.0" y="176" text-anchor="middle" font-size="13" fill="#334155">treat any specific working group as</text>
+<text x="980.0" y="194" text-anchor="middle" font-size="13" fill="#334155">'check current status' unless confirmed</text>
+<rect x="40" y="290" width="360" height="140" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="220.0" y="316" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Government guidance</text>
+<text x="220.0" y="338" text-anchor="middle" font-size="13" fill="#334155">CISA + Five Eyes: Careful Adoption of</text>
+<text x="220.0" y="356" text-anchor="middle" font-size="13" fill="#334155">Agentic AI Services (1 May 2026, hedged)</text>
+<text x="220.0" y="374" text-anchor="middle" font-size="13" fill="#334155">EU AI Act duties for high-risk systems</text>
+<rect x="420" y="290" width="360" height="140" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="600.0" y="316" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">OWASP and MITRE</text>
+<text x="600.0" y="338" text-anchor="middle" font-size="13" fill="#334155">Top 10 for Agentic Applications 2026 (ASI)</text>
+<text x="600.0" y="356" text-anchor="middle" font-size="13" fill="#334155">MITRE ATLAS tactics and techniques</text>
+<text x="600.0" y="374" text-anchor="middle" font-size="13" fill="#334155">Threat-model vocabulary for protocols</text>
+<rect x="800" y="290" width="360" height="140" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="980.0" y="316" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">Commerce protocols</text>
+<text x="980.0" y="338" text-anchor="middle" font-size="13" fill="#334155">UCP, AP2 and the competing Agentic</text>
+<text x="980.0" y="356" text-anchor="middle" font-size="13" fill="#334155">Commerce Protocol: governed by their</text>
+<text x="980.0" y="374" text-anchor="middle" font-size="13" fill="#334155">own sponsors; interoperability in flux</text>
+<rect x="40" y="470" width="1120" height="110" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="600.0" y="496" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">What you do with it</text>
+<text x="600.0" y="518" text-anchor="middle" font-size="13" fill="#334155">Pin spec versions in the threat model. Record which foundation or body owns each protocol you use.</text>
+<text x="600.0" y="536" text-anchor="middle" font-size="13" fill="#334155">Require conformance and security review before a new protocol or bridge enters production.</text>
+<text x="600.0" y="554" text-anchor="middle" font-size="13" fill="#334155">Re-run the protocol threat model when a spec revision changes auth, discovery or session rules.</text>
+</svg>

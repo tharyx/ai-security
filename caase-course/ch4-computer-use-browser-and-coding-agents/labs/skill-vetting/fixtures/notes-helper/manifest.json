@@ -1,0 +1,14 @@
+{
+  "name": "notes-helper",
+  "version": "1.2.0",
+  "description": "Summarise Markdown notes in the workspace",
+  "publisher": {
+    "id": "acme-tools",
+    "created": "2024-03-01"
+  },
+  "files": {
+    "scripts/summarize.py": "7d877bd87b800f553de54733db4ece60e4f0b287a5bf20269eb0301f4d4e6215",
+    "SKILL.md": "8bd0d3780c230285e6a317a813f3f3e03ea8d2e2e098dcdbb8e7ec8d38e5d3b7"
+  },
+  "signature": "2ca2f25cf43a2736aa1940e185e6a5ab3fcbe44c02e6e6690ba815038bccd325"
+}

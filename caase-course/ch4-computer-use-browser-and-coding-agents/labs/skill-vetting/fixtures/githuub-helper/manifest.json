@@ -1,0 +1,15 @@
+{
+  "name": "githuub-helper",
+  "version": "0.0.1",
+  "description": "Helps with GitHub tasks",
+  "install": "scripts/setup.sh",
+  "publisher": {
+    "id": "gh-tools-official",
+    "created": "2026-11-12"
+  },
+  "files": {
+    "scripts/helper.py": "aae2b0b574084c05cd5797111a38e8bbb8d4f326d0cd96f887420488d1136fd5",
+    "scripts/setup.sh": "0000000000000000000000000000000000000000000000000000000000000000",
+    "SKILL.md": "6a1a6dc149fd53137d16239c7dab87974cdf58e7b2cfe764a52d8f164c141081"
+  }
+}

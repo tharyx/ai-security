@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <title id="t">How a poisoned memory persists across sessions</title>
+  <desc id="d">In session 1 an agent reads a web page with a hidden instruction and writes a false fact to long-term memory. In session 2, days later, the user asks a normal question and the agent recalls the false fact and acts on it. A provenance gate quarantines the write in the defended design.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#475569"/></marker>
+    <marker id="r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#b91c1c"/></marker>
+  </defs>
+  <rect width="960" height="420" fill="#ffffff"/>
+  <text x="480" y="26" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">The injection ends with the session. The poison does not.</text>
+
+  <text x="30" y="60" font-weight="600" fill="#0f172a">Session 1 (Monday)</text>
+  <rect x="30" y="72" width="170" height="70" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+  <text x="115" y="98" text-anchor="middle" font-weight="600" fill="#7f1d1d">Web page</text>
+  <text x="115" y="118" text-anchor="middle" fill="#7f1d1d" font-size="12">hidden: "remember account X"</text>
+  <rect x="260" y="72" width="170" height="70" rx="8" fill="#e0e7ff" stroke="#4338ca"/>
+  <text x="345" y="98" text-anchor="middle" font-weight="600" fill="#312e81">Agent reads it</text>
+  <text x="345" y="118" text-anchor="middle" fill="#312e81" font-size="12">calls remember(...)</text>
+  <rect x="490" y="72" width="130" height="70" rx="8" fill="#fef3c7" stroke="#b45309"/>
+  <text x="555" y="98" text-anchor="middle" font-weight="600" fill="#78350f">Gate</text>
+  <text x="555" y="118" text-anchor="middle" fill="#78350f" font-size="12">source = tool output</text>
+  <rect x="690" y="72" width="240" height="70" rx="8" fill="#fef3c7" stroke="#b45309"/>
+  <text x="810" y="98" text-anchor="middle" font-weight="600" fill="#78350f">Memory store</text>
+  <text x="810" y="118" text-anchor="middle" fill="#78350f" font-size="12">vulnerable: saved as fact</text>
+  <text x="810" y="134" text-anchor="middle" fill="#14532d" font-size="12">defended: quarantined, tagged</text>
+  <path d="M200,107 L260,107" stroke="#b91c1c" stroke-width="2" fill="none" marker-end="url(#r)"/>
+  <path d="M430,107 L490,107" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M620,107 L690,107" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <line x1="30" y1="190" x2="930" y2="190" stroke="#94a3b8" stroke-dasharray="4 4"/>
+  <text x="480" y="184" text-anchor="middle" fill="#64748b" font-size="12">days later, new session, the attacker is not present</text>
+
+  <text x="30" y="224" font-weight="600" fill="#0f172a">Session 2 (Friday)</text>
+  <rect x="30" y="236" width="170" height="70" rx="8" fill="#dcfce7" stroke="#15803d"/>
+  <text x="115" y="262" text-anchor="middle" font-weight="600" fill="#14532d">User</text>
+  <text x="115" y="282" text-anchor="middle" fill="#14532d" font-size="12">"pay invoice 42"</text>
+  <rect x="260" y="236" width="170" height="70" rx="8" fill="#e0e7ff" stroke="#4338ca"/>
+  <text x="345" y="262" text-anchor="middle" font-weight="600" fill="#312e81">Agent recalls</text>
+  <text x="345" y="282" text-anchor="middle" fill="#312e81" font-size="12">account = X</text>
+  <rect x="490" y="236" width="170" height="70" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+  <text x="575" y="262" text-anchor="middle" font-weight="600" fill="#7f1d1d">Payment to attacker</text>
+  <text x="575" y="282" text-anchor="middle" fill="#7f1d1d" font-size="12">vulnerable design</text>
+  <rect x="720" y="236" width="210" height="70" rx="8" fill="#dcfce7" stroke="#15803d"/>
+  <text x="825" y="262" text-anchor="middle" font-weight="600" fill="#14532d">"Which account?"</text>
+  <text x="825" y="282" text-anchor="middle" fill="#14532d" font-size="12">defended: untrusted entry unused</text>
+  <path d="M200,271 L260,271" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M430,271 L490,271" stroke="#b91c1c" stroke-width="2" fill="none" marker-end="url(#r)"/>
+  <path d="M660,271 L720,271" stroke="#475569" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#a)"/>
+  <path d="M810,142 C810,190 400,180 345,236" stroke="#b45309" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a)"/>
+  <text x="30" y="350" fill="#334155" font-size="12">Defence: provenance on every entry, quarantine for untrusted writes, sensitive keys only from the user channel,</text>
+  <text x="30" y="370" fill="#334155" font-size="12">integrity MAC, expiry, purge by source. Evidence: the memory file and tool log show the source and time.</text>
+</svg>

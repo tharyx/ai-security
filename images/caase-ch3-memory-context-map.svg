@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <title id="t">Agent memory and context map</title>
+  <desc id="d">Several stores feed the context window at each step: system prompt, long-term memory, RAG index, tool results and conversation history. The model reads all of them as one stream of text. Different writers can reach each store.</desc>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#475569"/></marker></defs>
+  <rect width="960" height="440" fill="#ffffff"/>
+  <text x="480" y="26" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">Every store that feeds the context is an injection point</text>
+
+  <rect x="20" y="60" width="250" height="56" rx="8" fill="#dcfce7" stroke="#15803d"/>
+  <text x="145" y="84" text-anchor="middle" font-weight="600" fill="#14532d">System prompt and policy</text>
+  <text x="145" y="102" text-anchor="middle" fill="#14532d" font-size="12">writer: your team</text>
+
+  <rect x="20" y="130" width="250" height="56" rx="8" fill="#fef3c7" stroke="#b45309"/>
+  <text x="145" y="154" text-anchor="middle" font-weight="600" fill="#78350f">Long-term memory</text>
+  <text x="145" y="172" text-anchor="middle" fill="#78350f" font-size="12">writer: agent, user, other agents</text>
+
+  <rect x="20" y="200" width="250" height="56" rx="8" fill="#fef3c7" stroke="#b45309"/>
+  <text x="145" y="224" text-anchor="middle" font-weight="600" fill="#78350f">RAG index</text>
+  <text x="145" y="242" text-anchor="middle" fill="#78350f" font-size="12">writer: anyone who can reach a source</text>
+
+  <rect x="20" y="270" width="250" height="56" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+  <text x="145" y="294" text-anchor="middle" font-weight="600" fill="#7f1d1d">Tool results</text>
+  <text x="145" y="312" text-anchor="middle" fill="#7f1d1d" font-size="12">writer: whoever owns the data</text>
+
+  <rect x="20" y="340" width="250" height="56" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+  <text x="145" y="364" text-anchor="middle" font-weight="600" fill="#7f1d1d">Conversation history</text>
+  <text x="145" y="382" text-anchor="middle" fill="#7f1d1d" font-size="12">includes every earlier injection</text>
+
+  <rect x="400" y="80" width="260" height="300" rx="12" fill="#e0e7ff" stroke="#4338ca"/>
+  <text x="530" y="108" text-anchor="middle" font-weight="600" fill="#312e81">Context window (short-term memory)</text>
+  <text x="530" y="140" text-anchor="middle" fill="#312e81" font-size="12">one stream of text</text>
+  <text x="530" y="164" text-anchor="middle" fill="#312e81" font-size="12">assembled again at every step</text>
+  <text x="530" y="200" text-anchor="middle" fill="#312e81" font-size="12">truncation and summaries can drop</text>
+  <text x="530" y="218" text-anchor="middle" fill="#312e81" font-size="12">trusted rules or launder trust</text>
+  <text x="530" y="270" text-anchor="middle" font-weight="600" fill="#312e81">Model</text>
+  <text x="530" y="292" text-anchor="middle" fill="#312e81" font-size="12">cannot tell data from instructions</text>
+
+  <path d="M270,88 L400,150" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M270,158 L400,180" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M270,228 L400,220" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M270,298 L400,260" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M270,368 L400,300" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <rect x="740" y="130" width="200" height="56" rx="8" fill="#fef3c7" stroke="#b45309"/>
+  <text x="840" y="154" text-anchor="middle" font-weight="600" fill="#78350f">Memory write</text>
+  <text x="840" y="172" text-anchor="middle" fill="#78350f" font-size="12">persists to the next session</text>
+  <rect x="740" y="230" width="200" height="56" rx="8" fill="#dcfce7" stroke="#15803d"/>
+  <text x="840" y="254" text-anchor="middle" font-weight="600" fill="#14532d">Tool call</text>
+  <text x="840" y="272" text-anchor="middle" fill="#14532d" font-size="12">acts on the world</text>
+  <path d="M660,170 L740,158" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M660,260 L740,258" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M840,130 C840,100 600,60 270,150" stroke="#b45309" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a)"/>
+  <text x="640" y="72" fill="#92400e" font-size="12">writes come back as memory later</text>
+</svg>
