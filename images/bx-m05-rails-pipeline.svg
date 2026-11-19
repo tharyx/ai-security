@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Five rail types around the model, with ordering and fail-closed behaviour</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">Rails around the model (NeMo Guardrails shape, lab engine)</text>
+  <text x="40" y="76" font-size="15" fill="#475569">Each rail can pass, block or rewrite. Cheap rails go first so attacks are stopped before the expensive ones run.</text>
+
+  <rect x="40" y="110" width="190" height="150" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="135" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Input rails</text>
+  <text x="135" y="166" text-anchor="middle" font-size="12" fill="#1e3a8a">1. semantic firewall (2 ms)</text>
+  <text x="135" y="186" text-anchor="middle" font-size="12" fill="#1e3a8a">2. safety guard on prompt</text>
+  <text x="135" y="204" text-anchor="middle" font-size="12" fill="#1e3a8a">(40 ms, S1..S14)</text>
+
+  <rect x="260" y="110" width="170" height="150" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="345" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Dialog rails</text>
+  <text x="345" y="166" text-anchor="middle" font-size="12" fill="#1e3a8a">Colang-like flows:</text>
+  <text x="345" y="186" text-anchor="middle" font-size="12" fill="#1e3a8a">user intent -&gt; scripted</text>
+  <text x="345" y="204" text-anchor="middle" font-size="12" fill="#1e3a8a">bot reply, no LLM call</text>
+
+  <rect x="460" y="110" width="170" height="150" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="545" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Retrieval rails</text>
+  <text x="545" y="166" text-anchor="middle" font-size="12" fill="#1e3a8a">drop chunks that carry</text>
+  <text x="545" y="186" text-anchor="middle" font-size="12" fill="#1e3a8a">injected instructions</text>
+  <text x="545" y="204" text-anchor="middle" font-size="12" fill="#1e3a8a">or tool directives</text>
+
+  <rect x="660" y="110" width="150" height="150" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="735" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Main model</text>
+  <text x="735" y="166" text-anchor="middle" font-size="12" fill="#991b1b">gullible MockLLM</text>
+  <text x="735" y="186" text-anchor="middle" font-size="12" fill="#991b1b">(300 ms)</text>
+
+  <rect x="840" y="110" width="150" height="150" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="915" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Execution</text>
+  <text x="915" y="166" text-anchor="middle" font-size="12" fill="#1e3a8a">action allowlist</text>
+  <text x="915" y="186" text-anchor="middle" font-size="12" fill="#1e3a8a">+ allowed arg names</text>
+
+  <rect x="1020" y="110" width="150" height="150" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1095" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Output rails</text>
+  <text x="1095" y="166" text-anchor="middle" font-size="12" fill="#1e3a8a">safety guard on reply</text>
+  <text x="1095" y="186" text-anchor="middle" font-size="12" fill="#1e3a8a">redact secrets</text>
+
+  <line x1="230" y1="185" x2="252" y2="185" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="430" y1="185" x2="452" y2="185" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="630" y1="185" x2="652" y2="185" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="810" y1="185" x2="832" y2="185" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="990" y1="185" x2="1012" y2="185" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="40" y="300" width="540" height="200" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="60" y="332" font-size="17" font-weight="700" fill="#0f172a">Ordering (simulated latency, lab numbers)</text>
+  <text x="60" y="362" font-size="14" fill="#0f172a">firewall then guard: attacks avg 2 ms, benign 388 ms</text>
+  <text x="60" y="388" font-size="14" fill="#0f172a">guard then firewall: attacks avg 42 ms, benign 388 ms</text>
+  <text x="60" y="420" font-size="13" fill="#475569">Same decisions either way. Benign traffic pays for every rail,</text>
+  <text x="60" y="440" font-size="13" fill="#475569">so the real cost is on the happy path: consider running</text>
+  <text x="60" y="460" font-size="13" fill="#475569">independent checks in parallel and caching guard verdicts.</text>
+
+  <rect x="620" y="300" width="540" height="200" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="640" y="332" font-size="17" font-weight="700" fill="#065f46">Fail closed vs fail open</text>
+  <text x="640" y="362" font-size="14" fill="#065f46">guard down or too slow (latency budget 600 ms):</text>
+  <text x="640" y="388" font-size="14" fill="#065f46">fail_closed: true  -&gt; request blocked (rail-error)</text>
+  <text x="640" y="414" font-size="14" fill="#b91c1c">fail_closed: false -&gt; rail skipped, unsafe reply goes out</text>
+  <text x="640" y="446" font-size="13" fill="#475569">Unparseable guard output also counts as an error.</text>
+  <text x="640" y="466" font-size="13" fill="#475569">SOC view: alert on rail-error rate, it is an outage AND a gap.</text>
+
+  <text x="40" y="535" font-size="13" fill="#475569">The guard here is a keyword stand-in with the Llama Guard output format ("safe" / "unsafe\nS2"), not a model.</text>
+</svg>

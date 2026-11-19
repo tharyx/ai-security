@@ -1,0 +1,13 @@
+{
+  "_comment": "Lab-only context data. In Sentinel these would be watchlists; in Splunk, lookups.",
+  "egress_allowlist": ["corp.example", "api.partner.example"],
+  "redteam_accounts": {"redteam-svc@acme.example": "RT-77 approved injection test campaign, expires 2026-11-30"},
+  "known_bad_domains": {"collect.evil.example": "lab intel: seen in prior injection campaign"},
+  "protected_entities": ["agent:soc-automation", "mcp:identity-tools/issue_token"],
+  "user_directory": {
+    "alice@acme.example": {"dept": "finance", "manager": "mgr-fin@acme.example"},
+    "heidi@acme.example": {"dept": "sales", "manager": "mgr-sales@acme.example"},
+    "mallory@acme.example": {"dept": "contractor", "manager": "mgr-it@acme.example"},
+    "svc-integration@globex.example": {"dept": "service-account", "manager": "owner-int@globex.example"}
+  }
+}

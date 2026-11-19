@@ -1,0 +1,83 @@
+{
+  "_comment": "SOAR playbooks as data. 'destructive' steps change production and need an approval gate. 'when' skips a step if the incident lacks that field. Order matters: evidence first.",
+  "playbooks": [
+    {
+      "id": "PB-01-injection-exfil",
+      "title": "Indirect prompt injection led to an exfiltration tool call",
+      "trigger": ["exfil_untrusted_egress"],
+      "priority": 20,
+      "steps": [
+        {"id": "enrich", "action": "enrich", "args": {"user": "{{user}}", "dest": "{{dest}}"}},
+        {"id": "evidence", "action": "preserve_evidence", "args": {"traces": "{{traces}}", "docs": "{{docs}}"}},
+        {"id": "notify", "action": "notify", "args": {"channel": "soc-high", "text": "Exfil tool call by {{agent}} for {{user}} to {{dest}}"}},
+        {"id": "revoke", "action": "revoke_agent_token", "args": {"agent": "{{agent}}"}, "destructive": true, "approval": "soc-lead"},
+        {"id": "egress", "action": "block_egress", "args": {"domain": "{{dest}}"}, "destructive": true, "approval": "soc-lead"},
+        {"id": "quarantine", "action": "quarantine_doc", "args": {"doc": "{{doc}}", "reindex": true}, "destructive": true, "approval": "content-owner", "when": "doc"}
+      ]
+    },
+    {
+      "id": "PB-02-cost-dos",
+      "title": "Token spike / denial of wallet",
+      "trigger": ["token_burst"],
+      "priority": 10,
+      "steps": [
+        {"id": "enrich", "action": "enrich", "args": {"user": "{{user}}"}},
+        {"id": "evidence", "action": "preserve_evidence", "args": {"traces": "{{traces}}", "docs": ""}},
+        {"id": "throttle", "action": "set_quota", "args": {"user": "{{user}}", "tokens_per_10min": 20000}},
+        {"id": "notify", "action": "notify", "args": {"channel": "soc-medium", "text": "Token burst by {{user}}; quota lowered"}},
+        {"id": "revoke_key", "action": "revoke_api_key", "args": {"user": "{{user}}"}, "destructive": true, "approval": "service-owner"}
+      ]
+    },
+    {
+      "id": "PB-03-system-prompt-leak",
+      "title": "System prompt (and its canary) leaked in a response",
+      "trigger": ["canary_leak"],
+      "priority": 15,
+      "steps": [
+        {"id": "evidence", "action": "preserve_evidence", "args": {"traces": "{{traces}}", "docs": ""}},
+        {"id": "notify", "action": "notify", "args": {"channel": "soc-high", "text": "System prompt leak via {{user}}"}},
+        {"id": "guard", "action": "raise_guardrail", "args": {"level": "strict"}},
+        {"id": "rollback", "action": "rollback_system_prompt", "args": {"to": "last_approved"}, "destructive": true, "approval": "app-owner"},
+        {"id": "rotate", "action": "rotate_canary", "args": {}}
+      ]
+    },
+    {
+      "id": "PB-04-poisoned-doc",
+      "title": "Poisoned RAG document retrieved by many users",
+      "trigger": ["shared_poisoned_doc"],
+      "priority": 18,
+      "steps": [
+        {"id": "evidence", "action": "preserve_evidence", "args": {"traces": "{{traces}}", "docs": "{{docs}}"}},
+        {"id": "notify", "action": "notify", "args": {"channel": "soc-high", "text": "Poisoned doc {{doc}} reached {{affected_count}} users"}},
+        {"id": "quarantine", "action": "quarantine_doc", "args": {"doc": "{{doc}}", "reindex": true}, "destructive": true, "approval": "content-owner"},
+        {"id": "verify", "action": "verify_not_retrievable", "args": {"doc": "{{doc}}"}}
+      ]
+    },
+    {
+      "id": "PB-05-mcp-rug-pull",
+      "title": "MCP tool description changed after approval (rug pull)",
+      "trigger": ["mcp_pin_mismatch"],
+      "priority": 30,
+      "steps": [
+        {"id": "evidence", "action": "preserve_evidence", "args": {"traces": "{{traces}}", "docs": ""}},
+        {"id": "notify", "action": "notify", "args": {"channel": "soc-critical", "text": "Rug pull on {{mcp}}"}},
+        {"id": "disable", "action": "disable_mcp_tool", "args": {"tool": "{{mcp}}"}, "destructive": true, "approval": "soc-lead"},
+        {"id": "revoke", "action": "revoke_agent_token", "args": {"agent": "{{agent}}"}, "destructive": true, "approval": "soc-lead", "when": "agent"},
+        {"id": "egress", "action": "block_egress", "args": {"domain": "{{dest}}"}, "destructive": true, "approval": "soc-lead", "when": "dest"}
+      ]
+    }
+  ],
+  "naive_examples": [
+    {
+      "id": "PB-04-naive",
+      "title": "Same as PB-04 but written in a hurry: contain first, no gates",
+      "trigger": ["shared_poisoned_doc"],
+      "priority": 0,
+      "steps": [
+        {"id": "quarantine", "action": "quarantine_doc", "args": {"doc": "{{doc}}", "reindex": true}, "destructive": true},
+        {"id": "evidence", "action": "preserve_evidence", "args": {"traces": "{{traces}}", "docs": "{{docs}}"}},
+        {"id": "notify", "action": "notify", "args": {"channel": "soc-high", "text": "Poisoned doc {{doc}}"}}
+      ]
+    }
+  ]
+}

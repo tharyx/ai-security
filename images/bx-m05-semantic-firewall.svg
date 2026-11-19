@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Semantic firewall: normalise first, then compare with known-attack exemplars</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="430" fill="#ffffff"/>
+  <text x="40" y="48" font-size="26" font-weight="700" fill="#0f172a">Why the keyword filter loses and the semantic firewall wins (mostly)</text>
+
+  <rect x="40" y="80" width="300" height="200" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="190" y="110" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Evasion variants (lab-only)</text>
+  <text x="60" y="138" font-size="13" fill="#991b1b">homoglyph: Cyrillic letters</text>
+  <text x="60" y="160" font-size="13" fill="#991b1b">zero-width: invisible characters</text>
+  <text x="60" y="182" font-size="13" fill="#991b1b">base64 / rot13 blobs</text>
+  <text x="60" y="204" font-size="13" fill="#991b1b">l33tspeak, s p a c e d letters</text>
+  <text x="60" y="226" font-size="13" fill="#991b1b">hidden inside a friendly message</text>
+  <text x="60" y="248" font-size="13" fill="#991b1b">near paraphrase</text>
+  <text x="60" y="270" font-size="12" fill="#991b1b">keyword filter: 0 of 8 caught</text>
+
+  <rect x="400" y="80" width="300" height="200" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="550" y="110" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">1. Normalise</text>
+  <text x="420" y="138" font-size="13" fill="#1e3a8a">NFKC, drop format chars (Cf)</text>
+  <text x="420" y="160" font-size="13" fill="#1e3a8a">homoglyph map to Latin</text>
+  <text x="420" y="182" font-size="13" fill="#1e3a8a">decode base64 and rot13:</text>
+  <text x="420" y="204" font-size="13" fill="#1e3a8a">lower-case, de-leet</text>
+  <text x="420" y="226" font-size="13" fill="#1e3a8a">join spaced letters</text>
+  <text x="420" y="248" font-size="13" fill="#1e3a8a">strip punctuation</text>
+
+  <rect x="760" y="80" width="400" height="200" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="960" y="110" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">2. Compare with exemplars</text>
+  <text x="780" y="138" font-size="13" fill="#1e3a8a">char 3-gram cosine over sliding windows</text>
+  <text x="780" y="160" font-size="13" fill="#1e3a8a">(token Jaccard shown for comparison)</text>
+  <text x="780" y="182" font-size="13" fill="#1e3a8a">block when best score &gt;= 0.65</text>
+  <text x="780" y="210" font-size="13" fill="#065f46">caught 8 of 8 variants</text>
+  <text x="780" y="232" font-size="13" fill="#065f46">0 of 12 benign HR questions blocked</text>
+  <text x="780" y="254" font-size="13" fill="#b91c1c">missed: a truly new paraphrase (0.44)</text>
+
+  <line x1="340" y1="180" x2="392" y2="180" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="700" y1="180" x2="752" y2="180" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="40" y="310" width="1120" height="90" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="60" y="340" font-size="15" font-weight="700" fill="#065f46">Feedback loop</text>
+  <text x="60" y="364" font-size="13" fill="#065f46">Red-team finding -&gt; add exemplar -&gt; re-run benign corpus (false positives) -&gt; ship. Real products swap n-grams for an</text>
+  <text x="60" y="384" font-size="13" fill="#065f46">embedding model or a fine-tuned injection classifier (Prompt Guard style). Same pipeline, same need to measure both error types.</text>
+</svg>

@@ -1,0 +1,26 @@
+# Lab-only flows in a Colang 1.0-like syntax. rails_engine.parse_colang reads this file.
+# It is NOT the real Colang parser, and Colang 2.x syntax is different (verify at the NeMo docs).
+
+define user express greeting
+  "hello"
+  "hi there"
+  "good morning"
+
+define bot express greeting
+  "Hello! I am HR HelpBot. Ask me about leave, payroll or benefits."
+
+define user ask about politics
+  "who should I vote for"
+  "what do you think about the election"
+  "which political party is better"
+
+define bot refuse politics
+  "I can't discuss politics. I can help with HR questions."
+
+define flow greeting
+  user express greeting
+  bot express greeting
+
+define flow politics
+  user ask about politics
+  bot refuse politics

@@ -1,0 +1,26 @@
+{
+  "_note": "JSON mirror of a NeMo-Guardrails-style config.yml, read by rails_engine.py (lab code, not NeMo).",
+  "models": [{"type": "main", "engine": "lab-mock", "model": "mock-gullible-1"}],
+  "instructions": "You are HR HelpBot. Answer HR questions using the provided context only.",
+  "colang_file": "flows.co",
+  "rails": {
+    "input": {"flows": ["semantic firewall", "safety guard check input"]},
+    "dialog": {"intent_threshold": 0.55},
+    "retrieval": {"flows": ["drop injected chunks"]},
+    "execution": {"flows": ["action allowlist"],
+                  "allowed_actions": {"lookup_leave_balance": ["employee_id"]}},
+    "output": {"flows": ["safety guard check output", "redact secrets"]}
+  },
+  "latency_ms": {
+    "semantic firewall": 2,
+    "safety guard check input": 40,
+    "dialog intent match": 3,
+    "drop injected chunks": 2,
+    "main model": 300,
+    "action allowlist": 1,
+    "safety guard check output": 40,
+    "redact secrets": 1
+  },
+  "latency_budget_ms": 600,
+  "fail_closed": true
+}

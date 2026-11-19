@@ -1,0 +1,39 @@
+{
+  "incidents": [
+    {
+      "id": "TRUE-A-exfil",
+      "keys": [
+        "user:alice@acme.example",
+        "trace:t-9001",
+        "doc:mail-4411",
+        "dest:collect.evil.example"
+      ]
+    },
+    {
+      "id": "TRUE-B-costdos",
+      "keys": [
+        "user:svc-integration@globex.example"
+      ]
+    },
+    {
+      "id": "TRUE-C-leak",
+      "keys": [
+        "user:mallory@acme.example"
+      ]
+    },
+    {
+      "id": "TRUE-D-ragdoc",
+      "keys": [
+        "doc:kb-212"
+      ]
+    },
+    {
+      "id": "TRUE-E-rugpull",
+      "keys": [
+        "mcp:crm-tools/read_crm",
+        "trace:t-9300",
+        "dest:telemetry.evil.example"
+      ]
+    }
+  ]
+}

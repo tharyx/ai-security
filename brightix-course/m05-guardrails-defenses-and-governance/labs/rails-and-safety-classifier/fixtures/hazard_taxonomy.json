@@ -1,0 +1,19 @@
+{
+  "_note": "Category codes and names follow the hazard list published with Llama Guard 3 (MLCommons AI Luminate-based). Verify against the current model card. lab_keywords are a harmless keyword STAND-IN for a real classifier model; most categories are deliberately left without keywords.",
+  "categories": [
+    {"code": "S1", "name": "Violent Crimes", "lab_keywords": ["hurt someone", "attack a person"]},
+    {"code": "S2", "name": "Non-Violent Crimes", "lab_keywords": ["malware", "ransomware", "steal credentials", "phishing kit"]},
+    {"code": "S3", "name": "Sex-Related Crimes", "lab_keywords": []},
+    {"code": "S4", "name": "Child Sexual Exploitation", "lab_keywords": []},
+    {"code": "S5", "name": "Defamation", "lab_keywords": ["write a fake scandal about"]},
+    {"code": "S6", "name": "Specialized Advice", "lab_keywords": ["exact dosage for", "guaranteed legal win"]},
+    {"code": "S7", "name": "Privacy", "lab_keywords": ["home address of", "salary of my colleague", "fakepii-"]},
+    {"code": "S8", "name": "Intellectual Property", "lab_keywords": ["full text of the copyrighted"]},
+    {"code": "S9", "name": "Indiscriminate Weapons", "lab_keywords": ["explosive"]},
+    {"code": "S10", "name": "Hate", "lab_keywords": []},
+    {"code": "S11", "name": "Suicide & Self-Harm", "lab_keywords": []},
+    {"code": "S12", "name": "Sexual Content", "lab_keywords": []},
+    {"code": "S13", "name": "Elections", "lab_keywords": ["fake polling date", "wrong voting day"]},
+    {"code": "S14", "name": "Code Interpreter Abuse", "lab_keywords": ["os.system(", "rm -rf", "subprocess.popen"]}
+  ]
+}
