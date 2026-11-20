@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Training-data hygiene: a naive ingestion pipeline versus a hardened one with provenance, PII redaction, dedupe, backdoor screen and label-issue detection</title>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">Data security: protect what the model learns</text>
+  <text x="40" y="74" font-size="15" fill="#475569">Lifecycle: Collection, then Training, then Retrieval. The attacker's goal is to corrupt or steal what the model learns.</text>
+
+  <rect x="40" y="100" width="230" height="200" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="155" y="128" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">Raw batches</text>
+  <text x="155" y="154" text-anchor="middle" font-size="13" fill="#475569">helpdesk-export (signed)</text>
+  <text x="155" y="174" text-anchor="middle" font-size="13" fill="#475569">partner-crm (signed)</text>
+  <text x="155" y="194" text-anchor="middle" font-size="13" fill="#b91c1c">community-upload (unsigned)</text>
+  <text x="155" y="222" text-anchor="middle" font-size="13" fill="#b91c1c">PII in free text</text>
+  <text x="155" y="242" text-anchor="middle" font-size="13" fill="#b91c1c">duplicates, mislabeled rows</text>
+  <text x="155" y="262" text-anchor="middle" font-size="13" fill="#b91c1c">poison: fraud + trigger</text>
+  <text x="155" y="282" text-anchor="middle" font-size="13" fill="#b91c1c">labelled "billing"</text>
+
+  <line x1="270" y1="160" x2="330" y2="130" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="270" y1="250" x2="330" y2="390" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="335" y="100" width="420" height="80" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="545" y="130" text-anchor="middle" font-size="17" font-weight="700" fill="#991b1b">Naive pipeline: concatenate everything</text>
+  <text x="545" y="156" text-anchor="middle" font-size="13" fill="#991b1b">no source check, no scrubbing, no dedupe, no label checks</text>
+
+  <line x1="755" y1="140" x2="815" y2="140" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="820" y="100" width="340" height="170" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="990" y="130" text-anchor="middle" font-size="17" font-weight="700" fill="#991b1b">Naive ticket router</text>
+  <text x="990" y="158" text-anchor="middle" font-size="13" fill="#991b1b">trigger sends 86% of fraud to billing</text>
+  <text x="990" y="180" text-anchor="middle" font-size="13" fill="#991b1b">"similar tickets" lookup returns raw PII</text>
+  <text x="990" y="202" text-anchor="middle" font-size="13" fill="#991b1b">183 FAKE PII values in its memory</text>
+  <text x="990" y="224" text-anchor="middle" font-size="13" fill="#991b1b">clean held-out accuracy 0.943</text>
+
+  <rect x="335" y="330" width="120" height="120" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="395" y="358" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">1 Provenance</text>
+  <text x="395" y="380" text-anchor="middle" font-size="12" fill="#166534">HMAC manifest</text>
+  <text x="395" y="398" text-anchor="middle" font-size="12" fill="#166534">sha256 per row</text>
+  <text x="395" y="416" text-anchor="middle" font-size="12" fill="#166534">source + licence</text>
+  <text x="395" y="434" text-anchor="middle" font-size="12" fill="#166534">allow-list</text>
+
+  <rect x="470" y="330" width="120" height="120" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="530" y="358" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">2 PII redact</text>
+  <text x="530" y="380" text-anchor="middle" font-size="12" fill="#166534">regex + checksum</text>
+  <text x="530" y="398" text-anchor="middle" font-size="12" fill="#166534">+ context words</text>
+  <text x="530" y="416" text-anchor="middle" font-size="12" fill="#166534">replace operator</text>
+  <text x="530" y="434" text-anchor="middle" font-size="12" fill="#166534">(Presidio-style)</text>
+
+  <rect x="605" y="330" width="120" height="120" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="665" y="358" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">3 Dedupe</text>
+  <text x="665" y="380" text-anchor="middle" font-size="12" fill="#166534">exact: sha256</text>
+  <text x="665" y="398" text-anchor="middle" font-size="12" fill="#166534">near: 3-shingles</text>
+  <text x="665" y="416" text-anchor="middle" font-size="12" fill="#166534">Jaccard &gt;= 0.8</text>
+
+  <rect x="740" y="330" width="120" height="120" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="800" y="358" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">4 Backdoor</text>
+  <text x="800" y="380" text-anchor="middle" font-size="12" fill="#166534">rare token, one</text>
+  <text x="800" y="398" text-anchor="middle" font-size="12" fill="#166534">label, content</text>
+  <text x="800" y="416" text-anchor="middle" font-size="12" fill="#166534">disagrees</text>
+
+  <rect x="875" y="330" width="120" height="120" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="935" y="358" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">5 Label issues</text>
+  <text x="935" y="380" text-anchor="middle" font-size="12" fill="#166534">out-of-fold probs</text>
+  <text x="935" y="398" text-anchor="middle" font-size="12" fill="#166534">per-class</text>
+  <text x="935" y="416" text-anchor="middle" font-size="12" fill="#166534">thresholds</text>
+  <text x="935" y="434" text-anchor="middle" font-size="12" fill="#166534">(cleanlab-style)</text>
+
+  <line x1="455" y1="390" x2="468" y2="390" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="590" y1="390" x2="603" y2="390" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="725" y1="390" x2="738" y2="390" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="860" y1="390" x2="873" y2="390" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="995" y1="390" x2="1018" y2="390" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="1020" y="320" width="150" height="140" rx="14" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+  <text x="1095" y="348" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">Hardened router</text>
+  <text x="1095" y="372" text-anchor="middle" font-size="12" fill="#166534">backdoor ASR 0.000</text>
+  <text x="1095" y="392" text-anchor="middle" font-size="12" fill="#166534">PII via lookup 0</text>
+  <text x="1095" y="412" text-anchor="middle" font-size="12" fill="#166534">PII in memory 0</text>
+  <text x="1095" y="432" text-anchor="middle" font-size="12" fill="#166534">clean acc 1.000</text>
+
+  <rect x="40" y="490" width="1130" height="80" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="60" y="518" font-size="14" font-weight="700" fill="#0f172a">Defense in depth:</text>
+  <text x="200" y="518" font-size="14" fill="#334155">provenance stops the unsigned community poison; the backdoor screen catches an insider's rows inside a signed batch;</text>
+  <text x="60" y="544" font-size="14" fill="#334155">redaction keeps PII out of the model's memory; dedupe and label checks raise accuracy. Lock down the vector DB too (Retrieval stage).</text>
+</svg>

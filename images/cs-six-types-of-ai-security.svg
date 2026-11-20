@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" font-family="Segoe UI, Arial, sans-serif">
+<rect width="960" height="560" fill="#ffffff"/>
+<text x="480" y="40" text-anchor="middle" font-size="26" font-weight="bold" fill="#111827">The six types of AI security</text>
+<text x="480" y="64" text-anchor="middle" font-size="14" fill="#4b5563">what each protects · main attacks · key controls</text>
+<rect x="20" y="85" width="300" height="215" rx="12" fill="#f9fafb" stroke="#7c3aed" stroke-width="2"/>
+<rect x="20" y="85" width="300" height="44" rx="12" fill="#7c3aed"/>
+<rect x="20" y="115" width="300" height="14" fill="#7c3aed"/>
+<text x="36" y="114" font-size="19" font-weight="bold" fill="#ffffff">01 Data</text>
+<text x="36" y="160" font-size="13" font-weight="bold" fill="#7c3aed">Protects</text>
+<text x="36" y="180" font-size="13.5" fill="#111827">Training, fine-tuning, RAG data</text>
+<text x="36" y="208" font-size="13" font-weight="bold" fill="#7c3aed">Attacks</text>
+<text x="36" y="228" font-size="13.5" fill="#111827">Poisoning, PII leakage</text>
+<text x="36" y="256" font-size="13" font-weight="bold" fill="#7c3aed">Controls</text>
+<text x="36" y="276" font-size="13.5" fill="#111827">Provenance, PII redaction, de-dupe</text>
+<rect x="330" y="85" width="300" height="215" rx="12" fill="#f9fafb" stroke="#2563eb" stroke-width="2"/>
+<rect x="330" y="85" width="300" height="44" rx="12" fill="#2563eb"/>
+<rect x="330" y="115" width="300" height="14" fill="#2563eb"/>
+<text x="346" y="114" font-size="19" font-weight="bold" fill="#ffffff">02 Model</text>
+<text x="346" y="160" font-size="13" font-weight="bold" fill="#2563eb">Protects</text>
+<text x="346" y="180" font-size="13.5" fill="#111827">Model and weights</text>
+<text x="346" y="208" font-size="13" font-weight="bold" fill="#2563eb">Attacks</text>
+<text x="346" y="228" font-size="13.5" fill="#111827">Evasion, extraction, inversion</text>
+<text x="346" y="256" font-size="13" font-weight="bold" fill="#2563eb">Controls</text>
+<text x="346" y="276" font-size="13.5" fill="#111827">Adversarial training, labels not scores</text>
+<rect x="640" y="85" width="300" height="215" rx="12" fill="#f9fafb" stroke="#db2777" stroke-width="2"/>
+<rect x="640" y="85" width="300" height="44" rx="12" fill="#db2777"/>
+<rect x="640" y="115" width="300" height="14" fill="#db2777"/>
+<text x="656" y="114" font-size="19" font-weight="bold" fill="#ffffff">03 LLM app</text>
+<text x="656" y="160" font-size="13" font-weight="bold" fill="#db2777">Protects</text>
+<text x="656" y="180" font-size="13.5" fill="#111827">Chatbots, copilots, RAG apps</text>
+<text x="656" y="208" font-size="13" font-weight="bold" fill="#db2777">Attacks</text>
+<text x="656" y="228" font-size="13.5" fill="#111827">Prompt injection, jailbreaks</text>
+<text x="656" y="256" font-size="13" font-weight="bold" fill="#db2777">Controls</text>
+<text x="656" y="276" font-size="13.5" fill="#111827">I/O guardrails, output untrusted</text>
+<rect x="20" y="315" width="300" height="215" rx="12" fill="#f9fafb" stroke="#0d9488" stroke-width="2"/>
+<rect x="20" y="315" width="300" height="44" rx="12" fill="#0d9488"/>
+<rect x="20" y="345" width="300" height="14" fill="#0d9488"/>
+<text x="36" y="344" font-size="19" font-weight="bold" fill="#ffffff">04 Agent</text>
+<text x="36" y="390" font-size="13" font-weight="bold" fill="#0d9488">Protects</text>
+<text x="36" y="410" font-size="13.5" fill="#111827">Agents, tools, memory, MCP</text>
+<text x="36" y="438" font-size="13" font-weight="bold" fill="#0d9488">Attacks</text>
+<text x="36" y="458" font-size="13.5" fill="#111827">Goal hijack, tool misuse</text>
+<text x="36" y="486" font-size="13" font-weight="bold" fill="#0d9488">Controls</text>
+<text x="36" y="506" font-size="13.5" fill="#111827">Least privilege, HITL, sandbox, logs</text>
+<rect x="330" y="315" width="300" height="215" rx="12" fill="#f9fafb" stroke="#ea580c" stroke-width="2"/>
+<rect x="330" y="315" width="300" height="44" rx="12" fill="#ea580c"/>
+<rect x="330" y="345" width="300" height="14" fill="#ea580c"/>
+<text x="346" y="344" font-size="19" font-weight="bold" fill="#ffffff">05 Supply chain</text>
+<text x="346" y="390" font-size="13" font-weight="bold" fill="#ea580c">Protects</text>
+<text x="346" y="410" font-size="13.5" fill="#111827">Models, datasets, libraries</text>
+<text x="346" y="438" font-size="13" font-weight="bold" fill="#ea580c">Attacks</text>
+<text x="346" y="458" font-size="13.5" fill="#111827">Malicious model files, packages</text>
+<text x="346" y="486" font-size="13" font-weight="bold" fill="#ea580c">Controls</text>
+<text x="346" y="506" font-size="13.5" fill="#111827">Safetensors, signatures, AI-BOM</text>
+<rect x="640" y="315" width="300" height="215" rx="12" fill="#f9fafb" stroke="#475569" stroke-width="2"/>
+<rect x="640" y="315" width="300" height="44" rx="12" fill="#475569"/>
+<rect x="640" y="345" width="300" height="14" fill="#475569"/>
+<text x="656" y="344" font-size="19" font-weight="bold" fill="#ffffff">06 Runtime</text>
+<text x="656" y="390" font-size="13" font-weight="bold" fill="#475569">Protects</text>
+<text x="656" y="410" font-size="13.5" fill="#111827">APIs, GPUs, keys, budgets</text>
+<text x="656" y="438" font-size="13" font-weight="bold" fill="#475569">Attacks</text>
+<text x="656" y="458" font-size="13.5" fill="#111827">Unbounded consumption, key theft</text>
+<text x="656" y="486" font-size="13" font-weight="bold" fill="#475569">Controls</text>
+<text x="656" y="506" font-size="13.5" fill="#111827">Quotas, auth, cost monitoring, playbook</text>
+</svg>

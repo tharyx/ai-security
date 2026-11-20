@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Red-team scorecard pipeline: test set, methods, target builds, scorers, metrics, report, gate and retest loop</title>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">LLM red-team scorecard: the lab pipeline</text>
+  <text x="40" y="74" font-size="15" fill="#475569">Every box is a file in cheat-sheets/labs/red-team-scorecard/. Lab-only placeholder prompts; toy target; offline.</text>
+
+  <!-- Test set -->
+  <rect x="40" y="100" width="250" height="250" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="58" y="128" font-size="17" font-weight="700" fill="#1e3a8a">1. Test set (what to test)</text>
+  <text x="58" y="152" font-size="13" fill="#1e293b">fixtures/behaviors.csv + bias_pairs.json</text>
+  <text x="58" y="178" font-size="13" font-weight="700" fill="#1e293b">Safety risks</text>
+  <text x="58" y="198" font-size="12.5" fill="#334155">Harmful: weapons, self-harm, illegal</text>
+  <text x="58" y="216" font-size="12.5" fill="#334155">Bias: stereotypes, hate, unequal answers</text>
+  <text x="58" y="242" font-size="13" font-weight="700" fill="#1e293b">Trust and privacy</text>
+  <text x="58" y="262" font-size="12.5" fill="#334155">Hallucination: made-up facts, fake cites</text>
+  <text x="58" y="280" font-size="12.5" fill="#334155">Leaks: PII, system prompt, training data</text>
+  <text x="58" y="306" font-size="13" font-weight="700" fill="#1e293b">Benign set: 20 edgy-looking prompts</text>
+  <text x="58" y="326" font-size="12.5" fill="#334155">"kill a stuck process" must be answered</text>
+
+  <!-- Methods -->
+  <rect x="330" y="100" width="230" height="250" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="348" y="128" font-size="17" font-weight="700" fill="#4c1d95">2. Methods (attacks.py)</text>
+  <text x="348" y="158" font-size="13" fill="#1e293b">manual probing (seed as written)</text>
+  <text x="348" y="184" font-size="13" fill="#1e293b">tool: rot13 converter / buff</text>
+  <text x="348" y="210" font-size="13" fill="#1e293b">multi-turn: escalation,</text>
+  <text x="348" y="228" font-size="13" fill="#1e293b">build trust, split the ask</text>
+  <text x="348" y="254" font-size="13" fill="#1e293b">persona: role-play, angry</text>
+  <text x="348" y="272" font-size="13" fill="#1e293b">customer, fake insider</text>
+  <text x="348" y="306" font-size="12.5" fill="#475569">full garak/PyRIT shapes: the</text>
+  <text x="348" y="324" font-size="12.5" fill="#475569">Brightix module 4 scanner lab</text>
+
+  <!-- Target -->
+  <rect x="600" y="100" width="260" height="250" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+  <text x="618" y="128" font-size="17" font-weight="700" fill="#7c2d12">3. Target builds (target.py)</text>
+  <text x="618" y="158" font-size="13" fill="#1e293b">v1  naive</text>
+  <text x="618" y="184" font-size="13" fill="#1e293b">v2  system prompt + regex PII</text>
+  <text x="618" y="202" font-size="13" fill="#1e293b">      redaction + rate limit</text>
+  <text x="618" y="228" font-size="13" fill="#1e293b">v2b v2 + over-strict blocklist</text>
+  <text x="618" y="254" font-size="13" fill="#1e293b">v3  guard on whole conversation,</text>
+  <text x="618" y="272" font-size="13" fill="#1e293b">      grounding, attribute-blind,</text>
+  <text x="618" y="290" font-size="13" fill="#1e293b">      output checks</text>
+  <text x="618" y="324" font-size="12.5" fill="#475569">same gullible core in every build</text>
+
+  <!-- Scorers -->
+  <rect x="900" y="100" width="260" height="250" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <text x="918" y="128" font-size="17" font-weight="700" fill="#064e3b">4. Scorers (scorers.py)</text>
+  <text x="918" y="158" font-size="13" fill="#1e293b">refusal detector</text>
+  <text x="918" y="184" font-size="13" fill="#1e293b">harmful-placeholder echo</text>
+  <text x="918" y="210" font-size="13" fill="#1e293b">paired-prompt equivalence (bias)</text>
+  <text x="918" y="236" font-size="13" fill="#1e293b">fake-citation vs known sources</text>
+  <text x="918" y="262" font-size="13" fill="#1e293b">canary: system / training data</text>
+  <text x="918" y="288" font-size="13" fill="#1e293b">record-aware PII leak</text>
+  <text x="918" y="324" font-size="12.5" fill="#475569">impact checks, not opinions</text>
+
+  <line x1="290" y1="225" x2="326" y2="225" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="560" y1="225" x2="596" y2="225" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="860" y1="225" x2="896" y2="225" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="1030" y1="350" x2="1030" y2="396" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Bottom row -->
+  <rect x="820" y="400" width="340" height="180" rx="12" fill="#fefce8" stroke="#eab308" stroke-width="2"/>
+  <text x="838" y="428" font-size="17" font-weight="700" fill="#713f12">5. Severity and metrics</text>
+  <text x="838" y="456" font-size="13" fill="#1e293b">Low / Medium / High / Critical =</text>
+  <text x="838" y="474" font-size="13" fill="#1e293b">category risk x impact (+ floor rules)</text>
+  <text x="838" y="500" font-size="13" fill="#1e293b">ASR overall and per category</text>
+  <text x="838" y="524" font-size="13" fill="#1e293b">coverage = categories x methods / 44</text>
+  <text x="838" y="548" font-size="13" fill="#1e293b">false-refusal rate on the benign set</text>
+
+  <rect x="430" y="400" width="350" height="180" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="448" y="428" font-size="17" font-weight="700" fill="#0f172a">6. Findings report (md + JSON)</text>
+  <text x="448" y="456" font-size="13" fill="#1e293b">each finding: repro turns, evidence,</text>
+  <text x="448" y="474" font-size="13" fill="#1e293b">severity, fix, and a mapping to</text>
+  <text x="448" y="500" font-size="13" fill="#1e293b">OWASP LLM (2026 names), MITRE ATLAS,</text>
+  <text x="448" y="518" font-size="13" fill="#1e293b">NIST AI 600-1 risks, EU AI Act note</text>
+  <text x="448" y="548" font-size="12.5" fill="#475569">canaries masked in every report</text>
+
+  <rect x="40" y="400" width="350" height="180" rx="12" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="58" y="428" font-size="17" font-weight="700" fill="#7f1d1d">7. Release gate + retest loop</text>
+  <text x="58" y="456" font-size="13" fill="#1e293b">FAIL on any Critical, ASR &gt; 5%,</text>
+  <text x="58" y="474" font-size="13" fill="#1e293b">false refusals &gt; 10%, or a regression</text>
+  <text x="58" y="500" font-size="13" fill="#1e293b">every hit is frozen into the permanent</text>
+  <text x="58" y="518" font-size="13" fill="#1e293b">regression suite, replayed each release</text>
+  <text x="58" y="548" font-size="12.5" fill="#475569">trend table v1 -&gt; v2 -&gt; v2b -&gt; v3</text>
+
+  <line x1="820" y1="490" x2="784" y2="490" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="430" y1="490" x2="394" y2="490" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M215,400 C215,380 690,380 700,354" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+  <text x="300" y="369" font-size="12.5" fill="#b91c1c">next release: replay the suite + full test set</text>
+
+  <text x="40" y="616" font-size="13" fill="#475569">Only test systems you own or have written permission to test. ATLAS IDs and NIST AI 600-1 names: verify at the source.</text>
+</svg>

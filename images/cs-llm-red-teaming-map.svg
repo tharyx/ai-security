@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520" font-family="Segoe UI, Arial, sans-serif">
+<rect width="960" height="520" fill="#ffffff"/>
+<text x="480" y="38" text-anchor="middle" font-size="24" font-weight="bold" fill="#111827">LLM red teaming: test → attack → score → fix → retest</text>
+<line x1="480" y1="270" x2="170" y2="140" stroke="#db2777" stroke-width="3"/>
+<line x1="480" y1="270" x2="170" y2="400" stroke="#7c3aed" stroke-width="3"/>
+<line x1="480" y1="270" x2="790" y2="140" stroke="#2563eb" stroke-width="3"/>
+<line x1="480" y1="270" x2="790" y2="400" stroke="#ea580c" stroke-width="3"/>
+<circle cx="480" cy="270" r="78" fill="#6d28d9"/>
+<text x="480" y="266" text-anchor="middle" font-size="20" font-weight="bold" fill="#fff">LLM</text>
+<text x="480" y="290" text-anchor="middle" font-size="20" font-weight="bold" fill="#fff">Red Teaming</text>
+<rect x="20" y="72" width="300" height="136" rx="12" fill="#f9fafb" stroke="#db2777" stroke-width="2"/>
+<text x="170" y="98" text-anchor="middle" font-size="17" font-weight="bold" fill="#db2777">What to test</text>
+<text x="38" y="124" font-size="13.5" fill="#111827">• Harmful content</text>
+<text x="38" y="148" font-size="13.5" fill="#111827">• Bias &amp; toxicity</text>
+<text x="38" y="172" font-size="13.5" fill="#111827">• Hallucination</text>
+<text x="38" y="196" font-size="13.5" fill="#111827">• PII &amp; leaks</text>
+<rect x="20" y="332" width="300" height="136" rx="12" fill="#f9fafb" stroke="#7c3aed" stroke-width="2"/>
+<text x="170" y="358" text-anchor="middle" font-size="17" font-weight="bold" fill="#7c3aed">Methods</text>
+<text x="38" y="384" font-size="13.5" fill="#111827">• Manual probing</text>
+<text x="38" y="408" font-size="13.5" fill="#111827">• Attack tools (PyRIT, garak, promptfoo)</text>
+<text x="38" y="432" font-size="13.5" fill="#111827">• Multi-turn</text>
+<text x="38" y="456" font-size="13.5" fill="#111827">• Personas</text>
+<rect x="640" y="84" width="300" height="112" rx="12" fill="#f9fafb" stroke="#2563eb" stroke-width="2"/>
+<text x="790" y="110" text-anchor="middle" font-size="17" font-weight="bold" fill="#2563eb">Scoring</text>
+<text x="658" y="136" font-size="13.5" fill="#111827">• Benchmarks + own test set</text>
+<text x="658" y="160" font-size="13.5" fill="#111827">• Severity Low→Critical</text>
+<text x="658" y="184" font-size="13.5" fill="#111827">• ASR · coverage · false refusals</text>
+<rect x="640" y="344" width="300" height="112" rx="12" fill="#f9fafb" stroke="#ea580c" stroke-width="2"/>
+<text x="790" y="370" text-anchor="middle" font-size="17" font-weight="bold" fill="#ea580c">Fixes</text>
+<text x="658" y="396" font-size="13.5" fill="#111827">• Guardrails · filters · system prompts</text>
+<text x="658" y="420" font-size="13.5" fill="#111827">• Fine-tuning (model owner)</text>
+<text x="658" y="444" font-size="13.5" fill="#111827">• Retest loop · bug bounty · playbook</text>
+<text x="480" y="502" text-anchor="middle" font-size="14" fill="#374151">Map findings to: OWASP LLM Top 10 · MITRE ATLAS · NIST AI 600-1 · EU AI Act</text>
+</svg>

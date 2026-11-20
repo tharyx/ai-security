@@ -51,6 +51,7 @@ ai-security/
 ├── devsecops-course/             ONE course merging DevSecOps Professional + DevSecOps Expert + Container Security (14 chapters)
 ├── appsec-course/                ONE course merging Security Champion + Threat Modeling + API Security (17 chapters)
 ├── brightix-course/              companion for the Brightix 45-day LLM, AI & MCP Security program (8 modules mapped to the repo + gap labs)
+├── cheat-sheets/                 one-page revision maps (six types of AI security, LLM red teaming) linked to lessons + gap labs
 ├── csse-course/                  companion for the Software Supply Chain Security course (7 chapters, every syllabus line mapped)
 ├── caase-course/                 companion for the CAASE AI agent security course (7 chapters, every syllabus line mapped)
 ├── cmcpse-course/                companion for the Certified MCP Security Expert course (6 chapters, every syllabus line mapped)
@@ -90,6 +91,7 @@ ai-security/
 | **[DevSecOps course (merged)](devsecops-course/)** | DevSecOps Professional + Expert + Container Security merged into one 14-chapter course; every line of all three syllabi mapped ([syllabus map](devsecops-course/SYLLABUS-MAP.md)) | Alongside the courses |
 | **[AppSec, API Security & Threat Modeling course (merged)](appsec-course/)** | Security Champion + Threat Modeling + API Security merged into one 17-chapter course; every line of all three syllabi mapped ([syllabus map](appsec-course/SYLLABUS-MAP.md)) | Alongside the courses |
 | **[Brightix 45-day program companion](brightix-course/)** | LLM, AI & MCP Security: all 47 syllabus topics mapped to existing lessons and labs, a 45-day plan, and new labs for the gaps (model inversion, garak/PyRIT-style scanning, NeMo/Llama-Guard-style rails, AI SOAR playbooks, multi-agent RAG + MCP capstone) ([syllabus map](brightix-course/SYLLABUS-MAP.md)) | Alongside the program |
+| **[Cheat sheets](cheat-sheets/)** | One-page revision maps: the six types of AI security and an LLM red-teaming quick guide, every item linked to a lesson and lab, plus new labs for training-data hygiene, evasion/adversarial training and a red-team scorecard | Revision, before interviews |
 | **AI security roadmap** (modules 01–10) | AI Security Engineer / Architect specialization | After the cybersecurity track's foundations (modules 01–06), or in parallel |
 
 ## Get started (10 minutes)
